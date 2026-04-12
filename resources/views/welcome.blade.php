@@ -1,19 +1,18 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Primevest</title>
-        
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body>
-        <div class="bg-green-500 text-white px-10 py-3 flex justify-center items-center">
-            <h1 class="text-2xl font-bold">Welcome To Primevest</h1>
+@extends('layouts.app')
+
+@section('content')
+<div class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100">
+    <div class="max-w-7xl mx-auto p-6 lg:p-8">
+        <div class="text-center">
+            <h1 class="text-5xl font-bold text-gray-900 mb-4">Welcome to PrimeVest</h1>
+            <p class="text-xl text-gray-600 mb-8">Your Trusted Investment Partner</p>
+            @guest
+                <div class="space-x-4">
+                    <a href="{{ route('register') }}" class="bg-blue-600 text-white px-6 py-3 rounded-lg">Get Started</a>
+                    <a href="{{ route('login') }}" class="bg-gray-600 text-white px-6 py-3 rounded-lg">Login</a>
+                </div>
+            @endguest
         </div>
-        
-        <div class="bg-blue-500 text-white p-4 m-4 rounded-lg">
-            <p>If you see this blue box, Tailwind is working!</p>
-        </div>
-    </body>
-</html>
+    </div>
+</div>
+@endsection
