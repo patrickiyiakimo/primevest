@@ -46,7 +46,7 @@
                         Login
                     </a>
                     <a href="/register" 
-                       class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-5 py-2 rounded-lg text-sm font-medium duration-500 shadow-lg">
+                       class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-5 py-2 rounded-full text-sm font-medium duration-500 shadow-lg">
                         Get Started
                     </a>
                 @else
@@ -108,7 +108,6 @@
 
 <!-- Crypto Ticker Bar - Shows immediately after navbar -->
 <div class="bg-gray-900 border-b border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
         <iframe 
             src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no" 
             width="100%" 
@@ -119,9 +118,8 @@
             frameborder="0" 
             border="0" 
             style="border:0;margin:0;padding:0;"
-            class="rounded-lg">
+            >
         </iframe>
-    </div>
 </div>
 
 <!-- Mobile menu button for responsive design -->
