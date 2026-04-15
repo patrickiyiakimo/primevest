@@ -147,12 +147,12 @@
                 <a href="/company" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Company</a>
                 <a href="/education" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Education</a>
                 <div class="mt-6 space-y-3">
-                    <a href="/login" class="block text-center px-4 py-3 text-gray-300 hover:text-white border border-gray-700 rounded-lg">Login</a>
-                    <a href="/register" class="block text-center px-4 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-lg">Sign Up</a>
+                    <a href="/login" class="block text-center px-4 py-3 text-gray-300 hover:text-white border border-gray-700 rounded-full">Login</a>
+                    <a href="/register" class="block text-center px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full">Sign Up</a>
                 </div>
             @else
                 <div class="text-center mb-6">
-                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
                         <span class="text-white font-bold text-2xl">{{ substr(Auth::user()->name, 0, 1) }}</span>
                     </div>
                     <p class="text-white font-medium">{{ Auth::user()->name }}</p>

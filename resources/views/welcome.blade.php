@@ -31,17 +31,20 @@
                 Trade CFDs on a wide range of instruments, including popular FX pairs,</br> Futures, Indices, 
                 Metals, Energies and Shares. Experience </br>the global markets at your fingertips.
             </p>
-            
-            <!-- CTA Buttons -->
-            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a href="/register" 
-                   class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 transition-all duration-500 shadow-2xl">
+
+            <!-- Add a condition for this create free account such that it only shows to unauthenticated users -->
+            @if (!Auth::check())
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="/register" 
+                       class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 transition-all duration-500 shadow-2xl">
                     <span>Create Free Account</span>
                     <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                     </svg>
                 </a>
             </div>
+            @endif
             
             <!-- Trust Indicators -->
             <div class="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start">
@@ -81,6 +84,11 @@
                 style="border:0;margin:0;padding:0;">
             </iframe>
     </div>
+
+    <!-- import features section -->
+    @include('components.features-section')
+    <!-- import exclusive insights section -->
+    @include('components.exclusive-insights')
 
 <style>
     /* Custom animations */
