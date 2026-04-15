@@ -89,6 +89,16 @@
     @include('components.features-section')
     <!-- import exclusive insights section -->
     @include('components.exclusive-insights')
+    <!-- import market we offer section -->
+    @include('components.markets-we-offer')
+    <!-- Import learn bitcoin section -->
+    @include('components.learn-bitcoin')
+    <!-- Import trading features section -->
+    @include('components.trading-features')
+    <!-- Import copy trading features section -->
+    @include('components.copy-trading-features')
+    <!-- Import about us section -->
+    @include('components.about-us')
 
 <style>
     /* Custom animations */
