@@ -1,15 +1,14 @@
-<nav class="bg-gradient-to-r from-black via-gray-900 to-black shadow-2xl border-b border-gray-800 sticky top-0 z-50">
+<nav x-data="{ mobileMenuOpen: false }" class="bg-gradient-to-r from-black via-gray-900 to-black shadow-2xl border-b border-gray-800 sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <!-- Logo & Left Menu -->
             <div class="flex items-center space-x-8">
                 <!-- Logo -->
                 <div class="flex-shrink-0">
-                    <a href="/" class="text-2xl font-bold bg-green-500 bg-clip-text text-transparent transition-all duration-300">
+                    <a href="/" class="text-2xl font-bold bg-gradient-to-r from-green-500 to-green-600 bg-clip-text text-transparent transition-all duration-300">
                         PrimeVest
                     </a>
                 </div>
-                <!-- Test@1234 -->
                 <!-- Main Navigation Links - Hidden when logged in -->
                 @guest
                 <div class="hidden md:flex md:space-x-6">
@@ -53,7 +52,7 @@
                     <!-- Show when logged in -->
                     <div class="relative" x-data="{ open: false }">
                         <button @click="open = !open" 
-                                class="flex items-center space-x-3 px-4 py-2 rounded-lg  duration-500 border border-gray-700">
+                                class="flex items-center space-x-3 px-4 py-2 rounded-lg duration-500 border border-gray-700">
                             <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
                                 <span class="text-white font-semibold text-sm">{{ substr(Auth::user()->name, 0, 1) }}</span>
                             </div>
@@ -102,35 +101,19 @@
                     </div>
                 @endguest
             </div>
+            
+            <!-- Mobile menu button -->
+            <div class="flex items-center md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                        class="p-2 rounded-lg bg-gray-800 text-white focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </div>
-</nav>
-
-<!-- Crypto Ticker Bar - Shows immediately after navbar -->
-<div class="bg-gray-900 border-b border-gray-800">
-        <iframe 
-            src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no" 
-            width="100%" 
-            height="36px" 
-            scrolling="auto" 
-            marginwidth="0" 
-            marginheight="0" 
-            frameborder="0" 
-            border="0" 
-            style="border:0;margin:0;padding:0;"
-            >
-        </iframe>
-</div>
-
-<!-- Mobile menu button for responsive design -->
-<div x-data="{ mobileMenuOpen: false }" class="md:hidden">
-    <button @click="mobileMenuOpen = !mobileMenuOpen" 
-            class="fixed top-4 right-4 z-50 p-2 rounded-lg bg-gray-800 text-white focus:outline-none">
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
-
+    
     <!-- Mobile Menu -->
     <div x-show="mobileMenuOpen" 
          x-transition:enter="transition ease-out duration-200"
@@ -139,8 +122,14 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 transform translate-x-0"
          x-transition:leave-end="opacity-0 transform -translate-x-full"
-         class="fixed inset-0 z-40 bg-black bg-opacity-95 backdrop-blur-lg">
+         class="fixed inset-0 z-50 bg-black bg-opacity-95 backdrop-blur-lg md:hidden">
         <div class="flex flex-col h-full pt-20 px-6">
+            <button @click="mobileMenuOpen = false" 
+                    class="absolute top-4 right-4 p-2 rounded-lg bg-gray-800 text-white">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
             @guest
                 <a href="/trading" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Trading</a>
                 <a href="/system" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">System</a>
@@ -167,4 +156,22 @@
             @endguest
         </div>
     </div>
+</nav>
+
+<!-- TradingView Widget - Moved OUTSIDE the navbar -->
+<div class="">
+    <!-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <iframe 
+            src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no" 
+            width="100%" 
+            height="45px" 
+            scrolling="auto" 
+            marginwidth="0" 
+            marginheight="0" 
+            frameborder="0" 
+            border="0" 
+            style="border:0;margin:0;padding:0;"
+            class="rounded-lg">
+        </iframe>
+    </div> -->
 </div>

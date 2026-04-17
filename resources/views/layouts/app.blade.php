@@ -8,12 +8,20 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
-        @include('layouts.navigation')
+    <div class="min-h-screen bg-gray-100 flex flex-col">
+        <!-- I want the navbar not to show when I login to my dashboard -->
+
+        @if (!Auth::check())
+            @include('layouts.navigation')
+        @endif
         
-        <main>
+        <main class="flex-grow">
             @yield('content')
         </main>
+        <!-- I want the footer not to show when I login to my dashboard -->
+        @if (!Auth::check())
+            @include('layouts.footer')
+        @endif
     </div>
 </body>
 </html>

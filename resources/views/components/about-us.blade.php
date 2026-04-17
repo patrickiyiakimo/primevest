@@ -15,13 +15,6 @@
         
         <!-- Section Header -->
         <div class="text-center mb-12">
-            <div class="inline-flex items-center justify-center mb-4">
-                <div class="w-16 h-16 bg-green-500/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-                    <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-            </div>
             <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
                 About <span class="text-green-400">PrimeVest</span>
             </h2>
@@ -86,7 +79,7 @@
                 
                 <!-- CTA Button -->
                 <div class="text-center mt-8">
-                    <a href="/register" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <a href="/register" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-full duration-500">
                         Start Trading With PrimeVest
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
