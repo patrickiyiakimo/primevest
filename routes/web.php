@@ -108,6 +108,6 @@ Route::middleware('auth')->group(function () {
 
 // Page routes
 Route::get('/trading', [PageController::class, 'trading'])->name('trading');
-Route::get('/system', [PageController::class, 'system'])->name('system');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/company', [PageController::class, 'company'])->name('company');
 Route::get('/education', [PageController::class, 'education'])->name('education');

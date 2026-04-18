@@ -17,9 +17,9 @@
                         Trading
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
                     </a>
-                    <a href="/system"
+                    <a href="/contact"
                        class="relative text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 text-sm font-medium group">
-                        System
+                        Contact
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
                     </a>
                     <a href="/company"
@@ -32,6 +32,11 @@
                         Education
                         <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
                     </a>
+                    <!-- <a href="/contact"
+                       class="relative text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 text-sm font-medium group">
+                        Contact
+                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
+                    </a> -->
                 </div>
                 @endguest
             </div>
@@ -132,7 +137,7 @@
             </button>
             @guest
                 <a href="/trading" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Trading</a>
-                <a href="/system" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">System</a>
+                <a href="/contact" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Contact</a>
                 <a href="/company" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Company</a>
                 <a href="/education" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Education</a>
                 <div class="mt-6 space-y-3">

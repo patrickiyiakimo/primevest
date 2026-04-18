@@ -30,4 +30,6 @@
     
     <!-- Investment Plans Section -->
     @include('components.investment-plans')
+
+    
 @endsection

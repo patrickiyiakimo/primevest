@@ -20,9 +20,9 @@
                     <span>Trading</span>
                     <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-300 group-hover:w-full"></span>
                 </a>
-                <a href="/system"
+                <a href="/contact"
                    class="relative px-4 py-2 text-gray-300 hover:text-white transition-all duration-300 group">
-                    <span>System</span>
+                    <span>Contact</span>
                     <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-300 group-hover:w-full"></span>
                 </a>
                 <a href="/company"

@@ -1,234 +1,318 @@
 <!-- Investment Plans Section -->
-<div class="bg-gradient-to-br from-navy-900 to-navy-800 py-16 lg:py-24">
+<div class="bg-gradient-to-b from-gray-50 to-white py-20 lg:py-28">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Section Header -->
-        <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-600 mb-4">
-                Our Awesome <span class="text-green-400">Plans</span>
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center justify-center mb-4">
+                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center">
+                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                Complete Packages for <span class="text-green-600">Every Trader</span>
             </h2>
-            <p class="text-gray-600  text-lg max-w-2xl mx-auto">
-                Choose from a variety of investment plans tailored to your financial goals
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+                Choose the perfect investment plan that matches your financial goals and trading style
             </p>
         </div>
 
-        <!-- Category 1: Basic to Gold Plans -->
-        <div class="mb-16">
-            <div class="text-center mb-8">
-                <div class="inline-block bg-green-500/20 rounded-full px-6 py-2 mb-3">
-                    <h3 class="text-xl font-bold text-green-400">Crypto Investment Plans</h3>
-                </div>
-                <p class="text-gray-600 ">Start your crypto journey with our flexible investment options</p>
-            </div>
+        <!-- Plans Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Basic Plan -->
-                <div class="bg-gradient-to-br from-navy-800 to-navy-900 rounded-2xl overflow-hidden border border-navy-700 hover:border-green-500/50 transition-all duration-300 hover:transform hover:-translate-y-2 group">
-                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-4 text-center">
-                        <h4 class="text-xl font-bold text-white">Basic Plan</h4>
-                        <div class="text-2xl font-bold text-white mt-1">$500</div>
-                        <div class="text-xs text-blue-200">MINIMUM FUNDING</div>
-                    </div>
-                    <div class="p-5">
-                        <div class="space-y-3 mb-5">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Min Deposit:</span>
-                                <span class="text-gray-600  font-semibold">$500</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Max Deposit:</span>
-                                <span class="text-gray-600  font-semibold">$999</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Return of Investment:</span>
-                                <span class="text-green-400 font-bold">25%</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Referral Bonus:</span>
-                                <span class="text-gray-600  font-semibold">5%</span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-gray-400">Duration:</span>
-                                <span class="text-gray-600 font-semibold">24 Hours</span>
-                            </div>
+            <!-- Basic Plan -->
+            <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-green-200">
+                <!-- Card Top Border Accent -->
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 to-green-600"></div>
+                
+                <!-- Card Content -->
+                <div class="p-6">
+                    <!-- Minimum Funding Badge -->
+                    <div class="text-center mb-6">
+                        <div class="inline-block px-4 py-1 bg-green-50 rounded-full mb-3">
+                            <span class="text-green-600 text-xs font-semibold uppercase tracking-wider">Minimum Funding</span>
                         </div>
-                        <div class="flex items-center text-xs text-gray-400 mb-4">
-                            <svg class="w-4 h-4 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div class="text-4xl font-bold text-gray-900">$500</div>
+                    </div>
+                    
+                    <!-- Plan Name -->
+                    <div class="text-center mb-6 pb-4 border-b border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-900">Basic Plan</h3>
+                        <p class="text-sm text-gray-500 mt-1">Benefit from industry-leading entry prices</p>
+                    </div>
+                    
+                    <!-- Plan Details -->
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Min. Possible Deposit:</span>
+                            <span class="font-semibold text-gray-900">$500</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Max. Possible Deposit:</span>
+                            <span class="font-semibold text-gray-900">$999</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Return of Investment:</span>
+                            <span class="font-bold text-green-600">25%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Referral Bonus:</span>
+                            <span class="font-semibold text-gray-900">5%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Duration:</span>
+                            <span class="font-semibold text-gray-900">24 Hours</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Features -->
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
-                            Instant Deposit and Withdrawal
+                            Instant Deposit & Withdrawal
                         </div>
-                        <a href="/register"><button class="w-full py-2.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white font-semibold rounded-lg transition-all duration-300 border border-green-500/30 hover:border-green-500">Open an Account</button></a>
                     </div>
-                </div>
-
-                <!-- Standard Plan -->
-                <div class="bg-gradient-to-br from-navy-800 to-navy-900 rounded-2xl overflow-hidden border border-navy-700 hover:border-green-500/50 transition-all duration-300 hover:transform hover:-translate-y-2 group">
-                    <div class="bg-gradient-to-r from-cyan-600 to-cyan-700 p-4 text-center">
-                        <h4 class="text-xl font-bold text-white">Standard Plan</h4>
-                        <div class="text-2xl font-bold text-white mt-1">$1,000</div>
-                        <div class="text-xs text-cyan-200">MINIMUM FUNDING</div>
-                    </div>
-                    <div class="p-5">
-                        <div class="space-y-3 mb-5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Min Deposit:</span><span class="text-gray-600  font-semibold">$1,000</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Max Deposit:</span><span class="text-gray-600  font-semibold">$9,999</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Return of Investment:</span><span class="text-green-400 font-bold">30%</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Referral Bonus:</span><span class="text-gray-600  font-semibold">5%</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Duration:</span><span class="text-gray-600  font-semibold">24 Hours</span></div>
-                        </div>
-                        <div class="flex items-center text-xs text-gray-400 mb-4"><svg class="w-4 h-4 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Instant Deposit and Withdrawal</div>
-                        <a href="/register"><button class="w-full py-2.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white font-semibold rounded-lg transition-all duration-300 border border-green-500/30 hover:border-green-500">Open an Account</button></a>
-                    </div>
-                </div>
-
-                <!-- Silver Plan -->
-                <div class="bg-gradient-to-br from-navy-800 to-navy-900 rounded-2xl overflow-hidden border border-navy-700 hover:border-green-500/50 transition-all duration-300 hover:transform hover:-translate-y-2 group">
-                    <div class="bg-gradient-to-r from-gray-500 to-gray-600 p-4 text-center">
-                        <h4 class="text-xl font-bold text-white">Silver Plan</h4>
-                        <div class="text-2xl font-bold text-white mt-1">$10,000</div>
-                        <div class="text-xs text-gray-300">MINIMUM FUNDING</div>
-                    </div>
-                    <div class="p-5">
-                        <div class="space-y-3 mb-5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Min Deposit:</span><span class="text-gray-600  font-semibold">$10,000</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Max Deposit:</span><span class="text-gray-600  font-semibold">$49,999</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Return of Investment:</span><span class="text-green-400 font-bold">35%</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Referral Bonus:</span><span class="text-gray-600  font-semibold">5%</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Duration:</span><span class="text-gray-600  font-semibold">24 Hours</span></div>
-                        </div>
-                        <div class="flex items-center text-xs text-gray-400 mb-4"><svg class="w-4 h-4 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Instant Deposit and Withdrawal</div>
-                        <a href="/register"><button class="w-full py-2.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white font-semibold rounded-lg transition-all duration-300 border border-green-500/30 hover:border-green-500">Open an Account</button></a>
-                    </div>
-                </div>
-
-                <!-- Gold Plan -->
-                <div class="bg-gradient-to-br from-navy-800 to-navy-900 rounded-2xl overflow-hidden border border-navy-700 hover:border-green-500/50 transition-all duration-300 hover:transform hover:-translate-y-2 group">
-                    <div class="bg-gradient-to-r from-yellow-600 to-yellow-700 p-4 text-center">
-                        <h4 class="text-xl font-bold text-white">Gold Plan</h4>
-                        <div class="text-2xl font-bold text-white mt-1">$50,000</div>
-                        <div class="text-xs text-yellow-200">MINIMUM FUNDING</div>
-                    </div>
-                    <div class="p-5">
-                        <div class="space-y-3 mb-5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Min Deposit:</span><span class="text-gray-600  font-semibold">$50,000</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Max Deposit:</span><span class="text-gray-600  font-semibold">$100,000</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Return of Investment:</span><span class="text-green-400 font-bold">40%</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Referral Bonus:</span><span class="text-gray-600  font-semibold">5%</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Duration:</span><span class="text-gray-600  font-semibold">24 Hours</span></div>
-                        </div>
-                        <div class="flex items-center text-xs text-gray-400 mb-4"><svg class="w-4 h-4 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>Instant Deposit and Withdrawal</div>
-                        <a href="/register"><button class="w-full py-2.5 bg-green-600/20 hover:bg-green-600 text-green-400 hover:text-white font-semibold rounded-lg transition-all duration-300 border border-green-500/30 hover:border-green-500">Open an Account</button></a>
-                    </div>
+                    
+                    <!-- CTA Button -->
+                    <a href="{{ route('register') }}">
+                        <button class="w-full py-3 bg-white border-2 border-green-600 text-green-600 font-semibold rounded-xl hover:bg-green-600 hover:text-white transition-all duration-300">
+                            Open an Account
+                        </button>
+                    </a>
                 </div>
             </div>
-        </div>
 
-        <!-- Category 2: VIP to Starter Plans -->
-        <div class="mb-16">
-            <div class="text-center mb-8">
-                <div class="inline-block bg-purple-500/20 rounded-full px-6 py-2 mb-3">
-                    <h3 class="text-xl font-bold text-purple-400">Premium Investment Plans</h3>
-                </div>
-                <p class="text-gray-300">Premium plans with higher returns for serious investors</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @php
-                    $premiumPlans = [
-                        ['name' => 'VIP Elite Plan', 'price' => 100000, 'duration' => '3 Days', 'returns' => 15, 'bonus' => 0, 'color' => 'from-rose-600 to-rose-700', 'badge' => '⭐ ELITE'],
-                        ['name' => 'Diamond Plan', 'price' => 50000, 'duration' => '3 Days', 'returns' => 11, 'bonus' => 0, 'color' => 'from-sky-600 to-sky-700', 'badge' => '💎 DIAMOND'],
-                        ['name' => 'Platinum Plan', 'price' => 25000, 'duration' => '3 Days', 'returns' => 9, 'bonus' => 0, 'color' => 'from-indigo-600 to-indigo-700', 'badge' => '⚡ PLATINUM'],
-                        ['name' => 'Gold Plan', 'price' => 10000, 'duration' => '3 Days', 'returns' => 7, 'bonus' => 0, 'color' => 'from-yellow-600 to-yellow-700', 'badge' => '🥇 GOLD'],
-                        ['name' => 'Silver Plan', 'price' => 5000, 'duration' => '3 Days', 'returns' => 8, 'bonus' => 0, 'color' => 'from-gray-500 to-gray-600', 'badge' => '🥈 SILVER'],
-                        ['name' => 'Starter Plan', 'price' => 1000, 'duration' => '3 Days', 'returns' => 3, 'bonus' => 0, 'color' => 'from-green-600 to-green-700', 'badge' => '🚀 STARTER'],
-                        ['name' => 'Basic Compound Plan', 'price' => 1000, 'duration' => '3 Days', 'returns' => 8, 'bonus' => 5, 'color' => 'from-teal-600 to-teal-700', 'badge' => '🔄 COMPOUND'],
-                    ];
-                @endphp
+            <!-- Standard Plan -->
+            <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-green-200 transform hover:-translate-y-1">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-green-500 to-green-600"></div>
                 
-                @foreach($premiumPlans as $plan)
-                <div class="bg-gradient-to-br from-navy-800 to-navy-900 rounded-2xl overflow-hidden border border-navy-700 hover:border-purple-500/50 transition-all duration-300 hover:transform hover:-translate-y-2 group">
-                    <div class="bg-gradient-to-r {{ $plan['color'] }} p-4 text-center relative">
-                        <div class="absolute top-2 right-2 bg-white/20 rounded-full px-2 py-0.5 text-[10px] font-bold text-white">{{ $plan['badge'] }}</div>
-                        <h4 class="text-lg font-bold text-white">{{ $plan['name'] }}</h4>
-                        <div class="text-2xl font-bold text-white mt-1">${{ number_format($plan['price']) }}</div>
-                    </div>
-                    <div class="p-5">
-                        <div class="space-y-3 mb-5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Duration:</span><span class="text-gray-600 font-semibold">{{ $plan['duration'] }}</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Min Deposit:</span><span class="text-gray-600 font-semibold">${{ number_format($plan['price']) }}</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Returns:</span><span class="text-green-400 font-bold">{{ $plan['returns'] }}%</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Bonus:</span><span class="text-gray-600 font-semibold">${{ number_format($plan['bonus']) }}</span></div>
-                        </div>
-                        <a href="/register">
-                            <button class="w-full py-2.5 bg-purple-600/20 hover:bg-purple-600 text-purple-400 hover:text-white font-semibold rounded-lg transition-all duration-300 border border-purple-500/30 hover:border-purple-500">
-                                Invest Now
-                            </button>
-                        </a>
+                <!-- Popular Badge -->
+                <div class="absolute top-4 right-4">
+                    <div class="bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                        MOST POPULAR
                     </div>
                 </div>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- Category 3: Stocks & Bonds Investment Plans -->
-        <div class="mb-16">
-            <div class="text-center mb-8">
-                <div class="inline-block bg-emerald-500/20 rounded-full px-6 py-2 mb-3">
-                    <h3 class="text-xl font-bold text-emerald-400">Stocks & Bonds Investment Plans</h3>
-                </div>
-                <p class="text-gray-300">Diversify your portfolio with global stocks, corporate shares, and stable bonds</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                @php
-                    $stockPlans = [
-                        ['name' => 'Global Index Plan', 'price' => 100000, 'duration' => '1 Year', 'returns' => 14, 'bonus' => 1500],
-                        ['name' => 'Corporate Stocks Plan', 'price' => 75000, 'duration' => '9 Months', 'returns' => 12, 'bonus' => 1000],
-                        ['name' => 'Industrial Growth Plan', 'price' => 50000, 'duration' => '6 Months', 'returns' => 10, 'bonus' => 800],
-                        ['name' => 'Balanced Portfolio Plan', 'price' => 25000, 'duration' => '6 Months', 'returns' => 8, 'bonus' => 400],
-                        ['name' => 'Partnership Growth Plan', 'price' => 10000, 'duration' => '3 Months', 'returns' => 6, 'bonus' => 200],
-                        ['name' => 'Savings Stock Plan', 'price' => 5000, 'duration' => '3 Months', 'returns' => 5, 'bonus' => 100],
-                        ['name' => 'Starter Market Plan', 'price' => 1000, 'duration' => '1 Month', 'returns' => 3, 'bonus' => 20],
-                    ];
-                @endphp
                 
-                @foreach($stockPlans as $plan)
-                <div class="bg-gradient-to-br from-navy-800 to-navy-900 rounded-2xl overflow-hidden border border-navy-700 hover:border-emerald-500/50 transition-all duration-300 hover:transform hover:-translate-y-2 group">
-                    <div class="bg-gradient-to-r from-emerald-600 to-emerald-700 p-4 text-center">
-                        <h4 class="text-lg font-bold text-white">{{ $plan['name'] }}</h4>
-                        <div class="text-2xl font-bold text-white mt-1">${{ number_format($plan['price']) }}</div>
-                    </div>
-                    <div class="p-5">
-                        <div class="space-y-3 mb-5">
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Duration:</span><span class="text-gray-600 font-semibold">{{ $plan['duration'] }}</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Min Deposit:</span><span class="text-gray-600 font-semibold">${{ number_format($plan['price']) }}</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Returns:</span><span class="text-green-400 font-bold">{{ $plan['returns'] }}%</span></div>
-                            <div class="flex justify-between text-sm"><span class="text-gray-400">Bonus:</span><span class="text-gray-600 font-semibold">${{ number_format($plan['bonus']) }}</span></div>
+                <div class="p-6">
+                    <div class="text-center mb-6">
+                        <div class="inline-block px-4 py-1 bg-green-50 rounded-full mb-3">
+                            <span class="text-green-600 text-xs font-semibold uppercase tracking-wider">Minimum Funding</span>
                         </div>
-                        <a href="/register">
-                            <button class="w-full py-2.5 bg-emerald-600/20 hover:bg-emerald-600 text-emerald-400 hover:text-white font-semibold rounded-lg transition-all duration-300 border border-emerald-500/30 hover:border-emerald-500">
-                                Invest Now
-                            </button>
-                        </a>
+                        <div class="text-4xl font-bold text-gray-900">$1,000</div>
+                    </div>
+                    
+                    <div class="text-center mb-6 pb-4 border-b border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-900">Standard Plan</h3>
+                        <p class="text-sm text-gray-500 mt-1">Receive even tighter spreads and commissions</p>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Min. Possible Deposit:</span>
+                            <span class="font-semibold text-gray-900">$1,000</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Max. Possible Deposit:</span>
+                            <span class="font-semibold text-gray-900">$9,999</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Return of Investment:</span>
+                            <span class="font-bold text-green-600">30%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Referral Bonus:</span>
+                            <span class="font-semibold text-gray-900">5%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Duration:</span>
+                            <span class="font-semibold text-gray-900">24 Hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Instant Deposit & Withdrawal
+                        </div>
+                    </div>
+                    
+                    <a href="{{ route('register') }}">
+                        <button class="w-full py-3 bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-all duration-300 shadow-md hover:shadow-lg">
+                            Open an Account
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Silver Plan -->
+            <div class="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-green-200">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-gray-400 to-gray-500"></div>
+                
+                <div class="p-6">
+                    <div class="text-center mb-6">
+                        <div class="inline-block px-4 py-1 bg-green-50 rounded-full mb-3">
+                            <span class="text-green-600 text-xs font-semibold uppercase tracking-wider">Minimum Funding</span>
+                        </div>
+                        <div class="text-4xl font-bold text-gray-900">$10,000</div>
+                    </div>
+                    
+                    <div class="text-center mb-6 pb-4 border-b border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-900">Silver Plan</h3>
+                        <p class="text-sm text-gray-500 mt-1">Benefit from industry-leading entry prices</p>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Min. Possible Deposit:</span>
+                            <span class="font-semibold text-gray-900">$10,000</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Max. Possible Deposit:</span>
+                            <span class="font-semibold text-gray-900">$49,999</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Return of Investment:</span>
+                            <span class="font-bold text-green-600">35%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Referral Bonus:</span>
+                            <span class="font-semibold text-gray-900">5%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500">Duration:</span>
+                            <span class="font-semibold text-gray-900">24 Hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Instant Deposit & Withdrawal
+                        </div>
+                    </div>
+                    
+                    <a href="{{ route('register') }}">
+                        <button class="w-full py-3 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 hover:border-green-500 hover:text-green-600 transition-all duration-300">
+                            Open an Account
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Gold Plan -->
+            <div class="group relative bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-1">
+                <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-500 to-yellow-600"></div>
+                
+                <!-- Premium Badge -->
+                <div class="absolute top-4 right-4">
+                    <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                        PREMIUM
                     </div>
                 </div>
-                @endforeach
+                
+                <div class="p-6">
+                    <div class="text-center mb-6">
+                        <div class="inline-block px-4 py-1 bg-white/10 rounded-full mb-3">
+                            <span class="text-yellow-400 text-xs font-semibold uppercase tracking-wider">Minimum Funding</span>
+                        </div>
+                        <div class="text-4xl font-bold text-white">$50,000</div>
+                    </div>
+                    
+                    <div class="text-center mb-6 pb-4 border-b border-gray-700">
+                        <h3 class="text-xl font-bold text-white">Gold Plan</h3>
+                        <p class="text-sm text-gray-400 mt-1">Receive even tighter spreads and commissions</p>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-400">Min. Possible Deposit:</span>
+                            <span class="font-semibold text-white">$50,000</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-400">Max. Possible Deposit:</span>
+                            <span class="font-semibold text-white">$100,000</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-400">Return of Investment:</span>
+                            <span class="font-bold text-yellow-400">40%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-400">Referral Bonus:</span>
+                            <span class="font-semibold text-white">5%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-400">Duration:</span>
+                            <span class="font-semibold text-white">24 Hours</span>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-2 mb-6">
+                        <div class="flex items-center text-sm text-gray-400">
+                            <svg class="w-4 h-4 text-yellow-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Instant Deposit & Withdrawal
+                        </div>
+                    </div>
+                    
+                    <a href="{{ route('register') }}">
+                        <button class="w-full py-3 bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold rounded-xl hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-md hover:shadow-lg">
+                            Open an Account
+                        </button>
+                    </a>
+                </div>
             </div>
         </div>
         
-        <!-- Disclaimer -->
-        <div class="text-center mt-8 pt-6 border-t border-navy-700">
-            <p class="text-xs text-gray-500">*Terms and conditions apply. Returns are subject to market conditions. Please read our risk disclosure before investing.</p>
+        <!-- Trust Badges -->
+        <div class="mt-16 pt-8 border-t border-gray-200">
+            <div class="flex flex-wrap justify-center gap-8">
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                    </svg>
+                    <span class="text-sm text-gray-600">Regulated & Licensed</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                    <span class="text-sm text-gray-600">SSL Secure</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                    </svg>
+                    <span class="text-sm text-gray-600">24/7 Support</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span class="text-sm text-gray-600">10+ Years Trusted</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
 <style>
-    .bg-navy-900 { background-color: #0a192f; }
-    .bg-navy-800 { background-color: #0f2b3d; }
-    .border-navy-700 { border-color: #1a3a4f; }
+    /* Smooth hover transitions */
+    .group:hover {
+        transform: translateY(-4px);
+    }
+    
+    /* Gold plan special styling */
+    .bg-gradient-to-br.from-gray-900.to-gray-800 {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+    }
 </style>
-
-<!-- Chinenyenwa02% -->
- <!-- Test@1234 -->
+@endsection

@@ -11,9 +11,9 @@ class PageController extends Controller
         return view('pages.trading');
     }
     
-    public function system()
+    public function contact()
     {
-        return view('pages.system');
+        return view('pages.contact');
     }
     
     public function company()
