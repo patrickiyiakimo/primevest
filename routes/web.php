@@ -55,6 +55,30 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully! Our team will process it within 24 hours.');
     })->name('withdraw.request');
     // ==========================================
+
+    // Card Application Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/card-application', function () {
+        return view('dashboard.card-application');
+    })->name('card-application');
+    
+    Route::post('/card-application/submit', function (Request $request) {
+        $user = Auth::user();
+        
+        if ($user->balance < 2000) {
+            return redirect()->back()->with('error', 'Minimum balance of $2,000 required to apply for a card');
+        }
+        
+        $validated = $request->validate([
+            'card_type' => 'required|string',
+            'delivery_address' => 'required|string',
+            'phone' => 'nullable|string',
+            'id_type' => 'required|string',
+        ]);
+        
+        return redirect()->route('card-application')->with('success', 'Card application submitted successfully! You will receive your card within 7-10 business days.');
+    })->name('card-application.submit');
+});
     
     // Make a Deposit
     Route::get('/deposit', function () { return view('dashboard.deposit'); })->name('deposit');
