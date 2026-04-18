@@ -21,21 +21,10 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Left Side - Card Preview -->
         <div class="space-y-6">
-            <!-- Card Preview Section -->
-            <!-- <div class="bg-white rounded-2xl shadow-lg overflow-hidden"> -->
-                <!-- <div class="border-b border-gray-700 px-6 py-4">
-                    <h2 class="text-lg font-semibold text-white flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                        Card Preview
-                    </h2>
-                </div> -->
                 <div class="p-6 flex justify-center">
                     <!-- Debit Card Image -->
                     <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-md rounded-2xl">
                 </div>
-            <!-- </div> -->
 
             <!-- Card Benefits -->
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">

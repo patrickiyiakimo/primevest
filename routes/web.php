@@ -79,6 +79,12 @@ Route::middleware('auth')->group(function () {
         return redirect()->route('card-application')->with('success', 'Card application submitted successfully! You will receive your card within 7-10 business days.');
     })->name('card-application.submit');
 });
+
+ // History Routes
+    Route::get('/deposits-history', [DepositHistoryController::class, 'index'])->name('deposits-history');
+    Route::get('/withdrawals-history', function () { return view('dashboard.withdrawals-history'); })->name('withdrawals-history');
+    Route::get('/earnings-history', function () { return view('dashboard.earnings-history'); })->name('earnings-history');
+    Route::get('/investments-history', function () { return view('dashboard.investments-history'); })->name('investments-history');
     
     // Make a Deposit
     Route::get('/deposit', function () { return view('dashboard.deposit'); })->name('deposit');
