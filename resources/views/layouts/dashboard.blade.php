@@ -125,6 +125,7 @@
                     </a>
                 </nav>
 
+                <!-- Buy Crypto Dropdown - CORRECTED (No duplicates) -->
                 <div class="px-4 mt-6 mb-2">
                     <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">BUY CRYPTO</p>
                 </div>
@@ -142,11 +143,22 @@
                             </svg>
                         </button>
                         <div id="cryptoDropdown" class="dropdown-menu pl-12 space-y-1">
-                            <a href="{{ route('buy-crypto') }}?coin=BTC" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">Bitcoin (BTC)</a>
-                            <a href="{{ route('buy-crypto') }}?coin=ETH" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">Ethereum (ETH)</a>
-                            <a href="{{ route('buy-crypto') }}?coin=BNB" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">Binance Coin (BNB)</a>
-                            <a href="{{ route('buy-crypto') }}?coin=SOL" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">Solana (SOL)</a>
-                            <a href="{{ route('buy-crypto') }}?coin=DOGE" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">Dogecoin (DOGE)</a>
+                            <!-- Robinhood -->
+                            <a href="https://robinhood.com" target="_self" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">
+                                <span class="mr-2">🟢</span> Robinhood
+                            </a>
+                            <!-- Coinbase -->
+                            <a href="https://coinbase.com" target="_self" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">
+                                <span class="mr-2">🔵</span> Coinbase
+                            </a>
+                            <!-- Exodus -->
+                            <a href="https://exodus.com" target="_self" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">
+                                <span class="mr-2">🟣</span> Exodus
+                            </a>
+                            <!-- CashApp -->
+                            <a href="https://cash.app" target="_self" class="flex items-center px-6 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">
+                                <span class="mr-2">💰</span> CashApp
+                            </a>
                         </div>
                     </div>
                 </nav>
