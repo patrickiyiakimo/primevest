@@ -1,5 +1,8 @@
 @extends('layouts.dashboard')
 
+@section('page-title', 'Dashboard Overview')
+@section('breadcrumb', 'Welcome back, ' . Auth::user()->name)
+
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Stats Cards -->

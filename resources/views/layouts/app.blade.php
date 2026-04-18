@@ -9,10 +9,9 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 flex flex-col">
-        <!-- I want the navbar not to show when I login to my dashboard -->
-
+        <!-- I want the navbar not to show when I login to my dashboard but I want it to show again when I go back to the homepage -->
         @if (!Auth::check())
-            @include('layouts.navigation')
+            @include('layouts.navbar')
         @endif
         
         <main class="flex-grow">

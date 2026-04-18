@@ -30,7 +30,7 @@
             </p>
 
             <!-- Add a condition for this create free account such that it only shows to unauthenticated users -->
-            @if (!Auth::check())
+            <!-- @if (!Auth::check()) -->
                 <!-- CTA Buttons -->
                 <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                     <a href="/register" 
@@ -41,7 +41,7 @@
                         </svg>
                     </a>
                 </div>
-            @endif
+            <!-- @endif -->
             
             <!-- Trust Indicators -->
             <div class="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start">
