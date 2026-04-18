@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 // Public routes
 Route::get('/', function () {
@@ -30,10 +32,33 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     
+    // ===== WITHDRAW ROUTES (Using closures - no controller needed) =====
+    Route::get('/withdraw', function () {
+        return view('dashboard.withdraw');
+    })->name('withdraw');
+    
+    Route::post('/withdraw/request', function (Request $request) {
+        $user = Auth::user();
+        
+        $validated = $request->validate([
+            'method' => 'required|string',
+            'amount' => 'required|numeric|min:1000|max:500000',
+            'wallet_address' => 'required|string|max:255',
+            'network' => 'required|string',
+        ]);
+        
+        // Check if user has sufficient balance
+        if ($validated['amount'] > $user->balance) {
+            return redirect()->back()->with('error', 'Insufficient balance.')->withInput();
+        }
+        
+        return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully! Our team will process it within 24 hours.');
+    })->name('withdraw.request');
+    // ==========================================
+    
     // Make a Deposit
     Route::get('/deposit', function () { return view('dashboard.deposit'); })->name('deposit');
     Route::get('/invest', function () { return view('dashboard.invest'); })->name('invest');
-    Route::get('/withdraw', function () { return view('dashboard.withdraw'); })->name('withdraw');
     
     // Buy Crypto
     Route::get('/buy-crypto', function () { return view('dashboard.buy-crypto'); })->name('buy-crypto');
