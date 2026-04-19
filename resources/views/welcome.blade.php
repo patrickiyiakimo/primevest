@@ -1,11 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <!-- Trading Widget -->
+    <!-- @include('components.trading-widget') -->
+
     <!-- Hero Section -->
     @include('pages.hero')
     
     <!-- Trading Widget -->
-    @include('components.trading-widget')
+    <!-- @include('components.trading-widget') -->
     
     <!-- Features Section -->
     @include('components.features-section')
@@ -30,6 +33,4 @@
     
     <!-- Investment Plans Section -->
     @include('components.investment-plans')
-
-    
 @endsection

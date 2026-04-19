@@ -2,49 +2,45 @@
 <div class="relative min-h-screen overflow-hidden">
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
-        <img src="/images/cryp-bg.webp" 
+        <img src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=1920&h=1080&fit=crop" 
              alt="Trading Background" 
              class="w-full h-full object-cover">
         <!-- Dark Overlay for better text readability -->
-        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/80"></div>
         <!-- Green gradient accent -->
-        <div class="absolute inset-0 bg-gradient-to-t from-green-600/20 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-green-600/30 via-transparent to-transparent"></div>
     </div>
     
     <!-- Hero Content -->
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-3 py-20 lg:py-20">
-        <div class="">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+        <div class="max-w-4xl">
             <!-- Main Heading -->
-            <h1 class="text-3xl sm:text-5xl lg:text-4xl xl:text-4xl font-bold text-white mb-6 leading-tight">
+            <h1 class="text-3xl sm:text-4xl lg:text-6xl xl:text-5xl font-bold text-white mb-6 leading-tight">
                 COPY TRADING ON
-                <span class="bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent block mt-2">
+                <span class="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent block mt-3">
                     CRYPTOCURRENCY, STOCKS, FOREX,<br>
                     INDICES, SHARE CFDs & MORE..
                 </span>
             </h1>
             
             <!-- Description -->
-            <p class="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 leading-relaxed">
-                Trade CFDs on a wide range of instruments, including popular FX pairs,<br> Futures, Indices, 
-                Metals, Energies and Shares. Experience <br>the global markets at your fingertips.
+            <p class="text-base sm:text-lg lg:text-xl text-gray-300 mb-10 leading-relaxed max-w-2xl">
+                Trade CFDs on a wide range of instruments, including popular FX pairs, Futures, Indices, 
+                Metals, Energies and Shares. Experience the global markets at your fingertips.
             </p>
 
-            <!-- Add a condition for this create free account such that it only shows to unauthenticated users -->
-            <!-- @if (!Auth::check()) -->
-                <!-- CTA Buttons -->
-                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <div class="flex flex-col sm:flex-row gap-5">
                     <a href="/register" 
-                       class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-bold rounded-full text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 transition-all duration-500 shadow-2xl">
+                       class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 transition-all duration-500">
                         <span>Create Free Account</span>
                         <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>
                     </a>
                 </div>
-            <!-- @endif -->
             
             <!-- Trust Indicators -->
-            <div class="mt-12 flex flex-wrap gap-6 justify-center lg:justify-start">
+            <div class="mt-12 flex flex-wrap gap-8">
                 <div class="flex items-center space-x-2">
                     <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
@@ -63,9 +59,30 @@
                     </svg>
                     <span class="text-gray-300 text-sm">Instant Execution</span>
                 </div>
+                <div class="flex items-center space-x-2">
+                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                    <span class="text-gray-300 text-sm">Secure Platform</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Test@1234 -->
-<!-- Chinenyenwa02% -->
+
+<style>
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(10px); }
+    }
+    .animate-bounce {
+        animation: bounce 2s infinite;
+    }
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+    .animate-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+</style>

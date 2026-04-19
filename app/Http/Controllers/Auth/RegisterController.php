@@ -30,6 +30,8 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
+            'phone' => null, // Optional field, set to null by default
+            'country' => null, // Optional field, set to null by default
             'password' => bcrypt($validated['password']), // Hash the password using bcrypt
             'balance' => 0, // Default balance for new users
         ]);

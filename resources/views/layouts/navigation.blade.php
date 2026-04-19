@@ -1,182 +1,140 @@
-<nav x-data="{ mobileMenuOpen: false }" class="bg-gradient-to-r from-black via-gray-900 to-black shadow-2xl border-b border-gray-800 sticky top-0 z-50">
+<nav x-data="{ mobileMenuOpen: false }" class="fixed top-0 left-0 right-0 z-50 bg-black backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <!-- Logo & Left Menu -->
-            <div class="flex items-center space-x-8">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <a href="/" class="text-2xl font-bold bg-gradient-to-r from-green-500 to-green-600 bg-clip-text text-transparent transition-all duration-300">
-                        PrimeVest
-                    </a>
-                </div>
-                <!-- Main Navigation Links - Hidden when logged in -->
+        <div class="flex justify-between items-center h-16">
+            
+            <!-- Logo -->
+            <div class="flex-shrink-0">
+                <a href="/" class="text-2xl font-bold text-white hover:text-green-400 transition-colors duration-300">
+                    PrimeVest
+                </a>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
                 @guest
-                <div class="hidden md:flex md:space-x-6">
-                    <a href="/trading" 
-                       class="relative text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 text-sm font-medium group">
-                        Trading
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="/contact"
-                       class="relative text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 text-sm font-medium group">
-                        Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="/company"
-                       class="relative text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 text-sm font-medium group">
-                        Company
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <a href="/education"
-                       class="relative text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 text-sm font-medium group">
-                        Education
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
-                    </a>
-                    <!-- <a href="/contact"
-                       class="relative text-gray-300 hover:text-white transition-all duration-300 px-3 py-2 text-sm font-medium group">
-                        Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-green-500 transition-all duration-300 group-hover:w-full"></span>
-                    </a> -->
-                </div>
+                    <a href="/trading" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Trading</a>
+                    <a href="/contact" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Contact</a>
+                    <a href="/company" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Company</a>
+                    <a href="/education" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Education</a>
                 @endguest
             </div>
             
-            <!-- Right Side (Auth buttons) -->
-            <div class="flex items-center space-x-4">
+            <!-- Desktop Auth Buttons -->
+            <div class="hidden md:flex items-center space-x-4">
                 @guest
-                    <!-- Show when NOT logged in -->
-                    <a href="/login" 
-                       class="text-gray-300 hover:text-green-500 px-4 py-2 text-sm font-medium transition-all duration-500">
-                        Login
-                    </a>
-                    <a href="/register" 
-                       class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white px-5 py-2 rounded-full text-sm font-medium duration-500 shadow-lg">
+                    <a href="/login" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Login</a>
+                    <a href="/register" class="px-5 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-sm font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
                         Get Started
                     </a>
                 @else
-                    <!-- Show when logged in -->
-                    <div class="relative" x-data="{ open: false }">
-                        <button @click="open = !open" 
-                                class="flex items-center space-x-3 px-4 py-2 rounded-lg duration-500 border border-gray-700">
+                    <div class="relative" x-data="{ dropdownOpen: false }">
+                        <button @click="dropdownOpen = !dropdownOpen" class="flex items-center space-x-2 focus:outline-none">
                             <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
-                                <span class="text-white font-semibold text-sm">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                                <span class="text-white text-sm font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                             </div>
-                            <span class="text-gray-200 font-medium">{{ Auth::user()->name }}</span>
-                            <svg class="w-4 h-4 text-gray-400 transition-transform duration-300" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <span class="text-gray-200 text-sm font-medium">{{ Auth::user()->name }}</span>
+                            <svg class="w-4 h-4 text-gray-400 transition-transform duration-200" :class="{ 'rotate-180': dropdownOpen }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                             </svg>
                         </button>
                         
-                        <!-- Dropdown Menu -->
-                        <div x-show="open" 
-                             @click.away="open = false"
-                             x-transition:enter="transition ease-out duration-200"
-                             x-transition:enter-start="opacity-0 transform -translate-y-2"
-                             x-transition:enter-end="opacity-100 transform translate-y-0"
-                             x-transition:leave="transition ease-in duration-150"
-                             x-transition:leave-start="opacity-100 transform translate-y-0"
-                             x-transition:leave-end="opacity-0 transform -translate-y-2"
-                             class="absolute right-0 mt-2 w-56 bg-gray-900 rounded-xl shadow-2xl py-2 z-50 border border-gray-800">
-                            <a href="/dashboard" 
-                               class="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-all duration-200">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                                </svg>
-                                <span>Dashboard</span>
-                            </a>
-                            <a href="/profile" 
-                               class="flex items-center space-x-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-gray-800 hover:text-white transition-all duration-200">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                                <span>Profile</span>
-                            </a>
-                            <div class="border-t border-gray-800 my-1"></div>
+                        <div x-show="dropdownOpen" @click.away="dropdownOpen = false" x-transition class="absolute right-0 mt-2 w-48 bg-gray-900/90 backdrop-blur-md rounded-xl shadow-2xl py-2 border border-gray-700">
+                            <a href="/dashboard" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors duration-200">Dashboard</a>
+                            <a href="/profile" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-gray-800/50 transition-colors duration-200">Profile</a>
+                            <div class="border-t border-gray-700 my-1"></div>
                             <form method="POST" action="/logout">
                                 @csrf
-                                <button type="submit" 
-                                        class="flex items-center space-x-3 w-full px-4 py-2.5 text-sm text-red-400 hover:bg-gray-800 hover:text-red-300 transition-all duration-200">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                                    </svg>
-                                    <span>Logout</span>
-                                </button>
+                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-gray-800/50 transition-colors duration-200">Logout</button>
                             </form>
                         </div>
                     </div>
                 @endguest
             </div>
             
-            <!-- Mobile menu button -->
-            <div class="flex items-center md:hidden">
-                <button @click="mobileMenuOpen = !mobileMenuOpen" 
-                        class="p-2 rounded-lg bg-gray-800 text-white focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-200 hover:text-green-400 focus:outline-none transition-colors duration-300">
+                    <svg x-show="!mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg x-show="mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
             </div>
         </div>
     </div>
     
-    <!-- Mobile Menu -->
-    <div x-show="mobileMenuOpen" 
-         x-transition:enter="transition ease-out duration-200"
-         x-transition:enter-start="opacity-0 transform -translate-x-full"
-         x-transition:enter-end="opacity-100 transform translate-x-0"
-         x-transition:leave="transition ease-in duration-150"
-         x-transition:leave-start="opacity-100 transform translate-x-0"
-         x-transition:leave-end="opacity-0 transform -translate-x-full"
-         class="fixed inset-0 z-50 bg-black bg-opacity-95 backdrop-blur-lg md:hidden">
-        <div class="flex flex-col h-full pt-20 px-6">
-            <button @click="mobileMenuOpen = false" 
-                    class="absolute top-4 right-4 p-2 rounded-lg bg-gray-800 text-white">
-                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
+    <!-- Mobile Menu Panel -->
+    <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translateY(-10px)" x-transition:enter-end="opacity-100 transform translateY(0)" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translateY(0)" x-transition:leave-end="opacity-0 transform -translateY(-10px)" class="md:hidden bg-black/95 backdrop-blur-md border-t border-white/10 max-h-[80vh] overflow-y-auto">
+        <div class="px-4 py-4 space-y-3">
             @guest
-                <a href="/trading" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Trading</a>
-                <a href="/contact" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Contact</a>
-                <a href="/company" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Company</a>
-                <a href="/education" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Education</a>
-                <div class="mt-6 space-y-3">
-                    <a href="/login" class="block text-center px-4 py-3 text-gray-300 hover:text-white border border-gray-700 rounded-full">Login</a>
-                    <a href="/register" class="block text-center px-4 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full">Sign Up</a>
+                <a href="/trading" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Trading</a>
+                <a href="/contact" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Contact</a>
+                <a href="/company" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Company</a>
+                <a href="/education" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Education</a>
+                <div class="pt-4 space-y-3">
+                    <a href="/login" class="block text-center py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border border-white/20 rounded-lg">Login</a>
+                    <a href="/register" class="block text-center py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg transition-all duration-300">Get Started</a>
                 </div>
             @else
-                <div class="text-center mb-6">
-                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-3">
-                        <span class="text-white font-bold text-2xl">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                <div class="text-center py-4 border-b border-white/10">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <span class="text-white text-xl font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                     </div>
                     <p class="text-white font-medium">{{ Auth::user()->name }}</p>
                     <p class="text-gray-400 text-sm">{{ Auth::user()->email }}</p>
                 </div>
-                <a href="/dashboard" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Dashboard</a>
-                <a href="/profile" class="py-4 text-gray-300 hover:text-white text-lg font-medium border-b border-gray-800">Profile</a>
+                <a href="/dashboard" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Dashboard</a>
+                <a href="/profile" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Profile</a>
                 <form method="POST" action="/logout">
                     @csrf
-                    <button type="submit" class="w-full text-left py-4 text-red-400 hover:text-red-300 text-lg font-medium">Logout</button>
+                    <button type="submit" class="block w-full text-left py-3 text-red-400 hover:text-red-300 transition-colors duration-300">Logout</button>
                 </form>
             @endguest
         </div>
     </div>
 </nav>
 
-<!-- TradingView Widget - Moved OUTSIDE the navbar -->
-<div class="">
-    <!-- <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <iframe 
-            src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no" 
-            width="100%" 
-            height="45px" 
-            scrolling="auto" 
-            marginwidth="0" 
-            marginheight="0" 
-            frameborder="0" 
-            border="0" 
-            style="border:0;margin:0;padding:0;"
-            class="rounded-lg">
-        </iframe>
-    </div> -->
+<!-- Crypto Ticker - Clean and simple -->
+<div>
+    <iframe 
+        src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no" 
+        width="100%" 
+        height="45px" 
+        scrolling="auto" 
+        marginwidth="0" 
+        marginheight="0" 
+        frameborder="0" 
+        border="0" 
+        style="border:0;margin:0;padding:0;display:block; margin-top: 4rem;">
+    </iframe>
 </div>
+
+<style>
+    /* Smooth transitions */
+    .transition-all {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+    
+    /* Backdrop blur for glass morphism */
+    .backdrop-blur-md {
+        backdrop-filter: blur(12px);
+    }
+    
+    /* Custom scrollbar for mobile menu */
+    .overflow-y-auto::-webkit-scrollbar {
+        width: 4px;
+    }
+    
+    .overflow-y-auto::-webkit-scrollbar-track {
+        background: #1f2937;
+    }
+    
+    .overflow-y-auto::-webkit-scrollbar-thumb {
+        background: #4b5563;
+        border-radius: 4px;
+    }
+</style>

@@ -9,16 +9,17 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100 flex flex-col">
-        <!-- I want the navbar not to show when I login to my dashboard but I want it to show again when I go back to the homepage -->
-        @if (!Auth::check())
-            @include('layouts.navbar')
+        <!-- Show navbar on ALL pages EXCEPT dashboard routes -->
+        @if(!request()->routeIs('dashboard*') && !request()->routeIs('deposit*') && !request()->routeIs('invest*') && !request()->routeIs('withdraw*') && !request()->routeIs('profile*') && !request()->routeIs('buy-crypto*') && !request()->routeIs('stock-trading*') && !request()->routeIs('card-application*') && !request()->routeIs('deposits-history*') && !request()->routeIs('withdrawals-history*') && !request()->routeIs('earnings-history*') && !request()->routeIs('investments-history*'))
+            @include('layouts.navigation')
         @endif
         
         <main class="flex-grow">
             @yield('content')
         </main>
-        <!-- I want the footer not to show when I login to my dashboard -->
-        @if (!Auth::check())
+        
+        <!-- Show footer on ALL pages EXCEPT dashboard routes -->
+        @if(!request()->routeIs('dashboard*') && !request()->routeIs('deposit*') && !request()->routeIs('invest*') && !request()->routeIs('withdraw*') && !request()->routeIs('profile*') && !request()->routeIs('buy-crypto*') && !request()->routeIs('stock-trading*') && !request()->routeIs('card-application*') && !request()->routeIs('deposits-history*') && !request()->routeIs('withdrawals-history*') && !request()->routeIs('earnings-history*') && !request()->routeIs('investments-history*'))
             @include('layouts.footer')
         @endif
     </div>

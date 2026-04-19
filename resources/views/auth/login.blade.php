@@ -1,21 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex items-stretch py-12 px-4 sm:px-6 lg:px-8 relative">
-    <div class="green-particles"></div>
+<div class="flex relative">
     
-    <div class="max-w-7xl w-full mx-auto flex flex-col lg:flex-row gap-0 lg:gap-8 items-stretch">
+    <div class="w-full mx-auto flex flex-col lg:flex-row items-stretch">
         
         <!-- Left Side - Full Height Image -->
-        <div class="lg:w-1/2 w-full lg:block hidden">
-            <div class="relative h-full rounded-2xl overflow-hidden shadow-2xl group" style="min-height: 600px;">
-                <img src="https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=800&h=1200&fit=crop" 
+        <div class=" w-full lg:block hidden">
+            <div class="relative h-full overflow-hidden" style="min-height: 650px;">
+                <img src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=800&h=1200&fit=crop" 
                      alt="Welcome Back" 
-                     class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                     class="absolute inset-0 w-full h-full object-cover">
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <div class="mb-4">
+                        <span class="inline-block px-3 py-1 bg-green-600 rounded-full text-sm font-semibold mb-3">
+                            👋 Welcome Back
+                        </span>
+                    </div>
                     <h3 class="text-3xl font-bold mb-3">Continue Your Journey</h3>
                     <p class="text-gray-200 text-lg mb-6">Access your portfolio and track your investments</p>
                     
@@ -40,68 +44,70 @@
         </div>
         
         <!-- Right Side - Login Form -->
-        <div class="lg:w-1/2 w-full">
-            <div class="glass-card h-full flex flex-col justify-center" style="min-height: 600px;">
+        <div class=" w-full">
+            <div class="bg-white shadow-xl p-8" style="min-height: 650px;">
                 <div class="text-center mb-8">
                     <h2 class="text-3xl font-bold text-gray-900 mb-2">Sign In</h2>
                     <p class="text-gray-600">Access your investment dashboard</p>
                 </div>
                 
                 @if(session('error'))
-                    <div class="alert-error mb-6">
-                        {{ session('error') }}
+                    <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6 rounded-lg">
+                        <p class="text-red-700 text-sm">{{ session('error') }}</p>
                     </div>
                 @endif
                 
                 <form method="POST" action="/login" class="space-y-6">
                     @csrf
                     
-                    <div class="input-group">
-                        <input id="email" name="email" type="email" required placeholder=" " class="modern-input @error('email') modern-input-error @enderror" value="{{ old('email') }}">
-                        <label for="email" class="floating-label">
-                            <svg class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            Email Address
-                        </label>
+                    <!-- Email Address -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                        <input type="email" 
+                               name="email" 
+                               value="{{ old('email') }}" 
+                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror"
+                               placeholder="Enter your email address"
+                               required>
+                        @error('email')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
-                    @error('email') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     
-                    <div class="input-group">
-                        <input id="password" name="password" type="password" required placeholder=" " class="modern-input @error('password') modern-input-error @enderror">
-                        <label for="password" class="floating-label">
-                            <svg class="inline-block w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                            Password
-                        </label>
+                    <!-- Password -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                        <input type="password" 
+                               name="password" 
+                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 @error('password') border-red-500 @enderror"
+                               placeholder="Enter your password"
+                               required>
+                        @error('password')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
-                    @error('password') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                     
+                    <!-- Remember Me & Forgot Password -->
                     <div class="flex items-center justify-between">
                         <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" name="remember" class="checkbox-green">
+                            <input type="checkbox" name="remember" class="w-4 h-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
                             <span class="ml-2 text-sm text-gray-600">Remember me</span>
                         </label>
-                        <a href="/forgot-password" class="link-green text-sm">
+                        <a href="/forgot-password" class="text-sm text-green-600 hover:text-green-700 font-semibold">
                             Forgot password?
                         </a>
                     </div>
                     
-                    <button type="submit" class="btn-primary group">
-                        <span class="flex items-center justify-center">
-                            Sign In
-                            <svg class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </span>
+                    <!-- Submit Button -->
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        Sign In
                     </button>
                 </form>
                 
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">
                         Don't have an account?
-                        <a href="/register" class="link-green font-semibold ml-1">
+                        <a href="/register" class="text-green-600 hover:text-green-700 font-semibold ml-1">
                             Create free account
                         </a>
                     </p>
@@ -110,4 +116,26 @@
         </div>
     </div>
 </div>
+
+<style>
+    /* Custom styling */
+    input:focus {
+        outline: none;
+    }
+    
+    input {
+        transition: all 0.3s ease;
+    }
+    
+    /* No spacing between sections */
+    .rounded-l-2xl {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    
+    .rounded-r-2xl {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+</style>
 @endsection
