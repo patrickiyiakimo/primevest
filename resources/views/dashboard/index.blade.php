@@ -142,6 +142,21 @@
         </div>
     </div>
 
+    <div>
+     <iframe 
+        src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no" 
+        width="100%" 
+        height="45px" 
+        scrolling="auto" 
+        marginwidth="0" 
+        marginheight="0" 
+        frameborder="0" 
+        border="0" 
+        style="border:0;margin:0;padding:0;display:block;">
+    </iframe>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
     <!-- TradingView News Widget -->
     <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
         <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4">
@@ -232,6 +247,7 @@
                 </script>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Transaction History -->
