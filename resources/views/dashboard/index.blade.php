@@ -109,37 +109,43 @@
     </div>
 </div>
 
-        <!-- Last Withdrawal Card -->
-        <div class="relative bg-gradient-to-br from-purple-800 to-purple-900">
-            <div class="absolute inset-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path d="M50,30 L65,50 L50,70" fill="none" stroke="white" stroke-width="1.5"/>
-                    <path d="M50,30 L35,50 L50,70" fill="none" stroke="white" stroke-width="1.5"/>
-                </svg>
+       <!-- Last Withdrawal Card -->
+<div class="relative bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
+    <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M50,30 L65,50 L50,70" fill="none" stroke="white" stroke-width="1.5"/>
+            <path d="M50,30 L35,50 L50,70" fill="none" stroke="white" stroke-width="1.5"/>
+        </svg>
+    </div>
+    <div class="absolute top-4 left-4">
+        <svg width="40" height="30" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="36" rx="4" fill="#D4AF37"/>
+            <rect x="6" y="6" width="36" height="24" rx="2" fill="none" stroke="#B8960C" stroke-width="1.5"/>
+            <line x1="24" y1="6" x2="24" y2="30" stroke="#B8960C" stroke-width="1"/>
+            <line x1="6" y1="18" x2="42" y2="18" stroke="#B8960C" stroke-width="1"/>
+        </svg>
+    </div>
+    <div class="absolute top-4 right-4">
+        <p class="text-[10px] text-purple-300 uppercase tracking-wider font-semibold">PrimeVest</p>
+    </div>
+    <div class="p-6 pt-16">
+        <p class="text-xs text-purple-300 uppercase tracking-wider mb-1">Last Withdrawal</p>
+        <p class="text-3xl font-bold text-white">${{ number_format($lastWithdrawalAmount ?? 0, 2) }}</p>
+        @if(isset($lastWithdrawalDate))
+        <p class="text-xs text-purple-300 mt-1">{{ $lastWithdrawalDate }}</p>
+        @endif
+        <div class="flex justify-between items-end mt-6">
+            <div>
+                <p class="text-[10px] text-purple-300 uppercase tracking-wider">Card Holder</p>
+                <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
             </div>
-            <div class="absolute top-4 left-4">
-                <svg width="40" height="30" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="36" rx="4" fill="#D4AF37"/>
-                </svg>
-            </div>
-            <div class="absolute top-4 right-4">
-                <p class="text-[10px] text-purple-300 uppercase tracking-wider font-semibold">PrimeVest</p>
-            </div>
-            <div class="p-6 pt-16">
-                <p class="text-xs text-purple-300 uppercase tracking-wider mb-1">Last Withdrawal</p>
-                <p class="text-3xl font-bold text-white">${{ number_format($lastWithdrawal ?? 0, 2) }}</p>
-                <div class="flex justify-between items-end mt-6">
-                    <div>
-                        <p class="text-[10px] text-purple-300 uppercase tracking-wider">Card Holder</p>
-                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] text-purple-300 uppercase tracking-wider">Valid Thru</p>
-                        <p class="text-sm font-semibold text-white">08/28</p>
-                    </div>
-                </div>
+            <div class="text-right">
+                <p class="text-[10px] text-purple-300 uppercase tracking-wider">Valid Thru</p>
+                <p class="text-sm font-semibold text-white">08/28</p>
             </div>
         </div>
+    </div>
+</div>
     </div>
 
     <div>
