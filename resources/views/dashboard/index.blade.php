@@ -110,7 +110,7 @@
 </div>
 
        <!-- Last Withdrawal Card -->
-<div class="relative bg-gradient-to-br from-purple-800 to-purple-900 rounded-2xl shadow-lg overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="relative bg-gradient-to-br from-purple-800 to-purple-900 shadow-lg overflow-hidden group">
     <div class="absolute inset-0 opacity-10">
         <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M50,30 L65,50 L50,70" fill="none" stroke="white" stroke-width="1.5"/>

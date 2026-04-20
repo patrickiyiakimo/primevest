@@ -8,6 +8,7 @@ use App\Models\DepositRequest;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\Investment;
+use App\Models\WithdrawalRequest;
 
 class AdminController extends Controller
 {
@@ -91,7 +92,7 @@ class AdminController extends Controller
     }
 
     public function investments()
-{
+    {
     $investments = Investment::with('user')
         ->latest()
         ->paginate(20);
@@ -108,5 +109,82 @@ class AdminController extends Controller
         'completedInvestments', 
         'totalReturns'
     ));
+    }
+
+public function withdrawals()
+{
+    $pendingWithdrawals = WithdrawalRequest::where('status', 'pending')
+        ->with('user')
+        ->latest()
+        ->get();
+    
+    $approvedWithdrawals = WithdrawalRequest::where('status', 'approved')
+        ->with('user')
+        ->latest()
+        ->take(20)
+        ->get();
+    
+    $rejectedWithdrawals = WithdrawalRequest::where('status', 'rejected')
+        ->with('user')
+        ->latest()
+        ->take(10)
+        ->get();
+    
+    $totalPending = WithdrawalRequest::where('status', 'pending')->sum('amount');
+    $totalApproved = WithdrawalRequest::where('status', 'approved')->sum('amount');
+    
+    return view('admin.withdrawals', compact(
+        'pendingWithdrawals', 
+        'approvedWithdrawals', 
+        'rejectedWithdrawals',
+        'totalPending',
+        'totalApproved'
+    ));
+}
+
+public function approveWithdrawal($id)
+{
+    $withdrawal = WithdrawalRequest::findOrFail($id);
+    $user = $withdrawal->user;
+    
+    // Check if user has sufficient balance
+    if ($withdrawal->amount > $user->balance) {
+        return redirect()->back()->with('error', 'Insufficient user balance to process this withdrawal.');
+    }
+    
+    // Update withdrawal status
+    $withdrawal->status = 'approved';
+    $withdrawal->approved_at = now();
+    $withdrawal->save();
+    
+    // Deduct from user's balance
+    $oldBalance = $user->balance;
+    $user->balance -= $withdrawal->amount;
+    $user->save();
+    
+    // Create transaction record
+    Transaction::create([
+        'user_id' => $user->id,
+        'type' => 'withdrawal',
+        'amount' => $withdrawal->amount,
+        'balance_before' => $oldBalance,
+        'balance_after' => $user->balance,
+        'status' => 'completed',
+        'reference' => 'WDL-' . strtoupper(uniqid()),
+        'description' => 'Withdrawal via ' . ucfirst($withdrawal->method),
+        'payment_method' => $withdrawal->method,
+    ]);
+    
+    return redirect()->back()->with('success', 'Withdrawal approved and processed successfully!');
+}
+
+public function rejectWithdrawal(Request $request, $id)
+{
+    $withdrawal = WithdrawalRequest::findOrFail($id);
+    $withdrawal->status = 'rejected';
+    $withdrawal->admin_notes = $request->admin_notes;
+    $withdrawal->save();
+    
+    return redirect()->back()->with('success', 'Withdrawal rejected successfully!');
 }
 }

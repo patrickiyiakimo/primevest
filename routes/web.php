@@ -63,27 +63,59 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     
-    // Withdraw Routes
-    Route::get('/withdraw', function () {
-        return view('dashboard.withdraw');
-    })->name('withdraw');
+    // // Withdraw Routes
+    // Route::get('/withdraw', function () {
+    //     return view('dashboard.withdraw');
+    // })->name('withdraw');
     
+    // Route::post('/withdraw/request', function (Request $request) {
+    //     $user = Auth::user();
+        
+    //     $validated = $request->validate([
+    //         'method' => 'required|string',
+    //         'amount' => 'required|numeric|min:1000|max:500000',
+    //         'wallet_address' => 'required|string|max:255',
+    //         'network' => 'required|string',
+    //     ]);
+        
+    //     if ($validated['amount'] > $user->balance) {
+    //         return redirect()->back()->with('error', 'Insufficient balance.')->withInput();
+    //     }
+        
+    //     return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully!');
+    // })->name('withdraw.request');
+
     Route::post('/withdraw/request', function (Request $request) {
-        $user = Auth::user();
-        
-        $validated = $request->validate([
-            'method' => 'required|string',
-            'amount' => 'required|numeric|min:1000|max:500000',
-            'wallet_address' => 'required|string|max:255',
-            'network' => 'required|string',
-        ]);
-        
-        if ($validated['amount'] > $user->balance) {
-            return redirect()->back()->with('error', 'Insufficient balance.')->withInput();
-        }
-        
-        return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully!');
-    })->name('withdraw.request');
+    $user = Auth::user();
+    
+    $validated = $request->validate([
+        'method' => 'required|string',
+        'amount' => 'required|numeric|min:1000|max:500000',
+        'wallet_address' => 'required|string|max:255',
+        'network' => 'required|string',
+    ]);
+    
+    if ($validated['amount'] > $user->balance) {
+        return redirect()->back()->with('error', 'Insufficient balance.')->withInput();
+    }
+    
+    // Create withdrawal record
+    $withdrawal = \App\Models\Withdrawal::create([
+        'user_id' => $user->id,
+        'amount' => $validated['amount'],
+        'method' => $validated['method'],
+        'wallet_address' => $validated['wallet_address'],
+        'network' => $validated['network'],
+        'status' => 'pending'
+    ]);
+
+    // Withdrawal management routes
+Route::get('/withdrawals', [AdminController::class, 'withdrawals'])->name('withdrawals');
+Route::post('/withdrawals/{id}/approve', [AdminController::class, 'approveWithdrawal'])->name('withdrawals.approve');
+Route::post('/withdrawals/{id}/reject', [AdminController::class, 'rejectWithdrawal'])->name('withdrawals.reject');
+    
+    return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully!');
+})->name('withdraw.request');
     
     // Card Application Routes
     Route::get('/card-application', function () {

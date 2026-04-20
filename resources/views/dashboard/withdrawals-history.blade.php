@@ -54,44 +54,41 @@
                 <tbody class="divide-y divide-gray-100">
                     @forelse($withdrawals ?? [] as $index => $withdrawal)
                     <tr class="hover:bg-gray-50 transition-colors duration-200">
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ $index + 1 }}</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">${{ number_format($withdrawal['amount'] ?? 0, 2) }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ $withdrawals->firstItem() + $index }}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-gray-900">${{ number_format($withdrawal->amount, 2) }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600">
                             <span class="inline-flex items-center gap-1">
-                                @if(($withdrawal['method'] ?? '') == 'bitcoin')
+                                @if($withdrawal->method == 'bitcoin')
                                     <span class="text-orange-500">₿</span> Bitcoin (BTC)
-                                @elseif(($withdrawal['method'] ?? '') == 'ethereum')
+                                @elseif($withdrawal->method == 'ethereum')
                                     <span class="text-indigo-500">Ξ</span> Ethereum (ERC20)
-                                @elseif(($withdrawal['method'] ?? '') == 'solana')
+                                @elseif($withdrawal->method == 'solana')
                                     <span class="text-purple-500">◎</span> Solana
-                                @elseif(($withdrawal['method'] ?? '') == 'usdt_erc20')
+                                @elseif($withdrawal->method == 'usdt_erc20')
                                     <span class="text-blue-500">USDT</span> Tether (ERC20)
-                                @elseif(($withdrawal['method'] ?? '') == 'usdt_trc20')
+                                @elseif($withdrawal->method == 'usdt_trc20')
                                     <span class="text-teal-500">USDT</span> Tether (TRC20)
                                 @else
-                                    {{ ucfirst($withdrawal['method'] ?? 'N/A') }}
+                                    {{ ucfirst($withdrawal->method ?? 'N/A') }}
                                 @endif
                             </span>
                         </td>
                         <td class="px-6 py-4 text-sm text-gray-500 font-mono">
-                            {{ substr($withdrawal['wallet_address'] ?? 'N/A', 0, 15) }}...
+                            {{ substr($withdrawal->wallet_address ?? 'N/A', 0, 15) }}...
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ $withdrawal['date'] ?? 'N/A' }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ $withdrawal->created_at->format('Y-m-d H:i:s') }}</td>
                         <td class="px-6 py-4 text-sm">
-                            @php
-                                $status = $withdrawal['status'] ?? 'pending';
-                            @endphp
-                            @if($status == 'completed')
+                            @if($withdrawal->status == 'completed')
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
                                     <span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-1.5"></span>
                                     Completed
                                 </span>
-                            @elseif($status == 'pending')
+                            @elseif($withdrawal->status == 'pending')
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700">
                                     <span class="w-1.5 h-1.5 bg-yellow-600 rounded-full mr-1.5 animate-pulse"></span>
                                     Pending
                                 </span>
-                            @elseif($status == 'processing')
+                            @elseif($withdrawal->status == 'processing')
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
                                     <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-1.5"></span>
                                     Processing
@@ -99,7 +96,7 @@
                             @else
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">
                                     <span class="w-1.5 h-1.5 bg-red-600 rounded-full mr-1.5"></span>
-                                    Failed
+                                    {{ ucfirst($withdrawal->status) }}
                                 </span>
                             @endif
                         </td>

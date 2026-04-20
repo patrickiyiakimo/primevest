@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WithdrawalRequest;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class WithdrawController extends Controller
+class WithdrawalController extends Controller
 {
     public function index()
     {
@@ -25,12 +27,25 @@ class WithdrawController extends Controller
         
         // Check if user has sufficient balance
         if ($validated['amount'] > $user->balance) {
-            return redirect()->back()->with('error', 'Insufficient balance.')->withInput();
+            return response()->json([
+                'success' => false,
+                'message' => 'Insufficient balance.'
+            ], 400);
         }
         
-        // TODO: Create withdrawal record in database
-        // You'll create a withdrawals table later
+        // Create withdrawal request
+        $withdrawal = WithdrawalRequest::create([
+            'user_id' => $user->id,
+            'amount' => $validated['amount'],
+            'method' => $validated['method'],
+            'wallet_address' => $validated['wallet_address'],
+            'network' => $validated['network'],
+            'status' => 'pending'
+        ]);
         
-        return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully! Our team will process it within 24 hours.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Withdrawal request submitted successfully! Awaiting admin approval.'
+        ]);
     }
 }

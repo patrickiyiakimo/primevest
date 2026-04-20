@@ -94,6 +94,21 @@
                         </svg>
                         <span>Investments</span>
                     </a>
+
+
+                    <!-- Withdrawals -->
+                    <a href="{{ route('admin.withdrawals') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.withdrawals') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        <span>Withdrawals</span>
+                        @php
+                            $pendingCount = \App\Models\WithdrawalRequest::where('status', 'pending')->count();
+                        @endphp
+                        @if($pendingCount > 0)
+                            <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $pendingCount }}</span>
+                        @endif
+                    </a>`
                 </nav>
             </div>
             
