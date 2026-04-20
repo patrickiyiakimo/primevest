@@ -28,7 +28,7 @@
     </div>
 
     <!-- Pending Deposit Requests -->
-    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+    <!-- <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
         <div class="px-6 py-4 border-b border-gray-200 bg-yellow-50">
             <div class="flex items-center justify-between">
                 <h2 class="text-lg font-semibold text-yellow-800">Pending Deposit Requests</h2>
@@ -87,7 +87,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> -->
 
     <!-- Recent Users -->
     <div class="bg-white rounded-2xl shadow-lg overflow-hidden">

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\DepositRequest;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Models\Investment;
 
 class AdminController extends Controller
 {
@@ -88,4 +89,24 @@ class AdminController extends Controller
         
         return redirect()->back()->with('success', 'Deposit rejected successfully!');
     }
+
+    public function investments()
+{
+    $investments = Investment::with('user')
+        ->latest()
+        ->paginate(20);
+    
+    $totalInvested = Investment::sum('amount');
+    $activeInvestments = Investment::where('status', 'active')->count();
+    $completedInvestments = Investment::where('status', 'completed')->count();
+    $totalReturns = Investment::where('status', 'completed')->sum('expected_return');
+    
+    return view('admin.investments', compact(
+        'investments', 
+        'totalInvested', 
+        'activeInvestments', 
+        'completedInvestments', 
+        'totalReturns'
+    ));
+}
 }

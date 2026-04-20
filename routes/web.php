@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\DepositController;
+use App\Http\Controllers\InvestmentController;
 
 // Public routes
 Route::get('/', function () {
@@ -26,7 +27,7 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-// Admin Routes - CORRECTED (all routes inside the group)
+// Admin Routes (only for admins)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [UserManagementController::class, 'index'])->name('users');
@@ -37,14 +38,22 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/deposits', [AdminController::class, 'deposits'])->name('deposits');
     Route::post('/deposits/{id}/approve', [AdminController::class, 'approveDeposit'])->name('deposits.approve');
     Route::post('/deposits/{id}/reject', [AdminController::class, 'rejectDeposit'])->name('deposits.reject');
+    
+    // Admin investment view
+    Route::get('/investments', [AdminController::class, 'investments'])->name('investments');
 });
 
-// Deposit Routes
+// User Investment Routes (accessible by all authenticated users)
+Route::middleware('auth')->group(function () {
+    Route::post('/invest/store', [InvestmentController::class, 'store'])->name('invest.store');
+});
+
+// Deposit Routes (accessible by all authenticated users)
 Route::middleware('auth')->group(function () {
     Route::post('/deposit/request', [DepositController::class, 'request'])->name('deposit.request');
 });
 
-// Protected routes
+// Protected routes (accessible by all authenticated users)
 Route::middleware('auth')->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -115,7 +124,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/stock-trading', function () { return view('dashboard.stock-trading'); })->name('stock-trading');
 });
 
-// Page routes
+// Page routes (public)
 Route::get('/trading', [PageController::class, 'trading'])->name('trading');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/company', [PageController::class, 'company'])->name('company');

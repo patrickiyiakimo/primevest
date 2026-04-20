@@ -119,53 +119,45 @@
                 <tbody class="divide-y divide-gray-100">
                     @forelse($investments ?? [] as $index => $investment)
                     <tr class="hover:bg-gray-50 transition-colors duration-200">
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ $index + 1 }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ $investments->firstItem() + $index }}</td>
                         <td class="px-6 py-4 text-sm font-semibold text-gray-800">
                             <div class="flex items-center gap-2">
-                                @if(($investment['plan'] ?? '') == 'VIP Elite')
+                                @if($investment->plan_name == 'VIP Elite Plan')
                                     <span class="text-yellow-500">👑</span>
-                                @elseif(($investment['plan'] ?? '') == 'Diamond')
+                                @elseif($investment->plan_name == 'Diamond Plan')
                                     <span class="text-blue-500">💎</span>
-                                @elseif(($investment['plan'] ?? '') == 'Platinum')
+                                @elseif($investment->plan_name == 'Platinum Plan')
                                     <span class="text-gray-500">⚡</span>
-                                @elseif(($investment['plan'] ?? '') == 'Gold')
+                                @elseif($investment->plan_name == 'Gold Plan')
                                     <span class="text-yellow-500">🥇</span>
-                                @elseif(($investment['plan'] ?? '') == 'Silver')
+                                @elseif($investment->plan_name == 'Silver Plan')
                                     <span class="text-gray-400">🥈</span>
                                 @else
                                     <span class="text-green-500">🚀</span>
                                 @endif
-                                {{ $investment['plan'] ?? 'N/A' }}
+                                {{ $investment->plan_name }}
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-sm font-semibold text-green-600">${{ number_format($investment['amount'] ?? 0, 2) }}</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-blue-600">{{ $investment['roi'] ?? 0 }}%</td>
-                        <td class="px-6 py-4 text-sm font-semibold text-purple-600">${{ number_format($investment['expected_return'] ?? 0, 2) }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ $investment['start_date'] ?? 'N/A' }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ $investment['end_date'] ?? 'N/A' }}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-green-600">${{ number_format($investment->amount, 2) }}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-blue-600">{{ $investment->roi }}%</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-purple-600">${{ number_format($investment->expected_return, 2) }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ $investment->start_date ? $investment->start_date->format('Y-m-d') : 'N/A' }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ $investment->end_date ? $investment->end_date->format('Y-m-d') : 'N/A' }}</td>
                         <td class="px-6 py-4 text-sm">
-                            @php
-                                $status = $investment['status'] ?? 'active';
-                            @endphp
-                            @if($status == 'active')
+                            @if($investment->status == 'active')
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
                                     <span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-1.5 animate-pulse"></span>
                                     Active
                                 </span>
-                            @elseif($status == 'completed')
+                            @elseif($investment->status == 'completed')
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
                                     <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-1.5"></span>
                                     Completed
                                 </span>
-                            @elseif($status == 'pending')
-                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-700">
-                                    <span class="w-1.5 h-1.5 bg-yellow-600 rounded-full mr-1.5"></span>
-                                    Pending
-                                </span>
                             @else
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">
                                     <span class="w-1.5 h-1.5 bg-red-600 rounded-full mr-1.5"></span>
-                                    Cancelled
+                                    {{ ucfirst($investment->status) }}
                                 </span>
                             @endif
                         </td>
@@ -238,6 +230,7 @@
             </div>
             <div class="p-6">
                 <div class="space-y-4">
+                    @if(($vipPercentage ?? 0) > 0)
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="text-gray-600">VIP Elite Plan</span>
@@ -247,6 +240,9 @@
                             <div class="bg-yellow-500 h-2 rounded-full" style="width: {{ $vipPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
+                    @endif
+                    
+                    @if(($diamondPercentage ?? 0) > 0)
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="text-gray-600">Diamond Plan</span>
@@ -256,6 +252,9 @@
                             <div class="bg-blue-500 h-2 rounded-full" style="width: {{ $diamondPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
+                    @endif
+                    
+                    @if(($platinumPercentage ?? 0) > 0)
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="text-gray-600">Platinum Plan</span>
@@ -265,6 +264,9 @@
                             <div class="bg-gray-500 h-2 rounded-full" style="width: {{ $platinumPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
+                    @endif
+                    
+                    @if(($goldPercentage ?? 0) > 0)
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="text-gray-600">Gold Plan</span>
@@ -274,15 +276,43 @@
                             <div class="bg-yellow-600 h-2 rounded-full" style="width: {{ $goldPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
+                    @endif
+                    
+                    @if(($silverPercentage ?? 0) > 0)
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600">Silver Plan</span>
+                            <span class="font-semibold text-gray-800">{{ $silverPercentage ?? 0 }}%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-gray-400 h-2 rounded-full" style="width: {{ $silverPercentage ?? 0 }}%"></div>
+                        </div>
+                    </div>
+                    @endif
+                    
+                    @if(($starterPercentage ?? 0) > 0)
+                    <div>
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600">Starter Plan</span>
+                            <span class="font-semibold text-gray-800">{{ $starterPercentage ?? 0 }}%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-500 h-2 rounded-full" style="width: {{ $starterPercentage ?? 0 }}%"></div>
+                        </div>
+                    </div>
+                    @endif
+                    
+                    @if(($otherPercentage ?? 0) > 0)
                     <div>
                         <div class="flex justify-between text-sm mb-1">
                             <span class="text-gray-600">Other Plans</span>
                             <span class="font-semibold text-gray-800">{{ $otherPercentage ?? 0 }}%</span>
                         </div>
                         <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-green-500 h-2 rounded-full" style="width: {{ $otherPercentage ?? 0 }}%"></div>
+                            <div class="bg-gray-300 h-2 rounded-full" style="width: {{ $otherPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

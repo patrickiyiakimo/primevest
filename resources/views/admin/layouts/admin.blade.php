@@ -10,6 +10,13 @@
         .admin-sidebar {
             transition: all 0.3s ease;
         }
+        .admin-sidebar-item {
+            transition: all 0.3s ease;
+        }
+        .admin-sidebar-item:hover {
+            padding-left: 1.5rem;
+            background-color: rgba(255,255,255,0.1);
+        }
         @media (max-width: 768px) {
             .admin-sidebar {
                 transform: translateX(-100%);
@@ -20,6 +27,16 @@
             .admin-sidebar.open {
                 transform: translateX(0);
             }
+        }
+        
+        /* Badge for pending deposits */
+        .pending-badge {
+            background-color: #ef4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 9999px;
+            margin-left: 8px;
         }
     </style>
 </head>
@@ -36,25 +53,53 @@
                 </div>
             </div>
             
-            <div class="flex-1 py-6">
+            <div class="flex-1 py-6 overflow-y-auto">
                 <nav class="space-y-1">
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.dashboard') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                    <!-- Dashboard -->
+                    <a href="{{ route('admin.dashboard') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.dashboard') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                         </svg>
                         <span>Dashboard</span>
                     </a>
-                    <a href="{{ route('admin.users') }}" class="flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.users*') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                    
+                    <!-- User Management -->
+                    <a href="{{ route('admin.users') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.users*') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
                         <span>User Management</span>
                     </a>
+                    
+                    <!-- Deposit Requests with Pending Badge -->
+                    <a href="{{ route('admin.deposits') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.deposits') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Deposit Requests</span>
+                        </div>
+                        @php
+                            $pendingDepositsCount = \App\Models\DepositRequest::where('status', 'pending')->count();
+                        @endphp
+                        @if($pendingDepositsCount > 0)
+                            <span class="pending-badge">{{ $pendingDepositsCount }}</span>
+                        @endif
+                    </a>
+                    
+                    <!-- Investments -->
+                    <a href="{{ route('admin.investments') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.investments') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <span>Investments</span>
+                    </a>
                 </nav>
             </div>
             
+            <!-- Footer Section -->
             <div class="p-4 border-t border-gray-700">
-                <a href="/dashboard" class="flex items-center space-x-3 px-4 py-2 text-gray-400 hover:text-white transition-colors duration-300">
+                <a href="/dashboard" class="flex items-center space-x-3 px-4 py-2 text-gray-400 hover:text-white transition-colors duration-300 rounded-lg hover:bg-gray-800">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                     </svg>
@@ -80,6 +125,13 @@
         </div>
     </div>
     
+    <!-- Mobile Menu Toggle Button -->
+    <button onclick="toggleSidebar()" class="fixed bottom-4 left-4 z-50 lg:hidden bg-gray-800 text-white p-3 rounded-full shadow-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+    </button>
+    
     <script>
         // Mobile menu toggle
         const sidebar = document.querySelector('.admin-sidebar');
@@ -91,6 +143,20 @@
             sidebar.classList.toggle('open');
             overlay.classList.toggle('hidden');
         }
+        
+        // Close sidebar when clicking overlay
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('open');
+            overlay.classList.add('hidden');
+        });
+        
+        // Close sidebar on window resize if open
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 768) {
+                sidebar.classList.remove('open');
+                overlay.classList.add('hidden');
+            }
+        });
     </script>
 </body>
 </html>
