@@ -41,12 +41,12 @@
                                oninput="updateAmount()">
                     </div>
                     <div class="flex flex-wrap gap-3 mt-4">
-                        <button onclick="setAmount(100)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$100</button>
-                        <button onclick="setAmount(250)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$250</button>
-                        <button onclick="setAmount(500)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$500</button>
-                        <button onclick="setAmount(1000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$1,000</button>
-                        <button onclick="setAmount(5000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$5,000</button>
-                        <button onclick="setAmount(10000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$10,000</button>
+                        <button type="button" onclick="setAmount(100)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$100</button>
+                        <button type="button" onclick="setAmount(250)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$250</button>
+                        <button type="button" onclick="setAmount(500)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$500</button>
+                        <button type="button" onclick="setAmount(1000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$1,000</button>
+                        <button type="button" onclick="setAmount(5000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$5,000</button>
+                        <button type="button" onclick="setAmount(10000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$10,000</button>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,6 @@
                     <p class="text-sm text-gray-500 mt-1">Select a payment method to see instructions</p>
                 </div>
                 <div class="p-4 space-y-3 max-h-[400px] overflow-y-auto">
-                    <!-- Payment Method Options -->
                     @php
                         $paymentMethods = [
                             ['value' => 'solana', 'name' => 'Solana (SOL)', 'icon' => '🟣', 'bg' => 'from-purple-500 to-purple-600', 'desc' => 'Fast and low-cost transactions'],
@@ -101,7 +100,6 @@
 
         <!-- Right Sidebar - Payment Instructions -->
         <div class="space-y-6">
-            <!-- Payment Instructions Card -->
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden sticky top-6" id="paymentInstructionsCard">
                 <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4">
                     <div class="flex items-center">
@@ -159,14 +157,12 @@
     .sticky { position: sticky; top: 100px; }
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { opacity: 0.5; }
-    .file-upload-label:hover { background-color: #f3f4f6; }
 </style>
 
 <!-- Toast Container -->
 <div id="toastContainer" class="toast-container"></div>
 
 <script>
-    // Toast Notification System
     class Toast {
         constructor() {
             this.container = document.getElementById('toastContainer');
@@ -206,64 +202,15 @@
     let selectedPaymentMethod = null;
     let currentAmount = 0;
 
-    // Payment methods configuration with addresses
     const paymentConfig = {
-        solana: {
-            name: 'Solana (SOL)',
-            instruction: 'Pay via Solana',
-            address: 'iNTTRrsvJU4TMP2k7iGaaSkQJphswRWdJroPSLC4ReK',
-            minAmount: 50,
-            maxAmount: 50000
-        },
-        usdt_erc20: {
-            name: 'Tether USD (ERC20)',
-            instruction: 'Pay via USDT (ERC20)',
-            address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8',
-            minAmount: 50,
-            maxAmount: 100000
-        },
-        etransfer: {
-            name: 'E-Transfer',
-            instruction: 'Pay via Interac E-Transfer',
-            address: 'deposits@primevest.com',
-            minAmount: 100,
-            maxAmount: 10000
-        },
-        paypal: {
-            name: 'PayPal',
-            instruction: 'Send as Family & Friends',
-            address: 'payments@primevest.com',
-            minAmount: 20,
-            maxAmount: 5000
-        },
-        bank_transfer: {
-            name: 'Bank Transfer',
-            instruction: 'Wire Transfer Details',
-            address: 'Account: 1234567890\nRouting: 021000021\nBeneficiary: PrimeVest Ltd',
-            minAmount: 500,
-            maxAmount: 100000
-        },
-        usdt_trc20: {
-            name: 'Tether USD (TRC20)',
-            instruction: 'Pay via USDT (TRC20)',
-            address: 'TXRqQ8jLnKqWqjJqjLjKjLqWqjJqjLjKjLqWq',
-            minAmount: 50,
-            maxAmount: 100000
-        },
-        ethereum: {
-            name: 'Ethereum (ETH)',
-            instruction: 'Pay via Ethereum',
-            address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8',
-            minAmount: 100,
-            maxAmount: 100000
-        },
-        bitcoin: {
-            name: 'Bitcoin (BTC)',
-            instruction: 'Pay via Bitcoin',
-            address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',
-            minAmount: 50,
-            maxAmount: 100000
-        }
+        solana: { name: 'Solana (SOL)', address: 'iNTTRrsvJU4TMP2k7iGaaSkQJphswRWdJroPSLC4ReK' },
+        usdt_erc20: { name: 'Tether USD (ERC20)', address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8' },
+        etransfer: { name: 'E-Transfer', address: 'deposits@primevest.com' },
+        paypal: { name: 'PayPal', address: 'payments@primevest.com' },
+        bank_transfer: { name: 'Bank Transfer', address: 'Account: 1234567890\nRouting: 021000021\nBeneficiary: PrimeVest Ltd' },
+        usdt_trc20: { name: 'Tether USD (TRC20)', address: 'TXRqQ8jLnKqWqjJqjLjKjLqWqjJqjLjKjLqWq' },
+        ethereum: { name: 'Ethereum (ETH)', address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8' },
+        bitcoin: { name: 'Bitcoin (BTC)', address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh' }
     };
 
     function setAmount(amount) {
@@ -287,14 +234,7 @@
         const instructionsDiv = document.getElementById('paymentInstructions');
         
         if (!selectedPaymentMethod) {
-            instructionsDiv.innerHTML = `
-                <div class="text-center py-8 text-gray-500">
-                    <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                    </svg>
-                    <p>Select a payment method to see instructions</p>
-                </div>
-            `;
+            instructionsDiv.innerHTML = `<div class="text-center py-8 text-gray-500"><p>Select a payment method to see instructions</p></div>`;
             return;
         }
 
@@ -303,7 +243,6 @@
         
         instructionsDiv.innerHTML = `
             <div class="space-y-5">
-                <!-- Payment Method Header -->
                 <div class="text-center">
                     <div class="w-16 h-16 mx-auto bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg mb-3">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -311,18 +250,15 @@
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-900">${config.name}</h3>
-                    <p class="text-sm text-gray-500">${config.instruction}</p>
                 </div>
 
-                <!-- Amount to Pay -->
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
                     <p class="text-sm text-gray-500 mb-1">Amount to Pay:</p>
                     <p class="text-3xl font-bold text-green-600">$${amount.toLocaleString()}</p>
                 </div>
 
-                <!-- Payment Address -->
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                    <p class="text-sm text-gray-500 mb-2">Payment Address (${selectedPaymentMethod.toUpperCase()}):</p>
+                    <p class="text-sm text-gray-500 mb-2">Payment Address:</p>
                     <div class="flex items-center justify-between gap-2">
                         <code class="text-xs bg-white p-2 rounded border border-gray-200 break-all flex-1 font-mono">${config.address}</code>
                         <button onclick="copyAddress('${config.address}')" class="px-3 py-2 bg-gray-200 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">
@@ -333,9 +269,8 @@
                     </div>
                 </div>
 
-                <!-- Upload Payment Proof -->
                 <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                    <p class="text-sm text-gray-500 mb-2">Upload Payment Proof:</p>
+                    <p class="text-sm text-gray-500 mb-2">Upload Payment Proof (Optional):</p>
                     <div class="relative">
                         <input type="file" id="paymentProof" class="hidden" accept="image/*,.pdf,.jpg,.png">
                         <label for="paymentProof" class="flex items-center justify-between w-full px-4 py-3 bg-white border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300">
@@ -343,30 +278,27 @@
                             <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-sm">Browse</span>
                         </label>
                     </div>
-                    <p class="text-xs text-gray-400 mt-2">Upload screenshot or PDF of your payment transaction</p>
+                    <p class="text-xs text-gray-400 mt-2">Upload screenshot or PDF of your payment transaction (Optional)</p>
                 </div>
 
-                <!-- Submit Button -->
                 <button onclick="submitDeposit()" class="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
-                    Submit Deposit
+                    Submit Deposit Request
                 </button>
 
-                <!-- Warning Note -->
-                <div class="bg-yellow-50 rounded-lg p-3 border border-yellow-200">
+                <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
                     <div class="flex items-start gap-2">
-                        <svg class="w-4 h-4 text-yellow-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                        <svg class="w-4 h-4 text-blue-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <p class="text-xs text-yellow-700">Please ensure you send the exact amount to the address above. Include your transaction ID in the proof.</p>
+                        <p class="text-xs text-blue-700">Your deposit will be processed within 15-30 minutes after admin approval.</p>
                     </div>
                 </div>
             </div>
         `;
         
-        // Add file input listener
         const fileInput = document.getElementById('paymentProof');
         if (fileInput) {
             fileInput.addEventListener('change', function(e) {
@@ -396,23 +328,38 @@
             return;
         }
         
-        if (!file) {
-            toast.warning('Please upload payment proof');
-            return;
+        // Create form data
+        const formData = new FormData();
+        formData.append('amount', amount);
+        formData.append('method', selectedPaymentMethod);
+        if (file) {
+            formData.append('proof', file);
         }
         
-        const config = paymentConfig[selectedPaymentMethod];
-        toast.success(`Deposit request submitted! Amount: $${amount.toLocaleString()}`);
-        toast.info('Our team will verify your payment within 15-30 minutes', 5000);
-        
-        // Here you would submit the form data to your backend
-        // const formData = new FormData();
-        // formData.append('amount', amount);
-        // formData.append('method', selectedPaymentMethod);
-        // formData.append('proof', file);
+        // Submit via fetch
+        fetch('/deposit/request', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                toast.success(data.message);
+                setTimeout(() => {
+                    window.location.href = '/deposits-history';
+                }, 2000);
+            } else {
+                toast.error(data.message);
+            }
+        })
+        .catch(error => {
+            toast.error('Something went wrong. Please try again.');
+        });
     }
 
-    // Update instructions when amount changes
     document.getElementById('depositAmount').addEventListener('input', updateAmount);
 </script>
 @endsection

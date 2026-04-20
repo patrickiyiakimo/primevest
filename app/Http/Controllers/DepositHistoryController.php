@@ -42,6 +42,17 @@ class DepositHistoryController extends Controller
                 'status' => $transaction->status,
             ];
         });
+
+        $deposits = Transaction::where('user_id', $user->id)
+        ->where('type', 'deposit')
+        ->orderBy('created_at', 'desc')
+        ->paginate(15);
+    
+         $totalDeposits = Transaction::where('user_id', $user->id)
+        ->where('type', 'deposit')
+        ->sum('amount');
+    
+    // return view('dashboard.deposits-history', compact('deposits', 'totalDeposits'));
         
         // Replace the collection with paginated data
         $deposits->setCollection($depositsCollection);

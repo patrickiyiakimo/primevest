@@ -76,38 +76,38 @@
             </div>
         </div>
 
-        <!-- Last Deposit Card -->
-        <div class="relative bg-gradient-to-br from-blue-800 to-blue-900 overflow-hidden group">
-            <div class="absolute inset-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <circle cx="50" cy="50" r="20" fill="none" stroke="white" stroke-width="1"/>
-                    <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="1"/>
-                    <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="1"/>
-                </svg>
+       <!-- Last Deposit Card -->
+<div class="relative bg-gradient-to-br from-blue-800 to-blue-900 overflow-hidden group">
+    <div class="absolute inset-0 opacity-10">
+        <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <circle cx="50" cy="50" r="20" fill="none" stroke="white" stroke-width="1"/>
+            <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="1"/>
+            <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="1"/>
+        </svg>
+    </div>
+    <div class="absolute top-4 left-4">
+        <svg width="40" height="30" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="48" height="36" rx="4" fill="#D4AF37"/>
+        </svg>
+    </div>
+    <div class="absolute top-4 right-4">
+        <p class="text-[10px] text-blue-300 uppercase tracking-wider font-semibold">PrimeVest</p>
+    </div>
+    <div class="p-6 pt-16">
+        <p class="text-xs text-blue-300 uppercase tracking-wider mb-1">Last Deposit</p>
+        <p class="text-3xl font-bold text-white">${{ number_format($lastDepositAmount ?? 0, 2) }}</p>
+        <div class="flex justify-between items-end mt-6">
+            <div>
+                <p class="text-[10px] text-blue-300 uppercase tracking-wider">Card Holder</p>
+                <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
             </div>
-            <div class="absolute top-4 left-4">
-                <svg width="40" height="30" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="36" rx="4" fill="#D4AF37"/>
-                </svg>
-            </div>
-            <div class="absolute top-4 right-4">
-                <p class="text-[10px] text-blue-300 uppercase tracking-wider font-semibold">PrimeVest</p>
-            </div>
-            <div class="p-6 pt-16">
-                <p class="text-xs text-blue-300 uppercase tracking-wider mb-1">Last Deposit</p>
-                <p class="text-3xl font-bold text-white">${{ number_format($lastDeposit ?? 0, 2) }}</p>
-                <div class="flex justify-between items-end mt-6">
-                    <div>
-                        <p class="text-[10px] text-blue-300 uppercase tracking-wider">Card Holder</p>
-                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] text-blue-300 uppercase tracking-wider">Valid Thru</p>
-                        <p class="text-sm font-semibold text-white">08/28</p>
-                    </div>
-                </div>
+            <div class="text-right">
+                <p class="text-[10px] text-blue-300 uppercase tracking-wider">Valid Thru</p>
+                <p class="text-sm font-semibold text-white">08/28</p>
             </div>
         </div>
+    </div>
+</div>
 
         <!-- Last Withdrawal Card -->
         <div class="relative bg-gradient-to-br from-purple-800 to-purple-900">

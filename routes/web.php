@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserManagementController;
+use App\Http\Controllers\DepositController;
 
 // Public routes
 Route::get('/', function () {
@@ -31,6 +32,16 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/users', [UserManagementController::class, 'index'])->name('users');
     Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
+    
+    // Deposit management routes
+    Route::get('/deposits', [AdminController::class, 'deposits'])->name('deposits');
+    Route::post('/deposits/{id}/approve', [AdminController::class, 'approveDeposit'])->name('deposits.approve');
+    Route::post('/deposits/{id}/reject', [AdminController::class, 'rejectDeposit'])->name('deposits.reject');
+});
+
+// Deposit Routes
+Route::middleware('auth')->group(function () {
+    Route::post('/deposit/request', [DepositController::class, 'request'])->name('deposit.request');
 });
 
 // Protected routes
