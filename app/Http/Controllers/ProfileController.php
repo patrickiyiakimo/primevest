@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -11,7 +12,11 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = Auth::user();
-        $affiliates = []; // You'll implement this when you create referrals table
+        
+        // Get users referred by this user
+        $affiliates = User::where('referred_by', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
         
         return view('dashboard.profile', compact('user', 'affiliates'));
     }
