@@ -25,8 +25,8 @@
                         <p class="text-2xl font-bold text-green-600">${{ number_format($user->balance, 2) }}</p>
                     </div>
                     <div>
-                        <p class="text-xs text-gray-500">Member Since</p>
-                        <p class="font-semibold text-gray-900">{{ $user->created_at->format('F d, Y') }}</p>
+                        <p class="text-xs text-gray-500">Total Profits</p>
+                        <p class="text-2xl font-bold text-blue-600">${{ number_format($user->total_profits ?? 0, 2) }}</p>
                     </div>
                 </div>
             </div>
@@ -39,14 +39,18 @@
                 <div class="space-y-6">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Transaction Type</label>
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-3 gap-4">
                             <label class="flex items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300">
                                 <input type="radio" name="transaction_type" value="credit" class="w-5 h-5 text-green-600" checked onchange="updateTransactionType()">
-                                <span class="ml-3 font-semibold text-gray-700">Credit (Add Funds)</span>
+                                <span class="ml-3 font-semibold text-gray-700">Credit (Add Balance)</span>
                             </label>
                             <label class="flex items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300">
                                 <input type="radio" name="transaction_type" value="debit" class="w-5 h-5 text-red-600" onchange="updateTransactionType()">
-                                <span class="ml-3 font-semibold text-gray-700">Debit (Deduct Funds)</span>
+                                <span class="ml-3 font-semibold text-gray-700">Debit (Deduct Balance)</span>
+                            </label>
+                            <label class="flex items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300">
+                                <input type="radio" name="transaction_type" value="profit" class="w-5 h-5 text-blue-600" onchange="updateTransactionType()">
+                                <span class="ml-3 font-semibold text-gray-700">Add Profit</span>
                             </label>
                         </div>
                     </div>
@@ -87,6 +91,7 @@
 
 <script>
     const currentBalance = {{ $user->balance }};
+    const currentProfits = {{ $user->total_profits ?? 0 }};
     
     function updateTransactionType() {
         const amountInput = document.getElementById('amount');
@@ -97,8 +102,11 @@
         let newBalance = currentBalance;
         if (transactionType === 'credit') {
             newBalance = currentBalance + amount;
-        } else {
+        } else if (transactionType === 'debit') {
             newBalance = currentBalance - amount;
+        } else {
+            // Profit doesn't affect balance
+            newBalance = currentBalance;
         }
         
         newBalanceSpan.innerText = '$' + newBalance.toFixed(2);
@@ -106,8 +114,10 @@
         // Color coding
         if (transactionType === 'credit') {
             newBalanceSpan.className = 'text-2xl font-bold text-green-600';
-        } else {
+        } else if (transactionType === 'debit') {
             newBalanceSpan.className = 'text-2xl font-bold text-red-600';
+        } else {
+            newBalanceSpan.className = 'text-2xl font-bold text-blue-600';
         }
     }
     

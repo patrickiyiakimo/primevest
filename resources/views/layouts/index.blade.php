@@ -39,7 +39,7 @@
         <div class="bg-gradient-to-br from-blue-900 to-blue-800 rounded-2xl shadow-xl overflow-hidden">
             <div class="p-6">
                 <p class="text-gray-300 text-sm mb-2">Last Deposit</p>
-                <p class="text-3xl font-bold text-white">${{ number_format($lastDeposit ?? 0, 2) }}</p>
+                <p class="text-3xl font-bold text-white">${{ number_format($lastDepositAmount ?? 0, 2) }}</p>
                 <div class="mt-4 pt-4 border-t border-blue-700">
                     <p class="text-xs text-gray-400">VALID THRU</p>
                     <p class="text-sm text-white font-semibold">08/28</p>
@@ -53,7 +53,7 @@
         <div class="bg-gradient-to-br from-purple-900 to-purple-800 rounded-2xl shadow-xl overflow-hidden">
             <div class="p-6">
                 <p class="text-gray-300 text-sm mb-2">Last Withdrawal</p>
-                <p class="text-3xl font-bold text-white">${{ number_format($lastWithdrawal ?? 0, 2) }}</p>
+                <p class="text-3xl font-bold text-white">${{ number_format($lastWithdrawalAmount ?? 0, 2) }}</p>
                 <div class="mt-4 pt-4 border-t border-purple-700">
                     <p class="text-xs text-gray-400">VALID THRU</p>
                     <p class="text-sm text-white font-semibold">08/28</p>

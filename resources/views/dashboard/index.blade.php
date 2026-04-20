@@ -61,8 +61,8 @@
                 <p class="text-[10px] text-green-300 uppercase tracking-wider font-semibold">PrimeVest</p>
             </div>
             <div class="p-6 pt-16">
-                <p class="text-xs text-green-300 uppercase tracking-wider mb-1">Total Profits</p>
-                <p class="text-3xl font-bold text-white">${{ number_format($profits ?? 0, 2) }}</p>
+               <p class="text-xs text-green-300 uppercase tracking-wider mb-1">Total Profits</p>
+        <p class="text-3xl font-bold text-white">${{ number_format($profits, 2) }}</p>
                 <div class="flex justify-between items-end mt-6">
                     <div>
                         <p class="text-[10px] text-green-300 uppercase tracking-wider">Card Holder</p>

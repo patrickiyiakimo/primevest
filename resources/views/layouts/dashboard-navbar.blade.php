@@ -44,28 +44,95 @@
                         <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
                     </button>
                     
-                    <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl py-2 z-50 border border-gray-200">
-                        <div class="px-4 py-2 border-b border-gray-200">
-                            <p class="text-sm font-semibold text-gray-800">Notifications</p>
+                   <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl py-2 z-50 border border-gray-200">
+    <div class="px-4 py-2 border-b border-gray-200">
+        <p class="text-sm font-semibold text-gray-800">Recent Transactions</p>
+    </div>
+    
+    <div class="max-h-96 overflow-y-auto">
+        @php
+            $recentTransactions = App\Models\Transaction::where('user_id', Auth::id())
+                ->latest()
+                ->take(4)
+                ->get();
+        @endphp
+        
+        @forelse($recentTransactions as $transaction)
+        <div class="px-4 py-3 hover:bg-gray-50 transition-colors duration-200 border-b border-gray-100 last:border-0">
+            <div class="flex items-center justify-between mb-1">
+                <div class="flex items-center space-x-2">
+                    @if($transaction->type == 'deposit')
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
                         </div>
-                        <div class="max-h-96 overflow-y-auto">
-                            <div class="px-4 py-3 hover:bg-gray-50">
-                                <p class="text-sm text-gray-800">Your investment earned $250.00</p>
-                                <p class="text-xs text-gray-500 mt-1">2 hours ago</p>
-                            </div>
-                            <div class="px-4 py-3 hover:bg-gray-50">
-                                <p class="text-sm text-gray-800">New trading signal available</p>
-                                <p class="text-xs text-gray-500 mt-1">5 hours ago</p>
-                            </div>
-                            <div class="px-4 py-3 hover:bg-gray-50">
-                                <p class="text-sm text-gray-800">Market update: Bitcoin surges</p>
-                                <p class="text-xs text-gray-500 mt-1">Yesterday</p>
-                            </div>
+                        <span class="text-xs font-semibold text-green-600">Deposit</span>
+                    @elseif($transaction->type == 'withdrawal')
+                        <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                            </svg>
                         </div>
-                        <div class="px-4 py-2 border-t border-gray-200">
-                            <a href="#" class="text-xs text-green-600 hover:text-green-700 font-semibold">View all notifications</a>
+                        <span class="text-xs font-semibold text-red-600">Withdrawal</span>
+                    @elseif($transaction->type == 'profit')
+                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
                         </div>
-                    </div>
+                        <span class="text-xs font-semibold text-blue-600">Profit</span>
+                    @else
+                        <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xs font-semibold text-gray-600">Adjustment</span>
+                    @endif
+                </div>
+                <span class="text-xs text-gray-500">{{ $transaction->created_at->diffForHumans() }}</span>
+            </div>
+            
+            <div class="flex justify-between items-center mt-1">
+                <p class="text-sm text-gray-700">
+                    @if($transaction->type == 'deposit')
+                        Deposited
+                    @elseif($transaction->type == 'withdrawal')
+                        Withdrew
+                    @elseif($transaction->type == 'profit')
+                        Earned from investment
+                    @else
+                        Account adjusted
+                    @endif
+                </p>
+                <p class="text-sm font-bold {{ $transaction->type == 'withdrawal' ? 'text-red-600' : 'text-green-600' }}">
+                    {{ $transaction->type == 'withdrawal' ? '-' : '+' }}${{ number_format($transaction->amount, 2) }}
+                </p>
+            </div>
+            
+            <p class="text-xs text-gray-400 mt-1">Balance: ${{ number_format($transaction->balance_after, 2) }}</p>
+        </div>
+        @empty
+        <div class="px-4 py-8 text-center">
+            <svg class="w-12 h-12 mx-auto text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+            </svg>
+            <p class="text-sm text-gray-500">No transactions yet</p>
+            <p class="text-xs text-gray-400 mt-1">Your recent transactions will appear here</p>
+        </div>
+        @endforelse
+    </div>
+    
+    <div class="px-4 py-2 border-t border-gray-200 bg-gray-50">
+        <a href="{{ route('deposits-history') }}" class="text-xs text-green-600 hover:text-green-700 font-semibold flex items-center justify-between">
+            View all transactions
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </a>
+    </div>
+</div>
                 </div>
 
                 <!-- User Menu -->

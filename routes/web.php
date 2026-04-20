@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\DepositHistoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,17 +25,13 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-// Admin Routes - Place this AFTER your auth routes
-Route::middleware(['auth', 'admin'])
-    ->prefix('admin')
-    ->name('admin.')
-    ->group(function () {
-        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-    });
+// Admin Routes - CORRECTED (all routes inside the group)
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/users', [UserManagementController::class, 'index'])->name('users');
     Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
-
+});
 
 // Protected routes
 Route::middleware('auth')->group(function () {
@@ -46,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     
-    // ===== WITHDRAW ROUTES (Using closures - no controller needed) =====
+    // Withdraw Routes
     Route::get('/withdraw', function () {
         return view('dashboard.withdraw');
     })->name('withdraw');
@@ -61,17 +58,14 @@ Route::middleware('auth')->group(function () {
             'network' => 'required|string',
         ]);
         
-        // Check if user has sufficient balance
         if ($validated['amount'] > $user->balance) {
             return redirect()->back()->with('error', 'Insufficient balance.')->withInput();
         }
         
-        return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully! Our team will process it within 24 hours.');
+        return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully!');
     })->name('withdraw.request');
-    // ==========================================
-
+    
     // Card Application Routes
-Route::middleware('auth')->group(function () {
     Route::get('/card-application', function () {
         return view('dashboard.card-application');
     })->name('card-application');
@@ -90,11 +84,10 @@ Route::middleware('auth')->group(function () {
             'id_type' => 'required|string',
         ]);
         
-        return redirect()->route('card-application')->with('success', 'Card application submitted successfully! You will receive your card within 7-10 business days.');
+        return redirect()->route('card-application')->with('success', 'Card application submitted successfully!');
     })->name('card-application.submit');
-});
-
- // History Routes
+    
+    // History Routes
     Route::get('/deposits-history', [DepositHistoryController::class, 'index'])->name('deposits-history');
     Route::get('/withdrawals-history', function () { return view('dashboard.withdrawals-history'); })->name('withdrawals-history');
     Route::get('/earnings-history', function () { return view('dashboard.earnings-history'); })->name('earnings-history');
@@ -109,15 +102,6 @@ Route::middleware('auth')->group(function () {
     
     // Stocks
     Route::get('/stock-trading', function () { return view('dashboard.stock-trading'); })->name('stock-trading');
-    
-    // History
-    Route::get('/deposits-history', function () { return view('dashboard.deposits-history'); })->name('deposits-history');
-    Route::get('/withdrawals-history', function () { return view('dashboard.withdrawals-history'); })->name('withdrawals-history');
-    Route::get('/earnings-history', function () { return view('dashboard.earnings-history'); })->name('earnings-history');
-    Route::get('/investments-history', function () { return view('dashboard.investments-history'); })->name('investments-history');
-    
-    // Account
-    Route::get('/card-application', function () { return view('dashboard.card-application'); })->name('card-application');
 });
 
 // Page routes
@@ -125,4 +109,3 @@ Route::get('/trading', [PageController::class, 'trading'])->name('trading');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/company', [PageController::class, 'company'])->name('company');
 Route::get('/education', [PageController::class, 'education'])->name('education');
-

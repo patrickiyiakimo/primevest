@@ -15,6 +15,7 @@ class User extends Authenticatable
     'email',
     'password',
     'balance',
+    'total_profits',
     'country',
     'phone',
 ];
@@ -28,4 +29,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'balance' => 'decimal:2', // Add this
     ];
+
+    public function transactions()
+{
+    return $this->hasMany(Transaction::class)->orderBy('created_at', 'desc');
+}
 }

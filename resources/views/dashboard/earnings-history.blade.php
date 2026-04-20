@@ -93,9 +93,9 @@
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">#</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Source</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Description</th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Amount</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Reference</th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date</th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
                     </tr>
@@ -106,34 +106,12 @@
                         <td class="px-6 py-4 text-sm text-gray-500">{{ $index + 1 }}</td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-800">
                             <div class="flex items-center gap-2">
-                                @if(($earning['source'] ?? '') == 'investment')
-                                    <span class="text-green-500">📈</span>
-                                @elseif(($earning['source'] ?? '') == 'referral')
-                                    <span class="text-blue-500">👥</span>
-                                @elseif(($earning['source'] ?? '') == 'bonus')
-                                    <span class="text-yellow-500">🎁</span>
-                                @elseif(($earning['source'] ?? '') == 'dividend')
-                                    <span class="text-purple-500">💵</span>
-                                @else
-                                    <span class="text-gray-500">💰</span>
-                                @endif
-                                {{ ucfirst($earning['source'] ?? 'N/A') }}
+                                <span class="text-green-500">💰</span>
+                                {{ $earning['description'] ?? 'Profit Added' }}
                             </div>
                         </td>
                         <td class="px-6 py-4 text-sm font-semibold text-green-600">+${{ number_format($earning['amount'] ?? 0, 2) }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600">
-                            <span class="inline-flex items-center gap-1">
-                                @if(($earning['type'] ?? '') == 'crypto')
-                                    <span class="text-orange-500">₿</span> Crypto
-                                @elseif(($earning['type'] ?? '') == 'stock')
-                                    <span class="text-blue-500">📊</span> Stock
-                                @elseif(($earning['type'] ?? '') == 'forex')
-                                    <span class="text-green-500">💱</span> Forex
-                                @else
-                                    {{ ucfirst($earning['type'] ?? 'N/A') }}
-                                @endif
-                            </span>
-                        </td>
+                        <td class="px-6 py-4 text-sm text-gray-500 font-mono">{{ $earning['reference'] ?? 'N/A' }}</td>
                         <td class="px-6 py-4 text-sm text-gray-500">{{ $earning['date'] ?? 'N/A' }}</td>
                         <td class="px-6 py-4 text-sm">
                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
@@ -149,20 +127,12 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                             </svg>
                             <p class="text-sm font-medium">No earnings history found</p>
-                            <p class="text-xs mt-1">Start investing to see your earnings here</p>
-                            <div class="mt-4">
-                                <a href="{{ route('invest') }}" class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-all duration-300">
-                                    Start Investing
-                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                    </svg>
-                                </a>
-                            </div>
-                        </td>
+                            <p class="text-xs mt-1">Profits added by admin will appear here</p>
+                         </td>
                     </tr>
                     @endforelse
                 </tbody>
-            </table>
+             </table>
         </div>
         
         <!-- Pagination -->
