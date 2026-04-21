@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\DepositHistoryController;
+use App\Http\Controllers\WithdrawalHistoryController;
+use App\Http\Controllers\WithdrawalController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -39,6 +41,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/deposits/{id}/approve', [AdminController::class, 'approveDeposit'])->name('deposits.approve');
     Route::post('/deposits/{id}/reject', [AdminController::class, 'rejectDeposit'])->name('deposits.reject');
     
+    // Withdrawal management routes
+    Route::get('/withdrawals', [AdminController::class, 'withdrawals'])->name('withdrawals');
+    Route::post('/withdrawals/{id}/approve', [AdminController::class, 'approveWithdrawal'])->name('withdrawals.approve');
+    Route::post('/withdrawals/{id}/reject', [AdminController::class, 'rejectWithdrawal'])->name('withdrawals.reject');
+    
     // Admin investment view
     Route::get('/investments', [AdminController::class, 'investments'])->name('investments');
 });
@@ -53,6 +60,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/deposit/request', [DepositController::class, 'request'])->name('deposit.request');
 });
 
+// Withdraw Routes (accessible by all authenticated users)
+Route::middleware('auth')->group(function () {
+    Route::get('/withdraw', [WithdrawalController::class, 'index'])->name('withdraw');
+    Route::post('/withdraw/request', [WithdrawalController::class, 'request'])->name('withdraw.request');
+});
+
 // Protected routes (accessible by all authenticated users)
 Route::middleware('auth')->group(function () {
     // Dashboard
@@ -62,60 +75,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
-    
-    // // Withdraw Routes
-    // Route::get('/withdraw', function () {
-    //     return view('dashboard.withdraw');
-    // })->name('withdraw');
-    
-    // Route::post('/withdraw/request', function (Request $request) {
-    //     $user = Auth::user();
-        
-    //     $validated = $request->validate([
-    //         'method' => 'required|string',
-    //         'amount' => 'required|numeric|min:1000|max:500000',
-    //         'wallet_address' => 'required|string|max:255',
-    //         'network' => 'required|string',
-    //     ]);
-        
-    //     if ($validated['amount'] > $user->balance) {
-    //         return redirect()->back()->with('error', 'Insufficient balance.')->withInput();
-    //     }
-        
-    //     return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully!');
-    // })->name('withdraw.request');
-
-    Route::post('/withdraw/request', function (Request $request) {
-    $user = Auth::user();
-    
-    $validated = $request->validate([
-        'method' => 'required|string',
-        'amount' => 'required|numeric|min:1000|max:500000',
-        'wallet_address' => 'required|string|max:255',
-        'network' => 'required|string',
-    ]);
-    
-    if ($validated['amount'] > $user->balance) {
-        return redirect()->back()->with('error', 'Insufficient balance.')->withInput();
-    }
-    
-    // Create withdrawal record
-    $withdrawal = \App\Models\Withdrawal::create([
-        'user_id' => $user->id,
-        'amount' => $validated['amount'],
-        'method' => $validated['method'],
-        'wallet_address' => $validated['wallet_address'],
-        'network' => $validated['network'],
-        'status' => 'pending'
-    ]);
-
-    // Withdrawal management routes
-Route::get('/withdrawals', [AdminController::class, 'withdrawals'])->name('withdrawals');
-Route::post('/withdrawals/{id}/approve', [AdminController::class, 'approveWithdrawal'])->name('withdrawals.approve');
-Route::post('/withdrawals/{id}/reject', [AdminController::class, 'rejectWithdrawal'])->name('withdrawals.reject');
-    
-    return redirect()->route('withdraw')->with('success', 'Withdrawal request submitted successfully!');
-})->name('withdraw.request');
     
     // Card Application Routes
     Route::get('/card-application', function () {
@@ -141,7 +100,7 @@ Route::post('/withdrawals/{id}/reject', [AdminController::class, 'rejectWithdraw
     
     // History Routes
     Route::get('/deposits-history', [DepositHistoryController::class, 'index'])->name('deposits-history');
-    Route::get('/withdrawals-history', function () { return view('dashboard.withdrawals-history'); })->name('withdrawals-history');
+    Route::get('/withdrawals-history', [WithdrawalHistoryController::class, 'index'])->name('withdrawals-history');
     Route::get('/earnings-history', function () { return view('dashboard.earnings-history'); })->name('earnings-history');
     Route::get('/investments-history', function () { return view('dashboard.investments-history'); })->name('investments-history');
     

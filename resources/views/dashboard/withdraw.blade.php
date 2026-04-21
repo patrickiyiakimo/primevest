@@ -261,7 +261,8 @@
                                        placeholder="0.00"
                                        min="${config.minAmount}"
                                        max="${Math.min(config.maxAmount, userBalance)}"
-                                       oninput="updateWithdrawSummary()">
+                                       oninput="updateWithdrawSummary()"
+                                       required>
                             </div>
                             <p class="text-xs text-gray-500 mt-1">Min: $${config.minAmount.toLocaleString()}, Max: $${Math.min(config.maxAmount, userBalance).toLocaleString()}</p>
                         </div>
@@ -403,11 +404,39 @@
             return;
         }
         
-        toast.success(`Withdrawal request of $${amount.toLocaleString()} submitted successfully!`);
-        toast.info('Our team will process your request within 24 hours', 5000);
+        // Disable button and show loading
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> Processing...';
         
-        // Here you would submit the form to your backend
-        // form.submit();
+        // Submit the form via fetch
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                toast.success(data.message);
+                // Redirect to withdrawal history after 2 seconds
+                setTimeout(() => {
+                    window.location.href = '/withdrawals-history';
+                }, 2000);
+            } else {
+                toast.error(data.message);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        })
+        .catch(error => {
+            toast.error('Something went wrong. Please try again.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        });
     }
 </script>
 
@@ -437,6 +466,13 @@
     
     #withdrawalForm {
         animation: slideIn 0.3s ease-out;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    .animate-spin {
+        animation: spin 1s linear infinite;
     }
 </style>
 @endsection
