@@ -108,7 +108,6 @@
         </div>
     </div>
 </div>
-
        <!-- Last Withdrawal Card -->
 <div class="relative bg-gradient-to-br from-purple-800 to-purple-900 shadow-lg overflow-hidden group">
     <div class="absolute inset-0 opacity-10">
