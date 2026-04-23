@@ -30,7 +30,7 @@
     </div>
 
     <!-- Stock Dashboard Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-1 gap-6">
         <!-- Main Chart Area -->
         <div class="lg:col-span-2 space-y-6">
             <!-- TradingView Chart -->
@@ -83,8 +83,7 @@
         </div>
 
         <!-- Right Sidebar - Stock Info & Trading -->
-        <div class="space-y-6">
-            <!-- Stock Stats Card -->
+        <!-- <div class="space-y-6">
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                 <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                     <div class="flex items-center">
@@ -120,10 +119,10 @@
                         <span class="font-semibold text-gray-900">$789.4B</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Quick Trade Card -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <!-- <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                 <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,10 +170,10 @@
                         Place Order
                     </button>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Company Info Card -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <!-- <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                 <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -196,7 +195,7 @@
                         <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">S&P 500</span>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

@@ -108,7 +108,20 @@
                         @if($pendingCount > 0)
                             <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $pendingCount }}</span>
                         @endif
-                    </a>`
+                    </a>
+
+                    <a href="{{ route('admin.card-applications') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300">
+                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                        </svg>
+                        <span>Card Applications</span>
+                        @php
+                            $pendingCards = \App\Models\CardApplication::where('status', 'pending')->count();
+                        @endphp
+                        @if($pendingCards > 0)
+                            <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $pendingCards }}</span>
+                        @endif
+                    </a>
                 </nav>
             </div>
             

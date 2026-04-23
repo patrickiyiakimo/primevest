@@ -9,6 +9,9 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\DepositHistoryController;
 use App\Http\Controllers\WithdrawalHistoryController;
 use App\Http\Controllers\WithdrawalController;
+use App\Http\Controllers\EarningsHistoryController;
+use App\Http\Controllers\InvestmentsHistoryController;
+use App\Http\Controllers\CardApplicationController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +51,11 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     
     // Admin investment view
     Route::get('/investments', [AdminController::class, 'investments'])->name('investments');
+    
+    // Card Applications management
+    Route::get('/card-applications', [AdminController::class, 'cardApplications'])->name('card-applications');
+    Route::post('/card-applications/{id}/approve', [AdminController::class, 'approveCardApplication'])->name('card-applications.approve');
+    Route::post('/card-applications/{id}/reject', [AdminController::class, 'rejectCardApplication'])->name('card-applications.reject');
 });
 
 // User Investment Routes (accessible by all authenticated users)
@@ -66,6 +74,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/withdraw/request', [WithdrawalController::class, 'request'])->name('withdraw.request');
 });
 
+// Card Application Routes (accessible by all authenticated users)
+Route::middleware('auth')->group(function () {
+    Route::get('/card-application', function () {
+        return view('dashboard.card-application');
+    })->name('card-application');
+    Route::post('/card-application/submit', [CardApplicationController::class, 'submit'])->name('card-application.submit');
+});
+
 // Protected routes (accessible by all authenticated users)
 Route::middleware('auth')->group(function () {
     // Dashboard
@@ -76,34 +92,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     
-    // Card Application Routes
-    Route::get('/card-application', function () {
-        return view('dashboard.card-application');
-    })->name('card-application');
-    
-    Route::post('/card-application/submit', function (Request $request) {
-        $user = Auth::user();
-        
-        if ($user->balance < 2000) {
-            return redirect()->back()->with('error', 'Minimum balance of $2,000 required to apply for a card');
-        }
-        
-        $validated = $request->validate([
-            'card_type' => 'required|string',
-            'delivery_address' => 'required|string',
-            'phone' => 'nullable|string',
-            'id_type' => 'required|string',
-        ]);
-        
-        return redirect()->route('card-application')->with('success', 'Card application submitted successfully!');
-    })->name('card-application.submit');
-    
     // History Routes
     Route::get('/deposits-history', [DepositHistoryController::class, 'index'])->name('deposits-history');
     Route::get('/withdrawals-history', [WithdrawalHistoryController::class, 'index'])->name('withdrawals-history');
-    Route::get('/earnings-history', [App\Http\Controllers\EarningsHistoryController::class, 'index'])->name('earnings-history');
-    Route::get('/investments-history', [App\Http\Controllers\InvestmentsHistoryController::class, 'index'])->name('investments-history');
-
+    Route::get('/earnings-history', [EarningsHistoryController::class, 'index'])->name('earnings-history');
+    Route::get('/investments-history', [InvestmentsHistoryController::class, 'index'])->name('investments-history');
 
     // Make a Deposit
     Route::get('/deposit', function () { return view('dashboard.deposit'); })->name('deposit');

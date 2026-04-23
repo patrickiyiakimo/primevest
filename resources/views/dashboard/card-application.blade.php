@@ -4,7 +4,7 @@
 @section('breadcrumb', 'Apply for your PrimeVest debit card')
 
 @section('dashboard-content')
-<div class="space-y-6 bg-white">
+<div class="space-y-6">
     <!-- Page Header -->
     <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl shadow-lg p-6 text-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
@@ -21,10 +21,10 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Left Side - Card Preview -->
         <div class="space-y-6">
-                <div class="p-6 flex justify-center">
-                    <!-- Debit Card Image -->
-                    <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-md rounded-2xl">
-                </div>
+            <!-- Debit Card Image - Static Image -->
+            <div class="flex justify-center">
+                <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-300">
+            </div>
 
             <!-- Card Benefits -->
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
@@ -106,7 +106,7 @@
             @endif
 
             <!-- Application Form -->
-            <div class="bg-white rounded-2xl border border-gray-100 overflow-hidden">
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
                 <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,12 +119,39 @@
                     <form id="cardApplicationForm" method="POST" action="{{ route('card-application.submit') }}">
                         @csrf
                         
-                        <!-- Card Type Selection -->
+                        <!-- Card Type Selection - Mastercard or Visa -->
                         <div class="mb-6">
                             <label class="block text-sm font-semibold text-gray-700 mb-3">SELECT CARD TYPE</label>
                             <div class="grid grid-cols-2 gap-3">
                                 <label class="card-type-option cursor-pointer">
-                                    <input type="radio" name="card_type" value="platinum" class="hidden peer" checked>
+                                    <input type="radio" name="card_type" value="visa" class="hidden peer" checked>
+                                    <div class="border-2 border-gray-200 rounded-xl p-3 text-center peer-checked:border-green-500 peer-checked:bg-green-50 transition-all duration-300">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center mx-auto mb-2">
+                                            <span class="text-white font-bold text-sm">VISA</span>
+                                        </div>
+                                        <p class="font-semibold text-gray-800 text-sm">Visa Card</p>
+                                        <p class="text-xs text-gray-500">Global Acceptance</p>
+                                    </div>
+                                </label>
+                                <label class="card-type-option cursor-pointer">
+                                    <input type="radio" name="card_type" value="mastercard" class="hidden peer">
+                                    <div class="border-2 border-gray-200 rounded-xl p-3 text-center peer-checked:border-green-500 peer-checked:bg-green-50 transition-all duration-300">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-red-600 to-red-700 rounded-full flex items-center justify-center mx-auto mb-2">
+                                            <span class="text-white font-bold text-sm">MC</span>
+                                        </div>
+                                        <p class="font-semibold text-gray-800 text-sm">Mastercard</p>
+                                        <p class="text-xs text-gray-500">Premium Benefits</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Card Tier Selection -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold text-gray-700 mb-3">SELECT CARD TIER</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <label class="card-tier-option cursor-pointer">
+                                    <input type="radio" name="card_tier" value="platinum" class="hidden peer" checked>
                                     <div class="border-2 border-gray-200 rounded-xl p-3 text-center peer-checked:border-green-500 peer-checked:bg-green-50 transition-all duration-300">
                                         <div class="w-12 h-12 bg-gradient-to-br from-gray-500 to-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
                                             <span class="text-white font-bold text-sm">P</span>
@@ -133,8 +160,8 @@
                                         <p class="text-xs text-gray-500">Premium Benefits</p>
                                     </div>
                                 </label>
-                                <label class="card-type-option cursor-pointer">
-                                    <input type="radio" name="card_type" value="gold" class="hidden peer">
+                                <label class="card-tier-option cursor-pointer">
+                                    <input type="radio" name="card_tier" value="gold" class="hidden peer">
                                     <div class="border-2 border-gray-200 rounded-xl p-3 text-center peer-checked:border-green-500 peer-checked:bg-green-50 transition-all duration-300">
                                         <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full flex items-center justify-center mx-auto mb-2">
                                             <span class="text-white font-bold text-sm">G</span>
@@ -164,11 +191,11 @@
                         <div class="grid grid-cols-2 gap-4 mb-6">
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                                <input type="tel" name="phone" value="{{ Auth::user()->phone ?? '' }}" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Your phone number">
+                                <input type="tel" name="phone" value="{{ Auth::user()->phone ?? '' }}" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Your phone number" required>
                             </div>
                             <div>
                                 <label class="block text-sm font-semibold text-gray-700 mb-2">ID Type</label>
-                                <select name="id_type" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                <select name="id_type" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" required>
                                     <option value="passport">International Passport</option>
                                     <option value="driver_license">Driver's License</option>
                                     <option value="national_id">National ID Card</option>
@@ -200,7 +227,6 @@
 <div id="toastContainer" class="fixed bottom-4 right-4 z-50"></div>
 
 <script>
-    // Toast Notification System
     class Toast {
         constructor() {
             this.container = document.getElementById('toastContainer');
@@ -241,7 +267,7 @@
     const toast = new Toast();
     
     // Form submission
-    document.getElementById('cardApplicationForm')?.addEventListener('submit', function(e) {
+    document.getElementById('cardApplicationForm')?.addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const balance = {{ Auth::user()->balance }};
@@ -256,10 +282,39 @@
             return;
         }
         
-        toast.success('Card application submitted successfully!');
-        toast.info('Your card will be delivered within 7-10 business days', 5000);
+        const formData = new FormData(this);
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
         
-        // this.submit();
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> Submitting...';
+        
+        try {
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                toast.success(data.message);
+                setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 3000);
+            } else {
+                toast.error(data.message);
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        } catch (error) {
+            toast.error('Something went wrong. Please try again.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
     });
 </script>
 
@@ -268,9 +323,17 @@
         outline: none;
     }
     
-    .card-type-option input:checked + div {
+    .card-type-option input:checked + div,
+    .card-tier-option input:checked + div {
         border-color: #10b981;
         background-color: #ecfdf5;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    .animate-spin {
+        animation: spin 1s linear infinite;
     }
 </style>
 @endsection

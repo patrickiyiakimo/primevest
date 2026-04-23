@@ -8,13 +8,14 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::create('withdrawal_requests', function (Blueprint $table) {
+        Schema::create('card_applications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->decimal('amount', 15, 2);
-            $table->string('method');
-            $table->string('wallet_address');
-            $table->string('network');
+            $table->string('card_type'); // visa, mastercard
+            $table->string('card_tier'); // platinum, gold
+            $table->text('delivery_address');
+            $table->string('phone');
+            $table->string('id_type');
             $table->enum('status', ['pending', 'approved', 'rejected', 'processing'])->default('pending');
             $table->text('admin_notes')->nullable();
             $table->timestamp('approved_at')->nullable();
@@ -24,6 +25,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('withdrawal_requests');
+        Schema::dropIfExists('card_applications');
     }
 };

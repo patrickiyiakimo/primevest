@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use App\Models\Investment;
 use App\Models\WithdrawalRequest;
+use App\Models\CardApplication;
 
 class AdminController extends Controller
 {
@@ -186,5 +187,43 @@ public function rejectWithdrawal(Request $request, $id)
     $withdrawal->save();
     
     return redirect()->back()->with('success', 'Withdrawal rejected successfully!');
+}
+
+public function cardApplications()
+{
+    $pendingApplications = CardApplication::where('status', 'pending')
+        ->with('user')
+        ->latest()
+        ->get();
+    
+    $approvedApplications = CardApplication::where('status', 'approved')
+        ->with('user')
+        ->latest()
+        ->take(20)
+        ->get();
+    
+    $totalPending = CardApplication::where('status', 'pending')->count();
+    
+    return view('admin.card-applications', compact('pendingApplications', 'approvedApplications', 'totalPending'));
+}
+
+public function approveCardApplication($id)
+{
+    $application = CardApplication::findOrFail($id);
+    $application->status = 'approved';
+    $application->approved_at = now();
+    $application->save();
+    
+    return redirect()->back()->with('success', 'Card application approved successfully!');
+}
+
+public function rejectCardApplication(Request $request, $id)
+{
+    $application = CardApplication::findOrFail($id);
+    $application->status = 'rejected';
+    $application->admin_notes = $request->admin_notes;
+    $application->save();
+    
+    return redirect()->back()->with('success', 'Card application rejected successfully!');
 }
 }
