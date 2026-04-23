@@ -8,7 +8,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         .admin-sidebar {
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
+            transform: translateX(0);
         }
         .admin-sidebar-item {
             transition: all 0.3s ease;
@@ -17,19 +18,23 @@
             padding-left: 1.5rem;
             background-color: rgba(255,255,255,0.1);
         }
-        @media (max-width: 768px) {
-            .admin-sidebar {
-                transform: translateX(-100%);
-                position: fixed;
-                z-index: 1000;
-                height: 100vh;
-            }
-            .admin-sidebar.open {
-                transform: translateX(0);
-            }
+        
+        /* Custom scrollbar for sidebar */
+        .admin-sidebar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .admin-sidebar::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        .admin-sidebar::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 5px;
+        }
+        .admin-sidebar::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
         }
         
-        /* Badge for pending deposits */
+        /* Badge for pending items */
         .pending-badge {
             background-color: #ef4444;
             color: white;
@@ -38,19 +43,93 @@
             border-radius: 9999px;
             margin-left: 8px;
         }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100vh;
+                width: 18rem;
+                z-index: 1000;
+                transform: translateX(-100%);
+            }
+            .admin-sidebar.open {
+                transform: translateX(0);
+            }
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                display: none;
+            }
+            .overlay.active {
+                display: block;
+            }
+            .admin-content {
+                width: 100%;
+            }
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 769px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+        }
+        
+        /* Navbar styles for admin */
+        .admin-navbar {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0.75rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 45;
+        }
     </style>
 </head>
 <body class="font-sans antialiased bg-gray-100">
+    <!-- Mobile Overlay -->
+    <div id="sidebarOverlay" class="overlay" onclick="closeSidebar()"></div>
+    
+    <!-- Mobile Navbar with Hamburger -->
+    <div class="mobile-menu-btn fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between lg:hidden">
+        <button onclick="toggleSidebar()" class="text-gray-600 hover:text-green-600 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+        <div class="flex items-center space-x-2">
+            <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                <span class="text-white font-bold text-sm">A</span>
+            </div>
+            <span class="text-lg font-bold text-gray-800">Admin Panel</span>
+        </div>
+        <div class="w-10"></div> <!-- Spacer for alignment -->
+    </div>
+
     <div class="flex">
         <!-- Sidebar -->
-        <div class="admin-sidebar w-72 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col shadow-2xl min-h-screen">
-            <div class="p-6 border-b border-gray-700">
+        <div id="adminSidebar" class="admin-sidebar w-72 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col shadow-2xl min-h-screen">
+            <!-- Sidebar Header -->
+            <div class="p-6 border-b border-gray-700 flex items-center justify-between">
                 <div class="flex items-center space-x-3">
                     <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-xl">A</span>
                     </div>
                     <span class="text-xl font-bold text-white">Admin Panel</span>
                 </div>
+                <button onclick="closeSidebar()" class="lg:hidden text-gray-400 hover:text-white transition-colors duration-200">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
             </div>
             
             <div class="flex-1 py-6 overflow-y-auto">
@@ -87,6 +166,22 @@
                         @endif
                     </a>
                     
+                    <!-- Withdrawals -->
+                    <a href="{{ route('admin.withdrawals') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.withdrawals') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            <span>Withdrawals</span>
+                        </div>
+                        @php
+                            $pendingCount = \App\Models\WithdrawalRequest::where('status', 'pending')->count();
+                        @endphp
+                        @if($pendingCount > 0)
+                            <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $pendingCount }}</span>
+                        @endif
+                    </a>
+                    
                     <!-- Investments -->
                     <a href="{{ route('admin.investments') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.investments') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -95,31 +190,19 @@
                         <span>Investments</span>
                     </a>
 
-
-                    <!-- Withdrawals -->
-                    <a href="{{ route('admin.withdrawals') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.withdrawals') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
-                       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        <span>Withdrawals</span>
-                        @php
-                            $pendingCount = \App\Models\WithdrawalRequest::where('status', 'pending')->count();
-                        @endphp
-                        @if($pendingCount > 0)
-                            <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $pendingCount }}</span>
-                        @endif
-                    </a>
-
-                    <a href="{{ route('admin.card-applications') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300">
-                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                        <span>Card Applications</span>
+                    <!-- Card Applications -->
+                    <a href="{{ route('admin.card-applications') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.card-applications') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                        <div class="flex items-center space-x-3">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                            </svg>
+                            <span>Card Applications</span>
+                        </div>
                         @php
                             $pendingCards = \App\Models\CardApplication::where('status', 'pending')->count();
                         @endphp
                         @if($pendingCards > 0)
-                            <span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">{{ $pendingCards }}</span>
+                            <span class="pending-badge">{{ $pendingCards }}</span>
                         @endif
                     </a>
                 </nav>
@@ -146,45 +229,65 @@
         </div>
         
         <!-- Main Content -->
-        <div class="flex-1">
+        <div class="flex-1 admin-content">
+            <!-- Desktop Navbar (visible on larger screens) -->
+            <div class="hidden lg:block bg-white border-b border-gray-200 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <h1 class="text-xl font-semibold text-gray-800">Admin Dashboard</h1>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-600">{{ Auth::user()->name }}</span>
+                        <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">{{ substr(Auth::user()->name, 0, 1) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <main class="p-6">
                 @yield('admin-content')
             </main>
         </div>
     </div>
     
-    <!-- Mobile Menu Toggle Button -->
-    <button onclick="toggleSidebar()" class="fixed bottom-4 left-4 z-50 lg:hidden bg-gray-800 text-white p-3 rounded-full shadow-lg">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-    </button>
-    
     <script>
-        // Mobile menu toggle
-        const sidebar = document.querySelector('.admin-sidebar');
-        const overlay = document.createElement('div');
-        overlay.className = 'fixed inset-0 bg-black/50 z-40 hidden';
-        document.body.appendChild(overlay);
+        // Get sidebar element
+        const sidebar = document.getElementById('adminSidebar');
+        const overlay = document.getElementById('sidebarOverlay');
         
         function toggleSidebar() {
             sidebar.classList.toggle('open');
-            overlay.classList.toggle('hidden');
+            if (overlay) overlay.classList.toggle('active');
+            if (sidebar.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
+        }
+        
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            if (overlay) overlay.classList.remove('active');
+            document.body.style.overflow = '';
         }
         
         // Close sidebar when clicking overlay
-        overlay.addEventListener('click', function() {
-            sidebar.classList.remove('open');
-            overlay.classList.add('hidden');
-        });
+        if (overlay) {
+            overlay.addEventListener('click', closeSidebar);
+        }
         
-        // Close sidebar on window resize if open
+        // Close sidebar on window resize if open and screen becomes larger
         window.addEventListener('resize', function() {
             if (window.innerWidth >= 768) {
-                sidebar.classList.remove('open');
-                overlay.classList.add('hidden');
+                closeSidebar();
             }
         });
+        
+        // Prevent body scroll when sidebar is open on mobile
+        document.addEventListener('touchmove', function(e) {
+            if (sidebar.classList.contains('open') && window.innerWidth < 768) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
