@@ -86,6 +86,8 @@ Route::middleware('auth')->group(function () {
 // AI Support Routes
 Route::middleware('auth')->group(function () {
     Route::post('/ai/ask', [AISupportController::class, 'ask'])->name('ai.ask');
+    Route::get('/ai/history', [AISupportController::class, 'getHistory'])->name('ai.history');
+    Route::post('/ai/clear-history', [AISupportController::class, 'clearHistory'])->name('ai.clear-history');
 });
 
 // Protected routes (accessible by all authenticated users)

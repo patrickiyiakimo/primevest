@@ -19,30 +19,26 @@
                 </div>
                 <div>
                     <h3 class="text-white font-semibold">PrimeVest AI Assistant</h3>
-                    <p class="text-xs text-gray-400">Online • Ready to help</p>
+                    <p class="text-xs text-gray-400"><span class=" text-green-500 text-xs"> Online </span> Always here to help!</p>
                 </div>
             </div>
-            <button id="closeChatBtn" class="text-gray-400 hover:text-white transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
+            <div class="flex gap-2">
+                <button id="clearHistoryBtn" class="text-gray-400 hover:text-yellow-400 transition-colors" title="Clear history">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+                <button id="closeChatBtn" class="text-gray-400 hover:text-white transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
         
         <!-- Chat Messages -->
         <div id="chatMessages" class="h-96 overflow-y-auto p-4 space-y-3 bg-gray-50">
-            <div class="flex items-start gap-2">
-                <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                    </svg>
-                </div>
-                <div class="flex-1 bg-white rounded-2xl rounded-tl-none px-4 py-2 shadow-sm border border-gray-100">
-                    <p class="text-sm text-gray-800">👋 Hi! I'm your PrimeVest AI Assistant. I can help you with:</p>
-                    <p class="text-xs text-gray-500 mt-1">• Investment plans and ROI<br>• Deposits and withdrawals<br>• Account security<br>• Card applications<br>• Monthly profit reports<br>• And more!</p>
-                    <p class="text-xs text-gray-500 mt-2">What would you like to know?</p>
-                </div>
-            </div>
+            <!-- Messages will load here -->
         </div>
         
         <!-- Quick Questions -->
@@ -67,38 +63,44 @@
                     Send
                 </button>
             </div>
-            <p class="text-xs text-gray-400 mt-2 text-center">AI Assistant • Responses are instant</p>
+            <p class="text-xs text-gray-400 mt-2 text-center">Powered by DeepSeek AI • Responses saved to your history</p>
         </div>
     </div>
 </div>
 
 <script>
-    const chatButton = document.getElementById('aiChatButton');
-    const chatModal = document.getElementById('aiChatModal');
-    const closeChatBtn = document.getElementById('closeChatBtn');
-    const sendMessageBtn = document.getElementById('sendMessageBtn');
-    const chatInput = document.getElementById('chatInput');
-    const chatMessages = document.getElementById('chatMessages');
+    let currentUserId = {{ Auth::id() }};
     
-    // Open chat
-    chatButton.addEventListener('click', () => {
-        chatModal.classList.remove('hidden');
-        chatModal.classList.add('flex');
-    });
-    
-    // Close chat
-    function closeChat() {
-        chatModal.classList.remove('flex');
-        chatModal.classList.add('hidden');
+    // Load chat history on open
+    async function loadChatHistory() {
+        try {
+            const response = await fetch('/ai/history');
+            const data = await response.json();
+            
+            if (data.success && data.history.length > 0) {
+                // Clear existing messages except the first welcome
+                const chatMessages = document.getElementById('chatMessages');
+                chatMessages.innerHTML = '';
+                
+                // Display each historical message
+                data.history.forEach(msg => {
+                    addMessageToChat(msg.question, true);
+                    addMessageToChat(msg.answer, false);
+                });
+            } else {
+                // Show welcome message if no history
+                const chatMessages = document.getElementById('chatMessages');
+                if (chatMessages.children.length === 0) {
+                    addMessageToChat("👋 Hi! I'm your PrimeVest AI Assistant. I can help you with investment plans, deposits, withdrawals, and provide monthly profit reports. What would you like to know?", false);
+                }
+            }
+        } catch (error) {
+            console.error('Error loading history:', error);
+        }
     }
     
-    closeChatBtn.addEventListener('click', closeChat);
-    chatModal.addEventListener('click', (e) => {
-        if (e.target === chatModal) closeChat();
-    });
-    
-    // Add message to chat
-    function addMessage(text, isUser = false) {
+    function addMessageToChat(text, isUser = false) {
+        const chatMessages = document.getElementById('chatMessages');
         const messageDiv = document.createElement('div');
         messageDiv.className = `flex items-start gap-2 ${isUser ? 'flex-row-reverse' : ''}`;
         
@@ -128,8 +130,72 @@
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
     
-    // Show typing indicator
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    async function askQuestion(question) {
+        if (!question.trim()) return;
+        
+        // Add user message
+        addMessageToChat(question, true);
+        document.getElementById('chatInput').value = '';
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        try {
+            const response = await fetch('/ai/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ question: question })
+            });
+            
+            const data = await response.json();
+            removeTypingIndicator();
+            
+            if (data.success) {
+                addMessageToChat(data.response);
+            } else {
+                addMessageToChat("I'm having trouble connecting. Please try again in a moment.");
+            }
+        } catch (error) {
+            removeTypingIndicator();
+            addMessageToChat("Sorry, I encountered an error. Please refresh the page and try again.");
+        }
+    }
+    
+    async function clearHistory() {
+        if (confirm('Are you sure you want to clear your chat history?')) {
+            try {
+                const response = await fetch('/ai/clear-history', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    // Clear chat messages
+                    const chatMessages = document.getElementById('chatMessages');
+                    chatMessages.innerHTML = '';
+                    addMessageToChat("Chat history cleared! 👋 I'm here to help with any questions you have.", false);
+                }
+            } catch (error) {
+                console.error('Error clearing history:', error);
+            }
+        }
+    }
+    
+    // Chat UI functions
     function showTypingIndicator() {
+        const chatMessages = document.getElementById('chatMessages');
         const typingDiv = document.createElement('div');
         typingDiv.id = 'typingIndicator';
         typingDiv.className = 'flex items-start gap-2';
@@ -156,47 +222,30 @@
         if (indicator) indicator.remove();
     }
     
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
+    // Event Listeners
+    const chatButton = document.getElementById('aiChatButton');
+    const chatModal = document.getElementById('aiChatModal');
+    const closeChatBtn = document.getElementById('closeChatBtn');
+    const sendMessageBtn = document.getElementById('sendMessageBtn');
+    const chatInput = document.getElementById('chatInput');
+    const clearHistoryBtn = document.getElementById('clearHistoryBtn');
+    
+    chatButton.addEventListener('click', () => {
+        chatModal.classList.remove('hidden');
+        chatModal.classList.add('flex');
+        loadChatHistory();
+    });
+    
+    function closeChat() {
+        chatModal.classList.remove('flex');
+        chatModal.classList.add('hidden');
     }
     
-    async function askQuestion(question) {
-        if (!question.trim()) return;
-        
-        // Add user message
-        addMessage(question, true);
-        chatInput.value = '';
-        
-        // Show typing indicator
-        showTypingIndicator();
-        
-        try {
-            const response = await fetch('/ai/ask', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({ question: question })
-            });
-            
-            const data = await response.json();
-            removeTypingIndicator();
-            
-            if (data.success) {
-                addMessage(data.response);
-            } else {
-                addMessage("I'm having trouble connecting. Please try again in a moment.");
-            }
-        } catch (error) {
-            removeTypingIndicator();
-            addMessage("Sorry, I encountered an error. Please refresh the page and try again.");
-        }
-    }
+    closeChatBtn.addEventListener('click', closeChat);
+    chatModal.addEventListener('click', (e) => {
+        if (e.target === chatModal) closeChat();
+    });
     
-    // Send message
     sendMessageBtn.addEventListener('click', () => {
         askQuestion(chatInput.value);
     });
@@ -206,6 +255,10 @@
             askQuestion(chatInput.value);
         }
     });
+    
+    if (clearHistoryBtn) {
+        clearHistoryBtn.addEventListener('click', clearHistory);
+    }
 </script>
 
 <style>

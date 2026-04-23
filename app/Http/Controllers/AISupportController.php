@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ChatHistory;
 use App\Models\Transaction;
 use App\Models\Investment;
 use Illuminate\Http\Request;
@@ -17,9 +18,38 @@ class AISupportController extends Controller
         
         $response = $this->getAIResponse($question, $user);
         
+        // Save to database
+        ChatHistory::create([
+            'user_id' => $user->id,
+            'question' => $question,
+            'answer' => $response,
+        ]);
+        
         return response()->json([
             'success' => true,
             'response' => $response
+        ]);
+    }
+    
+    public function getHistory()
+    {
+        $history = ChatHistory::where('user_id', Auth::id())
+            ->orderBy('created_at', 'asc')
+            ->get();
+            
+        return response()->json([
+            'success' => true,
+            'history' => $history
+        ]);
+    }
+    
+    public function clearHistory()
+    {
+        ChatHistory::where('user_id', Auth::id())->delete();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Chat history cleared successfully'
         ]);
     }
     
