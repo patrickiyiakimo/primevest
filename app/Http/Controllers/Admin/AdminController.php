@@ -202,9 +202,15 @@ public function cardApplications()
         ->take(20)
         ->get();
     
+    $rejectedApplications = CardApplication::where('status', 'rejected')
+        ->with('user')
+        ->latest()
+        ->take(20)
+        ->get();
+    
     $totalPending = CardApplication::where('status', 'pending')->count();
     
-    return view('admin.card-applications', compact('pendingApplications', 'approvedApplications', 'totalPending'));
+    return view('admin.card-applications', compact('pendingApplications', 'approvedApplications', 'rejectedApplications', 'totalPending'));
 }
 
 public function approveCardApplication($id)

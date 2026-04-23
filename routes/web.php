@@ -35,10 +35,28 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // Admin Routes (only for admins)
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/users', [UserManagementController::class, 'index'])->name('users');
-    Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
+    Route::get('/', function () {
+        if (Auth::user()->is_admin != 1) {
+            abort(403, 'Unauthorized access. Admin privileges required.');
+        }
+        return app(App\Http\Controllers\Admin\AdminController::class)->dashboard();
+    })->name('dashboard');
+    
+    Route::get('/users', function () {
+        if (Auth::user()->is_admin != 1) abort(403);
+        return app(App\Http\Controllers\Admin\UserManagementController::class)->index(request());
+    })->name('users');
+    
+    Route::get('/users/{user}/edit', function ($user) {
+        if (Auth::user()->is_admin != 1) abort(403);
+        return app(App\Http\Controllers\Admin\UserManagementController::class)->edit($user);
+    })->name('users.edit');
+    
+    Route::put('/users/{user}', function ($user) {
+        if (Auth::user()->is_admin != 1) abort(403);
+        return app(App\Http\Controllers\Admin\UserManagementController::class)->update(request(), $user);
+    })->name('users.update');
+    
     
     // Deposit management routes
     Route::get('/deposits', [AdminController::class, 'deposits'])->name('deposits');
