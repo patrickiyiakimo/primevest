@@ -454,5 +454,10 @@
             }
         });
     </script>
+
+    <!-- AI Support Chat -->
+@auth
+    @include('components.ai-support-chat')
+@endauth
 </body>
 </html>

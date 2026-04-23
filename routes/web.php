@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\InvestmentController;
+use App\Http\Controllers\AISupportController;
 
 // Public routes
 Route::get('/', function () {
@@ -80,6 +81,11 @@ Route::middleware('auth')->group(function () {
         return view('dashboard.card-application');
     })->name('card-application');
     Route::post('/card-application/submit', [CardApplicationController::class, 'submit'])->name('card-application.submit');
+});
+
+// AI Support Routes
+Route::middleware('auth')->group(function () {
+    Route::post('/ai/ask', [AISupportController::class, 'ask'])->name('ai.ask');
 });
 
 // Protected routes (accessible by all authenticated users)
