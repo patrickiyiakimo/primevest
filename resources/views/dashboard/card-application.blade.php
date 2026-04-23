@@ -4,7 +4,7 @@
 @section('breadcrumb', 'Apply for your PrimeVest debit card')
 
 @section('dashboard-content')
-<div class="space-y-6">
+<div class="space-y-6 bg-white">
     <!-- Page Header -->
     <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl shadow-lg p-6 text-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
@@ -23,11 +23,12 @@
         <div class="space-y-6">
             <!-- Debit Card Image - Static Image -->
             <div class="flex justify-center">
-                <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-300">
+                <!-- <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-300"> -->
             </div>
 
             <!-- Card Benefits -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div class="bg-white overflow-hidden">
+                 <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-mdtransition-all duration-300">
                 <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,7 +107,7 @@
             @endif
 
             <!-- Application Form -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+            <div class="bg-white overflow-hidden">
                 <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
