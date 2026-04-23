@@ -16,7 +16,110 @@
                 <span class="text-green-400 text-sm font-semibold">💰 Available Balance: ${{ number_format(Auth::user()->balance, 2) }}</span>
             </div>
         </div>
+        
     </div>
+
+    <!-- Card Application Status Notification -->
+@php
+    $cardApplication = App\Models\CardApplication::where('user_id', Auth::id())
+        ->whereIn('status', ['approved', 'rejected'])
+        ->latest()
+        ->first();
+@endphp
+
+@if($cardApplication)
+    @if($cardApplication->status == 'approved')
+        <div id="cardNotification" class="bg-green-50 border-l-4 border-green-500 rounded-lg p-4 mb-6 relative">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-green-800">
+                            🎉 Congratulations! Your {{ ucfirst($cardApplication->card_type) }} {{ ucfirst($cardApplication->card_tier) }} card application has been approved!
+                        </p>
+                        <p class="text-xs text-green-700 mt-1">Your card will be delivered within 7-10 business days.</p>
+                    </div>
+                </div>
+                <button onclick="closeNotification()" class="text-green-600 hover:text-green-800 transition-colors duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Progress Bar -->
+            <div class="absolute bottom-0 left-0 h-1 bg-green-500 rounded-b-lg" style="width: 100%; animation: shrinkWidth 10s linear forwards;"></div>
+        </div>
+    @elseif($cardApplication->status == 'rejected')
+        <div id="cardNotification" class="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 mb-6 relative">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <p class="text-sm font-medium text-red-800">
+                            Your card application has been reviewed.
+                        </p>
+                        <p class="text-xs text-red-700 mt-1">
+                            Reason: {{ $cardApplication->admin_notes ?? 'Please contact support for more information.' }}
+                        </p>
+                    </div>
+                </div>
+                <button onclick="closeNotification()" class="text-red-600 hover:text-red-800 transition-colors duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Progress Bar -->
+            <div class="absolute bottom-0 left-0 h-1 bg-red-500 rounded-b-lg" style="width: 100%; animation: shrinkWidth 10s linear forwards;"></div>
+        </div>
+    @endif
+@endif
+
+<style>
+    @keyframes shrinkWidth {
+        from {
+            width: 100%;
+        }
+        to {
+            width: 0%;
+        }
+    }
+</style>
+
+<script>
+    // Auto close notification after 10 seconds
+    setTimeout(function() {
+        const notification = document.getElementById('cardNotification');
+        if (notification) {
+            notification.style.transition = 'opacity 0.5s ease';
+            notification.style.opacity = '0';
+            setTimeout(function() {
+                notification.remove();
+            }, 500);
+        }
+    }, 10000);
+    
+    // Manual close function
+    function closeNotification() {
+        const notification = document.getElementById('cardNotification');
+        if (notification) {
+            notification.style.transition = 'opacity 0.5s ease';
+            notification.style.opacity = '0';
+            setTimeout(function() {
+                notification.remove();
+            }, 500);
+        }
+    }
+</script>
+    
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Left Side - Card Preview -->
@@ -222,59 +325,6 @@
             </div>
         </div>
     </div>
-    <!-- Check if user has an existing application -->
-@php
-    $existingApplication = App\Models\CardApplication::where('user_id', Auth::id())->latest()->first();
-@endphp
-
-@if($existingApplication)
-    <div class="mb-6">
-        @if($existingApplication->status == 'pending')
-            <div class="bg-yellow-50 border-l-4 border-yellow-500 rounded-lg p-4">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-yellow-800">Application Pending Review</p>
-                        <p class="text-xs text-yellow-700 mt-1">Your card application is being reviewed. You will be notified once a decision is made.</p>
-                    </div>
-                </div>
-            </div>
-        @elseif($existingApplication->status == 'approved')
-            <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-4">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-green-800">Application Approved! 🎉</p>
-                        <p class="text-xs text-green-700 mt-1">Your card has been approved and will be delivered within 7-10 business days.</p>
-                    </div>
-                </div>
-            </div>
-        @elseif($existingApplication->status == 'rejected')
-            <div class="bg-red-50 border-l-4 border-red-500 rounded-lg p-4">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0">
-                        <svg class="h-5 w-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                        </svg>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-red-800">Application Status: Not Approved</p>
-                        <p class="text-xs text-red-700 mt-1">{{ $existingApplication->admin_notes ?? 'Please contact support for more information.' }}</p>
-                    </div>
-                </div>
-            </div>
-        @endif
-    </div>
-@endif
-</div>
 
 <!-- Toast Container -->
 <div id="toastContainer" class="fixed bottom-4 right-4 z-50"></div>
