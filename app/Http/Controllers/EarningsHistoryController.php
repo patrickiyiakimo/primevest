@@ -16,16 +16,7 @@ class EarningsHistoryController extends Controller
         $earnings = Transaction::where('user_id', $user->id)
             ->where('type', 'profit')
             ->orderBy('created_at', 'desc')
-            ->get()
-            ->map(function($transaction) {
-                return [
-                    'description' => $transaction->description ?? 'Profit Added',
-                    'amount' => $transaction->amount,
-                    'reference' => $transaction->reference,
-                    'date' => $transaction->created_at->format('Y-m-d H:i:s'),
-                    'status' => $transaction->status,
-                ];
-            });
+            ->paginate(15);
         
         // Calculate summary statistics
         $totalEarnings = Transaction::where('user_id', $user->id)
@@ -50,6 +41,12 @@ class EarningsHistoryController extends Controller
             ->whereDate('created_at', $today)
             ->sum('amount');
         
-        return view('dashboard.earnings-history', compact('earnings', 'totalEarnings', 'averageEarnings', 'monthlyEarnings', 'todayEarnings'));
+        return view('dashboard.earnings-history', compact(
+            'earnings', 
+            'totalEarnings', 
+            'averageEarnings', 
+            'monthlyEarnings', 
+            'todayEarnings'
+        ));
     }
 }

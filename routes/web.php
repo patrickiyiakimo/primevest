@@ -101,7 +101,7 @@ Route::middleware('auth')->group(function () {
     // History Routes
     Route::get('/deposits-history', [DepositHistoryController::class, 'index'])->name('deposits-history');
     Route::get('/withdrawals-history', [WithdrawalHistoryController::class, 'index'])->name('withdrawals-history');
-    Route::get('/earnings-history', function () { return view('dashboard.earnings-history'); })->name('earnings-history');
+    Route::get('/earnings-history', [App\Http\Controllers\EarningsHistoryController::class, 'index'])->name('earnings-history');
     Route::get('/investments-history', [App\Http\Controllers\InvestmentsHistoryController::class, 'index'])->name('investments-history');
 
 

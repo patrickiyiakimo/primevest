@@ -26,11 +26,6 @@
                     <p class="text-sm text-green-700">Total Invested</p>
                     <p class="text-2xl font-bold text-green-800">${{ number_format($totalInvested ?? 0, 2) }}</p>
                 </div>
-                <!-- <div class="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                </div> -->
             </div>
         </div>
         
@@ -40,11 +35,6 @@
                     <p class="text-sm text-blue-700">Active Investments</p>
                     <p class="text-2xl font-bold text-blue-800">{{ $activeInvestments ?? 0 }}</p>
                 </div>
-                <!-- <div class="w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div> -->
             </div>
         </div>
         
@@ -54,11 +44,6 @@
                     <p class="text-sm text-purple-700">Total Returns</p>
                     <p class="text-2xl font-bold text-purple-800">${{ number_format($totalReturns ?? 0, 2) }}</p>
                 </div>
-                <!-- <div class="w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                    </svg>
-                </div> -->
             </div>
         </div>
         
@@ -68,12 +53,7 @@
                     <p class="text-sm text-yellow-700">ROI</p>
                     <p class="text-2xl font-bold text-yellow-800">{{ number_format($roi ?? 0, 2) }}%</p>
                 </div>
-                <!-- <div class="w-5 h-5 bg-yellow-500 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                    </svg>
-                </div> -->
-            </div>
+               </div>
         </div>
         
         <div class="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl p-5 border border-red-200">
@@ -82,12 +62,7 @@
                     <p class="text-sm text-red-700">Completed</p>
                     <p class="text-2xl font-bold text-red-800">{{ $completedInvestments ?? 0 }}</p>
                 </div>
-                <!-- <div class="w-5 h-5 bg-red-500 rounded-full flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                    </svg>
-                </div> -->
-            </div>
+               </div>
         </div>
     </div>
 

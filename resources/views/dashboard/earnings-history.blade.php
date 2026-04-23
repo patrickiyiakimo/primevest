@@ -103,16 +103,16 @@
                 <tbody class="divide-y divide-gray-100">
                     @forelse($earnings ?? [] as $index => $earning)
                     <tr class="hover:bg-gray-50 transition-colors duration-200">
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ $index + 1 }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ $earnings->firstItem() + $index }}</td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-800">
                             <div class="flex items-center gap-2">
                                 <span class="text-green-500">💰</span>
-                                {{ $earning['description'] ?? 'Profit Added' }}
+                                {{ $earning->description ?? 'Profit Added' }}
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-sm font-semibold text-green-600">+${{ number_format($earning['amount'] ?? 0, 2) }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-500 font-mono">{{ $earning['reference'] ?? 'N/A' }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ $earning['date'] ?? 'N/A' }}</td>
+                        <td class="px-6 py-4 text-sm font-semibold text-green-600">+${{ number_format($earning->amount, 2) }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500 font-mono">{{ $earning->reference ?? 'N/A' }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ $earning->created_at->format('Y-m-d H:i:s') }}</td>
                         <td class="px-6 py-4 text-sm">
                             <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
                                 <span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-1.5"></span>
@@ -128,42 +128,19 @@
                             </svg>
                             <p class="text-sm font-medium">No earnings history found</p>
                             <p class="text-xs mt-1">Profits added by admin will appear here</p>
-                         </td>
+                        </td>
                     </tr>
                     @endforelse
                 </tbody>
-             </table>
+            </table>
         </div>
         
         <!-- Pagination -->
-        @if(isset($earnings) && method_exists($earnings, 'links'))
+        @if($earnings->hasPages())
         <div class="border-t border-gray-100 px-6 py-4 bg-gray-50">
             {{ $earnings->links() }}
         </div>
         @endif
-    </div>
-    
-    <!-- Earnings Chart Section -->
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-        <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
-            <div class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                </svg>
-                <h2 class="text-lg font-semibold text-gray-900">Earnings Overview</h2>
-            </div>
-        </div>
-        <div class="p-6">
-            <div class="h-80 flex items-center justify-center bg-gray-50 rounded-xl">
-                <div class="text-center">
-                    <svg class="w-20 h-20 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 12l3-3 3 3 4-4m0 0l3 3m-3-3v12M3 8l3-3 3 3 4-4m0 0l3 3m-3-3v12"></path>
-                    </svg>
-                    <p class="text-gray-500">Earnings chart will appear here</p>
-                    <p class="text-xs text-gray-400 mt-1">Connect your trading data to see visual analytics</p>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -171,7 +148,6 @@
 <div id="toastContainer" class="fixed bottom-4 right-4 z-50"></div>
 
 <script>
-    // Toast Notification System
     class Toast {
         constructor() {
             this.container = document.getElementById('toastContainer');
@@ -223,10 +199,6 @@
 <style>
     table {
         min-width: 700px;
-    }
-    
-    .hover-scale:hover {
-        transform: scale(1.02);
     }
 </style>
 @endsection

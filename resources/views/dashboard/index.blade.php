@@ -332,40 +332,18 @@
         </div>
     </div>
 
-    <!-- Recent Trading Activities -->
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-        <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4">
-            <h2 class="text-xl font-bold text-white">Recent Trading Activities</h2>
-            <p class="text-sm text-gray-400">Watch your daily earnings top up...</p>
-        </div>
-        <div class="p-6">
-            <div class="space-y-4">
-                @forelse($recentActivities ?? [] as $activity)
-                <div class="flex items-center justify-between py-3 border-b border-gray-100 last:border-0">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
-                            @if($activity['type'] == 'crypto')
-                                <span class="text-lg">₿</span>
-                            @elseif($activity['type'] == 'stock')
-                                <span class="text-lg">📈</span>
-                            @else
-                                <span class="text-lg">💰</span>
-                            @endif
-                        </div>
-                        <div>
-                            <p class="text-sm font-semibold text-gray-800">{{ $activity['title'] ?? 'N/A' }}</p>
-                            <p class="text-xs text-gray-500">{{ $activity['time'] ?? 'N/A' }}</p>
-                        </div>
-                    </div>
-                    <p class="text-sm font-bold text-green-600">+${{ number_format($activity['amount'] ?? 0, 2) }}</p>
-                </div>
-                @empty
-                <div class="text-center py-8 text-gray-500">
-                    <p class="text-sm">No recent activities</p>
-                </div>
-                @endforelse
-            </div>
-        </div>
+     <div>
+     <iframe 
+        src="https://widget.coinlib.io/widget?type=horizontal_v2&theme=dark&pref_coin_id=1505&invert_hover=no" 
+        width="100%" 
+        height="45px" 
+        scrolling="auto" 
+        marginwidth="0" 
+        marginheight="0" 
+        frameborder="0" 
+        border="0" 
+        style="border:0;margin:0;padding:0;display:block;">
+    </iframe>
     </div>
 </div>
 
