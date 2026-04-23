@@ -95,5 +95,64 @@
         </div>
         @endif
     </div>
+
+    <!-- Summary Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-green-700">Total Withdrawn</p>
+                    <p class="text-2xl font-bold text-green-800">${{ number_format($totalWithdrawals ?? 0, 2) }}</p>
+                </div>
+                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-blue-700">Average Withdrawal</p>
+                    <p class="text-2xl font-bold text-blue-800">${{ number_format($averageWithdrawal ?? 0, 2) }}</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-5 border border-purple-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-purple-700">Last Withdrawal</p>
+                    <p class="text-2xl font-bold text-purple-800">${{ number_format($lastWithdrawalAmount ?? 0, 2) }}</p>
+                </div>
+                <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-5 border border-yellow-200">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm text-yellow-700">Pending Requests</p>
+                    <p class="text-2xl font-bold text-yellow-800">{{ $pendingCount ?? 0 }}</p>
+                </div>
+                <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 @endsection
