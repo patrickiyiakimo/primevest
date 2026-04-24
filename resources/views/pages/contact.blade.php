@@ -49,33 +49,6 @@
                     <a href="mailto:support@primevest.com" class="text-2xl lg:text-3xl font-semibold text-green-600 hover:text-green-700 transition-colors duration-300 break-all">
                         support@primevest.com
                     </a>
-                    <div class="mt-6 pt-6 border-t border-gray-200">
-                        <div class="flex items-start space-x-3">
-                            <svg class="w-5 h-5 text-gray-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <p class="text-sm text-gray-500">Response within 24 hours, Monday - Friday</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quick Contact Form -->
-                <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-                    <h3 class="text-xl font-bold text-gray-900 mb-6">Quick Message</h3>
-                    <form action="#" method="POST" class="space-y-5">
-                        <div>
-                            <input type="text" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
-                        </div>
-                        <div>
-                            <input type="email" placeholder="Your Email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
-                        </div>
-                        <div>
-                            <textarea rows="4" placeholder="Your Message" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
-                            Send Message
-                        </button>
-                    </form>
                 </div>
             </div>
 
@@ -129,7 +102,7 @@
                             <a href="tel:+15206125104" class="text-xl font-semibold text-green-600 hover:text-green-700 transition-colors duration-300">
                                 +1 (520) 612 - 5104
                             </a>
-                            <p class="text-xs text-gray-500 mt-1">Monday - Friday, 9:00 - 18:00 GMT</p>
+                            <!-- <p class="text-xs text-gray-500 mt-1">Monday - Friday, 9:00 - 18:00 GMT</p> -->
                         </div>
                     </div>
                 </div>
@@ -148,24 +121,6 @@
                             <p class="text-gray-600 leading-relaxed">
                                 1017 Centre Road Suite 300 A,<br>
                                 Florida 34761, USA
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Business Hours -->
-                <div class="bg-green-600 rounded-2xl p-8 text-white">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-semibold mb-2">Business Hours</h3>
-                            <p class="text-green-100 text-sm">
-                                Monday - Friday: 9:00 AM - 6:00 PM EST<br>
-                                Saturday - Sunday: Closed
                             </p>
                         </div>
                     </div>
