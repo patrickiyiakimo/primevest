@@ -7,12 +7,14 @@
     </div>
     
     <!-- Search -->
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-4">
-        <form method="GET" action="{{ route('admin.users') }}" class="flex gap-4">
-            <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or email..." class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
-            <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Search</button>
-        </form>
-    </div>
+    <div class="rounded-2xl border border-gray-100 p-4">
+    <form method="GET" action="{{ route('admin.users') }}" class="flex flex-col md:flex-row gap-4">
+        <input type="text" name="search" value="{{ request('search') }}" placeholder="Search by name or email..." class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 w-full">
+        <button type="submit" class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 w-full md:w-auto">
+            Search
+        </button>
+    </form>
+</div>
     
     <!-- Users Table -->
     <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
