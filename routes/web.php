@@ -98,6 +98,17 @@ Route::get('/create-admin', function () {
     return "Admin created successfully!!! Email: iyiakimopatrick2002@gmail.com, Password: Test@1234";
 });
 
+// Temporary route to make an existing user an admin (for testing purposes)
+Route::get('/make-me-admin', function () {
+    $user = App\Models\User::where('email', 'iyiakimopatrick2002@gmail.com')->first();
+    if ($user) {
+        $user->is_admin = 1;
+        $user->save();
+        return "User {$user->name} is now admin! is_admin = " . $user->is_admin;
+    }
+    return "User not found!";
+});
+
 // User Investment Routes (accessible by all authenticated users)
 Route::middleware('auth')->group(function () {
     Route::post('/invest/store', [InvestmentController::class, 'store'])->name('invest.store');
