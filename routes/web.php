@@ -77,6 +77,25 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/card-applications/{id}/reject', [AdminController::class, 'rejectCardApplication'])->name('card-applications.reject');
 });
 
+// Temporary route to create an admin user (for testing purposes)
+Route::get('/create-admin', function () {
+    // Check if admin already exists
+    if (User::where('email', 'iyiakimopatrick2002@gmail.com')->exists()) {
+        return "Admin already exists!";
+    }
+    
+    $user = User::create([
+        'name' => 'Patrick Iyiakimo',
+        'email' => 'iyiakimopatrick2002@gmail.com',
+        'password' => Hash::make('Test@1234'),
+        'balance' => 0,
+        'total_profits' => 0,
+        'is_admin' => true,
+    ]);
+    
+    return "Admin created successfully! Email: iyiakimopatrick2002@gmail.com, Password: Test@1234";
+});
+
 // User Investment Routes (accessible by all authenticated users)
 Route::middleware('auth')->group(function () {
     Route::post('/invest/store', [InvestmentController::class, 'store'])->name('invest.store');
