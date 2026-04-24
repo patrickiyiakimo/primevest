@@ -336,9 +336,7 @@
                     <span>Withdraw</span>
                 </a>
             </nav>
-            
             <!-- Add the rest of your navigation items (Buy Crypto, Stocks, Transaction History, Account) here -->
-            
         </div>
     </div>
     
