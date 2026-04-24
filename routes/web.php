@@ -95,7 +95,7 @@ Route::get('/create-admin', function () {
         'is_admin' => true,
     ]);
     
-    return "Admin created successfully! Email: iyiakimopatrick2002@gmail.com, Password: Test@1234";
+    return "Admin created successfully!!! Email: iyiakimopatrick2002@gmail.com, Password: Test@1234";
 });
 
 // User Investment Routes (accessible by all authenticated users)
