@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\AISupportController;
+use App\Models\User;  // ← ADD THIS
+use Illuminate\Support\Facades\Hash;  // ← ADD THIS
 
 // Public routes
 Route::get('/', function () {
