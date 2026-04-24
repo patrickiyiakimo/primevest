@@ -184,3 +184,42 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 700ms;
 }
+
+/* Custom selection color - Green Theme */
+::selection {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+::-moz-selection {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+/* For specific elements only (optional) */
+p::selection,
+h1::selection,
+h2::selection,
+h3::selection,
+span::selection,
+li::selection,
+td::selection {
+    background-color: var(--primary-green-light);
+    color: white;
+}
+
+/* Input fields selection color */
+input::selection,
+textarea::selection,
+select::selection {
+    background-color: var(--primary-green);
+    color: white;
+}
+
+/* Table content selection */
+table::selection,
+td::selection,
+th::selection {
+    background-color: var(--primary-green);
+    color: white;
+}

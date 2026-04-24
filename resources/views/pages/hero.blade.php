@@ -16,10 +16,9 @@
         <div class="max-w-4xl">
             <!-- Main Heading -->
             <h1 class="text-3xl sm:text-4xl lg:text-6xl xl:text-5xl font-bold text-white mb-6 leading-tight">
-                COPY TRADING ON
-                <span class="bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent block mt-3">
-                    CRYPTOCURRENCY, STOCKS, FOREX,<br>
-                    INDICES, SHARE CFDs & MORE..
+                <!-- COPY TRADING ON -->
+                <span class="bg-gradient-to-r from-green-400 to-green-500 uppercase bg-clip-text text-transparent block mt-3">
+                   Trade Shares and Forex with Financial Thinking
                 </span>
             </h1>
             
