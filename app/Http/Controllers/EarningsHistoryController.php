@@ -12,7 +12,7 @@ class EarningsHistoryController extends Controller
     {
         $user = Auth::user();
         
-        // Get all profit transactions from the database
+        // Get all profit transactions
         $earnings = Transaction::where('user_id', $user->id)
             ->where('type', 'profit')
             ->orderBy('created_at', 'desc')
@@ -27,18 +27,17 @@ class EarningsHistoryController extends Controller
             ->where('type', 'profit')
             ->avg('amount') ?? 0;
         
-        // Calculate monthly earnings (current month)
-        $currentMonth = date('Y-m');
+        // Calculate monthly earnings (current month) - FIXED
         $monthlyEarnings = Transaction::where('user_id', $user->id)
             ->where('type', 'profit')
-            ->whereRaw("strftime('%Y-%m', created_at) = ?", [$currentMonth])
+            ->whereYear('created_at', date('Y'))
+            ->whereMonth('created_at', date('m'))
             ->sum('amount');
         
         // Calculate today's earnings
-        $today = date('Y-m-d');
         $todayEarnings = Transaction::where('user_id', $user->id)
             ->where('type', 'profit')
-            ->whereDate('created_at', $today)
+            ->whereDate('created_at', now()->toDateString())
             ->sum('amount');
         
         return view('dashboard.earnings-history', compact(
