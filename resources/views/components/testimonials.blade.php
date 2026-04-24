@@ -27,7 +27,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 w-full max-w-6xl">
                 
                 <!-- Testimonial 1 - Rukky Sanders -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
                         <!-- Quote Icon -->
                         <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
@@ -61,7 +61,7 @@
                 </div>
 
                 <!-- Testimonial 2 - Scott Smith -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
                         <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
@@ -92,7 +92,7 @@
                 </div>
 
                 <!-- Testimonial 3 - Alex Glyson -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
                         <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
@@ -127,7 +127,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
                 
                 <!-- Testimonial 4 - Sarah Johnson -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
                         <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
@@ -158,7 +158,7 @@
                 </div>
 
                 <!-- Testimonial 5 - Michael Chen -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
+                <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
                         <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
