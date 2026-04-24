@@ -15,11 +15,7 @@
     <!-- Hero Content -->
     <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div class="max-w-3xl">
-            <!-- <div class="inline-flex items-center px-3 py-1 rounded-full bg-green-500/20 border border-green-500/30 mb-6">
-                <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                <span class="text-green-400 text-xs font-semibold uppercase tracking-wider">Education Hub</span>
-            </div> -->
-            <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 class="text-4xl lg:text-5xl xl:text-5xl font-bold text-white mb-6 leading-tight">
                 Build up <span class="text-green-400">Your Skills</span>
             </h1>
             <p class="text-xl text-gray-300 mb-8 leading-relaxed">
@@ -120,7 +116,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             <!-- Ultimate Platform Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl">
+            <div class="bg-white border border-gray-100 p-6 transition-all duration-300">
                 <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
@@ -133,7 +129,7 @@
             </div>
 
             <!-- Analysis & Alerts Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl">
+            <div class="bg-white border border-gray-100 p-6 transition-all duration-300">
                 <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
@@ -146,7 +142,7 @@
             </div>
 
             <!-- Demo Account Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl">
+            <div class="bg-white border border-gray-100 p-6 transition-all duration-300">
                 <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
@@ -159,7 +155,7 @@
             </div>
 
             <!-- Risk Management Card -->
-            <div class="bg-white rounded-2xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl">
+            <div class="bg-white border border-gray-100 p-6 transition-all duration-300">
                 <div class="w-14 h-14 bg-green-50 rounded-xl flex items-center justify-center mb-4">
                     <svg class="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
@@ -175,13 +171,22 @@
 </div>
 
 <!-- CTA Section -->
-<div class="bg-green-600 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<div class="relative py-16 overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+        <!-- Darker green overlay for better text visibility -->
+        <div class="absolute inset-0 bg-green-900/85"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center"></div>
+        <!-- Additional dark overlay for depth -->
+        <div class="absolute inset-0 bg-black/30"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Start Learning?</h2>
         <p class="text-green-100 text-lg mb-8 max-w-2xl mx-auto">
             Join our educational programs and become a better trader
         </p>
-        <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-3 bg-white text-green-600 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl">
+        <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-3 text-white bg-green-600 font-semibold rounded-full hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl">
             Open an Account
             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>

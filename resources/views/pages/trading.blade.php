@@ -16,7 +16,7 @@
     <!-- Hero Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
         <div class="max-w-3xl">
-            <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 class="text-4xl lg:text-5xl xl:text-4xl font-bold text-white mb-6 leading-tight">
                 GET MORE FROM METATRADER WITH <span class="text-green-400">PrimeVest</span>
             </h1>
             <p class="text-xl text-gray-300 mb-8 leading-relaxed">

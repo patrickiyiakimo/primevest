@@ -4,7 +4,7 @@
 @section('content')
 
 <!-- Hero Section with Background Image -->
-<div class="relative overflow-hidden min-h-[500px] flex items-center">
+<div class="relative overflow-hidden min-h-[500px] pl-10 flex">
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
         <img src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=1920&h=800&fit=crop" 
@@ -15,9 +15,9 @@
     </div>
     
     <!-- Hero Content -->
-    <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div class="max-w-3xl">
-            <div class="inline-flex items-center px-3 py-1 rounded-full bg-green-500/20 border border-green-500/30 mb-6">
+    <div class="relative z-20 px-4 sm:px-6 lg:px-8 py-20">
+        <div class="">
+            <div class="inline-flex px-3 py-1 rounded-full bg-green-500/20 border border-green-500/30 mb-6">
                 <span class="w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                 <span class="text-green-400 text-xs font-semibold uppercase tracking-wider">The Advantage</span>
             </div>
@@ -28,10 +28,10 @@
                 NO HASSLE. NO BRAINER
             </h2>
             <p class="text-xl text-gray-300 mb-8 leading-relaxed">
-                We know that hidden fees, surprise costs and unexpected charges can take a good chunk out of your investment.
+                We know that hidden fees, surprise costs and unexpected <br> charges can take a good chunk out of your investment.
             </p>
             <p class="text-lg text-gray-300 mb-8">
-                With our <span class="text-green-400 font-semibold">VIP Black account</span> you can trade with zero commissions and razor-thin spreads on all markets, resulting in tremendous savings.
+                With our <span class="text-green-400 font-semibold">VIP Black account</span> you can trade with zero commissions and razor-thin <br>spreads on all markets, resulting in tremendous savings.
             </p>
             <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
                 Register Now
@@ -44,32 +44,32 @@
 </div>
 
 <!-- Experience & Innovation Section - Navy Blue -->
-<div class="bg-navy-900 py-20">
+<div class="bg-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             
             <!-- Experience Card -->
-            <div class="bg-navy-800 rounded-2xl p-8 transition-all duration-300 hover:transform hover:-translate-y-1">
+            <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:transform hover:-translate-y-1">
                 <div class="w-16 h-16 bg-green-500/20 rounded-xl flex items-center justify-center mb-6">
                     <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-3">EXPERIENCE</h3>
-                <p class="text-gray-300 leading-relaxed">
+                <h3 class="text-2xl font-bold text-gray-600 mb-3">EXPERIENCE</h3>
+                <p class="text-gray-600 leading-relaxed">
                     A team with <span class="text-green-400 font-semibold">40+ years experience</span> in providing the most advanced trading solutions for FX and CFDs.
                 </p>
             </div>
 
             <!-- Innovation Card -->
-            <div class="bg-navy-800 rounded-2xl p-8 transition-all duration-300 hover:transform hover:-translate-y-1">
+            <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:transform hover:-translate-y-1">
                 <div class="w-16 h-16 bg-green-500/20 rounded-xl flex items-center justify-center mb-6">
                     <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                     </svg>
                 </div>
-                <h3 class="text-2xl font-bold text-white mb-3">INNOVATIVE</h3>
-                <p class="text-gray-300 leading-relaxed">
+                <h3 class="text-2xl font-bold text-gray-600 mb-3">INNOVATIVE</h3>
+                <p class="text-gray-600 leading-relaxed">
                     Power up your trading with innovative products like the <span class="text-green-400 font-semibold">PrimeVest</span>, which lets you undo losing trades if the markets move against you.
                 </p>
             </div>
@@ -258,7 +258,7 @@
         <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             We have subscriptions to suit every trader, with commissions as low as 0 and spreads from 0 pips.
         </p>
-        <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+        <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
             Start Trading Today
             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>

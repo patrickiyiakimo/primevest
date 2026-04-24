@@ -13,10 +13,11 @@
             <div class="hidden md:flex items-center space-x-8">
                 @guest
                     <a href="/trading" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Trading</a>
-                    <a href="/contact" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Contact</a>
                     <a href="/company" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Company</a>
                     <a href="/education" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Education</a>
-                @endguest
+                    <a href="/contact" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Contact</a>
+
+                    @endguest
             </div>
             
             <!-- Desktop Auth Buttons -->
@@ -70,9 +71,9 @@
         <div class="px-4 py-4 space-y-3">
             @guest
                 <a href="/trading" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Trading</a>
-                <a href="/contact" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Contact</a>
                 <a href="/company" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Company</a>
                 <a href="/education" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Education</a>
+                <a href="/contact" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Contact</a>
                 <div class="pt-4 space-y-3">
                     <a href="/login" class="block text-center py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border border-white/20 rounded-lg">Login</a>
                     <a href="/register" class="block text-center py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg transition-all duration-300">Get Started</a>
