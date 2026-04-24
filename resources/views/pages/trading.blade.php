@@ -261,13 +261,20 @@
 </div>
 
 <!-- CTA Section -->
-<div class="bg-green-600 py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<div class="relative py-16 overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-green-900/90"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-black/40"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">Ready to Start Trading?</h2>
         <p class="text-green-100 text-lg mb-8 max-w-2xl mx-auto">
             Join our trading programs and become a better trader
         </p>
-        <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-3 bg-white text-green-600 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl">
+        <a href="{{ route('register') }}" class="inline-flex items-center px-8 py-3 text-white bg-green-600 font-semibold rounded-full hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl">
             Open an Account
             <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
