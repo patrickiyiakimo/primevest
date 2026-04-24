@@ -33,4 +33,13 @@
     
     <!-- Investment Plans Section -->
     @include('components.investment-plans')
+
+    <!-- Testimonials Section -->
+    @include('components.testimonials')
+
+    <!-- Trusted Section -->
+    @include('components.trusted-section')
+
+    <!-- How It Works Section -->
+    @include('components.how-it-works')
 @endsection
