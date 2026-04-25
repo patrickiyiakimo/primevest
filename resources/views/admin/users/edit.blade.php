@@ -39,7 +39,7 @@
                 <div class="space-y-6">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Transaction Type</label>
-                        <div class="grid grid-cols-3 gap-4">
+                        <div class="grid md:grid-cols-3 gap-4">
                             <label class="flex items-center p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300">
                                 <input type="radio" name="transaction_type" value="credit" class="w-5 h-5 text-green-600" checked onchange="updateTransactionType()">
                                 <span class="ml-3 font-semibold text-gray-700">Credit (Add Balance)</span>
