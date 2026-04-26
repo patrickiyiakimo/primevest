@@ -134,6 +134,10 @@ class AISupportController extends Controller
         if (str_contains($question, 'stock trading') || str_contains($question, 'forex trading') || str_contains($question, 'crypto trading')) {
             return "PrimeVest offers copy trading on a wide range of assets including stocks, forex, and cryptocurrencies. You can choose from our list of top-performing traders and automatically copy their trades to your account.";
         }
+
+        if(str_contains($question, 'card benefits') || str_contains($question, 'debit card benefits')) {
+            return "The PrimeVest debit card offers 0% foreign transaction fees, up to 5% cashback on purchases, secure contactless payments and accepted globally. It's a great way to access your funds and enjoy rewards on everyday spending.";
+        }
         
         // Default response
         return "I'm here to help! You can ask me about:\n\n• Investment plans and ROI\n• Deposits and withdrawals\n• Account security\n• Card applications\n• Referral program\n• Monthly profit reports\n• Account balance\n\nWhat would you like to know?";
