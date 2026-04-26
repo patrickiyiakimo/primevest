@@ -149,7 +149,7 @@
             <div class="flex items-center justify-between">
                 <!-- Left Side - Page Title & Breadcrumb -->
                 <div class="flex items-center space-x-4">
-                    <button id="mobileMenuBtn" class="lg:hidden text-gray-600 hover:text-green-600 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100">
+                    <button id="mobileMenuBtn" class="lg:hidden text-gray-600 hover:text-red-600 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                         </svg>
@@ -164,7 +164,7 @@
                 <!-- Right Side - Tools & User Menu -->
                 <div class="flex items-center space-x-3 sm:space-x-4">
                     <!-- Fullscreen Toggle -->
-                    <button id="fullscreenToggle" class="text-gray-600 hover:text-green-600 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100">
+                    <button id="fullscreenToggle" class="text-gray-600 hover:text-red-600 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
                         </svg>
@@ -247,7 +247,7 @@
                                 <p class="text-sm font-semibold text-gray-800">{{ Auth::user()->name }}</p>
                                 <p class="text-xs text-gray-500">{{ Auth::user()->email }}</p>
                             </div>
-                            <div class="w-9 h-9 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+                            <div class="w-9 h-9 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
                                 <span class="text-white font-bold text-sm">{{ substr(Auth::user()->name, 0, 1) }}</span>
                             </div>
                             <svg class="w-4 h-4 text-gray-500 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,7 +294,7 @@
         <!-- User Info -->
         <div class="p-4 border-b border-gray-700">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
+                <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
                     <span class="text-white font-bold text-lg">{{ substr(Auth::user()->name, 0, 1) }}</span>
                 </div>
                 <div>

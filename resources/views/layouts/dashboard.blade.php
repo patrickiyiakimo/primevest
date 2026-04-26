@@ -43,9 +43,11 @@
         }
         
         .sidebar-item-active {
-            background-color: #1f2937;
+            background-color: ;
             color: white;
-            border-left: 4px solid #10b981;
+
+            /* I want the color to be red */
+            border-left: 4px solid #ef4444;
         }
         
         /* Custom scrollbar for sidebar */
@@ -147,10 +149,10 @@
         <!-- Sidebar Header with Close Button -->
         <div class="p-4 border-b border-gray-700 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                <div class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center">
                     <span class="text-white font-bold text-sm">P</span>
                 </div>
-                <a href="/" class="text-xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+                <a href="/" class="text-xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
                     PrimeVest
                 </a>
             </div>
@@ -164,7 +166,7 @@
         <!-- User Info -->
         <div class="p-4 border-b border-gray-700">
             <div class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
+                <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
                     <span class="text-white font-bold text-lg">{{ substr(Auth::user()->name, 0, 1) }}</span>
                 </div>
                 <div>
@@ -187,6 +189,7 @@
                     <span>Dashboard</span>
                 </a>
             </nav>
+            <hr class="my-6 border-gray-700" />
 
             <div class="px-4 mt-6 mb-2">
                 <p class="text-xs text-gray-500 uppercase tracking-wider font-semibold">MAKE A DEPOSIT</p>
@@ -211,6 +214,8 @@
                     <span>Withdraw</span>
                 </a>
             </nav>
+            <hr class="my-6 border-gray-700" />
+
 
             <!-- Buy Crypto Dropdown -->
             <div class="px-4 mt-6 mb-2">
@@ -237,6 +242,7 @@
                     </div>
                 </div>
             </nav>
+            <hr class="my-6 border-gray-700" />
 
             <!-- Stocks Dropdown -->
             <div class="px-4 mt-6 mb-2">
@@ -267,6 +273,7 @@
                     </div>
                 </div>
             </nav>
+            <hr class="my-6 border-gray-700" />
 
             <!-- Transaction History Dropdown -->
             <div class="px-4 mt-6 mb-2">
@@ -293,6 +300,7 @@
                     </div>
                 </div>
             </nav>
+            <hr class="my-6 border-gray-700" />
 
             <!-- Account -->
             <div class="px-4 mt-6 mb-2">

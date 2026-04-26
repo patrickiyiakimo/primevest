@@ -7,7 +7,7 @@
 <div class="space-y-6">
  
     <!-- Stats Cards - Credit Card Style -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10">
         <!-- Main Balance Card -->
         <div class="relative bg-gradient-to-br from-gray-800 to-gray-900  overflow-hidden group">
             <div class="absolute inset-0 opacity-10">
