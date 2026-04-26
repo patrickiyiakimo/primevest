@@ -9,10 +9,20 @@ export default {
         './resources/views/**/*.blade.php',
     ],
 
-    theme: {
+    // theme: {
+    //     extend: {
+    //         fontFamily: {
+    //             sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+    //         },
+    //     },
+    // },
+
+     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                'sans': ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
+                'heading': ['Plus Jakarta Sans', 'sans-serif'],
+                'body': ['Plus Jakarta Sans', 'sans-serif'],
             },
         },
     },

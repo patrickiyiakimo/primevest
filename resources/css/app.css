@@ -223,3 +223,25 @@ th::selection {
     background-color: var(--primary-green);
     color: white;
 }
+
+
+
+/* Set default font */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 400;
+}
+
+/* Heading styles */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+/* Special text styles */
+.text-gradient {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
