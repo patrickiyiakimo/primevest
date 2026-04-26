@@ -135,7 +135,7 @@ class AISupportController extends Controller
             return "PrimeVest offers copy trading on a wide range of assets including stocks, forex, and cryptocurrencies. You can choose from our list of top-performing traders and automatically copy their trades to your account.";
         }
 
-        if(str_contains($question, 'card benefits') || str_contains($question, 'debit card benefits')) {
+        if(str_contains($question, 'card benefits') || str_contains($question, 'card benefit') || str_contains($question, 'debit card benefits') || str_contains($question, 'debit card benefit')) {
             return "The PrimeVest debit card offers 0% foreign transaction fees, up to 5% cashback on purchases, secure contactless payments and accepted globally. It's a great way to access your funds and enjoy rewards on everyday spending.";
         }
         
