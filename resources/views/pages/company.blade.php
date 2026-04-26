@@ -13,7 +13,7 @@
         <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/90 z-10"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div>
     </div>
-    
+
     <!-- Hero Content -->
     <div class="relative z-20 px-4 sm:px-6 lg:px-8 py-20">
         <div class="">

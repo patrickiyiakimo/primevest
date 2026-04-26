@@ -6,22 +6,22 @@
     
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="bg-white rounded-2xl shadow-lg p-6">
+        <div class="bg-white rounded-2xl p-6">
             <p class="text-gray-500 text-sm">Total Users</p>
             <p class="text-3xl font-bold text-gray-900">{{ $totalUsers }}</p>
         </div>
         
-        <div class="bg-white rounded-2xl shadow-lg p-6">
+        <div class="bg-white rounded-2xl p-6">
             <p class="text-gray-500 text-sm">Total Balance</p>
             <p class="text-3xl font-bold text-green-600">${{ number_format($totalBalance, 2) }}</p>
         </div>
         
-        <div class="bg-white rounded-2xl shadow-lg p-6">
+        <div class="bg-white rounded-2xl p-6">
             <p class="text-gray-500 text-sm">Pending Deposits</p>
             <p class="text-3xl font-bold text-yellow-600">{{ $pendingDepositsCount }}</p>
         </div>
         
-        <div class="bg-white rounded-2xl shadow-lg p-6">
+        <div class="bg-white rounded-2xl p-6">
             <p class="text-gray-500 text-sm">Total Deposits</p>
             <p class="text-3xl font-bold text-blue-600">${{ number_format($totalDepositsAmount, 2) }}</p>
         </div>

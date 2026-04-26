@@ -10,13 +10,24 @@
         .admin-sidebar {
             transition: transform 0.3s ease;
             transform: translateX(0);
+            overflow-y: auto;
+            max-height: 100vh;
         }
+        
         .admin-sidebar-item {
             transition: all 0.3s ease;
         }
+        
         .admin-sidebar-item:hover {
             padding-left: 1.5rem;
             background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* Make main content scrollable */
+        .admin-main-content {
+            overflow-y: auto;
+            height: 100vh;
+            scroll-behavior: smooth;
         }
         
         /* Custom scrollbar for sidebar */
@@ -32,6 +43,21 @@
         }
         .admin-sidebar::-webkit-scrollbar-thumb:hover {
             background: #6b7280;
+        }
+        
+        /* Custom scrollbar for main content */
+        .admin-main-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .admin-main-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .admin-main-content::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 5px;
+        }
+        .admin-main-content::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
         }
         
         /* Badge for pending items */
@@ -74,12 +100,18 @@
             .admin-content {
                 width: 100%;
             }
+            .admin-main-content {
+                height: calc(100vh - 60px);
+            }
         }
         
         /* Desktop styles */
         @media (min-width: 769px) {
             .mobile-menu-btn {
                 display: none;
+            }
+            .admin-main-content {
+                height: 100vh;
             }
         }
         
@@ -92,21 +124,35 @@
             top: 0;
             z-index: 45;
         }
+        
+        /* Desktop navbar */
+        .desktop-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 44;
+            background: white;
+        }
+        
+        /* Ensure content area scrolls */
+        .admin-content-area {
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
     </style>
 </head>
-<body class="font-sans antialiased bg-gray-100">
+<body class="font-sans antialiased bg-gray-100 overflow-hidden">
     <!-- Mobile Overlay -->
     <div id="sidebarOverlay" class="overlay" onclick="closeSidebar()"></div>
     
     <!-- Mobile Navbar with Hamburger -->
     <div class="mobile-menu-btn fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between lg:hidden">
-        <button onclick="toggleSidebar()" class="text-gray-600 hover:text-green-600 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100">
+        <button onclick="toggleSidebar()" class="text-gray-600 hover:text-red-600 transition-colors duration-200 p-2 rounded-lg hover:bg-gray-100">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
         </button>
         <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+            <div class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
                 <span class="text-white font-bold text-sm">A</span>
             </div>
             <span class="text-lg font-bold text-gray-800">Admin Panel</span>
@@ -114,13 +160,13 @@
         <div class="w-10"></div> <!-- Spacer for alignment -->
     </div>
 
-    <div class="flex">
+    <div class="flex h-screen overflow-hidden">
         <!-- Sidebar -->
-        <div id="adminSidebar" class="admin-sidebar w-72 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col shadow-2xl min-h-screen">
+        <div id="adminSidebar" class="admin-sidebar w-72 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex flex-col shadow-2xl">
             <!-- Sidebar Header -->
-            <div class="p-6 border-b border-gray-700 flex items-center justify-between">
+            <div class="p-6 border-b border-gray-700 flex items-center justify-between flex-shrink-0">
                 <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                    <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
                         <span class="text-white font-bold text-xl">A</span>
                     </div>
                     <span class="text-xl font-bold text-white">Admin Panel</span>
@@ -132,10 +178,10 @@
                 </button>
             </div>
             
-            <div class="flex-1 py-6 overflow-y-auto">
+            <div class="flex-1 overflow-y-auto py-6">
                 <nav class="space-y-1">
                     <!-- Dashboard -->
-                    <a href="{{ route('admin.dashboard') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.dashboard') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                    <a href="{{ route('admin.dashboard') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.dashboard') ? 'bg-gray-700 text-white border-l-4 border-red-500' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                         </svg>
@@ -143,7 +189,7 @@
                     </a>
                     
                     <!-- User Management -->
-                    <a href="{{ route('admin.users') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.users*') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                    <a href="{{ route('admin.users') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.users*') ? 'bg-gray-700 text-white border-l-4 border-red-500' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
@@ -151,7 +197,7 @@
                     </a>
                     
                     <!-- Deposit Requests with Pending Badge -->
-                    <a href="{{ route('admin.deposits') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.deposits') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                    <a href="{{ route('admin.deposits') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.deposits') ? 'bg-gray-700 text-white border-l-4 border-red-500' : '' }}">
                         <div class="flex items-center space-x-3">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -167,7 +213,7 @@
                     </a>
                     
                     <!-- Withdrawals -->
-                    <a href="{{ route('admin.withdrawals') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.withdrawals') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                    <a href="{{ route('admin.withdrawals') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.withdrawals') ? 'bg-gray-700 text-white border-l-4 border-red-500' : '' }}">
                         <div class="flex items-center space-x-3">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -183,7 +229,7 @@
                     </a>
                     
                     <!-- Investments -->
-                    <a href="{{ route('admin.investments') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.investments') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                    <a href="{{ route('admin.investments') }}" class="admin-sidebar-item flex items-center space-x-3 px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.investments') ? 'bg-gray-700 text-white border-l-4 border-red-500' : '' }}">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                         </svg>
@@ -191,7 +237,7 @@
                     </a>
 
                     <!-- Card Applications -->
-                    <a href="{{ route('admin.card-applications') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.card-applications') ? 'bg-gray-700 text-white border-l-4 border-green-500' : '' }}">
+                    <a href="{{ route('admin.card-applications') }}" class="admin-sidebar-item flex items-center justify-between px-6 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all duration-300 {{ request()->routeIs('admin.card-applications') ? 'bg-gray-700 text-white border-l-4 border-red-500' : '' }}">
                         <div class="flex items-center space-x-3">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
@@ -209,7 +255,7 @@
             </div>
             
             <!-- Footer Section -->
-            <div class="p-4 border-t border-gray-700">
+            <div class="p-4 border-t border-gray-700 flex-shrink-0">
                 <a href="/dashboard" class="flex items-center space-x-3 px-4 py-2 text-gray-400 hover:text-white transition-colors duration-300 rounded-lg hover:bg-gray-800">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
@@ -228,10 +274,10 @@
             </div>
         </div>
         
-        <!-- Main Content -->
-        <div class="flex-1 admin-content">
+        <!-- Main Content - Scrollable Area -->
+        <div class="flex-1 admin-main-content overflow-y-auto">
             <!-- Desktop Navbar (visible on larger screens) -->
-            <div class="hidden lg:block bg-white border-b border-gray-200 px-6 py-4">
+            <div class="hidden lg:block bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-10">
                 <div class="flex items-center justify-between">
                     <h1 class="text-xl font-semibold text-gray-800">Admin Dashboard</h1>
                     <div class="flex items-center space-x-4">
@@ -243,9 +289,10 @@
                 </div>
             </div>
             
-            <main class="p-6">
+            <!-- Main Content Area -->
+            <div class="admin-content-area">
                 @yield('admin-content')
-            </main>
+            </div>
         </div>
     </div>
     
