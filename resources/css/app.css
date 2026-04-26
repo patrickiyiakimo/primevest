@@ -13,47 +13,12 @@
     --primary-green-hover: #34d399;
     --secondary-green: #064e3b;
     --accent-green: #6ee7b7;
+    /* Red selection color */
+    --selection-red: #dc2626;
+    --selection-red-light: #ef4444;
+    --selection-red-dark: #b91c1c;
 }
 
-/* Modern Input Fields */
-.modern-input {
-    @apply appearance-none rounded-xl relative block w-full px-4 py-3 border-2 border-gray-200 
-           placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-2 
-           focus:ring-green-500 focus:border-transparent transition-all duration-300 
-           bg-white shadow-sm hover:shadow-md;
-}
-
-.modern-input:focus {
-    box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
-}
-
-.modern-input-error {
-    @apply border-red-500 bg-red-50 focus:ring-red-500;
-}
-
-/* Floating Labels */
-.input-group {
-    @apply relative mb-6;
-}
-
-.floating-label {
-    @apply absolute left-4 -top-2.5 bg-white px-2 text-sm font-medium text-gray-600 
-           transition-all duration-200 ease-in-out;
-}
-
-.input-group input:focus ~ .floating-label,
-.input-group input:not(:placeholder-shown) ~ .floating-label {
-    @apply text-green-600 text-xs -top-3;
-}
-
-/* Modern Button */
-.btn-primary {
-    @apply w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold 
-           rounded-xl text-white bg-gradient-to-r from-green-600 to-green-700 
-           hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 
-           focus:ring-offset-2 focus:ring-green-500 transition-all duration-500 
-           transform shadow-lg hover:shadow-xl;
-}
 
 /* Card Styles */
 .glass-card {
@@ -185,18 +150,22 @@
     transition-duration: 700ms;
 }
 
-/* Custom selection color - Green Theme */
+/* ============================================ */
+/* CUSTOM SELECTION COLOR - RED THEME */
+/* ============================================ */
+
+/* Global selection color - RED */
 ::selection {
-    background-color: var(--primary-green);
+    background-color: var(--selection-red);
     color: white;
 }
 
 ::-moz-selection {
-    background-color: var(--primary-green);
+    background-color: var(--selection-red);
     color: white;
 }
 
-/* For specific elements only (optional) */
+/* For specific elements - Lighter Red */
 p::selection,
 h1::selection,
 h2::selection,
@@ -204,15 +173,15 @@ h3::selection,
 span::selection,
 li::selection,
 td::selection {
-    background-color: var(--primary-green-light);
+    background-color: var(--selection-red-light);
     color: white;
 }
 
-/* Input fields selection color */
+/* Input fields selection - Darker Red for better contrast */
 input::selection,
 textarea::selection,
 select::selection {
-    background-color: var(--primary-green);
+    background-color: var(--selection-red-dark);
     color: white;
 }
 
@@ -220,11 +189,27 @@ select::selection {
 table::selection,
 td::selection,
 th::selection {
-    background-color: var(--primary-green);
+    background-color: var(--selection-red);
     color: white;
 }
 
+/* Optional: Different red for different elements */
+a::selection {
+    background-color: var(--selection-red-dark);
+    color: white;
+}
 
+button::selection {
+    background-color: var(--selection-red);
+    color: white;
+}
+
+/* Dashboard cards selection */
+.card::selection,
+.dashboard-card::selection {
+    background-color: var(--selection-red-light);
+    color: white;
+}
 
 /* Set default font */
 body {

@@ -17,7 +17,7 @@
     <!-- Hero Content -->
     <div class="relative z-20 px-4 sm:px-6 lg:px-8 py-20">
         <div class="">
-            <div class="inline-flex px-3 py-1 rounded-full bg-green-500/20 border border-red-500/30 mb-6">
+            <div class="inline-flex px-3 py-1 rounded-full bg-red-500/20 border border-red-500/30 mb-6">
                 <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>
                 <span class="text-red-400 text-xs font-semibold uppercase tracking-wider">The Advantage</span>
             </div>
