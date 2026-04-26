@@ -8,7 +8,7 @@
         <!-- Dark Overlay for better text readability -->
         <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/80"></div>
         <!-- Red gradient accent -->
-        <div class="absolute inset-0 bg-gradient-to-t from-red-600/30 via-transparent to-transparent"></div>
+        <!-- <div class="absolute inset-0 bg-gradient-to-t from-red-600/30 via-transparent to-transparent"></div> -->
     </div>
     
     <!-- Hero Content -->

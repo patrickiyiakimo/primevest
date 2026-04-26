@@ -1,6 +1,6 @@
 <!-- Investment Plans Section -->
-<div class="bg-gray-50 py-20 lg:py-28">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="bg-gray-100 py-20 lg:py-28">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Section Header -->
         <div class="text-center mb-12">
@@ -11,10 +11,10 @@
                     </svg>
                 </div>
             </div>
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-600 mb-4">
                 Complete Packages for Every Trader
             </h2>
-            <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
                 Choose the perfect investment plan that matches your financial goals
             </p>
         </div>
@@ -23,7 +23,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
             
             <!-- Basic Plan -->
-            <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+            <div class="bg-white rounded-md transition-all duration-300 overflow-hidden group">
                 <div class="p-6">
                     <!-- Minimum Funding -->
                     <div class="text-center mb-4">
@@ -83,7 +83,7 @@
             </div>
 
             <!-- Standard Plan -->
-            <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden relative group">
+            <div class="bg-white rounded-md transition-all duration-300 overflow-hidden group">
                 <!-- Popular Badge -->
                 <div class="absolute top-4 right-4">
                     <div class="bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
@@ -145,7 +145,7 @@
             </div>
 
             <!-- Silver Plan -->
-            <div class="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+            <div class="bg-white rounded-md transition-all duration-300 overflow-hidden group">
                 <div class="p-6">
                     <div class="text-center mb-4">
                         <div class="inline-block px-4 py-1 bg-red-100 rounded-full mb-3">
@@ -200,7 +200,7 @@
             </div>
 
             <!-- Gold Plan -->
-            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group border border-yellow-200">
+            <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-md transition-all duration-300 overflow-hidden group border border-yellow-200">
                 <!-- Premium Badge -->
                 <!-- <div class="absolute top-4 right-4">
                     <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">

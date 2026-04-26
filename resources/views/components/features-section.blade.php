@@ -1,9 +1,9 @@
 <!-- Features Section -->
-<div class="bg-navy-900 py-16 lg:py-24">
+<div class="py-16 lg:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-12 lg:mb-16">
-            <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-600 mb-4">
                 Why Trade With PrimeVest
             </h2>
             <p class="text-gray-300 text-lg max-w-2xl mx-auto">
@@ -25,8 +25,8 @@
                     <!-- Glow Effect -->
                     <div class="absolute inset-0 bg-red-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Trading Tools</h3>
-                <p class="text-gray-300 leading-relaxed">
+                <h3 class="text-xl font-bold text-gray-600 mb-3">Trading Tools</h3>
+                <p class="text-gray-400 leading-relaxed">
                     Plan your trades effectively with our wide range of free trading tools
                 </p>
             </div>
@@ -41,8 +41,8 @@
                     </div>
                     <div class="absolute inset-0 bg-red-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-1０"></div>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Trading Products</h3>
-                <p class="text-gray-300 leading-relaxed">
+                <h3 class="text-xl font-bold text-gray-600 mb-3">Trading Products</h3>
+                <p class="text-gray-400 leading-relaxed">
                     All the best possible opportunities to diversify your trading portfolio
                 </p>
             </div>
@@ -57,8 +57,8 @@
                     </div>
                     <div class="absolute inset-0 bg-red-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-1０"></div>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Trading Platforms</h3>
-                <p class="text-gray-300 leading-relaxed">
+                <h3 class="text-xl font-bold text-gray-600 mb-3">Trading Platforms</h3>
+                <p class="text-gray-400 leading-relaxed">
                     Powerful platforms to suit all trading styles and needs on any device
                 </p>
             </div>
@@ -73,8 +73,8 @@
                     </div>
                     <div class="absolute inset-0 bg-red-500/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-1０"></div>
                 </div>
-                <h3 class="text-xl font-bold text-white mb-3">Funding Methods</h3>
-                <p class="text-gray-300 leading-relaxed">
+                <h3 class="text-xl font-bold text-gray-600 mb-3">Funding Methods</h3>
+                <p class="text-gray-400 leading-relaxed">
                     Fund your account for free with these quick, easy and secure methods
                 </p>
             </div>

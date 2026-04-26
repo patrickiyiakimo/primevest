@@ -1,13 +1,13 @@
 <!-- Exclusive Insights & Analysis Section -->
-<div class="bg-white py-16 lg:py-24">
+<div class="bg-gray-100 py-16 lg:py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <!-- Section Header -->
         <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-4xl font-bold text-navy-900 mb-4">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-600 mb-4">
                 Exclusive Insights & Analysis
             </h2>
-            <p class="text-navy-600 text-lg max-w-2xl mx-auto">
+            <p class="text-gray-400 text-lg max-w-2xl mx-auto">
                 Financial Markets by TradingView - Stay up to date with our experts!
             </p>
         </div>
@@ -28,21 +28,21 @@
                             </div>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-xl font-bold text-navy-900 mb-3">Daily Market Analysis</h3>
+                            <h3 class="text-xl font-bold text-gray-600 mb-3">Daily Market Analysis</h3>
                             <ul class="space-y-2">
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Daily market analysis directly to your inbox
                                 </li>
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     The latest financial news and forecasts
                                 </li>
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
@@ -65,21 +65,21 @@
                             </div>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-xl font-bold text-navy-900 mb-3">Premium Trader Tools</h3>
+                            <h3 class="text-xl font-bold text-gray-600 mb-3">Premium Trader Tools</h3>
                             <ul class="space-y-2">
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Multi-platform customized solutions
                                 </li>
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Covering a range of trading needs & styles
                                 </li>
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
@@ -101,21 +101,21 @@
                             </div>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-xl font-bold text-navy-900 mb-3">Ultimate Insurance</h3>
+                            <h3 class="text-xl font-bold text-gray-600 mb-3">Ultimate Insurance</h3>
                             <ul class="space-y-2">
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Client funds market leading insurance
                                 </li>
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Insurance up to $1,000,000
                                 </li>
-                                <li class="flex items-center text-navy-700">
+                                <li class="flex items-center text-gray-400">
                                     <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
