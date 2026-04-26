@@ -14,7 +14,7 @@
             </div>
             
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                What Our <span class="text-red-600">Clients Say</span>
+                What Our Clients Say
             </h2>
             <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                 Join thousands of satisfied traders who trust PrimeVest for their investment journey

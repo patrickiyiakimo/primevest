@@ -8,7 +8,7 @@
     @include('pages.hero')
     
     <!-- Trading Widget -->
-    <!-- @include('components.trading-widget') -->
+    @include('components.trading-widget')
     
     <!-- Features Section -->
     @include('components.features-section')

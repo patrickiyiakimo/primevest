@@ -4,7 +4,7 @@
         <!-- Section Header -->
         <div class="text-center mb-12 lg:mb-16">
             <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
-                Why Trade With <span class="text-red-400">PrimeVest</span>
+                Why Trade With PrimeVest
             </h2>
             <p class="text-gray-300 text-lg max-w-2xl mx-auto">
             </p>

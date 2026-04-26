@@ -8,7 +8,7 @@
                 <span class="bg-red-100 text-red-700 text-sm font-semibold px-4 py-2 rounded-full">Simple Process</span>
             </div>
             <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Trade with <span class="text-red-600">Confidence</span>
+                Trade with Confidence
             </h2>
             <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                 Get started in three easy steps and join thousands of successful traders

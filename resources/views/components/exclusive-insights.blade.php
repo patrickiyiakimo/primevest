@@ -5,7 +5,7 @@
         <!-- Section Header -->
         <div class="text-center mb-12">
             <h2 class="text-3xl lg:text-4xl font-bold text-navy-900 mb-4">
-                Exclusive Insights & <span class="text-red-600">Analysis</span>
+                Exclusive Insights & Analysis
             </h2>
             <p class="text-navy-600 text-lg max-w-2xl mx-auto">
                 Financial Markets by TradingView - Stay up to date with our experts!

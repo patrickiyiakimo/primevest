@@ -12,7 +12,7 @@
                 </div>
             </div>
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Complete Packages for <span class="text-red-600">Every Trader</span>
+                Complete Packages for Every Trader
             </h2>
             <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                 Choose the perfect investment plan that matches your financial goals
