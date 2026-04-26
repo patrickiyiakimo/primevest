@@ -5,16 +5,16 @@
         <!-- Section Header -->
         <div class="text-center mb-12">
             <div class="inline-block mb-4">
-                <div class="flex items-center space-x-2 bg-green-100 rounded-full px-4 py-2">
-                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                <div class="flex items-center space-x-2 bg-red-100 rounded-full px-4 py-2">
+                    <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
                     </svg>
-                    <span class="text-green-700 text-sm font-semibold tracking-wide">Client Testimonials</span>
+                    <span class="text-red-700 text-sm font-semibold tracking-wide">Client Testimonials</span>
                 </div>
             </div>
             
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                What Our <span class="text-green-600">Clients Say</span>
+                What Our <span class="text-red-600">Clients Say</span>
             </h2>
             <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                 Join thousands of satisfied traders who trust PrimeVest for their investment journey
@@ -30,7 +30,7 @@
                 <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
                         <!-- Quote Icon -->
-                        <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                         </svg>
                         
@@ -41,7 +41,7 @@
                         
                         <!-- User Info -->
                         <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1757815688420.jpg') }}" alt="Rukky Sanders" class="w-20 h-20 rounded-full object-cover border-2 border-green-500">
+                            <img src="{{ asset('/images/FB_IMG_1757815688420.jpg') }}" alt="Rukky Sanders" class="w-28 h-28 rounded-full object-cover border-2">
                             <div>
                                 <h4 class="font-bold text-gray-900">Rukky Sanders</h4>
                                 <div class="flex items-center space-x-1 mt-1">
@@ -54,7 +54,7 @@
                                     </div>
                                     <span class="text-xs text-gray-500">5.0</span>
                                 </div>
-                                <p class="text-sm text-green-600 font-medium mt-1">Verified Trader</p>
+                                <p class="text-sm text-gray-600 font-medium mt-1">Verified Trader</p>
                             </div>
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                 <!-- Testimonial 2 - Scott Smith -->
                 <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
-                        <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                         </svg>
                         
@@ -72,7 +72,7 @@
                         </p>
                         
                         <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1758010236426.jpg') }}" alt="Scott Smith" class="w-20 h-20 rounded-full object-cover border-2 border-green-500">
+                            <img src="{{ asset('/images/FB_IMG_1758010236426.jpg') }}" alt="Scott Smith" class="w-28 h-28 rounded-full object-cover border-2">
                             <div>
                                 <h4 class="font-bold text-gray-900">Scott Smith</h4>
                                 <div class="flex items-center space-x-1 mt-1">
@@ -85,7 +85,7 @@
                                     </div>
                                     <span class="text-xs text-gray-500">5.0</span>
                                 </div>
-                                <p class="text-sm text-green-600 font-medium mt-1">Premium Plan Investor</p>
+                                <p class="text-sm text-gray-600 font-medium mt-1">Premium Plan Investor</p>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                 <!-- Testimonial 3 - Alex Glyson -->
                 <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
-                        <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                         </svg>
                         
@@ -103,7 +103,7 @@
                         </p>
                         
                         <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1757815849959.jpg') }}" alt="Alex Glyson" class="w-20 h-20 rounded-full object-cover border-2 border-green-500">
+                            <img src="{{ asset('/images/FB_IMG_1757815849959.jpg') }}" alt="Alex Glyson" class="w-28 h-28 rounded-full object-cover border-2">
                             <div>
                                 <h4 class="font-bold text-gray-900">Alex Glyson</h4>
                                 <div class="flex items-center space-x-1 mt-1">
@@ -116,7 +116,7 @@
                                     </div>
                                     <span class="text-xs text-gray-500">5.0</span>
                                 </div>
-                                <p class="text-sm text-green-600 font-medium mt-1">Happy Investor</p>
+                                <p class="text-sm text-gray-600 font-medium mt-1">Happy Investor</p>
                             </div>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                 <!-- Testimonial 4 - Sarah Johnson -->
                 <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
-                        <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                         </svg>
                         
@@ -138,7 +138,7 @@
                         </p>
                         
                         <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1757815900467 (1).jpg') }}" alt="Sarah Michaels" class="w-20 h-20 rounded-full object-cover border-2 border-green-500">
+                            <img src="{{ asset('/images/FB_IMG_1757815900467 (1).jpg') }}" alt="Sarah Michaels" class="w-28 h-28 rounded-full object-cover border-2">
                             <div>
                                 <h4 class="font-bold text-gray-900">Sarah Michaels</h4>
                                 <div class="flex items-center space-x-1 mt-1">
@@ -151,7 +151,7 @@
                                     </div>
                                     <span class="text-xs text-gray-500">5.0</span>
                                 </div>
-                                <p class="text-sm text-green-600 font-medium mt-1">Long-term Investor</p>
+                                <p class="text-sm text-gray-600 font-medium mt-1">Long-term Investor</p>
                             </div>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                 <!-- Testimonial 5 - Michael Chen -->
                 <div class="bg-white overflow-hidden border border-gray-100">
                     <div class="p-6">
-                        <svg class="w-8 h-8 text-green-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                         </svg>
                         
@@ -169,7 +169,7 @@
                         </p>
                         
                         <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1758008965260.jpg') }}" alt="Michael Cornelius" class="w-20 h-20 rounded-full object-cover border-2 border-green-500">
+                            <img src="{{ asset('/images/FB_IMG_1758008965260.jpg') }}" alt="Michael Cornelius" class="w-28 h-28 rounded-full object-cover border-2">
                             <div>
                                 <h4 class="font-bold text-gray-900">Michael Cornelius</h4>
                                 <div class="flex items-center space-x-1 mt-1">
@@ -182,7 +182,7 @@
                                     </div>
                                     <span class="text-xs text-gray-500">5.0</span>
                                 </div>
-                                <p class="text-sm text-green-600 font-medium mt-1">Active Trader</p>
+                                <p class="text-sm text-gray-600 font-medium mt-1">Active Trader</p>
                             </div>
                         </div>
                     </div>
@@ -194,19 +194,19 @@
         <div class="mt-16 pt-8 border-t border-gray-200">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                 <div>
-                    <div class="text-3xl font-bold text-green-600 mb-2">10,000+</div>
+                    <div class="text-5xl font-bold text-gray-600 mb-2">10,000+</div>
                     <p class="text-gray-600 text-sm">Active Traders</p>
                 </div>
                 <div>
-                    <div class="text-3xl font-bold text-green-600 mb-2">98%</div>
+                    <div class="text-5xl font-bold text-gray-600 mb-2">98%</div>
                     <p class="text-gray-600 text-sm">Client Satisfaction</p>
                 </div>
                 <div>
-                    <div class="text-3xl font-bold text-green-600 mb-2">150+</div>
+                    <div class="text-5xl font-bold text-gray-600 mb-2">150+</div>
                     <p class="text-gray-600 text-sm">Countries Served</p>
                 </div>
                 <div>
-                    <div class="text-3xl font-bold text-green-600 mb-2">24/7</div>
+                    <div class="text-5xl font-bold text-gray-600 mb-2">24/7</div>
                     <p class="text-gray-600 text-sm">Support Available</p>
                 </div>
             </div>

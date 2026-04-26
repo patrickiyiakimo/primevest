@@ -4,7 +4,7 @@
             
             <!-- Logo -->
             <div class="flex-shrink-0">
-                <a href="/" class="text-2xl font-bold text-white hover:text-green-400 transition-colors duration-300">
+                <a href="/" class="text-2xl font-bold text-white hover:text-red-700 transition-colors duration-300">
                     PrimeVest
                 </a>
             </div>
@@ -12,10 +12,10 @@
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-8">
                 @guest
-                    <a href="/trading" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Trading</a>
-                    <a href="/company" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Company</a>
-                    <a href="/education" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Education</a>
-                    <a href="/contact" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Contact</a>
+                    <a href="/trading" class="text-gray-200 hover:text-red-700 transition-all duration-300 text-sm font-medium">Trading</a>
+                    <a href="/company" class="text-gray-200 hover:text-red-700 transition-all duration-300 text-sm font-medium">Company</a>
+                    <a href="/education" class="text-gray-200 hover:text-red-700 transition-all duration-300 text-sm font-medium">Education</a>
+                    <a href="/contact" class="text-gray-200 hover:text-red-700 transition-all duration-300 text-sm font-medium">Contact</a>
 
                     @endguest
             </div>
@@ -23,14 +23,14 @@
             <!-- Desktop Auth Buttons -->
             <div class="hidden md:flex items-center space-x-4">
                 @guest
-                    <a href="/login" class="text-gray-200 hover:text-green-400 transition-all duration-300 text-sm font-medium">Login</a>
-                    <a href="/register" class="px-5 py-2 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white text-sm font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <a href="/login" class="text-gray-200 hover:text-red-700 transition-all duration-300 text-sm font-medium">Login</a>
+                    <a href="/register" class="px-5 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-medium rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
                         Get Started
                     </a>
                 @else
                     <div class="relative" x-data="{ dropdownOpen: false }">
                         <button @click="dropdownOpen = !dropdownOpen" class="flex items-center space-x-2 focus:outline-none">
-                            <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                            <div class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center">
                                 <span class="text-white text-sm font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                             </div>
                             <span class="text-gray-200 text-sm font-medium">{{ Auth::user()->name }}</span>
@@ -54,7 +54,7 @@
             
             <!-- Mobile Menu Button -->
             <div class="md:hidden">
-                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-200 hover:text-green-400 focus:outline-none transition-colors duration-300">
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-200 hover:text-red-700 focus:outline-none transition-colors duration-300">
                     <svg x-show="!mobileMenuOpen" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -70,24 +70,24 @@
     <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translateY(-10px)" x-transition:enter-end="opacity-100 transform translateY(0)" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translateY(0)" x-transition:leave-end="opacity-0 transform -translateY(-10px)" class="md:hidden bg-black/95 backdrop-blur-md border-t border-white/10 max-h-[80vh] overflow-y-auto">
         <div class="px-4 py-4 space-y-3">
             @guest
-                <a href="/trading" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Trading</a>
-                <a href="/company" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Company</a>
-                <a href="/education" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Education</a>
-                <a href="/contact" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Contact</a>
+                <a href="/trading" class="block py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Trading</a>
+                <a href="/company" class="block py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Company</a>
+                <a href="/education" class="block py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Education</a>
+                <a href="/contact" class="block py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Contact</a>
                 <div class="pt-4 space-y-3">
-                    <a href="/login" class="block text-center py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border border-white/20 rounded-lg">Login</a>
-                    <a href="/register" class="block text-center py-3 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-lg transition-all duration-300">Get Started</a>
+                    <a href="/login" class="block text-center py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border border-white/20 rounded-full">Login</a>
+                    <a href="/register" class="block text-center py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full transition-all duration-300">Get Started</a>
                 </div>
             @else
                 <div class="text-center py-4 border-b border-white/10">
-                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <div class="w-16 h-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-2">
                         <span class="text-white text-xl font-bold">{{ substr(Auth::user()->name, 0, 1) }}</span>
                     </div>
                     <p class="text-white font-medium">{{ Auth::user()->name }}</p>
                     <p class="text-gray-400 text-sm">{{ Auth::user()->email }}</p>
                 </div>
-                <a href="/dashboard" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Dashboard</a>
-                <a href="/profile" class="block py-3 text-gray-200 hover:text-green-400 transition-colors duration-300 border-b border-white/10">Profile</a>
+                <a href="/dashboard" class="block py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Dashboard</a>
+                <a href="/profile" class="block py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Profile</a>
                 <form method="POST" action="/logout">
                     @csrf
                     <button type="submit" class="block w-full text-left py-3 text-red-400 hover:text-red-300 transition-colors duration-300">Logout</button>

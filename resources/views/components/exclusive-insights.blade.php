@@ -5,7 +5,7 @@
         <!-- Section Header -->
         <div class="text-center mb-12">
             <h2 class="text-3xl lg:text-4xl font-bold text-navy-900 mb-4">
-                Exclusive Insights & <span class="text-green-600">Analysis</span>
+                Exclusive Insights & <span class="text-red-600">Analysis</span>
             </h2>
             <p class="text-navy-600 text-lg max-w-2xl mx-auto">
                 Financial Markets by TradingView - Stay up to date with our experts!
@@ -21,8 +21,8 @@
                 <div class="bg-gradient-to-br from-gray-50 to-white p-6 transition-all duration-300 border border-gray-200">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                                 </svg>
                             </div>
@@ -31,19 +31,19 @@
                             <h3 class="text-xl font-bold text-navy-900 mb-3">Daily Market Analysis</h3>
                             <ul class="space-y-2">
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Daily market analysis directly to your inbox
                                 </li>
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     The latest financial news and forecasts
                                 </li>
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Weekly webinars
@@ -57,8 +57,8 @@
                 <div class="bg-gradient-to-br from-gray-50 to-white p-6 transition-all duration-300 border border-gray-200">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                 </svg>
@@ -68,19 +68,19 @@
                             <h3 class="text-xl font-bold text-navy-900 mb-3">Premium Trader Tools</h3>
                             <ul class="space-y-2">
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Multi-platform customized solutions
                                 </li>
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Covering a range of trading needs & styles
                                 </li>
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Variety of languages
@@ -94,8 +94,8 @@
                 <div class="bg-gradient-to-br from-gray-50 to-white p-6 transition-all duration-300 border border-gray-200">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                                 </svg>
                             </div>
@@ -104,19 +104,19 @@
                             <h3 class="text-xl font-bold text-navy-900 mb-3">Ultimate Insurance</h3>
                             <ul class="space-y-2">
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Client funds market leading insurance
                                 </li>
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Insurance up to $1,000,000
                                 </li>
                                 <li class="flex items-center text-navy-700">
-                                    <svg class="w-4 h-4 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                     </svg>
                                     Your funds' security is our top priority
@@ -164,7 +164,7 @@
                     <!-- Top Cryptocurrencies Table -->
                     <div class="mt-6">
                         <h4 class="text-navy-900 font-bold mb-4 flex items-center">
-                            <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-5 h-5 text-red-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                             </svg>
                             Top Cryptocurrencies
@@ -185,7 +185,7 @@
                                 </div>
                                 <div class="text-right">
                                     <p class="font-bold text-navy-900" id="btc-price">$67,234.50</p>
-                                    <p class="text-xs text-green-600">+2.34%</p>
+                                    <p class="text-xs text-red-600">+2.34%</p>
                                 </div>
                             </div>
                             
@@ -202,7 +202,7 @@
                                 </div>
                                 <div class="text-right">
                                     <p class="font-bold text-navy-900" id="eth-price">$3,456.78</p>
-                                    <p class="text-xs text-green-600">+1.56%</p>
+                                    <p class="text-xs text-red-600">+1.56%</p>
                                 </div>
                             </div>
                             
@@ -219,7 +219,7 @@
                                 </div>
                                 <div class="text-right">
                                     <p class="font-bold text-navy-900">$567.89</p>
-                                    <p class="text-xs text-green-600">+0.78%</p>
+                                    <p class="text-xs text-red-600">+0.78%</p>
                                 </div>
                             </div>
                             
@@ -236,7 +236,7 @@
                                 </div>
                                 <div class="text-right">
                                     <p class="font-bold text-navy-900">$145.67</p>
-                                    <p class="text-xs text-green-600">+3.21%</p>
+                                    <p class="text-xs text-red-600">+3.21%</p>
                                 </div>
                             </div>
                             

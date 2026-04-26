@@ -5,7 +5,7 @@
         <!-- Section Header -->
         <div class="text-center mb-12">
             <h2 class="text-3xl lg:text-4xl font-bold text-navy-900 mb-4">
-                Tighter Spreads <span class="text-green-600">|</span> <span class="text-navy-900">Faster Execution</span>
+                Tighter Spreads <span class="text-red-600">|</span> <span class="text-navy-900">Faster Execution</span>
             </h2>
             <p class="text-gray-600 text-lg max-w-2xl mx-auto">
                 Experience premium trading conditions with industry-leading spreads and lightning-fast execution
@@ -21,7 +21,7 @@
                 <div class="bg-white p-6 transition-all duration-300 border border-gray-200 group">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
+                            <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                                 </svg>
@@ -40,7 +40,7 @@
                <div class="bg-white p-6 transition-all duration-300 border border-gray-200 group">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
+                            <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                                 </svg>
@@ -59,7 +59,7 @@
              <div class="bg-white p-6 transition-all duration-300 border border-gray-200 group">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
+                            <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                                 </svg>
@@ -77,7 +77,7 @@
                 <!-- No Dealing Desk -->
                 <div class="bg-white p-6 transition-all duration-300 border border-gray-200 group">                    <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
-                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
+                            <div class="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-md">
                                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                                 </svg>

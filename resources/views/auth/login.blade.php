@@ -16,7 +16,7 @@
                 
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                     <div class="mb-4">
-                        <span class="inline-block px-3 py-1 bg-green-600 rounded-full text-sm font-semibold mb-3">
+                        <span class="inline-block px-3 py-1 bg-red-600 rounded-full text-sm font-semibold mb-3">
                             👋 Welcome Back
                         </span>
                     </div>
@@ -66,7 +66,7 @@
                         <input type="email" 
                                name="email" 
                                value="{{ old('email') }}" 
-                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror"
+                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror"
                                placeholder="Enter your email address"
                                required>
                         @error('email')
@@ -79,7 +79,7 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
                         <input type="password" 
                                name="password" 
-                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 @error('password') border-red-500 @enderror"
+                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 @error('password') border-red-500 @enderror"
                                placeholder="Enter your password"
                                required>
                         @error('password')
@@ -90,16 +90,16 @@
                     <!-- Remember Me & Forgot Password -->
                     <div class="flex items-center justify-between">
                         <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" name="remember" class="w-4 h-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
+                            <input type="checkbox" name="remember" class="w-4 h-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
                             <span class="ml-2 text-sm text-gray-600">Remember me</span>
                         </label>
-                        <a href="/forgot-password" class="text-sm text-green-600 hover:text-green-700 font-semibold">
+                        <a href="/forgot-password" class="text-sm text-red-600 hover:text-red-700 font-semibold">
                             Forgot password?
                         </a>
                     </div>
                     
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition-all duration-500 shadow-lg">
                         Sign In
                     </button>
                 </form>
@@ -107,7 +107,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">
                         Don't have an account?
-                        <a href="/register" class="text-green-600 hover:text-green-700 font-semibold ml-1">
+                        <a href="/register" class="text-red-600 hover:text-red-700 font-semibold ml-1">
                             Create free account
                         </a>
                     </p>

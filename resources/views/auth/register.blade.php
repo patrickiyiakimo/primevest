@@ -16,7 +16,7 @@
                 
                 <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
                     <div class="mb-4">
-                        <span class="inline-block px-3 py-1 bg-green-600 rounded-full text-sm font-semibold mb-3">
+                        <span class="inline-block px-3 py-1 bg-red-600 rounded-full text-sm font-semibold mb-3">
                             🚀 Join Now
                         </span>
                     </div>
@@ -60,7 +60,7 @@
                         <input type="text" 
                                name="name" 
                                value="{{ old('name') }}" 
-                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 @error('name') border-red-500 @enderror"
+                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 @error('name') border-red-500 @enderror"
                                placeholder="Enter your full name"
                                required>
                         @error('name')
@@ -74,7 +74,7 @@
                         <input type="email" 
                                name="email" 
                                value="{{ old('email') }}" 
-                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror"
+                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 @error('email') border-red-500 @enderror"
                                placeholder="Enter your email address"
                                required>
                         @error('email')
@@ -88,7 +88,7 @@
                         <input type="tel" 
                                name="phone" 
                                value="{{ old('phone') }}" 
-                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 @error('phone') border-red-500 @enderror"
+                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 @error('phone') border-red-500 @enderror"
                                placeholder="+1234567890">
                         @error('phone')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -98,7 +98,7 @@
                     <!-- Country (Optional) -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Country (Optional)</label>
-                        <select name="country" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300">
+                        <select name="country" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300">
                             <option value="">Select Country</option>
                             <option value="Nigeria" {{ old('country') == 'Nigeria' ? 'selected' : '' }}>Nigeria</option>
                             <option value="United States" {{ old('country') == 'United States' ? 'selected' : '' }}>United States</option>
@@ -121,7 +121,7 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Password *</label>
                         <input type="password" 
                                name="password" 
-                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300 @error('password') border-red-500 @enderror"
+                               class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300 @error('password') border-red-500 @enderror"
                                placeholder="Create a password"
                                required>
                         @error('password')
@@ -134,13 +134,13 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Confirm Password *</label>
                         <input type="password" 
                                name="password_confirmation" 
-                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition-all duration-300"
                                placeholder="Confirm your password"
                                required>
                     </div>
                     
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition-all duration-500 shadow-lg">
                         Create Account
                     </button>
                 </form>
@@ -148,7 +148,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">
                         Already have an account?
-                        <a href="/login" class="text-green-600 hover:text-green-700 font-semibold ml-1">
+                        <a href="/login" class="text-red-600 hover:text-red-700 font-semibold ml-1">
                             Sign in instead
                         </a>
                     </p>
