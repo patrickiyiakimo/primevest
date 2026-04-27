@@ -3,13 +3,13 @@
     <!-- Video Background -->
     <div class="absolute inset-0 z-0">
         <video class="w-full h-full object-cover" autoplay loop muted playsinline>
-            <source src="{{ asset('videos/primevest-video2.mp4') }}" type="video/mp4">
+            <source src="{{ asset('videos/primevest-video4.mp4') }}" type="video/mp4">
             <!-- Fallback image in case video doesn't load -->
             <img src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=1920&h=1080&fit=crop" 
                  alt="Trading Background">
         </video>
         <!-- Dark Overlay for better text readability -->
-        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/80"></div>
+        <div class="absolute inset-0 bg-gray-900/80"></div>
     </div>
     
     <!-- Hero Content -->
