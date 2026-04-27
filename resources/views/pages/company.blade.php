@@ -11,7 +11,7 @@
              alt="Trading Background" 
              class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/90 z-10"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div>
+        <!-- <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div> -->
     </div>
 
     <!-- Hero Content -->
@@ -44,14 +44,14 @@
 </div>
 
 <!-- Experience & Innovation Section - Navy Blue -->
-<div class="bg-white py-20">
+<div class="bg-gray-100 py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             
             <!-- Experience Card -->
-            <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div class="w-16 h-16 bg-red-500/20 rounded-xl flex items-center justify-center mb-6">
-                    <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class=" p-8 transition-all duration-300 ">
+                <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-14 h-14 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
@@ -62,9 +62,9 @@
             </div>
 
             <!-- Innovation Card -->
-            <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div class="w-16 h-16 bg-red-500/20 rounded-xl flex items-center justify-center mb-6">
-                    <svg class="w-8 h-8 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-8 transition-all duration-300 hover:transform hover:-translate-y-1">
+                <div class="w-16 h-16  rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-14 h-14 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
                     </svg>
                 </div>
@@ -83,9 +83,9 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
             
             <!-- Predictable Pricing Card -->
-            <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:shadow-xl">
-                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class=" p-8 ">
+                <div class="w-16 h-16  rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-14 h-14 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 8h6m-5 0v8m0-8h2m0 0v8m-2 0h4M5 5h14a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2z"></path>
                     </svg>
                 </div>
@@ -96,9 +96,9 @@
             </div>
 
             <!-- Robust Foundation Card -->
-            <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:shadow-xl">
-                <div class="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class=" p-8 ">
+                <div class="w-16 h-16 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-14 h-14 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                     </svg>
                 </div>
@@ -187,67 +187,77 @@
 </div>
 
 <!-- Freedom to Trade Section - Navy Blue -->
-<div class="bg-navy-900 py-20">
+<div class="bg-white py-20">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl lg:text-5xl font-bold text-white mb-4">
+            <h2 class="text-3xl lg:text-5xl font-bold text-gray-600 mb-4">
                 FREEDOM TO TRADE THE
             </h2>
             <h2 class="text-3xl lg:text-5xl font-bold text-red-400 mb-6">
                 GLOBAL MARKETS
             </h2>
-            <p class="text-xl text-gray-300">
+            <p class="text-xl text-gray-400">
                 Every tick of markets around the world at your fingertips.
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            
-            <!-- Forex -->
-            <div class="p-6 text-center transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span class="text-xl">💱</span>
-                </div>
-                <h3 class="font-bold text-white">FOREX</h3>
-                <p class="text-xs text-gray-400 mt-2">Currency majors, minors, crosses and exotics</p>
-            </div>
-
-            <!-- Indices -->
-            <div class="p-6 text-center transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span class="text-xl">📊</span>
-                </div>
-                <h3 class="font-bold text-white">INDICES</h3>
-                <p class="text-xs text-gray-400 mt-2">Global indices from US, UK, Asia, Australia & Europe</p>
-            </div>
-
-            <!-- Shares -->
-            <div class="p-6 text-center transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span class="text-xl">🏢</span>
-                </div>
-                <h3 class="font-bold text-white">SHARES</h3>
-                <p class="text-xs text-gray-400 mt-2">Trade shares from global markets</p>
-            </div>
-
-            <!-- Energies -->
-            <div class="p-6 text-center transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span class="text-xl">⚡</span>
-                </div>
-                <h3 class="font-bold text-white">ENERGIES</h3>
-                <p class="text-xs text-gray-400 mt-2">Trade oil and gas on futures or spot markets</p>
-            </div>
-
-            <!-- Cryptocurrencies -->
-            <div class="p-6 text-center transition-all duration-300 hover:transform hover:-translate-y-1">
-                <div class="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span class="text-xl">₿</span>
-                </div>
-                <h3 class="font-bold text-white">CRYPTOCURRENCIES</h3>
-                <p class="text-xs text-gray-400 mt-2">Digital currencies on CFDs like Bitcoin & Ethereum</p>
-            </div>
+       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+    
+    <!-- Forex -->
+    <div class="p-6 text-center">
+        <div class="w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
         </div>
+        <h3 class="font-bold text-gray-600">FOREX</h3>
+        <p class="text-xl text-gray-400 mt-2">Currency majors, minors, crosses and exotics</p>
+    </div>
+
+    <!-- Indices -->
+    <div class="p-6 text-center">
+        <div class="w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>
+        </div>
+        <h3 class="font-bold text-gray-600">INDICES</h3>
+        <p class="text-xl text-gray-400 mt-2">Global indices from US, UK, Asia, Australia & Europe</p>
+    </div>
+
+    <!-- Shares -->
+    <div class="p-6 text-center">
+        <div class="w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+            </svg>
+        </div>
+        <h3 class="font-bold text-gray-600">SHARES</h3>
+        <p class="text-xl text-gray-400 mt-2">Trade shares from global markets</p>
+    </div>
+
+    <!-- Energies -->
+    <div class="p-6 text-center">
+        <div class="w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+        </div>
+        <h3 class="font-bold text-gray-600">ENERGIES</h3>
+        <p class="text-xl text-gray-400 mt-2">Trade oil and gas on futures or spot markets</p>
+    </div>
+
+    <!-- Cryptocurrencies -->
+    <div class="p-6 text-center">
+        <div class="w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-12 h-12 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+        <h3 class="font-bold text-gray-600">CRYPTOCURRENCIES</h3>
+        <p class="text-xl text-gray-400 mt-2">Digital currencies on CFDs like Bitcoin & Ethereum</p>
+    </div>
+</div>
     </div>
 </div>
 

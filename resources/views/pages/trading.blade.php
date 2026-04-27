@@ -11,7 +11,8 @@
              alt="Trading Platform" 
              class="w-full h-full object-cover">
  <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/90 z-10"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div>    </div>
+        <!-- <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div> -->   
+        </div> 
     
     <!-- Hero Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
@@ -45,10 +46,10 @@
                 <div class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 mb-6">
                     <span class="text-red-700 text-xs font-semibold uppercase tracking-wider">Instant Access</span>
                 </div>
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-600 mb-6">
                     INSTANT ACCESS TO <span class="text-red-600">GLOBAL MARKETS</span>
                 </h2>
-                <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                <p class="text-gray-400 text-lg leading-relaxed mb-6">
                     Analyse the markets, spot your opportunities and trade, all from the same platform. Charts, news streams, and multiple order execution options available from any device.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -58,7 +59,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
-                        <span class="text-gray-700">Professional technical analysis</span>
+                        <span class="text-gray-400">Professional technical analysis</span>
                     </div>
                     <div class="flex items-center space-x-3">
                         <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
@@ -66,7 +67,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
-                        <span class="text-gray-700">Automatic trading using expert advisors</span>
+                        <span class="text-gray-400">Automatic trading using expert advisors</span>
                     </div>
                     <div class="flex items-center space-x-3">
                         <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
@@ -74,7 +75,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
-                        <span class="text-gray-700">Mobile, web, and desktop trading</span>
+                        <span class="text-gray-400">Mobile, web, and desktop trading</span>
                     </div>
                     <div class="flex items-center space-x-3">
                         <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
@@ -82,7 +83,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
-                        <span class="text-gray-700">Chart trading and market execution</span>
+                        <span class="text-gray-400">Chart trading and market execution</span>
                     </div>
                 </div>
             </div>
@@ -115,16 +116,16 @@
             <div class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 mb-4">
                 <span class="text-red-700 text-xs font-semibold uppercase tracking-wider">Why Choose Us</span>
             </div>
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-600">
                 THE BEST IN THE <span class="text-red-600">BUSINESS</span>
             </h2>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <!-- React Rapidly -->
-            <div class="bg-white p-8 transition-all duration-300 border border-gray-200">
-                <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white p-8 transition-all duration-300">
+                <div class="w-14 h-14 text-gray-600 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-14 h-14 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                     </svg>
                 </div>
@@ -135,9 +136,9 @@
             </div>
             
             <!-- Never Miss a Trade -->
-            <div class="bg-white p-8 transition-all duration-300 border border-gray-200">
-                <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white p-8 transition-all duration-300">
+                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-14 h-14 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                     </svg>
                 </div>
@@ -148,9 +149,9 @@
             </div>
             
             <!-- Automate Trades -->
-            <div class="bg-white p-8 transition-all duration-300 border border-gray-200">
-                <div class="w-14 h-14 bg-red-100 rounded-xl flex items-center justify-center mb-6">
-                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="bg-white p-8 transition-all duration-300">
+                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-6">
+                    <svg class="w-14 h-14 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
@@ -172,13 +173,13 @@
                 <div class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 mb-6">
                     <span class="text-red-700 text-xs font-semibold uppercase tracking-wider">Understanding Swaps</span>
                 </div>
-                <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                <h2 class="text-3xl lg:text-4xl font-bold text-gray-600 mb-6">
                     WHAT ARE <span class="text-red-600">SWAPS?</span>
                 </h2>
-                <p class="text-gray-600 text-lg leading-relaxed mb-6">
+                <p class="text-gray-400 text-lg leading-relaxed mb-6">
                     Swap is the interest paid or earned for holding a position overnight. Each symbol has an overnight lending rate associated with it. Spot trades need to be settled and rolled forward every day. Swaps are attached to open positions and are realized when the position is closed.
                 </p>
-                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-200">
+                <div class="bg-gray-50 p-6">
                     <p class="text-gray-700 font-semibold mb-2">Key Information:</p>
                     <ul class="space-y-2 text-gray-600">
                         <li class="flex items-start">

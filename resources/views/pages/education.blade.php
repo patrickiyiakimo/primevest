@@ -11,7 +11,7 @@
              alt="Trading Platform" 
              class="w-full h-full object-cover">
  <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/90 z-10"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div>
+        <!-- <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div> -->
     </div>        
 
 
@@ -35,10 +35,10 @@
             <div class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 mb-4">
                 <span class="text-red-700 text-xs font-semibold uppercase tracking-wider">Learn & Grow</span>
             </div>
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-600">
                 Trading <span class="text-red-600">Fundamentals</span>
             </h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+            <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
                 Understand the core concepts of different trading instruments
             </p>
         </div>
@@ -47,53 +47,45 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
             <!-- Forex Card -->
-            <div class="bg-white p-8 border-2 transition-all duration-300 hover:shadow-xl">
+            <div class="bg-white p-8 ">
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center">
-                        <span class="text-2xl">💱</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">Forex</h3>
+                   
+                    <h3 class="text-2xl font-bold text-gray-600">Forex</h3>
                 </div>
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-400 leading-relaxed">
                     Forex is short for foreign exchange. The forex market is a place where currencies are traded. It is the largest and most liquid financial market in the world with an average daily turnover of 6.6 trillion U.S. dollars as of 2019. The basis of the forex market is the fluctuations of exchange rates. Forex traders speculate on the price fluctuations of currency pairs, making money on the difference between buying and selling prices.
                 </p>
             </div>
 
             <!-- CFD Card -->
-            <div class="bg-white p-8 border-2 transition-all duration-300 hover:shadow-xl">
+            <div class="bg-white p-8 ">
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center">
-                        <span class="text-2xl">📊</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">CFD</h3>
+                  
+                    <h3 class="text-2xl font-bold text-gray-600">CFD</h3>
                 </div>
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-400 leading-relaxed">
                     A CFD, or Contract for Difference, is a type of financial instrument that allows you to trade on the price movements of stocks, regardless of whether prices are rising or falling. The key advantage of a CFD is the opportunity to speculate on the price movements of an asset (upwards or downwards) without actually owning the underlying asset.
                 </p>
             </div>
 
             <!-- Cryptocurrency Card -->
-            <div class="bg-white p-8 border-2 transition-all duration-300 hover:shadow-xl">
+            <div class="bg-white p-8 ">
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center">
-                        <span class="text-2xl">₿</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">Cryptocurrency</h3>
+                   
+                    <h3 class="text-2xl font-bold text-gray-600">Cryptocurrency</h3>
                 </div>
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-400 leading-relaxed">
                     A cryptocurrency, crypto currency or crypto is a digital asset designed to work as a medium of exchange wherein individual coin ownership records are stored in a ledger existing in a form of computerized database using strong cryptography to secure transaction records, to control the creation of additional coins, and to verify the transfer of coin ownership.
                 </p>
             </div>
 
             <!-- Digital Options Card -->
-            <div class="bg-white p-8 border-2 transition-all duration-300 hover:shadow-xl">
+            <div class="bg-white p-8">
                 <div class="flex items-center space-x-3 mb-4">
-                    <div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center">
-                        <span class="text-2xl">🎯</span>
-                    </div>
-                    <h3 class="text-2xl font-bold text-gray-900">Digital Options</h3>
+                   
+                    <h3 class="text-2xl font-bold text-gray-600">Digital Options</h3>
                 </div>
-                <p class="text-gray-600 leading-relaxed">
+                <p class="text-gray-400 leading-relaxed">
                     Digital Options is a trading instrument that allows you to speculate on the extent of the price change, rather than just on the general price direction. If the price of the underlying asset is to reach the threshold selected by the trader (known as the 'strike price'), the payout may get as high as 900%. However, an unsuccessful trade will result in loss of the investment.
                 </p>
             </div>
@@ -108,10 +100,10 @@
             <div class="inline-flex items-center px-3 py-1 rounded-full bg-red-100 mb-4">
                 <span class="text-red-700 text-xs font-semibold uppercase tracking-wider">Platform Features</span>
             </div>
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-600">
                 Ultimate <span class="text-red-600">Platform</span>
             </h2>
-            <p class="text-gray-600 mt-4 max-w-2xl mx-auto">
+            <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
                 Everything you need for successful trading in one place
             </p>
         </div>
@@ -119,22 +111,22 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             
             <!-- Ultimate Platform Card -->
-            <div class="bg-white border border-gray-100 p-6 transition-all duration-300">
-                <div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center mb-4">
-                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-6 transition-all duration-300">
+                <div class="w-14 h-14  rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-14 h-14 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Ultimate Platform</h3>
+                <h3 class="text-xl font-bold text-gray-600 mb-2">Ultimate Platform</h3>
                 <p class="text-gray-600 text-sm leading-relaxed">
                     A multichart layout, technical analysis, historical quotes and beyond. Everything you're looking for in a platform — on the device of your choice.
                 </p>
             </div>
 
             <!-- Analysis & Alerts Card -->
-            <div class="bg-white border border-gray-100 p-6 transition-all duration-300">
-                <div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center mb-4">
-                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-6">
+                <div class="w-14 h-14  rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-14 h-14 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                     </svg>
                 </div>
@@ -145,9 +137,9 @@
             </div>
 
             <!-- Demo Account Card -->
-            <div class="bg-white border border-gray-100 p-6 transition-all duration-300">
-                <div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center mb-4">
-                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="p-6 ">
+                <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-14 h-14 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
                 </div>
@@ -158,9 +150,9 @@
             </div>
 
             <!-- Risk Management Card -->
-            <div class="bg-white border border-gray-100 p-6 transition-all duration-300">
-                <div class="w-14 h-14 bg-red-50 rounded-xl flex items-center justify-center mb-4">
-                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class=" p-6">
+                <div class="w-14 h-14  rounded-xl flex items-center justify-center mb-4">
+                    <svg class="w-14 h-14 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                     </svg>
                 </div>

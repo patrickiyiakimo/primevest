@@ -11,7 +11,7 @@
              alt="Contact Background" 
              class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/95 to-gray-900/90 z-10"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div>
+        <!-- <div class="absolute inset-0 bg-gradient-to-t from-red-600/20 via-transparent to-transparent z-10"></div> -->
     </div>
     
     <!-- Hero Content -->
@@ -45,7 +45,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                         </svg>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-6">SEND A MESSAGE TO</h2>
+                    <h2 class="text-2xl font-bold text-gray-600 mb-6">SEND A MESSAGE TO</h2>
                     <a href="mailto:support@primevest.com" class="text-2xl lg:text-3xl font-semibold text-red-600 hover:text-red-700 transition-colors duration-300 break-all">
                         support@primevest.com
                     </a>
@@ -56,7 +56,7 @@
             <div class="space-y-8">
                 
                 <!-- General Enquiries Card -->
-                <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:shadow-lg">
+                <div class="bg-gray-50 rounded-2xl p-8 ">
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -64,7 +64,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">General Enquiries</h3>
+                            <h3 class="text-lg font-semibold text-gray-600 mb-2">General Enquiries</h3>
                             <a href="mailto:enquiries@primevest.com" class="text-red-600 hover:text-red-700 transition-colors duration-300 break-all">
                                 enquiries@primevest.com
                             </a>
@@ -73,7 +73,7 @@
                 </div>
 
                 <!-- Support Card -->
-                <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:shadow-lg">
+                <div class="bg-gray-50 rounded-2xl p-8 ">
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +81,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Support</h3>
+                            <h3 class="text-lg font-semibold text-gray-600 mb-2">Support</h3>
                             <a href="mailto:support@primevest.com" class="text-red-600 hover:text-red-700 transition-colors duration-300 break-all">
                                 support@primevest.com
                             </a>
@@ -90,7 +90,7 @@
                 </div>
 
                 <!-- Phone Card -->
-                <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:shadow-lg">
+                <div class="bg-gray-50 rounded-2xl p-8 ">
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Phone</h3>
+                            <h3 class="text-lg font-semibold text-gray-600 mb-2">Phone</h3>
                             <a href="tel:+15206125104" class="text-xl font-semibold text-red-600 hover:text-red-700 transition-colors duration-300">
                                 +1 (520) 612 - 5104
                             </a>
@@ -108,7 +108,7 @@
                 </div>
 
                 <!-- Address Card -->
-                <div class="bg-gray-50 rounded-2xl p-8 transition-all duration-300 hover:shadow-lg">
+                <div class="bg-gray-50 rounded-2xl p-8 ">
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center flex-shrink-0">
                             <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +117,7 @@
                             </svg>
                         </div>
                         <div>
-                            <h3 class="text-lg font-semibold text-gray-900 mb-2">PrimeVest Address</h3>
+                            <h3 class="text-lg font-semibold text-gray-600 mb-2">PrimeVest Address</h3>
                             <p class="text-gray-600 leading-relaxed">
                                 1017 Centre Road Suite 300 A,<br>
                                 Florida 34761, USA
