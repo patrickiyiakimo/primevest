@@ -18,7 +18,7 @@
             <!-- Left Column - Content (White background, Navy text) -->
             <div class="space-y-6">
                 <!-- Daily Market Analysis -->
-                <div class="bg-gradient-to-br from-gray-50 to-white p-6 transition-all duration-300 border border-gray-200">
+                <div class="p-6 transition-all duration-300">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
@@ -54,7 +54,7 @@
                 </div>
                 
                 <!-- Premium Trader Tools -->
-                <div class="bg-gradient-to-br from-gray-50 to-white p-6 transition-all duration-300 border border-gray-200">
+                <div class="p-6 transition-all duration-300">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
@@ -91,7 +91,7 @@
                 </div>
                 
                 <!-- Ultimate Insurance -->
-                <div class="bg-gradient-to-br from-gray-50 to-white p-6 transition-all duration-300 border border-gray-200">
+                <div class="p-6 transition-all duration-300">
                     <div class="flex items-start space-x-4">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
@@ -128,11 +128,11 @@
             </div>
             
             <!-- Right Column - Live Crypto Updates (White background, Navy text) -->
-            <div class="bg-white overflow-hidden border border-gray-200">
+            <div class="overflow-hidden">
                 <div class="bg-gradient-to-r from-navy-900 to-navy-800 px-6 py-4">
                     <div class="flex items-center justify-between">
                         <div>
-                            <h3 class="text-xl font-bold text-white">Live Crypto Updates</h3>
+                            <h3 class="text-xl font-bold text-gray-600">Live Crypto Updates</h3>
                             <p class="text-green-400 text-sm">Real-time cryptocurrency prices</p>
                         </div>
                         <div class="flex items-center space-x-1">
@@ -145,18 +145,20 @@
                     </div>
                 </div>
                 
-                <!-- Live Crypto Ticker Widget -->
+                <!-- Live Crypto Widget Area -->
                 <div class="p-6">
-                    <!-- TradingView Widget - Cryptocurrency Market -->
+                    <!-- TradingView Widget - Crypto Market Overview -->
                     <div class="tradingview-widget-container mb-6">
                         <div class="tradingview-widget-container__widget"></div>
-                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js" async>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-crypto-market.js" async>
                         {
-                            "symbol": "BINANCE:BTCUSDT",
                             "width": "100%",
-                            "locale": "en",
+                            "height": 450,
+                            "defaultColumn": "overview",
+                            "screener_type": "crypto_market",
+                            "displayCurrency": "USD",
                             "colorTheme": "light",
-                            "isTransparent": false
+                            "locale": "en"
                         }
                         </script>
                     </div>
@@ -170,105 +172,37 @@
                             Top Cryptocurrencies
                         </h4>
                         
-                        <!-- Crypto Price Ticker -->
-                        <div class="space-y-3">
-                            <!-- Bitcoin -->
-                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-orange-100 rounded-full flex items-center justify-center">
-                                        <span class="text-orange-600 font-bold text-sm">BTC</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-navy-900">Bitcoin</p>
-                                        <p class="text-xs text-gray-500">BTC/USD</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-navy-900" id="btc-price">$67,234.50</p>
-                                    <p class="text-xs text-red-600">+2.34%</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Ethereum -->
-                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                                        <span class="text-purple-600 font-bold text-sm">ETH</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-navy-900">Ethereum</p>
-                                        <p class="text-xs text-gray-500">ETH/USD</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-navy-900" id="eth-price">$3,456.78</p>
-                                    <p class="text-xs text-red-600">+1.56%</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Binance Coin -->
-                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center">
-                                        <span class="text-yellow-600 font-bold text-sm">BNB</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-navy-900">Binance Coin</p>
-                                        <p class="text-xs text-gray-500">BNB/USD</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-navy-900">$567.89</p>
-                                    <p class="text-xs text-red-600">+0.78%</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Solana -->
-                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <span class="text-blue-600 font-bold text-sm">SOL</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-navy-900">Solana</p>
-                                        <p class="text-xs text-gray-500">SOL/USD</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-navy-900">$145.67</p>
-                                    <p class="text-xs text-red-600">+3.21%</p>
-                                </div>
-                            </div>
-                            
-                            <!-- Cardano -->
-                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-200">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <span class="text-blue-600 font-bold text-sm">ADA</span>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold text-navy-900">Cardano</p>
-                                        <p class="text-xs text-gray-500">ADA/USD</p>
-                                    </div>
-                                </div>
-                                <div class="text-right">
-                                    <p class="font-bold text-navy-900">$0.456</p>
-                                    <p class="text-xs text-red-600">-0.23%</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Market Update Timer -->
-                    <div class="mt-6 pt-4 border-t border-gray-200">
-                        <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span>Last updated: <span id="update-time">Just now</span></span>
-                            <button onclick="refreshPrices()" class="text-green-600 hover:text-green-700 font-semibold flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                                </svg>
-                                Refresh
-                            </button>
+                        <!-- TradingView Widget - Ticker Tape for Top Coins -->
+                        <div class="tradingview-widget-container">
+                            <div class="tradingview-widget-container__widget"></div>
+                            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                            {
+                                "width": "100%",
+                                "height": 300,
+                                "symbols": [
+                                    ["BINANCE:BTCUSDT", "Bitcoin|1D"],
+                                    ["BINANCE:ETHUSDT", "Ethereum|1D"],
+                                    ["BINANCE:SOLUSDT", "Solana|1D"],
+                                    ["BINANCE:BNBUSDT", "BNB|1D"],
+                                    ["BINANCE:XRPUSDT", "XRP|1D"],
+                                    ["BINANCE:DOGEUSDT", "Dogecoin|1D"]
+                                ],
+                                "chartOnly": false,
+                                "locale": "en",
+                                "colorTheme": "light",
+                                "autosize": false,
+                                "showVolume": false,
+                                "showMA": false,
+                                "hideDateRanges": false,
+                                "showSymbolLogo": true,
+                                "scalePosition": "right",
+                                "scaleMode": "Normal",
+                                "fontFamily": "Inter, sans-serif",
+                                "fontSize": "10",
+                                "valuesTracking": "1",
+                                "changeMode": "price-and-percent"
+                            }
+                            </script>
                         </div>
                     </div>
                 </div>
