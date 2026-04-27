@@ -194,19 +194,19 @@
         <div class="mt-16 pt-8 border-t border-gray-200">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                 <div>
-                    <div class="text-5xl font-bold text-gray-600 mb-2">10,000+</div>
+                    <div class="text-3xl md:text-5xl font-bold text-gray-600 mb-2">10,000+</div>
                     <p class="text-gray-600 text-sm">Active Traders</p>
                 </div>
                 <div>
-                    <div class="text-5xl font-bold text-gray-600 mb-2">98%</div>
+                    <div class="text-3xl md:text-5xl font-bold text-gray-600 mb-2">98%</div>
                     <p class="text-gray-600 text-sm">Client Satisfaction</p>
                 </div>
                 <div>
-                    <div class="text-5xl font-bold text-gray-600 mb-2">150+</div>
+                    <div class="text-3xl md:text-5xl font-bold text-gray-600 mb-2">150+</div>
                     <p class="text-gray-600 text-sm">Countries Served</p>
                 </div>
                 <div>
-                    <div class="text-5xl font-bold text-gray-600 mb-2">24/7</div>
+                    <div class="text-3xl md:text-5xl font-bold text-gray-600 mb-2">24/7</div>
                     <p class="text-gray-600 text-sm">Support Available</p>
                 </div>
             </div>
