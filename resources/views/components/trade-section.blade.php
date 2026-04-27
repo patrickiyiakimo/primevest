@@ -17,9 +17,13 @@
                 </a>
             </div>
 
-            <!-- Right side - Image -->
-            <div class="flex-1 min-w-[300px] text-center md:text-right">
-                <img src="{{ asset('/images/frontpage-pricing-d.webp') }}" alt="Trading Illustration" class="max-w-full h-auto rounded-xl">
+            <!-- Right side - Image with overlay -->
+            <div class="flex-1 min-w-[300px] text-center md:text-right relative bg-gray-50/100">
+                <img src="{{ asset('/images/Gemini_Generated_Image_wqa4i6wqa4i6wqa4.png') }}" alt="Trading Illustration" class=" rounded-xl shadow-lg" style="mix-blend-mode: multiply;">
+                <!-- Overlay text to cover Gemini logo -->
+                <div class="absolute bottom-3 right-3 bg-gray-200 px-3 py-1 text-xs text-gray-400">
+                    PrimeVest
+                </div>
             </div>
         </div>
     </div>
