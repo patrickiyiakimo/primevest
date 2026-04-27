@@ -1,22 +1,22 @@
-<!-- Hero Section with Background Image -->
-<div class="relative min-h-screen overflow-hidden">
-    <!-- Background Image -->
+<!-- Hero Section with Video Background -->
+<div class="relative min-h-[600px] md:min-h-[700px] lg:min-h-[800px] overflow-hidden">
+    <!-- Video Background -->
     <div class="absolute inset-0 z-0">
-        <img src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=1920&h=1080&fit=crop" 
-             alt="Trading Background" 
-             class="w-full h-full object-cover">
+        <video class="w-full h-full object-cover" autoplay loop muted playsinline>
+            <source src="{{ asset('videos/primevest-video2.mp4') }}" type="video/mp4">
+            <!-- Fallback image in case video doesn't load -->
+            <img src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=1920&h=1080&fit=crop" 
+                 alt="Trading Background">
+        </video>
         <!-- Dark Overlay for better text readability -->
         <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/80"></div>
-        <!-- Red gradient accent -->
-        <!-- <div class="absolute inset-0 bg-gradient-to-t from-red-600/30 via-transparent to-transparent"></div> -->
     </div>
     
     <!-- Hero Content -->
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div class="max-w-4xl">
             <!-- Main Heading -->
-            <h1 class="text-3xl sm:text-4xl lg:text-6xl xl:text-5xl font-bold text-white mb-6 leading-tight">
-                <!-- COPY TRADING ON -->
+            <h1 class="text-3xl sm:text-4xl lg:text-4xl xl:text-4xl font-bold text-white mb-6 leading-tight">
                 <span class="bg-gradient-to-r from-red-400 to-red-500 uppercase bg-clip-text text-transparent block mt-3">
                    Trade Shares and Forex with Financial Thinking
                 </span>
@@ -28,15 +28,15 @@
                 Metals, Energies and Shares. Experience the global markets at your fingertips.
             </p>
 
-                <div class="flex flex-col sm:flex-row gap-5">
-                    <a href="/register" 
-                       class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 transition-all duration-500">
-                        <span>Create Free Account</span>
-                        <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                        </svg>
-                    </a>
-                </div>
+            <div class="flex flex-col sm:flex-row gap-5">
+                <a href="/register" 
+                   class="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold rounded-full text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 transition-all duration-500">
+                    <span>Create Free Account</span>
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+            </div>
             
             <!-- Trust Indicators -->
             <div class="mt-12 flex flex-wrap gap-8">
@@ -83,5 +83,19 @@
     }
     .animate-pulse {
         animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    /* For ultra-wide screens (2560px and above) */
+    @media (min-width: 2560px) {
+        .hero-section {
+            min-height: 700px;
+        }
+    }
+    
+    /* For very large screens (3840px and above) */
+    @media (min-width: 3840px) {
+        .hero-section {
+            min-height: 800px;
+        }
     }
 </style>
