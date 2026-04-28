@@ -1,6 +1,7 @@
 <!-- Hero Section with Video Background -->
 <div class="relative min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[600px] xl:min-h-[700px] overflow-hidden">
-    <!-- Video Background -->
+   
+<!-- Video Background -->
     <div class="absolute inset-0 z-0">
         <video class="w-full h-full object-cover" autoplay loop muted playsinline>
             <source src="{{ asset('videos/primevest-video4.mp4') }}" type="video/mp4">
@@ -11,6 +12,31 @@
         <!-- Dark Overlay for better text readability -->
         <div class="absolute inset-0 bg-gray-900/80"></div>
     </div>
+
+    <div class="tradingview-widget-container" style="height:45px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright">
+    <a href="https://www.tradingview.com/?utm_campaign=ticker-tape-logo&utm_medium=widget&utm_source=bitxprofits.net" rel="noopener noreferrer" target="_blank">
+    </a>
+  </div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+    "symbols": [
+      { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
+      { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
+      { "proName": "BINANCE:SOLUSD", "title": "Solana" },
+      { "proName": "FX:EURUSD", "title": "EUR/USD" },
+      { "proName": "TVC:GOLD", "title": "Gold" },
+      { "proName": "NASDAQ:NDX", "title": "Nasdaq 100" }
+    ],
+    "showSymbolLogo": true,
+    "colorTheme": "dark",
+    "isTransparent": false,
+    "displayMode": "adaptive",
+    "locale": "en"
+  }
+  </script>
+</div>
     
     <!-- Hero Content -->
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
