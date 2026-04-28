@@ -1,7 +1,7 @@
 <!-- Hero Section with Video Background -->
-<div class="relative min-h-[250px] sm:min-h-[400px] md:min-h-[500px] lg:min-h-[600px] xl:min-h-[700px] overflow-hidden">
+<div class="relative min-h-screen sm:min-h-[250px] md:min-h-[500px] lg:min-h-[600px] xl:min-h-[700px] overflow-hidden">
    
-<!-- Video Background -->
+    <!-- Video Background -->
     <div class="absolute inset-0 z-0">
         <video class="w-full h-full object-cover" autoplay loop muted playsinline>
             <source src="{{ asset('videos/primevest-video4.mp4') }}" type="video/mp4">
@@ -13,43 +13,44 @@
         <div class="absolute inset-0 bg-gray-900/80"></div>
     </div>
 
+    <!-- TradingView Widget -->
     <div class="tradingview-widget-container" style="height:45px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright">
-    <a href="https://www.tradingview.com/?utm_campaign=ticker-tape-logo&utm_medium=widget&utm_source=bitxprofits.net" rel="noopener noreferrer" target="_blank">
-    </a>
-  </div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-  {
-    "symbols": [
-      { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
-      { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
-      { "proName": "BINANCE:SOLUSD", "title": "Solana" },
-      { "proName": "FX:EURUSD", "title": "EUR/USD" },
-      { "proName": "TVC:GOLD", "title": "Gold" },
-      { "proName": "NASDAQ:NDX", "title": "Nasdaq 100" }
-    ],
-    "showSymbolLogo": true,
-    "colorTheme": "dark",
-    "isTransparent": false,
-    "displayMode": "adaptive",
-    "locale": "en"
-  }
-  </script>
-</div>
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright">
+            <a href="https://www.tradingview.com/?utm_campaign=ticker-tape-logo&utm_medium=widget&utm_source=bitxprofits.net" rel="noopener noreferrer" target="_blank">
+            </a>
+        </div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+        {
+            "symbols": [
+                { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
+                { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
+                { "proName": "BINANCE:SOLUSD", "title": "Solana" },
+                { "proName": "FX:EURUSD", "title": "EUR/USD" },
+                { "proName": "TVC:GOLD", "title": "Gold" },
+                { "proName": "NASDAQ:NDX", "title": "Nasdaq 100" }
+            ],
+            "showSymbolLogo": true,
+            "colorTheme": "dark",
+            "isTransparent": false,
+            "displayMode": "adaptive",
+            "locale": "en"
+        }
+        </script>
+    </div>
     
     <!-- Hero Content -->
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 mt-20 md:mt-auto">
         <div class="max-w-4xl">
             <!-- Main Heading -->
-            <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
+            <h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-white mb-4 sm:mb-4 md:mb-6 leading-tight">
                 <span class="bg-gradient-to-r from-red-400 to-red-500 uppercase bg-clip-text text-transparent block mt-2 sm:mt-3">
                    Trade Shares and Forex with Financial Thinking
                 </span>
             </h1>
             
             <!-- Description -->
-            <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 md:mb-10 leading-relaxed max-w-2xl">
+            <p class="text-base sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 md:mb-10 leading-relaxed max-w-2xl">
                 Trade CFDs on a wide range of instruments, including popular FX pairs, Futures, Indices, 
                 Metals, Energies and Shares. Experience the global markets at your fingertips.
             </p>
