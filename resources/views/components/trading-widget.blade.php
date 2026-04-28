@@ -1,3 +1,4 @@
+<div>
 <div class="tradingview-widget-container" style="height:45px; margin:0; padding:0; line-height:0;">
   <div class="tradingview-widget-container__widget" style="margin:0; padding:0;"></div>
   <div class="tradingview-widget-copyright" style="margin:0; padding:0; display:none;">
@@ -21,4 +22,5 @@
     "locale": "en"
   }
   </script>
+</div>
 </div>

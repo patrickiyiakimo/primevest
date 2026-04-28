@@ -88,6 +88,7 @@
     </div>
 </footer>
 
+<div>
 <div class="tradingview-widget-container" style="height:45px;">
   <div class="tradingview-widget-container__widget"></div>
   <div class="tradingview-widget-copyright">
@@ -111,4 +112,5 @@
     "locale": "en"
   }
   </script>
+</div>
 </div>
