@@ -1,4 +1,4 @@
-<div class="w-full py-20 px-5 bg-gray-100">
+<div class="w-full py-5 px-5 bg-gray-100">
     <div class="max-w-5xl mx-auto">
         <!-- Two column layout centered -->
         <div class="flex items-center justify-center gap-14 flex-wrap md:flex-nowrap">
