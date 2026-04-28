@@ -48,7 +48,4 @@
 
     <!-- How It Works Section -->
     @include('components.how-it-works')
-
-    <!-- Profit-Notification -->
-    @include('components.profit-notification')
 @endsection
