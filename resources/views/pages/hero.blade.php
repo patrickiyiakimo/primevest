@@ -40,7 +40,7 @@
     </div>
     
     <!-- Hero Content -->
-    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 mt-20 md:mt-auto">
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 mt-16 md:mt-auto">
         <div class="max-w-4xl">
             <!-- Main Heading -->
             <h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-white mb-4 sm:mb-4 md:mb-6 leading-tight">
