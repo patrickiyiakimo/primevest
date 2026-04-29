@@ -44,10 +44,10 @@
         </div>
         
         <!-- Right Side - Login Form -->
-        <div class=" w-full">
+        <div class=" w-full ">
             <div class="bg-white shadow-xl p-8" style="min-height: 650px;">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2">Sign In</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2 pt-20">Sign In</h2>
                     <p class="text-gray-600">Access your investment dashboard</p>
                 </div>
                 

@@ -271,7 +271,7 @@
     </div>
 
     <!-- Transaction History -->
-    <div class="bg-white rounded-2xl mt-10 shadow-lg border border-gray-100 overflow-hidden">
+    <div class="bg-white rounded-2xl my-10 shadow-lg border border-gray-100 overflow-hidden">
         <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4">
             <div class="flex items-center justify-between">
                 <div>
