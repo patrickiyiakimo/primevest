@@ -6,7 +6,7 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
                 <div class="flex items-center gap-3">

@@ -6,7 +6,7 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
                 <h1 class="text-2xl font-bold">Choose a Plan</h1>
@@ -83,10 +83,10 @@
                     </h2>
                 </div>
                 <div class="p-6">
-                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 border border-green-200">
+                    <div class="bg-gradient-to-r from-red-50 to-red-100 rounded-xl p-4 border border-red-200">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3">
-                                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center shadow-lg">
+                                <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                                     </svg>
@@ -110,7 +110,7 @@
         <div class="space-y-6">
             <!-- Plan Details Card -->
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden sticky top-6">
-                <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4">
+                <div class="bg-gradient-to-r from-red-800 to-red-900 px-6 py-4">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -156,7 +156,7 @@
                 
                 <!-- Confirm Button -->
                 <div class="border-t border-gray-100 p-6 bg-gray-50">
-                    <button id="confirmInvestBtn" class="w-full py-3.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                    <button id="confirmInvestBtn" class="w-full py-3.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>

@@ -6,7 +6,7 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Welcome Header -->
-    <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl shadow-lg overflow-hidden">
+    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg overflow-hidden">
         <div class="p-6">
             <div class="flex items-center justify-between flex-wrap gap-4">
                 <div>
@@ -135,7 +135,7 @@
                         </div>
                         
                         <div class="mt-6">
-                            <button type="submit" class="px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2">
+                            <button type="submit" class="px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg flex items-center gap-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                                 </svg>
@@ -375,7 +375,7 @@
                         <p class="text-sm font-medium">No referrals yet</p>
                         <p class="text-xs mt-1">Share your referral link to start earning 5% commission</p>
                         <div class="mt-4">
-                            <button onclick="copyReferralLink()" class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-all duration-300">
+                            <button onclick="copyReferralLink()" class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-all duration-300">
                                 Copy Referral Link
                                 <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>

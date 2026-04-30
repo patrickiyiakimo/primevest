@@ -6,7 +6,7 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
                 <h1 class="text-2xl font-bold">Withdraw Funds</h1>
@@ -336,7 +336,7 @@
                         </div>
                         
                         <!-- Submit Button -->
-                        <button type="submit" class="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
+                        <button type="submit" class="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>

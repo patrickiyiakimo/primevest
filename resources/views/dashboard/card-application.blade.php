@@ -131,7 +131,7 @@
 
             <!-- Card Benefits -->
             <div class="bg-white overflow-hidden">
-                 <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-mdtransition-all duration-300">
+                 <img src="{{ asset('/images/primevest-card.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-mdtransition-all duration-300">
                 <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -308,7 +308,7 @@
                         </div>
                         
                         <!-- Submit Button -->
-                        <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center gap-2" {{ Auth::user()->balance < 2000 ? 'disabled' : '' }}>
+                        <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl transition-all duration-500 shadow-lg flex items-center justify-center gap-2" {{ Auth::user()->balance < 2000 ? 'disabled' : '' }}>
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>

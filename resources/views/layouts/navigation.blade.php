@@ -3,12 +3,12 @@
         <div class="flex justify-between items-center h-16">
             
             <!-- Logo -->
-            <div class="flex-shrink-0">
-                <a href="/" class="text-2xl flex font-bold text-white hover:text-red-700 transition-colors duration-300">
-                    <img src="/images/Gemini_Generated_Image_29nsuc29nsuc29ns.png" alt="PrimeVest Logo" class="h-8 w-auto"/>
-                    PrimeVest
-                </a>
-            </div>
+           <div class="flex-shrink-0">
+    <a href="/" class="flex items-center text-2xl font-bold text-white hover:text-red-700 transition-colors duration-300">
+        <img src="/images/primevest-logo.png" alt="PrimeVest Logo" class="h-10 w-auto"/>
+        <span>PrimeVest</span>
+    </a>
+</div>
             
             <!-- Desktop Navigation -->
             <div class="hidden md:flex items-center space-x-8">

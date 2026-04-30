@@ -6,7 +6,7 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
                 <h1 class="text-2xl font-bold">Deposit Funds</h1>
@@ -101,7 +101,7 @@
         <!-- Right Sidebar - Payment Instructions -->
         <div class="space-y-6">
             <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden sticky top-6" id="paymentInstructionsCard">
-                <div class="bg-gradient-to-r from-gray-800 to-gray-900 px-6 py-4">
+                <div class="bg-gradient-to-r from-red-800 to-red-900 px-6 py-4">
                     <div class="flex items-center">
                         <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -281,7 +281,7 @@
                     <p class="text-xs text-gray-400 mt-2">Upload screenshot or PDF of your payment transaction (Optional)</p>
                 </div>
 
-                <button onclick="submitDeposit()" class="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
+                <button onclick="submitDeposit()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
