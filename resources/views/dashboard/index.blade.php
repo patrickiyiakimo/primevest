@@ -9,7 +9,7 @@
     <!-- Stats Cards - Premium Red Gradient Design -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10">
         <!-- Main Balance Card -->
-        <div class="relative bg-gradient-to-br from-red-700 via-red-800 to-red-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+        <div class="relative bg-gradient-to-br from-red-700 via-red-400 to-red-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
             <!-- Animated Background Pattern -->
             <div class="absolute inset-0 opacity-15">
                 <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -64,7 +64,7 @@
         </div>
 
         <!-- Profits Card -->
-        <div class="relative bg-gradient-to-br from-emerald-700 via-emerald-800 to-emerald-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+        <div class="relative bg-gradient-to-br from-emerald-700 via-emerald-400 to-emerald-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
             <div class="absolute inset-0 opacity-10">
                 <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <defs>
@@ -115,7 +115,7 @@
         </div>
 
         <!-- Last Deposit Card -->
-        <div class="relative bg-gradient-to-br from-amber-700 via-amber-800 to-amber-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+        <div class="relative bg-gradient-to-br from-amber-700 via-amber-400 to-amber-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
             <div class="absolute inset-0 opacity-10">
                 <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <circle cx="50" cy="50" r="25" fill="none" stroke="white" stroke-width="1" stroke-dasharray="3 3"/>
@@ -163,7 +163,7 @@
         </div>
 
         <!-- Last Withdrawal Card -->
-        <div class="relative bg-gradient-to-br from-rose-700 via-rose-800 to-rose-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+        <div class="relative bg-gradient-to-br from-rose-700 via-rose-400 to-rose-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
             <div class="absolute inset-0 opacity-10">
                 <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <defs>
