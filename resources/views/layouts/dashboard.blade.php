@@ -148,14 +148,12 @@
     <div id="sidebar" class="sidebar">
         <!-- Sidebar Header with Close Button -->
         <div class="p-4 border-b border-gray-700 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center">
-                    <span class="text-white font-bold text-sm">P</span>
-                </div>
-                <a href="/" class="text-xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
-                    PrimeVest
-                </a>
-            </div>
+           <a href="/" class="flex items-center space-x-1">
+    <img src="{{ asset('/images/primevest-logo.png') }}" alt="PrimeVest Logo" class="w-10 h-10">
+    <span class="text-xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
+        PrimeVest
+    </span>
+</a>
             <button id="closeSidebarBtn" class="lg:hidden text-gray-400 hover:text-white transition-colors duration-200">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
