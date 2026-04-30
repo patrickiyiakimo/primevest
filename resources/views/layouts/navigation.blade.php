@@ -4,7 +4,8 @@
             
             <!-- Logo -->
             <div class="flex-shrink-0">
-                <a href="/" class="text-2xl font-bold text-white hover:text-red-700 transition-colors duration-300">
+                <a href="/" class="text-2xl flex font-bold text-white hover:text-red-700 transition-colors duration-300">
+                    <img src="/images/Gemini_Generated_Image_29nsuc29nsuc29ns.png" alt="PrimeVest Logo" class="h-8 w-auto"/>
                     PrimeVest
                 </a>
             </div>

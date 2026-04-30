@@ -277,10 +277,10 @@
         <!-- Sidebar Header with Close Button -->
         <div class="p-4 border-b border-gray-700 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                <div class="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
                     <span class="text-white font-bold text-sm">P</span>
                 </div>
-                <a href="/dashboard" class="text-xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent">
+                <a href="/dashboard" class="text-xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
                     PrimeVest
                 </a>
             </div>
