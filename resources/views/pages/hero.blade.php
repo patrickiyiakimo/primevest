@@ -20,6 +20,9 @@
                 <div class="w-2 h-2 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
                 <div class="w-2 h-2 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
             </div>
+            
+            <!-- Loading Status Text -->
+            <!-- <p id="loading-status" class="text-gray-400 text-sm mt-4">Loading video...</p> -->
         </div>
     </div>
 
@@ -35,24 +38,24 @@
         <div class="absolute inset-0 bg-gray-900/80"></div>
     </div>
     
-    <!-- Hero Content -->
-    <div class="relative z-10 flex-1 flex items-center">
+    <!-- Hero Content (hidden until video is ready) -->
+    <div id="hero-content" class="relative z-10 flex-1 flex items-center opacity-0 transition-opacity duration-700">
         <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-10 sm:py-12 md:py-16 lg:py-20 w-full">
             <div class="max-w-4xl mx-auto sm:mx-0 text-center sm:text-left">
-                <!-- Main Heading - Better spacing for mobile -->
+                <!-- Main Heading -->
                 <h1 class="text-4xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl font-bold text-white mb-5 sm:mb-4 md:mb-6 leading-tight">
                     <span class="bg-gradient-to-r from-red-400 to-red-500 uppercase bg-clip-text text-transparent block">
                        Trade Shares and Forex <br class="hidden sm:hidden md:block">with Financial Thinking
                     </span>
                 </h1>
                 
-                <!-- Description - Better line height and spacing -->
+                <!-- Description -->
                 <p class="text-base sm:text-base md:text-lg lg:text-xl text-gray-200 leading-relaxed sm:leading-relaxed mb-8 sm:mb-8 md:mb-10 max-w-2xl mx-auto sm:mx-0">
                     Trade CFDs on a wide range of instruments, including popular FX pairs, Futures, Indices, 
                     Metals, Energies and Shares. Experience the global markets at your fingertips.
                 </p>
 
-                <!-- Button - Better touch target for mobile -->
+                <!-- Button -->
                 <div class="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center sm:justify-start">
                     <a href="/register" 
                        class="group relative inline-flex items-center justify-center px-8 sm:px-8 py-4 sm:py-4 text-base sm:text-lg font-semibold rounded-full text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 transition-all duration-500">
@@ -63,7 +66,7 @@
                     </a>
                 </div>
                 
-                <!-- Trust Indicators - Better wrap and spacing for mobile -->
+                <!-- Trust Indicators -->
                 <div class="mt-10 sm:mt-10 md:mt-12 flex flex-wrap gap-5 sm:gap-6 md:gap-8 justify-center sm:justify-start">
                     <div class="flex items-center space-x-2">
                         <svg class="w-5 h-5 sm:w-5 sm:h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -96,44 +99,87 @@
 </div>
 
 <script>
-    // Show video once it's loaded
+    // Wait for video to be fully ready before showing
     document.addEventListener('DOMContentLoaded', function() {
         const video = document.getElementById('hero-video');
         const loadingDiv = document.getElementById('video-loading');
         const videoContainer = document.getElementById('video-container');
+        const heroContent = document.getElementById('hero-content');
+        const loadingStatus = document.getElementById('loading-status');
         
-        if (video) {
-            // If video is already loaded
-            if (video.readyState >= 2) {
-                hideLoadingAndShowVideo();
-            }
-            
-            // Wait for video to load
-            video.addEventListener('canplay', function() {
-                hideLoadingAndShowVideo();
-            });
-            
-            // Fallback: hide loading after max 5 seconds
-            setTimeout(function() {
-                if (loadingDiv && loadingDiv.style.display !== 'none') {
-                    hideLoadingAndShowVideo();
-                }
-            }, 5000);
-        } else {
-            // If no video, hide loading immediately
-            if (loadingDiv) loadingDiv.style.display = 'none';
-        }
-        
-        function hideLoadingAndShowVideo() {
+        function showContent() {
+            // Fade out loading state
             if (loadingDiv) {
                 loadingDiv.style.opacity = '0';
                 setTimeout(function() {
                     loadingDiv.style.display = 'none';
                 }, 500);
             }
+            
+            // Show video and hero content with fade in
             if (videoContainer) {
                 videoContainer.style.opacity = '1';
             }
+            
+            if (heroContent) {
+                heroContent.style.opacity = '1';
+            }
+            
+            // Ensure video is playing
+            if (video) {
+                video.play().catch(function(e) {
+                    console.log('Video autoplay prevented:', e);
+                });
+            }
+        }
+        
+        if (video) {
+            // Update loading status text
+            const updateStatus = (message) => {
+                if (loadingStatus) loadingStatus.textContent = message;
+            };
+            
+            updateStatus('Loading video...');
+            
+            // Check if video is already loaded and ready to play
+            if (video.readyState >= 3) { // HAVE_FUTURE_DATA or HAVE_ENOUGH_DATA
+                updateStatus('Video ready!');
+                showContent();
+            }
+            
+            // When video has enough data to play through
+            video.addEventListener('canplaythrough', function() {
+                updateStatus('Video ready!');
+                setTimeout(showContent, 300); // Small delay for smooth transition
+            });
+            
+            // When video metadata is loaded (fallback)
+            video.addEventListener('loadedmetadata', function() {
+                if (video.readyState < 3) {
+                    updateStatus('Preparing video stream...');
+                }
+            });
+            
+            // When video starts playing
+            video.addEventListener('playing', function() {
+                if (loadingDiv && loadingDiv.style.display !== 'none') {
+                    updateStatus('Playing now...');
+                    showContent();
+                }
+            });
+            
+            // Fallback: force show after 5 seconds regardless
+            setTimeout(function() {
+                if (loadingDiv && loadingDiv.style.display !== 'none') {
+                    updateStatus('Starting now...');
+                    showContent();
+                }
+            }, 5000);
+            
+        } else {
+            // No video element found, hide loading immediately
+            if (loadingDiv) loadingDiv.style.display = 'none';
+            if (heroContent) heroContent.style.opacity = '1';
         }
     });
 </script>
@@ -145,5 +191,12 @@
     }
     .animate-bounce {
         animation: bounce 2s infinite;
+    }
+    
+    /* Prevent any layout shift */
+    #video-loading,
+    #video-container,
+    #hero-content {
+        transition: opacity 0.5s ease-in-out;
     }
 </style>

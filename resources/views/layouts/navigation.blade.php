@@ -1,4 +1,4 @@
-<nav x-data="{ mobileMenuOpen: false }" class="fixed top-0 left-0 right-0 z-50 bg-black backdrop-blur-md border-b border-white/10">
+<nav x-data="{ mobileMenuOpen: false }" x-init="$nextTick(() => { mobileMenuOpen = false })" class="fixed top-0 left-0 right-0 z-50 bg-black backdrop-blur-md border-b border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-16">
             
@@ -16,8 +16,7 @@
                     <a href="/company" class="text-gray-200 hover:text-red-700 transition-all duration-300 text-sm font-medium">Company</a>
                     <a href="/education" class="text-gray-200 hover:text-red-700 transition-all duration-300 text-sm font-medium">Education</a>
                     <a href="/contact" class="text-gray-200 hover:text-red-700 transition-all duration-300 text-sm font-medium">Contact</a>
-
-                    @endguest
+                @endguest
             </div>
             
             <!-- Desktop Auth Buttons -->
@@ -66,8 +65,17 @@
         </div>
     </div>
     
-    <!-- Mobile Menu Panel -->
-    <div x-show="mobileMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform -translateY(-10px)" x-transition:enter-end="opacity-100 transform translateY(0)" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 transform translateY(0)" x-transition:leave-end="opacity-0 transform -translateY(-10px)" class="md:hidden bg-black/95 backdrop-blur-md border-t border-white/10 max-h-[80vh] overflow-y-auto">
+    <!-- Mobile Menu Panel - Now hidden by default with proper initial state -->
+    <div x-show="mobileMenuOpen" 
+         x-cloak
+         x-transition:enter="transition ease-out duration-200" 
+         x-transition:enter-start="opacity-0 transform -translateY(-10px)" 
+         x-transition:enter-end="opacity-100 transform translateY(0)" 
+         x-transition:leave="transition ease-in duration-150" 
+         x-transition:leave-start="opacity-100 transform translateY(0)" 
+         x-transition:leave-end="opacity-0 transform -translateY(-10px)" 
+         class="md:hidden bg-black/95 backdrop-blur-md border-t border-white/10 max-h-[80vh] overflow-y-auto"
+         style="display: none;">
         <div class="px-4 py-4 space-y-3">
             @guest
                 <a href="/trading" class="block py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Trading</a>
@@ -97,33 +105,13 @@
     </div>
     
 </nav>
-<!-- <div class="tradingview-widget-container" style="height:45px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright">
-    <a href="https://www.tradingview.com/?utm_campaign=ticker-tape-logo&utm_medium=widget&utm_source=bitxprofits.net" rel="noopener noreferrer" target="_blank">
-    </a>
-  </div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-  {
-    "symbols": [
-      { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
-      { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
-      { "proName": "BINANCE:SOLUSD", "title": "Solana" },
-      { "proName": "FX:EURUSD", "title": "EUR/USD" },
-      { "proName": "TVC:GOLD", "title": "Gold" },
-      { "proName": "NASDAQ:NDX", "title": "Nasdaq 100" }
-    ],
-    "showSymbolLogo": true,
-    "colorTheme": "dark",
-    "isTransparent": false,
-    "displayMode": "adaptive",
-    "locale": "en"
-  }
-  </script>
-</div> -->
-
 
 <style>
+    /* Prevent FOUC - hide content until Alpine is ready */
+    [x-cloak] {
+        display: none !important;
+    }
+    
     /* Smooth transitions */
     .transition-all {
         transition-property: all;
