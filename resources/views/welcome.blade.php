@@ -48,4 +48,9 @@
 
     <!-- How It Works Section -->
     @include('components.how-it-works')
+
+    <!-- cookies -->
+    @include('components.cookies-consent')
+
+    
 @endsection

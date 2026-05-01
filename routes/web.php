@@ -176,3 +176,6 @@ Route::get('/trading', [PageController::class, 'trading'])->name('trading');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/company', [PageController::class, 'company'])->name('company');
 Route::get('/education', [PageController::class, 'education'])->name('education');
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+})->name('privacy.policy');
