@@ -6,7 +6,7 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
                 <h1 class="text-2xl font-bold">Hi, welcome back!</h1>
@@ -29,7 +29,7 @@
                     <h2 class="text-lg font-semibold text-gray-900">Withdrawal History</h2>
                 </div>
                 <div class="flex items-center gap-2">
-                    <a href="{{ route('withdraw') }}" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-all duration-300 flex items-center gap-2">
+                    <a href="{{ route('withdraw') }}" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-all duration-300 flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
