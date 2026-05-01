@@ -18,7 +18,7 @@
                 <div class="relative">
                     <!-- Icon Background -->
                     <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-gray-50 to-gray-100">
-                        <svg class="w-14 h-14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-20 h-20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Chart bars -->
                             <rect x="4" y="14" width="3" height="6" rx="0.5" fill="#9CA3AF" stroke="#9CA3AF" stroke-width="0.5"/>
                             <rect x="9" y="10" width="3" height="10" rx="0.5" fill="#EF4444" stroke="#EF4444" stroke-width="0.5"/>
@@ -41,7 +41,7 @@
             <div class="group text-center hover:transform hover:-translate-y-2 transition-all duration-300">
                 <div class="relative">
                     <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-gray-50 to-gray-100">
-                        <svg class="w-14 h-14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-20 h-20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Currency symbols -->
                             <circle cx="12" cy="12" r="9" stroke="#9CA3AF" stroke-width="1.5" fill="none"/>
                             <!-- Dollar sign -->
@@ -68,7 +68,7 @@
             <div class="group text-center hover:transform hover:-translate-y-2 transition-all duration-300">
                 <div class="relative">
                     <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-gray-50 to-gray-100">
-                        <svg class="w-14 h-14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-20 h-20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Desktop/Laptop icon -->
                             <rect x="3" y="4" width="18" height="13" rx="1.5" stroke="#9CA3AF" stroke-width="1.5" fill="none"/>
                             <!-- Screen inner -->
@@ -93,7 +93,7 @@
             <div class="group text-center hover:transform hover:-translate-y-2 transition-all duration-300">
                 <div class="relative">
                     <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 transition-transform duration-300 bg-gradient-to-br from-gray-50 to-gray-100">
-                        <svg class="w-14 h-14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="w-20 h-20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <!-- Credit card background -->
                             <rect x="3" y="6" width="18" height="12" rx="1.5" stroke="#9CA3AF" stroke-width="1.5" fill="none"/>
                             <!-- Card chip -->
@@ -119,7 +119,7 @@
         
         <!-- Optional: CTA Button at bottom of features -->
         <div class="text-center mt-12">
-            <a href="/register" class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-full duration-500 shadow-lg transition-all duration-300 hover:shadow-xl">
+            <a href="/register" class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-full duration-500 shadow-lg transition-all hover:shadow-xl">
                 Start Trading Now
                 <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
