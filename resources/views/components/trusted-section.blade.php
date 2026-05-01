@@ -64,11 +64,11 @@
     <div class="hover:transform transition-all duration-300">
         <!-- <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"> -->
             <span class="inline-flex items-center gap-2 mt-2 text-green-600 text-sm font-semibold">
-            <img src="{{ asset('/images/in-wave-award.svg') }}" alt="Award" class="w-14 h-14">
+            <img src="{{ asset('/images/awards-2026-stockbrokers-professionaltrading.svg') }}" alt="Award" class="w-24 h-24">
             <!-- Winner -->
         </span>
-        <h4 class="text-xl font-bold text-gray-900 mb-1">Best CFD Broker</h4>
-        <p class="text-gray-600">TradeON Summit 2020</p>
+        <h4 class="text-xl font-bold text-gray-900 mb-1">#1 Professional Trading</h4>
+        <p class="text-gray-600">#1 International Trading</p>
         
     </div>
 
@@ -76,23 +76,35 @@
     <div class="hover:transform transition-all duration-300">
         <!-- <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"> -->
             <span class="inline-flex items-center gap-2 mt-2 text-green-600 text-sm font-semibold">
-            <img src="{{ asset('/images/in-wave-award.svg') }}" alt="Award" class="w-14 h-14">
+            <img src="{{ asset('/images/INV_broker-advanced_vt-green.svg') }}" alt="Award" class="w-24 h-24">
             <!-- Winner -->
         </span>
-        <h4 class="text-xl font-bold text-gray-900 mb-1">Best Trading Experience</h4>
-        <p class="text-gray-600">Jordan Forex EXPO 2015</p>
+        <h4 class="text-xl font-bold text-gray-900 mb-1">Best Online Broker</h4>
+        <p class="text-gray-600">for Advanced Traders</p>
     </div>
 
     <!-- Award 3 -->
     <div class="hover:transform transition-all duration-300">
         <!-- <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"> -->
             <span class="inline-flex items-center gap-2 mt-2 text-green-600 text-sm font-semibold">
-            <img src="{{ asset('/images/in-wave-award.svg') }}" alt="Award" class="w-14 h-14">
+            <img src="{{ asset('/images/award-2024-investopedia-best-for-advanced-traders.png') }}" alt="Award" class="w-24 h-24">
+            <!-- Winner -->
+        </span>
+        <!-- </div> -->
+        <h4 class="text-xl font-bold text-gray-900 mb-1">Best for</h4>
+        <p class="text-gray-600">Advanced Traders</p>
+    </div>
+
+    <!-- Award 4 -->
+     <div class="hover:transform transition-all duration-300">
+        <!-- <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"> -->
+            <span class="inline-flex items-center gap-2 mt-2 text-green-600 text-sm font-semibold">
+            <img src="{{ asset('/images/best-online-broker-2026-badges.png') }}" alt="Award" class="w-24 h-24">
             <!-- Winner -->
         </span>
         <!-- </div> -->
         <h4 class="text-xl font-bold text-gray-900 mb-1">Best Execution Broker</h4>
-        <p class="text-gray-600">Forex EXPO Dubai 2017</p>
+        <p class="text-gray-600">Best Online Broker</p>
     </div>
 </div>
             </div>
