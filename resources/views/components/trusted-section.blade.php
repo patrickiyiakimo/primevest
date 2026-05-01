@@ -59,7 +59,7 @@
                 <div class="border-t border-gray-200 my-10"></div>
 
               <!-- Awards Section -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
     <!-- Award 1 -->
     <div class="hover:transform transition-all duration-300">
         <!-- <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"> -->
