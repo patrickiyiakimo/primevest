@@ -46,6 +46,9 @@
     <!-- Trusted Section -->
     @include('components.trusted-section')
 
+    <!-- global Opportunities -->
+    @include('components.global-opportunities')
+
     <!-- How It Works Section -->
     @include('components.how-it-works')
 
