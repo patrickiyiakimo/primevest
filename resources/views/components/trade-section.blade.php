@@ -17,17 +17,20 @@
                 </a>
             </div>
 
-            <!-- Right side - Video with overlay -->
+            <!-- Right side - Image with overlay -->
             <div class="flex-1 min-w-[300px] text-center md:text-right relative">
-                <video class="rounded-xl shadow-lg w-full h-auto" autoplay loop muted playsinline>
+                {{-- Video disabled - using image instead --}}
+                {{-- <video class="rounded-xl  w-full h-auto" autoplay loop muted playsinline>
                     <source src="{{ asset('videos/laptop-video.mp4') }}" type="video/mp4">
-                    <!-- Fallback image in case video doesn't load -->
-                    <img src="{{ asset('/images/Gemini_Generated_Image_wqa4i6wqa4i6wqa4.png') }}" alt="Trading Illustration">
-                </video>
-                <!-- Overlay text to cover Veo/Google logo -->
-                <div class="absolute bottom-2 right-1 bg-gray-100/90 backdrop-blur-sm px-3 py-1.5 rounded-md text-xs text-gray-500 font-medium">
+                </video> --}}
+                
+                <!-- Image -->
+                <img src="{{ asset('/images/laptop-bg.png') }}" alt="Trading Illustration" class="rounded-xl w-full h-auto">
+                
+                <!-- Overlay text to cover any logo -->
+                <!-- <div class="absolute bottom-2 right-1 bg-gray-100/90 backdrop-blur-sm px-3 py-1.5 rounded-md text-xs text-gray-500 font-medium">
                     PrimeVest
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

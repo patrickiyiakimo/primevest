@@ -51,6 +51,4 @@
 
     <!-- cookies -->
     @include('components.cookies-consent')
-
-    
 @endsection

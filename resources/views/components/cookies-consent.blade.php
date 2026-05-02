@@ -20,10 +20,10 @@
                     </p>
                 </div>
                 <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-                    <button id="decline-cookies" class="px-5 py-2.5 text-sm font-medium text-gray-300 hover:text-white bg-gray-700 hover:bg-gray-600 rounded-xl transition-all duration-300">
+                    <button id="decline-cookies" class="px-5 py-2.5 text-sm font-medium text-gray-300 hover:text-white bg-gray-700 hover:bg-gray-600 rounded-full transition-all duration-300">
                         Decline
                     </button>
-                    <button id="accept-cookies" class="px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl">
+                    <button id="accept-cookies" class="px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl">
                         Accept Cookies
                     </button>
                 </div>
