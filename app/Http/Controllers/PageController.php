@@ -25,4 +25,8 @@ class PageController extends Controller
     {
         return view('pages.education');
     }
+    public function settings()
+    {
+        return view('pages.settings');
+    }
 }

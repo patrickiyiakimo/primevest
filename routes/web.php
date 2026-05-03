@@ -179,3 +179,6 @@ Route::get('/education', [PageController::class, 'education'])->name('education'
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->name('privacy.policy');
+Route::get('/settings', [PageController::class, 'settings'])->name('settings');
+Route::put('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
+Route::put('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
