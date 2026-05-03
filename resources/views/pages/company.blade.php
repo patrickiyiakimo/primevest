@@ -4,7 +4,7 @@
 @section('content')
 
 <!-- Hero Section with Background Image -->
-<div class="relative overflow-hidden min-h-[500px] pl-10 flex">
+<div class="relative overflow-hidden min-h-[500px] lg:pl-10 flex">
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
         <img src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=1920&h=800&fit=crop" 
@@ -15,7 +15,7 @@
     </div>
 
     <!-- Hero Content -->
-    <div class="relative z-20 px-4 sm:px-6 lg:px-8 py-20">
+    <div class="relative z-20 px-4 sm:px-6 lg:px-8 py-20 text-center">
         <div class="">
             <div class="inline-flex px-3 py-1 rounded-full bg-red-500/20 border border-red-500/30 mb-6">
                 <span class="w-2 h-2 bg-red-500 rounded-full mr-2"></span>

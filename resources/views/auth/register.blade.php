@@ -47,7 +47,7 @@
         <div class="w-full">
             <div class="bg-white shadow-xl p-8" style="min-height: 650px;">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-2 pt-20">Create Account</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-2 pt-20 lg:pt-32">Create Account</h2>
                     <p class="text-gray-600">Start your free account today</p>
                 </div>
                 

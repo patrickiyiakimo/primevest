@@ -248,7 +248,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Join Our Team</h3>
                     <p class="text-gray-600 text-sm mb-4">Explore career opportunities at PrimeVest</p>
-                    <a href="/careers" class="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-sm font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
+                    <a href="/company" class="inline-flex items-center px-6 py-2.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-sm font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
                         View Open Positions
                         <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
