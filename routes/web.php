@@ -191,3 +191,9 @@ Route::get('/forex/minors', function () {
 Route::get('/forex/exotics', function () {
     return view('pages.forex-exotics');
 })->name('forex.exotics');
+Route::get('/shares/us', function () {
+    return view('pages.shares-us');
+})->name('shares.us');
+Route::get('/shares/uk', function () {
+    return view('pages.shares-uk');
+})->name('shares.uk');
