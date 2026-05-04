@@ -71,7 +71,7 @@
             <div class="flex-1">
                 <img src="{{ asset('images/map-solo-2245664933.png') }}" 
                      alt="Global Markets Map" 
-                     class="w-full h-auto rounded-xl shadow-lg">
+                     class="w-full h-auto">
             </div>
             
         </div>
