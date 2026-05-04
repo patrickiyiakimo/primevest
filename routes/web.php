@@ -182,3 +182,12 @@ Route::get('/privacy-policy', function () {
 Route::get('/settings', [PageController::class, 'settings'])->name('settings');
 Route::put('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
 Route::put('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
+Route::get('/forex/majors', function () {
+    return view('pages.forex-majors');
+})->name('forex.majors');
+Route::get('/forex/minors', function () {
+    return view('pages.forex-minors');
+})->name('forex.minors');
+Route::get('/forex/exotics', function () {
+    return view('pages.forex-exotics');
+})->name('forex.exotics');
