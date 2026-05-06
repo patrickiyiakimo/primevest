@@ -24,7 +24,7 @@
             <!-- Case Study 1 - Beginner Success -->
             <div class="bg-white overflow-hidden border border-gray-200">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="{{ asset('images/case-studies/beginner-success.jpg') }}" 
+                    <img src="{{ asset('images/beginner-success.jpg') }}" 
                          alt="Beginner trader celebrating success" 
                          class="w-full h-full object-cover">
                 </div>
@@ -47,7 +47,7 @@
             <!-- Case Study 2 - Automated Trading -->
             <div class="bg-white overflow-hidden border border-gray-200">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="{{ asset('images/case-studies/automated-trading.jpg') }}" 
+                    <img src="{{ asset('images/automated-trading.jpg') }}" 
                          alt="Automated trading dashboard" 
                          class="w-full h-full object-cover">
                 </div>
@@ -70,7 +70,7 @@
             <!-- Case Study 3 - Portfolio Recovery -->
             <div class="bg-white overflow-hidden border border-gray-200">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="{{ asset('images/case-studies/portfolio-recovery.jpg') }}" 
+                    <img src="{{ asset('images/portfolio-recovery.jpg') }}" 
                          alt="Portfolio recovery chart" 
                          class="w-full h-full object-cover">
                 </div>
@@ -93,7 +93,7 @@
             <!-- Case Study 4 - Risk Management -->
             <div class="bg-white overflow-hidden border border-gray-200">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="{{ asset('images/case-studies/risk-management.jpg') }}" 
+                    <img src="{{ asset('images/risk-management.jpg') }}" 
                          alt="Risk management concept" 
                          class="w-full h-full object-cover">
                 </div>
@@ -116,7 +116,7 @@
             <!-- Case Study 5 - Advanced Strategies -->
             <div class="bg-white overflow-hidden border border-gray-200">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="{{ asset('images/case-studies/advanced-strategies.jpg') }}" 
+                    <img src="{{ asset('images/advanced-strategies.jpg') }}" 
                          alt="Advanced trading strategies" 
                          class="w-full h-full object-cover">
                 </div>
@@ -139,7 +139,7 @@
             <!-- Case Study 6 - Mentorship Program -->
             <div class="bg-white overflow-hidden border border-gray-200">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="{{ asset('images/case-studies/mentorship-program.jpg') }}" 
+                    <img src="{{ asset('images/mentorship-program.jpg') }}" 
                          alt="Mentorship program" 
                          class="w-full h-full object-cover">
                 </div>

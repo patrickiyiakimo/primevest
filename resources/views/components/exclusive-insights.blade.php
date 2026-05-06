@@ -58,7 +58,7 @@
             <!-- Card 2 - Premium Trader Tools -->
             <div class="bg-white overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="https://images.pexels.com/photos/6802820/pexels-photo-6802820.jpeg?w=800&h=450&fit=crop" 
+                    <img src="/images/trader-tool.jpg" 
                          alt="Premium Trader Tools" 
                          class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -99,7 +99,7 @@
             <!-- Card 3 - Ultimate Insurance -->
             <div class="bg-white overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?w=800&h=450&fit=crop" 
+                    <img src="/images/ultimate-insurance.jpg" 
                          alt="Ultimate Insurance" 
                          class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
