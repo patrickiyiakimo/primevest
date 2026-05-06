@@ -20,7 +20,7 @@
             <div class="relative z-10 flex items-center min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">
                     <div class="max-w-3xl">
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                        <h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-white mb-6 leading-tight">
                             Trade Shares and Forex <br>with <span class="text-red-500">Financial Thinking</span>
                         </h1>
                         <p class="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl">
@@ -80,7 +80,7 @@
             <div class="relative z-10 flex items-center min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">
                     <div class="max-w-3xl">
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                        <h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-white mb-6 leading-tight">
                             The Competitive Edge for <span class="text-red-500">Institutions</span>
                         </h1>
                         <p class="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl">
@@ -134,7 +134,7 @@
             <div class="relative z-10 flex items-center min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">
                     <div class="max-w-3xl">
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                        <h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-white mb-6 leading-tight">
                             Trade Your Predictions on <span class="text-red-500">Economic & Climate Events</span>
                         </h1>
                         <p class="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl">
@@ -188,7 +188,7 @@
             <div class="relative z-10 flex items-center min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">
                     <div class="max-w-3xl">
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+                        <h1 class="text-3xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-white mb-6 leading-tight">
                             Trade US Stocks, ETFs, and <span class="text-red-500">Bonds Around the Clock</span>
                         </h1>
                         <p class="text-base sm:text-lg md:text-xl text-gray-200 leading-relaxed mb-8 max-w-2xl">

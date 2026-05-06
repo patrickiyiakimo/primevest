@@ -22,6 +22,9 @@
      <!-- Markets-Widget Section -->
      @include('components.markets-widget')
 
+     <!-- case Studies -->
+     @include('components.case-studies')
+
     <!-- Exclusive Insights Section -->
     @include('components.exclusive-insights')
     
