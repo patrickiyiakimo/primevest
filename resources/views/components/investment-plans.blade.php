@@ -11,7 +11,7 @@
                     </svg>
                 </div>
             </div>
-            <h2 class="text-3xl lg:text-4xl font-bold text-gray-600 mb-4">
+            <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
                 Complete Packages for Every Trader
             </h2>
             <p class="text-gray-400 text-lg max-w-2xl mx-auto">
