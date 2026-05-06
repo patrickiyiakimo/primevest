@@ -16,7 +16,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             <!-- Card 1 - Daily Market Analysis -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
+            <div class="bg-white overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="relative h-56 overflow-hidden">
                     <img src="https://images.pexels.com/photos/844124/pexels-photo-844124.jpeg?w=800&h=450&fit=crop" 
                          alt="Daily Market Analysis" 
@@ -56,7 +56,7 @@
             </div>
             
             <!-- Card 2 - Premium Trader Tools -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
+            <div class="bg-white shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="relative h-56 overflow-hidden">
                     <img src="https://images.pexels.com/photos/6802820/pexels-photo-6802820.jpeg?w=800&h=450&fit=crop" 
                          alt="Premium Trader Tools" 
@@ -97,7 +97,7 @@
             </div>
             
             <!-- Card 3 - Ultimate Insurance -->
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
+            <div class="bg-white shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-100">
                 <div class="relative h-56 overflow-hidden">
                     <img src="https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?w=800&h=450&fit=crop" 
                          alt="Ultimate Insurance" 
