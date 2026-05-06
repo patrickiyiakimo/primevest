@@ -11,7 +11,7 @@
                     <!-- YouTube Video Embed -->
                     <div class="relative pb-[56.25%] h-0">
                         <iframe 
-                            class="absolute top-0 left-0 w-full h-full"
+                            class="absolute top-0 left-0 w-full h-full rounded-md"
                             src="https://www.youtube.com/embed/bBC-nXj3Ng4?si=KxQ3xGtL8QhLvP6h&autoplay=0&rel=0" 
                             title="What is Bitcoin? Bitcoin Explained Simply for Dummies"
                             frameborder="0" 
