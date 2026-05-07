@@ -1,10 +1,10 @@
-<div class="w-full py-5 px-5 bg-gray-100">
-    <div class="max-w-5xl mx-auto">
+<div class="w-full py-5 px-5 bg-white">
+    <div class="max-w-7xl mx-auto">
         <!-- Two column layout centered -->
         <div class="flex items-center justify-center gap-14 flex-wrap md:flex-nowrap">
             <!-- Left side - Text Content -->
             <div class="flex-1 min-w-[300px]">
-                <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-6 text-gray-600">
+                <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-6 text-gray-900">
                     Trade with low commissions and tight spreads
                 </h2>
                 <p class="text-lg leading-relaxed text-gray-400 mb-8">

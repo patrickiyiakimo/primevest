@@ -10,14 +10,17 @@
     <!-- Trading Widget -->
     @include('components.trading-widget')
 
+    <!-- Features Section -->
+    @include('components.features-section')
+
+    <!-- Award Section -->
+    @include('components.awards')
+
     <!-- Trade Section -->
      @include('components.trade-section')
 
      <!-- Markets-Widget Section -->
      @include('components.markets-widget')
-    
-    <!-- Features Section -->
-    @include('components.features-section')
 
     <!-- Exclusive Insights Section -->
     @include('components.exclusive-insights')
