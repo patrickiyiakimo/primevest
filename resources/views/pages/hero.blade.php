@@ -6,7 +6,7 @@
          x-init="setInterval(() => { currentSlide = (currentSlide + 1) % slides.length }, 6000)"
          class="relative min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
         
-        <!-- Slide 1 - Financial Trading -->
+        <!-- Slide 1 - Financial Trading / New York Skyline -->
         <div x-show="currentSlide === 0" 
              x-transition:enter="transition ease-out duration-700"
              x-transition:enter-start="opacity-0 transform scale-105"
@@ -15,7 +15,7 @@
              x-transition:leave-start="opacity-100 transform scale-100"
              x-transition:leave-end="opacity-0 transform scale-95"
              class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-             style="background-image: url('{{ asset('images/background-image-1.webp') }}');">
+             style="background-image: url('https://images.pexels.com/photos/466685/pexels-photo-466685.jpeg?w=1920&h=1080&fit=crop');">
             <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
             <div class="relative z-10 flex items-center min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">
@@ -66,7 +66,7 @@
             </div>
         </div>
         
-        <!-- Slide 2 - Institutional Trading -->
+        <!-- Slide 2 - Institutional Trading / London Financial District -->
         <div x-show="currentSlide === 1" 
              x-transition:enter="transition ease-out duration-700"
              x-transition:enter-start="opacity-0 transform scale-105"
@@ -75,7 +75,7 @@
              x-transition:leave-start="opacity-100 transform scale-100"
              x-transition:leave-end="opacity-0 transform scale-95"
              class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-             style="background-image: url('{{ asset('images/background-image-2.webp') }}');">
+             style="background-image: url('https://images.pexels.com/photos/3738836/pexels-photo-3738836.jpeg?w=1920&h=1080&fit=crop');">
             <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
             <div class="relative z-10 flex items-center min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">
@@ -120,7 +120,7 @@
             </div>
         </div>
         
-        <!-- Slide 3 - Forecast Trading -->
+        <!-- Slide 3 - Forecast Trading / Hong Kong Skyline -->
         <div x-show="currentSlide === 2" 
              x-transition:enter="transition ease-out duration-700"
              x-transition:enter-start="opacity-0 transform scale-105"
@@ -129,7 +129,7 @@
              x-transition:leave-start="opacity-100 transform scale-100"
              x-transition:leave-end="opacity-0 transform scale-95"
              class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-             style="background-image: url('{{ asset('images/background-image-3.webp') }}');">
+             style="background-image: url('https://images.pexels.com/photos/351283/pexels-photo-351283.jpeg?w=1920&h=1080&fit=crop');">
             <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
             <div class="relative z-10 flex items-center min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">
@@ -174,7 +174,7 @@
             </div>
         </div>
         
-        <!-- Slide 4 - 24/7 Trading -->
+        <!-- Slide 4 - 24/7 Trading / Singapore Skyline -->
         <div x-show="currentSlide === 3" 
              x-transition:enter="transition ease-out duration-700"
              x-transition:enter-start="opacity-0 transform scale-105"
@@ -183,7 +183,7 @@
              x-transition:leave-start="opacity-100 transform scale-100"
              x-transition:leave-end="opacity-0 transform scale-95"
              class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-             style="background-image: url('{{ asset('images/background-image-4.jpg') }}');">
+             style="background-image: url('https://images.pexels.com/photos/2614818/pexels-photo-2614818.jpeg?w=1920&h=1080&fit=crop');">
             <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
             <div class="relative z-10 flex items-center min-h-screen sm:min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
                 <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">

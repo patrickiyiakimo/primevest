@@ -1,5 +1,5 @@
-<div class="w-full py-5 px-5 bg-white">
-    <div class="max-w-7xl mx-auto">
+<div class="w-full py-20 px-5 bg-white">
+    <div class="max-w-6xl mx-auto">
         <!-- Two column layout centered -->
         <div class="flex items-center justify-center gap-14 flex-wrap md:flex-nowrap">
             <!-- Left side - Text Content -->
