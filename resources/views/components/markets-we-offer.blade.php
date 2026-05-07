@@ -104,8 +104,8 @@
                     <div class="p-5">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 flex items-center justify-center">
-                                    <img src="{{ asset('images/btc.png') }}" alt="Bitcoin" class="w-24 h-24">
+                                <div class="w-20 h-20 flex items-center justify-center">
+                                    <img src="{{ asset('images/btc.png') }}" alt="Bitcoin" class="w-20 h-20">
                                 </div>
                                 <div>
                                     <h4 class="text-gray-800 font-bold text-lg">Bitcoin</h4>
@@ -134,8 +134,8 @@
                     <div class="p-5">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-red-600 flex items-center justify-center">
-                                    <img src="{{ asset('images/eth.png') }}" alt="Ethereum" class="w-7 h-7">
+                                <div class="w-20 h-20 flex items-center justify-center">
+                                    <img src="{{ asset('images/eth.png') }}" alt="Ethereum" class="w-20 h-20">
                                 </div>
                                 <div>
                                     <h4 class="text-gray-800 font-bold text-lg">Ethereum</h4>
@@ -164,8 +164,8 @@
                     <div class="p-5">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-red-600 flex items-center justify-center">
-                                    <img src="{{ asset('images/bch.png') }}" alt="Bitcoin Cash" class="w-7 h-7">
+                                <div class="w-20 h-20  flex items-center justify-center">
+                                    <img src="{{ asset('images/bch.png') }}" alt="Bitcoin Cash" class="w-20 h-20">
                                 </div>
                                 <div>
                                     <h4 class="text-gray-800 font-bold text-lg">Bitcoin Cash</h4>
@@ -194,8 +194,8 @@
                     <div class="p-5">
                         <div class="flex items-center justify-between mb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-12 h-12 bg-red-600 flex items-center justify-center">
-                                    <img src="{{ asset('images/doge.png') }}" alt="Dogecoin" class="w-7 h-7">
+                                <div class="w-20 h-20  flex items-center justify-center">
+                                    <img src="{{ asset('images/doge.png') }}" alt="Dogecoin" class="w-20 h-20">
                                 </div>
                                 <div>
                                     <h4 class="text-gray-800 font-bold text-lg">Dogecoin</h4>
@@ -232,3 +232,4 @@
         </div>
     </div>
 </div>
+
