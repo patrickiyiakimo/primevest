@@ -7,7 +7,7 @@
         <!-- Background Image -->
         <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center"></div>
         <!-- Very light green tint overlay -->
-        <div class="absolute inset-0 bg-blue-500/50"></div>
+        <div class="absolute inset-0 bg-red-500/50"></div>
     </div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-4">

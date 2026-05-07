@@ -4,7 +4,7 @@
 }" x-init="$nextTick(() => { mobileMenuOpen = false })" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
     
     <!-- Top Market Ticker Slider -->
-    <div class="bg-blue-600 py-2 overflow-hidden">
+    <div class="bg-red-600 py-2 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between gap-4">
                 <div class="flex-1 text-center overflow-hidden">
