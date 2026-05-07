@@ -162,23 +162,6 @@
     </div>
 </div>
 
-<!-- Testimonial Section -->
-<div class="py-16 lg:py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-gray-800 to-gray-900 p-8 lg:p-12 text-center">
-            <svg class="w-12 h-12 text-gray-500 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-            </svg>
-            <p class="text-white text-lg lg:text-xl italic mb-6 max-w-3xl mx-auto">
-                "The mentorship program completely transformed my approach to trading. From a complete beginner to consistent profitability in just 2 months. PrimeVest's support and education are unmatched."
-            </p>
-            <div>
-                <p class="text-white font-semibold">Michael Chen</p>
-                <p class="text-gray-400 text-sm">Success Story #6 - Mentorship Program</p>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- CTA Section -->
 <div class="py-16 lg:py-20 bg-gray-50">
