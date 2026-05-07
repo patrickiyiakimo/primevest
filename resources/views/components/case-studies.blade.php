@@ -24,7 +24,7 @@
             <!-- Case Study 1 - Beginner Success -->
             <div class="bg-white overflow-hidden border border-gray-200">
                 <div class="relative h-56 overflow-hidden">
-                    <img src="{{ asset('images/beginner-success.jpg') }}" 
+                    <img src="{{ asset('images/beginners-success.jpg') }}" 
                          alt="Beginner trader celebrating success" 
                          class="w-full h-full object-cover">
                 </div>

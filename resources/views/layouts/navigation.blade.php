@@ -7,7 +7,7 @@
     <div class="bg-blue-600 py-2 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between gap-4">
-                <div class="flex-1 overflow-hidden">
+                <div class="flex-1 text-center overflow-hidden">
                     <div x-data="{ 
                         messages: [
                             '🇺🇸 S&P 500 at all-time high | 📈 +1.2% today',
