@@ -2,9 +2,7 @@
 <div class="relative py-16 lg:py-24 overflow-hidden">
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('{{ asset('images/real-estate-background.jpg') }}');"></div>
-        <div class="absolute inset-0 bg-black/70"></div>
-    </div>
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?w=1920&h=1080&fit=crop');"></div>
     
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
