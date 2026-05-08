@@ -7,272 +7,217 @@
 <div class="space-y-6">
  
     <!-- Stats Cards - Premium Red Gradient Design -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-
-    <!-- MAIN BALANCE -->
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#3b0000] via-[#8b0000] to-[#1a0000] p-[1px] shadow-[0_10px_40px_rgba(139,0,0,0.35)] group hover:scale-[1.02] transition duration-500">
-        <div class="relative h-full rounded-3xl bg-gradient-to-br from-[#1a1a1a]/95 to-[#2b0000]/95 backdrop-blur-xl overflow-hidden">
-
-            <!-- Glow -->
-            <div class="absolute -top-20 -right-20 w-56 h-56 bg-red-500/20 blur-3xl rounded-full"></div>
-
-            <!-- Grid Pattern -->
-            <div class="absolute inset-0 opacity-5">
-                <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:40px_40px]"></div>
-            </div>
-
-            <!-- Top -->
-            <div class="relative flex items-start justify-between p-7">
-                <div>
-                    <p class="text-red-200/70 uppercase text-xs tracking-[0.3em] font-medium">
-                        Main Balance
-                    </p>
-
-                    <h1 class="mt-4 text-4xl font-bold text-white tracking-tight">
-                        ${{ number_format($user->balance, 2) }}
-                    </h1>
-                </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-400 to-red-700 flex items-center justify-center shadow-lg shadow-red-900/40">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                            d="M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/>
-                    </svg>
-                </div>
-            </div>
-
-            <!-- Middle -->
-            <div class="px-7">
-                <div class="flex items-center gap-3">
-                    <div class="h-2 w-2 rounded-full bg-red-400 animate-pulse"></div>
-                    <span class="text-sm text-red-100/70">
-                        Premium Investment Account
-                    </span>
-                </div>
-
-                <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
-                    <div>
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-red-200/60">
-                            Account Holder
-                        </p>
-                        <p class="mt-1 text-white font-semibold tracking-wide">
-                            {{ strtoupper($user->name) }}
-                        </p>
-                    </div>
-
-                    <div class="text-right">
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-red-200/60">
-                            Status
-                        </p>
-                        <p class="mt-1 text-emerald-400 font-semibold">
-                            Active
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bottom Accent -->
-            <div class="mt-8 h-1 w-full bg-gradient-to-r from-red-700 via-red-400 to-red-700"></div>
-        </div>
-    </div>
-
-
-
-    <!-- PROFITS -->
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#5a0000] via-[#b91c1c] to-[#240000] p-[1px] shadow-[0_10px_40px_rgba(220,38,38,0.35)] group hover:scale-[1.02] transition duration-500">
-        <div class="relative h-full rounded-3xl bg-gradient-to-br from-[#1b1b1b]/95 to-[#2d0000]/95 overflow-hidden">
-
-            <div class="absolute -bottom-20 -left-20 w-56 h-56 bg-red-500/20 blur-3xl rounded-full"></div>
-
-            <!-- Chart Lines -->
-            <div class="absolute inset-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100">
-                    <path d="M0 80 L20 60 L40 68 L60 38 L80 50 L100 20"
-                        stroke="white"
-                        stroke-width="1.5"
-                        fill="none"/>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10">
+        <!-- Main Balance Card -->
+        <div class="relative bg-gradient-to-br from-red-700 via-red-400 to-red-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+            <!-- Animated Background Pattern -->
+            <div class="absolute inset-0 opacity-15">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                        <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                            <rect width="20" height="20" fill="none" stroke="white" stroke-width="0.5"/>
+                            <circle cx="10" cy="10" r="1" fill="white" opacity="0.5"/>
+                        </pattern>
+                    </defs>
+                    <rect width="100" height="100" fill="url(#grid)"/>
                 </svg>
             </div>
-
-            <div class="relative flex items-start justify-between p-7">
-                <div>
-                    <p class="text-red-200/70 uppercase text-xs tracking-[0.3em] font-medium">
-                        Total Profits
-                    </p>
-
-                    <h1 class="mt-4 text-4xl font-bold text-white tracking-tight">
-                        ${{ number_format($profits, 2) }}
-                    </h1>
+            <!-- Animated Shine Effect -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            
+            <div class="absolute top-5 left-5">
+                <svg width="44" height="34" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="36" rx="6" fill="#FFD700"/>
+                    <rect x="7" y="7" width="34" height="22" rx="3" fill="none" stroke="#DAA520" stroke-width="1.5"/>
+                    <line x1="24" y1="7" x2="24" y2="29" stroke="#DAA520" stroke-width="1"/>
+                    <line x1="7" y1="18" x2="41" y2="18" stroke="#DAA520" stroke-width="1"/>
+                    <circle cx="24" cy="18" r="3" fill="#DAA520" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="absolute top-5 right-5">
+                <div class="flex items-center space-x-1">
+                    <span class="w-2 h-2 rounded-full bg-red-300 animate-pulse"></span>
+                    <p class="text-[10px] text-red-200 uppercase tracking-wider font-semibold">PrimeVest</p>
                 </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-400 to-emerald-700 flex items-center justify-center shadow-lg shadow-emerald-900/40">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                            d="M13 7h8m0 0v8m0-8L10 18l-4-4-6 6"/>
+            </div>
+            <div class="p-6 pt-14">
+                <div class="flex items-center space-x-2 mb-2">
+                    <svg class="w-4 h-4 text-red-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M6 14h3m9 0h-3M5 18h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
                     </svg>
+                    <p class="text-xs text-red-200 uppercase tracking-wider font-medium">Main Balance</p>
                 </div>
-            </div>
-
-            <div class="px-7">
-                <div class="flex items-center gap-3">
-                    <div class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></div>
-                    <span class="text-sm text-red-100/70">
-                        Portfolio Performing Strongly
-                    </span>
-                </div>
-
-                <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
+                <p class="text-4xl font-bold text-white tracking-tight">${{ number_format($user->balance, 2) }}</p>
+                <div class="flex justify-between items-end mt-8">
                     <div>
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-red-200/60">
-                            Investor
-                        </p>
-                        <p class="mt-1 text-white font-semibold tracking-wide">
-                            {{ strtoupper($user->name) }}
-                        </p>
+                        <p class="text-[10px] text-red-300 uppercase tracking-wider">Card Holder</p>
+                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
                     </div>
-
                     <div class="text-right">
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-red-200/60">
-                            Growth
-                        </p>
-                        <p class="mt-1 text-emerald-400 font-semibold">
-                            +18.4%
-                        </p>
+                        <p class="text-[10px] text-red-300 uppercase tracking-wider">Valid Thru</p>
+                        <p class="text-sm font-semibold text-white">08/28</p>
                     </div>
                 </div>
             </div>
+            <!-- Card Chip Decor -->
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-md opacity-20"></div>
+        </div>
 
-            <div class="mt-8 h-1 w-full bg-gradient-to-r from-emerald-700 via-emerald-400 to-emerald-700"></div>
+        <!-- Profits Card -->
+        <div class="relative bg-gradient-to-br from-emerald-700 via-emerald-400 to-emerald-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+            <div class="absolute inset-0 opacity-10">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="profitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="white" stop-opacity="0.8"/>
+                            <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M10,70 L30,40 L50,55 L70,30 L90,50" fill="none" stroke="url(#profitGrad)" stroke-width="1.5"/>
+                    <path d="M5,80 L95,80" stroke="white" stroke-width="0.5" stroke-dasharray="4 4"/>
+                </svg>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            
+            <div class="absolute top-5 left-5">
+                <svg width="44" height="34" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="36" rx="6" fill="#FFD700"/>
+                    <path d="M15 20 L20 15 L28 23 L36 15 L40 19" stroke="#DAA520" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    <rect x="10" y="24" width="28" height="6" rx="2" fill="#DAA520" fill-opacity="0.3" stroke="#DAA520" stroke-width="1"/>
+                </svg>
+            </div>
+            <div class="absolute top-5 right-5">
+                <div class="flex items-center space-x-1">
+                    <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
+                    <p class="text-[10px] text-emerald-200 uppercase tracking-wider font-semibold">PrimeVest</p>
+                </div>
+            </div>
+            <div class="p-6 pt-14">
+                <div class="flex items-center space-x-2 mb-2">
+                    <svg class="w-4 h-4 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                    </svg>
+                    <p class="text-xs text-emerald-200 uppercase tracking-wider font-medium">Total Profits</p>
+                </div>
+                <p class="text-4xl font-bold text-white tracking-tight">${{ number_format($profits, 2) }}</p>
+                <div class="flex justify-between items-end mt-8">
+                    <div>
+                        <p class="text-[10px] text-emerald-300 uppercase tracking-wider">Card Holder</p>
+                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] text-emerald-300 uppercase tracking-wider">Valid Thru</p>
+                        <p class="text-sm font-semibold text-white">08/28</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-md opacity-20"></div>
+        </div>
+
+        <!-- Last Deposit Card -->
+        <div class="relative bg-gradient-to-br from-amber-700 via-amber-400 to-amber-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+            <div class="absolute inset-0 opacity-10">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <circle cx="50" cy="50" r="25" fill="none" stroke="white" stroke-width="1" stroke-dasharray="3 3"/>
+                    <circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="0.8"/>
+                    <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="1"/>
+                    <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="1"/>
+                </svg>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            
+            <div class="absolute top-5 left-5">
+                <svg width="44" height="34" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="36" rx="6" fill="#FFD700"/>
+                    <path d="M18 12 L24 6 L30 12" stroke="#DAA520" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="14" y="14" width="20" height="16" rx="2" fill="none" stroke="#DAA520" stroke-width="1.5"/>
+                    <circle cx="24" cy="22" r="3" fill="#DAA520" fill-opacity="0.4" stroke="#DAA520" stroke-width="1"/>
+                </svg>
+            </div>
+            <div class="absolute top-5 right-5">
+                <div class="flex items-center space-x-1">
+                    <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
+                    <p class="text-[10px] text-amber-200 uppercase tracking-wider font-semibold">PrimeVest</p>
+                </div>
+            </div>
+            <div class="p-6 pt-14">
+                <div class="flex items-center space-x-2 mb-2">
+                    <svg class="w-4 h-4 text-amber-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <p class="text-xs text-amber-200 uppercase tracking-wider font-medium">Last Deposit</p>
+                </div>
+                <p class="text-4xl font-bold text-white tracking-tight">${{ number_format($lastDepositAmount ?? 0, 2) }}</p>
+                <div class="flex justify-between items-end mt-8">
+                    <div>
+                        <p class="text-[10px] text-amber-300 uppercase tracking-wider">Card Holder</p>
+                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] text-amber-300 uppercase tracking-wider">Valid Thru</p>
+                        <p class="text-sm font-semibold text-white">08/28</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-md opacity-20"></div>
+        </div>
+
+        <!-- Last Withdrawal Card -->
+        <div class="relative bg-gradient-to-br from-rose-700 via-rose-400 to-rose-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
+            <div class="absolute inset-0 opacity-10">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <defs>
+                        <linearGradient id="withdrawGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="white" stop-opacity="0.6"/>
+                            <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                        </linearGradient>
+                    </defs>
+                    <path d="M50,25 L65,50 L50,75" fill="none" stroke="url(#withdrawGrad)" stroke-width="1.8" stroke-linecap="round"/>
+                    <path d="M50,25 L35,50 L50,75" fill="none" stroke="url(#withdrawGrad)" stroke-width="1.8" stroke-linecap="round"/>
+                    <circle cx="50" cy="50" r="3" fill="white" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            
+            <div class="absolute top-5 left-5">
+                <svg width="44" height="34" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="48" height="36" rx="6" fill="#FFD700"/>
+                    <rect x="10" y="12" width="28" height="16" rx="2" fill="none" stroke="#DAA520" stroke-width="1.5"/>
+                    <path d="M20 20 L24 16 L28 20" stroke="#DAA520" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="24" y1="16" x2="24" y2="28" stroke="#DAA520" stroke-width="1.5"/>
+                </svg>
+            </div>
+            <div class="absolute top-5 right-5">
+                <div class="flex items-center space-x-1">
+                    <span class="w-2 h-2 rounded-full bg-rose-300 animate-pulse"></span>
+                    <p class="text-[10px] text-rose-200 uppercase tracking-wider font-semibold">PrimeVest</p>
+                </div>
+            </div>
+            <div class="p-6 pt-14">
+                <div class="flex items-center space-x-2 mb-2">
+                    <svg class="w-4 h-4 text-rose-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2"/>
+                    </svg>
+                    <p class="text-xs text-rose-200 uppercase tracking-wider font-medium">Last Withdrawal</p>
+                </div>
+                <p class="text-4xl font-bold text-white tracking-tight">${{ number_format($lastWithdrawalAmount ?? 0, 2) }}</p>
+                @if(isset($lastWithdrawalDate))
+                <p class="text-xs text-rose-300 mt-1">{{ $lastWithdrawalDate }}</p>
+                @endif
+                <div class="flex justify-between items-end mt-6">
+                    <div>
+                        <p class="text-[10px] text-rose-300 uppercase tracking-wider">Card Holder</p>
+                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] text-rose-300 uppercase tracking-wider">Valid Thru</p>
+                        <p class="text-sm font-semibold text-white">08/28</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-md opacity-20"></div>
         </div>
     </div>
-
-
-
-    <!-- LAST DEPOSIT -->
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#2a0000] via-[#991b1b] to-[#140000] p-[1px] shadow-[0_10px_40px_rgba(239,68,68,0.30)] group hover:scale-[1.02] transition duration-500">
-        <div class="relative h-full rounded-3xl bg-gradient-to-br from-[#181818]/95 to-[#290000]/95 overflow-hidden">
-
-            <div class="absolute top-0 right-0 w-64 h-64 bg-red-500/10 blur-3xl rounded-full"></div>
-
-            <div class="relative flex items-start justify-between p-7">
-                <div>
-                    <p class="text-red-200/70 uppercase text-xs tracking-[0.3em] font-medium">
-                        Last Deposit
-                    </p>
-
-                    <h1 class="mt-4 text-4xl font-bold text-white tracking-tight">
-                        ${{ number_format($lastDepositAmount ?? 0, 2) }}
-                    </h1>
-                </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-300 to-yellow-600 flex items-center justify-center shadow-lg shadow-yellow-900/40">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                            d="M12 4v16m8-8H4"/>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="px-7">
-                <div class="flex items-center gap-3">
-                    <div class="h-2 w-2 rounded-full bg-yellow-400 animate-pulse"></div>
-                    <span class="text-sm text-red-100/70">
-                        Funds Added Successfully
-                    </span>
-                </div>
-
-                <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
-                    <div>
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-red-200/60">
-                            Depositor
-                        </p>
-                        <p class="mt-1 text-white font-semibold tracking-wide">
-                            {{ strtoupper($user->name) }}
-                        </p>
-                    </div>
-
-                    <div class="text-right">
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-red-200/60">
-                            Method
-                        </p>
-                        <p class="mt-1 text-white font-semibold">
-                            Bank Transfer
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8 h-1 w-full bg-gradient-to-r from-yellow-700 via-yellow-400 to-yellow-700"></div>
-        </div>
-    </div>
-
-
-
-    <!-- LAST WITHDRAWAL -->
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#400000] via-[#dc2626] to-[#180000] p-[1px] shadow-[0_10px_40px_rgba(220,38,38,0.30)] group hover:scale-[1.02] transition duration-500">
-        <div class="relative h-full rounded-3xl bg-gradient-to-br from-[#181818]/95 to-[#240000]/95 overflow-hidden">
-
-            <div class="absolute bottom-0 left-0 w-64 h-64 bg-red-600/10 blur-3xl rounded-full"></div>
-
-            <div class="relative flex items-start justify-between p-7">
-                <div>
-                    <p class="text-red-200/70 uppercase text-xs tracking-[0.3em] font-medium">
-                        Last Withdrawal
-                    </p>
-
-                    <h1 class="mt-4 text-4xl font-bold text-white tracking-tight">
-                        ${{ number_format($lastWithdrawalAmount ?? 0, 2) }}
-                    </h1>
-
-                    @if(isset($lastWithdrawalDate))
-                        <p class="mt-2 text-sm text-red-200/60">
-                            {{ $lastWithdrawalDate }}
-                        </p>
-                    @endif
-                </div>
-
-                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-red-400 to-rose-700 flex items-center justify-center shadow-lg shadow-rose-900/40">
-                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
-                            d="M17 17H7m0 0l4 4m-4-4l4-4"/>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="px-7">
-                <div class="flex items-center gap-3">
-                    <div class="h-2 w-2 rounded-full bg-rose-400 animate-pulse"></div>
-                    <span class="text-sm text-red-100/70">
-                        Withdrawal Processed
-                    </span>
-                </div>
-
-                <div class="mt-8 flex items-center justify-between border-t border-white/10 pt-6">
-                    <div>
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-red-200/60">
-                            Beneficiary
-                        </p>
-                        <p class="mt-1 text-white font-semibold tracking-wide">
-                            {{ strtoupper($user->name) }}
-                        </p>
-                    </div>
-
-                    <div class="text-right">
-                        <p class="text-[11px] uppercase tracking-[0.2em] text-red-200/60">
-                            Status
-                        </p>
-                        <p class="mt-1 text-emerald-400 font-semibold">
-                            Completed
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-8 h-1 w-full bg-gradient-to-r from-rose-700 via-rose-400 to-rose-700"></div>
-        </div>
-    </div>
-
-</div>
 
     <!-- TradingView Widgets Container -->
     <div>
