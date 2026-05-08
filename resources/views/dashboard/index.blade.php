@@ -7,217 +7,275 @@
 <div class="space-y-6">
  
     <!-- Stats Cards - Premium Red Gradient Design -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10">
-        <!-- Main Balance Card -->
-        <div class="relative bg-gradient-to-br from-red-700 via-red-400 to-red-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
-            <!-- Animated Background Pattern -->
-            <div class="absolute inset-0 opacity-15">
-                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <defs>
-                        <pattern id="grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                            <rect width="20" height="20" fill="none" stroke="white" stroke-width="0.5"/>
-                            <circle cx="10" cy="10" r="1" fill="white" opacity="0.5"/>
-                        </pattern>
-                    </defs>
-                    <rect width="100" height="100" fill="url(#grid)"/>
-                </svg>
-            </div>
-            <!-- Animated Shine Effect -->
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-            
-            <div class="absolute top-5 left-5">
-                <svg width="44" height="34" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="36" rx="6" fill="#FFD700"/>
-                    <rect x="7" y="7" width="34" height="22" rx="3" fill="none" stroke="#DAA520" stroke-width="1.5"/>
-                    <line x1="24" y1="7" x2="24" y2="29" stroke="#DAA520" stroke-width="1"/>
-                    <line x1="7" y1="18" x2="41" y2="18" stroke="#DAA520" stroke-width="1"/>
-                    <circle cx="24" cy="18" r="3" fill="#DAA520" opacity="0.6"/>
-                </svg>
-            </div>
-            <div class="absolute top-5 right-5">
-                <div class="flex items-center space-x-1">
-                    <span class="w-2 h-2 rounded-full bg-red-300 animate-pulse"></span>
-                    <p class="text-[10px] text-red-200 uppercase tracking-wider font-semibold">PrimeVest</p>
-                </div>
-            </div>
-            <div class="p-6 pt-14">
-                <div class="flex items-center space-x-2 mb-2">
-                    <svg class="w-4 h-4 text-red-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M6 14h3m9 0h-3M5 18h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
-                    </svg>
-                    <p class="text-xs text-red-200 uppercase tracking-wider font-medium">Main Balance</p>
-                </div>
-                <p class="text-4xl font-bold text-white tracking-tight">${{ number_format($user->balance, 2) }}</p>
-                <div class="flex justify-between items-end mt-8">
-                    <div>
-                        <p class="text-[10px] text-red-300 uppercase tracking-wider">Card Holder</p>
-                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] text-red-300 uppercase tracking-wider">Valid Thru</p>
-                        <p class="text-sm font-semibold text-white">08/28</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card Chip Decor -->
-            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-md opacity-20"></div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-7 mt-10">
+
+    <!-- MAIN BALANCE - Premium Ray of Light Gradient -->
+    <div class="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl group"
+         style="background: radial-gradient(ellipse 180% 120% at 30% 20%, #ff2d2d 0%, #cc0000 45%, #8b0000 100%);">
+        
+        <!-- Massive Ray of Light Beam -->
+        <div class="absolute inset-0 opacity-30 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="ray1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="white" stop-opacity="0.6"/>
+                        <stop offset="30%" stop-color="white" stop-opacity="0.05"/>
+                        <stop offset="100%" stop-color="white" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="ray2" x1="20%" y1="0%" x2="80%" y2="100%">
+                        <stop offset="0%" stop-color="#ffcc00" stop-opacity="0.4"/>
+                        <stop offset="50%" stop-color="white" stop-opacity="0.1"/>
+                        <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+                    </linearGradient>
+                    <radialGradient id="glowOrb" cx="25%" cy="15%" r="50%">
+                        <stop offset="0%" stop-color="#ff6666" stop-opacity="0.5"/>
+                        <stop offset="50%" stop-color="#ff0000" stop-opacity="0.2"/>
+                        <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+                    </radialGradient>
+                </defs>
+                <!-- Primary light ray -->
+                <polygon points="0,0 350,0 500,600 0,600" fill="url(#ray1)"/>
+                <polygon points="100,0 280,0 420,600 200,600" fill="url(#ray2)"/>
+                <!-- Cross light beam -->
+                <polygon points="0,200 800,100 800,250 0,350" fill="white" opacity="0.08"/>
+                <polygon points="0,350 800,250 800,400 0,500" fill="white" opacity="0.05"/>
+            </svg>
         </div>
 
-        <!-- Profits Card -->
-        <div class="relative bg-gradient-to-br from-emerald-700 via-emerald-400 to-emerald-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
-            <div class="absolute inset-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id="profitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="white" stop-opacity="0.8"/>
-                            <stop offset="100%" stop-color="white" stop-opacity="0"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M10,70 L30,40 L50,55 L70,30 L90,50" fill="none" stroke="url(#profitGrad)" stroke-width="1.5"/>
-                    <path d="M5,80 L95,80" stroke="white" stroke-width="0.5" stroke-dasharray="4 4"/>
-                </svg>
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-            
-            <div class="absolute top-5 left-5">
-                <svg width="44" height="34" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="36" rx="6" fill="#FFD700"/>
-                    <path d="M15 20 L20 15 L28 23 L36 15 L40 19" stroke="#DAA520" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-                    <rect x="10" y="24" width="28" height="6" rx="2" fill="#DAA520" fill-opacity="0.3" stroke="#DAA520" stroke-width="1"/>
-                </svg>
-            </div>
-            <div class="absolute top-5 right-5">
-                <div class="flex items-center space-x-1">
-                    <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
-                    <p class="text-[10px] text-emerald-200 uppercase tracking-wider font-semibold">PrimeVest</p>
-                </div>
-            </div>
-            <div class="p-6 pt-14">
-                <div class="flex items-center space-x-2 mb-2">
-                    <svg class="w-4 h-4 text-emerald-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-                    </svg>
-                    <p class="text-xs text-emerald-200 uppercase tracking-wider font-medium">Total Profits</p>
-                </div>
-                <p class="text-4xl font-bold text-white tracking-tight">${{ number_format($profits, 2) }}</p>
-                <div class="flex justify-between items-end mt-8">
-                    <div>
-                        <p class="text-[10px] text-emerald-300 uppercase tracking-wider">Card Holder</p>
-                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] text-emerald-300 uppercase tracking-wider">Valid Thru</p>
-                        <p class="text-sm font-semibold text-white">08/28</p>
-                    </div>
-                </div>
-            </div>
-            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-md opacity-20"></div>
+        <!-- Secondary soft glow orb -->
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(255,100,100,0.25), transparent 70%);"></div>
+
+        <!-- Animated Shine Effect - enhanced -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 skew-x-12"></div>
+
+        <!-- Top Accent Glow - more vibrant -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-300 via-yellow-300 to-red-500"></div>
+
+        <!-- Premium Decorative SVG Patterns -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="white" stroke-width="0.3"/>
+                <circle cx="15" cy="15" r="12" fill="white" opacity="0.6"/>
+                <circle cx="85" cy="85" r="18" fill="white" opacity="0.3"/>
+                <circle cx="45" cy="30" r="6" fill="white" opacity="0.5"/>
+                <path d="M70,10 L80,20 L70,30 L60,20 Z" fill="white" opacity="0.4"/>
+                <path d="M20,70 L35,75 L30,90 L15,85 Z" fill="white" opacity="0.3"/>
+            </svg>
         </div>
 
-        <!-- Last Deposit Card -->
-        <div class="relative bg-gradient-to-br from-amber-700 via-amber-400 to-amber-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
-            <div class="absolute inset-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <circle cx="50" cy="50" r="25" fill="none" stroke="white" stroke-width="1" stroke-dasharray="3 3"/>
-                    <circle cx="50" cy="50" r="15" fill="none" stroke="white" stroke-width="0.8"/>
-                    <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="1"/>
-                    <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="1"/>
-                </svg>
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-            
-            <div class="absolute top-5 left-5">
-                <svg width="44" height="34" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="36" rx="6" fill="#FFD700"/>
-                    <path d="M18 12 L24 6 L30 12" stroke="#DAA520" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <rect x="14" y="14" width="20" height="16" rx="2" fill="none" stroke="#DAA520" stroke-width="1.5"/>
-                    <circle cx="24" cy="22" r="3" fill="#DAA520" fill-opacity="0.4" stroke="#DAA520" stroke-width="1"/>
-                </svg>
-            </div>
-            <div class="absolute top-5 right-5">
-                <div class="flex items-center space-x-1">
-                    <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
-                    <p class="text-[10px] text-amber-200 uppercase tracking-wider font-semibold">PrimeVest</p>
+        <div class="p-7 relative z-10">
+            <div class="flex items-start justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-red-100 font-semibold drop-shadow-lg">
+                        Main Balance
+                    </p>
+                    <div class="mt-4 flex items-baseline gap-2">
+                        <span class="text-3xl text-red-100 drop-shadow-md">$</span>
+                        <h2 class="text-[42px] leading-none font-bold text-white tracking-tight drop-shadow-2xl">
+                            {{ number_format($user->balance, 2) }}
+                        </h2>
+                    </div>
                 </div>
-            </div>
-            <div class="p-6 pt-14">
-                <div class="flex items-center space-x-2 mb-2">
-                    <svg class="w-4 h-4 text-amber-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 shadow-lg">
+                    <svg class="h-7 w-7 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                            d="M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/>
                     </svg>
-                    <p class="text-xs text-amber-200 uppercase tracking-wider font-medium">Last Deposit</p>
-                </div>
-                <p class="text-4xl font-bold text-white tracking-tight">${{ number_format($lastDepositAmount ?? 0, 2) }}</p>
-                <div class="flex justify-between items-end mt-8">
-                    <div>
-                        <p class="text-[10px] text-amber-300 uppercase tracking-wider">Card Holder</p>
-                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] text-amber-300 uppercase tracking-wider">Valid Thru</p>
-                        <p class="text-sm font-semibold text-white">08/28</p>
-                    </div>
                 </div>
             </div>
-            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-md opacity-20"></div>
+            <div class="mt-8 border-t border-white/15"></div>
+            <div class="mt-6 flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-100 font-semibold">Account Holder</p>
+                    <p class="mt-2 text-sm font-semibold tracking-wide text-white drop-shadow-md">{{ strtoupper($user->name) }}</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-100 font-semibold">Account Type</p>
+                    <p class="mt-2 text-sm font-semibold text-white drop-shadow-md">Premium Elite</p>
+                </div>
+            </div>
         </div>
-
-        <!-- Last Withdrawal Card -->
-        <div class="relative bg-gradient-to-br from-rose-700 via-rose-400 to-rose-900 rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]">
-            <div class="absolute inset-0 opacity-10">
-                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <defs>
-                        <linearGradient id="withdrawGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="white" stop-opacity="0.6"/>
-                            <stop offset="100%" stop-color="white" stop-opacity="0"/>
-                        </linearGradient>
-                    </defs>
-                    <path d="M50,25 L65,50 L50,75" fill="none" stroke="url(#withdrawGrad)" stroke-width="1.8" stroke-linecap="round"/>
-                    <path d="M50,25 L35,50 L50,75" fill="none" stroke="url(#withdrawGrad)" stroke-width="1.8" stroke-linecap="round"/>
-                    <circle cx="50" cy="50" r="3" fill="white" opacity="0.6"/>
-                </svg>
-            </div>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-            
-            <div class="absolute top-5 left-5">
-                <svg width="44" height="34" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="48" height="36" rx="6" fill="#FFD700"/>
-                    <rect x="10" y="12" width="28" height="16" rx="2" fill="none" stroke="#DAA520" stroke-width="1.5"/>
-                    <path d="M20 20 L24 16 L28 20" stroke="#DAA520" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                    <line x1="24" y1="16" x2="24" y2="28" stroke="#DAA520" stroke-width="1.5"/>
-                </svg>
-            </div>
-            <div class="absolute top-5 right-5">
-                <div class="flex items-center space-x-1">
-                    <span class="w-2 h-2 rounded-full bg-rose-300 animate-pulse"></span>
-                    <p class="text-[10px] text-rose-200 uppercase tracking-wider font-semibold">PrimeVest</p>
-                </div>
-            </div>
-            <div class="p-6 pt-14">
-                <div class="flex items-center space-x-2 mb-2">
-                    <svg class="w-4 h-4 text-rose-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm0 0v2"/>
-                    </svg>
-                    <p class="text-xs text-rose-200 uppercase tracking-wider font-medium">Last Withdrawal</p>
-                </div>
-                <p class="text-4xl font-bold text-white tracking-tight">${{ number_format($lastWithdrawalAmount ?? 0, 2) }}</p>
-                @if(isset($lastWithdrawalDate))
-                <p class="text-xs text-rose-300 mt-1">{{ $lastWithdrawalDate }}</p>
-                @endif
-                <div class="flex justify-between items-end mt-6">
-                    <div>
-                        <p class="text-[10px] text-rose-300 uppercase tracking-wider">Card Holder</p>
-                        <p class="text-sm font-semibold text-white tracking-wider">{{ strtoupper($user->name) }}</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] text-rose-300 uppercase tracking-wider">Valid Thru</p>
-                        <p class="text-sm font-semibold text-white">08/28</p>
-                    </div>
-                </div>
-            </div>
-            <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-8 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-md opacity-20"></div>
-        </div>
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-yellow-400/20 to-red-500/20 rounded-full blur-3xl"></div>
     </div>
+
+    <!-- TOTAL PROFITS - Intense Light Ray Gradient -->
+    <div class="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl group"
+         style="background: radial-gradient(ellipse 200% 130% at 70% 15%, #ff3333 0%, #d40000 40%, #7a0000 100%);">
+        
+        <div class="absolute inset-0 opacity-25 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="profitRay" x1="60%" y1="0%" x2="30%" y2="100%">
+                        <stop offset="0%" stop-color="#fff5cc" stop-opacity="0.7"/>
+                        <stop offset="40%" stop-color="white" stop-opacity="0.2"/>
+                        <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+                <polygon points="400,0 800,0 800,600 200,600" fill="url(#profitRay)"/>
+                <polygon points="500,0 700,0 550,600 350,600" fill="white" opacity="0.12"/>
+                <rect x="600" y="200" width="200" height="300" fill="white" opacity="0.06" transform="skewX(-20)"/>
+            </svg>
+        </div>
+        
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 85% 20%, rgba(255,200,100,0.3), transparent 60%);"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-300 via-amber-300 to-red-500"></div>
+
+        <div class="absolute inset-0 opacity-8 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M10,50 L30,30 L50,50 L70,30 L90,50" fill="none" stroke="white" stroke-width="0.8" stroke-dasharray="4 4"/>
+                <path d="M5,70 L95,70" stroke="white" stroke-width="0.6" stroke-dasharray="2 4"/>
+                <polygon points="80,10 90,15 85,25" fill="white" opacity="0.5"/>
+            </svg>
+        </div>
+
+        <div class="p-7 relative z-10">
+            <div class="flex items-start justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-red-100 font-semibold drop-shadow-lg">Total Profits</p>
+                    <div class="mt-4 flex items-baseline gap-2">
+                        <span class="text-3xl text-red-100 drop-shadow-md">$</span>
+                        <h2 class="text-[42px] leading-none font-bold text-white tracking-tight drop-shadow-2xl">{{ number_format($profits, 2) }}</h2>
+                    </div>
+                </div>
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 shadow-lg">
+                    <svg class="h-7 w-7 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 7h8m0 0v8m0-8L10 18l-4-4-6 6"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-white/15"></div>
+            <div class="mt-6 flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-100 font-semibold">Investor</p>
+                    <p class="mt-2 text-sm font-semibold tracking-wide text-white drop-shadow-md">{{ strtoupper($user->name) }}</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-100 font-semibold">Performance</p>
+                    <div class="mt-2 flex items-center gap-1.5"><span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span><p class="text-sm font-semibold text-green-300 drop-shadow">+12.5%</p></div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-tl from-amber-400/20 to-red-500/20 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- LAST DEPOSIT - Solar Flare Gradient -->
+    <div class="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl group"
+         style="background: radial-gradient(ellipse 170% 140% at 40% 10%, #ff4444 0%, #bb0000 50%, #660000 100%);">
+        
+        <div class="absolute inset-0 opacity-30 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="depositRay" x1="0%" y1="0%" x2="100%" y2="80%">
+                        <stop offset="0%" stop-color="#ffdd99" stop-opacity="0.8"/>
+                        <stop offset="25%" stop-color="white" stop-opacity="0.3"/>
+                        <stop offset="70%" stop-color="#ff8000" stop-opacity="0.05"/>
+                        <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+                <polygon points="0,0 300,0 400,600 0,600" fill="url(#depositRay)"/>
+                <polygon points="150,0 280,0 350,600 220,600" fill="white" opacity="0.15"/>
+                <circle cx="120" cy="100" r="80" fill="white" opacity="0.08"/>
+            </svg>
+        </div>
+        
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 15% 20%, rgba(255,180,80,0.35), transparent 65%);"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-300 via-yellow-200 to-red-600"></div>
+
+        <div class="absolute inset-0 opacity-8 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <circle cx="50" cy="50" r="25" fill="none" stroke="white" stroke-width="1" stroke-dasharray="3 4"/>
+                <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="0.8"/>
+                <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="0.8"/>
+                <circle cx="70" cy="20" r="5" fill="white" opacity="0.5"/>
+            </svg>
+        </div>
+
+        <div class="p-7 relative z-10">
+            <div class="flex items-start justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-red-100 font-semibold drop-shadow-lg">Last Deposit</p>
+                    <div class="mt-4 flex items-baseline gap-2">
+                        <span class="text-3xl text-red-100 drop-shadow-md">$</span>
+                        <h2 class="text-[42px] leading-none font-bold text-white tracking-tight drop-shadow-2xl">{{ number_format($lastDepositAmount ?? 0, 2) }}</h2>
+                    </div>
+                    @if(isset($lastDepositDate))<p class="mt-2 text-xs text-red-100 drop-shadow">{{ $lastDepositDate }}</p>@endif
+                </div>
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 shadow-lg">
+                    <svg class="h-7 w-7 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-white/15"></div>
+            <div class="mt-6 flex items-center justify-between">
+                <div><p class="text-[10px] uppercase tracking-[0.2em] text-red-100 font-semibold">Depositor</p><p class="mt-2 text-sm font-semibold tracking-wide text-white drop-shadow-md">{{ strtoupper($user->name) }}</p></div>
+                <div class="text-right"><p class="text-[10px] uppercase tracking-[0.2em] text-red-100 font-semibold">Status</p><div class="mt-2 flex items-center gap-1.5 justify-end"><span class="w-2 h-2 bg-green-400 rounded-full"></span><p class="text-sm font-semibold text-green-300 drop-shadow">Completed</p></div></div>
+            </div>
+        </div>
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-bl from-yellow-400/20 via-red-500/20 to-transparent rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- LAST WITHDRAWAL - Radiant Explosion Gradient -->
+    <div class="relative overflow-hidden rounded-2xl shadow-xl transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl group"
+         style="background: radial-gradient(ellipse 160% 150% at 80% 30%, #ff2a2a 0%, #c10000 45%, #800000 100%);">
+        
+        <div class="absolute inset-0 opacity-25 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 800 600" preserveAspectRatio="none">
+                <defs>
+                    <linearGradient id="withdrawRay" x1="80%" y1="0%" x2="10%" y2="100%">
+                        <stop offset="0%" stop-color="#ffddaa" stop-opacity="0.7"/>
+                        <stop offset="35%" stop-color="white" stop-opacity="0.25"/>
+                        <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+                    </linearGradient>
+                </defs>
+                <polygon points="500,0 800,0 800,600 300,600" fill="url(#withdrawRay)"/>
+                <polygon points="600,0 750,0 600,600 450,600" fill="white" opacity="0.12"/>
+                <rect x="650" y="100" width="150" height="400" fill="white" opacity="0.06" transform="skewX(-15)"/>
+                <circle cx="650" cy="150" r="60" fill="white" opacity="0.08"/>
+            </svg>
+        </div>
+        
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 90% 10%, rgba(255,220,120,0.4), transparent 70%);"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-400 via-amber-200 to-red-700"></div>
+
+        <div class="absolute inset-0 opacity-8 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M50,25 L65,50 L50,75" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M50,25 L35,50 L50,75" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="4" fill="white" opacity="0.6"/>
+                <polygon points="20,80 30,85 25,95" fill="white" opacity="0.3"/>
+            </svg>
+        </div>
+
+        <div class="p-7 relative z-10">
+            <div class="flex items-start justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-red-100 font-semibold drop-shadow-lg">Last Withdrawal</p>
+                    <div class="mt-4 flex items-baseline gap-2">
+                        <span class="text-3xl text-red-100 drop-shadow-md">$</span>
+                        <h2 class="text-[42px] leading-none font-bold text-white tracking-tight drop-shadow-2xl">{{ number_format($lastWithdrawalAmount ?? 0, 2) }}</h2>
+                    </div>
+                    @if(isset($lastWithdrawalDate))<p class="mt-2 text-xs text-red-100 drop-shadow">{{ $lastWithdrawalDate }}</p>@endif
+                </div>
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-md border border-white/30 shadow-lg">
+                    <svg class="h-7 w-7 text-white drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 17H7m0 0l4 4m-4-4l4-4"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-white/15"></div>
+            <div class="mt-6 flex items-center justify-between">
+                <div><p class="text-[10px] uppercase tracking-[0.2em] text-red-100 font-semibold">Beneficiary</p><p class="mt-2 text-sm font-semibold tracking-wide text-white drop-shadow-md">{{ strtoupper($user->name) }}</p></div>
+                <div class="text-right"><p class="text-[10px] uppercase tracking-[0.2em] text-red-100 font-semibold">Status</p><div class="mt-2 flex items-center gap-1.5 justify-end"><span class="w-2 h-2 bg-green-400 rounded-full"></span><p class="text-sm font-semibold text-green-300 drop-shadow">Processed</p></div></div>
+            </div>
+        </div>
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-t from-amber-500/20 to-red-600/20 rounded-full blur-3xl"></div>
+    </div>
+
+</div>
 
     <!-- TradingView Widgets Container -->
     <div>
