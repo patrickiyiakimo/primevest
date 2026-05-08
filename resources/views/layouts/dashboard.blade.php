@@ -13,83 +13,204 @@
             box-sizing: border-box;
         }
         
-        /* Sidebar Styles */
+        /* Sidebar Styles - International Professional Style */
         .sidebar {
             position: fixed;
             top: 0;
             left: 0;
             width: 18rem;
             height: 100vh;
-            background: linear-gradient(to bottom, #111827, #1f2937);
-            color: white;
+            background: #f3f4f6;
+            color: #1f2937;
             z-index: 40;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             overflow-y: auto;
+            border-right: 1px solid #e5e7eb;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.02);
+        }
+        
+        /* Sidebar Header with subtle brand accent */
+        .sidebar-header {
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
+            background: linear-gradient(to bottom, #f9fafb, #f3f4f6);
+        }
+        
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.25rem;
+        }
+        
+        .sidebar-header p {
+            font-size: 0.7rem;
+            color: #6b7280;
+            margin-top: 0.25rem;
+            font-weight: 400;
+        }
+        
+        /* Sidebar Navigation Items */
+        .sidebar-nav {
+            padding: 0 0.75rem;
         }
         
         .sidebar-item {
-            transition: all 0.3s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            padding: 0.75rem 1.5rem;
-            color: #d1d5db;
+            padding: 0.75rem 1rem;
+            color: #374151;
+            border-radius: 0.5rem;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            position: relative;
         }
         
         .sidebar-item:hover {
-            background-color: #374151;
-            color: white;
-            padding-left: 1.5rem;
+            background-color: #fee2e2;
+            color: #dc2626;
+            transform: translateX(2px);
         }
         
         .sidebar-item-active {
-            background-color: ;
-            color: white;
-
-            /* I want the color to be red */
-            border-left: 4px solid #ef4444;
+            background: linear-gradient(135deg, #fef2f2, #fecaca);
+            color: #dc2626;
+            border-left: 3px solid #dc2626;
+            font-weight: 600;
         }
         
-        /* Custom scrollbar for sidebar */
-        .sidebar::-webkit-scrollbar {
-            width: 5px;
-        }
-        .sidebar::-webkit-scrollbar-track {
-            background: #1f2937;
-        }
-        .sidebar::-webkit-scrollbar-thumb {
-            background: #4b5563;
-            border-radius: 5px;
-        }
-        .sidebar::-webkit-scrollbar-thumb:hover {
-            background: #6b7280;
+        /* Sidebar Icons */
+        .sidebar-item svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            flex-shrink: 0;
+            color: #6b7280;
+            transition: all 0.2s ease;
         }
         
-        /* Dropdown styles */
+        .sidebar-item:hover svg {
+            color: #dc2626;
+            transform: scale(1.05);
+        }
+        
+        .sidebar-item-active svg {
+            color: #dc2626;
+        }
+        
+        /* Section Titles */
+        .sidebar-section-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            padding: 0.75rem 1rem 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Dropdown styles - Professional Animation */
+        .dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
         .dropdown-menu {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-left: 2rem;
         }
+        
         .dropdown-menu.open {
-            max-height: 500px;
+            max-height: 30rem;
         }
+        
+        .dropdown-menu .sidebar-item {
+            padding: 0.625rem 1rem;
+            font-size: 0.813rem;
+            margin-bottom: 0.125rem;
+        }
+        
+        .dropdown-menu .sidebar-item:hover {
+            transform: translateX(4px);
+        }
+        
         .dropdown-arrow {
-            transition: transform 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #9ca3af;
+            font-size: 0.75rem;
         }
+        
         .dropdown-arrow.rotated {
             transform: rotate(180deg);
+        }
+        
+        /* Nested dropdowns (for transaction history sub-items) */
+        .sub-dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            padding-left: 1.75rem;
+        }
+        
+        .sub-dropdown-menu.open {
+            max-height: 20rem;
+        }
+        
+        .sub-dropdown-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        
+        .sub-dropdown-arrow {
+            transition: transform 0.3s ease;
+            color: #9ca3af;
+            font-size: 0.65rem;
+        }
+        
+        .sub-dropdown-arrow.rotated {
+            transform: rotate(180deg);
+        }
+        
+        /* Custom scrollbar for sidebar - Light theme */
+        .sidebar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar::-webkit-scrollbar-track {
+            background: #e5e7eb;
+        }
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #ef4444;
         }
         
         /* Main content adjustment */
         .main-content {
             margin-left: 18rem;
             width: calc(100% - 18rem);
-            transition: margin-left 0.3s ease;
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             padding-top: 65px;
+            background: #f9fafb;
+            min-height: 100vh;
         }
         
-        /* Navbar styles */
+        /* Navbar styles - Clean white header */
         .dashboard-navbar {
             position: fixed;
             top: 0;
@@ -97,8 +218,76 @@
             left: 18rem;
             z-index: 45;
             background: white;
-            border-bottom: 1px solid #e5e7eb;
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid #f0f0f0;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+            transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* User Avatar */
+        .user-avatar {
+            width: 2.25rem;
+            height: 2.25rem;
+            background: linear-gradient(135deg, #dc2626, #991b1b);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        
+        /* Animation for dropdown items - staggered entrance */
+        .dropdown-menu .sidebar-item {
+            animation: slideIn 0.25s ease forwards;
+            opacity: 0;
+            transform: translateX(-8px);
+        }
+        
+        .dropdown-menu.open .sidebar-item {
+            animation: slideIn 0.25s ease forwards;
+        }
+        
+        .dropdown-menu.open .sidebar-item:nth-child(1) { animation-delay: 0.02s; }
+        .dropdown-menu.open .sidebar-item:nth-child(2) { animation-delay: 0.04s; }
+        .dropdown-menu.open .sidebar-item:nth-child(3) { animation-delay: 0.06s; }
+        .dropdown-menu.open .sidebar-item:nth-child(4) { animation-delay: 0.08s; }
+        .dropdown-menu.open .sidebar-item:nth-child(5) { animation-delay: 0.1s; }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Staggered entrance for sub-dropdown items */
+        .sub-dropdown-menu .sidebar-item {
+            animation: slideInSub 0.25s ease forwards;
+            opacity: 0;
+        }
+        
+        .sub-dropdown-menu.open .sidebar-item {
+            animation: slideInSub 0.25s ease forwards;
+        }
+        
+        .sub-dropdown-menu.open .sidebar-item:nth-child(1) { animation-delay: 0.02s; }
+        .sub-dropdown-menu.open .sidebar-item:nth-child(2) { animation-delay: 0.04s; }
+        .sub-dropdown-menu.open .sidebar-item:nth-child(3) { animation-delay: 0.06s; }
+        
+        @keyframes slideInSub {
+            from {
+                opacity: 0;
+                transform: translateX(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
         /* Mobile styles */
@@ -106,9 +295,11 @@
             .sidebar {
                 transform: translateX(-100%);
                 z-index: 1000;
+                box-shadow: none;
             }
             .sidebar.open {
                 transform: translateX(0);
+                box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
             }
             .main-content {
                 margin-left: 0;
@@ -123,7 +314,8 @@
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(2px);
                 z-index: 999;
                 display: none;
             }
@@ -137,6 +329,61 @@
             .mobile-only {
                 display: none;
             }
+        }
+        
+        /* International accent - UK/US inspired subtle flag elements */
+        .sidebar-footer {
+            padding: 1rem 1rem;
+            border-top: 1px solid #e5e7eb;
+            margin-top: 1rem;
+            font-size: 0.7rem;
+            color: #6b7280;
+            text-align: center;
+        }
+        
+        .region-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: #ffffff;
+            padding: 0.25rem 0.65rem;
+            border-radius: 2rem;
+            font-size: 0.6rem;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+        
+        /* Notification badge */
+        .sidebar-badge {
+            margin-left: auto;
+            background: #ef4444;
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 600;
+            padding: 0.125rem 0.5rem;
+            border-radius: 1rem;
+        }
+        
+        /* Tooltip for sidebar items */
+        .sidebar-item[data-tooltip] {
+            position: relative;
+        }
+        
+        .sidebar-item[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1f2937;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            white-space: nowrap;
+            margin-left: 0.5rem;
+            z-index: 50;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -168,7 +415,7 @@
                     <span class="text-white font-bold text-lg">{{ substr(Auth::user()->name, 0, 1) }}</span>
                 </div>
                 <div>
-                    <p class="font-semibold text-white">Hello, {{ Auth::user()->name }}</p>
+                    <p class="font-semibold text-gray-900">Hello, {{ Auth::user()->name }}</p>
                     <p class="text-xs text-gray-400">{{ Auth::user()->email }}</p>
                 </div>
             </div>
