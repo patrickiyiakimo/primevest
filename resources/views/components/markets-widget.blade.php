@@ -1,4 +1,4 @@
-<div class="w-full py-20 px-5 bg-gray-100">
+<div class="w-full py-20 px-5 bg-white">
     <div class="max-w-7xl mx-auto">
         <!-- Title -->
         <div class="text-center mb-12">
@@ -11,7 +11,7 @@
         </div>
 
         <!-- TradingView Market Overview Widget -->
-        <div class="w-full rounded-xl overflow-hidden shadow-2xl">
+        <div class="w-full rounded-xl overflow-hidden ">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
@@ -20,7 +20,7 @@
                     "height": 600,
                     "title": "Market Overview",
                     "titleColor": "#1f2937",
-                    "colorTheme": "light",
+                    "colorTheme": "dark",
                     "locale": "en",
                     "trendLineColor": "#b91c1c",
                     "isTransparent": false,

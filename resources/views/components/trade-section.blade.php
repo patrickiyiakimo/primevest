@@ -1,4 +1,4 @@
-<div class="w-full py-20 px-5 bg-white">
+<div class="w-full py-24 px-5 bg-white">
     <div class="max-w-6xl mx-auto">
         <!-- Two column layout centered -->
         <div class="flex items-center justify-center gap-14 flex-wrap md:flex-nowrap">
@@ -12,7 +12,7 @@
                     and regulated trading environment. As an active trader you can also 
                     qualify for lower fees and extra benefits.
                 </p>
-                <a href="/register" class="inline-block px-8 py-3.5 bg-red-700 text-white font-semibold rounded-full hover:bg-red-800 transition-all duration-300">
+                <a href="/register" class="inline-block px-8 py-3.5 bg-red-700 text-white font-semibold  hover:bg-red-800 transition-all duration-300">
                     See our Packages
                 </a>
             </div>
