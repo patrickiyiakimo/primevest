@@ -68,14 +68,13 @@
                     ctaLink: '/contact'
                 }
             ],
-            setActive(id) { 
-                if (this.activeFeature === id) {
-                    this.activeFeature = null;
-                    document.body.style.overflow = '';
-                } else {
-                    this.activeFeature = id;
-                    document.body.style.overflow = 'hidden';
-                }
+            openFeature(id) {
+                this.activeFeature = id;
+                document.body.classList.add('modal-open');
+            },
+            closeFeature() {
+                this.activeFeature = null;
+                document.body.classList.remove('modal-open');
             }
         }" class="relative">
             
@@ -87,7 +86,7 @@
                         <div x-show="activeFeature !== feature.id" 
                              class="relative overflow-hidden rounded-xl cursor-pointer group h-[320px] transition-all duration-500"
                              :class="{ 'opacity-40 scale-95': activeFeature !== null && activeFeature !== feature.id, 'opacity-100 scale-100': activeFeature === null || activeFeature === feature.id }"
-                             @click="setActive(feature.id)">
+                             @click="openFeature(feature.id)">
                             
                             <!-- Background Image -->
                             <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -133,7 +132,7 @@
                  style="display: none;">
                 
                 <!-- Dark overlay -->
-                <div class="absolute inset-0 bg-black/60" @click="setActive(null)"></div>
+                <div class="absolute inset-0 bg-black/60" @click="closeFeature()"></div>
                 
                 <!-- Slide-out Panel - Scrollable -->
                 <div x-show="activeFeature !== null"
@@ -149,7 +148,7 @@
                     <template x-for="feature in features" :key="feature.id">
                         <div x-show="activeFeature === feature.id" class="relative">
                             <!-- Close Button -->
-                            <button @click="setActive(null)" class="sticky top-6 right-6 z-10 w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition shadow-lg float-right mr-6 mt-6">
+                            <button @click="closeFeature()" class="sticky top-6 right-6 z-10 w-10 h-10 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition shadow-lg float-right mr-6 mt-6">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
@@ -219,7 +218,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
                                     </a>
-                                    <button @click="setActive(null)" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-300">
+                                    <button @click="closeFeature()" class="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-300">
                                         Close
                                     </button>
                                 </div>
@@ -237,7 +236,7 @@
                  class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 flex gap-3 bg-white rounded-full px-4 py-2 shadow-xl border border-gray-200"
                  style="display: none;">
                 <template x-for="feature in features" :key="feature.id">
-                    <button @click="setActive(feature.id)" 
+                    <button @click="openFeature(feature.id)" 
                             class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-300"
                             :class="activeFeature === feature.id ? 'bg-red-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'">
                         <span x-text="feature.title"></span>
@@ -265,6 +264,16 @@
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         transition-duration: 300ms;
     }
+    
+    /* Prevent body scroll when modal is open */
+    body.modal-open {
+        overflow: hidden !important;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
+    
+    /* Restore body scroll when modal is closed - handled by removing the class */
     
     /* Scrollbar for expanded card - ensure scrolling works */
     .overflow-y-auto {
