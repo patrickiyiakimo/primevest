@@ -31,8 +31,7 @@
     <!-- Markets We Offer Section -->
     @include('components.markets-we-offer')
     
-    <!-- Learn Bitcoin Section -->
-    @include('components.learn-bitcoin')
+    
     
     <!-- Trading Features Section -->
     @include('components.trading-features')
