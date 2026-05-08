@@ -9,228 +9,296 @@
     <!-- Stats Cards - Premium Red Gradient Design -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-7 mt-10">
 
-    <!-- MAIN BALANCE -->
-    <div class="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#111111] shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1">
+    <!-- MAIN BALANCE - Red Gradient -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-700 via-red-600 to-red-800 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl group">
 
-        <!-- Top Accent -->
-        <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-[#7f1d1d] via-red-600 to-[#450a0a]"></div>
+        <!-- Animated Shine Effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
-        <div class="p-7">
+        <!-- Top Accent Glow -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-300 via-red-400 to-red-600"></div>
 
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="white" stroke-width="0.5"/>
+                <circle cx="20" cy="20" r="15" fill="white"/>
+                <circle cx="80" cy="80" r="25" fill="white"/>
+                <circle cx="50" cy="50" r="8" fill="white"/>
+            </svg>
+        </div>
+
+        <div class="p-7 relative z-10">
             <!-- Header -->
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-medium">
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-red-200 font-medium">
                         Main Balance
                     </p>
 
-                    <h2 class="mt-5 text-[42px] leading-none font-semibold text-white">
-                        ${{ number_format($user->balance, 2) }}
-                    </h2>
+                    <div class="mt-4 flex items-baseline gap-2">
+                        <span class="text-3xl text-red-200">$</span>
+                        <h2 class="text-[42px] leading-none font-bold text-white tracking-tight">
+                            {{ number_format($user->balance, 2) }}
+                        </h2>
+                    </div>
                 </div>
 
-                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-600/10 border border-red-500/20">
-                    <svg class="h-6 w-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+                    <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2z"/>
                     </svg>
                 </div>
             </div>
 
             <!-- Divider -->
-            <div class="mt-8 border-t border-white/5"></div>
+            <div class="mt-8 border-t border-white/10"></div>
 
             <!-- Footer -->
             <div class="mt-6 flex items-center justify-between">
                 <div>
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-300">
                         Account Holder
                     </p>
 
-                    <p class="mt-2 text-sm font-medium tracking-wide text-white">
+                    <p class="mt-2 text-sm font-semibold tracking-wide text-white">
                         {{ strtoupper($user->name) }}
                     </p>
                 </div>
 
                 <div class="text-right">
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-300">
                         Account Type
                     </p>
 
-                    <p class="mt-2 text-sm font-medium text-white">
-                        Premium
+                    <p class="mt-2 text-sm font-semibold text-white">
+                        Premium Elite
                     </p>
                 </div>
             </div>
         </div>
+        
+        <!-- Card Chip Decor -->
+        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow-400/10 rounded-full blur-2xl"></div>
     </div>
 
+    <!-- TOTAL PROFITS - Red Gradient -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-700 via-red-600 to-red-800 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl group">
 
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
-    <!-- PROFITS -->
-    <div class="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#111111] shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-300 via-red-400 to-red-600"></div>
 
-        <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-emerald-800 via-emerald-500 to-emerald-900"></div>
+        <div class="absolute inset-0 opacity-5">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M10,50 L30,30 L50,50 L70,30 L90,50" fill="none" stroke="white" stroke-width="1"/>
+                <path d="M5,70 L95,70" stroke="white" stroke-width="0.5" stroke-dasharray="3 3"/>
+            </svg>
+        </div>
 
-        <div class="p-7">
-
+        <div class="p-7 relative z-10">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-medium">
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-red-200 font-medium">
                         Total Profits
                     </p>
 
-                    <h2 class="mt-5 text-[42px] leading-none font-semibold text-white">
-                        ${{ number_format($profits, 2) }}
-                    </h2>
+                    <div class="mt-4 flex items-baseline gap-2">
+                        <span class="text-3xl text-red-200">$</span>
+                        <h2 class="text-[42px] leading-none font-bold text-white tracking-tight">
+                            {{ number_format($profits, 2) }}
+                        </h2>
+                    </div>
                 </div>
 
-                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-600/10 border border-emerald-500/20">
-                    <svg class="h-6 w-6 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+                    <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M13 7h8m0 0v8m0-8L10 18l-4-4-6 6"/>
                     </svg>
                 </div>
             </div>
 
-            <div class="mt-8 border-t border-white/5"></div>
+            <div class="mt-8 border-t border-white/10"></div>
 
             <div class="mt-6 flex items-center justify-between">
                 <div>
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-300">
                         Investor
                     </p>
 
-                    <p class="mt-2 text-sm font-medium tracking-wide text-white">
+                    <p class="mt-2 text-sm font-semibold tracking-wide text-white">
                         {{ strtoupper($user->name) }}
                     </p>
                 </div>
 
                 <div class="text-right">
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-300">
                         Performance
                     </p>
 
-                    <p class="mt-2 text-sm font-medium text-emerald-500">
-                        Positive
-                    </p>
+                    <div class="mt-2 flex items-center gap-1.5">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <p class="text-sm font-semibold text-green-300">
+                            +12.5%
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow-400/10 rounded-full blur-2xl"></div>
     </div>
 
+    <!-- LAST DEPOSIT - Red Gradient -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-700 via-red-600 to-red-800 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl group">
 
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
-    <!-- LAST DEPOSIT -->
-    <div class="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#111111] shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-300 via-red-400 to-red-600"></div>
 
-        <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-amber-700 via-amber-400 to-amber-800"></div>
+        <div class="absolute inset-0 opacity-5">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <circle cx="50" cy="50" r="25" fill="none" stroke="white" stroke-width="1" stroke-dasharray="3 3"/>
+                <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="0.8"/>
+                <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="0.8"/>
+            </svg>
+        </div>
 
-        <div class="p-7">
-
+        <div class="p-7 relative z-10">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-medium">
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-red-200 font-medium">
                         Last Deposit
                     </p>
 
-                    <h2 class="mt-5 text-[42px] leading-none font-semibold text-white">
-                        ${{ number_format($lastDepositAmount ?? 0, 2) }}
-                    </h2>
+                    <div class="mt-4 flex items-baseline gap-2">
+                        <span class="text-3xl text-red-200">$</span>
+                        <h2 class="text-[42px] leading-none font-bold text-white tracking-tight">
+                            {{ number_format($lastDepositAmount ?? 0, 2) }}
+                        </h2>
+                    </div>
+                    
+                    @if(isset($lastDepositDate))
+                        <p class="mt-2 text-xs text-red-300">
+                            {{ $lastDepositDate }}
+                        </p>
+                    @endif
                 </div>
 
-                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-500/10 border border-amber-500/20">
-                    <svg class="h-6 w-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+                    <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M12 4v16m8-8H4"/>
                     </svg>
                 </div>
             </div>
 
-            <div class="mt-8 border-t border-white/5"></div>
+            <div class="mt-8 border-t border-white/10"></div>
 
             <div class="mt-6 flex items-center justify-between">
                 <div>
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-300">
                         Depositor
                     </p>
 
-                    <p class="mt-2 text-sm font-medium tracking-wide text-white">
+                    <p class="mt-2 text-sm font-semibold tracking-wide text-white">
                         {{ strtoupper($user->name) }}
                     </p>
                 </div>
 
                 <div class="text-right">
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-300">
                         Status
                     </p>
 
-                    <p class="mt-2 text-sm font-medium text-white">
-                        Successful
-                    </p>
+                    <div class="mt-2 flex items-center gap-1.5 justify-end">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <p class="text-sm font-semibold text-green-300">
+                            Completed
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow-400/10 rounded-full blur-2xl"></div>
     </div>
 
+    <!-- LAST WITHDRAWAL - Red Gradient -->
+    <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-700 via-red-600 to-red-800 shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl group">
 
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
 
-    <!-- LAST WITHDRAWAL -->
-    <div class="relative overflow-hidden rounded-[28px] border border-white/10 bg-[#111111] shadow-[0_10px_30px_rgba(0,0,0,0.35)] transition duration-300 hover:-translate-y-1">
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-300 via-red-400 to-red-600"></div>
 
-        <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-[#7f1d1d] via-rose-500 to-[#881337]"></div>
+        <div class="absolute inset-0 opacity-5">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M50,25 L65,50 L50,75" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M50,25 L35,50 L50,75" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="50" cy="50" r="3" fill="white"/>
+            </svg>
+        </div>
 
-        <div class="p-7">
-
+        <div class="p-7 relative z-10">
             <div class="flex items-start justify-between">
                 <div>
-                    <p class="text-[11px] uppercase tracking-[0.25em] text-zinc-400 font-medium">
+                    <p class="text-[11px] uppercase tracking-[0.25em] text-red-200 font-medium">
                         Last Withdrawal
                     </p>
 
-                    <h2 class="mt-5 text-[42px] leading-none font-semibold text-white">
-                        ${{ number_format($lastWithdrawalAmount ?? 0, 2) }}
-                    </h2>
+                    <div class="mt-4 flex items-baseline gap-2">
+                        <span class="text-3xl text-red-200">$</span>
+                        <h2 class="text-[42px] leading-none font-bold text-white tracking-tight">
+                            {{ number_format($lastWithdrawalAmount ?? 0, 2) }}
+                        </h2>
+                    </div>
 
                     @if(isset($lastWithdrawalDate))
-                        <p class="mt-3 text-sm text-zinc-500">
+                        <p class="mt-2 text-xs text-red-300">
                             {{ $lastWithdrawalDate }}
                         </p>
                     @endif
                 </div>
 
-                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-rose-500/10 border border-rose-500/20">
-                    <svg class="h-6 w-6 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7"
+                <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-lg">
+                    <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                             d="M17 17H7m0 0l4 4m-4-4l4-4"/>
                     </svg>
                 </div>
             </div>
 
-            <div class="mt-8 border-t border-white/5"></div>
+            <div class="mt-8 border-t border-white/10"></div>
 
             <div class="mt-6 flex items-center justify-between">
                 <div>
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-300">
                         Beneficiary
                     </p>
 
-                    <p class="mt-2 text-sm font-medium tracking-wide text-white">
+                    <p class="mt-2 text-sm font-semibold tracking-wide text-white">
                         {{ strtoupper($user->name) }}
                     </p>
                 </div>
 
                 <div class="text-right">
-                    <p class="text-[10px] uppercase tracking-[0.2em] text-zinc-500">
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-red-300">
                         Status
                     </p>
 
-                    <p class="mt-2 text-sm font-medium text-white">
-                        Completed
-                    </p>
+                    <div class="mt-2 flex items-center gap-1.5 justify-end">
+                        <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+                        <p class="text-sm font-semibold text-green-300">
+                            Processed
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-yellow-400/10 rounded-full blur-2xl"></div>
     </div>
 
 </div>
