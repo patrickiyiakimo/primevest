@@ -76,7 +76,7 @@
 
         <!-- CTA Button -->
         <div class="text-center mt-12">
-            <a href="{{ route('register') }}" class="inline-flex items-center space-x-2 px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
+            <a href="{{ route('register') }}" class="inline-flex items-center space-x-2 px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold transition-all duration-300 shadow-md hover:shadow-lg">
                 <span>Get Started Now</span>
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>

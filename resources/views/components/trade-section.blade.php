@@ -3,7 +3,7 @@
         <!-- Two column layout centered -->
         <div class="flex items-center justify-center gap-14 flex-wrap md:flex-nowrap">
             <!-- Left side - Text Content -->
-            <div class="flex-1 min-w-[300px]">
+            <div class="flex-1 min-w-[300px] text-center md:text-left">
                 <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-6 text-gray-900">
                     Trade with low commissions and tight spreads
                 </h2>
