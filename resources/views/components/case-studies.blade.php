@@ -58,7 +58,7 @@
                     <p class="text-gray-500 text-sm mb-4 px-5">
                         A corporate client implemented our automated trading solutions, achieving a stable 6–8% monthly ROI with minimal manual intervention.
                     </p>
-                    <a href="/case-studies/automated-trading" class="inline-flex items-center px-5  text-red-600 hover:text-red-700 font-semibold text-sm transition-colors duration-300">
+                    <a href="/case-studies/automated-trading" class="inline-flex items-center pl-5 pb-5  text-red-600 hover:text-red-700 font-semibold text-sm transition-colors duration-300">
                         Learn more
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -81,7 +81,7 @@
                     <p class="text-gray-500 text-sm mb-4 px-5">
                         An investor who faced a 40% portfolio drawdown regained profitability in 5 months using our custom recovery plan.
                     </p>
-                    <a href="/case-studies/portfolio-recovery" class="inline-flex px-5 items-center text-red-600 hover:text-red-700 font-semibold text-sm transition-colors duration-300">
+                    <a href="/case-studies/portfolio-recovery" class="inline-flex pl-5 pb-5 items-center text-red-600 hover:text-red-700 font-semibold text-sm transition-colors duration-300">
                         Learn more
                         <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
