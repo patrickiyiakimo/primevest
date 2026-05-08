@@ -8,7 +8,7 @@
         <!-- Left Side - Full Height Image -->
         <div class=" w-full lg:block hidden">
             <div class="relative h-full overflow-hidden shadow-2xl group" style="min-height: 650px;">
-                <img src="https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=800&h=1200&fit=crop" 
+                <img src="/images/beginners-success.jpg" 
                      alt="Investment Growth" 
                      class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
                 
@@ -140,7 +140,7 @@
                     </div>
                     
                     <!-- Submit Button -->
-                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition-all duration-500 shadow-lg">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold transition-all duration-500 shadow-lg">
                         Create Account
                     </button>
                 </form>
