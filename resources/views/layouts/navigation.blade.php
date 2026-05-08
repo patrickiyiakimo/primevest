@@ -4,7 +4,7 @@
 }" x-init="$nextTick(() => { mobileMenuOpen = false })" class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
     
     <!-- Top Market Ticker Slider -->
-    <div class="bg-blue-600 py-2 overflow-hidden">
+    <!-- <div class="bg-blue-600 py-2 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between gap-4">
                 <div class="flex-1 text-center overflow-hidden">
@@ -31,7 +31,7 @@
 </a>
             </div>
         </div>
-    </div>
+    </div> -->
     
     <!-- Main Navbar -->
     <div class="bg-white">
@@ -145,7 +145,7 @@
                 <div class="hidden md:flex items-center space-x-4">
                     @guest
                         <a href="/login" class="text-gray-600 hover:text-red-600 transition-all duration-300 text-sm font-medium">Login</a>
-                        <a href="/register" class="px-5 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-medium rounded-full transition-all duration-300 shadow-md hover:shadow-lg">
+                        <a href="/register" class="px-5 py-2 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white text-sm font-medium  transition-all duration-300 shadow-md hover:shadow-lg">
                             Get Started
                         </a>
                     @else
@@ -268,8 +268,8 @@
                 
                 <!-- Mobile Auth Buttons -->
                 <div class="pt-6 space-y-3">
-                    <a href="/login" class="block text-center py-3 text-gray-700 hover:text-red-600 transition-all duration-300 border border-gray-300 rounded-full">Login</a>
-                    <a href="/register" class="block text-center py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-full transition-all duration-300 shadow-md">Get Started</a>
+                    <a href="/login" class="block text-center py-3 text-gray-700 hover:text-red-600 transition-all duration-300 border border-gray-300">Login</a>
+                    <a href="/register" class="block text-center py-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white transition-all duration-300 shadow-md">Get Started</a>
                 </div>
                 
             @else
