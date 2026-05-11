@@ -1,4 +1,4 @@
-<div class="w-full py-20 px-5 bg-white">
+<div class="w-full py-5 px-5 bg-white">
     <div class="max-w-7xl mx-auto">
         <!-- Title -->
         <div class="text-center mb-12">
@@ -11,7 +11,7 @@
         </div>
 
         <!-- TradingView Market Overview Widget -->
-        <div class="w-full rounded-xl overflow-hidden ">
+        <!-- <div class="w-full rounded-xl overflow-hidden ">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
@@ -69,6 +69,7 @@
                 }
                 </script>
             </div>
-        </div>
+        </div> -->
+        <img src="{{ asset('/images/wealthfront-image.png') }}" alt="Markets Widget Placeholder" class="w-full rounded-xl">
     </div>
 </div>

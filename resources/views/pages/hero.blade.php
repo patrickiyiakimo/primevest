@@ -4,9 +4,9 @@
     <!-- Red Gradient Background Elements -->
     <div class="absolute inset-0 overflow-hidden">
         <!-- Top right red gradient -->
-        <div class="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-red-100 via-red-50 to-transparent rounded-full opacity-60"></div>
+        <div class="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-red-500 via-red-200 to-transparent rounded-full opacity-60"></div>
         <!-- Bottom left red gradient -->
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-red-100 via-red-50 to-transparent rounded-full opacity-60"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-red-500 via-red-200 to-transparent rounded-full opacity-60"></div>
         <!-- Center subtle red glow -->
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-red-50/30 via-transparent to-red-50/30 rounded-full blur-3xl"></div>
     </div>
@@ -19,7 +19,7 @@
                 <!-- Left Side - Text Content -->
                 <div class="text-center lg:text-left">
                     <!-- Main Heading -->
-                    <h1 class="text-4xl sm:text-5xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-gray-900 mb-6 leading-tight pt-20 lg:pt-0">
+                    <h1 class="text-4xl sm:text-5xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-6 leading-tight pt-20 lg:pt-0">
                         Trade Shares and Forex <br>with <span class="text-red-600">Financial Thinking</span>
                     </h1>
                     
@@ -79,10 +79,66 @@
                 
                 <!-- Right Side - Image with subtle red glow -->
                 <div class="flex justify-center lg:justify-end relative">
-                    <div class="absolute inset-0 bg-gradient-to-r from-red-100 to-transparent rounded-full blur-2xl opacity-50"></div>
-                    <img src="{{ asset('images/wealthfront-image.png') }}" 
-                         alt="Trading Illustration" 
-                         class="relative w-full max-w-lg lg:max-w-full h-auto">
+                    <div class="absolute inset-0 bg-gradient-to-r from-red-400 to-transparent rounded-full blur-2xl opacity-50"></div>
+                     <div class="w-full rounded-xl overflow-hidden ">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+                {
+                    "width": "100%",
+                    "height": 400,
+                    "title": "Market Overview",
+                    "titleColor": "#1f2937",
+                    "colorTheme": "light",
+                    "locale": "en",
+                    "trendLineColor": "#b91c1c",
+                    "isTransparent": false,
+                    "showVolume": false,
+                    "showChart": true,
+                    "tabs": [
+                        {
+                            "title": "Forex",
+                            "symbols": [
+                                {"s": "FX:EURUSD", "d": "EUR/USD"},
+                                {"s": "FX:GBPUSD", "d": "GBP/USD"},
+                                {"s": "FX:USDJPY", "d": "USD/JPY"},
+                                {"s": "FX:AUDUSD", "d": "AUD/USD"},
+                                {"s": "FX:USDCAD", "d": "USD/CAD"}
+                            ]
+                        },
+                        {
+                            "title": "Indices",
+                            "symbols": [
+                                {"s": "SP:SPX", "d": "S&P 500"},
+                                {"s": "NASDAQ:IXIC", "d": "Nasdaq"},
+                                {"s": "DJI:DJI", "d": "Dow Jones"},
+                                {"s": "FTSE:UKX", "d": "FTSE 100"},
+                                {"s": "HSI:HSI", "d": "Hang Seng"}
+                            ]
+                        },
+                        {
+                            "title": "Commodities",
+                            "symbols": [
+                                {"s": "TVC:GOLD", "d": "Gold"},
+                                {"s": "TVC:SILVER", "d": "Silver"},
+                                {"s": "NYMEX:CL1!", "d": "Crude Oil"},
+                                {"s": "TVC:USOIL", "d": "WTI Oil"}
+                            ]
+                        },
+                        {
+                            "title": "Crypto",
+                            "symbols": [
+                                {"s": "BINANCE:BTCUSDT", "d": "Bitcoin"},
+                                {"s": "BINANCE:ETHUSDT", "d": "Ethereum"},
+                                {"s": "BINANCE:SOLUSDT", "d": "Solana"},
+                                {"s": "BINANCE:BNBUSDT", "d": "BNB"}
+                            ]
+                        }
+                    ]
+                }
+                </script>
+            </div>
+        </div>
                 </div>
                 
             </div>
