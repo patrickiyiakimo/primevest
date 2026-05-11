@@ -70,6 +70,8 @@
                 </script>
             </div>
         </div> -->
-        <img src="{{ asset('/images/wealthfront-image.png') }}" alt="Markets Widget Placeholder" class="w-full rounded-xl">
+        <img src="{{ asset('/images/wealthfront-image.png') }}" 
+     alt="Markets Widget Placeholder" 
+     class="w-full max-w-md md:max-w-lg lg:max-w-xl h-auto mx-auto">
     </div>
 </div>
