@@ -6,7 +6,7 @@
         <!-- Top right red gradient -->
         <div class="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-red-500 via-red-200 to-transparent rounded-full opacity-60"></div>
         <!-- Bottom left red gradient -->
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-red-200 via-red-200 to-transparent rounded-full opacity-60"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-red-400 via-red-200 to-transparent rounded-full opacity-60"></div>
         <!-- Center subtle red glow -->
         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-red-50/30 via-transparent to-red-50/30 rounded-full blur-3xl"></div>
     </div>
@@ -79,7 +79,7 @@
                 
                 <!-- Right Side - Image with subtle red glow -->
                 <div class="flex justify-center lg:justify-end relative">
-                    <div class="absolute inset-0 bg-gradient-to-r from-red-400 to-transparent rounded-full blur-2xl opacity-50"></div>
+                    <!-- <div class="absolute inset-0 bg-gradient-to-r from-red-200 to-transparent rounded-full blur-2xl opacity-50"></div> -->
                      <div class="w-full rounded-xl overflow-hidden ">
             <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
