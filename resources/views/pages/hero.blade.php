@@ -86,10 +86,10 @@
                 <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
                 {
                     "width": "100%",
-                    "height": 400,
+                    "height": 500,
                     "title": "Market Overview",
                     "titleColor": "#1f2937",
-                    "colorTheme": "light",
+                    "colorTheme": "dark",
                     "locale": "en",
                     "trendLineColor": "#b91c1c",
                     "isTransparent": false,
