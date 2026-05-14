@@ -60,7 +60,7 @@
                 }
             ],
             "showSymbolLogo": true,
-            "colorTheme": "light",
+            "colorTheme": "dark",
             "isTransparent": false,
             "locale": "en",
             "backgroundColor": "#ffffff"
