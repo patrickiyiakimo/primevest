@@ -2,7 +2,7 @@
 <div class="relative min-h-[400px] sm:min-h-[450px] md:min-h-[500px] overflow-hidden bg-white">
     
     <!-- Section Header -->
-<div class="text-center mb-12">
+<div class="text-center mb-5">
     <div class="inline-flex items-center justify-center mb-4">
         <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center">
             <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -20,7 +20,7 @@
 </div>
 
 <!-- Case Studies Interactive Grid -->
-<div class="py-16 lg:py-24 bg-gray-50">
+<div class="py-10 lg:py-14 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div x-data="{ 
