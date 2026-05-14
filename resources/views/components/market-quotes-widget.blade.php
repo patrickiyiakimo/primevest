@@ -1,6 +1,6 @@
 <!-- Market Quotes Widget with Constrained Width (Tailwind) -->
 <!-- This widget displays real-time data for Indices, Commodities, Forex, and Crypto -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-10">
     <div class="tradingview-widget-container">
         <div class="tradingview-widget-container__widget"></div>
         <div class="tradingview-widget-copyright">
