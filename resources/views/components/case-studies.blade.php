@@ -168,6 +168,9 @@
                                 </div>
                                 <p class="text-gray-600 text-sm font-medium mb-2" x-text="caseStudy.subtitle"></p>
                                 <p class="text-gray-500 pb-7 text-sm leading-relaxed" x-text="caseStudy.description"></p>
+                                <p class="text-red-600 py-5 font-semibold hover:text-red-700 transition-colors duration-300 cursor-pointer">
+                                    Learn more
+                                </p>
                                 <!-- <div class="mx-12 flex justify-end">
                                     <div class="w-10 h-10 bg-red-600 mx-12 flex items-center justify-center shadow-lg hover:bg-red-700 transition-all duration-300 cursor-pointer">
                                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
