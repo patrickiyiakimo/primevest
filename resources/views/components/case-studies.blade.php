@@ -169,7 +169,7 @@
                                 <p class="text-gray-600 text-sm font-medium mb-2" x-text="caseStudy.subtitle"></p>
                                 <p class="text-gray-500 text-sm leading-relaxed" x-text="caseStudy.description"></p>
                                 <div class="mt-4 flex justify-end mb-8">
-                                    <div class="w-10 h-10 bg-red-600 flex items-center justify-center shadow-lg hover:bg-red-700 transition-all duration-300 cursor-pointer">
+                                    <div class="w-10 h-10 bg-green-600 flex items-center justify-center shadow-lg hover:bg-green-700 transition-all duration-300 cursor-pointer">
                                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
