@@ -1,5 +1,5 @@
 <!-- Hero Section - Same Design as Homepage -->
-<div class="relative min-h-[400px] sm:min-h-[450px] md:min-h-[500px] overflow-hidden bg-white">
+<!-- <div class="relative min-h-[400px] sm:min-h-[450px] md:min-h-[500px] overflow-hidden bg-white"> -->
     
     <!-- Section Header -->
 <div class="text-center mb-5">
@@ -17,7 +17,7 @@
         Success stories from our community of traders who achieved their financial goals with PrimeVest
     </p>
 </div>
-</div>
+<!-- </div> -->
 
 <!-- Case Studies Interactive Grid -->
 <div class="py-10 lg:py-14 bg-gray-50">
@@ -168,8 +168,8 @@
                                 </div>
                                 <p class="text-gray-600 text-sm font-medium mb-2" x-text="caseStudy.subtitle"></p>
                                 <p class="text-gray-500 text-sm leading-relaxed" x-text="caseStudy.description"></p>
-                                <div class="mt-4 flex justify-end">
-                                    <div class="w-10 h-10 bg-red-600 flex mb-5 items-center justify-center shadow-lg hover:bg-red-700 transition-all duration-300 cursor-pointer">
+                                <div class="mt-4 flex justify-end mb-8">
+                                    <div class="w-10 h-10 bg-red-600 flex items-center justify-center shadow-lg hover:bg-red-700 transition-all duration-300 cursor-pointer">
                                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                         </svg>
