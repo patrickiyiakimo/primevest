@@ -80,7 +80,7 @@
         <label class="payment-method flex items-center justify-between p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300" data-method="{{ $method['value'] }}">
             <div class="flex items-center space-x-4">
                 <input type="radio" name="payment_method" value="{{ $method['value'] }}" class="w-5 h-5 text-green-600 focus:ring-green-500" onchange="selectPaymentMethod(this)">
-                <div class="w-12 h-12 bg-gradient-to-br {{ $method['bg'] }} rounded-xl flex items-center justify-center shadow-md p-2">
+                <div class="w-12 h-12  rounded-xl flex items-center justify-center shadow-md p-2">
                     <img src="{{ $method['logo'] }}" alt="{{ $method['name'] }}" class="w-8 h-8 object-contain">
                 </div>
                 <div>
