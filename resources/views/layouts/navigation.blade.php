@@ -93,6 +93,10 @@
                             <a href="/careers" class="block px-4 py-2 text-sm text-gray-700 hover:text-red-600 hover:bg-gray-50 transition">Careers</a>
                         </div>
                     </div>
+
+                    <a href="/real-estate" class="text-gray-700 hover:text-red-600 transition-all duration-300 text-sm font-medium block py-2">
+    Real Estate
+</a>
                     
                     <div class="relative">
                         <button @click="activeDropdown = activeDropdown === 'education' ? null : 'education'" 
@@ -139,6 +143,7 @@
                             <a href="tel:+1-800-PRIMEVEST" class="block px-4 py-2 text-sm text-gray-700 hover:text-red-600 hover:bg-gray-50 transition">24/7 Helpline</a>
                         </div>
                     </div>
+                    
                 </div>
                 
                 <!-- Desktop Auth Buttons -->
@@ -236,6 +241,8 @@
                         <a href="/careers" class="block py-2 text-sm text-gray-500 hover:text-red-600 transition">Careers</a>
                     </div>
                 </div>
+
+                <a href="/real-estate" class="block py-3 text-gray-200 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Real Estate</a>
                 
                 <!-- Education Mobile Dropdown -->
                 <div x-data="{ open: false }">

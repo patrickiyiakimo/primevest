@@ -175,6 +175,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/trading', [PageController::class, 'trading'])->name('trading');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/company', [PageController::class, 'company'])->name('company');
+// Real Estate Routes
+Route::get('/real-estate', [PageController::class, 'realEstate'])->name('real-estate');
+Route::get('/real-estate/{id}', function ($id) {
+    return view('pages.property-details', ['id' => $id]);
+})->name('real-estate.show');
 Route::get('/education', [PageController::class, 'education'])->name('education');
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');

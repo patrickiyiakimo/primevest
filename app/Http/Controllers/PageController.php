@@ -20,11 +20,18 @@ class PageController extends Controller
     {
         return view('pages.company');
     }
+
+    // Fixed: Changed from real-estate() to realEstate() (no hyphen allowed)
+    public function realEstate()
+    {
+        return view('pages.real-estate');
+    }
     
     public function education()
     {
         return view('pages.education');
     }
+    
     public function settings()
     {
         return view('pages.settings');
