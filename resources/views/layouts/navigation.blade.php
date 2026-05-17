@@ -243,6 +243,7 @@
                 </div>
 
                 <a href="/real-estate" class="block py-3 text-gray-700 hover:text-red-700 transition-colors duration-300 border-b border-white/10">Real Estate</a>
+                <hr/>
                 
                 <!-- Education Mobile Dropdown -->
                 <div x-data="{ open: false }">
