@@ -146,7 +146,7 @@
         }" class="relative">
             
             <!-- Case Studies Grid - 3 columns -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                 <template x-for="(caseStudy, index) in caseStudies" :key="caseStudy.id">
                     <div>
                         <!-- Card Container - Collapsed State -->
@@ -162,9 +162,9 @@
                             
                             <!-- Content -->
                             <div class="p-5">
-                                <div class="flex items-center justify-between mb-2">
-                                    <h3 class="text-xl font-bold text-gray-800" x-text="caseStudy.title"></h3>
-                                    <span class="text-red-600 font-bold text-sm" x-text="caseStudy.roi"></span>
+                                <div class="flex items-center justify-center mb-2">
+                                    <h3 class="text-xl flex items-center justify-center font-bold bg-red-600 text-white py-3 w-full" x-text="caseStudy.title"></h3>
+                                    <!-- <span class="text-red-600 font-bold text-sm" x-text="caseStudy.roi"></span> -->
                                 </div>
                                 <p class="text-gray-600 text-sm font-medium mb-2" x-text="caseStudy.subtitle"></p>
                                 <p class="text-gray-500 pb-7 text-sm leading-relaxed" x-text="caseStudy.description"></p>
