@@ -34,7 +34,7 @@
     <!-- Markets We Offer Section -->
     @include('components.markets-we-offer')
     
-    
+    @include('components.mt4-demo')
     
     <!-- Trading Features Section -->
     @include('components.trading-features')
@@ -47,6 +47,7 @@
     
     <!-- Investment Plans Section -->
     @include('components.investment-plans')
+
 
     <!-- Testimonials Section -->
     @include('components.testimonials')
