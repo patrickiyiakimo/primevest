@@ -52,50 +52,50 @@
             </div>
 
             <!-- Payment Methods -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div class="border-b border-gray-100 px-6 py-4 bg-gray-50">
-                    <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                        Choose your method of payment
-                    </h2>
-                    <p class="text-sm text-gray-500 mt-1">Select a payment method to see instructions</p>
-                </div>
-                <div class="p-4 space-y-3 max-h-[400px] overflow-y-auto">
-                    @php
-                        $paymentMethods = [
-                            ['value' => 'solana', 'name' => 'Solana (SOL)', 'icon' => '🟣', 'bg' => 'from-purple-500 to-purple-600', 'desc' => 'Fast and low-cost transactions'],
-                            ['value' => 'usdt_erc20', 'name' => 'Tether USD (ERC20)', 'icon' => '🔵', 'bg' => 'from-blue-500 to-blue-600', 'desc' => 'Ethereum network'],
-                            ['value' => 'etransfer', 'name' => 'E-Transfer', 'icon' => '🔴', 'bg' => 'from-red-500 to-red-600', 'desc' => 'Instant bank transfer (Canada)'],
-                            ['value' => 'paypal', 'name' => 'PayPal', 'icon' => '💙', 'bg' => 'from-blue-400 to-blue-500', 'desc' => 'Send as Family & Friends'],
-                            ['value' => 'bank_transfer', 'name' => 'Bank Transfer', 'icon' => '🏦', 'bg' => 'from-gray-500 to-gray-600', 'desc' => 'Wire transfer (1-3 business days)'],
-                            ['value' => 'usdt_trc20', 'name' => 'Tether USD (TRC20)', 'icon' => '🟢', 'bg' => 'from-teal-500 to-teal-600', 'desc' => 'TRON network - Low fees'],
-                            ['value' => 'ethereum', 'name' => 'Ethereum (ETH)', 'icon' => '💜', 'bg' => 'from-indigo-500 to-indigo-600', 'desc' => 'Smart contract platform'],
-                            ['value' => 'bitcoin', 'name' => 'Bitcoin (BTC)', 'icon' => '🟠', 'bg' => 'from-orange-500 to-orange-600', 'desc' => 'World\'s leading cryptocurrency'],
-                        ];
-                    @endphp
+<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+    <div class="border-b border-gray-100 px-6 py-4 bg-gray-50">
+        <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+            </svg>
+            Choose your method of payment
+        </h2>
+        <p class="text-sm text-gray-500 mt-1">Select a payment method to see instructions</p>
+    </div>
+    <div class="p-4 space-y-3 max-h-[400px] overflow-y-auto">
+        @php
+            $paymentMethods = [
+                ['value' => 'solana', 'name' => 'Solana (SOL)', 'logo' => 'https://cryptologos.cc/logos/solana-sol-logo.svg', 'bg' => 'from-purple-500 to-purple-600', 'desc' => 'Fast and low-cost transactions'],
+                ['value' => 'usdt_erc20', 'name' => 'Tether USD (ERC20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'bg' => 'from-blue-500 to-blue-600', 'desc' => 'Ethereum network'],
+                ['value' => 'etransfer', 'name' => 'E-Transfer', 'logo' => 'https://cdn-icons-png.flaticon.com/512/854/854878.png', 'bg' => 'from-red-500 to-red-600', 'desc' => 'Instant bank transfer (Canada)'],
+                ['value' => 'paypal', 'name' => 'PayPal', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/39/PayPal_logo.svg', 'bg' => 'from-blue-400 to-blue-500', 'desc' => 'Send as Family & Friends'],
+                ['value' => 'bank_transfer', 'name' => 'Bank Transfer', 'logo' => 'https://cdn-icons-png.flaticon.com/512/833/833593.png', 'bg' => 'from-gray-500 to-gray-600', 'desc' => 'Wire transfer (1-3 business days)'],
+                ['value' => 'usdt_trc20', 'name' => 'Tether USD (TRC20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'bg' => 'from-teal-500 to-teal-600', 'desc' => 'TRON network - Low fees'],
+                ['value' => 'ethereum', 'name' => 'Ethereum (ETH)', 'logo' => 'https://cryptologos.cc/logos/ethereum-eth-logo.svg', 'bg' => 'from-indigo-500 to-indigo-600', 'desc' => 'Smart contract platform'],
+                ['value' => 'bitcoin', 'name' => 'Bitcoin (BTC)', 'logo' => 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg', 'bg' => 'from-orange-500 to-orange-600', 'desc' => 'World\'s leading cryptocurrency'],
+            ];
+        @endphp
 
-                    @foreach($paymentMethods as $method)
-                    <label class="payment-method flex items-center justify-between p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300" data-method="{{ $method['value'] }}">
-                        <div class="flex items-center space-x-4">
-                            <input type="radio" name="payment_method" value="{{ $method['value'] }}" class="w-5 h-5 text-green-600 focus:ring-green-500" onchange="selectPaymentMethod(this)">
-                            <div class="w-12 h-12 bg-gradient-to-br {{ $method['bg'] }} rounded-xl flex items-center justify-center shadow-md">
-                                <span class="text-white font-bold text-xl">{{ $method['icon'] }}</span>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-900">{{ $method['name'] }}</p>
-                                <p class="text-sm text-gray-500">{{ $method['desc'] }}</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-xs text-gray-400">Min: ${{ $method['value'] == 'etransfer' ? '100' : ($method['value'] == 'paypal' ? '20' : ($method['value'] == 'bank_transfer' ? '500' : '50')) }}</p>
-                            <p class="text-xs text-gray-400">Max: ${{ $method['value'] == 'etransfer' ? '10,000' : ($method['value'] == 'paypal' ? '5,000' : '100,000') }}</p>
-                        </div>
-                    </label>
-                    @endforeach
+        @foreach($paymentMethods as $method)
+        <label class="payment-method flex items-center justify-between p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300" data-method="{{ $method['value'] }}">
+            <div class="flex items-center space-x-4">
+                <input type="radio" name="payment_method" value="{{ $method['value'] }}" class="w-5 h-5 text-green-600 focus:ring-green-500" onchange="selectPaymentMethod(this)">
+                <div class="w-12 h-12 bg-gradient-to-br {{ $method['bg'] }} rounded-xl flex items-center justify-center shadow-md p-2">
+                    <img src="{{ $method['logo'] }}" alt="{{ $method['name'] }}" class="w-8 h-8 object-contain">
+                </div>
+                <div>
+                    <p class="font-semibold text-gray-900">{{ $method['name'] }}</p>
+                    <p class="text-sm text-gray-500">{{ $method['desc'] }}</p>
                 </div>
             </div>
+            <div class="text-right">
+                <p class="text-xs text-gray-400">Min: ${{ $method['value'] == 'etransfer' ? '100' : ($method['value'] == 'paypal' ? '20' : ($method['value'] == 'bank_transfer' ? '500' : '50')) }}</p>
+                <p class="text-xs text-gray-400">Max: ${{ $method['value'] == 'etransfer' ? '10,000' : ($method['value'] == 'paypal' ? '5,000' : '100,000') }}</p>
+            </div>
+        </label>
+        @endforeach
+    </div>
+</div>
         </div>
 
         <!-- Right Sidebar - Payment Instructions -->
