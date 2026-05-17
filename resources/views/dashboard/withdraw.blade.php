@@ -255,17 +255,18 @@ const paymentMethods = {
         const formContainer = document.getElementById('withdrawalForm');
         
         formContainer.innerHTML = `
-            <div class=" px-6 py-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                        <span class="text-white font-bold text-lg">${config.icon}</span>
-                    </div>
-                    <div>
-                        <h2 class="text-xl font-bold text-white">${config.name}</h2>
-                        <p class="text-white/80 text-sm">${config.network}</p>
+           <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
+                <div class=" px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center p-2">
+                            <img src="${config.logo}" alt="${config.name}" class="w-8 h-8 object-contain">
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white">${config.name}</h2>
+                            <p class="text-white/80 text-sm">${config.network}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
             <div class="p-6">
                 <p class="text-gray-600 mb-6">Fill in the form to request your withdrawal.</p>
                 
