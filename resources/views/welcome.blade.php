@@ -48,6 +48,7 @@
     <!-- Investment Plans Section -->
     @include('components.investment-plans')
 
+    @include('components.trade-from-any-device')
 
     <!-- Testimonials Section -->
     @include('components.testimonials')

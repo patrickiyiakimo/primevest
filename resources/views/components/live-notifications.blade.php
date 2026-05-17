@@ -38,19 +38,19 @@
          x-show="visible && notifications.length > 0">
         <template x-for="(notification, idx) in notifications" :key="notification.id">
             <div x-show="idx === currentIndex" 
-                 class="bg-white rounded-lg shadow-2xl border-l-4 overflow-hidden max-w-sm w-full"
+                 class="bg-white  border-l-4 overflow-hidden max-w-sm w-full"
                  :class="notification.type === 'profit' ? 'border-l-green-500' : 'border-l-blue-500'">
                 
                 <div class="p-4">
                     <div class="flex items-start gap-3">
                         <!-- Avatar -->
-                        <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
+                        <!-- <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
                              :class="notification.type === 'profit' ? 'bg-green-100' : 'bg-blue-100'">
                             <span class="font-bold text-sm" 
                                   :class="notification.type === 'profit' ? 'text-green-700' : 'text-blue-700'"
                                   x-text="notification.avatar"></span>
                         </div>
-                        
+                         -->
                         <div class="flex-1 min-w-0">
                             <p class="text-sm font-semibold text-gray-800" x-text="notification.user"></p>
                             
