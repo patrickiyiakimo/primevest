@@ -10,7 +10,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mt-10">
     
     <!-- MAIN BALANCE CARD - Expanded Red Gradient with Wide Light Ray -->
-    <div class="relative rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+    <div class="relative  shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
          style="background: linear-gradient(135deg, #991b1b 0%, #ef4444 15%, #f87171 45%, #ef4444 65%, #7f1d1d 100%);">
         
         <!-- Massive Light Ray Overlay -->
@@ -78,7 +78,7 @@
     </div>
 
     <!-- PROFITS CARD - Expanded Emerald Gradient with Wide Light Ray -->
-    <div class="relative rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+    <div class="relative shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
          style="background: linear-gradient(135deg, #065f46 0%, #10b981 20%, #34d399 45%, #10b981 70%, #064e3b 100%);">
         
         <div class="absolute inset-0 opacity-20 pointer-events-none">
@@ -135,7 +135,7 @@
     </div>
 
     <!-- LAST DEPOSIT CARD - Expanded Amber Gradient with Wide Light Ray -->
-    <div class="relative rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+    <div class="relative shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
          style="background: linear-gradient(135deg, #78350f 0%, #f59e0b 25%, #fbbf24 50%, #f59e0b 75%, #92400e 100%);">
         
         <div class="absolute inset-0 opacity-25 pointer-events-none">
@@ -193,7 +193,7 @@
     </div>
 
     <!-- LAST WITHDRAWAL CARD - Expanded Rose Gradient with Wide Light Ray -->
-    <div class="relative rounded-2xl shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+    <div class="relative shadow-xl overflow-hidden group transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
          style="background: linear-gradient(135deg, #9f1239 0%, #f43f5e 25%, #fb7185 48%, #f43f5e 72%, #881337 100%);">
         
         <div class="absolute inset-0 opacity-20 pointer-events-none">

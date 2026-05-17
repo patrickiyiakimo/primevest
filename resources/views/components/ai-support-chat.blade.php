@@ -63,7 +63,7 @@
                     Send
                 </button>
             </div>
-            <p class="text-xs text-gray-400 mt-2 text-center">Powered by DeepSeek AI • Responses saved to your history</p>
+            <p class="text-xs text-gray-400 mt-2 text-center"> Responses are saved to your history</p>
         </div>
     </div>
 </div>
