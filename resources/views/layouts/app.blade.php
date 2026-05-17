@@ -27,7 +27,7 @@
         <main class="flex-grow">
             @yield('content')
         </main>
-        
+        @include('components.live-notifications')
         <!-- Show footer on ALL pages EXCEPT dashboard routes -->
         @if(!request()->routeIs('dashboard*') && !request()->routeIs('deposit*') && !request()->routeIs('invest*') && !request()->routeIs('withdraw*') && !request()->routeIs('profile*') && !request()->routeIs('buy-crypto*') && !request()->routeIs('stock-trading*') && !request()->routeIs('card-application*') && !request()->routeIs('deposits-history*') && !request()->routeIs('withdrawals-history*') && !request()->routeIs('earnings-history*') && !request()->routeIs('investments-history*'))
             @include('layouts.footer')
