@@ -151,7 +151,7 @@
                     <div>
                         <!-- Card Container - Collapsed State -->
                         <div x-show="activeCase !== caseStudy.id" 
-                             class="relative overflow-hidden cursor-pointer group h-[380px] transition-all duration-500 border border-gray-200 bg-white"
+                             class="relative overflow-hidden cursor-pointer  transition-all duration-500 border border-gray-200 bg-white"
                              :class="{ 'opacity-40 scale-95': activeCase !== null && activeCase !== caseStudy.id, 'opacity-100 scale-100': activeCase === null || activeCase === caseStudy.id }"
                              @click="openCase(caseStudy.id)">
                             
@@ -166,11 +166,20 @@
                                     <h3 class="text-xl flex items-center justify-center font-bold bg-red-600 text-white py-3 w-full" x-text="caseStudy.title"></h3>
                                     <!-- <span class="text-red-600 font-bold text-sm" x-text="caseStudy.roi"></span> -->
                                 </div>
+                                
                                 <p class="text-gray-600 text-sm font-medium mb-2" x-text="caseStudy.subtitle"></p>
-                                <p class="text-gray-500 pb-7 text-sm leading-relaxed" x-text="caseStudy.description"></p>
-                                <p class="text-red-600 py-5 font-semibold hover:text-red-700 transition-colors duration-300 cursor-pointer">
+                                <p class="text-gray-500 pb-4 text-sm leading-relaxed" x-text="caseStudy.description"></p>
+                                <div class="flex">
+                                     <p class="text-red-600 font-semibold hover:text-red-700 transition-colors duration-300 cursor-pointer">
                                     Learn more
+
+                                    
                                 </p>
+                                     <svg class="w-5 h-5 ml-2 mt-1 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+                                </div>
+                               
                                 <!-- <div class="mx-12 flex justify-end">
                                     <div class="w-10 h-10 bg-red-600 mx-12 flex items-center justify-center shadow-lg hover:bg-red-700 transition-all duration-300 cursor-pointer">
                                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
