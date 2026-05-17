@@ -85,7 +85,7 @@
                             </p>
                             
                             <!-- Crypto Logos -->
-                            <div class="flex items-center gap-4 mb-4">
+                            <div class="grid grid-cols-2 md:grid-cols-4 items-center gap-4 mb-4">
                                 <!-- Bitcoin -->
                                 <div class="flex items-center gap-2 bg-white/10 rounded-full px-3 py-1.5">
                                     <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg" alt="Bitcoin" class="w-5 h-5">
