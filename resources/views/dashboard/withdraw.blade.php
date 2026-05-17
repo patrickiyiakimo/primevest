@@ -173,63 +173,36 @@
     let selectedMethod = null;
     const userBalance = {{ Auth::user()->balance }};
 
-   // Payment methods configuration with image logos
-const paymentMethods = {
-    usdt_trc20: {
-        name: 'Tether USD (TRC20)',
-        network: 'TRON Network',
-        logo: 'https://cryptologos.cc/logos/tether-usdt-logo.svg',
-        minAmount: 1000,
-        maxAmount: 500000,
-        fee: 0,
-        bgGradient: 'from-teal-500 to-teal-600'
-    },
-    ethereum: {
-        name: 'Ethereum (ERC20)',
-        network: 'Ethereum Network',
-        logo: 'https://cryptologos.cc/logos/ethereum-eth-logo.svg',
-        minAmount: 1000,
-        maxAmount: 500000,
-        fee: 0,
-        bgGradient: 'from-indigo-500 to-indigo-600'
-    },
-    bitcoin: {
-        name: 'Bitcoin (BTC)',
-        network: 'Bitcoin Network',
-        logo: 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg',
-        minAmount: 1000,
-        maxAmount: 500000,
-        fee: 0,
-        bgGradient: 'from-orange-500 to-orange-600'
-    },
-    solana: {
-        name: 'Solana (SOL)',
-        network: 'Solana Network',
-        logo: 'https://cryptologos.cc/logos/solana-sol-logo.svg',
-        minAmount: 1000,
-        maxAmount: 500000,
-        fee: 0,
-        bgGradient: 'from-purple-500 to-purple-600'
-    },
-    binance: {
-        name: 'Binance Coin (BSC)',
-        network: 'Binance Smart Chain',
-        logo: 'https://cryptologos.cc/logos/bnb-bnb-logo.svg',
-        minAmount: 1000,
-        maxAmount: 500000,
-        fee: 0,
-        bgGradient: 'from-yellow-500 to-yellow-600'
-    },
-    cardano: {
-        name: 'Cardano (ADA)',
-        network: 'Cardano Network',
-        logo: 'https://cryptologos.cc/logos/cardano-ada-logo.svg',
-        minAmount: 1000,
-        maxAmount: 500000,
-        fee: 0,
-        bgGradient: 'from-blue-500 to-blue-600'
-    }
-};
+    // Payment methods configuration
+    const paymentMethods = {
+        usdt_trc20: {
+            name: 'Tether USD (TRC20)',
+            network: 'TRON Network',
+            icon: 'USDT',
+            minAmount: 1000,
+            maxAmount: 500000,
+            fee: 0,
+            bgGradient: 'from-teal-500 to-teal-600'
+        },
+        ethereum: {
+            name: 'Ethereum (ERC20)',
+            network: 'Ethereum Network',
+            icon: 'ETH',
+            minAmount: 1000,
+            maxAmount: 500000,
+            fee: 0,
+            bgGradient: 'from-indigo-500 to-indigo-600'
+        },
+        bitcoin: {
+            name: 'Bitcoin (BTC)',
+            network: 'Bitcoin Network',
+            icon: 'BTC',
+            minAmount: 1000,
+            maxAmount: 500000,
+            fee: 0,
+            bgGradient: 'from-orange-500 to-orange-600'
+        }
+    };
 
     // Payment option click handlers
     document.querySelectorAll('.payment-option').forEach(option => {
@@ -255,18 +228,17 @@ const paymentMethods = {
         const formContainer = document.getElementById('withdrawalForm');
         
         formContainer.innerHTML = `
-           <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl">
-                <div class=" px-6 py-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center p-2">
-                            <img src="${config.logo}" alt="${config.name}" class="w-8 h-8 object-contain">
-                        </div>
-                        <div>
-                            <h2 class="text-xl font-bold text-white">${config.name}</h2>
-                            <p class="text-white/80 text-sm">${config.network}</p>
-                        </div>
+            <div class="bg-gradient-to-r ${config.bgGradient} px-6 py-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">${config.icon}</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white">${config.name}</h2>
+                        <p class="text-white/80 text-sm">${config.network}</p>
                     </div>
                 </div>
+            </div>
             <div class="p-6">
                 <p class="text-gray-600 mb-6">Fill in the form to request your withdrawal.</p>
                 
