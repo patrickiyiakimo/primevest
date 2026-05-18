@@ -65,7 +65,7 @@
     </div>
 </div>
 <!-- Black Crypto Deposit Section - Completes the image -->
-<div class="w-full bg-black">
+<div class="w-full bg-black mb-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             
