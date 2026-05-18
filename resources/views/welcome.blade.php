@@ -16,6 +16,9 @@
     <!-- Award Section -->
     @include('components.awards')
 
+    <!-- Industry prices Section -->
+    @include('components.industry-prices')
+
     <!-- market-quotes Widget -->
     @include('components.market-quotes-widget')
 
