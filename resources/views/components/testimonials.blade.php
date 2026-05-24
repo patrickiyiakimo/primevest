@@ -21,198 +21,147 @@
             </p>
         </div>
 
-        <!-- Testimonials Grid - 5 items layout (3 on top, 2 on bottom centered) -->
-        <div class="flex flex-col items-center">
-            <!-- Top Row - 3 Testimonials -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8 w-full max-w-6xl">
-                
-                <!-- Testimonial 1 - Rukky Sanders -->
-                <div class="bg-white overflow-hidden border border-gray-100">
-                    <div class="p-6">
-                        <!-- Quote Icon -->
-                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                        </svg>
-                        
-                        <!-- Testimonial Text -->
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            "PrimeVest runs a quick and reliable system. It feels great to know that I can always trust their support system to come through for me. Their response speed is prompt and the delivery precise to the last detail."
-                        </p>
-                        
-                        <!-- User Info -->
-                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1757815688420.jpg') }}" alt="Rukky Sanders" class="w-28 h-28 rounded-full object-cover border-2">
-                            <div>
-                                <h4 class="font-bold text-gray-900">Rukky Sanders</h4>
-                                <div class="flex items-center space-x-1 mt-1">
-                                    <div class="flex text-yellow-400">
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+        <!-- Testimonials Carousel -->
+        <div x-data="{ 
+            currentSlide: 0, 
+            testimonials: [
+                {
+                    text: 'PrimeVest runs a quick and reliable system. It feels great to know that I can always trust their support system to come through for me. Their response speed is prompt and the delivery precise to the last detail.',
+                    name: 'Rukky Sanders',
+                    role: 'Verified Trader',
+                    image: '/images/FB_IMG_1757815688420.jpg',
+                    rating: 5
+                },
+                {
+                    text: 'I\'m an engineer in Washington DC. When an account manager brought this opportunity to me, I just said casually to invest with $500. My story today is on a premium plan. Truly life-changing!',
+                    name: 'Scott Smith',
+                    role: 'Premium Plan Investor',
+                    image: '/images/FB_IMG_1758010236426.jpg',
+                    rating: 5
+                },
+                {
+                    text: 'I have only been a member for a few months and I have already earned a decent amount of money. Finally a real and honest company that does what it says. Thank you so much for this great opportunity!',
+                    name: 'Alex Glyson',
+                    role: 'Happy Investor',
+                    image: '/images/FB_IMG_1757815849959.jpg',
+                    rating: 5
+                },
+                {
+                    text: 'The customer service at PrimeVest is exceptional. They guided me through every step of my investment journey. I\'ve seen consistent returns and feel confident in my financial future.',
+                    name: 'Sarah Michaels',
+                    role: 'Long-term Investor',
+                    image: '/images/FB_IMG_1757815900467 (1).jpg',
+                    rating: 5
+                },
+                {
+                    text: 'The MT4 platform integration is seamless. I can trade from anywhere, and the withdrawal process is incredibly fast. Best decision I made for my investment portfolio.',
+                    name: 'Michael Cornelius',
+                    role: 'Active Trader',
+                    image: '/images/FB_IMG_1758008965260.jpg',
+                    rating: 5
+                }
+            ], 
+            next() { 
+                this.currentSlide = (this.currentSlide + 1) % this.testimonials.length 
+            }, 
+            prev() { 
+                this.currentSlide = (this.currentSlide - 1 + this.testimonials.length) % this.testimonials.length 
+            } 
+        }" class="relative max-w-4xl mx-auto">
+            
+            <!-- Carousel Container -->
+            <div class="overflow-hidden rounded-2xl">
+                <div class="flex transition-transform duration-500 ease-out" :style="'transform: translateX(-' + (currentSlide * 100) + '%)'">
+                    <template x-for="(testimonial, index) in testimonials" :key="index">
+                        <div class="w-full flex-shrink-0 px-4">
+                            <!-- Testimonial Card with Background Image -->
+                            <div class="relative overflow-hidden transition-all duration-300 hover:transform hover:-translate-y-2 min-h-[480px] md:min-h-[450px] w-full"
+                                 style="background-image: url('{{ asset('images/testimonial card.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+                                
+                                <!-- Semi-transparent overlay for better text readability -->
+                                <!-- <div class="absolute inset-0 bg-black/40"></div> -->
+                                
+                                <div class="relative p-4 sm:p-6 md:p-8 z-10 h-full flex flex-col">
+                                    <!-- Quote Icon -->
+                                    <div class="mb-4">
+                                        <svg class="w-10 h-10 md:w-12 md:h-12 text-red-400 opacity-80" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                                        </svg>
                                     </div>
-                                    <span class="text-xs text-gray-500">5.0</span>
+                                    
+                                    <!-- Testimonial Text -->
+                                    <p class="text-white text-sm md:text-base leading-relaxed mb-6 line-clamp-8 md:line-clamp-6 flex-grow" x-text="testimonial.text"></p>
+                                    
+                                    <!-- User Info -->
+                                    <div class="flex items-center space-x-3 md:space-x-4 pt-4 border-t border-white/20">
+                                        <img :src="testimonial.image" :alt="testimonial.name" class="w-10 h-10 md:w-14 md:h-14 rounded-full object-cover border-2 border-red-500">
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-white text-sm md:text-base" x-text="testimonial.name"></h4>
+                                            <div class="flex items-center space-x-1 mt-1">
+                                                <div class="flex text-yellow-400">
+                                                    <template x-for="i in 5">
+                                                        <svg class="w-3 h-3 md:w-4 md:h-4 fill-current" viewBox="0 0 24 24">
+                                                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                                        </svg>
+                                                    </template>
+                                                </div>
+                                                <span class="text-xs text-white/70">5.0</span>
+                                            </div>
+                                            <p class="text-xs md:text-sm text-white/80 font-medium mt-1" x-text="testimonial.role"></p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p class="text-sm text-gray-600 font-medium mt-1">Verified Trader</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 2 - Scott Smith -->
-                <div class="bg-white overflow-hidden border border-gray-100">
-                    <div class="p-6">
-                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                        </svg>
-                        
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            "I'm an engineer in Washington DC. When an account manager brought this opportunity to me, I just said casually to invest with $500. My story today is on a premium plan. Truly life-changing!"
-                        </p>
-                        
-                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1758010236426.jpg') }}" alt="Scott Smith" class="w-28 h-28 rounded-full object-cover border-2">
-                            <div>
-                                <h4 class="font-bold text-gray-900">Scott Smith</h4>
-                                <div class="flex items-center space-x-1 mt-1">
-                                    <div class="flex text-yellow-400">
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                    </div>
-                                    <span class="text-xs text-gray-500">5.0</span>
-                                </div>
-                                <p class="text-sm text-gray-600 font-medium mt-1">Premium Plan Investor</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 3 - Alex Glyson -->
-                <div class="bg-white overflow-hidden border border-gray-100">
-                    <div class="p-6">
-                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                        </svg>
-                        
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            "I have only been a member for a few months and I have already earned a decent amount of money. Finally a real and honest company that does what it says. Thank you so much for this great opportunity!"
-                        </p>
-                        
-                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1757815849959.jpg') }}" alt="Alex Glyson" class="w-28 h-28 rounded-full object-cover border-2">
-                            <div>
-                                <h4 class="font-bold text-gray-900">Alex Glyson</h4>
-                                <div class="flex items-center space-x-1 mt-1">
-                                    <div class="flex text-yellow-400">
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                    </div>
-                                    <span class="text-xs text-gray-500">5.0</span>
-                                </div>
-                                <p class="text-sm text-gray-600 font-medium mt-1">Happy Investor</p>
-                            </div>
-                        </div>
-                    </div>
+                    </template>
                 </div>
             </div>
-
-            <!-- Bottom Row - 2 Testimonials Centered -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
-                
-                <!-- Testimonial 4 - Sarah Johnson -->
-                <div class="bg-white overflow-hidden border border-gray-100">
-                    <div class="p-6">
-                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                        </svg>
-                        
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            "The customer service at PrimeVest is exceptional. They guided me through every step of my investment journey. I've seen consistent returns and feel confident in my financial future."
-                        </p>
-                        
-                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1757815900467 (1).jpg') }}" alt="Sarah Michaels" class="w-28 h-28 rounded-full object-cover border-2">
-                            <div>
-                                <h4 class="font-bold text-gray-900">Sarah Michaels</h4>
-                                <div class="flex items-center space-x-1 mt-1">
-                                    <div class="flex text-yellow-400">
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                    </div>
-                                    <span class="text-xs text-gray-500">5.0</span>
-                                </div>
-                                <p class="text-sm text-gray-600 font-medium mt-1">Long-term Investor</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 5 - Michael Chen -->
-                <div class="bg-white overflow-hidden border border-gray-100">
-                    <div class="p-6">
-                        <svg class="w-16 h-16 text-gray-300 mb-4" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                        </svg>
-                        
-                        <p class="text-gray-700 leading-relaxed mb-6">
-                            "The MT4 platform integration is seamless. I can trade from anywhere, and the withdrawal process is incredibly fast. Best decision I made for my investment portfolio."
-                        </p>
-                        
-                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <img src="{{ asset('/images/FB_IMG_1758008965260.jpg') }}" alt="Michael Cornelius" class="w-28 h-28 rounded-full object-cover border-2">
-                            <div>
-                                <h4 class="font-bold text-gray-900">Michael Cornelius</h4>
-                                <div class="flex items-center space-x-1 mt-1">
-                                    <div class="flex text-yellow-400">
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                                    </div>
-                                    <span class="text-xs text-gray-500">5.0</span>
-                                </div>
-                                <p class="text-sm text-gray-600 font-medium mt-1">Active Trader</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Trust Indicators -->
-        <div class="mt-16 pt-8 border-t border-gray-200">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div>
-                    <div class="text-3xl md:text-5xl font-bold text-gray-600 mb-2">10,000+</div>
-                    <p class="text-gray-600 text-sm">Active Traders</p>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-5xl font-bold text-gray-600 mb-2">98%</div>
-                    <p class="text-gray-600 text-sm">Client Satisfaction</p>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-5xl font-bold text-gray-600 mb-2">150+</div>
-                    <p class="text-gray-600 text-sm">Countries Served</p>
-                </div>
-                <div>
-                    <div class="text-3xl md:text-5xl font-bold text-gray-600 mb-2">24/7</div>
-                    <p class="text-gray-600 text-sm">Support Available</p>
-                </div>
+            
+            <!-- Navigation Buttons -->
+            <button @click="prev" class="absolute -left-3 md:-left-5 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 md:p-3 shadow-lg hover:bg-red-600 hover:text-white transition-all duration-300 z-20 focus:outline-none">
+                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <button @click="next" class="absolute -right-3 md:-right-5 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 md:p-3 shadow-lg hover:bg-red-600 hover:text-white transition-all duration-300 z-20 focus:outline-none">
+                <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+            
+            <!-- Dots Navigation -->
+            <div class="flex justify-center space-x-2 mt-6">
+                <template x-for="(testimonial, index) in testimonials" :key="index">
+                    <button @click="currentSlide = index" 
+                            class="h-2 rounded-full transition-all duration-300 focus:outline-none"
+                            :class="currentSlide === index ? 'w-8 bg-red-600' : 'w-2 bg-gray-300'"></button>
+                </template>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Trust Indicators -->
+        <div class="mt-16 pt-8 border-t border-gray-200">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
+                <div>
+                    <div class="text-2xl md:text-5xl font-bold text-gray-600 mb-1 md:mb-2">10,000+</div>
+                    <p class="text-gray-500 text-xs md:text-sm">Active Traders</p>
+                </div>
+                <div>
+                    <div class="text-2xl md:text-5xl font-bold text-gray-600 mb-1 md:mb-2">98%</div>
+                    <p class="text-gray-500 text-xs md:text-sm">Client Satisfaction</p>
+                </div>
+                <div>
+                    <div class="text-2xl md:text-5xl font-bold text-gray-600 mb-1 md:mb-2">150+</div>
+                    <p class="text-gray-500 text-xs md:text-sm">Countries Served</p>
+                </div>
+                <div>
+                    <div class="text-2xl md:text-5xl font-bold text-gray-600 mb-1 md:mb-2">24/7</div>
+                    <p class="text-gray-500 text-xs md:text-sm">Support Available</p>
+                </div>
+            </div>
+        </div>
 
 <style>
     /* Selection color */
@@ -221,10 +170,37 @@
         color: white;
     }
     
+    /* Line clamp for testimonial text */
+    .line-clamp-6 {
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .line-clamp-8 {
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
     /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .text-3xl {
-            font-size: 1.5rem;
+    @media (max-width: 640px) {
+        .line-clamp-8 {
+            -webkit-line-clamp: 10;
         }
+    }
+    
+    /* Smooth transition for carousel */
+    .transition-transform {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Ensure the card background covers properly on all devices */
+    .bg-cover {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 </style>

@@ -36,11 +36,10 @@
     
     <!-- Markets We Offer Section -->
     @include('components.markets-we-offer')
-    
-    @include('components.mt4-demo')
 
     @include('components.trade-from-any-device')
 
+    @include('components.mt4-demo')
     
     <!-- Trading Features Section -->
     @include('components.trading-features')
