@@ -13,6 +13,9 @@
     <!-- Trusted Brands Section -->
     @include('components.trusted-brands')
 
+     <!-- case Studies -->
+     @include('components.case-studies')
+
     <!-- Features Section -->
     @include('components.features-section')
 
@@ -31,8 +34,7 @@
      <!-- Markets-Widget Section -->
      @include('components.markets-widget')
 
-     <!-- case Studies -->
-     @include('components.case-studies')
+    
 
     <!-- Exclusive Insights Section -->
     @include('components.exclusive-insights')
