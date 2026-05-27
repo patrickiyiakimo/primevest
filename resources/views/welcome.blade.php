@@ -16,6 +16,9 @@
      <!-- case Studies -->
      @include('components.case-studies')
 
+     <!-- top Rated -->
+     @include('components.top-rated')
+
     <!-- Features Section -->
     @include('components.features-section')
 
