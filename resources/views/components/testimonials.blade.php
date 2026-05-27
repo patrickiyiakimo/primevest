@@ -142,26 +142,47 @@
 </div>
 
 <!-- Trust Indicators -->
-        <div class="mt-16 pt-8 border-t border-gray-200">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
-                <div>
-                    <div class="text-2xl md:text-5xl font-bold text-gray-600 mb-1 md:mb-2">10,000+</div>
-                    <p class="text-gray-500 text-xs md:text-sm">Active Traders</p>
+<div class="mt-16 bg-black">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-0 text-center">
+            
+            <!-- Item 1 - Active Traders -->
+            <div class="relative py-6 md:py-8 border-r border-gray-800 last:border-r-0">
+                <div class="text-3xl md:text-5xl font-bold text-white mb-1 md:mb-2">
+                    <span id="counter1" class="counter" data-target="10000">0</span><span>+</span>
                 </div>
-                <div>
-                    <div class="text-2xl md:text-5xl font-bold text-gray-600 mb-1 md:mb-2">98%</div>
-                    <p class="text-gray-500 text-xs md:text-sm">Client Satisfaction</p>
-                </div>
-                <div>
-                    <div class="text-2xl md:text-5xl font-bold text-gray-600 mb-1 md:mb-2">150+</div>
-                    <p class="text-gray-500 text-xs md:text-sm">Countries Served</p>
-                </div>
-                <div>
-                    <div class="text-2xl md:text-5xl font-bold text-gray-600 mb-1 md:mb-2">24/7</div>
-                    <p class="text-gray-500 text-xs md:text-sm">Support Available</p>
-                </div>
+                <p class="text-gray-400 text-xs md:text-sm">Active Traders</p>
             </div>
+            
+            <!-- Item 2 - Client Satisfaction -->
+            <div class="relative py-6 md:py-8 border-r border-gray-800 last:border-r-0">
+                <div class="text-3xl md:text-5xl font-bold text-white mb-1 md:mb-2">
+                    <span id="counter2" class="counter" data-target="98">0</span><span>%</span>
+                </div>
+                <p class="text-gray-400 text-xs md:text-sm">Client Satisfaction</p>
+            </div>
+            
+            <!-- Item 3 - Countries Served -->
+            <div class="relative py-6 md:py-8 border-r border-gray-800 last:border-r-0">
+                <div class="text-3xl md:text-5xl font-bold text-white mb-1 md:mb-2">
+                    <span id="counter3" class="counter" data-target="150">0</span><span>+</span>
+                </div>
+                <p class="text-gray-400 text-xs md:text-sm">Countries Served</p>
+            </div>
+            
+            <!-- Item 4 - Support Available -->
+            <div class="relative py-6 md:py-8 border-r border-gray-800 last:border-r-0">
+                <div class="text-3xl md:text-5xl font-bold text-white mb-1 md:mb-2">
+                    <span id="counter4" class="counter" data-target="24">0</span><span>/7</span>
+                </div>
+                <p class="text-gray-400 text-xs md:text-sm">Support Available</p>
+            </div>
+            
         </div>
+    </div>
+</div>
+
+
 
 <style>
     /* Selection color */
@@ -204,3 +225,51 @@
         background-position: center;
     }
 </style>
+
+<script>
+    // Counter animation function
+    function animateCounter(element, start, end, duration) {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const currentValue = Math.floor(progress * (end - start) + start);
+            element.textContent = currentValue;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+    
+    // Intersection Observer to trigger counters when visible
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: "0px"
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counters = document.querySelectorAll('.counter');
+                counters.forEach(counter => {
+                    const target = parseInt(counter.getAttribute('data-target'));
+                    const current = parseInt(counter.textContent);
+                    if (current === 0) {
+                        animateCounter(counter, 0, target, 2000);
+                    }
+                });
+                // Unobserve after animation starts
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    // Observe the trust indicators section
+    document.addEventListener('DOMContentLoaded', () => {
+        const section = document.querySelector('.bg-black');
+        if (section) {
+            observer.observe(section);
+        }
+    });
+</script>

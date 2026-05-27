@@ -10,6 +10,9 @@
     <!-- Trading Widget -->
     @include('components.trading-widget')
 
+    <!-- Trusted Brands Section -->
+    @include('components.trusted-brands')
+
     <!-- Features Section -->
     @include('components.features-section')
 
