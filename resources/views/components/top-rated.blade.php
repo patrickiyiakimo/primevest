@@ -1,26 +1,4 @@
 <div class="w-full min-h-screen relative overflow-hidden" style="background: linear-gradient(135deg, #0a0f2a 0%, #1a1030 50%, #0d0f2a 100%);">
-    
-    <!-- Faded Background Logo & Name (Watermark) -->
-    <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none">
-        <div class="flex flex-col items-center gap-4">
-            <img src="/images/primevest-logo.png" alt="PrimeVest Logo" class="h-40 w-auto">
-            <span class="text-7xl font-bold text-white tracking-wider">PrimeVest</span>
-        </div>
-    </div>
-
-    <!-- Subtle Red Glow Accents -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-red-700/20 rounded-full blur-3xl pointer-events-none"></div>
-
-    <!-- Navigation / Logo Bar -->
-    <div class="relative z-10 border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-5">
-            <div class="flex items-center gap-3">
-                <img src="/images/primevest-logo.png" alt="PrimeVest Logo" class="h-9 w-auto">
-                <span class="text-xl font-bold text-white">PrimeVest</span>
-            </div>
-        </div>
-    </div>
 
     <!-- Main Content - Two Column Layout: Left = Trust + FAQ, Right = Bold PrimeVest Card -->
     <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 lg:py-16">
@@ -28,24 +6,13 @@
             
             <!-- LEFT SIDE - Trust Content + FAQ (Smaller, compact) -->
             <div>
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                    </span>
-                    <span class="text-sm font-medium text-white/90">2026 Top Rated Platform</span>
-                </div>
-
+              
                 <!-- Main Headline -->
-                <h1 class="text-4xl sm:text-5xl lg:text-5xl font-bold text-white leading-tight mb-5">
+                <h1 class="text-4xl sm:text-5xl lg:text-4xl font-bold text-white leading-tight mb-5">
                     Trusted. Proven.
-                    <br>
+                    
                     <span class="relative inline-block">
                         Top-Rated.
-                        <svg class="absolute -bottom-2 left-0 w-full" height="6" viewBox="0 0 300 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M0 3C50 0 100 6 150 3C200 0 250 6 300 3" stroke="#ef4444" stroke-width="2" stroke-dasharray="4 4"/>
-                        </svg>
                     </span>
                     <br>Here's Why.
                 </h1>
@@ -146,21 +113,11 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Small CTA after FAQ -->
-                    <div class="mt-6">
-                        <a href="/register" class="inline-flex items-center gap-2 px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg transition-all duration-300">
-                            Start Trading Today
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                            </svg>
-                        </a>
-                    </div>
                 </div>
             </div>
 
             <!-- RIGHT SIDE - Bold PrimeVest Card with own background -->
-            <div class="bg-gradient-to-br from-red-900/40 to-red-950/60 backdrop-blur-md rounded-2xl p-8 lg:p-10 border border-red-500/30 shadow-2xl shadow-red-900/20">
+            <div class="bg-gradient-to-br from-red-900/40 to-red-950/60 backdrop-blur-md p-8 lg:p-10 border border-red-500/30 shadow-2xl shadow-red-900/20">
                 <!-- Prominent PrimeVest Logo & Name -->
                 <div class="flex flex-col items-center text-center mb-8">
                     <div class="bg-white/10 rounded-full p-4 mb-4">
@@ -186,7 +143,7 @@
                 <!-- Competitor Comparison Mini List -->
                 <div class="space-y-2 mb-8">
                     <div class="flex items-center justify-between py-2 border-b border-white/10">
-                        <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 bg-red-600/20 px-3 py-1 rounded-full">
                             <svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                             </svg>
@@ -229,26 +186,6 @@
                     Join PrimeVest Today
                 </a>
                 <p class="text-white/40 text-xs text-center mt-4">Trusted by 500,000+ traders worldwide</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <div class="relative z-10 border-t border-white/10 mt-12">
-        <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-6">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
-                <div class="flex items-center gap-3">
-                    <img src="/images/primevest-logo.png" alt="PrimeVest Logo" class="h-5 w-auto">
-                    <span class="text-xs text-white/40">© 2026 PrimeVest. All rights reserved.</span>
-                </div>
-                <div class="flex gap-5">
-                    <a href="#" class="text-white/30 hover:text-white/60 text-xs transition-colors">Privacy</a>
-                    <a href="#" class="text-white/30 hover:text-white/60 text-xs transition-colors">Terms</a>
-                    <a href="#" class="text-white/30 hover:text-white/60 text-xs transition-colors">Risk Disclosure</a>
-                </div>
-            </div>
-            <div class="text-center mt-4">
-                <p class="text-white/30 text-[10px]">CFDs are complex instruments and come with a high risk of losing money rapidly due to leverage. 73% of retail investor accounts lose money when trading CFDs. Please consider whether you understand how CFDs work.</p>
             </div>
         </div>
     </div>
