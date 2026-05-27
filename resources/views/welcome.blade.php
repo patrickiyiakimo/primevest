@@ -19,6 +19,9 @@
      <!-- top Rated -->
      @include('components.top-rated')
 
+     <!-- Three Column Stats -->
+     @include('components.three-column')
+
     <!-- Talents Section -->
     @include('components.talents')
 

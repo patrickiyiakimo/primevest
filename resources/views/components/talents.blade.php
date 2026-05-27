@@ -212,47 +212,51 @@
         }
     });
 
-    // Function to generate profile card HTML
+    // Function to generate profile card HTML - No rounded corners, padded image with white background
     function generateProfileCard(profile, showViewProfile = true) {
         return `
-            <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm h-full">
-                <!-- Profile Image Frame -->
-                <div class="relative h-64 bg-cover bg-center" style="background-image: url('${profile.image}'); background-position: center;">
-                    <div class="absolute inset-0 bg-black/20"></div>
-                    <!-- Logo at bottom right -->
-                    <div class="absolute bottom-3 right-3">
-                        <img src="/images/primevest-logo.png" alt="PrimeVest" class="h-8 w-auto opacity-90">
+            <div class="bg-white border border-gray-200 shadow-sm h-full">
+                <!-- Profile Image Frame - No rounded corners, with padding -->
+                <div class="p-4 bg-white">
+                    <div class="relative h-64 bg-gray-100">
+                        <img src="${profile.image}" alt="${profile.name}" class="w-full h-full object-cover object-center">
+                        <!-- Dark overlay for text readability -->
+                        <div class="absolute inset-0 bg-black/30"></div>
+                        <!-- Logo at bottom right - Styled white background -->
+                        <div class="absolute bottom-3 right-3 bg-white rounded-md p-1.5 shadow-md">
+                            <img src="/images/primevest-logo.png" alt="PrimeVest" class="h-6 w-auto">
+                        </div>
+                        ${showViewProfile ? '<p class="absolute bottom-3 left-3 text-white text-xs font-medium">View full profile →</p>' : ''}
                     </div>
-                    ${showViewProfile ? '<p class="absolute bottom-3 left-3 text-white text-xs font-medium">View full profile →</p>' : ''}
                 </div>
                 
                 <!-- Profile Info -->
-                <div class="p-5">
+                <div class="p-5 pt-0">
                     <h3 class="text-xl font-bold text-gray-900 mb-1">${profile.name}</h3>
                     <p class="text-red-600 text-sm font-semibold mb-2">${profile.role}</p>
                     <p class="text-gray-700 text-base font-medium mb-3">${profile.title}</p>
                     
                     <!-- Expertise Tags -->
                     <div class="flex flex-wrap gap-2">
-                        ${profile.expertise.map(skill => `<span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">${skill}</span>`).join('')}
+                        ${profile.expertise.map(skill => `<span class="text-xs px-2 py-1 bg-gray-100 text-gray-600">${skill}</span>`).join('')}
                     </div>
                 </div>
             </div>
         `;
     }
 
-    // Generate CTA card for desktop
+    // Generate CTA card for desktop - No rounded corners
     function generateCTACard() {
         return `
-            <div class="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl overflow-hidden shadow-lg flex flex-col items-center justify-center text-center p-8 h-full min-h-[450px]">
-                <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mb-5">
+            <div class="bg-gradient-to-br from-red-600 to-red-800 shadow-lg flex flex-col items-center justify-center text-center p-8 h-full min-h-[450px]">
+                <div class="w-20 h-20 bg-white/20 flex items-center justify-center mb-5">
                     <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path>
                     </svg>
                 </div>
                 <h3 class="text-2xl font-bold text-white mb-3">20,000+ More Experts</h3>
                 <p class="text-red-100 text-sm mb-6">Connect with verified investment professionals worldwide</p>
-                <a href="/discover-talent" class="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-red-600 font-semibold rounded-lg hover:bg-red-50 transition-all duration-300">
+                <a href="/discover-talent" class="inline-flex items-center gap-2 px-6 py-2.5 bg-white text-red-600 font-semibold hover:bg-red-50 transition-all duration-300">
                     Explore Network
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
@@ -300,7 +304,7 @@
         // Create dot indicators
         for (let i = 0; i < profiles.length; i++) {
             const dot = document.createElement('button');
-            dot.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-red-600 w-4' : 'bg-gray-300');
+            dot.className = 'w-2 h-2 transition-all duration-300 ' + (i === 0 ? 'bg-red-600 w-4' : 'bg-gray-300');
             dot.setAttribute('data-index', i);
             dot.addEventListener('click', () => {
                 const slideWidth = track.children[0]?.offsetWidth || 0;
@@ -427,8 +431,25 @@
         scroll-snap-type: x mandatory;
     }
     
-    /* Dot indicator transitions */
-    .dot-transition {
-        transition: all 0.3s ease;
+    /* No rounded corners on any elements */
+    .category-btn,
+    select,
+    .bg-white,
+    .border,
+    img,
+    .bg-gradient-to-br,
+    button,
+    a {
+        border-radius: 0 !important;
+    }
+    
+    /* Ensure images cover properly */
+    .object-cover {
+        object-fit: cover;
+    }
+    
+    /* Logo white background styling */
+    .bg-white.rounded-md {
+        border-radius: 4px !important;
     }
 </style>
