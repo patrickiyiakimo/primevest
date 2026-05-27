@@ -38,6 +38,19 @@
             </div>
         </div>
 
+        <!-- Mobile Select Dropdown -->
+        <div class="md:hidden mb-8">
+            <select id="mobileCategorySelect" class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-red-500">
+                <option value="all">All Experts</option>
+                <option value="developers">Strategists</option>
+                <option value="designers">Analysts</option>
+                <option value="marketing">Marketing</option>
+                <option value="consultants">Consultants</option>
+                <option value="managers">Managers</option>
+                <option value="sales">Sales Experts</option>
+            </select>
+        </div>
+
         <!-- Desktop Grid Container (4 columns) -->
         <div id="desktopGrid" class="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <!-- Dynamic content injected here -->
@@ -67,7 +80,16 @@
 </div>
 
 <script>
-    // Talent Data - Investment focused professionals
+    // Image mapping for each expert
+    const expertImages = [
+        "/images/FB_IMG_1758008965260.jpg",
+        "/images/FB_IMG_1757815900467 (1).jpg",
+        "/images/FB_IMG_1757815849959.jpg",
+        "/images/FB_IMG_1758010236426.jpg",
+        "/images/FB_IMG_1757815688420.jpg"
+    ];
+
+    // Talent Data - Investment focused professionals with images
     const talentData = {
         all: [
             {
@@ -75,104 +97,104 @@
                 role: "Verified Expert in Trading",
                 title: "Forex & Commodities Strategist",
                 expertise: ["Technical Analysis", "Forex Trading", "Risk Management", "Market Psychology"],
-                previouslyAt: "JP Morgan",
-                category: "developers"
+                category: "developers",
+                image: expertImages[0]
             },
             {
                 name: "Marcus Williams",
                 role: "Verified Expert in Investment",
                 title: "Portfolio Manager",
                 expertise: ["Asset Allocation", "Equity Analysis", "Derivatives", "Bloomberg Terminal"],
-                previouslyAt: "Goldman Sachs",
-                category: "developers"
+                category: "developers",
+                image: expertImages[1]
             },
             {
                 name: "Elena Volkov",
                 role: "Verified Expert in Analytics",
                 title: "Quantitative Analyst",
                 expertise: ["Python", "Machine Learning", "Algorithmic Trading", "Statistical Modeling"],
-                previouslyAt: "Citadel",
-                category: "developers"
+                category: "developers",
+                image: expertImages[2]
             },
             {
                 name: "David Kim",
                 role: "Verified Expert in UX",
                 title: "Investment Platform Designer",
                 expertise: ["UI/UX Design", "User Research", "Prototyping", "Design Systems"],
-                previouslyAt: "Robinhood",
-                category: "designers"
+                category: "designers",
+                image: expertImages[3]
             },
             {
                 name: "Isabella Rossi",
                 role: "Verified Expert in Design",
                 title: "Financial UI Designer",
                 expertise: ["Visual Design", "Interactive Design", "Figma", "User Testing"],
-                previouslyAt: "Revolut",
-                category: "designers"
+                category: "designers",
+                image: expertImages[4]
             },
             {
                 name: "Oliver Schmidt",
                 role: "Verified Expert in Marketing",
                 title: "Growth Marketing Director",
                 expertise: ["Digital Strategy", "SEO/SEM", "Content Marketing", "Conversion Optimization"],
-                previouslyAt: "Binance",
-                category: "marketing"
+                category: "marketing",
+                image: expertImages[0]
             },
             {
                 name: "Nina Patel",
                 role: "Verified Expert in Marketing",
                 title: "Brand Strategy Consultant",
                 expertise: ["Brand Positioning", "Market Research", "Social Media", "Campaign Management"],
-                previouslyAt: "eToro",
-                category: "marketing"
+                category: "marketing",
+                image: expertImages[1]
             },
             {
                 name: "James O'Connor",
                 role: "Verified Expert in Consulting",
                 title: "Financial Management Consultant",
                 expertise: ["M&A Strategy", "Financial Modeling", "Due Diligence", "FP&A"],
-                previouslyAt: "McKinsey & Company",
-                category: "consultants"
+                category: "consultants",
+                image: expertImages[2]
             },
             {
                 name: "Wei Zhang",
                 role: "Verified Expert in Consulting",
                 title: "Risk Management Consultant",
                 expertise: ["Enterprise Risk", "Regulatory Compliance", "Stress Testing", "Basel III"],
-                previouslyAt: "Deloitte",
-                category: "consultants"
+                category: "consultants",
+                image: expertImages[3]
             },
             {
                 name: "Carlos Mendez",
                 role: "Verified Expert in Management",
                 title: "Project Management Lead",
                 expertise: ["Agile Methodology", "Scrum Master", "JIRA", "Stakeholder Management"],
-                previouslyAt: "BlackRock",
-                category: "managers"
+                category: "managers",
+                image: expertImages[4]
             },
             {
                 name: "Amara Okonkwo",
                 role: "Verified Expert in Product",
                 title: "Product Manager - Trading Platforms",
                 expertise: ["Product Strategy", "Roadmap Planning", "User Stories", "A/B Testing"],
-                previouslyAt: "Coinbase",
-                category: "managers"
+                category: "managers",
+                image: expertImages[0]
             },
             {
                 name: "Thomas Anderson",
                 role: "Verified Expert in Sales",
                 title: "Institutional Sales Director",
                 expertise: ["Client Acquisition", "Relationship Management", "Negotiation", "CRM"],
-                previouslyAt: "Fidelity Investments",
-                category: "sales"
+                category: "sales",
+                image: expertImages[1]
             },
             {
                 name: "Sophie Laurent",
                 role: "Verified Expert in Sales",
                 title: "Business Development Executive",
                 expertise: ["Lead Generation", "Sales Strategy", "Partnerships", "Account Management"],
-                previouslyAt: "Interactive Brokers",
-                category: "sales"
+                category: "sales",
+                image: expertImages[2]
             }
         ],
         developers: [],
@@ -195,17 +217,13 @@
         return `
             <div class="bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-sm h-full">
                 <!-- Profile Image Frame -->
-                <div class="relative bg-gray-100 h-64">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-28 h-28 bg-gray-300 rounded-full flex items-center justify-center">
-                            <span class="text-4xl font-bold text-gray-500">${profile.name.charAt(0)}</span>
-                        </div>
-                    </div>
+                <div class="relative h-64 bg-cover bg-center" style="background-image: url('${profile.image}'); background-position: center;">
+                    <div class="absolute inset-0 bg-black/20"></div>
                     <!-- Logo at bottom right -->
                     <div class="absolute bottom-3 right-3">
-                        <img src="/images/primevest-logo.png" alt="PrimeVest" class="h-8 w-auto opacity-70">
+                        <img src="/images/primevest-logo.png" alt="PrimeVest" class="h-8 w-auto opacity-90">
                     </div>
-                    ${showViewProfile ? '<p class="absolute bottom-3 left-3 text-gray-400 text-xs font-medium">View full profile →</p>' : ''}
+                    ${showViewProfile ? '<p class="absolute bottom-3 left-3 text-white text-xs font-medium">View full profile →</p>' : ''}
                 </div>
                 
                 <!-- Profile Info -->
@@ -215,16 +233,8 @@
                     <p class="text-gray-700 text-base font-medium mb-3">${profile.title}</p>
                     
                     <!-- Expertise Tags -->
-                    <div class="flex flex-wrap gap-2 mb-4">
+                    <div class="flex flex-wrap gap-2">
                         ${profile.expertise.map(skill => `<span class="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded-full">${skill}</span>`).join('')}
-                    </div>
-                    
-                    <!-- Previously at -->
-                    <div class="flex items-center gap-2 text-sm text-gray-500 pt-2 border-t border-gray-100">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                        </svg>
-                        <span>Previously at <span class="font-semibold text-gray-700">${profile.previouslyAt}</span></span>
                     </div>
                 </div>
             </div>
@@ -329,8 +339,6 @@
             if (category === activeCategory) {
                 btn.classList.add('bg-red-50', 'text-red-700', 'font-semibold');
                 btn.classList.remove('text-gray-600', 'font-medium');
-                // Add underline indicator
-                btn.style.position = 'relative';
                 btn.style.borderBottom = '2px solid #dc2626';
             } else {
                 btn.classList.remove('bg-red-50', 'text-red-700', 'font-semibold');
@@ -380,6 +388,16 @@
                 filterByCategory(category);
             });
         });
+        
+        // Mobile select dropdown
+        const mobileSelect = document.getElementById('mobileCategorySelect');
+        if (mobileSelect) {
+            mobileSelect.addEventListener('change', (e) => {
+                const category = e.target.value;
+                updateActiveButton(category);
+                filterByCategory(category);
+            });
+        }
     });
 </script>
 
