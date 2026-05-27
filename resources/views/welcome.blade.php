@@ -19,6 +19,9 @@
      <!-- top Rated -->
      @include('components.top-rated')
 
+    <!-- Talents Section -->
+    @include('components.talents')
+
     <!-- Features Section -->
     @include('components.features-section')
 
