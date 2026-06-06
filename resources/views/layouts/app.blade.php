@@ -30,8 +30,8 @@
     <meta name="twitter:title" content="PrimeVest - Join Over 22 Million Traders Worldwide">
     <meta name="twitter:description" content="Trade stocks, forex, cryptocurrencies, commodities, and indices with low commissions and tight spreads. Start your trading journey today.">
     <meta name="twitter:image" content="{{ asset('/images/Gemini_Generated_Image_l15menl15menl15m.png') }}">
-    <meta name="twitter:site" content="@profitmasstrade">
-    <meta name="twitter:creator" content="@profitmasstrade">
+    <meta name="twitter:site" content="@primevest">
+    <meta name="twitter:creator" content="@primevest">
     
     <!-- Additional SEO Tags -->
     <link rel="canonical" href="{{ url()->current() }}">
