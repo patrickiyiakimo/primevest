@@ -22,9 +22,6 @@
      <!-- Three Column Stats -->
      @include('components.three-column')
 
-    <!-- Tradingview market-quotes Widget -->
-    @include('components.tradingView-market')
-
     <!-- Features Section -->
     @include('components.features-section')
 
