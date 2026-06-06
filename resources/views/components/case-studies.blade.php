@@ -1,7 +1,7 @@
 <!-- Investment Expertise Grid Section - Toptal Style with Red Theme -->
 <div class="w-full bg-white">
     <!-- Max width container to prevent touching edges -->
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-5xl mx-auto">
         
         <!-- Section Header -->
         <div class="text-center py-16 lg:py-20 px-4">

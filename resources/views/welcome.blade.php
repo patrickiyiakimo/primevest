@@ -40,17 +40,10 @@
     <!-- Trade Section -->
      @include('components.trade-section')
 
-     <!-- Markets-Widget Section -->
-     @include('components.markets-widget')
-
-    
-
+   
     <!-- Exclusive Insights Section -->
     @include('components.exclusive-insights')
-    
-    <!-- Markets We Offer Section -->
-    @include('components.markets-we-offer')
-
+   
     @include('components.trade-from-any-device')
 
     @include('components.mt4-demo')
@@ -75,9 +68,6 @@
 
     <!-- global Opportunities -->
     @include('components.global-opportunities')
-
-    <!-- How It Works Section -->
-    @include('components.how-it-works')
 
     <!-- cookies -->
     @include('components.cookies-consent')

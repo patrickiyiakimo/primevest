@@ -2,120 +2,80 @@
 <div class="w-full bg-white py-16 lg:py-20 border-y border-gray-100">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         
-        <!-- Desktop: Horizontal 3-column layout with numbered indicators -->
+        <!-- Desktop: Horizontal 3-column layout with vertical borders -->
         <div class="hidden md:block">
-            <div class="flex items-start justify-between">
+            <div class="flex items-stretch justify-between">
                 
                 <!-- Stat 1 -->
-                <div class="flex-1 text-center relative">
-                    <!-- Number Indicator -->
-                    <div class="flex justify-center mb-4">
-                        <div class="w-12 h-12 rounded-full border-2 border-red-500 flex items-center justify-center bg-white">
-                            <span class="text-red-600 font-bold text-xl">1</span>
-                        </div>
-                    </div>
-                    <!-- Connecting Line to next stat -->
-                    <div class="absolute top-6 left-[50%] right-[-50%] h-0.5 bg-red-400 hidden lg:block" style="width: calc(100% - 3rem);"></div>
-                    
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-2xl mb-4">
-                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex-1 text-center px-6 border-r border-gray-200">
+                    <div class="inline-flex items-center justify-center w-14 h-14 bg-red-100 rounded-2xl mb-4">
+                        <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2">AWARD-WINNING</h3>
-                    <p class="text-gray-500 text-base max-w-xs mx-auto">Recognized globally for excellence in trading services and customer satisfaction</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">AWARD-WINNING</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Recognized globally for excellence in trading services and customer satisfaction</p>
                 </div>
                 
                 <!-- Stat 2 -->
-                <div class="flex-1 text-center relative">
-                    <!-- Number Indicator -->
-                    <div class="flex justify-center mb-4">
-                        <div class="w-12 h-12 rounded-full border-2 border-red-500 flex items-center justify-center bg-white">
-                            <span class="text-red-600 font-bold text-xl">2</span>
-                        </div>
-                    </div>
-                    <!-- Connecting Line to next stat -->
-                    <div class="absolute top-6 left-[50%] right-[-50%] h-0.5 bg-red-400 hidden lg:block" style="width: calc(100% - 3rem);"></div>
-                    
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-2xl mb-4">
-                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex-1 text-center px-6 border-r border-gray-200">
+                    <div class="inline-flex items-center justify-center w-14 h-14 bg-red-100 rounded-2xl mb-4">
+                        <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2">REGULATED BY THE GSE, USA</h3>
-                    <p class="text-gray-500 text-base max-w-xs mx-auto">Fully compliant with Global Stock Exchange and US financial regulations</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">REGULATED BY THE GSE, USA</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Fully compliant with Global Stock Exchange and US financial regulations</p>
                 </div>
                 
                 <!-- Stat 3 -->
-                <div class="flex-1 text-center">
-                    <!-- Number Indicator -->
-                    <div class="flex justify-center mb-4">
-                        <div class="w-12 h-12 rounded-full border-2 border-red-500 flex items-center justify-center bg-white">
-                            <span class="text-red-600 font-bold text-xl">3</span>
-                        </div>
-                    </div>
-                    
-                    <div class="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-2xl mb-4">
-                        <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex-1 text-center px-6">
+                    <div class="inline-flex items-center justify-center w-14 h-14 bg-red-100 rounded-2xl mb-4">
+                        <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-2">30 YEARS EXPERIENCE</h3>
-                    <p class="text-gray-500 text-base max-w-xs mx-auto">Three decades of market expertise serving millions of investors worldwide</p>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">30 YEARS EXPERIENCE</h3>
+                    <p class="text-gray-500 text-sm max-w-xs mx-auto">Three decades of market expertise serving millions of investors worldwide</p>
                 </div>
                 
             </div>
         </div>
         
-        <!-- Mobile: Vertical layout with numbered circles -->
-        <div class="md:hidden space-y-10">
+        <!-- Mobile: Vertical layout with bottom borders -->
+        <div class="md:hidden space-y-8">
             
             <!-- Stat 1 -->
-            <div class="text-center">
-                <div class="flex justify-center mb-3">
-                    <div class="w-10 h-10 rounded-full border-2 border-red-500 flex items-center justify-center bg-white">
-                        <span class="text-red-600 font-bold text-base">1</span>
-                    </div>
-                </div>
+            <div class="text-center pb-8 border-b border-gray-200">
                 <div class="inline-flex items-center justify-center w-14 h-14 bg-red-100 rounded-2xl mb-3">
                     <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">AWARD-WINNING</h3>
-                <p class="text-gray-500 text-sm max-w-xs mx-auto">Recognized globally for excellence in trading services and customer satisfaction</p>
+                <h3 class="text-base font-bold text-gray-900 mb-1">AWARD-WINNING</h3>
+                <p class="text-gray-500 text-xs max-w-xs mx-auto">Recognized globally for excellence in trading services and customer satisfaction</p>
             </div>
             
             <!-- Stat 2 -->
-            <div class="text-center">
-                <div class="flex justify-center mb-3">
-                    <div class="w-10 h-10 rounded-full border-2 border-red-500 flex items-center justify-center bg-white">
-                        <span class="text-red-600 font-bold text-base">2</span>
-                    </div>
-                </div>
+            <div class="text-center pb-8 border-b border-gray-200">
                 <div class="inline-flex items-center justify-center w-14 h-14 bg-red-100 rounded-2xl mb-3">
                     <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">REGULATED BY THE GSE, USA</h3>
-                <p class="text-gray-500 text-sm max-w-xs mx-auto">Fully compliant with Global Stock Exchange and US financial regulations</p>
+                <h3 class="text-base font-bold text-gray-900 mb-1">REGULATED BY THE GSE, USA</h3>
+                <p class="text-gray-500 text-xs max-w-xs mx-auto">Fully compliant with Global Stock Exchange and US financial regulations</p>
             </div>
             
             <!-- Stat 3 -->
             <div class="text-center">
-                <div class="flex justify-center mb-3">
-                    <div class="w-10 h-10 rounded-full border-2 border-red-500 flex items-center justify-center bg-white">
-                        <span class="text-red-600 font-bold text-base">3</span>
-                    </div>
-                </div>
                 <div class="inline-flex items-center justify-center w-14 h-14 bg-red-100 rounded-2xl mb-3">
                     <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1">30 YEARS EXPERIENCE</h3>
-                <p class="text-gray-500 text-sm max-w-xs mx-auto">Three decades of market expertise serving millions of investors worldwide</p>
+                <h3 class="text-base font-bold text-gray-900 mb-1">30 YEARS EXPERIENCE</h3>
+                <p class="text-gray-500 text-xs max-w-xs mx-auto">Three decades of market expertise serving millions of investors worldwide</p>
             </div>
             
         </div>
