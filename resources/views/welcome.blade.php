@@ -22,8 +22,8 @@
      <!-- Three Column Stats -->
      @include('components.three-column')
 
-    <!-- Talents Section -->
-    @include('components.talents')
+    <!-- Tradingview market-quotes Widget -->
+    @include('components.tradingView-market')
 
     <!-- Features Section -->
     @include('components.features-section')
