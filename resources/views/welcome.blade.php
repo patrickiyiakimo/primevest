@@ -28,6 +28,9 @@
     <!-- Award Section -->
     @include('components.awards')
 
+    <!-- Desktop App Download Section -->
+    @include('components.desktop-app')
+
     <!-- Industry prices Section -->
     @include('components.industry-prices')
 
