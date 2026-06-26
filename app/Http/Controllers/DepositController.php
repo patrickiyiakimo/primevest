@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\DepositRequest;
 use App\Models\Transaction;
+use App\Mail\DepositConfirmationMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class DepositController extends Controller
 {
@@ -32,9 +34,16 @@ class DepositController extends Controller
             'status' => 'pending'
         ]);
         
+        // Send confirmation email to user
+        try {
+            Mail::to($user->email)->send(new DepositConfirmationMail($user, $validated['amount'], $validated['method']));
+        } catch (\Exception $e) {
+            \Log::error('Failed to send deposit confirmation email to ' . $user->email . ': ' . $e->getMessage());
+        }
+        
         return response()->json([
             'success' => true,
-            'message' => 'Deposit request submitted successfully!'
+            'message' => 'Deposit request submitted successfully! A confirmation email has been sent to your inbox.'
         ]);
     }
 }

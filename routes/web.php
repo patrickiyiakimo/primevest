@@ -6,6 +6,8 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\KYCController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\DepositHistoryController;
 use App\Http\Controllers\WithdrawalHistoryController;
 use App\Http\Controllers\WithdrawalController;
@@ -35,41 +37,28 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-// Admin Routes (only for admins)
+// ============================================
+// ADMIN ROUTES (Only for admins)
+// ============================================
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', function () {
         if (Auth::user()->is_admin != 1) {
             abort(403, 'Unauthorized access. Admin privileges required.');
         }
-        return app(App\Http\Controllers\Admin\AdminController::class)->dashboard();
+        return app(AdminController::class)->dashboard();
     })->name('dashboard');
     
-    // Route::get('/users', function () {
-    //     if (Auth::user()->is_admin != 1) abort(403);
-    //     return app(App\Http\Controllers\Admin\UserManagementController::class)->index(request());
-    // })->name('users');
-    
-    // Route::get('/users/{user}/edit', function ($user) {
-    //     if (Auth::user()->is_admin != 1) abort(403);
-    //     return app(App\Http\Controllers\Admin\UserManagementController::class)->edit($user);
-    // })->name('users.edit');
-    
-    // Route::put('/users/{user}', function ($user) {
-    //     if (Auth::user()->is_admin != 1) abort(403);
-    //     return app(App\Http\Controllers\Admin\UserManagementController::class)->update(request(), $user);
-    // })->name('users.update');
-
+    // User Management
     Route::get('/users', [UserManagementController::class, 'index'])->name('users');
     Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
     
-    
-    // Deposit management routes
+    // Deposit management
     Route::get('/deposits', [AdminController::class, 'deposits'])->name('deposits');
     Route::post('/deposits/{id}/approve', [AdminController::class, 'approveDeposit'])->name('deposits.approve');
     Route::post('/deposits/{id}/reject', [AdminController::class, 'rejectDeposit'])->name('deposits.reject');
     
-    // Withdrawal management routes
+    // Withdrawal management
     Route::get('/withdrawals', [AdminController::class, 'withdrawals'])->name('withdrawals');
     Route::post('/withdrawals/{id}/approve', [AdminController::class, 'approveWithdrawal'])->name('withdrawals.approve');
     Route::post('/withdrawals/{id}/reject', [AdminController::class, 'rejectWithdrawal'])->name('withdrawals.reject');
@@ -81,6 +70,34 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/card-applications', [AdminController::class, 'cardApplications'])->name('card-applications');
     Route::post('/card-applications/{id}/approve', [AdminController::class, 'approveCardApplication'])->name('card-applications.approve');
     Route::post('/card-applications/{id}/reject', [AdminController::class, 'rejectCardApplication'])->name('card-applications.reject');
+    
+    // KYC Management
+    Route::get('/kyc', [AdminController::class, 'kycSubmissions'])->name('kyc.index');
+    Route::get('/kyc/{id}', [AdminController::class, 'viewKycSubmission'])->name('kyc.view');
+    Route::post('/kyc/{id}/approve', [AdminController::class, 'approveKyc'])->name('kyc.approve');
+    Route::post('/kyc/{id}/reject', [AdminController::class, 'rejectKyc'])->name('kyc.reject');
+    Route::get('/kyc/{id}/download/{type}', [AdminController::class, 'downloadKycDocument'])->name('kyc.download');
+    
+    // Stock Management
+    Route::get('/stock-prices', [App\Http\Controllers\Admin\StockManagementController::class, 'stockPrices'])->name('stock.prices');
+    Route::post('/stock-prices/update', [App\Http\Controllers\Admin\StockManagementController::class, 'updateStockPrice'])->name('stock.prices.update');
+    Route::post('/stock-prices/update-all', [App\Http\Controllers\Admin\StockManagementController::class, 'updateAllStockPrices'])->name('stock.prices.update-all');
+    Route::get('/stock-portfolios', [App\Http\Controllers\Admin\StockManagementController::class, 'userPortfolios'])->name('stock.portfolio');
+    Route::get('/stock-transactions', [App\Http\Controllers\Admin\StockManagementController::class, 'stockTransactions'])->name('stock.transactions');
+    
+    // Admin Copy Trading Management
+    Route::get('/copy-traders', [CopyTraderController::class, 'index'])->name('copy-traders.index');
+    Route::get('/copy-traders/create', [CopyTraderController::class, 'create'])->name('copy-traders.create');
+    Route::post('/copy-traders', [CopyTraderController::class, 'store'])->name('copy-traders.store');
+    Route::get('/copy-traders/{trader}/edit', [CopyTraderController::class, 'edit'])->name('copy-traders.edit');
+    Route::put('/copy-traders/{trader}', [CopyTraderController::class, 'update'])->name('copy-traders.update');
+    Route::delete('/copy-traders/{trader}', [CopyTraderController::class, 'destroy'])->name('copy-traders.destroy');
+    Route::post('/copy-traders/{trader}/performances', [CopyTraderController::class, 'storePerformance'])->name('copy-traders.performances.store');
+    Route::delete('/copy-traders/performances/{performance}', [CopyTraderController::class, 'destroyPerformance'])->name('copy-traders.performances.destroy');
+    // Add this route inside the admin group
+Route::get('/copy-trading-requests', [App\Http\Controllers\Admin\CopyTraderController::class, 'requests'])->name('admin.copy-trading-requests');
+Route::post('/copy-trading-requests/{id}/approve', [App\Http\Controllers\Admin\CopyTraderController::class, 'approveRequest'])->name('admin.copy-trading-requests.approve');
+Route::post('/copy-trading-requests/{id}/reject', [App\Http\Controllers\Admin\CopyTraderController::class, 'rejectRequest'])->name('admin.copy-trading-requests.reject');   
 });
 
 // Temporary route to create an admin user (for testing purposes)
@@ -146,7 +163,6 @@ Route::middleware('auth')->group(function () {
 
 // Protected routes (accessible by all authenticated users)
 Route::middleware('auth')->group(function () {
-    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     // Profile Routes
@@ -154,13 +170,19 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     
+    // KYC Routes
+    Route::get('/kyc/form', [KYCController::class, 'showForm'])->name('kyc.form');
+    Route::get('/kyc/status', [KYCController::class, 'showStatus'])->name('kyc.status');
+    Route::post('/kyc/submit', [KYCController::class, 'submit'])->name('kyc.submit');
+    Route::put('/kyc/update/{user}', [KYCController::class, 'updateStatus'])->name('kyc.update')->middleware('admin');
+    
     // History Routes
     Route::get('/deposits-history', [DepositHistoryController::class, 'index'])->name('deposits-history');
     Route::get('/withdrawals-history', [WithdrawalHistoryController::class, 'index'])->name('withdrawals-history');
     Route::get('/earnings-history', [EarningsHistoryController::class, 'index'])->name('earnings-history');
     Route::get('/investments-history', [InvestmentsHistoryController::class, 'index'])->name('investments-history');
-
-    // Make a Deposit
+    
+    // Make a Deposit/Invest
     Route::get('/deposit', function () { return view('dashboard.deposit'); })->name('deposit');
     Route::get('/invest', function () { return view('dashboard.invest'); })->name('invest');
     
@@ -168,8 +190,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/buy-crypto', function () { return view('dashboard.buy-crypto'); })->name('buy-crypto');
     
     // Stocks
-    Route::get('/stock-trading', function () { return view('dashboard.stock-trading'); })->name('stock-trading');
+    Route::get('/stock-trading', [StockController::class, 'index'])->name('stock-trading');
+    Route::post('/stock/buy', [StockController::class, 'buy'])->name('stock.buy');
+    Route::post('/stock/sell', [StockController::class, 'sell'])->name('stock.sell');
+    Route::get('/stock/quote', [StockController::class, 'getStockQuote'])->name('stock.quote');
+    Route::get('/stock/history', [StockController::class, 'history'])->name('stock.history');
 });
+
 
 // Page routes (public)
 Route::get('/trading', [PageController::class, 'trading'])->name('trading');

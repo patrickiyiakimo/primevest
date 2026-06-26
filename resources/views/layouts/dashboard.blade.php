@@ -535,6 +535,7 @@
                 <a href="{{ route('withdrawals-history') }}" class="dropdown-item">Withdrawals</a>
                 <a href="{{ route('earnings-history') }}" class="dropdown-item">Earnings</a>
                 <a href="{{ route('investments-history') }}" class="dropdown-item">Investments</a>
+                <a href="{{ route('stock.history') }}" class="dropdown-item">Stock Trading</a>
             </div>
         </div>
     </div>
@@ -547,6 +548,12 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
             </svg>
             <span>Card Application</span>
+        </a>
+         <a href="{{ route('kyc.form') }}" class="nav-item {{ request()->routeIs('kyc.form') || request()->routeIs('kyc.status') ? 'nav-item-active' : '' }}">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+            </svg>
+            <span>KYC Verification</span>
         </a>
         <a href="{{ route('profile') }}" class="nav-item {{ request()->routeIs('profile') ? 'nav-item-active' : '' }}">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">

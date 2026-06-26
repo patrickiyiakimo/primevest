@@ -6,71 +6,96 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="border-l-4 border-green-600 shadow-md p-6 bg-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
-                <h1 class="text-2xl font-bold">Hi, welcome back!</h1>
-                <p class="text-gray-300 mt-1">Your investments history</p>
+                <h1 class="text-2xl font-bold text-gray-900">Investments History</h1>
+                <p class="text-gray-500 mt-1">Track all your investment activities</p>
             </div>
-            <div class="bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/20">
-                <span class="text-green-400 text-sm font-semibold">💰 Total Invested: ${{ number_format($totalInvested ?? 0, 2) }}</span>
+            <div class="bg-green-50 border border-green-200 px-5 py-2.5">
+                <span class="text-green-600 text-sm font-semibold">💰 Total Invested: ${{ number_format($totalInvested ?? 0, 2) }}</span>
             </div>
         </div>
     </div>
 
     <!-- Investment Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
-        <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-200">
+        <div class="border-l-4 border-green-500 p-5 bg-white border border-gray-200 shadow-sm">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm text-green-700">Total Invested</p>
-                    <p class="text-2xl font-bold text-green-800">${{ number_format($totalInvested ?? 0, 2) }}</p>
+                    <p class="text-sm text-gray-500">Total Invested</p>
+                    <p class="text-2xl font-bold text-gray-900">${{ number_format($totalInvested ?? 0, 2) }}</p>
+                </div>
+                <div class="w-12 h-12 bg-green-100 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
                 </div>
             </div>
         </div>
         
-        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-5 border border-blue-200">
+        <div class="border-l-4 border-blue-500 p-5 bg-white border border-gray-200 shadow-sm">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm text-blue-700">Active Investments</p>
-                    <p class="text-2xl font-bold text-blue-800">{{ $activeInvestments ?? 0 }}</p>
+                    <p class="text-sm text-gray-500">Active Investments</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $activeInvestments ?? 0 }}</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-100 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
                 </div>
             </div>
         </div>
         
-        <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-5 border border-purple-200">
+        <div class="border-l-4 border-purple-500 p-5 bg-white border border-gray-200 shadow-sm">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm text-purple-700">Total Returns</p>
-                    <p class="text-2xl font-bold text-purple-800">${{ number_format($totalReturns ?? 0, 2) }}</p>
+                    <p class="text-sm text-gray-500">Total Returns</p>
+                    <p class="text-2xl font-bold text-gray-900">${{ number_format($totalReturns ?? 0, 2) }}</p>
+                </div>
+                <div class="w-12 h-12 bg-purple-100 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
                 </div>
             </div>
         </div>
         
-        <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-5 border border-yellow-200">
+        <div class="border-l-4 border-yellow-500 p-5 bg-white border border-gray-200 shadow-sm">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm text-yellow-700">ROI</p>
-                    <p class="text-2xl font-bold text-yellow-800">{{ number_format($roi ?? 0, 2) }}%</p>
+                    <p class="text-sm text-gray-500">ROI</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ number_format($roi ?? 0, 2) }}%</p>
                 </div>
-               </div>
+                <div class="w-12 h-12 bg-yellow-100 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                    </svg>
+                </div>
+            </div>
         </div>
         
-        <div class="bg-gradient-to-br from-red-50 to-rose-50 rounded-2xl p-5 border border-red-200">
+        <div class="border-l-4 border-red-500 p-5 bg-white border border-gray-200 shadow-sm">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm text-red-700">Completed</p>
-                    <p class="text-2xl font-bold text-red-800">{{ $completedInvestments ?? 0 }}</p>
+                    <p class="text-sm text-gray-500">Completed</p>
+                    <p class="text-2xl font-bold text-gray-900">{{ $completedInvestments ?? 0 }}</p>
                 </div>
-               </div>
+                <div class="w-12 h-12 bg-red-100 flex items-center justify-center">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Investments History Table -->
-    <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-        <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
+    <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+        <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
             <div class="flex items-center">
-                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                 </svg>
                 <h2 class="text-lg font-semibold text-gray-900">Investments History</h2>
@@ -92,23 +117,23 @@
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
- @forelse($investments ?? [] as $index => $investment)
-                     <tr class="hover:bg-gray-50 transition-colors duration-200">
-                        <td class="px-6 py-4 text-sm text-gray-500">{{ $investments->firstItem() + $index }}</td>
+                    @forelse($investments ?? [] as $index => $investment)
+                    <tr class="hover:bg-gray-50 transition-colors duration-200">
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ ($investments->currentPage() - 1) * $investments->perPage() + $loop->iteration }}</td>
                         <td class="px-6 py-4 text-sm font-semibold text-gray-800">
                             <div class="flex items-center gap-2">
                                 @if($investment->plan_name == 'VIP Elite Plan')
-                                    <span class="text-yellow-500">👑</span>
+                                    <span class="text-yellow-600">👑</span>
                                 @elseif($investment->plan_name == 'Diamond Plan')
-                                    <span class="text-blue-500">💎</span>
+                                    <span class="text-blue-600">💎</span>
                                 @elseif($investment->plan_name == 'Platinum Plan')
-                                    <span class="text-gray-500">⚡</span>
+                                    <span class="text-gray-600">⚡</span>
                                 @elseif($investment->plan_name == 'Gold Plan')
-                                    <span class="text-yellow-500">🥇</span>
+                                    <span class="text-yellow-600">🥇</span>
                                 @elseif($investment->plan_name == 'Silver Plan')
-                                    <span class="text-gray-400">🥈</span>
+                                    <span class="text-gray-500">🥈</span>
                                 @else
-                                    <span class="text-green-500">🚀</span>
+                                    <span class="text-green-600">🚀</span>
                                 @endif
                                 {{ $investment->plan_name }}
                             </div>
@@ -120,18 +145,18 @@
                         <td class="px-6 py-4 text-sm text-gray-500">{{ $investment->end_date ? $investment->end_date->format('Y-m-d') : 'N/A' }}</td>
                         <td class="px-6 py-4 text-sm">
                             @if($investment->status == 'active')
-                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-green-100 text-green-700">
-                                    <span class="w-1.5 h-1.5 bg-green-600 rounded-full mr-1.5 animate-pulse"></span>
+                                <span class="inline-flex items-center px-2 py-1 text-xs font-semibold bg-green-100 text-green-700">
+                                    <span class="w-1.5 h-1.5 bg-green-600 mr-1.5"></span>
                                     Active
                                 </span>
                             @elseif($investment->status == 'completed')
-                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">
-                                    <span class="w-1.5 h-1.5 bg-blue-600 rounded-full mr-1.5"></span>
+                                <span class="inline-flex items-center px-2 py-1 text-xs font-semibold bg-blue-100 text-blue-700">
+                                    <span class="w-1.5 h-1.5 bg-blue-600 mr-1.5"></span>
                                     Completed
                                 </span>
                             @else
-                                <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-700">
-                                    <span class="w-1.5 h-1.5 bg-red-600 rounded-full mr-1.5"></span>
+                                <span class="inline-flex items-center px-2 py-1 text-xs font-semibold bg-red-100 text-red-700">
+                                    <span class="w-1.5 h-1.5 bg-red-600 mr-1.5"></span>
                                     {{ ucfirst($investment->status) }}
                                 </span>
                             @endif
@@ -146,7 +171,7 @@
                             <p class="text-sm font-medium">No investment history found</p>
                             <p class="text-xs mt-1">Start investing to see your investments here</p>
                             <div class="mt-4">
-                                <a href="{{ route('invest') }}" class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold rounded-lg transition-all duration-300">
+                                <a href="{{ route('invest') }}" class="inline-flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold transition-all duration-300">
                                     Start Investing
                                     <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -161,19 +186,19 @@
         </div>
         
         <!-- Pagination -->
-        @if(isset($investments) && method_exists($investments, 'links'))
-        <div class="border-t border-gray-100 px-6 py-4 bg-gray-50">
+        @if(isset($investments) && method_exists($investments, 'hasPages') && $investments->hasPages())
+        <div class="border-t border-gray-200 px-6 py-4 bg-gray-50">
             {{ $investments->links() }}
         </div>
         @endif
     </div>
    
-    <!-- Investment Distribution -->
+    <!-- Investment Distribution & Quick Actions -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-            <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
+        <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+            <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                 <div class="flex items-center">
-                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                     </svg>
@@ -188,8 +213,8 @@
                             <span class="text-gray-600">VIP Elite Plan</span>
                             <span class="font-semibold text-gray-800">{{ $vipPercentage ?? 0 }}%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-yellow-500 h-2 rounded-full" style="width: {{ $vipPercentage ?? 0 }}%"></div>
+                        <div class="w-full bg-gray-200 h-2">
+                            <div class="bg-yellow-500 h-2" style="width: {{ $vipPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
                     @endif
@@ -200,8 +225,8 @@
                             <span class="text-gray-600">Diamond Plan</span>
                             <span class="font-semibold text-gray-800">{{ $diamondPercentage ?? 0 }}%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-blue-500 h-2 rounded-full" style="width: {{ $diamondPercentage ?? 0 }}%"></div>
+                        <div class="w-full bg-gray-200 h-2">
+                            <div class="bg-blue-500 h-2" style="width: {{ $diamondPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
                     @endif
@@ -212,8 +237,8 @@
                             <span class="text-gray-600">Platinum Plan</span>
                             <span class="font-semibold text-gray-800">{{ $platinumPercentage ?? 0 }}%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-gray-500 h-2 rounded-full" style="width: {{ $platinumPercentage ?? 0 }}%"></div>
+                        <div class="w-full bg-gray-200 h-2">
+                            <div class="bg-gray-500 h-2" style="width: {{ $platinumPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
                     @endif
@@ -224,8 +249,8 @@
                             <span class="text-gray-600">Gold Plan</span>
                             <span class="font-semibold text-gray-800">{{ $goldPercentage ?? 0 }}%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-yellow-600 h-2 rounded-full" style="width: {{ $goldPercentage ?? 0 }}%"></div>
+                        <div class="w-full bg-gray-200 h-2">
+                            <div class="bg-yellow-600 h-2" style="width: {{ $goldPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
                     @endif
@@ -236,8 +261,8 @@
                             <span class="text-gray-600">Silver Plan</span>
                             <span class="font-semibold text-gray-800">{{ $silverPercentage ?? 0 }}%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-gray-400 h-2 rounded-full" style="width: {{ $silverPercentage ?? 0 }}%"></div>
+                        <div class="w-full bg-gray-200 h-2">
+                            <div class="bg-gray-400 h-2" style="width: {{ $silverPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
                     @endif
@@ -248,8 +273,8 @@
                             <span class="text-gray-600">Starter Plan</span>
                             <span class="font-semibold text-gray-800">{{ $starterPercentage ?? 0 }}%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-green-500 h-2 rounded-full" style="width: {{ $starterPercentage ?? 0 }}%"></div>
+                        <div class="w-full bg-gray-200 h-2">
+                            <div class="bg-green-500 h-2" style="width: {{ $starterPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
                     @endif
@@ -260,8 +285,8 @@
                             <span class="text-gray-600">Other Plans</span>
                             <span class="font-semibold text-gray-800">{{ $otherPercentage ?? 0 }}%</span>
                         </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-gray-300 h-2 rounded-full" style="width: {{ $otherPercentage ?? 0 }}%"></div>
+                        <div class="w-full bg-gray-200 h-2">
+                            <div class="bg-gray-300 h-2" style="width: {{ $otherPercentage ?? 0 }}%"></div>
                         </div>
                     </div>
                     @endif
@@ -269,10 +294,10 @@
             </div>
         </div>
         
-        <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-            <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
+        <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+            <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                 <div class="flex items-center">
-                    <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
                     </svg>
                     <h2 class="text-lg font-semibold text-gray-900">Quick Actions</h2>
@@ -280,9 +305,9 @@
             </div>
             <div class="p-6">
                 <div class="space-y-4">
-                    <a href="{{ route('invest') }}" class="flex items-center justify-between p-4 bg-green-50 rounded-xl hover:bg-green-100 transition-all duration-300">
+                    <a href="{{ route('invest') }}" class="flex items-center justify-between p-4 border border-gray-200 hover:border-green-500 transition-all duration-300">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                            <div class="w-10 h-10 bg-green-600 flex items-center justify-center">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
@@ -297,9 +322,9 @@
                         </svg>
                     </a>
                     
-                    <a href="{{ route('dashboard') }}" class="flex items-center justify-between p-4 bg-blue-50 rounded-xl hover:bg-blue-100 transition-all duration-300">
+                    <a href="{{ route('dashboard') }}" class="flex items-center justify-between p-4 border border-gray-200 hover:border-blue-500 transition-all duration-300">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                            <div class="w-10 h-10 bg-blue-600 flex items-center justify-center">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                                 </svg>
@@ -314,9 +339,9 @@
                         </svg>
                     </a>
                     
-                    <a href="{{ route('deposit') }}" class="flex items-center justify-between p-4 bg-purple-50 rounded-xl hover:bg-purple-100 transition-all duration-300">
+                    <a href="{{ route('deposit') }}" class="flex items-center justify-between p-4 border border-gray-200 hover:border-purple-500 transition-all duration-300">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                            <div class="w-10 h-10 bg-purple-600 flex items-center justify-center">
                                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                 </svg>
@@ -343,6 +368,12 @@
     class Toast {
         constructor() {
             this.container = document.getElementById('toastContainer');
+            if (!this.container) {
+                this.container = document.createElement('div');
+                this.container.id = 'toastContainer';
+                this.container.className = 'toast-container';
+                document.body.appendChild(this.container);
+            }
         }
         
         show(message, type = 'success', duration = 4000) {
@@ -360,7 +391,7 @@
                 info: 'ℹ'
             };
             
-            toast.className = `${colors[type]} text-white px-5 py-3 rounded-xl shadow-lg mb-3 flex items-center gap-3 transform translate-x-full transition-all duration-300`;
+            toast.className = `${colors[type]} text-white px-5 py-3 shadow-lg mb-3 flex items-center gap-3 transform translate-x-full transition-all duration-300`;
             toast.innerHTML = `<span class="font-bold text-lg">${icons[type]}</span><span>${message}</span>`;
             this.container.appendChild(toast);
             
@@ -389,17 +420,22 @@
 </script>
 
 <style>
+    /* No rounded corners */
+    .bg-white, .border, button, a, .toast, .bg-green-50, .bg-blue-100, .bg-purple-100, .bg-yellow-100, .bg-red-100 {
+        border-radius: 0 !important;
+    }
+    
+    /* Remove all border-radius */
+    * {
+        border-radius: 0 !important;
+    }
+    
+    .rounded-full {
+        border-radius: 0 !important;
+    }
+    
     table {
         min-width: 900px;
-    }
-    
-    @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.5; }
-    }
-    
-    .animate-pulse {
-        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 </style>
 @endsection

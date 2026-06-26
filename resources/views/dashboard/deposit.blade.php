@@ -6,14 +6,14 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="border-l-4 border-green-600 shadow-md p-6 bg-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
-                <h1 class="text-2xl font-bold">Deposit Funds</h1>
-                <p class="text-gray-300 mt-1">Add money to your trading account securely</p>
+                <h1 class="text-2xl font-bold text-gray-900">Deposit Funds</h1>
+                <p class="text-gray-500 mt-1">Add money to your trading account securely</p>
             </div>
-            <div class="bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/20">
-                <span class="text-green-400 text-sm font-semibold">💰 Available Balance: ${{ number_format(Auth::user()->balance, 2) }}</span>
+            <div class="bg-green-50 border border-green-200 px-5 py-2.5">
+                <span class="text-green-600 text-sm font-semibold">💰 Available Balance: $<span id="availableBalance">{{ number_format($spendableBalance ?? Auth::user()->balance, 2) }}</span></span>
             </div>
         </div>
     </div>
@@ -22,10 +22,10 @@
         <!-- Left Side - Main Deposit Form -->
         <div class="lg:col-span-2 space-y-6">
             <!-- Amount Section -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div class="border-b border-gray-100 px-6 py-4 bg-gray-50">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>
                         Enter Amount
@@ -37,76 +37,77 @@
                         <input type="number" 
                                id="depositAmount" 
                                placeholder="0.00" 
-                               class="w-full pl-8 pr-4 py-4 text-2xl border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
-                               oninput="updateAmount()">
+                               class="w-full pl-8 pr-4 py-4 text-2xl border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-all duration-300">
                     </div>
                     <div class="flex flex-wrap gap-3 mt-4">
-                        <button type="button" onclick="setAmount(100)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$100</button>
-                        <button type="button" onclick="setAmount(250)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$250</button>
-                        <button type="button" onclick="setAmount(500)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$500</button>
-                        <button type="button" onclick="setAmount(1000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$1,000</button>
-                        <button type="button" onclick="setAmount(5000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$5,000</button>
-                        <button type="button" onclick="setAmount(10000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">$10,000</button>
+                        <button type="button" onclick="setAmount(100)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$100</button>
+                        <button type="button" onclick="setAmount(250)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$250</button>
+                        <button type="button" onclick="setAmount(500)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$500</button>
+                        <button type="button" onclick="setAmount(1000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$1,000</button>
+                        <button type="button" onclick="setAmount(5000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$5,000</button>
+                        <button type="button" onclick="setAmount(10000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$10,000</button>
                     </div>
                 </div>
             </div>
 
             <!-- Payment Methods -->
-<div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-    <div class="border-b border-gray-100 px-6 py-4 bg-gray-50">
-        <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-            <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-            </svg>
-            Choose your method of payment
-        </h2>
-        <p class="text-sm text-gray-500 mt-1">Select a payment method to see instructions</p>
-    </div>
-    <div class="p-4 space-y-3 max-h-[400px] overflow-y-auto">
-        @php
-            $paymentMethods = [
-                ['value' => 'solana', 'name' => 'Solana (SOL)', 'logo' => 'https://cryptologos.cc/logos/solana-sol-logo.svg', 'bg' => 'from-purple-500 to-purple-600', 'desc' => 'Fast and low-cost transactions'],
-                ['value' => 'usdt_erc20', 'name' => 'Tether USD (ERC20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'bg' => 'from-blue-500 to-blue-600', 'desc' => 'Ethereum network'],
-                ['value' => 'etransfer', 'name' => 'E-Transfer', 'logo' => 'https://cdn-icons-png.flaticon.com/512/854/854878.png', 'bg' => 'from-red-500 to-red-600', 'desc' => 'Instant bank transfer (Canada)'],
-                ['value' => 'paypal', 'name' => 'PayPal', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/39/PayPal_logo.svg', 'bg' => 'from-blue-400 to-blue-500', 'desc' => 'Send as Family & Friends'],
-                ['value' => 'bank_transfer', 'name' => 'Bank Transfer', 'logo' => 'https://cdn-icons-png.flaticon.com/512/833/833593.png', 'bg' => 'from-gray-500 to-gray-600', 'desc' => 'Wire transfer (1-3 business days)'],
-                ['value' => 'usdt_trc20', 'name' => 'Tether USD (TRC20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'bg' => 'from-teal-500 to-teal-600', 'desc' => 'TRON network - Low fees'],
-                ['value' => 'ethereum', 'name' => 'Ethereum (ETH)', 'logo' => 'https://cryptologos.cc/logos/ethereum-eth-logo.svg', 'bg' => 'from-indigo-500 to-indigo-600', 'desc' => 'Smart contract platform'],
-                ['value' => 'bitcoin', 'name' => 'Bitcoin (BTC)', 'logo' => 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg', 'bg' => 'from-orange-500 to-orange-600', 'desc' => 'World\'s leading cryptocurrency'],
-            ];
-        @endphp
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
+                    <h2 class="text-lg font-semibold text-gray-900 flex items-center">
+                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                        </svg>
+                        Choose your method of payment
+                    </h2>
+                    <p class="text-sm text-gray-500 mt-1">Select a payment method to see instructions</p>
+                </div>
+                <div class="p-4 space-y-3 max-h-[400px] overflow-y-auto">
+                    @php
+                        $paymentMethods = [
+                            ['value' => 'bitcoin', 'name' => 'Bitcoin (BTC)', 'logo' => 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg', 'desc' => 'World\'s leading cryptocurrency', 'active' => true],
+                            ['value' => 'solana', 'name' => 'Solana (SOL)', 'logo' => 'https://cryptologos.cc/logos/solana-sol-logo.svg', 'desc' => 'Fast and low-cost transactions', 'active' => true],
+                            ['value' => 'usdt_erc20', 'name' => 'Tether USD (ERC20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'desc' => 'Ethereum network', 'active' => true],
+                            ['value' => 'usdt_trc20', 'name' => 'Tether USD (TRC20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'desc' => 'TRON network - Low fees', 'active' => true],
+                            ['value' => 'ethereum', 'name' => 'Ethereum (ETH)', 'logo' => 'https://cryptologos.cc/logos/ethereum-eth-logo.svg', 'desc' => 'Smart contract platform', 'active' => true],
+                            ['value' => 'tron', 'name' => 'TRON (TRX)', 'logo' => 'https://cryptologos.cc/logos/tron-trx-logo.svg', 'desc' => 'High-speed blockchain', 'active' => true],
+                            ['value' => 'usdt_bnb', 'name' => 'Tether USD (BEP20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'desc' => 'Binance Smart Chain', 'active' => true],
+                            ['value' => 'etransfer', 'name' => 'E-Transfer', 'logo' => 'https://cdn-icons-png.flaticon.com/512/854/854878.png', 'desc' => 'Instant bank transfer (Canada)', 'active' => false],
+                            ['value' => 'paypal', 'name' => 'PayPal', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/39/PayPal_logo.svg', 'desc' => 'Send as Family & Friends', 'active' => false],
+                            ['value' => 'bank_transfer', 'name' => 'Bank Transfer', 'logo' => 'https://cdn-icons-png.flaticon.com/512/833/833593.png', 'desc' => 'Wire transfer (1-3 business days)', 'active' => false],
+                        ];
+                    @endphp
 
-        @foreach($paymentMethods as $method)
-        <label class="payment-method flex items-center justify-between p-4 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300" data-method="{{ $method['value'] }}">
-            <div class="flex items-center space-x-4">
-                <input type="radio" name="payment_method" value="{{ $method['value'] }}" class="w-5 h-5 text-green-600 focus:ring-green-500" onchange="selectPaymentMethod(this)">
-                <div class="w-12 h-12  rounded-xl flex items-center justify-center shadow-md p-2">
-                    <img src="{{ $method['logo'] }}" alt="{{ $method['name'] }}" class="w-8 h-8 object-contain">
-                </div>
-                <div>
-                    <p class="font-semibold text-gray-900">{{ $method['name'] }}</p>
-                    <p class="text-sm text-gray-500">{{ $method['desc'] }}</p>
+                    @foreach($paymentMethods as $method)
+                    <label class="payment-method flex items-center justify-between p-4 border-2 border-gray-200 cursor-pointer transition-all duration-300 hover:border-green-500" data-method="{{ $method['value'] }}">
+                        <div class="flex items-center space-x-4">
+                            <input type="radio" name="payment_method" value="{{ $method['value'] }}" class="w-5 h-5 text-green-600 focus:ring-green-500" onchange="selectPaymentMethod(this)">
+                            <div class="w-12 h-12 flex items-center justify-center shadow-sm p-2 border border-gray-100">
+                                <img src="{{ $method['logo'] }}" alt="{{ $method['name'] }}" class="w-8 h-8 object-contain">
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-900">{{ $method['name'] }}</p>
+                                <p class="text-sm text-gray-500">{{ $method['desc'] }}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-400">Min: ${{ $method['value'] == 'etransfer' ? '100' : ($method['value'] == 'paypal' ? '20' : ($method['value'] == 'bank_transfer' ? '500' : '50')) }}</p>
+                            <p class="text-xs text-gray-400">Max: ${{ $method['value'] == 'etransfer' ? '10,000' : ($method['value'] == 'paypal' ? '5,000' : '100,000') }}</p>
+                        </div>
+                    </label>
+                    @endforeach
                 </div>
             </div>
-            <div class="text-right">
-                <p class="text-xs text-gray-400">Min: ${{ $method['value'] == 'etransfer' ? '100' : ($method['value'] == 'paypal' ? '20' : ($method['value'] == 'bank_transfer' ? '500' : '50')) }}</p>
-                <p class="text-xs text-gray-400">Max: ${{ $method['value'] == 'etransfer' ? '10,000' : ($method['value'] == 'paypal' ? '5,000' : '100,000') }}</p>
-            </div>
-        </label>
-        @endforeach
-    </div>
-</div>
         </div>
 
         <!-- Right Sidebar - Payment Instructions -->
         <div class="space-y-6">
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden sticky top-6" id="paymentInstructionsCard">
-                <div class="bg-gradient-to-r from-red-800 to-red-900 px-6 py-4">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden sticky top-6" id="paymentInstructionsCard">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <h2 class="text-lg font-bold text-white">Payment Instructions</h2>
+                        <h2 class="text-lg font-bold text-gray-900">Payment Instructions</h2>
                     </div>
                 </div>
                 <div class="p-6" id="paymentInstructions">
@@ -124,6 +125,11 @@
 
 <!-- Toast Notification Styles -->
 <style>
+    /* No rounded corners */
+    .bg-white, .border, button, .toast, .payment-method, input, .rounded-xl, .rounded-lg, .rounded-2xl {
+        border-radius: 0 !important;
+    }
+    
     .toast-container {
         position: fixed;
         bottom: 20px;
@@ -133,7 +139,6 @@
     .toast {
         min-width: 320px;
         background: white;
-        border-radius: 12px;
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         margin-bottom: 12px;
         transform: translateX(400px);
@@ -157,6 +162,11 @@
     .sticky { position: sticky; top: 100px; }
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { opacity: 0.5; }
+    
+    /* Remove all border-radius from all elements */
+    * {
+        border-radius: 0 !important;
+    }
 </style>
 
 <!-- Toast Container -->
@@ -174,7 +184,7 @@
             }
         }
         
-        show(message, type = 'success', duration = 4000) {
+        show(message, type = 'success', duration = 5000) {
             const toast = document.createElement('div');
             toast.className = `toast toast-${type}`;
             let icon = '';
@@ -192,26 +202,62 @@
                 setTimeout(() => toast.remove(), 300);
             }, duration);
         }
-        success(message, duration = 4000) { this.show(message, 'success', duration); }
-        error(message, duration = 4000) { this.show(message, 'error', duration); }
-        warning(message, duration = 4000) { this.show(message, 'warning', duration); }
-        info(message, duration = 4000) { this.show(message, 'info', duration); }
+        success(message, duration = 5000) { this.show(message, 'success', duration); }
+        error(message, duration = 5000) { this.show(message, 'error', duration); }
+        warning(message, duration = 5000) { this.show(message, 'warning', duration); }
+        info(message, duration = 5000) { this.show(message, 'info', duration); }
     }
     
     const toast = new Toast();
     let selectedPaymentMethod = null;
     let currentAmount = 0;
+    let spendableBalance = {{ $spendableBalance ?? Auth::user()->balance }};
+
+    // Function to fetch spendable balance from server
+    async function fetchSpendableBalance() {
+        try {
+            const response = await fetch('/user/balance');
+            const data = await response.json();
+            if (data.success) {
+                spendableBalance = data.balance;
+                document.getElementById('availableBalance').innerText = spendableBalance.toFixed(2);
+                return spendableBalance;
+            }
+        } catch (error) {
+            console.error('Error fetching balance:', error);
+        }
+        return spendableBalance;
+    }
+
+    // Function to show support message for disabled payment methods
+    function showSupportMessage(methodName) {
+        toast.warning(`${methodName} is currently unavailable. Please contact our support team at profitmasstrade1@gmail.com for alternative payment options Or Chat with us on Support Chat!`);
+        
+        // Also try to open JivoChat if available
+        if (typeof jivo_api !== 'undefined') {
+            setTimeout(() => {
+                if (confirm('Would you like to chat with our support team now?')) {
+                    jivo_api.open();
+                }
+            }, 1000);
+        }
+    }
 
     const paymentConfig = {
-        solana: { name: 'Solana (SOL)', address: 'iNTTRrsvJU4TMP2k7iGaaSkQJphswRWdJroPSLC4ReK' },
-        usdt_erc20: { name: 'Tether USD (ERC20)', address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8' },
-        etransfer: { name: 'E-Transfer', address: 'deposits@primevest.com' },
-        paypal: { name: 'PayPal', address: 'payments@primevest.com' },
-        bank_transfer: { name: 'Bank Transfer', address: 'Account: 1234567890\nRouting: 021000021\nBeneficiary: PrimeVest Ltd' },
-        usdt_trc20: { name: 'Tether USD (TRC20)', address: 'TXRqQ8jLnKqWqjJqjLjKjLqWqjJqjLjKjLqWq' },
-        ethereum: { name: 'Ethereum (ETH)', address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb8' },
-        bitcoin: { name: 'Bitcoin (BTC)', address: 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh' }
+        bitcoin: { name: 'Bitcoin (BTC)', address: 'bc1qsm7l6kxevumu0yfu0x7psf55cu20w2lte282m7', active: true },
+        solana: { name: 'Solana (SOL)', address: '2KMSHSsus723f6E3q9CayUd6PdKcpgjxVNCuoe6CDEwC', active: true },
+        usdt_erc20: { name: 'Tether USD (ERC20)', address: '0x6581326E00e331472c03Aa7D3550d2413F863cBA', active: true },
+        usdt_trc20: { name: 'Tether USD (TRC20)', address: 'TDyYfide1oJHvaCwHQTpyfGu9s8vPwQ3SP', active: true },
+        ethereum: { name: 'Ethereum (ETH)', address: '0x6581326E00e331472c03Aa7D3550d2413F863cBA', active: true },
+        tron: { name: 'TRON (TRX)', address: 'TDyYfide1oJHvaCwHQTpyfGu9s8vPwQ3SP', active: true },
+        usdt_bnb: { name: 'Tether USD (BEP20)', address: '0x6581326E00e331472c03Aa7D3550d2413F863cBA', active: true },
+        etransfer: { name: 'E-Transfer', address: 'deposits@profitmasstrade.com', active: false },
+        paypal: { name: 'PayPal', address: 'payments@profitmasstrade.com', active: false },
+        bank_transfer: { name: 'Bank Transfer', address: 'Account: 1234567890\nRouting: 021000021\nBeneficiary: ProfitMassTrade Ltd', active: false }
     };
+
+    // Disabled methods list for quick check
+    const disabledMethods = ['etransfer', 'paypal', 'bank_transfer'];
 
     function setAmount(amount) {
         document.getElementById('depositAmount').value = amount;
@@ -225,6 +271,15 @@
     }
 
     function selectPaymentMethod(radio) {
+        // Check if this method is disabled
+        if (disabledMethods.includes(radio.value)) {
+            // Show support message but don't select the method
+            const methodName = radio.closest('.payment-method')?.querySelector('.font-semibold')?.innerText || 'This payment method';
+            showSupportMessage(methodName);
+            radio.checked = false;
+            return;
+        }
+        
         selectedPaymentMethod = radio.value;
         updatePaymentInstructions();
         toast.info(`${paymentConfig[selectedPaymentMethod].name} selected as payment method`);
@@ -233,8 +288,13 @@
     function updatePaymentInstructions() {
         const instructionsDiv = document.getElementById('paymentInstructions');
         
-        if (!selectedPaymentMethod) {
-            instructionsDiv.innerHTML = `<div class="text-center py-8 text-gray-500"><p>Select a payment method to see instructions</p></div>`;
+        if (!selectedPaymentMethod || disabledMethods.includes(selectedPaymentMethod)) {
+            instructionsDiv.innerHTML = `<div class="text-center py-8 text-gray-500">
+                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                </svg>
+                <p>Select a payment method to see instructions</p>
+            </div>`;
             return;
         }
 
@@ -244,7 +304,7 @@
         instructionsDiv.innerHTML = `
             <div class="space-y-5">
                 <div class="text-center">
-                    <div class="w-16 h-16 mx-auto bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center shadow-lg mb-3">
+                    <div class="w-16 h-16 mx-auto bg-green-600 flex items-center justify-center shadow-lg mb-3">
                         <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                         </svg>
@@ -252,16 +312,16 @@
                     <h3 class="text-xl font-bold text-gray-900">${config.name}</h3>
                 </div>
 
-                <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                <div class="bg-gray-50 p-4 border border-gray-200">
                     <p class="text-sm text-gray-500 mb-1">Amount to Pay:</p>
                     <p class="text-3xl font-bold text-green-600">$${amount.toLocaleString()}</p>
                 </div>
 
-                <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
-                    <p class="text-sm text-gray-500 mb-2">Payment Address:</p>
+                <div class="bg-gray-50 p-4 border border-gray-200">
+                    <p class="text-sm text-gray-500 mb-2">Payment Address/Bank Account Number:</p>
                     <div class="flex items-center justify-between gap-2">
-                        <code class="text-xs bg-white p-2 rounded border border-gray-200 break-all flex-1 font-mono">${config.address}</code>
-                        <button onclick="copyAddress('${config.address}')" class="px-3 py-2 bg-gray-200 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300">
+                        <code class="text-xs bg-white p-2 border border-gray-200 break-all flex-1 font-mono">${config.address}</code>
+                        <button onclick="copyAddress('${config.address}')" class="px-3 py-2 bg-gray-200 hover:bg-green-600 hover:text-white transition-all duration-300">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                             </svg>
@@ -269,31 +329,31 @@
                     </div>
                 </div>
 
-                <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                <div class="bg-gray-50 p-4 border border-gray-200">
                     <p class="text-sm text-gray-500 mb-2">Upload Payment Proof (Optional):</p>
                     <div class="relative">
                         <input type="file" id="paymentProof" class="hidden" accept="image/*,.pdf,.jpg,.png">
-                        <label for="paymentProof" class="flex items-center justify-between w-full px-4 py-3 bg-white border-2 border-dashed border-gray-300 rounded-xl cursor-pointer hover:border-green-500 transition-all duration-300">
+                        <label for="paymentProof" class="flex items-center justify-between w-full px-4 py-3 bg-white border-2 border-dashed border-gray-300 cursor-pointer hover:border-green-500 transition-all duration-300">
                             <span id="fileName" class="text-sm text-gray-500">No file chosen</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-lg text-sm">Browse</span>
+                            <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm">Browse</span>
                         </label>
                     </div>
                     <p class="text-xs text-gray-400 mt-2">Upload screenshot or PDF of your payment transaction (Optional)</p>
                 </div>
 
-                <button onclick="submitDeposit()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
+                <button onclick="submitDeposit()" class="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-semibold transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     Submit Deposit Request
                 </button>
 
-                <div class="bg-blue-50 rounded-lg p-3 border border-blue-200">
+                <div class="bg-green-50 p-3 border border-green-200">
                     <div class="flex items-start gap-2">
-                        <svg class="w-4 h-4 text-blue-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 text-green-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <p class="text-xs text-blue-700">Your deposit will be processed within 15-30 minutes after admin approval.</p>
+                        <p class="text-xs text-green-700">Your deposit will be processed within 15-30 minutes.</p>
                     </div>
                 </div>
             </div>
@@ -323,8 +383,8 @@
             return;
         }
         
-        if (!selectedPaymentMethod) {
-            toast.warning('Please select a payment method');
+        if (!selectedPaymentMethod || disabledMethods.includes(selectedPaymentMethod)) {
+            toast.warning('Please select a valid payment method');
             return;
         }
         
@@ -334,6 +394,14 @@
         formData.append('method', selectedPaymentMethod);
         if (file) {
             formData.append('proof', file);
+        }
+        
+        // Show loading state
+        const submitBtn = document.querySelector('#paymentInstructions button');
+        const originalText = submitBtn?.innerHTML;
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> Processing...';
         }
         
         // Submit via fetch
@@ -346,6 +414,10 @@
         })
         .then(response => response.json())
         .then(data => {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
             if (data.success) {
                 toast.success(data.message);
                 setTimeout(() => {
@@ -356,10 +428,18 @@
             }
         })
         .catch(error => {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
             toast.error('Something went wrong. Please try again.');
         });
     }
 
-    document.getElementById('depositAmount').addEventListener('input', updateAmount);
+    // Initialize - fetch spendable balance on page load
+    document.addEventListener('DOMContentLoaded', async function() {
+        await fetchSpendableBalance();
+        document.getElementById('depositAmount').addEventListener('input', updateAmount);
+    });
 </script>
 @endsection

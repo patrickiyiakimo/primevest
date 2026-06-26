@@ -6,14 +6,14 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="border-l-4 border-green-600 shadow-md p-6 bg-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
-                <h1 class="text-2xl font-bold">Withdraw Funds</h1>
-                <p class="text-gray-300 mt-1">Request a withdrawal from your trading account</p>
+                <h1 class="text-2xl font-bold text-gray-900">Withdraw Funds</h1>
+                <p class="text-gray-500 mt-1">Request a withdrawal from your trading account</p>
             </div>
-            <div class="bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/20">
-                <span class="text-green-400 text-sm font-semibold">💰 Available Balance: ${{ number_format(Auth::user()->balance, 2) }}</span>
+            <div class="bg-green-50 border border-green-200 px-5 py-2.5">
+                <span class="text-green-600 text-sm font-semibold">💰 Available Balance: $<span id="userBalanceDisplay">{{ number_format(Auth::user()->balance, 2) }}</span></span>
             </div>
         </div>
     </div>
@@ -21,10 +21,10 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Left Side - Payment Methods -->
         <div class="lg:col-span-1 space-y-4">
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                         </svg>
                         <h2 class="text-lg font-semibold text-gray-900">Choose Your Preferred Payment Method</h2>
@@ -32,10 +32,10 @@
                 </div>
                 <div class="p-4 space-y-3">
                     <!-- Tether USD (TRC20) -->
-                    <div class="payment-option rounded-xl cursor-pointer transition-all duration-300" data-method="usdt_trc20">
-                        <div class="flex items-center justify-between p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 transition-all duration-300">
+                    <div class="payment-option cursor-pointer transition-all duration-300" data-method="usdt_trc20">
+                        <div class="flex items-center justify-between p-4 border-2 border-gray-200 hover:border-green-500 transition-all duration-300">
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center shadow-md">
+                                <div class="w-12 h-12 bg-teal-600 flex items-center justify-center shadow-sm">
                                     <span class="text-white font-bold text-sm">USDT</span>
                                 </div>
                                 <div>
@@ -52,10 +52,10 @@
                     </div>
 
                     <!-- Ethereum (ERC20) -->
-                    <div class="payment-option rounded-xl cursor-pointer transition-all duration-300" data-method="ethereum">
-                        <div class="flex items-center justify-between p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 transition-all duration-300">
+                    <div class="payment-option cursor-pointer transition-all duration-300" data-method="ethereum">
+                        <div class="flex items-center justify-between p-4 border-2 border-gray-200 hover:border-green-500 transition-all duration-300">
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-md">
+                                <div class="w-12 h-12 bg-indigo-600 flex items-center justify-center shadow-sm">
                                     <span class="text-white font-bold text-sm">ETH</span>
                                 </div>
                                 <div>
@@ -72,10 +72,10 @@
                     </div>
 
                     <!-- Bitcoin (BTC) -->
-                    <div class="payment-option rounded-xl cursor-pointer transition-all duration-300" data-method="bitcoin">
-                        <div class="flex items-center justify-between p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 transition-all duration-300">
+                    <div class="payment-option cursor-pointer transition-all duration-300" data-method="bitcoin">
+                        <div class="flex items-center justify-between p-4 border-2 border-gray-200 hover:border-green-500 transition-all duration-300">
                             <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center shadow-md">
+                                <div class="w-12 h-12 bg-orange-600 flex items-center justify-center shadow-sm">
                                     <span class="text-white font-bold text-sm">BTC</span>
                                 </div>
                                 <div>
@@ -94,15 +94,15 @@
             </div>
 
             <!-- Account Summary -->
-            <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5 border border-green-200">
+            <div class="bg-green-50 p-5 border border-green-200">
                 <div class="flex items-center justify-between mb-3">
                     <span class="text-sm text-green-700">Available Balance</span>
-                    <span class="text-2xl font-bold text-green-600">${{ number_format(Auth::user()->balance, 2) }}</span>
+                    <span class="text-2xl font-bold text-green-600" id="accountBalanceSummary">${{ number_format(Auth::user()->balance, 2) }}</span>
                 </div>
                 <div class="border-t border-green-200 pt-3">
                     <div class="flex justify-between text-sm">
                         <span class="text-green-700">Pending Withdrawals</span>
-                        <span class="text-green-800 font-semibold">$0.00</span>
+                        <span class="text-green-800 font-semibold" id="pendingWithdrawals">$0.00</span>
                     </div>
                     <div class="flex justify-between text-sm mt-1">
                         <span class="text-green-700">Withdrawal Limit (24h)</span>
@@ -114,7 +114,7 @@
 
         <!-- Right Side - Withdrawal Form -->
         <div class="lg:col-span-2">
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden" id="withdrawalForm">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden" id="withdrawalForm">
                 <!-- Dynamic form will be loaded here -->
                 <div class="text-center py-12">
                     <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,6 +135,12 @@
     class Toast {
         constructor() {
             this.container = document.getElementById('toastContainer');
+            if (!this.container) {
+                this.container = document.createElement('div');
+                this.container.id = 'toastContainer';
+                this.container.className = 'toast-container';
+                document.body.appendChild(this.container);
+            }
         }
         
         show(message, type = 'success', duration = 4000) {
@@ -152,7 +158,7 @@
                 info: 'ℹ'
             };
             
-            toast.className = `${colors[type]} text-white px-5 py-3 rounded-xl shadow-lg mb-3 flex items-center gap-3 transform translate-x-full transition-all duration-300`;
+            toast.className = `${colors[type]} text-white px-5 py-3 shadow-lg mb-3 flex items-center gap-3 transform translate-x-full transition-all duration-300`;
             toast.innerHTML = `<span class="font-bold text-lg">${icons[type]}</span><span>${message}</span>`;
             this.container.appendChild(toast);
             
@@ -171,7 +177,26 @@
     
     const toast = new Toast();
     let selectedMethod = null;
-    const userBalance = {{ Auth::user()->balance }};
+    
+    // Function to fetch spendable balance from server
+    async function fetchSpendableBalance() {
+        try {
+            const response = await fetch('/user/balance');
+            const data = await response.json();
+            if (data.success) {
+                const newBalance = data.balance;
+                document.getElementById('userBalanceDisplay').innerText = newBalance.toFixed(2);
+                document.getElementById('accountBalanceSummary').innerText = '$' + newBalance.toFixed(2);
+                return newBalance;
+            }
+        } catch (error) {
+            console.error('Error fetching balance:', error);
+        }
+        return parseFloat(document.getElementById('userBalanceDisplay').innerText.replace(/,/g, ''));
+    }
+    
+    // Get initial balance (this will be updated by API call)
+    let userBalance = parseFloat({{ Auth::user()->balance }});
 
     // Payment methods configuration
     const paymentMethods = {
@@ -182,7 +207,7 @@
             minAmount: 1000,
             maxAmount: 500000,
             fee: 0,
-            bgGradient: 'from-teal-500 to-teal-600'
+            bgColor: 'teal'
         },
         ethereum: {
             name: 'Ethereum (ERC20)',
@@ -191,7 +216,7 @@
             minAmount: 1000,
             maxAmount: 500000,
             fee: 0,
-            bgGradient: 'from-indigo-500 to-indigo-600'
+            bgColor: 'indigo'
         },
         bitcoin: {
             name: 'Bitcoin (BTC)',
@@ -200,13 +225,16 @@
             minAmount: 1000,
             maxAmount: 500000,
             fee: 0,
-            bgGradient: 'from-orange-500 to-orange-600'
+            bgColor: 'orange'
         }
     };
 
     // Payment option click handlers
     document.querySelectorAll('.payment-option').forEach(option => {
-        option.addEventListener('click', function() {
+        option.addEventListener('click', async function() {
+            // Fetch latest spendable balance before loading form
+            userBalance = await fetchSpendableBalance();
+            
             // Remove selected class from all options
             document.querySelectorAll('.payment-option .border-2').forEach(opt => {
                 opt.classList.remove('border-green-500', 'bg-green-50');
@@ -226,22 +254,21 @@
     function loadWithdrawalForm(method) {
         const config = paymentMethods[method];
         const formContainer = document.getElementById('withdrawalForm');
+        const maxAmount = Math.min(config.maxAmount, userBalance);
         
         formContainer.innerHTML = `
-            <div class="bg-gradient-to-r ${config.bgGradient} px-6 py-4">
+            <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                 <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                    <div class="w-12 h-12 bg-gray-800 flex items-center justify-center">
                         <span class="text-white font-bold text-lg">${config.icon}</span>
                     </div>
                     <div>
-                        <h2 class="text-xl font-bold text-white">${config.name}</h2>
-                        <p class="text-white/80 text-sm">${config.network}</p>
+                        <h2 class="text-xl font-bold text-gray-900">${config.name}</h2>
+                        <p class="text-gray-500 text-sm">${config.network}</p>
                     </div>
                 </div>
             </div>
             <div class="p-6">
-                <p class="text-gray-600 mb-6">Fill in the form to request your withdrawal.</p>
-                
                 <form id="withdrawForm" method="POST" action="{{ route('withdraw.request') }}">
                     @csrf
                     <input type="hidden" name="method" value="${method}">
@@ -257,14 +284,14 @@
                                 <input type="number" 
                                        name="amount" 
                                        id="withdrawAmount" 
-                                       class="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
+                                       class="w-full pl-8 pr-4 py-3 border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-all duration-300"
                                        placeholder="0.00"
                                        min="${config.minAmount}"
-                                       max="${Math.min(config.maxAmount, userBalance)}"
+                                       max="${maxAmount}"
                                        oninput="updateWithdrawSummary()"
                                        required>
                             </div>
-                            <p class="text-xs text-gray-500 mt-1">Min: $${config.minAmount.toLocaleString()}, Max: $${Math.min(config.maxAmount, userBalance).toLocaleString()}</p>
+                            <p class="text-xs text-gray-500 mt-1">Min: $${config.minAmount.toLocaleString()}, Max: $${maxAmount.toLocaleString()}</p>
                         </div>
                         
                         <!-- Wallet Address -->
@@ -278,7 +305,7 @@
                                 </div>
                                 <input type="text" 
                                        name="wallet_address" 
-                                       class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all duration-300"
+                                       class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-all duration-300"
                                        placeholder="Enter your ${config.name} wallet address"
                                        required>
                             </div>
@@ -296,13 +323,13 @@
                                 <input type="text" 
                                        name="network" 
                                        value="${config.network}"
-                                       class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 rounded-xl bg-gray-50 text-gray-600"
+                                       class="w-full pl-10 pr-4 py-3 border-2 border-gray-200 bg-gray-50 text-gray-600"
                                        readonly>
                             </div>
                         </div>
                         
                         <!-- Withdrawal Summary -->
-                        <div class="bg-gray-50 rounded-xl p-4 border border-gray-200">
+                        <div class="bg-gray-50 p-4 border border-gray-200">
                             <h3 class="font-semibold text-gray-800 mb-3">Withdrawal Summary</h3>
                             <div class="space-y-2">
                                 <div class="flex justify-between text-sm">
@@ -323,20 +350,20 @@
                         </div>
                         
                         <!-- Minimum/Maximum Info -->
-                        <div class="bg-yellow-50 rounded-xl p-3 border border-yellow-200">
+                        <div class="bg-yellow-50 p-3 border border-yellow-200">
                             <div class="flex items-start gap-2">
                                 <svg class="w-4 h-4 text-yellow-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
                                 </svg>
                                 <div>
-                                    <p class="text-xs text-yellow-700">Minimum: $${config.minAmount.toLocaleString()} | Maximum: $${Math.min(config.maxAmount, userBalance).toLocaleString()}</p>
+                                    <p class="text-xs text-yellow-700">Minimum: $${config.minAmount.toLocaleString()} | Maximum: $${maxAmount.toLocaleString()}</p>
                                     <p class="text-xs text-yellow-700 mt-1">Charges: ${config.fee}% processing fee</p>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Submit Button -->
-                        <button type="submit" class="w-full py-3.5 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
+                        <button type="submit" class="w-full py-3.5 bg-green-600 hover:bg-green-700 text-white font-semibold transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
@@ -371,8 +398,13 @@
         }
     }
     
-    function handleWithdrawSubmit(e) {
+    async function handleWithdrawSubmit(e) {
         e.preventDefault();
+        
+        // Fetch latest spendable balance before processing
+        const currentBalance = await fetchSpendableBalance();
+        userBalance = currentBalance;
+        
         const form = e.target;
         const formData = new FormData(form);
         const amount = parseFloat(formData.get('amount'));
@@ -422,14 +454,16 @@
         .then(data => {
             if (data.success) {
                 toast.success(data.message);
-                // Redirect to withdrawal history after 2 seconds
+                // Refresh the page to show updated balance
                 setTimeout(() => {
-                    window.location.href = '/withdrawals-history';
+                    window.location.reload();
                 }, 2000);
             } else {
                 toast.error(data.message);
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalText;
+                // Refresh balance display
+                fetchSpendableBalance();
             }
         })
         .catch(error => {
@@ -438,9 +472,24 @@
             submitBtn.innerHTML = originalText;
         });
     }
+    
+    // Initialize - fetch spendable balance on page load
+    document.addEventListener('DOMContentLoaded', async function() {
+        userBalance = await fetchSpendableBalance();
+    });
 </script>
 
 <style>
+    /* No rounded corners */
+    .bg-white, .border, button, input, .payment-option, .bg-green-50, .bg-gray-50, .bg-yellow-50 {
+        border-radius: 0 !important;
+    }
+    
+    /* Remove all border-radius */
+    * {
+        border-radius: 0 !important;
+    }
+    
     .payment-option {
         transition: all 0.3s ease;
     }

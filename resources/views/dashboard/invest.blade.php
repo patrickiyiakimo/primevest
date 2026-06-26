@@ -6,14 +6,14 @@
 @section('dashboard-content')
 <div class="space-y-6">
     <!-- Page Header -->
-    <div class="bg-gradient-to-r from-red-900 to-red-800 rounded-2xl shadow-lg p-6 text-white">
+    <div class="border-l-4 border-green-600 shadow-md p-6 bg-white">
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
-                <h1 class="text-2xl font-bold">Choose a Plan</h1>
-                <p class="text-gray-300 mt-1">Select an investment plan that suits your financial goals</p>
+                <h1 class="text-2xl font-bold text-gray-900">Choose a Plan</h1>
+                <p class="text-gray-500 mt-1">Select an investment plan that suits your financial goals</p>
             </div>
-            <div class="bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/20">
-                <span class="text-green-400 text-sm font-semibold">💰 Account Balance: ${{ number_format(Auth::user()->balance, 2) }}</span>
+            <div class="bg-green-50 border border-green-200 px-5 py-2.5">
+                <span class="text-green-600 text-sm font-semibold">💰 Available Balance: $<span id="availableBalance">{{ number_format($spendableBalance ?? Auth::user()->balance, 2) }}</span></span>
             </div>
         </div>
     </div>
@@ -22,10 +22,10 @@
         <!-- Left Side - Plan Selection -->
         <div class="lg:col-span-2 space-y-6">
             <!-- Plan Dropdown -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div class="border-b border-gray-100 px-6 py-4 bg-gray-50">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
                         </svg>
                         Select Investment Plan
@@ -33,13 +33,13 @@
                 </div>
                 <div class="p-6">
                     <div class="relative">
-                        <select id="planSelect" class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent appearance-none bg-white text-gray-900 font-medium cursor-pointer">
-                            <option value="vip">👑 VIP Elite Plan - $100,000 (15% ROI)</option>
-                            <option value="diamond">💎 Diamond Plan - $50,000 (11% ROI)</option>
-                            <option value="platinum">⚡ Platinum Plan - $25,000 (9% ROI)</option>
-                            <option value="gold">🥇 Gold Plan - $10,000 (7% ROI)</option>
-                            <option value="silver">🥈 Silver Plan - $5,000 (8% ROI)</option>
-                            <option value="starter">🚀 Starter Plan - $1,000 (3% ROI)</option>
+                        <select id="planSelect" class="w-full px-4 py-3 border-2 border-gray-200 focus:outline-none focus:border-green-500 appearance-none bg-white text-gray-900 font-medium cursor-pointer">
+                            <option value="vip">👑 VIP Elite Plan - $100,000 (25% ROI)</option>
+                            <option value="diamond">💎 Diamond Plan - $50,000 (20% ROI)</option>
+                            <option value="platinum">⚡ Platinum Plan - $25,000 (15% ROI)</option>
+                            <option value="gold">🥇 Gold Plan - $10,000 (12% ROI)</option>
+                            <option value="silver">🥈 Silver Plan - $5,000 (10% ROI)</option>
+                            <option value="starter">🚀 Starter Plan - $1,000 (8% ROI)</option>
                         </select>
                         <div class="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
                             <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,10 +51,10 @@
             </div>
 
             <!-- Quick Amount Selection -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div class="border-b border-gray-100 px-6 py-4 bg-gray-50">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                         Choose quick amount to invest
@@ -66,27 +66,27 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Or enter custom amount</label>
                         <div class="relative">
                             <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
-                            <input type="number" id="customAmount" placeholder="0.00" class="w-full pl-8 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                            <input type="number" id="customAmount" placeholder="0.00" class="w-full pl-8 pr-4 py-3 border-2 border-gray-200 focus:outline-none focus:border-green-500">
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Payment Method -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div class="border-b border-gray-100 px-6 py-4 bg-gray-50">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                         </svg>
                         Payment Method
                     </h2>
                 </div>
                 <div class="p-6">
-                    <div class="bg-gradient-to-r from-red-50 to-red-100 rounded-xl p-4 border border-red-200">
+                    <div class="bg-green-50 p-4 border border-green-200">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-3">
-                                <div class="w-12 h-12 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center shadow-lg">
+                                <div class="w-12 h-12 bg-green-600 flex items-center justify-center shadow-lg">
                                     <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
                                     </svg>
@@ -98,7 +98,7 @@
                             </div>
                             <div class="text-right">
                                 <p class="text-xs text-gray-500">Available Balance</p>
-                                <p class="text-2xl font-bold text-green-600">${{ number_format(Auth::user()->balance, 2) }}</p>
+                                <p class="text-2xl font-bold text-green-600" id="balanceDisplay">${{ number_format($spendableBalance ?? Auth::user()->balance, 2) }}</p>
                             </div>
                         </div>
                     </div>
@@ -109,42 +109,42 @@
         <!-- Right Side - Plan Details & Investment Summary -->
         <div class="space-y-6">
             <!-- Plan Details Card -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden sticky top-6">
-                <div class="bg-gradient-to-r from-red-800 to-red-900 px-6 py-4">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden sticky top-6">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
-                        <h2 class="text-lg font-bold text-white">Plan Details</h2>
+                        <h2 class="text-lg font-bold text-gray-900">Plan Details</h2>
                     </div>
                 </div>
                 <div class="p-6 space-y-3" id="planDetails"></div>
             </div>
 
             <!-- Investment Summary -->
-            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
+            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
+                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
                     <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
                         </svg>
                         <h2 class="text-lg font-semibold text-gray-900">Investment Summary</h2>
                     </div>
                 </div>
                 <div class="p-6 space-y-4">
-                    <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                    <div class="flex justify-between items-center pb-3 border-b border-gray-200">
                         <span class="text-gray-600">Amount to Invest</span>
                         <span class="text-2xl font-bold text-gray-900" id="investAmount">$0</span>
                     </div>
-                    <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                    <div class="flex justify-between items-center pb-3 border-b border-gray-200">
                         <span class="text-gray-600">Expected ROI</span>
                         <span class="text-green-600 font-bold text-lg" id="expectedRoi">0%</span>
                     </div>
-                    <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                    <div class="flex justify-between items-center pb-3 border-b border-gray-200">
                         <span class="text-gray-600">Expected Return</span>
                         <span class="text-green-600 font-bold text-lg" id="expectedReturn">$0</span>
                     </div>
-                    <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+                    <div class="flex justify-between items-center pb-3 border-b border-gray-200">
                         <span class="text-gray-600">Duration</span>
                         <span class="text-gray-900 font-medium" id="duration">-</span>
                     </div>
@@ -155,8 +155,8 @@
                 </div>
                 
                 <!-- Confirm Button -->
-                <div class="border-t border-gray-100 p-6 bg-gray-50">
-                    <button id="confirmInvestBtn" class="w-full py-3.5 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+                <div class="border-t border-gray-200 p-6 bg-gray-50">
+                    <button id="confirmInvestBtn" class="w-full py-3.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
@@ -202,7 +202,7 @@
                 info: 'ℹ'
             };
             
-            toast.className = `${colors[type]} text-white px-5 py-3 rounded-xl shadow-lg mb-3 flex items-center gap-3 transform translate-x-full transition-all duration-300`;
+            toast.className = `${colors[type]} text-white px-5 py-3 shadow-lg mb-3 flex items-center gap-3 transform translate-x-full transition-all duration-300`;
             toast.innerHTML = `<span class="font-bold text-lg">${icons[type]}</span><span>${message}</span>`;
             this.container.appendChild(toast);
             
@@ -220,18 +220,36 @@
     }
     
     const toast = new Toast();
+    let spendableBalance = {{ $spendableBalance ?? Auth::user()->balance }};
     
-    // Plan Data with duration in days
+    // Function to fetch spendable balance from server
+    async function fetchSpendableBalance() {
+        try {
+            const response = await fetch('/user/balance');
+            const data = await response.json();
+            if (data.success) {
+                spendableBalance = data.balance;
+                document.getElementById('availableBalance').innerText = spendableBalance.toFixed(2);
+                document.getElementById('balanceDisplay').innerText = '$' + spendableBalance.toFixed(2);
+                return spendableBalance;
+            }
+        } catch (error) {
+            console.error('Error fetching balance:', error);
+        }
+        return spendableBalance;
+    }
+    
+    // Plan Data with INCREASED ROI
     const plans = {
         vip: {
             name: 'VIP Elite Plan',
             price: 100000,
             duration: '7 Day(s)',
             durationDays: 7,
-            roi: 15.00,
+            roi: 25.00,  // Increased from 15% to 25%
             minAmount: 100000,
             maxAmount: 500000,
-            bonus: 0,
+            bonus: 5000,  // Added bonus
             quickAmounts: [100000, 200000, 300000, 400000, 500000]
         },
         diamond: {
@@ -239,10 +257,10 @@
             price: 50000,
             duration: '30 Day(s)',
             durationDays: 30,
-            roi: 11.00,
+            roi: 20.00,  // Increased from 11% to 20%
             minAmount: 50000,
             maxAmount: 99999,
-            bonus: 0,
+            bonus: 2000,  // Added bonus
             quickAmounts: [50000, 60000, 70000, 80000, 90000]
         },
         platinum: {
@@ -250,10 +268,10 @@
             price: 25000,
             duration: '30 Day(s)',
             durationDays: 30,
-            roi: 9.00,
+            roi: 15.00,  // Increased from 9% to 15%
             minAmount: 25000,
             maxAmount: 49999,
-            bonus: 0,
+            bonus: 1000,  // Added bonus
             quickAmounts: [25000, 30000, 35000, 40000, 45000]
         },
         gold: {
@@ -261,10 +279,10 @@
             price: 10000,
             duration: '21 Day(s)',
             durationDays: 21,
-            roi: 7.00,
+            roi: 12.00,  // Increased from 7% to 12%
             minAmount: 10000,
             maxAmount: 24999,
-            bonus: 0,
+            bonus: 500,  // Added bonus
             quickAmounts: [10000, 15000, 20000]
         },
         silver: {
@@ -272,10 +290,10 @@
             price: 5000,
             duration: '14 Day(s)',
             durationDays: 14,
-            roi: 8.00,
+            roi: 10.00,  // Increased from 8% to 10%
             minAmount: 5000,
             maxAmount: 9999,
-            bonus: 0,
+            bonus: 250,  // Added bonus
             quickAmounts: [5000, 6000, 7000, 8000, 9000]
         },
         starter: {
@@ -283,17 +301,16 @@
             price: 1000,
             duration: '30 Day(s)',
             durationDays: 30,
-            roi: 3.00,
+            roi: 8.00,   // Increased from 3% to 8%
             minAmount: 1000,
             maxAmount: 4999,
-            bonus: 0,
+            bonus: 100,  // Added bonus
             quickAmounts: [1000, 2000, 3000, 4000]
         }
     };
 
     let currentPlan = 'vip';
     let currentAmount = 0;
-    const userBalance = {{ Auth::user()->balance }};
 
     function updatePlanDetails() {
         const plan = plans[currentPlan];
@@ -320,7 +337,7 @@
                     <span class="text-gray-900 font-semibold">$${plan.minAmount.toLocaleString()} - $${plan.maxAmount.toLocaleString()}</span>
                 </div>
                 <div class="flex justify-between items-center pt-2">
-                    <span class="text-gray-500 text-sm">Bonus:</span>
+                    <span class="text-gray-500 text-sm">Welcome Bonus:</span>
                     <span class="text-yellow-600 font-bold">$${plan.bonus.toLocaleString()}</span>
                 </div>
             </div>
@@ -338,7 +355,7 @@
         plan.quickAmounts.forEach(amount => {
             const btn = document.createElement('button');
             btn.textContent = `$${amount.toLocaleString()}`;
-            btn.className = 'px-4 py-2 bg-gray-100 hover:bg-green-500 hover:text-white rounded-lg transition-all duration-300 text-sm font-medium';
+            btn.className = 'px-4 py-2 bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300 text-sm font-medium';
             btn.onclick = () => setAmount(amount);
             container.appendChild(btn);
         });
@@ -354,8 +371,8 @@
             toast.warning(`Maximum investment for ${plan.name} is $${plan.maxAmount.toLocaleString()}`);
             return;
         }
-        if (amount > userBalance) {
-            toast.error(`Insufficient balance! Available: $${userBalance.toLocaleString()}`);
+        if (amount > spendableBalance) {
+            toast.error(`Insufficient balance! Available: $${spendableBalance.toLocaleString()}`);
             return;
         }
         currentAmount = amount;
@@ -367,7 +384,7 @@
     function updateInvestmentSummary() {
         const plan = plans[currentPlan];
         const amount = currentAmount || 0;
-        const expectedReturnAmount = (amount * plan.roi) / 100;
+        const expectedReturnAmount = (amount * plan.roi) / 100 + (plan.bonus || 0);
         
         document.getElementById('investAmount').innerHTML = `$${amount.toLocaleString()}`;
         document.getElementById('expectedRoi').innerHTML = `${plan.roi}%`;
@@ -376,7 +393,7 @@
         document.getElementById('bonus').innerHTML = `$${plan.bonus.toLocaleString()}`;
         
         const confirmBtn = document.getElementById('confirmInvestBtn');
-        confirmBtn.disabled = !(amount >= plan.minAmount && amount <= plan.maxAmount && amount <= userBalance && amount > 0);
+        confirmBtn.disabled = !(amount >= plan.minAmount && amount <= plan.maxAmount && amount <= spendableBalance && amount > 0);
     }
 
     document.getElementById('planSelect').addEventListener('change', function(e) {
@@ -395,9 +412,9 @@
         } else if (amount > plan.maxAmount) {
             document.getElementById('customAmount').style.borderColor = '#ef4444';
             toast.warning(`Maximum amount is $${plan.maxAmount.toLocaleString()}`, 2500);
-        } else if (amount > userBalance) {
+        } else if (amount > spendableBalance) {
             document.getElementById('customAmount').style.borderColor = '#ef4444';
-            toast.error(`Insufficient balance! Available: $${userBalance.toLocaleString()}`, 2500);
+            toast.error(`Insufficient balance! Available: $${spendableBalance.toLocaleString()}`, 2500);
         } else if (amount > 0) {
             document.getElementById('customAmount').style.borderColor = '#10b981';
         }
@@ -422,12 +439,12 @@
             toast.warning(`Maximum investment amount is $${plan.maxAmount.toLocaleString()}`);
             return;
         }
-        if (amount > userBalance) {
-            toast.error(`Insufficient balance. Available: $${userBalance.toLocaleString()}`);
+        if (amount > spendableBalance) {
+            toast.error(`Insufficient balance. Available: $${spendableBalance.toLocaleString()}`);
             return;
         }
         
-        const expectedReturn = (amount * plan.roi) / 100;
+        const expectedReturn = (amount * plan.roi) / 100 + (plan.bonus || 0);
         
         // Disable button and show loading
         const btn = this;
@@ -446,7 +463,8 @@
                     amount: amount,
                     roi: plan.roi,
                     duration: plan.duration,
-                    duration_days: plan.durationDays
+                    duration_days: plan.durationDays,
+                    bonus: plan.bonus
                 })
             });
             
@@ -471,10 +489,24 @@
         }
     });
 
-    updatePlanDetails();
+    // Initialize - fetch spendable balance on page load
+    document.addEventListener('DOMContentLoaded', async function() {
+        await fetchSpendableBalance();
+        updatePlanDetails();
+    });
 </script>
 
 <style>
+    /* No rounded corners */
+    .bg-white, .border, button, select, input, .toast, .bg-green-50 {
+        border-radius: 0 !important;
+    }
+    
+    /* Remove all border-radius */
+    * {
+        border-radius: 0 !important;
+    }
+    
     .sticky { position: sticky; top: 100px; }
     input[type="number"]::-webkit-inner-spin-button,
     input[type="number"]::-webkit-outer-spin-button { opacity: 0.5; }
