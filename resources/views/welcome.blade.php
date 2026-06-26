@@ -69,6 +69,5 @@
     <!-- global Opportunities -->
     @include('components.global-opportunities')
 
-    <!-- cookies -->
-    @include('components.cookies-consent')
+   
 @endsection

@@ -1,324 +1,609 @@
-<!-- Cookies Consent Modal -->
-<div id="cookies-consent" class="fixed inset-0 z-50 flex items-center justify-center transition-all duration-500 ease-in-out" style="display: none; opacity: 0;">
-    <!-- Backdrop -->
-    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" id="cookies-backdrop"></div>
-    
-    <!-- Modal -->
-    <div class="relative bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 transform transition-all duration-500 scale-95 opacity-0" id="cookies-modal">
-        
-        <!-- Decorative Top Bar -->
-        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 via-red-600 to-red-700 rounded-t-2xl"></div>
-        
-        <!-- Close Button -->
-        <button id="decline-cookies" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-        
-        <div class="p-6 pt-8">
-            <!-- Icon -->
-            <div class="flex justify-center mb-4">
-                <div class="w-16 h-16 bg-gradient-to-br from-red-50 to-red-100 rounded-2xl flex items-center justify-center shadow-inner">
-                    <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-            </div>
-            
-            <!-- Title -->
-            <h2 class="text-2xl font-bold text-gray-800 text-center mb-2">
-                Cookies & Privacy
-            </h2>
-            
-            <p class="text-sm text-gray-500 text-center mb-6">
-                We value your privacy
-            </p>
-            
-            <!-- Description -->
-            <div class="bg-gray-50 rounded-xl p-4 mb-6">
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    We use cookies to enhance your trading experience, analyze site traffic, 
-                    and personalize content. Your privacy is important to us.
-                </p>
-            </div>
-            
-            <!-- Cookie Preferences List -->
-            <div class="space-y-3 mb-6">
-                <!-- Essential Cookies -->
-                <div class="flex items-center justify-between py-2">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                            <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm font-semibold text-gray-800">Essential Cookies</p>
-                            <p class="text-xs text-gray-400">Required for the website to function</p>
-                        </div>
-                    </div>
-                    <div class="px-2 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full">
-                        Always Active
-                    </div>
-                </div>
-                
-                <!-- Analytics Cookies -->
-                <div class="flex items-center justify-between py-2">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm font-semibold text-gray-800">Analytics Cookies</p>
-                            <p class="text-xs text-gray-400">Help us improve our platform</p>
-                        </div>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="analytics-cookies" class="sr-only peer">
-                        <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                    </label>
-                </div>
-                
-                <!-- Marketing Cookies -->
-                <div class="flex items-center justify-between py-2">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                            <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-                            </svg>
-                        </div>
-                        <div>
-                            <p class="text-sm font-semibold text-gray-800">Marketing Cookies</p>
-                            <p class="text-xs text-gray-400">Personalize your experience</p>
-                        </div>
-                    </div>
-                    <label class="relative inline-flex items-center cursor-pointer">
-                        <input type="checkbox" id="marketing-cookies" class="sr-only peer">
-                        <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-red-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-red-600"></div>
-                    </label>
-                </div>
-            </div>
-            
-            <!-- Action Buttons -->
-            <div class="flex flex-col gap-3">
-                <button id="accept-cookies" class="w-full py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
-                    Accept All Cookies
-                </button>
-                
-                <button id="save-preferences" class="w-full py-3 bg-white border-2 border-gray-200 hover:border-red-200 text-gray-700 hover:text-red-600 font-semibold rounded-xl transition-all duration-300">
-                    Save My Preferences
-                </button>
-            </div>
-            
-            <!-- Footer Links -->
-            <div class="text-center mt-6">
-                <a href="/privacy-policy" class="text-xs text-gray-400 hover:text-red-500 transition-colors duration-200">
-                    Read our Privacy Policy
-                </a>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookie Consent · Pro Modal</title>
+  <style>
+    /* --- global reset & base --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f2f4f8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    /* demo card – just to show context */
+    .demo-card {
+      background: white;
+      padding: 2.5rem 2rem;
+      border-radius: 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.15);
+      max-width: 480px;
+      text-align: center;
+    }
+    .demo-card h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      color: #1e1e2f;
+      letter-spacing: -0.02em;
+    }
+    .demo-card p {
+      color: #5a5a7a;
+      margin: 0.5rem 0 1.5rem;
+      line-height: 1.5;
+    }
+    .demo-card .badge {
+      display: inline-block;
+      background: #eef2ff;
+      color: #4f46e5;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.25rem 0.9rem;
+      border-radius: 40px;
+    }
+
+    /* --- COOKIE MODAL (professional, compact, pop animation) --- */
+    #cookies-consent {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: none;          /* hidden by default, shown via JS */
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      /* backdrop + overlay are handled by pseudo + bg */
+    }
+
+    /* backdrop – smooth fade */
+    .cookies-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      transition: opacity 0.25s ease;
+    }
+
+    /* modal card – compact, clean, pop animation */
+    .cookies-card {
+      position: relative;
+      background: #ffffff;
+      max-width: 400px;
+      width: 100%;
+      border-radius: 24px;
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.4), 0 8px 24px -6px rgba(0,0,0,0.1);
+      padding: 1.75rem 1.75rem 1.5rem;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+      transform: scale(0.92) translateY(12px);
+      opacity: 0;
+      /* will be toggled via JS class */
+    }
+
+    /* open state – pop & fade in */
+    .cookies-card.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    /* top accent line – subtle */
+    .cookies-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 1.75rem;
+      right: 1.75rem;
+      height: 3px;
+      background: linear-gradient(90deg, #dc2626, #b91c1c);
+      border-radius: 0 0 4px 4px;
+    }
+
+    /* close button (×) */
+    .cookies-close {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      background: transparent;
+      border: none;
+      color: #9ca3af;
+      font-size: 1.4rem;
+      line-height: 1;
+      cursor: pointer;
+      transition: color 0.15s;
+      padding: 0.2rem 0.4rem;
+      border-radius: 8px;
+    }
+    .cookies-close:hover {
+      color: #1f2937;
+      background: #f3f4f6;
+    }
+
+    /* icon */
+    .cookies-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      background: #fef2f2;
+      border-radius: 18px;
+      margin-bottom: 1rem;
+    }
+    .cookies-icon svg {
+      width: 28px;
+      height: 28px;
+      color: #dc2626;
+    }
+
+    .cookies-title {
+      font-size: 1.3rem;
+      font-weight: 650;
+      color: #0b0b1a;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.2rem;
+    }
+    .cookies-sub {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 1.25rem;
+      font-weight: 450;
+    }
+
+    .cookies-description {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      color: #374151;
+      border: 1px solid #f0f0f0;
+    }
+
+    /* preferences list – compact */
+    .pref-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pref-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.3rem 0.1rem;
+      border-bottom: 1px solid #f1f3f5;
+    }
+    .pref-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .pref-left {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .pref-left .badge-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eef2ff;
+      color: #4f46e5;
+    }
+    .pref-left .badge-icon.green {
+      background: #e6f7e6;
+      color: #15803d;
+    }
+    .pref-left .badge-icon.blue {
+      background: #e0f2fe;
+      color: #2563eb;
+    }
+    .pref-left .badge-icon.purple {
+      background: #f3e8ff;
+      color: #7c3aed;
+    }
+
+    .pref-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .pref-info .name {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1e1e2f;
+      line-height: 1.2;
+    }
+    .pref-info .desc {
+      font-size: 0.65rem;
+      color: #8b8ba3;
+      letter-spacing: 0.01em;
+    }
+
+    .pref-badge {
+      background: #e6f7e6;
+      color: #15803d;
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 0.15rem 0.7rem;
+      border-radius: 40px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* toggle switch – refined */
+    .toggle {
+      position: relative;
+      width: 34px;
+      height: 20px;
+      flex-shrink: 0;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .toggle .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #d1d5db;
+      border-radius: 40px;
+      transition: background 0.2s;
+    }
+    .toggle .slider::before {
+      content: '';
+      position: absolute;
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .toggle input:checked + .slider {
+      background: #dc2626;
+    }
+    .toggle input:checked + .slider::before {
+      transform: translateX(14px);
+    }
+
+    /* buttons */
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      margin-top: 0.25rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.7rem 1rem;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+      width: 100%;
+      background: white;
+      color: #1f2937;
+      border: 1.5px solid #e5e7eb;
+    }
+    .btn-primary {
+      background: #dc2626;
+      border: 1.5px solid #dc2626;
+      color: white;
+      box-shadow: 0 4px 8px -2px rgba(220, 38, 38, 0.25);
+    }
+    .btn-primary:hover {
+      background: #b91c1c;
+      border-color: #b91c1c;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px -4px rgba(220, 38, 38, 0.3);
+    }
+    .btn-secondary {
+      background: white;
+      border: 1.5px solid #e5e7eb;
+    }
+    .btn-secondary:hover {
+      background: #f9fafb;
+      border-color: #d1d5db;
+    }
+
+    .footer-link {
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .footer-link a {
+      font-size: 0.7rem;
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.15s;
+      font-weight: 500;
+    }
+    .footer-link a:hover {
+      color: #dc2626;
+      text-decoration: underline;
+    }
+
+    /* toast */
+    #toast-container {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+    .toast {
+      background: #1f2937;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      box-shadow: 0 8px 20px -6px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      pointer-events: auto;
+      transform: translateX(0);
+      opacity: 1;
+      transition: all 0.25s ease;
+    }
+    .toast.success {
+      background: #15803d;
+    }
+    .toast.info {
+      background: #2563eb;
+    }
+    .toast.out {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+
+    /* responsive */
+    @media (max-width: 440px) {
+      .cookies-card {
+        padding: 1.5rem 1.25rem;
+      }
+      .cookies-title {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- demo page content -->
+  <div class="demo-card">
+    <span class="badge">🍪 cookie consent</span>
+    <h1>Professional modal</h1>
+    <p>Compact · Pop animation · Clean design</p>
+    <div style="font-size:0.8rem; color:#888; margin-top:0.25rem;">↓ modal will appear after 1s</div>
+  </div>
+
+  <!-- ========== COOKIE MODAL ========== -->
+  <div id="cookies-consent" role="dialog" aria-modal="true" aria-label="Cookie consent">
+    <!-- overlay (backdrop) -->
+    <div class="cookies-overlay" id="cookies-backdrop"></div>
+
+    <!-- modal card -->
+    <div class="cookies-card" id="cookies-modal">
+      <!-- close (×) -->
+      <button class="cookies-close" id="decline-cookies" aria-label="Decline cookies and close">
+        ✕
+      </button>
+
+
+      <h2 class="cookies-title">Privacy &amp; cookies</h2>
+      <p class="cookies-sub">We value your trust</p>
+
+      <div class="cookies-description">
+        We use cookies to improve your experience, analyse traffic and personalise content.
+      </div>
+
+     
+
+      <!-- actions -->
+      <div class="actions">
+        <button class="btn btn-primary" id="accept-cookies">Accept all cookies</button>
+        <button class="btn btn-secondary" id="decline-cookies">Decline all cookies</button>
+      </div>
+
+      <div class="footer-link">
+        <a href="/privacy-policy">Read our privacy policy</a>
+      </div>
     </div>
-</div>
+  </div>
 
-<script>
-    // Check if user has already accepted cookies
-    function hasCookieConsent() {
+  <script>
+    (function() {
+      "use strict";
+
+      // ----- DOM refs -----
+      const modalWrap = document.getElementById('cookies-consent');
+      const modalCard = document.getElementById('cookies-modal');
+      const backdrop = document.getElementById('cookies-backdrop');
+      const acceptBtn = document.getElementById('accept-cookies');
+      const declineBtn = document.getElementById('decline-cookies');
+      const savePrefsBtn = document.getElementById('save-preferences');
+      const analyticsCheck = document.getElementById('analytics-cookies');
+      const marketingCheck = document.getElementById('marketing-cookies');
+
+      // ----- helpers -----
+      function hasConsent() {
         return localStorage.getItem('cookies_consent') === 'accepted';
-    }
-    
-    function hasDeclinedCookies() {
+      }
+      function hasDeclined() {
         return localStorage.getItem('cookies_consent') === 'declined';
-    }
-    
-    function hasPreferencesSaved() {
+      }
+      function hasPreferences() {
         return localStorage.getItem('cookies_preferences') !== null;
-    }
-    
-    function showCookiesConsent() {
-        const modal = document.getElementById('cookies-consent');
-        const modalContent = document.getElementById('cookies-modal');
-        
-        if (modal) {
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                if (modalContent) {
-                    modalContent.classList.remove('scale-95', 'opacity-0');
-                    modalContent.classList.add('scale-100', 'opacity-100');
-                }
-            }, 50);
-        }
-    }
-    
-    function hideCookiesConsent() {
-        const modal = document.getElementById('cookies-consent');
-        const modalContent = document.getElementById('cookies-modal');
-        
-        if (modalContent) {
-            modalContent.classList.remove('scale-100', 'opacity-100');
-            modalContent.classList.add('scale-95', 'opacity-0');
-        }
-        
-        setTimeout(() => {
-            if (modal) {
-                modal.style.opacity = '0';
-                setTimeout(() => {
-                    modal.style.display = 'none';
-                }, 300);
-            }
-        }, 200);
-    }
-    
-    function acceptCookies() {
-        localStorage.setItem('cookies_consent', 'accepted');
-        localStorage.setItem('cookies_preferences', JSON.stringify({
-            analytics: true,
-            marketing: true
-        }));
-        hideCookiesConsent();
-        enableAnalytics();
-        enableMarketing();
-        showToast('All cookies accepted', 'success');
-    }
-    
-    function savePreferences() {
-        const analyticsChecked = document.getElementById('analytics-cookies')?.checked || false;
-        const marketingChecked = document.getElementById('marketing-cookies')?.checked || false;
-        
-        localStorage.setItem('cookies_consent', 'preferences');
-        localStorage.setItem('cookies_preferences', JSON.stringify({
-            analytics: analyticsChecked,
-            marketing: marketingChecked
-        }));
-        hideCookiesConsent();
-        
-        if (analyticsChecked) enableAnalytics();
-        else disableAnalytics();
-        
-        if (marketingChecked) enableMarketing();
-        else disableMarketing();
-        
-        showToast('Preferences saved', 'info');
-    }
-    
-    function declineCookies() {
-        localStorage.setItem('cookies_consent', 'declined');
-        localStorage.setItem('cookies_preferences', JSON.stringify({
-            analytics: false,
-            marketing: false
-        }));
-        hideCookiesConsent();
-        disableAnalytics();
-        disableMarketing();
-        showToast('You have declined non-essential cookies', 'info');
-    }
-    
-    function showToast(message, type = 'info') {
-        let toastContainer = document.getElementById('toast-container');
-        if (!toastContainer) {
-            toastContainer = document.createElement('div');
-            toastContainer.id = 'toast-container';
-            toastContainer.className = 'fixed top-20 right-4 z-50 space-y-2';
-            document.body.appendChild(toastContainer);
-        }
-        
-        const toast = document.createElement('div');
-        const bgColor = type === 'success' ? 'bg-green-600' : 'bg-gray-800';
-        toast.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg text-sm flex items-center gap-2 animate-slide-in`;
-        toast.innerHTML = `
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            ${message}
-        `;
-        toastContainer.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateX(100px)';
-            setTimeout(() => toast.remove(), 300);
-        }, 3000);
-    }
-    
-    function enableAnalytics() {
-        console.log('Analytics enabled');
-    }
-    
-    function disableAnalytics() {
-        console.log('Analytics disabled');
-    }
-    
-    function enableMarketing() {
-        console.log('Marketing cookies enabled');
-    }
-    
-    function disableMarketing() {
-        console.log('Marketing cookies disabled');
-    }
-    
-    function loadSavedPreferences() {
-        const preferences = localStorage.getItem('cookies_preferences');
-        if (preferences) {
-            try {
-                const prefs = JSON.parse(preferences);
-                const analyticsCheckbox = document.getElementById('analytics-cookies');
-                const marketingCheckbox = document.getElementById('marketing-cookies');
-                if (analyticsCheckbox) analyticsCheckbox.checked = prefs.analytics || false;
-                if (marketingCheckbox) marketingCheckbox.checked = prefs.marketing || false;
-            } catch (e) {
-                console.error('Error loading preferences:', e);
-            }
-        }
-    }
-    
-    // Initialize cookies consent
-    document.addEventListener('DOMContentLoaded', function() {
-        loadSavedPreferences();
-        
-        setTimeout(() => {
-            if (!hasCookieConsent() && !hasDeclinedCookies() && !hasPreferencesSaved()) {
-                showCookiesConsent();
-            }
-        }, 1000);
-        
-        const acceptBtn = document.getElementById('accept-cookies');
-        const declineBtn = document.getElementById('decline-cookies');
-        const savePrefsBtn = document.getElementById('save-preferences');
-        const closeBtn = document.querySelector('#decline-cookies');
-        const backdrop = document.getElementById('cookies-backdrop');
-        
-        if (acceptBtn) acceptBtn.addEventListener('click', acceptCookies);
-        if (declineBtn) declineBtn.addEventListener('click', declineCookies);
-        if (savePrefsBtn) savePrefsBtn.addEventListener('click', savePreferences);
-        if (closeBtn) closeBtn.addEventListener('click', declineCookies);
-        if (backdrop) backdrop.addEventListener('click', declineCookies);
-    });
-</script>
+      }
 
-<style>
-    @keyframes slideIn {
-        from {
-            opacity: 0;
-            transform: translateX(100px);
+      // show modal with pop animation
+      function showModal() {
+        if (!modalWrap) return;
+        modalWrap.style.display = 'flex';
+        // force reflow for animation
+        void modalWrap.offsetHeight;
+        // add open class to card (pop + fade)
+        if (modalCard) {
+          modalCard.classList.add('open');
         }
-        to {
-            opacity: 1;
-            transform: translateX(0);
+        // backdrop fade is automatic via css
+      }
+
+      function hideModal() {
+        if (modalCard) {
+          modalCard.classList.remove('open');
         }
-    }
-    .animate-slide-in {
-        animation: slideIn 0.3s ease-out;
-    }
-    
-    /* Smooth scale transition for modal */
-    .scale-95 {
-        transform: scale(0.95);
-    }
-    .scale-100 {
-        transform: scale(1);
-    }
-</style>
+        // wait for animation then hide
+        setTimeout(() => {
+          if (modalWrap) {
+            modalWrap.style.display = 'none';
+          }
+        }, 320);
+      }
+
+      // toast
+      function showToast(message, type = 'info') {
+        let container = document.getElementById('toast-container');
+        if (!container) {
+          container = document.createElement('div');
+          container.id = 'toast-container';
+          document.body.appendChild(container);
+        }
+        const toast = document.createElement('div');
+        toast.className = `toast ${type === 'success' ? 'success' : 'info'}`;
+        toast.innerHTML = `<span>${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => {
+          toast.classList.add('out');
+          setTimeout(() => toast.remove(), 300);
+        }, 2800);
+      }
+
+      // ----- cookie functions (mock) -----
+      function enableAnalytics() { console.log('[Analytics] enabled'); }
+      function disableAnalytics() { console.log('[Analytics] disabled'); }
+      function enableMarketing() { console.log('[Marketing] enabled'); }
+      function disableMarketing() { console.log('[Marketing] disabled'); }
+
+      function applyPreferences(prefs) {
+        const a = prefs?.analytics ?? false;
+        const m = prefs?.marketing ?? false;
+        if (a) enableAnalytics(); else disableAnalytics();
+        if (m) enableMarketing(); else disableMarketing();
+      }
+
+      // ----- actions -----
+      function acceptAll() {
+        localStorage.setItem('cookies_consent', 'accepted');
+        const prefs = { analytics: true, marketing: true };
+        localStorage.setItem('cookies_preferences', JSON.stringify(prefs));
+        // update checkboxes (UI)
+        if (analyticsCheck) analyticsCheck.checked = true;
+        if (marketingCheck) marketingCheck.checked = true;
+        applyPreferences(prefs);
+        hideModal();
+        showToast('All cookies accepted', 'success');
+      }
+
+      function declineAll() {
+        localStorage.setItem('cookies_consent', 'declined');
+        const prefs = { analytics: false, marketing: false };
+        localStorage.setItem('cookies_preferences', JSON.stringify(prefs));
+        if (analyticsCheck) analyticsCheck.checked = false;
+        if (marketingCheck) marketingCheck.checked = false;
+        applyPreferences(prefs);
+        hideModal();
+        showToast('Non‑essential cookies declined', 'info');
+      }
+
+      function savePreferences() {
+        const analytics = analyticsCheck?.checked || false;
+        const marketing = marketingCheck?.checked || false;
+        const prefs = { analytics, marketing };
+        localStorage.setItem('cookies_consent', 'preferences');
+        localStorage.setItem('cookies_preferences', JSON.stringify(prefs));
+        applyPreferences(prefs);
+        hideModal();
+        showToast('Preferences saved', 'info');
+      }
+
+      // load saved preferences into UI
+      function loadPrefsIntoUI() {
+        const raw = localStorage.getItem('cookies_preferences');
+        if (!raw) return;
+        try {
+          const prefs = JSON.parse(raw);
+          if (analyticsCheck) analyticsCheck.checked = prefs.analytics || false;
+          if (marketingCheck) marketingCheck.checked = prefs.marketing || false;
+        } catch (_) {}
+      }
+
+      // ----- init -----
+      document.addEventListener('DOMContentLoaded', function() {
+        loadPrefsIntoUI();
+
+        // if consent already given or declined or prefs saved → do not show
+        if (hasConsent() || hasDeclined() || hasPreferences()) {
+          // but we still apply stored preferences
+          const raw = localStorage.getItem('cookies_preferences');
+          if (raw) {
+            try {
+              const prefs = JSON.parse(raw);
+              applyPreferences(prefs);
+            } catch (_) {}
+          }
+          return; // never show
+        }
+
+        // show modal after 1s with pop effect
+        setTimeout(() => {
+          showModal();
+        }, 1000);
+
+        // ----- event listeners -----
+        if (acceptBtn) acceptBtn.addEventListener('click', acceptAll);
+        if (declineBtn) declineBtn.addEventListener('click', declineAll);
+        if (savePrefsBtn) savePrefsBtn.addEventListener('click', savePreferences);
+        if (backdrop) backdrop.addEventListener('click', declineAll); // click outside = decline
+
+        // close button (×) also declines
+        const closeBtn = document.querySelector('.cookies-close');
+        if (closeBtn) closeBtn.addEventListener('click', declineAll);
+
+        // keyboard: escape = decline
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && modalWrap && modalWrap.style.display === 'flex') {
+            declineAll();
+          }
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

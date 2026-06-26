@@ -41,7 +41,7 @@
                 <!-- Early Access Button (opens email client) -->
                 <div class="max-w-md mx-auto lg:mx-0">
                     <a href="mailto:earlyaccess@primevest.com?subject=Early%20Access%20Request&body=I%20would%20like%20to%20be%20notified%20when%20the%20PrimeVest%20app%20launches.%0A%0AName%3A%20%0AEmail%3A%20" 
-                       class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+                       class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
                         Get Early Access
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
