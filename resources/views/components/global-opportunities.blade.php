@@ -76,92 +76,17 @@
                 </div>
             </div>
             
-            <!-- Right Side - Map Image with Location Dots -->
-            <div class="flex-1 relative">
-                <div class="relative">
-                    <!-- Map Image -->
-                    <img src="{{ asset('images/map-solo-2245664933.png') }}" 
-                         alt="Global Markets Map" 
-                         class="w-full h-auto">
-                    
-                    <!-- Blinking Location Dots on Map -->
-                    <!-- New York (NYSE) -->
-                    <div class="absolute" style="top: 28%; left: 18%;">
-                        <div class="relative">
-                            <span class="absolute inline-flex h-4 w-4">
-                                <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                                <span class="relative inline-flex rounded-full h-4 w-4 bg-orange-500"></span>
-                            </span>
-                            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                New York (NYSE)
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- London (LSE) -->
-                    <div class="absolute" style="top: 30%; left: 42%;">
-                        <div class="relative">
-                            <span class="absolute inline-flex h-3.5 w-3.5">
-                                <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75" style="animation-delay: 0.5s;"></span>
-                                <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-orange-500"></span>
-                            </span>
-                            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                London (LSE)
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Hong Kong (HKSE) -->
-                    <div class="absolute" style="top: 45%; left: 82%;">
-                        <div class="relative">
-                            <span class="absolute inline-flex h-3.5 w-3.5">
-                                <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" style="animation-delay: 1s;"></span>
-                                <span class="relative inline-flex rounded-full h-3.5 w-3.5 bg-orange-500"></span>
-                            </span>
-                            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                Hong Kong (HKSE)
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Tokyo (TSE) - Additional market -->
-                    <div class="absolute" style="top: 35%; left: 72%;">
-                        <div class="relative">
-                            <span class="absolute inline-flex h-3 w-3">
-                                <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" style="animation-delay: 1.5s;"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
-                            </span>
-                            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                Tokyo (TSE)
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Frankfurt (FSE) - Additional market -->
-                    <div class="absolute" style="top: 32%; left: 48%;">
-                        <div class="relative">
-                            <span class="absolute inline-flex h-3 w-3">
-                                <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" style="animation-delay: 2s;"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
-                            </span>
-                            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                Frankfurt (FSE)
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Sydney (ASX) - Additional market -->
-                    <div class="absolute" style="top: 60%; left: 87%;">
-                        <div class="relative">
-                            <span class="absolute inline-flex h-3 w-3">
-                                <span class="animate-pulse absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75" style="animation-delay: 2.5s;"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-orange-500"></span>
-                            </span>
-                            <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 whitespace-nowrap bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                Sydney (ASX)
-                            </div>
-                        </div>
-                    </div>
+            <!-- Right Side - Rotating Globe Video -->
+            <div class="relative flex-1 flex justify-center">
+                <div class="relative w-full max-w-sm lg:max-w-md aspect-square min-h-[280px] rounded-full overflow-hidden shadow-2xl shadow-slate-900/15 bg-slate-900">
+                    <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline preload="auto" disablepictureinpicture
+                       width="1280" height="1280"
+                       style="filter: grayscale(0.85) contrast(0.92) brightness(1.04);">
+                        <source src="{{ asset('videos/globe-earth.mp4') }}" type="video/mp4" media="(min-width: 768px)">
+                        <source src="{{ asset('videos/globe-earth-mobile.mp4') }}" type="video/mp4">
+                    </video>
+                    <div class="absolute inset-0 rounded-full ring-1 ring-inset ring-slate-900/10"></div>
+                    <div class="absolute inset-0 rounded-full" style="background: radial-gradient(circle at 50% 30%, transparent 58%, rgba(2,6,23,0.22) 100%);"></div>
                 </div>
             </div>
             

@@ -89,7 +89,7 @@
 </footer>
 
 <div>
-<div class="tradingview-widget-container" style="height:45px;">
+<!-- <div class="tradingview-widget-container" style="height:45px;">
   <div class="tradingview-widget-container__widget"></div>
   <div class="tradingview-widget-copyright">
     <a href="https://www.tradingview.com/?utm_campaign=ticker-tape-logo&utm_medium=widget&utm_source=bitxprofits.net" rel="noopener noreferrer" target="_blank">
@@ -112,5 +112,5 @@
     "locale": "en"
   }
   </script>
-</div>
+</div> -->
 </div>
