@@ -229,3 +229,5 @@ Route::get('/shares/us', function () {
 Route::get('/shares/uk', function () {
     return view('pages.shares-uk');
 })->name('shares.uk');
+
+//  $env:APP_URL="http://localhost:8000"; npm run dev
