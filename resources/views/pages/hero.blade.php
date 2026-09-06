@@ -33,15 +33,6 @@
     <!-- Hero Content -->
     <div class="relative z-10 position-left flex min-h-[520px] md:min-h-[75vh] lg:min-h-screen items-center">
         <div class="max-w-4xl w-full px-5 sm:px-6 lg:px-8 pt-32 lg:pt-36 pb-20 text-left">
-
-            <!-- <div class="animate-fade-up inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/10 backdrop-blur px-4 py-1.5 shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-500 opacity-70"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-red-600"></span>
-                </span>
-                <span class="text-xs font-semibold text-white/80 tracking-wide">Trusted by 22M+ investors worldwide</span>
-            </div> -->
-
             <h1 class="animate-fade-up hero-delay-1 mt-6 text-[2.6rem] leading-[1.08] sm:text-5xl sm:leading-[1.08] xl:text-6xl font-extrabold tracking-tight text-white">
                 Discover a smarter way to
                 <span class="bg-gradient-to-r from-red-400 via-rose-300 to-amber-300 bg-clip-text text-transparent">build wealth</span>.
