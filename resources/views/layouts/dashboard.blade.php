@@ -19,6 +19,7 @@
         *{box-sizing:border-box}
         html,body{margin:0;padding:0}
         body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
+        ::selection{background:rgba(24,216,147,.35)}
         .num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
         a{color:inherit;text-decoration:none}
 
@@ -79,12 +80,12 @@
         .kpi-card .val{font-size:1.55rem;font-weight:800;letter-spacing:-.02em}
         .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px}
         .kpi-card.glow::after{content:"";position:absolute;top:-40%;right:-20%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(24,216,147,.18),transparent 70%);pointer-events:none}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d;font-weight:700;padding:11px 20px;border-radius:11px;border:0;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(24,216,147,.5)}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2df0a9 0%,#14d594 45%,#0b9d70 100%);color:#03140d;font-weight:700;padding:11px 20px;border-radius:11px;border:0;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(24,216,147,.55),inset 0 1px 0 rgba(255,255,255,.28)}
         .btn:hover{transform:translateY(-2px)}
         .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);box-shadow:none;border:1px solid var(--line)}
         .btn-ghost:hover{background:rgba(255,255,255,.1)}
         .btn-red{background:linear-gradient(135deg,#ff7c85,var(--red));box-shadow:0 10px 26px -12px rgba(239,68,68,.5);color:#2a0507}
-        .btn-gold{background:linear-gradient(135deg,#fbd56d,var(--gold));color:#241a00}
+        .btn-gold{background:linear-gradient(135deg,#ffe39d 0%,#ffd257 45%,#f0b90b 100%);color:#241a00;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
         .btn-sm{padding:8px 14px;font-size:.82rem}
         .inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:12px 14px;color:#fff;font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
         .inp:focus,.inp:focus-visible{border-color:rgba(24,216,147,.55);box-shadow:0 0 0 3px rgba(24,216,147,.13)}
