@@ -1,39 +1,22 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+@extends('layouts.guest')
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+@section('title', 'Set New Password · PrimeVest')
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+@section('content')
+<h2 style="margin:0 0 6px;font-size:1.5rem;font-weight:800;letter-spacing:-.01em">Set a new password</h2>
+<p class="pv-mut" style="margin:0 0 24px">Choose a strong password you haven't used before.</p>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+<form method="POST" action="{{ route('password.store') }}">
+    @csrf
+    <input type="hidden" name="token" value="{{ $request->route('token') }}">
+    <label class="pv-label" for="email">Email address</label>
+    <input class="pv-input" id="email" type="email" name="email" value="{{ old('email', $request->email) }}" required>
+    @error('email')<div class="pv-err">{{ $message }}</div>@enderror
+    <label class="pv-label" for="password" style="margin-top:16px">New password</label>
+    <input class="pv-input" id="password" type="password" name="password" required autofocus autocomplete="new-password" placeholder="Minimum 8 characters">
+    @error('password')<div class="pv-err">{{ $message }}</div>@enderror
+    <label class="pv-label" for="password_confirmation" style="margin-top:16px">Confirm new password</label>
+    <input class="pv-input" id="password_confirmation" type="password" name="password_confirmation" required autocomplete="new-password">
+    <button class="pv-btn pv-btn-block" type="submit" style="margin-top:22px">Reset Password</button>
+</form>
+@endsection

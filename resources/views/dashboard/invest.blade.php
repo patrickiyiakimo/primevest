@@ -1,517 +1,102 @@
 @extends('layouts.dashboard')
 
-@section('page-title', 'Investment Plans')
-@section('breadcrumb', 'Choose your investment strategy')
+@section('page-title', 'Staking Plans')
+@section('breadcrumb', 'Earn daily rewards by staking your crypto')
 
 @section('dashboard-content')
-<div class="space-y-6">
-    <!-- Page Header -->
-    <div class="border-l-4 border-green-600 shadow-md p-6 bg-white">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-900">Choose a Plan</h1>
-                <p class="text-gray-500 mt-1">Select an investment plan that suits your financial goals</p>
-            </div>
-            <div class="bg-green-50 border border-green-200 px-5 py-2.5">
-                <span class="text-green-600 text-sm font-semibold">💰 Available Balance: $<span id="availableBalance">{{ number_format($spendableBalance ?? Auth::user()->balance, 2) }}</span></span>
-            </div>
+<div class="pa" style="padding:22px;background:linear-gradient(140deg,#10221d,#0c1322);margin-bottom:24px">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px">
+        <div style="flex:1;min-width:220px">
+            <div style="font-weight:800;font-size:1.2rem">Choose a staking plan</div>
+            <div class="muted" style="font-size:.84rem">Pick a plan, enter your stake and start earning daily returns paid straight into your balance.</div>
         </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Left Side - Plan Selection -->
-        <div class="lg:col-span-2 space-y-6">
-            <!-- Plan Dropdown -->
-            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
-                    <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-                        </svg>
-                        Select Investment Plan
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <div class="relative">
-                        <select id="planSelect" class="w-full px-4 py-3 border-2 border-gray-200 focus:outline-none focus:border-green-500 appearance-none bg-white text-gray-900 font-medium cursor-pointer">
-                            <option value="vip">👑 VIP Elite Plan - $100,000 (25% ROI)</option>
-                            <option value="diamond">💎 Diamond Plan - $50,000 (20% ROI)</option>
-                            <option value="platinum">⚡ Platinum Plan - $25,000 (15% ROI)</option>
-                            <option value="gold">🥇 Gold Plan - $10,000 (12% ROI)</option>
-                            <option value="silver">🥈 Silver Plan - $5,000 (10% ROI)</option>
-                            <option value="starter">🚀 Starter Plan - $1,000 (8% ROI)</option>
-                        </select>
-                        <div class="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Amount Selection -->
-            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
-                    <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        Choose quick amount to invest
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <div class="flex flex-wrap gap-3" id="quickAmounts"></div>
-                    <div class="mt-4">
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Or enter custom amount</label>
-                        <div class="relative">
-                            <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 font-bold">$</span>
-                            <input type="number" id="customAmount" placeholder="0.00" class="w-full pl-8 pr-4 py-3 border-2 border-gray-200 focus:outline-none focus:border-green-500">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Payment Method -->
-            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
-                    <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                        Payment Method
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <div class="bg-green-50 p-4 border border-green-200">
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-12 h-12 bg-green-600 flex items-center justify-center shadow-lg">
-                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-gray-900 text-lg">Account Balance</p>
-                                    <p class="text-sm text-gray-600">Use your available balance to invest</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <p class="text-xs text-gray-500">Available Balance</p>
-                                <p class="text-2xl font-bold text-green-600" id="balanceDisplay">${{ number_format($spendableBalance ?? Auth::user()->balance, 2) }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Side - Plan Details & Investment Summary -->
-        <div class="space-y-6">
-            <!-- Plan Details Card -->
-            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden sticky top-6">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <h2 class="text-lg font-bold text-gray-900">Plan Details</h2>
-                    </div>
-                </div>
-                <div class="p-6 space-y-3" id="planDetails"></div>
-            </div>
-
-            <!-- Investment Summary -->
-            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                        </svg>
-                        <h2 class="text-lg font-semibold text-gray-900">Investment Summary</h2>
-                    </div>
-                </div>
-                <div class="p-6 space-y-4">
-                    <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-                        <span class="text-gray-600">Amount to Invest</span>
-                        <span class="text-2xl font-bold text-gray-900" id="investAmount">$0</span>
-                    </div>
-                    <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-                        <span class="text-gray-600">Expected ROI</span>
-                        <span class="text-green-600 font-bold text-lg" id="expectedRoi">0%</span>
-                    </div>
-                    <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-                        <span class="text-gray-600">Expected Return</span>
-                        <span class="text-green-600 font-bold text-lg" id="expectedReturn">$0</span>
-                    </div>
-                    <div class="flex justify-between items-center pb-3 border-b border-gray-200">
-                        <span class="text-gray-600">Duration</span>
-                        <span class="text-gray-900 font-medium" id="duration">-</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-2">
-                        <span class="text-gray-600">Welcome Bonus</span>
-                        <span class="text-yellow-600 font-bold text-lg" id="bonus">$0</span>
-                    </div>
-                </div>
-                
-                <!-- Confirm Button -->
-                <div class="border-t border-gray-200 p-6 bg-gray-50">
-                    <button id="confirmInvestBtn" class="w-full py-3.5 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white font-semibold transition-all duration-300 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        Confirm & Invest
-                    </button>
-                    <p class="text-xs text-center text-gray-500 mt-3">
-                        By confirming, you agree to our investment terms and conditions
-                    </p>
-                </div>
-            </div>
+        <div style="display:flex;gap:26px" class="num">
+            <div><div class="muted" style="font-size:.72rem">Daily rewards</div><div style="font-weight:800" class="gold">7d/week</div></div>
+            <div><div class="muted" style="font-size:.72rem">Flexible exit</div><div style="font-weight:800" class="ok">Yes</div></div>
         </div>
     </div>
 </div>
 
-<!-- Toast Container -->
-<div id="toastContainer" class="fixed bottom-4 right-4 z-50"></div>
+@php
+    $plans = [
+        ['Starter Staking',250,10,7,'Focus on BTC & ETH','Ideal for first-time investors'],
+        ['Silver Staking',1000,15,14,'Plus SOL & BNB','Balanced growth portfolio'],
+        ['Gold Staking',2500,24,30,'Plus LINK & ADA','Popular with active investors',true],
+        ['Platinum Staking',5000,32,45,'Plus DOT & XRP','Serious capital growth'],
+        ['Diamond Staking',10000,42,60,'Plus LTC & AVAX','Maximised compounding'],
+        ['VIP Elite Staking',25000,60,90,'Plus early access','Institutional-grade returns'],
+    ];
+@endphp
 
-<script>
-    // Toast Notification System
-    class Toast {
-        constructor() {
-            this.container = document.getElementById('toastContainer');
-            if (!this.container) {
-                this.container = document.createElement('div');
-                this.container.id = 'toastContainer';
-                this.container.className = 'toast-container';
-                document.body.appendChild(this.container);
-            }
-        }
-        
-        show(message, type = 'success', duration = 5000) {
-            const toast = document.createElement('div');
-            const colors = {
-                success: 'bg-green-600',
-                error: 'bg-red-600',
-                warning: 'bg-yellow-600',
-                info: 'bg-blue-600'
-            };
-            const icons = {
-                success: '✓',
-                error: '✗',
-                warning: '⚠',
-                info: 'ℹ'
-            };
-            
-            toast.className = `${colors[type]} text-white px-5 py-3 shadow-lg mb-3 flex items-center gap-3 transform translate-x-full transition-all duration-300`;
-            toast.innerHTML = `<span class="font-bold text-lg">${icons[type]}</span><span>${message}</span>`;
-            this.container.appendChild(toast);
-            
-            setTimeout(() => toast.classList.remove('translate-x-full'), 10);
-            setTimeout(() => {
-                toast.classList.add('translate-x-full');
-                setTimeout(() => toast.remove(), 300);
-            }, duration);
-        }
-        
-        success(message, duration = 5000) { this.show(message, 'success', duration); }
-        error(message, duration = 5000) { this.show(message, 'error', duration); }
-        warning(message, duration = 5000) { this.show(message, 'warning', duration); }
-        info(message, duration = 5000) { this.show(message, 'info', duration); }
-    }
-    
-    const toast = new Toast();
-    let spendableBalance = {{ $spendableBalance ?? Auth::user()->balance }};
-    
-    // Function to fetch spendable balance from server
-    async function fetchSpendableBalance() {
-        try {
-            const response = await fetch('/user/balance');
-            const data = await response.json();
-            if (data.success) {
-                spendableBalance = data.balance;
-                document.getElementById('availableBalance').innerText = spendableBalance.toFixed(2);
-                document.getElementById('balanceDisplay').innerText = '$' + spendableBalance.toFixed(2);
-                return spendableBalance;
-            }
-        } catch (error) {
-            console.error('Error fetching balance:', error);
-        }
-        return spendableBalance;
-    }
-    
-    // Plan Data with INCREASED ROI
-    const plans = {
-        vip: {
-            name: 'VIP Elite Plan',
-            price: 100000,
-            duration: '7 Day(s)',
-            durationDays: 7,
-            roi: 25.00,  // Increased from 15% to 25%
-            minAmount: 100000,
-            maxAmount: 500000,
-            bonus: 5000,  // Added bonus
-            quickAmounts: [100000, 200000, 300000, 400000, 500000]
-        },
-        diamond: {
-            name: 'Diamond Plan',
-            price: 50000,
-            duration: '30 Day(s)',
-            durationDays: 30,
-            roi: 20.00,  // Increased from 11% to 20%
-            minAmount: 50000,
-            maxAmount: 99999,
-            bonus: 2000,  // Added bonus
-            quickAmounts: [50000, 60000, 70000, 80000, 90000]
-        },
-        platinum: {
-            name: 'Platinum Plan',
-            price: 25000,
-            duration: '30 Day(s)',
-            durationDays: 30,
-            roi: 15.00,  // Increased from 9% to 15%
-            minAmount: 25000,
-            maxAmount: 49999,
-            bonus: 1000,  // Added bonus
-            quickAmounts: [25000, 30000, 35000, 40000, 45000]
-        },
-        gold: {
-            name: 'Gold Plan',
-            price: 10000,
-            duration: '21 Day(s)',
-            durationDays: 21,
-            roi: 12.00,  // Increased from 7% to 12%
-            minAmount: 10000,
-            maxAmount: 24999,
-            bonus: 500,  // Added bonus
-            quickAmounts: [10000, 15000, 20000]
-        },
-        silver: {
-            name: 'Silver Plan',
-            price: 5000,
-            duration: '14 Day(s)',
-            durationDays: 14,
-            roi: 10.00,  // Increased from 8% to 10%
-            minAmount: 5000,
-            maxAmount: 9999,
-            bonus: 250,  // Added bonus
-            quickAmounts: [5000, 6000, 7000, 8000, 9000]
-        },
-        starter: {
-            name: 'Starter Plan',
-            price: 1000,
-            duration: '30 Day(s)',
-            durationDays: 30,
-            roi: 8.00,   // Increased from 3% to 8%
-            minAmount: 1000,
-            maxAmount: 4999,
-            bonus: 100,  // Added bonus
-            quickAmounts: [1000, 2000, 3000, 4000]
-        }
-    };
+<div class="grid-3">
+    @foreach($plans as $i=>$p)
+    <div class="plan {{ ($p[6] ?? false) ? 'hot' : '' }}" data-idx="{{ $i }}">
+        <div class="muted" style="font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase">{{ $p[0] }}</div>
+        <div class="roi num" style="color:var(--acc)">{{ $p[2] }}%</div>
+        <div class="muted" style="font-size:.82rem">Total return in {{ $p[3] }} days</div>
+        <div style="margin:14px 0;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+            <div class="muted" style="font-size:.78rem">Stake</div>
+            <div class="num" style="font-weight:800">${{ number_format($p[1]) }} – ${{ number_format($p[1]*20 < 500000 ? $p[1]*20 : 500000) }}</div>
+        </div>
+        <ul><li>{{ $p[4] }}</li><li>{{ $p[5] }}</li><li>Rewards paid daily</li></ul>
+        <button class="btn btn-block btn-sm" style="margin-top:18px" onclick="pickPlan({{ $i }})">Select Plan</button>
+    </div>
+    @endforeach
+</div>
 
-    let currentPlan = 'vip';
-    let currentAmount = 0;
-
-    function updatePlanDetails() {
-        const plan = plans[currentPlan];
-        document.getElementById('planDetails').innerHTML = `
-            <div class="space-y-3">
-                <div class="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <span class="text-gray-500 text-sm">Plan Name:</span>
-                    <span class="text-gray-900 font-semibold">${plan.name}</span>
-                </div>
-                <div class="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <span class="text-gray-500 text-sm">Plan Price:</span>
-                    <span class="text-gray-900 font-semibold">$${plan.price.toLocaleString()}</span>
-                </div>
-                <div class="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <span class="text-gray-500 text-sm">Duration:</span>
-                    <span class="text-gray-900 font-semibold">${plan.duration}</span>
-                </div>
-                <div class="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <span class="text-gray-500 text-sm">ROI:</span>
-                    <span class="text-green-600 font-bold">${plan.roi}%</span>
-                </div>
-                <div class="flex justify-between items-center pb-2 border-b border-gray-100">
-                    <span class="text-gray-500 text-sm">Min/Max Amount:</span>
-                    <span class="text-gray-900 font-semibold">$${plan.minAmount.toLocaleString()} - $${plan.maxAmount.toLocaleString()}</span>
-                </div>
-                <div class="flex justify-between items-center pt-2">
-                    <span class="text-gray-500 text-sm">Welcome Bonus:</span>
-                    <span class="text-yellow-600 font-bold">$${plan.bonus.toLocaleString()}</span>
-                </div>
+<!-- Investment form -->
+<div class="pa mt" id="investPanel" style="padding:24px;display:none">
+    <div class="sec-h"><div><h2 id="planTitle">Start Staking</h2><p>Confirm your stake below</p></div></div>
+    <form id="investForm">
+        <input type="hidden" name="plan_name" id="iPlan">
+        <input type="hidden" name="roi" id="iRoi">
+        <input type="hidden" name="duration" id="iDur">
+        <input type="hidden" name="duration_days" id="iDurDays">
+        <input type="hidden" name="bonus" value="0">
+        <div class="grid-2" style="grid-template-columns:1fr 1fr">
+            <div>
+                <label class="lbl">Stake amount (USD)</label>
+                <input class="inp num" id="iAmount" type="number" min="0" step="0.01" required placeholder="e.g. 2,500">
             </div>
-        `;
-        updateQuickAmounts();
-        document.getElementById('customAmount').value = '';
-        currentAmount = 0;
-        updateInvestmentSummary();
+            <div>
+                <label class="lbl">Est. reward at maturity</label>
+                <div class="inp num" id="iReturn" style="display:flex;align-items:center;font-weight:700;color:var(--acc)">—</div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-gold mt">Confirm Stake</button>
+    </form>
+</div>
+@endsection
+
+@section('scripts')
+<script>
+    const plans={!! json_encode($plans) !!};
+    function pickPlan(i){
+        const p=plans[i];
+        document.getElementById('investPanel').style.display='block';
+        document.getElementById('planTitle').textContent=p[0];
+        document.getElementById('iPlan').value=p[0];
+        document.getElementById('iRoi').value=p[2];
+        document.getElementById('iDur').value=p[3]+' days';
+        document.getElementById('iDurDays').value=p[3];
+        document.getElementById('iAmount').min=p[1];
+        document.getElementById('iAmount').placeholder='Min $'+p[1].toLocaleString();
+        calc();
+        document.getElementById('investPanel').scrollIntoView({behavior:'smooth'});
     }
-
-    function updateQuickAmounts() {
-        const plan = plans[currentPlan];
-        const container = document.getElementById('quickAmounts');
-        container.innerHTML = '';
-        plan.quickAmounts.forEach(amount => {
-            const btn = document.createElement('button');
-            btn.textContent = `$${amount.toLocaleString()}`;
-            btn.className = 'px-4 py-2 bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300 text-sm font-medium';
-            btn.onclick = () => setAmount(amount);
-            container.appendChild(btn);
-        });
+    function calc(){
+        const p=plans.find((x,i)=>x[0]===document.getElementById('iPlan').value);
+        const amt=parseFloat(document.getElementById('iAmount').value)||0;
+        if(p&&amt>0){
+            const exp=amt+(amt*p[2]/100)+0;
+            document.getElementById('iReturn').innerHTML='$'+exp.toLocaleString('en-US',{maximumFractionDigits:2});
+        } else document.getElementById('iReturn').textContent='—';
     }
-
-    function setAmount(amount) {
-        const plan = plans[currentPlan];
-        if (amount < plan.minAmount) {
-            toast.warning(`Minimum investment for ${plan.name} is $${plan.minAmount.toLocaleString()}`);
-            return;
-        }
-        if (amount > plan.maxAmount) {
-            toast.warning(`Maximum investment for ${plan.name} is $${plan.maxAmount.toLocaleString()}`);
-            return;
-        }
-        if (amount > spendableBalance) {
-            toast.error(`Insufficient balance! Available: $${spendableBalance.toLocaleString()}`);
-            return;
-        }
-        currentAmount = amount;
-        document.getElementById('customAmount').value = amount;
-        updateInvestmentSummary();
-        toast.success(`$${amount.toLocaleString()} selected for ${plan.name}`);
-    }
-
-    function updateInvestmentSummary() {
-        const plan = plans[currentPlan];
-        const amount = currentAmount || 0;
-        const expectedReturnAmount = (amount * plan.roi) / 100 + (plan.bonus || 0);
-        
-        document.getElementById('investAmount').innerHTML = `$${amount.toLocaleString()}`;
-        document.getElementById('expectedRoi').innerHTML = `${plan.roi}%`;
-        document.getElementById('expectedReturn').innerHTML = `$${expectedReturnAmount.toLocaleString()}`;
-        document.getElementById('duration').innerHTML = plan.duration;
-        document.getElementById('bonus').innerHTML = `$${plan.bonus.toLocaleString()}`;
-        
-        const confirmBtn = document.getElementById('confirmInvestBtn');
-        confirmBtn.disabled = !(amount >= plan.minAmount && amount <= plan.maxAmount && amount <= spendableBalance && amount > 0);
-    }
-
-    document.getElementById('planSelect').addEventListener('change', function(e) {
-        currentPlan = e.target.value;
-        updatePlanDetails();
-        toast.info(`${plans[currentPlan].name} selected`, 2500);
-    });
-
-    document.getElementById('customAmount').addEventListener('input', function(e) {
-        const plan = plans[currentPlan];
-        let amount = parseFloat(e.target.value) || 0;
-        
-        if (amount > 0 && amount < plan.minAmount) {
-            document.getElementById('customAmount').style.borderColor = '#ef4444';
-            toast.warning(`Minimum amount is $${plan.minAmount.toLocaleString()}`, 2500);
-        } else if (amount > plan.maxAmount) {
-            document.getElementById('customAmount').style.borderColor = '#ef4444';
-            toast.warning(`Maximum amount is $${plan.maxAmount.toLocaleString()}`, 2500);
-        } else if (amount > spendableBalance) {
-            document.getElementById('customAmount').style.borderColor = '#ef4444';
-            toast.error(`Insufficient balance! Available: $${spendableBalance.toLocaleString()}`, 2500);
-        } else if (amount > 0) {
-            document.getElementById('customAmount').style.borderColor = '#10b981';
-        }
-        
-        currentAmount = amount;
-        updateInvestmentSummary();
-    });
-
-    document.getElementById('confirmInvestBtn').addEventListener('click', async function() {
-        const plan = plans[currentPlan];
-        const amount = currentAmount;
-        
-        if (!amount || amount <= 0) {
-            toast.warning('Please enter an investment amount');
-            return;
-        }
-        if (amount < plan.minAmount) {
-            toast.warning(`Minimum investment amount is $${plan.minAmount.toLocaleString()}`);
-            return;
-        }
-        if (amount > plan.maxAmount) {
-            toast.warning(`Maximum investment amount is $${plan.maxAmount.toLocaleString()}`);
-            return;
-        }
-        if (amount > spendableBalance) {
-            toast.error(`Insufficient balance. Available: $${spendableBalance.toLocaleString()}`);
-            return;
-        }
-        
-        const expectedReturn = (amount * plan.roi) / 100 + (plan.bonus || 0);
-        
-        // Disable button and show loading
-        const btn = this;
-        btn.disabled = true;
-        btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> Processing...';
-        
-        try {
-            const response = await fetch('/invest/store', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
-                body: JSON.stringify({
-                    plan_name: plan.name,
-                    amount: amount,
-                    roi: plan.roi,
-                    duration: plan.duration,
-                    duration_days: plan.durationDays,
-                    bonus: plan.bonus
-                })
-            });
-            
-            const data = await response.json();
-            
-            if (data.success) {
-                toast.success(data.message);
-                toast.info(`Your investment will mature on ${new Date(Date.now() + plan.durationDays * 86400000).toLocaleDateString()}`, 6000);
-                
-                setTimeout(() => {
-                    window.location.href = '/investments-history';
-                }, 3000);
-            } else {
-                toast.error(data.message);
-                btn.disabled = false;
-                btn.innerHTML = 'Confirm & Invest';
-            }
-        } catch (error) {
-            toast.error('Something went wrong. Please try again.');
-            btn.disabled = false;
-            btn.innerHTML = 'Confirm & Invest';
-        }
-    });
-
-    // Initialize - fetch spendable balance on page load
-    document.addEventListener('DOMContentLoaded', async function() {
-        await fetchSpendableBalance();
-        updatePlanDetails();
+    document.getElementById('iAmount').addEventListener('input',calc);
+    document.getElementById('investForm').addEventListener('submit',e=>{
+        e.preventDefault();
+        const f=document.getElementById('investForm'),btn=f.querySelector('button[type=submit]');
+        pvAjax(f,btn);
     });
 </script>
-
-<style>
-    /* No rounded corners */
-    .bg-white, .border, button, select, input, .toast, .bg-green-50 {
-        border-radius: 0 !important;
-    }
-    
-    /* Remove all border-radius */
-    * {
-        border-radius: 0 !important;
-    }
-    
-    .sticky { position: sticky; top: 100px; }
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button { opacity: 0.5; }
-    select { cursor: pointer; }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .animate-spin { animation: spin 1s linear infinite; }
-</style>
 @endsection

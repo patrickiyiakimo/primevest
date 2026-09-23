@@ -22,6 +22,10 @@ use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\InvestmentController;
 use App\Http\Controllers\AISupportController;
+use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Admin\CopyTraderController;
 use App\Models\User;  // ← ADD THIS
 use Illuminate\Support\Facades\Hash;  // ← ADD THIS
 
@@ -36,6 +40,12 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+// Password reset routes
+Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.store');
 
 // ============================================
 // ADMIN ROUTES (Only for admins)

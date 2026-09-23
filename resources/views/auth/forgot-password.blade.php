@@ -1,25 +1,20 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
-    </div>
+@extends('layouts.guest')
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@section('title', 'Reset Password · PrimeVest')
 
-    <form method="POST" action="{{ route('password.email') }}">
-        @csrf
+@section('content')
+<h2 style="margin:0 0 6px;font-size:1.5rem;font-weight:800;letter-spacing:-.01em">Reset your password</h2>
+<p class="pv-mut" style="margin:0 0 24px">We'll email you a secure link to set a new password.</p>
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+<form method="POST" action="{{ route('password.email') }}">
+    @csrf
+    <label class="pv-label" for="email">Email address</label>
+    <input class="pv-input" id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
+    @error('email')<div class="pv-err">{{ $message }}</div>@enderror
+    <button class="pv-btn pv-btn-block" type="submit" style="margin-top:22px">Email Password Reset Link</button>
+</form>
 
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Email Password Reset Link') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+<p class="pv-mut" style="text-align:center;margin:22px 0 0">
+    Remembered it? <a href="{{ route('login') }}" class="pv-link">Back to login</a>
+</p>
+@endsection

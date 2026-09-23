@@ -1,445 +1,107 @@
 @extends('layouts.dashboard')
 
 @section('page-title', 'Deposit Funds')
-@section('breadcrumb', 'Add funds to your trading account')
+@section('breadcrumb', 'Fund your trading account with crypto')
 
 @section('dashboard-content')
-<div class="space-y-6">
-    <!-- Page Header -->
-    <div class="border-l-4 border-green-600 shadow-md p-6 bg-white">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-900">Deposit Funds</h1>
-                <p class="text-gray-500 mt-1">Add money to your trading account securely</p>
-            </div>
-            <div class="bg-green-50 border border-green-200 px-5 py-2.5">
-                <span class="text-green-600 text-sm font-semibold">💰 Available Balance: $<span id="availableBalance">{{ number_format($spendableBalance ?? Auth::user()->balance, 2) }}</span></span>
-            </div>
+@php
+    $wallets = [
+        ['BTC','Bitcoin','Network: Bitcoin (BTC)','bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh','#f7931a'],
+        ['ETH','Ethereum','Network: ERC-20','0x71C7656EC7ab88b098defB751B7401B5f6d8976F','#8a92b2'],
+        ['USDT','Tether TRC-20','Network: TRON (TRC-20)','TX7XpN394okDd3rFZag4v1xH3v9WZJQaCo','#26a17b'],
+        ['SOL','Solana','Network: Solana','7YmM2ZvUGrfKXJq3ihQfC8gGKbQ2kBn3kXJb2mZv92oK','#9945ff'],
+    ];
+@endphp
+
+<div class="grid-2">
+    <div class="pa" style="padding:24px">
+        <div class="sec-h">
+            <div><h2>Make a Deposit</h2><p>Funds credit to your balance after confirmation</p></div>
+        </div>
+
+        <label class="lbl">Select payment method</label>
+        <select class="inp sel" id="depositMethod" style="margin-bottom:16px">
+            <option>Bitcoin (BTC)</option>
+            <option selected>Ethereum (ETH)</option>
+            <option>Tether (USDT – TRC20)</option>
+            <option>Solana (SOL)</option>
+            <option>USDC (ERC-20)</option>
+            <option>Bank Transfer</option>
+        </select>
+
+        <label class="lbl">Amount (USD)</label>
+        <input class="inp num" id="depositAmount" type="number" min="20" step="0.01" placeholder="e.g. 500.00" style="margin-bottom:8px">
+        <div class="muted" style="font-size:.78rem;margin-bottom:16px">
+            Min $20 · Max $100,000 · <span id="minedEq" class="gold num">≈ 0.1433 ETH</span>
+        </div>
+
+        <label class="lbl">Upload deposit proof <span class="muted" style="font-weight:400">(screenshot of transfer, optional)</span></label>
+        <input class="inp" type="file" id="depositProof" accept="image/*,.pdf" style="margin-bottom:20px">
+
+        <button class="btn btn-block" id="depositBtn" onclick="submitDeposit()">Submit Deposit Request</button>
+        <div class="muted" style="font-size:.78rem;margin-top:12px;text-align:center">
+            🔒 Your deposit request is reviewed within 15 minutes on business days.
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Left Side - Main Deposit Form -->
-        <div class="lg:col-span-2 space-y-6">
-            <!-- Amount Section -->
-            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
-                    <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
-                        Enter Amount
-                    </h2>
-                </div>
-                <div class="p-6">
-                    <div class="relative">
-                        <span class="absolute left-4 top-1/2 transform -translate-y-1/2 text-2xl text-gray-500 font-bold">$</span>
-                        <input type="number" 
-                               id="depositAmount" 
-                               placeholder="0.00" 
-                               class="w-full pl-8 pr-4 py-4 text-2xl border-2 border-gray-200 focus:outline-none focus:border-green-500 transition-all duration-300">
-                    </div>
-                    <div class="flex flex-wrap gap-3 mt-4">
-                        <button type="button" onclick="setAmount(100)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$100</button>
-                        <button type="button" onclick="setAmount(250)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$250</button>
-                        <button type="button" onclick="setAmount(500)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$500</button>
-                        <button type="button" onclick="setAmount(1000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$1,000</button>
-                        <button type="button" onclick="setAmount(5000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$5,000</button>
-                        <button type="button" onclick="setAmount(10000)" class="px-4 py-2 text-sm bg-gray-100 hover:bg-green-600 hover:text-white transition-all duration-300">$10,000</button>
-                    </div>
-                </div>
+    <div>
+        <div class="pa" style="padding:22px;margin-bottom:18px">
+            <div class="sec-h"><div><h2>Deposit Wallet Addresses</h2><p>Send crypto only to the matching network</p></div></div>
+            @foreach($wallets as $w)
+            <div style="display:flex;align-items:center;gap:12px;padding:13px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px">
+                <span style="font-size:.72rem;color:var(--muted)">{{ $w[1] }}</span>
+                <span class="num" style="flex:1;font-size:.74rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="{{ $w[3] }}">{{ $w[3] }}</span>
+                <button class="btn btn-sm btn-ghost" onclick="copyAddr('{{ $w[3] }}')">Copy</button>
             </div>
-
-            <!-- Payment Methods -->
-            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
-                    <h2 class="text-lg font-semibold text-gray-900 flex items-center">
-                        <svg class="w-5 h-5 mr-2 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                        Choose your method of payment
-                    </h2>
-                    <p class="text-sm text-gray-500 mt-1">Select a payment method to see instructions</p>
-                </div>
-                <div class="p-4 space-y-3 max-h-[400px] overflow-y-auto">
-                    @php
-                        $paymentMethods = [
-                            ['value' => 'bitcoin', 'name' => 'Bitcoin (BTC)', 'logo' => 'https://cryptologos.cc/logos/bitcoin-btc-logo.svg', 'desc' => 'World\'s leading cryptocurrency', 'active' => true],
-                            ['value' => 'solana', 'name' => 'Solana (SOL)', 'logo' => 'https://cryptologos.cc/logos/solana-sol-logo.svg', 'desc' => 'Fast and low-cost transactions', 'active' => true],
-                            ['value' => 'usdt_erc20', 'name' => 'Tether USD (ERC20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'desc' => 'Ethereum network', 'active' => true],
-                            ['value' => 'usdt_trc20', 'name' => 'Tether USD (TRC20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'desc' => 'TRON network - Low fees', 'active' => true],
-                            ['value' => 'ethereum', 'name' => 'Ethereum (ETH)', 'logo' => 'https://cryptologos.cc/logos/ethereum-eth-logo.svg', 'desc' => 'Smart contract platform', 'active' => true],
-                            ['value' => 'tron', 'name' => 'TRON (TRX)', 'logo' => 'https://cryptologos.cc/logos/tron-trx-logo.svg', 'desc' => 'High-speed blockchain', 'active' => true],
-                            ['value' => 'usdt_bnb', 'name' => 'Tether USD (BEP20)', 'logo' => 'https://cryptologos.cc/logos/tether-usdt-logo.svg', 'desc' => 'Binance Smart Chain', 'active' => true],
-                            ['value' => 'etransfer', 'name' => 'E-Transfer', 'logo' => 'https://cdn-icons-png.flaticon.com/512/854/854878.png', 'desc' => 'Instant bank transfer (Canada)', 'active' => false],
-                            ['value' => 'paypal', 'name' => 'PayPal', 'logo' => 'https://upload.wikimedia.org/wikipedia/commons/3/39/PayPal_logo.svg', 'desc' => 'Send as Family & Friends', 'active' => false],
-                            ['value' => 'bank_transfer', 'name' => 'Bank Transfer', 'logo' => 'https://cdn-icons-png.flaticon.com/512/833/833593.png', 'desc' => 'Wire transfer (1-3 business days)', 'active' => false],
-                        ];
-                    @endphp
-
-                    @foreach($paymentMethods as $method)
-                    <label class="payment-method flex items-center justify-between p-4 border-2 border-gray-200 cursor-pointer transition-all duration-300 hover:border-green-500" data-method="{{ $method['value'] }}">
-                        <div class="flex items-center space-x-4">
-                            <input type="radio" name="payment_method" value="{{ $method['value'] }}" class="w-5 h-5 text-green-600 focus:ring-green-500" onchange="selectPaymentMethod(this)">
-                            <div class="w-12 h-12 flex items-center justify-center shadow-sm p-2 border border-gray-100">
-                                <img src="{{ $method['logo'] }}" alt="{{ $method['name'] }}" class="w-8 h-8 object-contain">
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-900">{{ $method['name'] }}</p>
-                                <p class="text-sm text-gray-500">{{ $method['desc'] }}</p>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <p class="text-xs text-gray-400">Min: ${{ $method['value'] == 'etransfer' ? '100' : ($method['value'] == 'paypal' ? '20' : ($method['value'] == 'bank_transfer' ? '500' : '50')) }}</p>
-                            <p class="text-xs text-gray-400">Max: ${{ $method['value'] == 'etransfer' ? '10,000' : ($method['value'] == 'paypal' ? '5,000' : '100,000') }}</p>
-                        </div>
-                    </label>
-                    @endforeach
-                </div>
-            </div>
+            @endforeach
+            <p class="muted" style="font-size:.76rem;margin:6px 0 0">⚠ Send funds only on the indicated network. Sending on the wrong network may result in permanent loss.</p>
         </div>
-
-        <!-- Right Sidebar - Payment Instructions -->
-        <div class="space-y-6">
-            <div class="bg-white border border-gray-200 shadow-sm overflow-hidden sticky top-6" id="paymentInstructionsCard">
-                <div class="border-b border-gray-200 px-6 py-4 bg-gray-50">
-                    <div class="flex items-center">
-                        <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <h2 class="text-lg font-bold text-gray-900">Payment Instructions</h2>
-                    </div>
-                </div>
-                <div class="p-6" id="paymentInstructions">
-                    <div class="text-center py-8 text-gray-500">
-                        <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                        <p>Select a payment method to see instructions</p>
-                    </div>
-                </div>
-            </div>
+        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#10221d,#0c1322)">
+            <div style="font-weight:800;margin-bottom:6px">💡 Pro tip</div>
+            <p class="muted" style="margin:0;font-size:.86rem;line-height:1.7">
+                Crypto deposits are instantly credited once the network confirms 1–3 blocks (usually &lt;10 min). USDT-TRC20 has the lowest fees — great for frequent top-ups.
+            </p>
         </div>
     </div>
 </div>
+@endsection
 
-<!-- Toast Notification Styles -->
-<style>
-    /* No rounded corners */
-    .bg-white, .border, button, .toast, .payment-method, input, .rounded-xl, .rounded-lg, .rounded-2xl {
-        border-radius: 0 !important;
-    }
-    
-    .toast-container {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 9999;
-    }
-    .toast {
-        min-width: 320px;
-        background: white;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        margin-bottom: 12px;
-        transform: translateX(400px);
-        transition: transform 0.3s ease;
-        overflow: hidden;
-    }
-    .toast.show { transform: translateX(0); }
-    .toast-success { border-left: 4px solid #10b981; }
-    .toast-error { border-left: 4px solid #ef4444; }
-    .toast-warning { border-left: 4px solid #f59e0b; }
-    .toast-info { border-left: 4px solid #3b82f6; }
-    .toast-content { padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
-    .toast-icon { flex-shrink: 0; }
-    .toast-message { flex: 1; font-size: 14px; color: #1f2937; font-weight: 500; }
-    .toast-close { cursor: pointer; color: #9ca3af; transition: color 0.2s; }
-    .toast-close:hover { color: #4b5563; }
-    @keyframes slideOut {
-        from { transform: translateX(0); opacity: 1; }
-        to { transform: translateX(100%); opacity: 0; }
-    }
-    .sticky { position: sticky; top: 100px; }
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button { opacity: 0.5; }
-    
-    /* Remove all border-radius from all elements */
-    * {
-        border-radius: 0 !important;
-    }
-</style>
-
-<!-- Toast Container -->
-<div id="toastContainer" class="toast-container"></div>
-
+@section('scripts')
 <script>
-    class Toast {
-        constructor() {
-            this.container = document.getElementById('toastContainer');
-            if (!this.container) {
-                this.container = document.createElement('div');
-                this.container.id = 'toastContainer';
-                this.container.className = 'toast-container';
-                document.body.appendChild(this.container);
-            }
-        }
-        
-        show(message, type = 'success', duration = 5000) {
-            const toast = document.createElement('div');
-            toast.className = `toast toast-${type}`;
-            let icon = '';
-            switch(type) {
-                case 'success': icon = `<svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>`; break;
-                case 'error': icon = `<svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>`; break;
-                case 'warning': icon = `<svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`; break;
-                case 'info': icon = `<svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`; break;
-            }
-            toast.innerHTML = `<div class="toast-content"><div class="toast-icon">${icon}</div><div class="toast-message">${message}</div><div class="toast-close" onclick="this.closest('.toast').remove()"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></div></div>`;
-            this.container.appendChild(toast);
-            setTimeout(() => toast.classList.add('show'), 10);
-            setTimeout(() => {
-                toast.style.animation = 'slideOut 0.3s ease forwards';
-                setTimeout(() => toast.remove(), 300);
-            }, duration);
-        }
-        success(message, duration = 5000) { this.show(message, 'success', duration); }
-        error(message, duration = 5000) { this.show(message, 'error', duration); }
-        warning(message, duration = 5000) { this.show(message, 'warning', duration); }
-        info(message, duration = 5000) { this.show(message, 'info', duration); }
+    const fix=(n)=>(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4});
+    const rates={1:0.0001433,2:0.1433,3:0.5121,4:0.6562}; // per network
+    function rateFor(){
+        const m=document.getElementById('depositMethod').value.toLowerCase();
+        if(m.includes('bitcoin'))return 0.00001433;
+        if(m.includes('ethereum'))return 0.0002867;
+        if(m.includes('usdt'))return 0.98;
+        if(m.includes('solana'))return 0.0667;
+        return 1;
     }
-    
-    const toast = new Toast();
-    let selectedPaymentMethod = null;
-    let currentAmount = 0;
-    let spendableBalance = {{ $spendableBalance ?? Auth::user()->balance }};
-
-    // Function to fetch spendable balance from server
-    async function fetchSpendableBalance() {
-        try {
-            const response = await fetch('/user/balance');
-            const data = await response.json();
-            if (data.success) {
-                spendableBalance = data.balance;
-                document.getElementById('availableBalance').innerText = spendableBalance.toFixed(2);
-                return spendableBalance;
-            }
-        } catch (error) {
-            console.error('Error fetching balance:', error);
-        }
-        return spendableBalance;
+    function estEq(){
+        const amt=parseFloat(document.getElementById('depositAmount').value)||0, r=rateFor();
+        document.getElementById('minedEq').textContent='≈ '+fix(amt*r);
     }
+    document.getElementById('depositAmount').addEventListener('input',estEq);
+    document.getElementById('depositMethod').addEventListener('change',estEq);
 
-    // Function to show support message for disabled payment methods
-    function showSupportMessage(methodName) {
-        toast.warning(`${methodName} is currently unavailable. Please contact our support team at profitmasstrade1@gmail.com for alternative payment options Or Chat with us on Support Chat!`);
-        
-        // Also try to open JivoChat if available
-        if (typeof jivo_api !== 'undefined') {
-            setTimeout(() => {
-                if (confirm('Would you like to chat with our support team now?')) {
-                    jivo_api.open();
-                }
-            }, 1000);
-        }
+    function submitDeposit(){
+        const amount=document.getElementById('depositAmount').value;
+        const method=document.getElementById('depositMethod').value;
+        if(!amount||parseFloat(amount)<20){pvFlash('flash-err','Minimum deposit is $20');return}
+        const fd=new FormData();
+        fd.append('amount',amount);fd.append('method',method);
+        const pf=document.getElementById('depositProof');
+        if(pf.files[0])fd.append('proof',pf.files[0]);
+        const btn=document.getElementById('depositBtn');
+        btn.disabled=true;const old=btn.textContent;btn.textContent='Submitting…';
+        fetch('{{ route('deposit.request') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}})
+        .then(r=>r.json()).then(d=>{btn.disabled=false;btn.textContent=old;pvFlash(d.success?'flash-ok':'flash-err',d.message||'Processed');if(d.success)setTimeout(()=>location.reload(),1000)})
+        .catch(()=>{btn.disabled=false;btn.textContent=old;pvFlash('flash-err','Network error. Please try again.')});
     }
-
-    const paymentConfig = {
-        bitcoin: { name: 'Bitcoin (BTC)', address: 'bc1qsm7l6kxevumu0yfu0x7psf55cu20w2lte282m7', active: true },
-        solana: { name: 'Solana (SOL)', address: '2KMSHSsus723f6E3q9CayUd6PdKcpgjxVNCuoe6CDEwC', active: true },
-        usdt_erc20: { name: 'Tether USD (ERC20)', address: '0x6581326E00e331472c03Aa7D3550d2413F863cBA', active: true },
-        usdt_trc20: { name: 'Tether USD (TRC20)', address: 'TDyYfide1oJHvaCwHQTpyfGu9s8vPwQ3SP', active: true },
-        ethereum: { name: 'Ethereum (ETH)', address: '0x6581326E00e331472c03Aa7D3550d2413F863cBA', active: true },
-        tron: { name: 'TRON (TRX)', address: 'TDyYfide1oJHvaCwHQTpyfGu9s8vPwQ3SP', active: true },
-        usdt_bnb: { name: 'Tether USD (BEP20)', address: '0x6581326E00e331472c03Aa7D3550d2413F863cBA', active: true },
-        etransfer: { name: 'E-Transfer', address: 'deposits@profitmasstrade.com', active: false },
-        paypal: { name: 'PayPal', address: 'payments@profitmasstrade.com', active: false },
-        bank_transfer: { name: 'Bank Transfer', address: 'Account: 1234567890\nRouting: 021000021\nBeneficiary: ProfitMassTrade Ltd', active: false }
-    };
-
-    // Disabled methods list for quick check
-    const disabledMethods = ['etransfer', 'paypal', 'bank_transfer'];
-
-    function setAmount(amount) {
-        document.getElementById('depositAmount').value = amount;
-        updateAmount();
-        toast.success(`$${amount} amount selected`);
+    function copyAddr(addr){
+        navigator.clipboard.writeText(addr).then(()=>pvFlash('flash-ok','Wallet address copied'));
     }
-
-    function updateAmount() {
-        currentAmount = parseFloat(document.getElementById('depositAmount').value) || 0;
-        updatePaymentInstructions();
-    }
-
-    function selectPaymentMethod(radio) {
-        // Check if this method is disabled
-        if (disabledMethods.includes(radio.value)) {
-            // Show support message but don't select the method
-            const methodName = radio.closest('.payment-method')?.querySelector('.font-semibold')?.innerText || 'This payment method';
-            showSupportMessage(methodName);
-            radio.checked = false;
-            return;
-        }
-        
-        selectedPaymentMethod = radio.value;
-        updatePaymentInstructions();
-        toast.info(`${paymentConfig[selectedPaymentMethod].name} selected as payment method`);
-    }
-
-    function updatePaymentInstructions() {
-        const instructionsDiv = document.getElementById('paymentInstructions');
-        
-        if (!selectedPaymentMethod || disabledMethods.includes(selectedPaymentMethod)) {
-            instructionsDiv.innerHTML = `<div class="text-center py-8 text-gray-500">
-                <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                </svg>
-                <p>Select a payment method to see instructions</p>
-            </div>`;
-            return;
-        }
-
-        const config = paymentConfig[selectedPaymentMethod];
-        const amount = currentAmount || 0;
-        
-        instructionsDiv.innerHTML = `
-            <div class="space-y-5">
-                <div class="text-center">
-                    <div class="w-16 h-16 mx-auto bg-green-600 flex items-center justify-center shadow-lg mb-3">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900">${config.name}</h3>
-                </div>
-
-                <div class="bg-gray-50 p-4 border border-gray-200">
-                    <p class="text-sm text-gray-500 mb-1">Amount to Pay:</p>
-                    <p class="text-3xl font-bold text-green-600">$${amount.toLocaleString()}</p>
-                </div>
-
-                <div class="bg-gray-50 p-4 border border-gray-200">
-                    <p class="text-sm text-gray-500 mb-2">Payment Address/Bank Account Number:</p>
-                    <div class="flex items-center justify-between gap-2">
-                        <code class="text-xs bg-white p-2 border border-gray-200 break-all flex-1 font-mono">${config.address}</code>
-                        <button onclick="copyAddress('${config.address}')" class="px-3 py-2 bg-gray-200 hover:bg-green-600 hover:text-white transition-all duration-300">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="bg-gray-50 p-4 border border-gray-200">
-                    <p class="text-sm text-gray-500 mb-2">Upload Payment Proof (Optional):</p>
-                    <div class="relative">
-                        <input type="file" id="paymentProof" class="hidden" accept="image/*,.pdf,.jpg,.png">
-                        <label for="paymentProof" class="flex items-center justify-between w-full px-4 py-3 bg-white border-2 border-dashed border-gray-300 cursor-pointer hover:border-green-500 transition-all duration-300">
-                            <span id="fileName" class="text-sm text-gray-500">No file chosen</span>
-                            <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm">Browse</span>
-                        </label>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-2">Upload screenshot or PDF of your payment transaction (Optional)</p>
-                </div>
-
-                <button onclick="submitDeposit()" class="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-semibold transition-all duration-500 shadow-lg flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                    Submit Deposit Request
-                </button>
-
-                <div class="bg-green-50 p-3 border border-green-200">
-                    <div class="flex items-start gap-2">
-                        <svg class="w-4 h-4 text-green-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <p class="text-xs text-green-700">Your deposit will be processed within 15-30 minutes.</p>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        const fileInput = document.getElementById('paymentProof');
-        if (fileInput) {
-            fileInput.addEventListener('change', function(e) {
-                const fileName = e.target.files[0]?.name || 'No file chosen';
-                document.getElementById('fileName').innerText = fileName;
-            });
-        }
-    }
-
-    function copyAddress(address) {
-        navigator.clipboard.writeText(address);
-        toast.success('Address copied to clipboard!');
-    }
-
-    function submitDeposit() {
-        const amount = currentAmount;
-        const fileInput = document.getElementById('paymentProof');
-        const file = fileInput?.files[0];
-        
-        if (!amount || amount <= 0) {
-            toast.warning('Please enter a valid deposit amount');
-            return;
-        }
-        
-        if (!selectedPaymentMethod || disabledMethods.includes(selectedPaymentMethod)) {
-            toast.warning('Please select a valid payment method');
-            return;
-        }
-        
-        // Create form data
-        const formData = new FormData();
-        formData.append('amount', amount);
-        formData.append('method', selectedPaymentMethod);
-        if (file) {
-            formData.append('proof', file);
-        }
-        
-        // Show loading state
-        const submitBtn = document.querySelector('#paymentInstructions button');
-        const originalText = submitBtn?.innerHTML;
-        if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div> Processing...';
-        }
-        
-        // Submit via fetch
-        fetch('/deposit/request', {
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-            },
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            }
-            if (data.success) {
-                toast.success(data.message);
-                setTimeout(() => {
-                    window.location.href = '/deposits-history';
-                }, 2000);
-            } else {
-                toast.error(data.message);
-            }
-        })
-        .catch(error => {
-            if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-            }
-            toast.error('Something went wrong. Please try again.');
-        });
-    }
-
-    // Initialize - fetch spendable balance on page load
-    document.addEventListener('DOMContentLoaded', async function() {
-        await fetchSpendableBalance();
-        document.getElementById('depositAmount').addEventListener('input', updateAmount);
-    });
+    estEq();
 </script>
 @endsection

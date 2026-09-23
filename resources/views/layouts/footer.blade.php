@@ -1,116 +1,53 @@
-<!-- Footer -->
-<footer class="bg-gray-900 pt-12 pb-6">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Footer Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-8">
-            
-            <!-- MARKETS -->
+<footer style="border-top:1px solid var(--line);background:var(--bg2);padding:60px 0 0;margin-top:40px">
+    <div class="pv-container">
+        <div class="pv-grid pv-grid-4" style="gap:30px;padding-bottom:44px">
             <div>
-                <h3 class="text-white font-bold text-lg mb-4">MARKETS</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Forex</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Cryptos</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Shares</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Indices</a></li>
-                </ul>
+                <a href="{{ url('/') }}" class="pv-logo" style="margin-bottom:14px">
+                    <span class="pv-logo-badge">P</span>
+                    <span>Prime<span class="pv-acc">Vest</span></span>
+                </a>
+                <p class="pv-foot" style="max-width:260px;line-height:1.7">A trusted digital asset investment platform. Buy, trade, stake and copy elite crypto traders.</p>
+                <div style="display:flex;gap:10px;margin-top:16px">
+                    <a href="#" aria-label="X" style="width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--line);display:grid;place-items:center;font-size:.8rem">𝕏</a>
+                    <a href="#" aria-label="Telegram" style="width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--line);display:grid;place-items:center;font-size:.9rem">✈</a>
+                    <a href="#" aria-label="Discord" style="width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--line);display:grid;place-items:center;font-size:.9rem">◇</a>
+                </div>
             </div>
-            
-            <!-- TRADING -->
             <div>
-                <h3 class="text-white font-bold text-lg mb-4">TRADING</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Platform</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Pricing</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">PAMM</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Help Centre/FAQ</a></li>
-                </ul>
+                <div style="font-weight:700;margin-bottom:14px" class="pv-acc">Company</div>
+                <div style="display:flex;flex-direction:column;gap:10px" class="pv-foot">
+                    <a href="{{ route('company') }}">About PrimeVest</a>
+                    <a href="{{ route('contact') }}">Contact Us</a>
+                    <a href="{{ route('education') }}">Learn Crypto</a>
+                    <a href="{{ route('privacy.policy') }}">Privacy Policy</a>
+                </div>
             </div>
-            
-            <!-- COMPANY -->
             <div>
-                <h3 class="text-white font-bold text-lg mb-4">COMPANY</h3>
-                <ul class="space-y-2">
-                    <li><a href="{{ route('company') }}" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">About Us</a></li>
-                    <li><a href="{{ route('company') }}#why-us" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Why Us</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Contact Us</a></li>
-                </ul>
+                <div style="font-weight:700;margin-bottom:14px" class="pv-acc">Markets</div>
+                <div style="display:flex;flex-direction:column;gap:10px" class="pv-foot">
+                    <a href="{{ route('forex.majors') }}">Bitcoin &amp; Altcoins</a>
+                    <a href="{{ route('trading') }}#copy-trading">Copy Trading</a>
+                    <a href="{{ route('stock-trading') }}">Crypto Trading Desk</a>
+                    <a href="{{ route('buy-crypto') }}">Buy Crypto</a>
+                </div>
             </div>
-            
-            <!-- ACCOUNT -->
             <div>
-                <h3 class="text-white font-bold text-lg mb-4">ACCOUNT</h3>
-                <ul class="space-y-2">
-                    @guest
-                        <li><a href="{{ route('login') }}" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Login</a></li>
-                        <li><a href="{{ route('register') }}" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Sign Up</a></li>
-                    @else
-                        <li><a href="{{ route('dashboard') }}" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Dashboard</a></li>
-                        <li><a href="{{ route('profile') }}" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Profile</a></li>
-                        <li>
-                            <form method="POST" action="{{ route('logout') }}" class="inline">
-                                @csrf
-                                <button type="submit" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Logout</button>
-                            </form>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
-            
-            <!-- LEGAL -->
-            <div>
-                <h3 class="text-white font-bold text-lg mb-4">LEGAL</h3>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Privacy Policy</a></li>
-                    <li><a href="#" class="text-gray-400 hover:text-green-400 text-sm transition-colors duration-300">Terms of Service</a></li>
-                </ul>
+                <div style="font-weight:700;margin-bottom:14px" class="pv-acc">Stay updated</div>
+                <p class="pv-foot" style="margin-bottom:12px">Market insights delivered to your inbox weekly.</p>
+                <form style="display:flex;gap:8px" onsubmit="event.preventDefault();alert('Subscribed!')">
+                    <input class="pv-input" style="flex:1" type="email" placeholder="Email address" required>
+                    <button class="pv-btn pv-btn-sm" type="submit">Join</button>
+                </form>
             </div>
         </div>
-        
-        <!-- Risk Warning -->
-        <div class="border-t border-gray-800 pt-6 mb-6">
-            <p class="text-gray-500 text-xs leading-relaxed">
-                This website can be accessed worldwide however the information on the website is related to PrimeVest A/S and is not specific to any entity of PrimeVest. All clients will directly engage with PrimeVest A/S and all client agreements will be entered into with PrimeVest A/S.
-            </p>
-            <p class="text-gray-500 text-xs leading-relaxed mt-3">
-                Forex and CFDs are leveraged products and can result in losses that exceed your deposits. Please ensure you fully understand all of the risks. Contracts for Difference ("CFDs") are leveraged products and carry a significant risk of loss to your capital, as prices may move rapidly against you and you may be required to make further payments to keep any trades open. These products are not suitable for all clients, therefore please ensure you fully understand the risks and seek independent advice.
-            </p>
-            <p class="text-gray-500 text-xs leading-relaxed mt-3">
-                Apple and the Apple logo are trademarks of Apple Inc, registered in the US and other countries and regions. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.
-            </p>
+        <div style="border-top:1px solid var(--line);padding:20px 0;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between" class="pv-foot">
+            <span>&copy; {{ date('Y') }} PrimeVest. All rights reserved.</span>
+            <span>BTC · ETH · SOL · USDT · ADA · DOT</span>
         </div>
-        
-        <!-- Copyright -->
-        <div class="border-t border-gray-800 pt-6 text-center">
-            <p class="text-gray-500 text-xs">
-                Copyright © {{ date('Y') }} PrimeVest. All rights reserved.
+        <div style="padding:0 0 26px">
+            <p class="pv-foot" style="max-width:1000px;line-height:1.7;color:#6d7889">
+                <strong style="color:#94a1b6">Risk Disclosure:</strong> Trading and investing in digital assets involves substantial risk and may not be suitable for all investors. The value of crypto assets is highly volatile and you may lose all invested capital. Past performance is not a reliable indicator of future results. Nothing on this website constitutes financial or investment advice.
             </p>
         </div>
     </div>
 </footer>
-
-<div>
-<!-- <div class="tradingview-widget-container" style="height:45px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <div class="tradingview-widget-copyright">
-    <a href="https://www.tradingview.com/?utm_campaign=ticker-tape-logo&utm_medium=widget&utm_source=bitxprofits.net" rel="noopener noreferrer" target="_blank">
-    </a>
-  </div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-  {
-    "symbols": [
-      { "proName": "BITSTAMP:BTCUSD", "title": "Bitcoin" },
-      { "proName": "BITSTAMP:ETHUSD", "title": "Ethereum" },
-      { "proName": "BINANCE:SOLUSD", "title": "Solana" },
-      { "proName": "FX:EURUSD", "title": "EUR/USD" },
-      { "proName": "TVC:GOLD", "title": "Gold" },
-      { "proName": "NASDAQ:NDX", "title": "Nasdaq 100" }
-    ],
-    "showSymbolLogo": true,
-    "colorTheme": "dark",
-    "isTransparent": false,
-    "displayMode": "adaptive",
-    "locale": "en"
-  }
-  </script>
-</div> -->
-</div>
