@@ -37,9 +37,9 @@
         .pv-gold{color:var(--gold)}
         .pv-h{background:linear-gradient(90deg,#fff,#8c9bb5);-webkit-background-clip:text;background-clip:text;color:transparent}
         /* Buttons */
-        .pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d;font-weight:700;padding:12px 22px;border-radius:12px;border:0;cursor:pointer;font-size:.95rem;transition:.25s;box-shadow:0 10px 30px -12px rgba(24,216,147,.55)}
-        .pv-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(24,216,147,.7)}
-        .pv-btn-gold{background:linear-gradient(135deg,#fbd56d,var(--gold));color:#241a00;box-shadow:0 10px 30px -12px rgba(240,185,11,.5)}
+        .pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2df0a9 0%,#14d594 45%,#0b9d70 100%);color:#03140d;font-weight:700;padding:12px 22px;border-radius:12px;border:0;cursor:pointer;font-size:.95rem;transition:.25s;box-shadow:0 10px 30px -12px rgba(24,216,147,.6),inset 0 1px 0 rgba(255,255,255,.28)}
+        .pv-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(24,216,147,.75),inset 0 1px 0 rgba(255,255,255,.3)}
+        .pv-btn-gold{background:linear-gradient(135deg,#ffe39d 0%,#ffd257 45%,#f0b90b 100%);color:#241a00;box-shadow:0 10px 30px -12px rgba(240,185,11,.55),inset 0 1px 0 rgba(255,255,255,.4)}
         .pv-btn-ghost{background:rgba(255,255,255,.06);color:var(--text);box-shadow:none;border:1px solid var(--line)}
         .pv-btn-ghost:hover{background:rgba(255,255,255,.1);box-shadow:none}
         .pv-btn-sm{padding:9px 16px;font-size:.85rem;border-radius:10px}
@@ -53,7 +53,7 @@
         .pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:700;white-space:nowrap}
         .pill-up{background:rgba(24,216,147,.12);color:var(--acc);border:1px solid rgba(24,216,147,.3)}
         .pill-down{background:rgba(239,68,68,.1);color:#ff7c85;border:1px solid rgba(239,68,68,.3)}
-        .step-num{width:52px;height:52px;border-radius:14px;background:rgba(24,216,147,.14);border:1px solid rgba(24,216,147,.35);display:grid;place-items:center;font-weight:800;font-size:1.2rem;color:var(--acc)}
+        .step-num{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,#2df0a9,#0b9d70);border:0;display:grid;place-items:center;font-weight:800;font-size:1.2rem;color:#03140d;box-shadow:0 8px 20px -8px rgba(24,216,147,.5),inset 0 1px 0 rgba(255,255,255,.3)}
         .step-box{padding:26px;border-radius:16px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
         /* Headings */
         .pv-h1{font-size:clamp(2.1rem,4.6vw,3.6rem);font-weight:800;line-height:1.12;letter-spacing:-.02em;margin:0}
@@ -64,7 +64,7 @@
         .pv-nav{position:sticky;top:0;z-index:60;backdrop-filter:blur(18px);background:rgba(5,7,13,.72);border-bottom:1px solid var(--line)}
         .pv-nav-inner{display:flex;align-items:center;justify-content:space-between;height:70px}
         .pv-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.2rem}
-        .pv-logo-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d;font-weight:800;font-size:1.05rem;box-shadow:0 6px 18px -6px rgba(24,216,147,.6)}
+        .pv-logo-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#2df0a9,#0b9d70);color:#03140d;font-weight:800;font-size:1.05rem;box-shadow:0 6px 18px -6px rgba(24,216,147,.6),inset 0 1px 0 rgba(255,255,255,.3)}
         .pv-nav-links{display:flex;align-items:center;gap:26px;font-size:.92rem;font-weight:600}
         .pv-nav-links a{color:var(--muted);transition:.2s}
         .pv-nav-links a:hover,.pv-nav-links a.active{color:#fff}
