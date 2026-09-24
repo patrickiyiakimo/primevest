@@ -11,7 +11,7 @@
 
 <!-- KPI CARDS -->
 <div class="kpi">
-    <div class="kpi-card glow" style="background:linear-gradient(140deg,#0d1d2e,#0c1322)">
+    <div class="kpi-card glow pv-shade">
         <div class="lbl"><span style="width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)"></span>Total Balance</div>
         <div class="val num" style="color:var(--acc)">${{ number_format($totalBalance, 2) }}</div>
         <div class="sub">Main {{ number_format($user->balance, 2) }} · Profits {{ number_format($profits, 2) }}</div>
@@ -201,10 +201,15 @@
         const grad=ctx.createLinearGradient(0,0,0,el.clientHeight||260);
         grad.addColorStop(0,'rgba(47,123,255,.35)');grad.addColorStop(1,'rgba(47,123,255,0)');
         const up=(values[values.length-1]||0)>=(values[0]||0);
+        const isLight=document.documentElement.getAttribute('data-theme')==='light';
+        const tipBg=isLight?'#ffffff':'#0d1526';
+        const tipBorder=isLight?'rgba(10,24,52,.12)':'rgba(255,255,255,.1)';
+        const gridCol=isLight?'rgba(10,24,52,.06)':'rgba(255,255,255,.04)';
+        const tickCol=isLight?'#5c6b86':'#5a6685';
         new Chart(ctx,{
             type:'line',
             data:{labels,datasets:[{data:values,fill:true,backgroundColor:grad,borderColor:up?'#4cc3ff':'#ff7c85',borderWidth:2.4,tension:.35,pointRadius:0,pointHoverRadius:5}]},
-            options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#0d1526',borderColor:'rgba(255,255,255,.1)',borderWidth:1,callbacks:{label:(c)=>' $'+c.parsed.y.toLocaleString('en-US',{maximumFractionDigits:2})}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#5a6685',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#5a6685',font:{size:10},callback:(v)=>'$'+v}}}}
+            options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:tipBg,borderColor:tipBorder,borderWidth:1,callbacks:{label:(c)=>' $'+c.parsed.y.toLocaleString('en-US',{maximumFractionDigits:2})},titleColor:isLight?'#0b1526':'#eef2f9',bodyColor:isLight?'#0b1526':'#eef2f9'}},scales:{x:{grid:{color:gridCol},ticks:{color:tickCol,font:{size:10}}},y:{grid:{color:gridCol},ticks:{color:tickCol,font:{size:10},callback:(v)=>'$'+v}}}}
         });
     });
 </script>

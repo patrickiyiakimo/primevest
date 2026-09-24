@@ -7,7 +7,7 @@
 <div class="grid-2">
     <!-- Card preview -->
     <div style="display:flex;flex-direction:column;gap:18px">
-        <div class="pa" style="padding:20px;background:linear-gradient(140deg,#1a2b3d,#0c1322)">
+        <div class="pa pv-shade" style="padding:20px">
             <div style="font-weight:800;margin-bottom:14px">Your PrimeVest Debit Card</div>
             <div style="border-radius:18px;padding:24px;background:linear-gradient(135deg,#0f2027,#203a43 50%,#2c5364);border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)">
                 <div style="display:flex;justify-content:space-between;align-items:center">

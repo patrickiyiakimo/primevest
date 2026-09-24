@@ -64,7 +64,7 @@
     </div>
 </div>
 
-<div class="pa mt" style="padding:22px;background:linear-gradient(140deg,#0d1d2e,#0c1322)">
+<div class="pa pv-shade mt" style="padding:22px">
     <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
         <div style="flex:1;min-width:220px">
             <div style="font-weight:800;font-size:1.1rem">Why buy on PrimeVest?</div>

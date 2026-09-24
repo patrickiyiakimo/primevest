@@ -33,7 +33,7 @@
         .side-sec{font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:#5a6685;font-weight:700;padding:14px 12px 8px}
         .side-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:11px;color:var(--muted);font-size:.88rem;font-weight:600;margin-bottom:2px;transition:.18s}
         .side-item svg{width:19px;height:19px;flex-shrink:0;opacity:.8}
-        .side-item:hover{background:rgba(255,255,255,.05);color:#fff}
+        .side-item:hover{background:rgba(255,255,255,.05);color:var(--text)}
         .side-item.on{background:linear-gradient(90deg,rgba(47,123,255,.14),rgba(47,123,255,.04));color:var(--acc);box-shadow:inset 2px 0 0 var(--acc)}
         .side-sub{padding-left:34px;font-size:.85rem}
         .side-user{margin:14px 12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid var(--line);display:flex;gap:11px;align-items:center}
@@ -44,7 +44,7 @@
 
         .main{margin-left:var(--side);min-height:100vh;display:flex;flex-direction:column}
         .topbar{position:sticky;top:0;z-index:70;display:flex;align-items:center;gap:14px;justify-content:space-between;padding:13px 24px;background:rgba(7,11,20,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-        .burger{display:none;background:none;border:0;color:#fff;cursor:pointer}
+        .burger{display:none;background:none;border:0;color:var(--text);cursor:pointer}
         .crumb{font-size:.76rem;color:var(--muted)}
         .crumb b{color:#fff;font-size:.82rem}
         .content{flex:1;padding:26px 24px}
