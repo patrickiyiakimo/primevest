@@ -91,6 +91,28 @@ class DashboardController extends Controller
         // Profit percentage
         $profitPercentage = $user->balance > 0 ? ($profits / $user->balance) * 100 : 0;
         
+        // Signal strength — grows with the investor's funded balance (0% for new signups, 100% at $1M)
+        $signalTiers = [
+            ['threshold' => 0,          'level' => 'Bronze',    'signal' => 0],
+            ['threshold' => 1000,       'level' => 'Silver',    'signal' => 10],
+            ['threshold' => 10000,      'level' => 'Gold',      'signal' => 25],
+            ['threshold' => 50000,      'level' => 'Platinum',  'signal' => 40],
+            ['threshold' => 150000,     'level' => 'Titanium',  'signal' => 55],
+            ['threshold' => 300000,     'level' => 'Diamond',   'signal' => 70],
+            ['threshold' => 600000,     'level' => 'Obsidian',  'signal' => 85],
+            ['threshold' => 1000000,    'level' => 'Whale',     'signal' => 100],
+        ];
+        $signal = 0;
+        $signalLevel = $signalTiers[0]['level'];
+        $signalNext = null;
+        foreach ($signalTiers as $i => $tier) {
+            if ($spendableBalance >= $tier['threshold']) {
+                $signal = $tier['signal'];
+                $signalLevel = $tier['level'];
+                $signalNext = $signalTiers[$i + 1] ?? null;
+            }
+        }
+        
         // Build portfolio value curve from transaction history (net cash flow)
         $chart = [];
         $runningValue = 0.0;
@@ -133,6 +155,10 @@ class DashboardController extends Controller
             'totalCurrentValue',
             'stocksCurrentValue',
             'spendableBalance',
+            'signal',
+            'signalLevel',
+            'signalNext',
+            'signalTiers',
             'chart',
             'netPnl'
         ));
