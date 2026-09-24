@@ -22,7 +22,7 @@
         *{box-sizing:border-box}
         html,body{margin:0;padding:0}
         body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
-        ::selection{background:rgba(47,123,255,.35)}
+        ::selection{background:#2375ff;color:#fff}
         .num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
         a{color:inherit;text-decoration:none}
 
