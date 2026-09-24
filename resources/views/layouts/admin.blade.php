@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.theme')
     <title>@yield('title', 'Admin') · PrimeVest</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -187,6 +188,7 @@
             </div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;font-size:.82rem" class="muted">
+            @include('partials.theme-btn')
             <a href="{{ url('/') }}" class="btn btn-ghost btn-sm">← Back to site</a>
         </div>
     </header>

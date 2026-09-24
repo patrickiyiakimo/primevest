@@ -87,7 +87,7 @@
 <!-- ===== HERO ===== -->
 <section class="pv-hero">
     <!-- Background chart layer (gradient + grid kept via .pv-hero::before) -->
-    <svg class="hero-bgchart" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true">
+    <svg class="hero-bgchart" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true">
         <defs>
             <linearGradient id="bgLine" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0" stop-color="#18d893"/><stop offset=".55" stop-color="#4cc3ff"/><stop offset="1" stop-color="#f0b90b"/>
@@ -112,7 +112,7 @@
             <div>
                 <div class="hero-badge"><span class="dot"></span> Institutional-grade crypto investing for everyone</div>
                 <h1 class="pv-h1">Trade, stake &amp; grow your <span style="background:linear-gradient(120deg,#18d893,#4cc3ff);-webkit-background-clip:text;background-clip:text;color:transparent">digital assets</span> with a platform you can trust.</h1>
-                <p class="pv-lead">Buy and sell 200+ cryptocurrencies, stake for passive income, and mirror the trades of proven experts. Bank-grade security, transparent fees and lightning-fast execution.</p>
+                <!-- <p class="pv-lead">Buy and sell 200+ cryptocurrencies, stake for passive income, and mirror the trades of proven experts. Bank-grade security, transparent fees and lightning-fast execution.</p> -->
                 <div class="hero-actions">
                     <a href="{{ route('register') }}" class="pv-btn pv-btn-lg">Start Trading Free</a>
                     <a href="{{ route('trading') }}#copy-trading" class="pv-btn pv-btn-ghost pv-btn-lg">Explore Copy Trading</a>
@@ -165,12 +165,12 @@
                     <div class="ch-xhair" id="chX"></div>
                     <div class="chart-tip" id="chTip"></div>
                 </div>
-                <div class="hero-stat">
+                <!-- <div class="hero-stat">
                     <div class="cell"><div class="pv-mut" style="font-size:.68rem;letter-spacing:.05em">24H HIGH</div><div class="num" id="sHigh" style="font-weight:700;font-size:.88rem">$67,890</div></div>
                     <div class="cell"><div class="pv-mut" style="font-size:.68rem;letter-spacing:.05em">24H LOW</div><div class="num" id="sLow" style="font-weight:700;font-size:.88rem">$66,322</div></div>
                     <div class="cell"><div class="pv-mut" style="font-size:.68rem;letter-spacing:.05em">VOLUME</div><div class="num" id="sVol" style="font-weight:700;font-size:.88rem">$28.4B</div></div>
                     <div class="cell"><div class="pv-mut" style="font-size:.68rem;letter-spacing:.05em">MARKET CAP</div><div class="num" id="sMc" style="font-weight:700;font-size:.88rem">$1.33T</div></div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

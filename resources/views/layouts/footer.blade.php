@@ -41,7 +41,7 @@
             </div>
         </div>
         <div style="border-top:1px solid var(--line);padding:20px 0;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between" class="pv-foot">
-            <span>&copy; {{ date('Y') }} PrimeVest. All rights reserved.</span>
+            <span>&copy; 2023 PrimeVest. All rights reserved.</span>
             <span>BTC · ETH · SOL · USDT · ADA · DOT</span>
         </div>
         <div style="padding:0 0 26px">

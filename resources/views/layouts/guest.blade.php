@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.theme')
     <title>@yield('title', 'PrimeVest')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,6 +50,7 @@
             <span class="pv-logo-badge" style="width:26px;height:26px;font-size:.85rem;border-radius:8px">P</span>
             Back to <span class="pv-link">PrimeVest</span>
         </a>
+        @include('partials.theme-btn')
     </div>
     <div class="auth-wrap">
         <a href="{{ url('/') }}" class="pv-logo">

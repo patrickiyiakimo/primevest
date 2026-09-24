@@ -4,6 +4,23 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.theme')
+    <script>
+        (function(){
+            var KEY='pv-theme';
+            function prefer(){try{return (window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}catch(e){return 'dark'}}
+            function apply(t){ if(t!=='light'&&t!=='dark'){t=prefer()} try{document.documentElement.setAttribute('data-theme',t)}catch(e){} }
+            var s=null; try{s=localStorage.getItem(KEY)}catch(e){}
+            apply(s);
+            window.pvTheme=function(){
+                var h=document.documentElement;
+                var cur=h.getAttribute('data-theme');
+                var next=(cur==='light')?'dark':'light';
+                h.setAttribute('data-theme',next);
+                try{localStorage.setItem(KEY,next)}catch(e){}
+            };
+        })();
+    </script>
     <title>@yield('title', 'PrimeVest | Trade & Invest in Crypto')</title>
     <meta name="description" content="PrimeVest — a trusted crypto investment platform. Trade, stake and grow your digital assets with confidence, copy elite traders and track the markets in real time.">
     <meta name="theme-color" content="#05070d">
@@ -11,6 +28,9 @@
     <meta property="og:description" content="A trusted crypto investment platform. Trade, stake and grow your digital assets with confidence.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
+    <script>
+        (function(){try{var t=localStorage.getItem('pv-theme')||(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');document.documentElement.setAttribute('data-theme',t)}catch(e){document.documentElement.setAttribute('data-theme','dark')}})();
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

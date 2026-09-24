@@ -56,7 +56,7 @@
         <p class="pv-lead" style="margin:10px auto 34px">A leadership team with roots in fintech, institutional trading and cybersecurity.</p>
         <div class="pv-grid pv-grid-4" style="gap:18px">
             @foreach([
-                ['PI','Patrick Iyiakimo','Founder & CEO'],
+                ['KP','Kevin Patel','Founder & CEO'],
                 ['ET','Elena Torres','Chief Investment Officer'],
                 ['JK','James Kola','Chief Technology Officer'],
                 ['MT','Maya Thompson','Head of Security'],

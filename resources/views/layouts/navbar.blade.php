@@ -13,6 +13,7 @@
             <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
         </div>
         <div style="display:flex;align-items:center;gap:10px">
+            @include('partials.theme-btn')
             @auth
                 <a href="{{ route('dashboard') }}" class="pv-btn pv-btn-sm">Dashboard</a>
             @else

@@ -1,0 +1,36 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>diag</title></head>
+<body style="margin:0;font-family:monospace;font-size:12px;background:#0a0f1c;color:#eef2f9">
+<div id="out">waiting for headless JS...</div>
+<script>
+(function(){
+  var out=document.getElementById('out');
+  var f=document.createElement('iframe');
+  f.src='http://127.0.0.1:8000/';
+  f.style.cssText='width:1280px;height:2600px;border:0;display:block';
+  document.body.appendChild(f);
+  setTimeout(function(){
+    try{
+      var d=f.contentDocument;
+      var h=d.querySelector('.pv-hero');
+      var nav=d.querySelector('.pv-nav');
+      var main=d.querySelector('main');
+      var winH=window.innerHeight;
+      function R(el){if(!el)return null;var r=el.getBoundingClientRect();return {t:Math.round(r.top),h:Math.round(r.height),b:Math.round(r.bottom)}}
+      function CS(el){if(!el)return '';var s=d.defaultView.getComputedStyle(el);return ['position','display','min-height','height','padding-top','margin-top','align-items','z-index'].map(function(p){return p+'='+s[p]}).join(';')}
+      var res={
+        iframeWinH:winH,
+        docScrollH:d.documentElement.scrollHeight,
+        bodyScrollH:d.body.scrollHeight,
+        heroSection:R(h),
+        heroSectionCss:CS(h),
+        nav:R(nav)+' css:'+CS(nav),
+        main:R(main)+' css:'+CS(main)
+      };
+      var txt='R='+JSON.stringify(res);
+      out.textContent=txt;
+      document.title=txt;
+    }catch(e){ document.title='RERR '+e.message; out.textContent='RERR '+e.message; }
+  },1400);
+})();
+</script>
+</body></html>

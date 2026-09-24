@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @include('partials.theme')
     <title>@yield('title', 'Dashboard') · PrimeVest</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -226,6 +227,7 @@
                 <input type="text" placeholder="Search market (BTC, ETH…)" id="pvSearch">
             </div>
             <a href="{{ route('deposit') }}" class="btn btn-sm">+ Deposit</a>
+            @include('partials.theme-btn')
             <div class="udrop">
                 <button class="udrop-btn" onclick="pvDrop(event)">
                     <div class="udrop-av">{{ substr(Auth::user()->name, 0, 1) }}</div>
