@@ -41,7 +41,8 @@
             if(!price||price<=0)return flash('Enter a valid price');
             b.disabled=true; const o=b.textContent; b.textContent='Saving…';
             const fd=new FormData(); fd.append('symbol',symbol); fd.append('price',price);
-            fetch('{{ route('admin.stock.prices.update') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}})
+            const meta=document.querySelector('meta[name="csrf-token"]');
+            fetch('{{ route('admin.stock.prices.update') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json','X-CSRF-TOKEN':meta?meta.content:''}})
             .then(r=>r.json()).then(d=>{b.disabled=false;b.textContent=o;flash(d.message)})
             .catch(()=>{b.disabled=false;b.textContent=o;flash('Failed to save')});
         });
@@ -52,7 +53,8 @@
         document.querySelectorAll('input[data-symbol]').forEach(i=>{prices[i.dataset.symbol]=parseFloat(i.value)||0});
         const fd=new FormData();
         Object.entries(prices).forEach(([sym,p])=>{fd.append('prices['+sym+']', p)});
-        fetch('{{ route('admin.stock.prices.update-all') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}})
+        const meta=document.querySelector('meta[name="csrf-token"]');
+        fetch('{{ route('admin.stock.prices.update-all') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json','X-CSRF-TOKEN':meta?meta.content:''}})
         .then(r=>r.json()).then(d=>{inp.disabled=false;inp.textContent=o;flash(d.message)})
         .catch(()=>{inp.disabled=false;inp.textContent=o;flash('Failed to save all')});
     });

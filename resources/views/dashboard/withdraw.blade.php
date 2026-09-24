@@ -8,7 +8,8 @@
     <div class="pa" style="padding:24px">
         <div class="sec-h"><div><h2>Request Withdrawal</h2><p>Funds are sent after a quick security review</p></div></div>
 
-        <form id="withdrawForm">
+        <form id="withdrawForm" action="{{ route('withdraw.request') }}" method="POST" data-reload="1">
+            @csrf
             <label class="lbl">Withdrawal method</label>
             <select class="inp sel" name="method" style="margin-bottom:16px">
                 <option value="Bitcoin">Bitcoin (BTC)</option>
@@ -53,7 +54,7 @@
                 <span class="muted">Expected processing</span><b class="num ok">~15 min</b>
             </div>
         </div>
-        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#1d1520,#0c1322)">
+        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#0d1d2e,#0c1322)">
             <div style="font-weight:800;margin-bottom:6px">🛡 Security protection</div>
             <p class="muted" style="margin:0;font-size:.86rem;line-height:1.7">
                 All withdrawals are screened against anti-fraud rules. First-time withdrawals to a new address may require a short verification hold. Add wallet whitelisting from your profile to speed things up.

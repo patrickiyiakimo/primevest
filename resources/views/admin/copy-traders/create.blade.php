@@ -81,7 +81,7 @@
             <div style="font-weight:800;font-size:1.1rem">CryptoMatrix <span class="pill pill-g">Verified</span></div>
             <p class="muted" style="font-size:.85rem;line-height:1.6">How this trader appears to users browsing copy trading. Featured traders are ranked first.</p>
         </div>
-        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#10221d,#0c1322)">
+        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#0d1d2e,#0c1322)">
             <h2 style="margin:0 0 10px;font-size:1.05rem">💡 Tips</h2>
             <ul style="margin:0;padding-left:18px;color:var(--muted);font-size:.85rem;line-height:1.8">
                 <li>Use a real, verifiable track record.</li>

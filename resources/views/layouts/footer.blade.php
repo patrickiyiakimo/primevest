@@ -3,8 +3,7 @@
         <div class="pv-grid pv-grid-4" style="gap:30px;padding-bottom:44px">
             <div>
                 <a href="{{ url('/') }}" class="pv-logo" style="margin-bottom:14px">
-                    <span class="pv-logo-badge">P</span>
-                    <span>Prime<span class="pv-acc">Vest</span></span>
+                    <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="height:34px;width:auto;display:block">
                 </a>
                 <p class="pv-foot" style="max-width:260px;line-height:1.7">A trusted digital asset investment platform. Buy, trade, stake and copy elite crypto traders.</p>
                 <div style="display:flex;gap:10px;margin-top:16px">

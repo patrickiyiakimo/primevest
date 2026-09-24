@@ -11,7 +11,7 @@
 
 <!-- KPI CARDS -->
 <div class="kpi">
-    <div class="kpi-card glow" style="background:linear-gradient(140deg,#0e2a24,#0c1322)">
+    <div class="kpi-card glow" style="background:linear-gradient(140deg,#0d1d2e,#0c1322)">
         <div class="lbl"><span style="width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)"></span>Total Balance</div>
         <div class="val num" style="color:var(--acc)">${{ number_format($totalBalance, 2) }}</div>
         <div class="sub">Main {{ number_format($user->balance, 2) }} · Profits {{ number_format($profits, 2) }}</div>
@@ -162,10 +162,10 @@
         });
         const ctx=document.getElementById('growthChart').getContext('2d');
         const grad=ctx.createLinearGradient(0,0,0,250);
-        grad.addColorStop(0,'rgba(24,216,147,.35)');grad.addColorStop(1,'rgba(24,216,147,0)');
+        grad.addColorStop(0,'rgba(47,123,255,.35)');grad.addColorStop(1,'rgba(47,123,255,0)');
         new Chart(ctx,{
             type:'line',
-            data:{labels,datasets:[{data:steps,fill:true,backgroundColor:grad,borderColor:'#18d893',borderWidth:2.4,tension:.4,pointRadius:0,pointHoverRadius:5}]},
+            data:{labels,datasets:[{data:steps,fill:true,backgroundColor:grad,borderColor:'#4cc3ff',borderWidth:2.4,tension:.4,pointRadius:0,pointHoverRadius:5}]},
             options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#0d1526',borderColor:'rgba(255,255,255,.1)',borderWidth:1,callbacks:{label:(c)=>' $'+c.parsed.y.toLocaleString('en-US',{maximumFractionDigits:2})}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#5a6685',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#5a6685',font:{size:10},callback:(v)=>'$'+v}}}}
         });
     });

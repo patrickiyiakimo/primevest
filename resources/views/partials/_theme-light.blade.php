@@ -9,8 +9,8 @@
 :root[data-theme="light"]{
     --bg:#f2f6fc; --bg2:#eaf0f8; --panel:#ffffff; --panel2:#f6f9ff;
     --line:rgba(10,22,46,.12); --text:#0b1424; --muted:#5c6b85;
-    --acc:#0c9d6e; --acc2:#0a8a60; --gold:#a8730a; --red:#dc2626;
+    --acc:#2f7bff; --acc2:#00b4ff; --gold:#a8730a; --red:#dc2626;
 }
 [data-theme="light"] body{background:var(--bg);color:var(--text)}
 [data-theme="light"] a[data-band]{color:var(--muted)}
-[data-theme="light"] ::selection{background:rgba(12,157,110,.25);color:#04120c}
+[data-theme="light"] ::selection{background:rgba(47,123,255,.25);color:#04121f}

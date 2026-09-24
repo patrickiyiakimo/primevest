@@ -11,7 +11,7 @@
             <div style="font-weight:800;margin-bottom:14px">Your PrimeVest Debit Card</div>
             <div style="border-radius:18px;padding:24px;background:linear-gradient(135deg,#0f2027,#203a43 50%,#2c5364);border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)">
                 <div style="display:flex;justify-content:space-between;align-items:center">
-                    <span style="display:flex;align-items:center;gap:8px;font-weight:800"><span class="side-badge" style="width:26px;height:26px;font-size:.8rem;border-radius:8px">P</span> Prime<span style="color:var(--acc)">Vest</span></span>
+                    <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="width:auto;height:22px;display:block">
                     <span style="width:46px;height:30px;border-radius:6px;background:repeating-linear-gradient(45deg,#f0b90b,#f0b90b 6px,#e0a90a 6px,#e0a90a 12px)"></span>
                 </div>
                 <div class="num" style="font-size:1.15rem;letter-spacing:.14em;margin:26px 0 18px">•••• &nbsp;•&nbsp; •••• &nbsp;•&nbsp; •••• &nbsp;•&nbsp; 9021</div>
@@ -52,7 +52,7 @@
                 <option value="drivers_license">Driver's License</option>
                 <option value="national_id">National ID</option>
             </select>
-            <div style="display:flex;align-items:center;justify-content:center;gap:12px;background:rgba(24,216,147,.08);border:1px solid rgba(24,216,147,.25);border-radius:12px;padding:14px;margin-bottom:20px">
+            <div style="display:flex;align-items:center;justify-content:center;gap:12px;background:rgba(47,123,255,.08);border:1px solid rgba(47,123,255,.25);border-radius:12px;padding:14px;margin-bottom:20px">
                 <div class="lbl" style="margin:0">Balance: </div>
                 <b class="num" style="color:var(--acc)">${{ number_format(Auth::user()->balance, 2) }}</b>
                 <span class="muted" style="font-size:.8rem">/ $2,000 required</span>
@@ -70,7 +70,8 @@
         const f=e.target,btn=f.querySelector('button[type=submit]');
         const fd=new FormData(f);
         const o=btn.textContent;btn.disabled=true;btn.textContent='Submitting…';
-        fetch('{{ route('card-application.submit') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}})
+        const meta=document.querySelector('meta[name="csrf-token"]');
+        fetch('{{ route('card-application.submit') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json','X-CSRF-TOKEN':meta?meta.content:''}})
         .then(r=>r.json()).then(d=>{btn.disabled=false;btn.textContent=o;pvFlash(d.success?'flash-ok':'flash-err',d.message||'Processed')})
         .catch(()=>{btn.disabled=false;btn.textContent=o;pvFlash('flash-err','Something went wrong. Please try again.')});
     });
