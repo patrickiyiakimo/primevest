@@ -113,11 +113,19 @@
         .muted{color:var(--muted)}
         .ok{color:var(--acc)}.bad{color:#ff7c85}.gold{color:var(--gold)}
         .mt{margin-top:20px}.mb{margin-bottom:20px}
-        .flash{display:none}
-        .flash.show{display:flex;align-items:flex-start;gap:10px;padding:13px 16px;border-radius:12px;margin-bottom:18px;font-size:.88rem;animation:in .3s}
-        @keyframes in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-        .flash-ok{background:rgba(47,123,255,.1);border:1px solid rgba(47,123,255,.32);color:var(--acc)}
-        .flash-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.32);color:#ff7c85}
+        /* Toasts */
+        #pvToasts{position:fixed;top:82px;right:20px;z-index:300;display:flex;flex-direction:column;gap:10px;max-width:min(380px,calc(100vw - 40px));pointer-events:none}
+        .pv-toast{pointer-events:auto;display:flex;align-items:flex-start;gap:10px;padding:13px 14px;border-radius:13px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);box-shadow:0 18px 50px -12px rgba(0,0,0,.65);font-size:.88rem;font-weight:500;animation:tin .3s ease}
+        .pv-toast.ok{border-color:rgba(47,123,255,.45)}
+        .pv-toast.err{border-color:rgba(239,68,68,.45)}
+        .pv-toast .ic{flex-shrink:0;font-weight:800}
+        .pv-toast.ok .ic{color:var(--acc)}
+        .pv-toast.err .ic{color:#ff7c85}
+        .pv-toast .x{margin-left:6px;background:none;border:0;color:var(--muted);cursor:pointer;font-size:1.05rem;line-height:1;padding:0 2px}
+        .pv-toast .x:hover{color:#fff}
+        .pv-toast.out{animation:tout .3s ease forwards}
+        @keyframes tin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
+        @keyframes tout{to{opacity:0;transform:translateX(26px)}}
         /* Plan cards */
         .plan{border:1px solid var(--line);border-radius:16px;padding:22px;background:linear-gradient(180deg,var(--panel2),var(--panel));transition:.25s;position:relative;overflow:hidden}
         .plan:hover{transform:translateY(-4px);border-color:rgba(47,123,255,.4)}
@@ -250,16 +258,17 @@
     </header>
 
     <main class="content">
+        <div id="pvToasts"></div>
         @if (session('success'))
-            <div class="flash show flash-ok">✔ {{ session('success') }}</div>
+            <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-ok',{!! json_encode(session('success')) !!}))</script>
         @endif
         @if (session('error'))
-            <div class="flash show flash-err">✖ {{ session('error') }}</div>
+            <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode(session('error')) !!}))</script>
         @endif
         @if ($errors->any())
-            <div class="flash show flash-err">
-                @foreach ($errors->all() as $error)<div>✖ {{ $error }}</div>@endforeach
-            </div>
+            @foreach ($errors->all() as $error)
+                <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode($error) !!}))</script>
+            @endforeach
         @endif
         @yield('dashboard-content')
     </main>
@@ -284,9 +293,37 @@
         .catch(()=>done(false,'Network error. Please try again.'));
     }
     function pvFlash(kind,msg){
-        const el=document.createElement('div');el.className='flash show '+kind;el.textContent=msg;
-        const c=document.querySelector('.content');c.insertBefore(el,c.firstChild);
-        setTimeout(()=>{el.remove()},6000);
+        const wrap=document.getElementById('pvToasts');
+        if(!wrap)return;
+        const ok=kind==='flash-ok';
+        const el=document.createElement('div');el.className='pv-toast '+(ok?'ok':'err');
+        const ic=document.createElement('span');ic.className='ic';ic.textContent=ok?'✔':'✖';
+        const tx=document.createElement('div');tx.style.flex='1';tx.textContent=msg;
+        const x=document.createElement('button');x.className='x';x.type='button';x.setAttribute('aria-label','Dismiss');x.textContent='×';
+        let t=null;
+        const remove=()=>{if(!el.parentNode)return;clearTimeout(t);el.classList.add('out');setTimeout(()=>el.remove(),320)};
+        x.addEventListener('click',remove);
+        el.append(ic,tx,x);
+        wrap.appendChild(el);
+        t=setTimeout(remove,5200);
+        while(wrap.children.length>4)wrap.firstChild.remove();
+    }
+    // Mounts a TradingView external-embedding widget that follows the app theme.
+    function pvThemedWidget(hostId,src,cfg){
+        function th(){try{return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'}catch(e){return 'dark'}}
+        function mount(){
+            const host=document.getElementById(hostId);if(!host)return;
+            host.innerHTML='';
+            const wrap=document.createElement('div');wrap.className='tradingview-widget-container';
+            const w=document.createElement('div');w.className='tradingview-widget-container__widget';
+            wrap.appendChild(w);
+            const s=document.createElement('script');s.type='text/javascript';s.async=true;s.src=src;
+            const c=Object.assign({},cfg);c.colorTheme=th();s.text=JSON.stringify(c);
+            wrap.appendChild(s);
+            host.appendChild(wrap);
+        }
+        mount();
+        try{new MutationObserver(mount).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']})}catch(e){}
     }
     // search filters rows with data-sym
     const q=document.getElementById('pvSearch');

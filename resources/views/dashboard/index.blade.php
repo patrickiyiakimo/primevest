@@ -23,7 +23,7 @@
     </div>
     <div class="kpi-card">
         <div class="lbl">Est. Annual Return</div>
-        <div class="val num" style="color:var(--gold)">+{{ $profitPercentage >= 0 ? $profitPercentage : 0 }}%</div>
+        <div class="val num" style="color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">+{{ number_format($profitPercentage >= 0 ? $profitPercentage : 0, 3) }}%</div>
         <div class="sub">Lifetime return on balance</div>
     </div>
     <div class="kpi-card">
@@ -34,43 +34,49 @@
 </div>
 
 <!-- MAIN GRID: chart + quick actions -->
-<div class="grid-3 mt" style="grid-template-columns:1.7fr 1fr">
+<div class="grid-3 mt" style="grid-template-columns:1.7fr 1fr;height:560px">
     <!-- Portfolio performance -->
-    <div class="pa" style="padding:22px">
+    <div class="pa" style="padding:22px;display:flex;flex-direction:column;min-height:0">
         <div class="sec-h">
-            <div><h2>Portfolio Performance</h2><p>Simulated growth of your invested capital</p></div>
+            <div><h2>Portfolio Performance</h2><p>Value curve based on your realized activity</p></div>
             <span class="pill pill-g">● Live</span>
         </div>
         <div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:18px">
             <div><span class="muted" style="font-size:.75rem">Portfolio value</span><div style="font-weight:800" class="num">${{ number_format($totalBalance, 2) }}</div></div>
-            <div><span class="muted" style="font-size:.75rem">Growth (30d)</span><div style="font-weight:800" class="num ok">+4.82%</div></div>
+            <div><span class="muted" style="font-size:.75rem">Net P/L</span><div style="font-weight:800" class="num {{ $netPnl >= 0 ? 'ok' : 'bad' }}">{{ $netPnl >= 0 ? '+' : '' }}${{ number_format($netPnl, 2) }}</div></div>
             <div><span class="muted" style="font-size:.75rem">Last deposit</span><div style="font-weight:800" class="num">{{ $lastDepositDate ? '$'.number_format($lastDepositAmount,2).' · '.$lastDepositDate : '—' }}</div></div>
         </div>
-        <div style="height:250px"><canvas id="growthChart"></canvas></div>
+        <div style="flex:1;min-height:0;position:relative">
+            @if(count($chart))
+                <canvas id="growthChart" style="height:100%;width:100%"></canvas>
+            @else
+                <div class="muted" style="height:100%;display:grid;place-items:center;text-align:center;font-size:.9rem">No activity yet — your performance chart will appear here after your first deposit or stake.</div>
+            @endif
+        </div>
     </div>
 
-    <!-- Quick actions + real market chart -->
-    <div style="display:flex;flex-direction:column;gap:20px">
+    <!-- Quick actions + market screener -->
+    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
         <div class="pa" style="padding:22px">
             <div class="sec-h"><div><h2>Quick Actions</h2><p>Move your funds in seconds</p></div></div>
             <a href="{{ route('deposit') }}" class="btn btn-block" style="width:100%;margin-bottom:10px">⬆ Deposit Funds</a>
             <a href="{{ route('invest') }}" class="btn btn-gold btn-block" style="width:100%;margin-bottom:10px">🔥 Start Staking</a>
             <a href="{{ route('buy-crypto') }}" class="btn btn-ghost btn-block" style="width:100%">⟳ Buy Crypto</a>
         </div>
-        <div class="pa pv-card" style="padding:22px;flex:1">
-            <div class="sec-h"><div><h2>Live Market</h2><p>BTC/USD · 1H chart</p></div></div>
-            <div style="height:180px;border-radius:12px;overflow:hidden">
-                <div class="tradingview-widget-container" style="height:100%">
-                    <div id="tvMini" style="height:100%"></div>
-                    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                    <script type="text/javascript">
-                        window.addEventListener('load',()=>{
-                            if(typeof TradingView!=='undefined'){new TradingView.widget({container_id:"tvMini","width":"100%","height":"100%","symbol":"BITSTAMP:BTCUSD","interval":"60","theme":"dark","style":"1","locale":"en","hide_volume":true,"enable_publishing":false,"allow_symbol_change":true,"hide_side_toolbar":true,"withdateranges":false})}
-                        });
-                    </script>
-                </div>
+        <div class="pa pv-card" style="padding:22px 22px 14px;display:flex;flex-direction:column;flex:1;min-height:0">
+            <div class="sec-h" style="margin-bottom:10px"><div><h2>Market Screener</h2><p>Real-time crypto overview</p></div></div>
+            <div style="flex:1;min-height:0;border-radius:12px;overflow:hidden">
+                <div id="tvScreener" style="height:100%"></div>
             </div>
         </div>
+    </div>
+</div>
+
+<!-- MARKET OVERVIEW -->
+<div class="pa mt" style="padding:22px">
+    <div class="sec-h" style="margin-bottom:10px"><div><h2>Market Overview</h2><p>Global markets at a glance</p></div></div>
+    <div style="height:590px;border-radius:12px;overflow:hidden">
+        <div id="tvOverview" style="height:100%"></div>
     </div>
 </div>
 
@@ -151,21 +157,53 @@
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
+    if(typeof pvThemedWidget==='function'){
+        pvThemedWidget('tvScreener','https://s3.tradingview.com/external-embedding/embed-widget-screener.js',{
+            "width":"100%","height":"100%","defaultColumn":"overview","screener_type":"crypto_mkt",
+            "displayCurrency":"USD","locale":"en","isTransparent":true,"showLogo":true
+        });
+        pvThemedWidget('tvOverview','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{
+            "width":"100%","height":"100%","dateRange":"12M","showChart":true,"locale":"en","largeChartUrl":"",
+            "isTransparent":true,"showSymbolLogo":true,"showFloatingTooltip":false,
+            "plotLineColorGrowing":"rgba(41,98,255,1)","plotLineColorFalling":"rgba(41,98,255,1)",
+            "gridLineColor":"rgba(240,243,250,0)","scaleFontColor":"rgba(106,109,120,1)",
+            "belowLineFillColorGrowing":"rgba(41,98,255,0.12)","belowLineFillColorFalling":"rgba(41,98,255,0.12)",
+            "belowLineFillColorGrowingBottom":"rgba(41,98,255,0)","belowLineFillColorFallingBottom":"rgba(41,98,255,0)",
+            "symbolActiveColor":"rgba(41,98,255,0.12)",
+            "tabs":[
+                {"title":"Crypto","symbols":[
+                    {"s":"BINANCE:BTCUSDT","d":"Bitcoin"},
+                    {"s":"BINANCE:ETHUSDT","d":"Ethereum"},
+                    {"s":"BINANCE:SOLUSDT","d":"Solana"},
+                    {"s":"BINANCE:XRPUSDT","d":"XRP"},
+                    {"s":"BINANCE:BNBUSDT","d":"BNB"},
+                    {"s":"BINANCE:ADAUSDT","d":"Cardano"},
+                    {"s":"BINANCE:DOGEUSDT","d":"Dogecoin"},
+                    {"s":"BINANCE:LINKUSDT","d":"Chainlink"},
+                    {"s":"BINANCE:DOTUSDT","d":"Polkadot"},
+                    {"s":"COINBASE:AVAXUSD","d":"Avalanche"}
+                ]},
+                {"title":"Indices","symbols":[{"s":"TVC:DJI","d":"Dow 30"},{"s":"TVC:SPX","d":"S&P 500"},{"s":"NASDAQ:IXIC","d":"Nasdaq 100"}]},
+                {"title":"Forex","symbols":[{"s":"FX:EURUSD","d":"EUR/USD"},{"s":"FX:GBPUSD","d":"GBP/USD"},{"s":"FX:USDJPY","d":"USD/JPY"}]}
+            ]
+        });
+    }
+</script>
+<script>
     document.addEventListener('DOMContentLoaded',()=>{
         if(typeof Chart==='undefined')return;
-        const g=(i)=>[Number(document.querySelector('[data-growth-'+i+']')?.dataset?.growth)||30,31,32,30,33,35,34,36,38,37,39,41,42,44];
-        const labels=['J','F','M','A','M','J','J','A','S','O','N','D'];
-        const base=Math.max(100,({{ $totalBalance }}||100));
-        const steps=Array.from({length:12},(_,i)=>{
-            const growth = {0:0,1:0.6,2:1.3,3:2.1,4:2.8,5:3.4,6:3.9,7:4.6,8:5.2,9:5.8,10:6.3,11:6.8}[i]??0;
-            return Number((base*(1-growth/100)).toFixed(2));
-        });
-        const ctx=document.getElementById('growthChart').getContext('2d');
-        const grad=ctx.createLinearGradient(0,0,0,250);
+        const rows=@json($chart);
+        const el=document.getElementById('growthChart');
+        if(!el||rows.length<1)return;
+        const labels=rows.map(r=>r.d);
+        const values=rows.map(r=>r.v);
+        const ctx=el.getContext('2d');
+        const grad=ctx.createLinearGradient(0,0,0,el.clientHeight||260);
         grad.addColorStop(0,'rgba(47,123,255,.35)');grad.addColorStop(1,'rgba(47,123,255,0)');
+        const up=(values[values.length-1]||0)>=(values[0]||0);
         new Chart(ctx,{
             type:'line',
-            data:{labels,datasets:[{data:steps,fill:true,backgroundColor:grad,borderColor:'#4cc3ff',borderWidth:2.4,tension:.4,pointRadius:0,pointHoverRadius:5}]},
+            data:{labels,datasets:[{data:values,fill:true,backgroundColor:grad,borderColor:up?'#4cc3ff':'#ff7c85',borderWidth:2.4,tension:.35,pointRadius:0,pointHoverRadius:5}]},
             options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#0d1526',borderColor:'rgba(255,255,255,.1)',borderWidth:1,callbacks:{label:(c)=>' $'+c.parsed.y.toLocaleString('en-US',{maximumFractionDigits:2})}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#5a6685',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#5a6685',font:{size:10},callback:(v)=>'$'+v}}}}
         });
     });

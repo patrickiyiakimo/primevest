@@ -91,6 +91,33 @@ class DashboardController extends Controller
         // Profit percentage
         $profitPercentage = $user->balance > 0 ? ($profits / $user->balance) * 100 : 0;
         
+        // Build portfolio value curve from transaction history (net cash flow)
+        $chart = [];
+        $runningValue = 0.0;
+        $history = Transaction::where('user_id', $user->id)
+            ->where('status', 'completed')
+            ->orderBy('created_at')
+            ->get();
+        foreach ($history as $tx) {
+            $delta = match ($tx->type) {
+                'deposit', 'profit' => (float) $tx->amount,
+                'withdrawal', 'investment' => -1 * abs((float) $tx->amount),
+                'profit_withdrawal' => (float) $tx->amount, // stored as a negative amount
+                default => 0.0,
+            };
+            $runningValue += $delta;
+            $chart[] = [
+                'd' => $tx->created_at->format('M j'),
+                'v' => round($runningValue, 2),
+            ];
+        }
+        // Keep the curve readable
+        if (count($chart) > 30) {
+            $chart = array_slice(array_reverse($chart), 0, 30);
+            $chart = array_reverse($chart);
+        }
+        $netPnl = count($chart) ? (float) $chart[count($chart) - 1]['v'] : 0.0;
+        
         return view('dashboard.index', compact(
             'user',
             'profits',
@@ -105,7 +132,9 @@ class DashboardController extends Controller
             'totalInvested',
             'totalCurrentValue',
             'stocksCurrentValue',
-            'spendableBalance'
+            'spendableBalance',
+            'chart',
+            'netPnl'
         ));
     }
 }
