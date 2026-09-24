@@ -9,6 +9,12 @@
     $cashAvailable = $user->balance + $profits;
 @endphp
 
+<style>
+    .sig-ring{transform:rotate(-90deg)}
+    .pv-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,12,.72);backdrop-filter:blur(8px)}
+    .pv-modal.open{display:flex}
+</style>
+
 <!-- KPI CARDS -->
 <div class="kpi">
     <div class="kpi-card glow pv-shade">
@@ -31,6 +37,39 @@
         <div class="val num">{{ $stocksCount }}</div>
         <div class="sub">P/L <span class="{{ ($totalProfitLoss ?? 0) >= 0 ? 'ok' : 'bad' }} num">{{ ($totalProfitLoss ?? 0) >= 0 ? '+' : '' }}${{ number_format($totalProfitLoss ?? 0, 2) }}</span></div>
     </div>
+</div>
+
+<!-- SIGNAL STRENGTH -->
+<div class="pa pv-shade mt" style="padding:16px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:14px">
+        <svg class="sig-ring" width="64" height="64" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" stroke-width="9"/>
+            <circle id="sigRing" cx="50" cy="50" r="42" fill="none" stroke="url(#sigGrad)" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="{{ round(263.9 * (1 - $signal / 100), 1) }}"/>
+            <defs><linearGradient id="sigGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4cc3ff"/><stop offset="100%" stop-color="#2f7bff"/></linearGradient></defs>
+        </svg>
+        <div style="min-width:125px">
+            <div class="muted" style="font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700">Signal Strength</div>
+            <div style="font-weight:800;font-size:1.25rem" class="num"><span id="sigPct">{{ $signal }}</span>%</div>
+            <div class="muted" style="font-size:.78rem">Level <b class="ok">{{ $signalLevel }}</b></div>
+        </div>
+    </div>
+    <div style="flex:1;min-width:220px;font-size:.88rem">
+        @if($signalNext)
+            <div style="display:flex;align-items:center;gap:12px">
+                <div style="flex:1">
+                    <div class="muted" style="margin-bottom:6px">Top up to unlock <b class="ok">{{ $signalNext['level'] }}</b> tier</div>
+                    <div style="height:8px;border-radius:99px;background:var(--line);overflow:hidden">
+                        <div style="height:100%;width:{{ $signal }}%;background:linear-gradient(90deg,#4cc3ff,#2f7bff);border-radius:99px;transition:width .6s"></div>
+                    </div>
+                </div>
+                <div class="num" style="font-weight:800;font-size:1.1rem;color:var(--acc)">{{ $signal }}/100</div>
+            </div>
+            <div class="muted" style="font-size:.8rem;margin-top:6px">Deposit <b class="gold num">${{ number_format(max(0, $signalNext['threshold'] - $spendableBalance)) }}</b> more to reach <b class="ok num">{{ $signalNext['signal'] }}%</b> and enter elite {{ $signalNext['level'] }} trades.</div>
+        @else
+            <div class="ok" style="font-weight:700">🏆 Maximum signal reached — you have full access to elite trades &amp; staking plans.</div>
+        @endif
+    </div>
+    <button class="btn" onclick="openSignalModal()">⚡ Boost Signal</button>
 </div>
 
 <!-- MAIN GRID: chart + quick actions -->
@@ -213,4 +252,104 @@
         });
     });
 </script>
+<script>
+    const SIG={v:{{ $signal }}};
+    const SIG_R=70;
+    const SIG_C=(2*Math.PI*SIG_R).toFixed(1);
+    function openSignalModal(){
+        const modal=document.getElementById('sigModal');
+        modal.classList.add('open');
+        const ring=document.getElementById('sigModalRing');
+        const val=document.getElementById('sigModalVal');
+        ring.style.strokeDasharray=SIG_C;
+        ring.style.strokeDashoffset=SIG_C;
+        val.textContent='0';
+        let cur=0;
+        const step=Math.max(1,Math.round(SIG.v/40));
+        const t=setInterval(()=>{
+            cur=Math.min(SIG.v,cur+step);
+            val.textContent=cur;
+            ring.style.strokeDashoffset=(SIG_C*(1-cur/100)).toFixed(1);
+            if(cur>=SIG.v)clearInterval(t);
+        },24);
+        try{sessionStorage.setItem('pv-sig','1')}catch(e){}
+    }
+    function closeSignalModal(){document.getElementById('sigModal').classList.remove('open')}
+    document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeSignalModal()});
+    document.addEventListener('click',(e)=>{if(e.target&&e.target.id==='sigModal')closeSignalModal()});
+    if(SIG.v<100){
+        let seen=false;
+        try{seen=!!sessionStorage.getItem('pv-sig')}catch(e){}
+        if(!seen)setTimeout(openSignalModal,900);
+    }
+</script>
+
+<!-- SIGNAL MODAL -->
+<div id="sigModal" class="pv-modal">
+    <div style="width:480px;max-width:100%;background:linear-gradient(160deg,#1a1442 0%,#0d0a1a 40%,#0a0614 100%);border:1px solid rgba(124,58,237,.3);border-radius:24px;padding:32px;position:relative;overflow:hidden;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.6)">
+        <div style="position:absolute;top:-40%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(124,58,237,.4),transparent 70%);pointer-events:none"></div>
+        <div style="position:absolute;bottom:-30%;left:-15%;width:160px;height:160px;background:radial-gradient(circle,rgba(47,123,255,.3),transparent 70%);pointer-events:none"></div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;position:relative;z-index:1">
+            <span style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:#a78bfa">Signal Strength</span>
+            <button onclick="closeSignalModal()" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:1.4rem;cursor:pointer;line-height:1">&times;</button>
+        </div>
+
+        <!-- Gauge -->
+        <div style="position:relative;width:160px;height:160px;margin:0 auto 20px;z-index:1">
+            <svg width="160" height="160" viewBox="0 0 160 160" style="transform:rotate(-90deg)">
+                <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"/>
+                <circle id="sigModalRing" cx="80" cy="80" r="70" fill="none" stroke="url(#sigGrad2)" stroke-width="10" stroke-linecap="round" stroke-dasharray="439.8" stroke-dashoffset="439.8" style="transition:stroke-dashoffset .3s"/>
+                <defs><linearGradient id="sigGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c3aed"/><stop offset="50%" stop-color="#2f7bff"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient></defs>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+                <span id="sigModalVal" style="font-size:3rem;font-weight:800;color:#fff">0</span>
+                <span style="font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.5)">Percent</span>
+            </div>
+        </div>
+
+        <!-- Level -->
+        <div style="margin-bottom:16px;position:relative;z-index:1">
+            <span style="display:inline-block;padding:6px 20px;background:linear-gradient(90deg,#7c3aed,#2f7bff);border-radius:20px;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.05em">{{ $signalLevel }}</span>
+        </div>
+
+        @if($signalNext)
+            <p style="font-size:.95rem;color:rgba(255,255,255,.85);margin-bottom:8px;position:relative;z-index:1;line-height:1.6">
+                🎯 To unlock <strong style="color:#a78bfa">{{ $signalNext['level'] }}</strong> trading signals, deposit at least <strong style="color:#fff">${{ number_format($signalNext['threshold']) }}</strong>
+            </p>
+            <p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:20px;position:relative;z-index:1">
+                You're at ${{ number_format($spendableBalance) }} — deposit <strong style="color:#7c3aed">${{ number_format(max(0,$signalNext['threshold']-$spendableBalance)) }}</strong> more to reach {{ $signalNext['signal'] }}% signal
+            </p>
+        @else
+            <p style="font-size:.95rem;color:#a78bfa;margin-bottom:20px;position:relative;z-index:1;font-weight:600">
+                🏆 You've reached maximum signal strength! Full access to all trading signals.
+            </p>
+        @endif
+
+        <!-- Progress -->
+        <div style="background:rgba(255,255,255,.08);border-radius:10px;height:8px;overflow:hidden;margin-bottom:24px;position:relative;z-index:1">
+            <div style="height:100%;width:{{ $signal }}%;background:linear-gradient(90deg,#7c3aed,#2f7bff);border-radius:10px;transition:width .4s"></div>
+        </div>
+
+        <!-- CTAs -->
+        <div style="display:flex;gap:12px;position:relative;z-index:1">
+            <a href="{{ route('deposit') }}" style="flex:1;padding:14px;background:linear-gradient(90deg,#7c3aed,#2f7bff);border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:opacity .2s" onmouseover="this.style.opacity=.85" onmouseout="this.style.opacity=1">💰 Deposit Now</a>
+            <a href="{{ route('invest') }}" style="flex:1;padding:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.15)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">📈 View Plans</a>
+        </div>
+
+        <!-- Signal tiers mini-grid -->
+        <!-- <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);position:relative;z-index:1">
+            <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.4);margin-bottom:12px">Signal Tiers</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+                @foreach($signalTiers as $i => $tier)
+                    <div style="padding:8px 4px;background:{{ $spendableBalance >= $tier['threshold'] ? 'rgba(124,58,237,.2)' : 'rgba(255,255,255,.05)' }};border:1px solid {{ $spendableBalance >= $tier['threshold'] ? 'rgba(124,58,237,.5)' : 'rgba(255,255,255,.1)' }};border-radius:8px;text-align:center">
+                        <div style="font-size:.9rem;font-weight:700;color:{{ $spendableBalance >= $tier['threshold'] ? '#a78bfa' : 'rgba(255,255,255,.6)' }}">{{ $tier['signal'] }}%</div>
+                        <div style="font-size:.55rem;color:rgba(255,255,255,.4);margin-top:2px">{{ $tier['level'] }}</div>
+                        <div style="font-size:.55rem;color:rgba(255,255,255,.3);margin-top:1px">${{ number_format($tier['threshold']) }}</div>
+                    </div>
+                @endforeach
+            </div>
+        </div> -->
+    </div>
+</div>
 @endsection
