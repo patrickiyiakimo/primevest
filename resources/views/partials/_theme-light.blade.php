@@ -13,4 +13,4 @@
 }
 [data-theme="light"] body{background:var(--bg);color:var(--text)}
 [data-theme="light"] a[data-band]{color:var(--muted)}
-[data-theme="light"] ::selection{background:rgba(47,123,255,.25);color:#04121f}
+[data-theme="light"] ::selection{background:#2375ff;color:#fff}

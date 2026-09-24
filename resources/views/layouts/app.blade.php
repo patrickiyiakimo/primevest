@@ -126,7 +126,7 @@
         .pv-tag{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:700;margin:0 0 12px}
         .pv-foot{color:var(--muted);font-size:.82rem}
         .ticker{position:relative;z-index:1}
-        ::selection{background:rgba(47,123,255,.35)}
+        ::selection{background:#2375ff;color:#fff}
         .pv-card{transition:.3s}
         .pv-card:hover{transform:translateY(-4px);border-color:rgba(47,123,255,.35);box-shadow:0 24px 48px -24px rgba(0,0,0,.6)}
         .pv-icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(47,123,255,.12);color:var(--acc);font-size:1.25rem}
