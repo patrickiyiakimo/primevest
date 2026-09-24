@@ -4,7 +4,7 @@
 @section('breadcrumb', 'Earn daily rewards by staking your crypto')
 
 @section('dashboard-content')
-<div class="pa" style="padding:22px;background:linear-gradient(140deg,#10221d,#0c1322);margin-bottom:24px">
+<div class="pa" style="padding:22px;background:linear-gradient(140deg,#0d1d2e,#0c1322);margin-bottom:24px">
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px">
         <div style="flex:1;min-width:220px">
             <div style="font-weight:800;font-size:1.2rem">Choose a staking plan</div>
@@ -47,7 +47,8 @@
 <!-- Investment form -->
 <div class="pa mt" id="investPanel" style="padding:24px;display:none">
     <div class="sec-h"><div><h2 id="planTitle">Start Staking</h2><p>Confirm your stake below</p></div></div>
-    <form id="investForm">
+    <form id="investForm" action="{{ route('invest.store') }}" method="POST" data-reload="1">
+        @csrf
         <input type="hidden" name="plan_name" id="iPlan">
         <input type="hidden" name="roi" id="iRoi">
         <input type="hidden" name="duration" id="iDur">

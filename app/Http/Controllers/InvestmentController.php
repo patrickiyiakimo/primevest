@@ -88,7 +88,7 @@ class InvestmentController extends Controller
             
             $validated = $request->validate([
                 'plan_name' => 'required|string',
-                'amount' => 'required|numeric|min:1000|max:500000',
+                'amount' => 'required|numeric|min:250|max:500000',
                 'roi' => 'required|numeric',
                 'duration' => 'required|string',
                 'duration_days' => 'required|integer',

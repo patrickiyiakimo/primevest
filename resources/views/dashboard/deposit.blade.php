@@ -56,7 +56,7 @@
             @endforeach
             <p class="muted" style="font-size:.76rem;margin:6px 0 0">⚠ Send funds only on the indicated network. Sending on the wrong network may result in permanent loss.</p>
         </div>
-        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#10221d,#0c1322)">
+        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#0d1d2e,#0c1322)">
             <div style="font-weight:800;margin-bottom:6px">💡 Pro tip</div>
             <p class="muted" style="margin:0;font-size:.86rem;line-height:1.7">
                 Crypto deposits are instantly credited once the network confirms 1–3 blocks (usually &lt;10 min). USDT-TRC20 has the lowest fees — great for frequent top-ups.
@@ -95,7 +95,8 @@
         if(pf.files[0])fd.append('proof',pf.files[0]);
         const btn=document.getElementById('depositBtn');
         btn.disabled=true;const old=btn.textContent;btn.textContent='Submitting…';
-        fetch('{{ route('deposit.request') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}})
+        const meta=document.querySelector('meta[name="csrf-token"]');
+        fetch('{{ route('deposit.request') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json','X-CSRF-TOKEN':meta?meta.content:''}})
         .then(r=>r.json()).then(d=>{btn.disabled=false;btn.textContent=old;pvFlash(d.success?'flash-ok':'flash-err',d.message||'Processed');if(d.success)setTimeout(()=>location.reload(),1000)})
         .catch(()=>{btn.disabled=false;btn.textContent=old;pvFlash('flash-err','Network error. Please try again.')});
     }

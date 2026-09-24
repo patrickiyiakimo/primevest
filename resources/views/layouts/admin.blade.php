@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     @include('partials.theme')
     <title>@yield('title', 'Admin') · PrimeVest</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -14,25 +15,25 @@
         :root{
             --bg:#05070d; --bg2:#070b14; --panel:#0c1322; --panel2:#111b31;
             --line:rgba(255,255,255,.07); --text:#eef2f9; --muted:#94a1b6;
-            --acc:#18d893; --acc2:#00e3a5; --gold:#f0b90b; --red:#ef4444; --side:250px;
+            --acc:#2f7bff; --acc2:#00b4ff; --gold:#f0b90b; --red:#ef4444; --side:250px;
         }
         *{box-sizing:border-box}
         html,body{margin:0;padding:0}
         body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
-        ::selection{background:rgba(24,216,147,.35)}
+        ::selection{background:rgba(47,123,255,.35)}
         .num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
         a{color:inherit;text-decoration:none}
 
         .side{position:fixed;inset:0 auto 0 0;width:var(--side);background:linear-gradient(180deg,#0a0f1c,#070b14);border-right:1px solid var(--line);z-index:80;display:flex;flex-direction:column;transition:transform .3s}
         .side-logo{display:flex;align-items:center;gap:10px;padding:20px 20px 16px;border-bottom:1px solid var(--line)}
-        .side-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d;font-weight:800;box-shadow:0 6px 18px -6px rgba(24,216,147,.6)}
+        .side-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d;font-weight:800;box-shadow:0 6px 18px -6px rgba(47,123,255,.6)}
         .side-nav{flex:1;overflow-y:auto;padding:14px 12px 20px}
         .side-nav::-webkit-scrollbar{width:4px}.side-nav::-webkit-scrollbar-thumb{background:#1c2740;border-radius:4px}
         .side-sec{font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:#5a6685;font-weight:700;padding:14px 12px 8px}
         .side-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:11px;color:var(--muted);font-size:.88rem;font-weight:600;margin-bottom:2px;transition:.18s}
         .side-item svg{width:19px;height:19px;flex-shrink:0;opacity:.8}
         .side-item:hover{background:rgba(255,255,255,.05);color:#fff}
-        .side-item.on{background:linear-gradient(90deg,rgba(24,216,147,.14),rgba(24,216,147,.04));color:var(--acc);box-shadow:inset 2px 0 0 var(--acc)}
+        .side-item.on{background:linear-gradient(90deg,rgba(47,123,255,.14),rgba(47,123,255,.04));color:var(--acc);box-shadow:inset 2px 0 0 var(--acc)}
         .side-sub{padding-left:34px;font-size:.85rem}
         .side-user{margin:14px 12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid var(--line);display:flex;gap:11px;align-items:center}
         .side-av{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#fbd56d,var(--gold));display:grid;place-items:center;font-weight:800;color:#241a00;flex-shrink:0}
@@ -64,7 +65,7 @@
         .kpi-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
         .kpi-card .val{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
         .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#2df0a9 0%,#14d594 45%,#0b9d70 100%);color:#03140d;font-weight:700;padding:10px 18px;border-radius:11px;border:0;cursor:pointer;font-size:.88rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(24,216,147,.55),inset 0 1px 0 rgba(255,255,255,.28)}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#57c8ff 0%,#2f7bff 45%,#1456d1 100%);color:#03140d;font-weight:700;padding:10px 18px;border-radius:11px;border:0;cursor:pointer;font-size:.88rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(47,123,255,.55),inset 0 1px 0 rgba(255,255,255,.28)}
         .btn:hover{transform:translateY(-2px)}
         .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);box-shadow:none;border:1px solid var(--line)}
         .btn-ghost:hover{background:rgba(255,255,255,.1)}
@@ -72,14 +73,14 @@
         .btn-gold{background:linear-gradient(135deg,#ffe39d 0%,#ffd257 45%,#f0b90b 100%);color:#241a00;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
         .btn-sm{padding:7px 12px;font-size:.8rem}
         .inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:11px 13px;color:#fff;font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
-        .inp:focus{border-color:rgba(24,216,147,.55);box-shadow:0 0 0 3px rgba(24,216,147,.13)}
+        .inp:focus{border-color:rgba(47,123,255,.55);box-shadow:0 0 0 3px rgba(47,123,255,.13)}
         .lbl{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:7px}
         .tbl{width:100%;border-collapse:collapse;font-size:.86rem}
         .tbl th{text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;padding:12px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02);white-space:nowrap}
         .tbl td{padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.045);vertical-align:middle}
         .tbl tbody tr:hover td{background:rgba(255,255,255,.025)}
         .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.74rem;font-weight:700}
-        .pill-g{background:rgba(24,216,147,.13);color:var(--acc)}
+        .pill-g{background:rgba(47,123,255,.13);color:var(--acc)}
         .pill-r{background:rgba(239,68,68,.13);color:#ff7c85}
         .pill-y{background:rgba(240,185,11,.12);color:var(--gold)}
         .pill-b{background:rgba(14,165,233,.12);color:#4cc3ff}
@@ -92,7 +93,7 @@
         .flash{display:none}
         .flash.show{display:flex;align-items:flex-start;gap:10px;padding:13px 16px;border-radius:12px;margin-bottom:18px;font-size:.88rem;animation:in .3s}
         @keyframes in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-        .flash-ok{background:rgba(24,216,147,.1);border:1px solid rgba(24,216,147,.32);color:var(--acc)}
+        .flash-ok{background:rgba(47,123,255,.1);border:1px solid rgba(47,123,255,.32);color:var(--acc)}
         .flash-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.32);color:#ff7c85}
         .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
         @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
@@ -104,8 +105,8 @@
 <aside class="side" id="pvSide">
     <div class="side-logo">
         <a href="{{ route('admin.dashboard') }}" style="display:flex;align-items:center;gap:10px">
-            <span class="side-badge">P</span>
-            <span style="font-weight:800;font-size:1.1rem">Prime<span style="color:var(--gold)">Vest</span><span class="pill pill-y" style="margin-left:6px">ADMIN</span></span>
+            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="width:auto;height:28px;display:block">
+            <span class="pill pill-y" style="margin-left:2px">ADMIN</span>
         </a>
     </div>
     <nav class="side-nav">

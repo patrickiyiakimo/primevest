@@ -1,8 +1,7 @@
 <nav class="pv-nav">
     <div class="pv-container pv-nav-inner">
         <a href="{{ url('/') }}" class="pv-logo">
-            <span class="pv-logo-badge">P</span>
-            <span>Prime<span class="pv-acc">Vest</span></span>
+            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="height:38px;width:auto;display:block">
         </a>
         <div class="pv-nav-links" id="pvNav">
             <a href="{{ url('/') }}" class="{{ request()->routeIs('welcome') ? 'active' : '' }}">Home</a>

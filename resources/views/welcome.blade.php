@@ -4,9 +4,9 @@
 
 @section('styles')
 <style>
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:rgba(24,216,147,.1);border:1px solid rgba(24,216,147,.28);color:var(--acc);font-size:.82rem;font-weight:600;margin-bottom:22px}
-    .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 rgba(24,216,147,.7);animation:pulse 2s infinite}
-    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(24,216,147,.6)}70%{box-shadow:0 0 0 10px rgba(24,216,147,0)}100%{box-shadow:0 0 0 0 rgba(24,216,147,0)}}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:rgba(47,123,255,.1);border:1px solid rgba(47,123,255,.28);color:var(--acc);font-size:.82rem;font-weight:600;margin-bottom:22px}
+    .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 rgba(47,123,255,.7);animation:pulse 2s infinite}
+    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,123,255,.6)}70%{box-shadow:0 0 0 10px rgba(47,123,255,0)}100%{box-shadow:0 0 0 0 rgba(47,123,255,0)}}
     .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
     .hero-note{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:.84rem;margin-top:30px}
     .hero-note b{color:var(--text)}
@@ -15,11 +15,11 @@
     .hero-card{border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#0d1526,#0a0f1c);border:1px solid var(--line);box-shadow:0 60px 120px -60px rgba(0,0,0,.9)}
     .hero-tab{display:flex;gap:6px;padding:8px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid var(--line)}
     .hero-tab span{flex:1;text-align:center;padding:9px 0;border-radius:9px;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s}
-    .hero-tab span.on{background:rgba(24,216,147,.14);color:var(--acc);box-shadow:inset 0 0 0 1px rgba(24,216,147,.3)}
+    .hero-tab span.on{background:rgba(47,123,255,.14);color:var(--acc);box-shadow:inset 0 0 0 1px rgba(47,123,255,.3)}
     .price-row{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
     .price-num{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.02em}
     .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
-    .pill-up{background:rgba(24,216,147,.14);color:var(--acc)}
+    .pill-up{background:rgba(47,123,255,.14);color:var(--acc)}
     .pill-down{background:rgba(239,68,68,.14);color:#ff7c85}
     .market-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
     @media(max-width:880px){.market-row{grid-template-columns:repeat(2,1fr)}}
@@ -32,12 +32,12 @@
     .step-num{width:40px;height:40px;border-radius:12px;margin:0 auto 14px;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d}
     /* ---- premium hero chart card ---- */
     .hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .hero-live{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;background:rgba(24,216,147,.1);border:1px solid rgba(24,216,147,.3);color:var(--acc);font-size:.7rem;font-weight:800;letter-spacing:.1em}
+    .hero-live{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;background:rgba(47,123,255,.1);border:1px solid rgba(47,123,255,.3);color:var(--acc);font-size:.7rem;font-weight:800;letter-spacing:.1em}
     .hero-live i{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:lp 1.4s infinite}
-    @keyframes lp{0%{opacity:1;box-shadow:0 0 0 0 rgba(24,216,147,.55)}70%{opacity:.45;box-shadow:0 0 0 7px rgba(24,216,147,0)}100%{opacity:1}}
+    @keyframes lp{0%{opacity:1;box-shadow:0 0 0 0 rgba(47,123,255,.55)}70%{opacity:.45;box-shadow:0 0 0 7px rgba(47,123,255,0)}100%{opacity:1}}
     .range-tab{display:flex;gap:4px;padding:5px;background:rgba(255,255,255,.04);border-radius:10px;border:1px solid var(--line)}
     .range-tab span{padding:5px 11px;border-radius:7px;font-size:.74rem;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
-    .range-tab span.on{background:rgba(24,216,147,.15);color:var(--acc);box-shadow:inset 0 0 0 1px rgba(24,216,147,.3)}
+    .range-tab span.on{background:rgba(47,123,255,.15);color:var(--acc);box-shadow:inset 0 0 0 1px rgba(47,123,255,.3)}
     .lg{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:600;color:var(--muted)}
     .lg i{width:14px;height:2px;border-radius:2px}
     .chart-wrap{position:relative;margin:14px 20px 0}
@@ -72,9 +72,9 @@
     .pv-verif .pv-vtip-emit{content:"";position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:var(--line)}
     /* ---- wealth section ---- */
     .feat-stat{padding:20px 24px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--line);text-align:center}
-    .feat-stat b{display:block;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#2df0a9,#18d893);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .feat-stat b{display:block;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#57c8ff,#2f7bff);-webkit-background-clip:text;background-clip:text;color:transparent}
     .feat-stat span{color:var(--muted);font-size:.8rem}
-    .pv-icon-grad{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:1.35rem;background:linear-gradient(135deg,rgba(45,240,169,.22),rgba(16,197,139,.08));border:1px solid rgba(45,240,169,.3)}
+    .pv-icon-grad{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:1.35rem;background:linear-gradient(135deg,rgba(87,200,255,.22),rgba(47,123,255,.08));border:1px solid rgba(47,123,255,.3)}
     /* ---- academy video ---- */
     .aca-shell{display:grid;grid-template-columns:1.05fr 1fr;gap:34px;align-items:center}
     @media(max-width:900px){.aca-shell{grid-template-columns:1fr}}
@@ -90,10 +90,10 @@
     <svg class="hero-bgchart" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true">
         <defs>
             <linearGradient id="bgLine" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#18d893"/><stop offset=".55" stop-color="#4cc3ff"/><stop offset="1" stop-color="#f0b90b"/>
+                <stop offset="0" stop-color="#2f7bff"/><stop offset=".55" stop-color="#4cc3ff"/><stop offset="1" stop-color="#f0b90b"/>
             </linearGradient>
             <linearGradient id="bgArea" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#18d893" stop-opacity=".2"/><stop offset="1" stop-color="#18d893" stop-opacity="0"/>
+                <stop offset="0" stop-color="#2f7bff" stop-opacity=".2"/><stop offset="1" stop-color="#2f7bff" stop-opacity="0"/>
             </linearGradient>
             <linearGradient id="bgMask" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0" stop-color="#05070d"/><stop offset=".2" stop-color="transparent"/><stop offset=".75" stop-color="transparent"/><stop offset="1" stop-color="#05070d"/>
@@ -111,20 +111,20 @@
         <div class="pv-grid pv-grid-2" style="align-items:center;gap:46px">
             <div>
                 <div class="hero-badge"><span class="dot"></span> Institutional-grade crypto investing for everyone</div>
-                <h1 class="pv-h1">Trade, stake &amp; grow your <span style="background:linear-gradient(120deg,#18d893,#4cc3ff);-webkit-background-clip:text;background-clip:text;color:transparent">digital assets</span> with a platform you can trust.</h1>
+                <h1 class="pv-h1">Trade, stake &amp; grow your <span style="background:linear-gradient(120deg,#2f7bff,#4cc3ff);-webkit-background-clip:text;background-clip:text;color:transparent">digital assets</span> with a platform you can trust.</h1>
                 <!-- <p class="pv-lead">Buy and sell 200+ cryptocurrencies, stake for passive income, and mirror the trades of proven experts. Bank-grade security, transparent fees and lightning-fast execution.</p> -->
                 <div class="hero-actions">
-                    <a href="{{ route('register') }}" class="pv-btn pv-btn-lg">Start Trading Free</a>
+                    <a href="{{ route('register') }}" class="pv-btn pv-btn-lg mr-5">Start Trading Free</a>
                     <a href="{{ route('trading') }}#copy-trading" class="pv-btn pv-btn-ghost pv-btn-lg">Explore Copy Trading</a>
                 </div>
-                <div class="hero-trust">
+                <!-- <div class="hero-trust">
                     <span>◆ 480K+ investors</span>
                     <span>◆ $2.4B+ assets secured</span>
                     <span>◆ 99.9% uptime</span>
-                </div>
-                <div class="hero-note">
+                </div> -->
+                <!-- <div class="hero-note">
                     <span><b>New here?</b> Get a <b style="color:var(--gold)">$100 demo balance</b> to practise trading risk-free.</span>
-                </div>
+                </div> -->
             </div>
 
             <!-- Live trading chart -->
@@ -300,9 +300,9 @@
                         <div style="font-weight:700;display:flex;align-items:center">{{ $t[1] }}
                             <span class="pv-verif">
                                 <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z" fill="#18d893" opacity=".18"/>
-                                    <path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z" stroke="#18d893" stroke-width="1.6"/>
-                                    <path d="M8.4 12.1l2.4 2.4 4.8-5" stroke="#18d893" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z" fill="#2f7bff" opacity=".18"/>
+                                    <path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z" stroke="#2f7bff" stroke-width="1.6"/>
+                                    <path d="M8.4 12.1l2.4 2.4 4.8-5" stroke="#2f7bff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 <span class="pv-vtip"><b>Verified Professional</b><br>Passed PrimeVest's identity, risk and track-record review. {{ $t[3] }} of live trading experience with audited results.<span class="pv-vtip-emit"></span></span>
                             </span>
@@ -449,7 +449,7 @@
 <section class="pv-section" style="padding-bottom:0">
     <div class="pv-container">
         <div class="pv-panel" style="position:relative;overflow:hidden;padding:64px 28px;text-align:center">
-            <div style="position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 0%,rgba(24,216,147,.16),transparent 60%)"></div>
+            <div style="position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 0%,rgba(47,123,255,.16),transparent 60%)"></div>
             <div style="position:relative;z-index:1">
                 <h2 class="pv-h2" style="max-width:560px;margin:0 auto">Your crypto wealth journey starts today</h2>
                 <p class="pv-lead" style="margin:14px auto 30px">Join 480,000+ investors already growing their digital assets with PrimeVest.</p>
@@ -572,7 +572,7 @@
         const li=INFO[sym], base=SPEC[sym][0];
         const icon=document.getElementById('cIcon');
         icon.src="{{ asset('/images/') }}"+li.icon;
-        icon.onerror=()=>{icon.src='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="13" fill="#0c1322"/><circle cx="13" cy="13" r="12" fill="none" stroke="rgba(24,216,147,.6)"/><text x="13" y="17" font-size="11" font-family="Arial" font-weight="bold" text-anchor="middle" fill="#18d893">'+li.pair.slice(0,3)+'</text></svg>')};
+        icon.onerror=()=>{icon.src='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="13" fill="#0c1322"/><circle cx="13" cy="13" r="12" fill="none" stroke="rgba(47,123,255,.6)"/><text x="13" y="17" font-size="11" font-family="Arial" font-weight="bold" text-anchor="middle" fill="#2f7bff">'+li.pair.slice(0,3)+'</text></svg>')};
         document.getElementById('cName').textContent=li.name;
         document.getElementById('cPair').textContent=li.pair;
         document.getElementById('heroPrice').textContent='$'+fmtP(data[data.length-1][3],base);

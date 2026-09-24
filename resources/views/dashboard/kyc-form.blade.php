@@ -46,7 +46,7 @@
                 <div><b>Account protection</b><div class="muted" style="font-size:.83rem">Verification prevents account takeovers and keeps your funds safe.</div></div>
             </div>
         </div>
-        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#1d1520,#0c1322)">
+        <div class="pa" style="padding:22px;background:linear-gradient(140deg,#0d1d2e,#0c1322)">
             <div style="font-weight:800;margin-bottom:6px">🛡 Your privacy</div>
             <p class="muted" style="margin:0;font-size:.86rem;line-height:1.7">We only ask for what the law requires. Your KYC data is never shared, sold or used for marketing.</p>
         </div>

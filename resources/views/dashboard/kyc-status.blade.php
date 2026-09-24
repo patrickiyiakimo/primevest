@@ -17,7 +17,7 @@
 
 <div class="pa" style="padding:26px;text-align:center">
     <div style="width:74px;height:74px;border-radius:20px;margin:0 auto 18px;display:grid;place-items:center;font-size:2rem;
-        background:{{ in_array($st,['verified']) ? 'rgba(24,216,147,.15)' : (in_array($st,['rejected']) ? 'rgba(239,68,68,.15)' : 'rgba(240,185,11,.12)') }}">
+        background:{{ in_array($st,['verified']) ? 'rgba(47,123,255,.15)' : (in_array($st,['rejected']) ? 'rgba(239,68,68,.15)' : 'rgba(240,185,11,.12)') }}">
         {{ $st == 'verified' ? '✓' : ($st == 'rejected' ? '✖' : '⏳') }}
     </div>
     <h2 style="margin:0 0 8px;font-size:1.4rem">KYC: <span class="num" style="color:var(--acc)">{{ $label }}</span></h2>

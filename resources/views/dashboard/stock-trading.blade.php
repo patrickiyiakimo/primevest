@@ -128,7 +128,8 @@
             const sym=f.querySelector('[name=symbol]').value, qty=q.value;
             const o=btn.textContent;btn.disabled=true;btn.textContent='Placing…';
             const fd=new FormData();fd.append('symbol',sym);fd.append('quantity',qty);fd.append('order_type','market');
-            fetch(side==='buy' ? '{{ route('stock.buy') }}' : '{{ route('stock.sell') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json'}})
+            const meta=document.querySelector('meta[name="csrf-token"]');
+            fetch(side==='buy' ? '{{ route('stock.buy') }}' : '{{ route('stock.sell') }}',{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json','X-CSRF-TOKEN':meta?meta.content:''}})
             .then(r=>r.json()).then(d=>{btn.disabled=false;btn.textContent=o;pvFlash(d.success?'flash-ok':'flash-err',d.message||'Order processed');if(d.success)setTimeout(()=>location.reload(),1200)})
             .catch(()=>{btn.disabled=false;btn.textContent=o;pvFlash('flash-err','Order failed. Please try again.')});
         });

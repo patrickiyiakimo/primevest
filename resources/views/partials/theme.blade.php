@@ -35,7 +35,7 @@
     :root[data-theme="light"]{
         --bg:#f2f6fc; --bg2:#e9eef7; --panel:#ffffff; --panel2:#f5f9ff;
         --line:rgba(10,24,52,.12); --text:#0b1526; --muted:#5c6b86;
-        --acc:#0c9d6e; --acc2:#0a8a5f; --gold:#b07f0b; --red:#dc2626;
+        --acc:#2f7bff; --acc2:#00b4ff; --gold:#b07f0b; --red:#dc2626;
     }
 
     /* Universal light surfaces (hardcoded white-rgba -> dark-on-light tint) */

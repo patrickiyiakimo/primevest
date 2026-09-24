@@ -6,7 +6,7 @@
 <style>
     .mk-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
     .mk-tabs a{padding:9px 18px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:.87rem;font-weight:600;transition:.2s}
-    .mk-tabs a:hover,.mk-tabs a.on{background:rgba(24,216,147,.12);color:var(--acc);border-color:rgba(24,216,147,.4)}
+    .mk-tabs a:hover,.mk-tabs a.on{background:rgba(47,123,255,.12);color:var(--acc);border-color:rgba(47,123,255,.4)}
 </style>
 @endpush
 
