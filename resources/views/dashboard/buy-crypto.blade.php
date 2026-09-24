@@ -1,95 +1,121 @@
 @extends('layouts.dashboard')
 
 @section('page-title', 'Buy Crypto')
-@section('breadcrumb', 'Purchase digital assets instantly')
+@section('breadcrumb')
+    <a href="{{ route('dashboard') }}" style="color:inherit;text-decoration:none">← Back</a>
+@endsection
 
 @section('dashboard-content')
-<div class="grid-2">
-    <!-- Converter -->
-    <div class="pa" style="padding:24px">
-        <div class="sec-h"><div><h2>Quick Buy Converter</h2><p>Estimate your purchase before depositing</p></div></div>
-        <label class="lbl">You spend (USD)</label>
-        <div style="display:flex;gap:10px;margin-bottom:16px">
-            <input class="inp num" id="spend" type="number" min="10" value="500" step="0.01">
-            <span class="btn btn-ghost" style="pointer-events:none">USD</span>
-        </div>
-        <label class="lbl">You receive</label>
-        <div style="display:flex;gap:10px;align-items:center">
-            <input class="inp num" id="receive" type="text" readonly>
-            <div style="position:relative">
-                <select class="inp sel" id="coin" style="min-width:120px">
-                    <option value="97.04" data-sym="BTC">BTC</option>
-                    <option value="3111.42" data-sym="ETH">ETH</option>
-                    <option value="152.34" data-sym="SOL">SOL</option>
-                    <option value="0.3021" data-sym="XRP">XRP</option>
-                    <option value="584.90" data-sym="BNB">BNB</option>
-                    <option value="1.000" data-sym="USDT">USDT</option>
-                </select>
+@php
+    $steps = [
+        ['Choose Your Preferred Payment Option', 'Choose your preferred payment option from the list provided, such as PayPal, Venmo, Zelle, Cashapp, or Bank transfer.'],
+        ['Connect with a Verified Crypto Seller', 'Connect with a verified crypto seller on our platform. Rest assured that all merchants offering these payment services are registered and verified under our platform, ensuring the safety of your funds.'],
+        ['Confirm Crypto Availability', 'We would confirm that the selected payment option is available for the seller and confirm their availability to sell the required amount of crypto for your funding.'],
+        ['Merchant Details Submission', 'The seller submits their payment details to our system, and we promptly forward these details to you for your convenience.'],
+        ['Secure Payment Window', 'A 30-minute timeframe is established to ensure a smooth experience for all investors. During this window, you are encouraged to complete your payment.'],
+        ['Crypto Held in Escrow', 'Upon your confirmation of the payment, the specified amount of cryptocurrency is securely held in escrow for the designated 30-minute period. This ensures a seamless transaction process for both parties involved.'],
+        ['Confirm Payment', 'After making your payment, notify our system to confirm the successful transaction with a receipt or screenshot within the 30-minute window.'],
+        ['Payment Verification', 'Our system verifies the payment made within the stipulated time frame to ensure accuracy and security.'],
+        ['Crypto Delivery', 'Once payment is confirmed, the purchased cryptocurrency is promptly deposited into your wallet, providing you with immediate access to your asset.'],
+        ['Transaction Fee', 'Please note that a flat transaction fee of $25 applies to every payment processed, regardless of the transaction amount. This fee helps maintain the efficiency and security of our payment process.'],
+    ];
+    $methods = [
+        ['🏦', 'Zelle', 'Bank-to-bank instant transfer'],
+        ['💳', 'Venmo', 'Send and receive with the Venmo app'],
+        ['💵', 'Cashapp', 'Quick payments with Cash App'],
+        ['🅿️', 'PayPal', 'Secure PayPal transactions'],
+        ['🏛️', 'Wire Bank Transfer', 'Direct wire transfer from your bank'],
+    ];
+@endphp
+
+<style>
+    .pv-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,12,.72);backdrop-filter:blur(8px)}
+    .pv-modal.open{display:flex}
+    .paym-card{width:min(460px,100%);background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
+    .paym-x{background:none;border:none;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;padding:0 2px}
+    .paym-x:hover{color:var(--text)}
+    .paym-item{display:flex;align-items:center;gap:13px;padding:14px 15px;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:rgba(255,255,255,.03);transition:.2s}
+    .paym-item:hover{border-color:rgba(47,123,255,.5)}
+    .paym-item:has(input:checked){border-color:var(--acc);background:rgba(47,123,255,.1)}
+    .paym-item input{accent-color:var(--acc);width:18px;height:18px;flex-shrink:0}
+    .paym-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:1.05rem;flex-shrink:0}
+    .step{display:flex;gap:15px;padding:16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}
+    .step-n{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#57c8ff,#2f7bff);color:#04121f;display:grid;place-items:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+</style>
+
+<div class="pa" style="padding:26px">
+    <div class="sec-h">
+        <div><h2>Welcome to the Peer-to-Peer Crypto Investment Payment Guide</h2></div>
+    </div>
+
+    <div style="font-size:.93rem;line-height:1.75;color:var(--muted)">
+        <p style="margin:0 0 14px"><b style="color:var(--text)">Introduction:</b><br>
+        At Cap crypto Investment, we are committed to providing you with a seamless and user-friendly experience as you embark on your cryptocurrency investment journey. We understand that navigating the world of cryptocurrencies and payments can sometimes be challenging. To make things simpler, we are excited to introduce our new peer-to-peer payment method, designed to offer you a convenient and secure way to invest in crypto.</p>
+        <p style="margin:0 0 22px">Our peer-to-peer payment method allows you to use well-known payment platforms such as PayPal, Venmo, Zelle, and Bank transfer, ensuring that you can easily fund your investment without any hassles. Rest assured, the individuals offering these payment services are registered and verified under our platform, guaranteeing the safety of your funds.</p>
+    </div>
+
+    <div style="font-weight:800;font-size:1.05rem;margin-bottom:16px">Step-by-Step Guide:</div>
+
+    <div style="display:grid;gap:12px">
+        @foreach($steps as $i => $s)
+        <div class="step">
+            <div class="step-n">{{ $i + 1 }}</div>
+            <div>
+                <div style="font-weight:700;font-size:.95rem;margin-bottom:3px">{{ $s[0] }}</div>
+                <div class="muted" style="font-size:.86rem;line-height:1.6">{{ $s[1] }}</div>
             </div>
         </div>
-        <div class="muted" style="font-size:.78rem;margin-top:8px">Rate updates every 30s · estimated only</div>
-        <button class="btn btn-block mt" onclick="pvFlash('flash-ok','Please deposit funds first, then your purchase is executed instantly.')">Buy Now &gt;</button>
-        <a href="{{ route('deposit') }}" class="btn btn-ghost btn-block" style="margin-top:10px">Fund your wallet first</a>
+        @endforeach
     </div>
 
-    <!-- Live rates -->
-    <div class="pa" style="padding:24px">
-        <div class="sec-h">
-            <div><h2>Live Crypto Rates</h2><p>Top assets on PrimeVest</p></div>
-            <span class="pill pill-g">● Live</span>
-        </div>
-        <div style="overflow-x:auto">
-        <table class="tbl">
-            <thead><tr><th>Asset</th><th>Price</th><th>24h</th><th></th></tr></thead>
-            <tbody>
-                @php
-                    $live = [
-                        ['btc.png','Bitcoin','BTC',97241.80,2.41],
-                        ['eth.png','Ethereum','ETH',3111.42,-0.86],
-                        ['bch.png','Bitcoin Cash','BCH',381.20,1.08],
-                        ['doge.png','Dogecoin','DOGE',0.1524,5.72],
-                    ];
-                @endphp
-                @foreach($live as $c)
-                <tr>
-                    <td><div style="display:flex;align-items:center;gap:10px"><img src="{{ asset('/images/'.$c[0]) }}" width="26" height="26" alt="{{ $c[1] }}" style="border-radius:50%"><b>{{ $c[1] }}</b></div></td>
-                    <td class="num" style="font-weight:700">${{ $c[3] < 1 ? number_format($c[3],4) : number_format($c[3],2) }}</td>
-                    <td><span class="pill {{ $c[4] >= 0 ? 'pill-g' : 'pill-r' }} num">{{ $c[4] >= 0 ? '+' : '' }}{{ $c[4] }}%</span></td>
-                    <td><button class="btn btn-sm btn-ghost" onclick="buyCoin('{{ $c[2] }}')">Buy</button></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-        </div>
+    <div style="font-size:.93rem;line-height:1.75;color:var(--muted);margin-top:22px">
+        <p style="margin:0 0 14px">We understand the importance of simplifying the investment process for our valued customers. This peer-to-peer payment method allows you to use familiar payment platforms while ensuring the safety of your funds and the efficient delivery of your chosen cryptocurrency. If you have any questions or need assistance, our dedicated live support team is here to help.</p>
+        <p style="margin:0 0 20px">Thank you for choosing our platform for your crypto investment needs. We look forward to helping you achieve your financial goals.</p>
+        <div style="margin-top:18px;font-weight:800;color:#fff">Warm regards,</div>
     </div>
+
+    <button class="btn btn-block" style="margin-top:26px" onclick="openPayModal()">Next →</button>
 </div>
 
-<div class="pa pv-shade mt" style="padding:22px">
-    <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center">
-        <div style="flex:1;min-width:220px">
-            <div style="font-weight:800;font-size:1.1rem">Why buy on PrimeVest?</div>
-            <div class="muted" style="font-size:.84rem">Transparent spread, institutionally-vetted assets, and a clean audit trail on every order.</div>
+<!-- Accepted Payment Methods Modal -->
+<div id="payModal" class="pv-modal" onclick="if(event.target===this)closePayModal()">
+    <div class="paym-card">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
+            <div>
+                <div style="font-weight:800;font-size:1.15rem">Accepted Payment Methods</div>
+                <div class="muted" style="font-size:.82rem;margin-top:3px">Choose the method you'll use to fund your purchase</div>
+            </div>
+            <button class="paym-x" onclick="closePayModal()" aria-label="Close">×</button>
         </div>
-        <div class="num" style="display:flex;gap:26px">
-            <div><div class="muted" style="font-size:.72rem">Spread</div><div style="font-weight:800" class="ok">0.10%</div></div>
-            <div><div class="muted" style="font-size:.72rem">Settlement</div><div style="font-weight:800" class="ok">&lt;10 min</div></div>
-            <div><div class="muted" style="font-size:.72rem">Assets</div><div style="font-weight:800">200+</div></div>
+        <div style="display:grid;gap:11px">
+            @foreach($methods as $m)
+            <label class="paym-item">
+                <input type="radio" name="payMethod" value="{{ $m[1] }}"
+                    @if($loop->first) checked @endif>
+                <span class="paym-ico">{{ $m[0] }}</span>
+                <span style="flex:1;min-width:0">
+                    <span style="display:block;font-weight:700;font-size:.93rem">{{ $m[1] }}</span>
+                    <span class="muted" style="display:block;font-size:.76rem;margin-top:1px">{{ $m[2] }}</span>
+                </span>
+            </label>
+            @endforeach
         </div>
+        <button class="btn btn-block" style="margin-top:18px" onclick="confirmPay()">Continue</button>
     </div>
 </div>
 @endsection
 
 @section('scripts')
 <script>
-    const opts=document.getElementById('coin');
-    function conv(){
-        const amt=parseFloat(document.getElementById('spend').value)||0;
-        const rate=parseFloat(opts.value)||1;
-        document.getElementById('receive').value=(amt/rate).toLocaleString('en-US',{maximumFractionDigits:8});
+    function openPayModal(){document.getElementById('payModal').classList.add('open')}
+    function closePayModal(){document.getElementById('payModal').classList.remove('open')}
+    function confirmPay(){
+        const sel=document.querySelector('input[name="payMethod"]:checked');
+        closePayModal();
+        if(typeof pvFlash==='function'){
+            pvFlash('flash-ok',(sel?sel.value:'Selected method')+' selected — our team will contact you shortly.');
+        }
     }
-    document.getElementById('spend').addEventListener('input',conv);
-    opts.addEventListener('change',conv);
-    function buyCoin(sym){const o=Array.from(opts.options);const hit=o.find(o=>o.dataset.sym===sym);if(hit)opts.value=hit.value;conv();pvFlash('flash-ok',sym+' selected in converter');}
-    conv();
+    document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closePayModal()});
 </script>
 @endsection
