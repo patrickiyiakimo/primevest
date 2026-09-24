@@ -10,6 +10,11 @@
 @endphp
 
 <style>
+    .pv-alert{position:fixed;left:50%;bottom:24px;transform:translate(-50%,170%);z-index:960;display:flex;align-items:center;gap:12px;width:min(520px,calc(100vw - 32px));padding:14px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.5);transition:transform .55s cubic-bezier(.22,1,.36,1)}
+    .pv-alert.show{transform:translate(-50%,0)}
+    .pv-alert-bar{width:4px;align-self:stretch;border-radius:99px;flex-shrink:0}
+    .pv-alert-x{background:none;border:none;color:var(--muted);font-size:1.3rem;line-height:1;cursor:pointer;padding:0 2px;flex-shrink:0}
+    .pv-alert-x:hover{color:var(--text)}
     .sig-ring{transform:rotate(-90deg)}
     .pv-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,12,.72);backdrop-filter:blur(8px)}
     .pv-modal.open{display:flex}
@@ -336,20 +341,6 @@
             <a href="{{ route('deposit') }}" style="flex:1;padding:14px;background:linear-gradient(90deg,#7c3aed,#2f7bff);border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:opacity .2s" onmouseover="this.style.opacity=.85" onmouseout="this.style.opacity=1">💰 Deposit Now</a>
             <a href="{{ route('invest') }}" style="flex:1;padding:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.15)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">📈 View Plans</a>
         </div>
-
-        <!-- Signal tiers mini-grid -->
-        <!-- <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.08);position:relative;z-index:1">
-            <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:rgba(255,255,255,.4);margin-bottom:12px">Signal Tiers</div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-                @foreach($signalTiers as $i => $tier)
-                    <div style="padding:8px 4px;background:{{ $spendableBalance >= $tier['threshold'] ? 'rgba(124,58,237,.2)' : 'rgba(255,255,255,.05)' }};border:1px solid {{ $spendableBalance >= $tier['threshold'] ? 'rgba(124,58,237,.5)' : 'rgba(255,255,255,.1)' }};border-radius:8px;text-align:center">
-                        <div style="font-size:.9rem;font-weight:700;color:{{ $spendableBalance >= $tier['threshold'] ? '#a78bfa' : 'rgba(255,255,255,.6)' }}">{{ $tier['signal'] }}%</div>
-                        <div style="font-size:.55rem;color:rgba(255,255,255,.4);margin-top:2px">{{ $tier['level'] }}</div>
-                        <div style="font-size:.55rem;color:rgba(255,255,255,.3);margin-top:1px">${{ number_format($tier['threshold']) }}</div>
-                    </div>
-                @endforeach
-            </div>
-        </div> -->
     </div>
 </div>
 @endsection
