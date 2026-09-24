@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css">
     @include('partials.theme')
     <title>@yield('title', 'Admin') · PrimeVest</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -72,7 +73,9 @@
         .btn-red{background:linear-gradient(135deg,#ff7c85,var(--red));box-shadow:0 10px 26px -12px rgba(239,68,68,.5);color:#2a0507}
         .btn-gold{background:linear-gradient(135deg,#ffe39d 0%,#ffd257 45%,#f0b90b 100%);color:#241a00;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
         .btn-sm{padding:7px 12px;font-size:.8rem}
-        .inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:11px 13px;color:#fff;font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
+        .inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:11px 13px;color:var(--text);font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
+        .inp option{background:var(--panel2);color:var(--text)}
+        .sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' fill='none' stroke='%2394a1b6' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;cursor:pointer}
         .inp:focus{border-color:rgba(47,123,255,.55);box-shadow:0 0 0 3px rgba(47,123,255,.13)}
         .lbl{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:7px}
         .tbl{width:100%;border-collapse:collapse;font-size:.86rem}
@@ -90,11 +93,9 @@
         .muted{color:var(--muted)}
         .ok{color:var(--acc)}.bad{color:#ff7c85}.gold{color:var(--gold)}
         .mt{margin-top:20px}.mb{margin-bottom:20px}
-        .flash{display:none}
-        .flash.show{display:flex;align-items:flex-start;gap:10px;padding:13px 16px;border-radius:12px;margin-bottom:18px;font-size:.88rem;animation:in .3s}
-        @keyframes in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-        .flash-ok{background:rgba(47,123,255,.1);border:1px solid rgba(47,123,255,.32);color:var(--acc)}
-        .flash-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.32);color:#ff7c85}
+        /* Toasts (Toastify) */
+        .pv-tv-ok,.pv-tv-err{background:linear-gradient(180deg,var(--panel2),var(--panel))!important;color:var(--text)!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc);border-radius:12px!important;box-shadow:0 18px 50px -12px rgba(5,10,25,.6)!important;font-weight:600!important;font-size:.88rem!important}
+        .pv-tv-err{border-left-color:var(--red)}
         .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
         @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
     </style>
@@ -196,24 +197,38 @@
 
     <main class="content">
         @if (session('success'))
-            <div class="flash show flash-ok">✔ {{ session('success') }}</div>
+            <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-ok',{!! json_encode(session('success')) !!}))</script>
         @endif
         @if (session('error'))
-            <div class="flash show flash-err">✖ {{ session('error') }}</div>
+            <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode(session('error')) !!}))</script>
         @endif
         @if ($errors->any())
-            <div class="flash show flash-err">
-                @foreach ($errors->all() as $error)<div>✖ {{ $error }}</div>@endforeach
-            </div>
+            @foreach ($errors->all() as $error)
+                <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode($error) !!}))</script>
+            @endforeach
         @endif
         @yield('admin-content')
     </main>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
 <script>
     function pvOpenSide(){document.getElementById('pvSide').classList.add('open');document.getElementById('pvOverlay').classList.add('show')}
     function pvCloseSide(){document.getElementById('pvSide').classList.remove('open');document.getElementById('pvOverlay').classList.remove('show')}
     function pvConfirm(fid,msg){if(confirm(msg||'Are you sure?')){document.getElementById(fid).submit()}}
+    function pvFlash(kind,msg){
+        if(typeof Toastify==='undefined')return;
+        Toastify({
+            text:String(msg),
+            duration:3000,
+            gravity:'top',
+            position:'right',
+            stopOnFocus:true,
+            newestOnTop:true,
+            className:kind==='flash-ok'?'pv-tv-ok':'pv-tv-err',
+            onClick:function(){this.toast.remove()}
+        }).showToast();
+    }
 </script>
 @stack('scripts')
 </body>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css">
     @include('partials.theme')
     <title>@yield('title', 'Dashboard') · PrimeVest</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -48,19 +49,19 @@
         .topbar{position:sticky;top:0;z-index:70;display:flex;align-items:center;gap:14px;justify-content:space-between;padding:13px 24px;background:rgba(7,11,20,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
         .burger{display:none;background:none;border:0;color:#fff;cursor:pointer}
         .crumb{font-size:.76rem;color:var(--muted)}
-        .crumb b{color:#fff;font-size:.82rem}
+        .crumb b{color:var(--text);font-size:.82rem}
         .tsearch{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:9px 14px;width:260px}
-        .tsearch input{background:none;border:0;outline:0;color:#fff;font-family:inherit;font-size:.85rem;width:100%}
+        .tsearch input{background:none;border:0;outline:0;color:var(--text);font-family:inherit;font-size:.85rem;width:100%}
         .tsearch input::placeholder{color:#5a6685}
         .notif{position:relative;width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer}
         .notif .pip{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.25)}
         .udrop{position:relative}
         .udrop-btn{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:6px 12px 6px 6px;cursor:pointer}
         .udrop-av{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--acc2),var(--acc));display:grid;place-items:center;font-weight:800;color:#04140d;font-size:.9rem}
-        .udrop-menu{position:absolute;right:0;top:calc(100% + 8px);width:230px;background:#0d1526;border:1px solid var(--line);border-radius:14px;padding:8px;display:none;box-shadow:0 30px 60px -20px rgba(0,0,0,.8)}
+        .udrop-menu{position:absolute;right:0;top:calc(100% + 8px);width:230px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:8px;display:none;box-shadow:0 30px 60px -20px rgba(5,10,25,.5)}
         .udrop-menu.open{display:block}
         .udrop-menu a,.udrop-menu button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:9px;background:none;border:0;color:var(--muted);font-size:.86rem;font-family:inherit;cursor:pointer;text-align:left}
-        .udrop-menu a:hover,.udrop-menu button:hover{background:rgba(255,255,255,.06);color:#fff}
+        .udrop-menu a:hover,.udrop-menu button:hover{background:rgba(255,255,255,.06);color:var(--text)}
         .content{flex:1;padding:26px 24px}
         @media(max-width:1000px){
             .side{transform:translateX(-100%)}
@@ -89,7 +90,8 @@
         .btn-red{background:linear-gradient(135deg,#ff7c85,var(--red));box-shadow:0 10px 26px -12px rgba(239,68,68,.5);color:#2a0507}
         .btn-gold{background:linear-gradient(135deg,#ffe39d 0%,#ffd257 45%,#f0b90b 100%);color:#241a00;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
         .btn-sm{padding:8px 14px;font-size:.82rem}
-        .inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:12px 14px;color:#fff;font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
+        .inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:12px 14px;color:var(--text);font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
+        .inp option{background:var(--panel2);color:var(--text)}
         .inp:focus,.inp:focus-visible{border-color:rgba(47,123,255,.55);box-shadow:0 0 0 3px rgba(47,123,255,.13)}
         .lbl{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:7px}
         .sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' fill='none' stroke='%2394a1b6' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px}
@@ -113,19 +115,9 @@
         .muted{color:var(--muted)}
         .ok{color:var(--acc)}.bad{color:#ff7c85}.gold{color:var(--gold)}
         .mt{margin-top:20px}.mb{margin-bottom:20px}
-        /* Toasts */
-        #pvToasts{position:fixed;top:82px;right:20px;z-index:300;display:flex;flex-direction:column;gap:10px;max-width:min(380px,calc(100vw - 40px));pointer-events:none}
-        .pv-toast{pointer-events:auto;display:flex;align-items:flex-start;gap:10px;padding:13px 14px;border-radius:13px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);box-shadow:0 18px 50px -12px rgba(0,0,0,.65);font-size:.88rem;font-weight:500;animation:tin .3s ease}
-        .pv-toast.ok{border-color:rgba(47,123,255,.45)}
-        .pv-toast.err{border-color:rgba(239,68,68,.45)}
-        .pv-toast .ic{flex-shrink:0;font-weight:800}
-        .pv-toast.ok .ic{color:var(--acc)}
-        .pv-toast.err .ic{color:#ff7c85}
-        .pv-toast .x{margin-left:6px;background:none;border:0;color:var(--muted);cursor:pointer;font-size:1.05rem;line-height:1;padding:0 2px}
-        .pv-toast .x:hover{color:#fff}
-        .pv-toast.out{animation:tout .3s ease forwards}
-        @keyframes tin{from{opacity:0;transform:translateX(26px)}to{opacity:1;transform:none}}
-        @keyframes tout{to{opacity:0;transform:translateX(26px)}}
+        /* Toasts (Toastify) */
+        .pv-tv-ok,.pv-tv-err{background:linear-gradient(180deg,var(--panel2),var(--panel))!important;color:var(--text)!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc);border-radius:12px!important;box-shadow:0 18px 50px -12px rgba(5,10,25,.6)!important;font-weight:600!important;font-size:.88rem!important}
+        .pv-tv-err{border-left-color:var(--red)}
         /* Plan cards */
         .plan{border:1px solid var(--line);border-radius:16px;padding:22px;background:linear-gradient(180deg,var(--panel2),var(--panel));transition:.25s;position:relative;overflow:hidden}
         .plan:hover{transform:translateY(-4px);border-color:rgba(47,123,255,.4)}
@@ -258,7 +250,6 @@
     </header>
 
     <main class="content">
-        <div id="pvToasts"></div>
         @if (session('success'))
             <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-ok',{!! json_encode(session('success')) !!}))</script>
         @endif
@@ -274,6 +265,7 @@
     </main>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
 <script>
     function pvOpenSide(){document.getElementById('pvSide').classList.add('open');document.getElementById('pvOverlay').classList.add('show')}
     function pvCloseSide(){document.getElementById('pvSide').classList.remove('open');document.getElementById('pvOverlay').classList.remove('show')}
@@ -293,20 +285,17 @@
         .catch(()=>done(false,'Network error. Please try again.'));
     }
     function pvFlash(kind,msg){
-        const wrap=document.getElementById('pvToasts');
-        if(!wrap)return;
-        const ok=kind==='flash-ok';
-        const el=document.createElement('div');el.className='pv-toast '+(ok?'ok':'err');
-        const ic=document.createElement('span');ic.className='ic';ic.textContent=ok?'✔':'✖';
-        const tx=document.createElement('div');tx.style.flex='1';tx.textContent=msg;
-        const x=document.createElement('button');x.className='x';x.type='button';x.setAttribute('aria-label','Dismiss');x.textContent='×';
-        let t=null;
-        const remove=()=>{if(!el.parentNode)return;clearTimeout(t);el.classList.add('out');setTimeout(()=>el.remove(),320)};
-        x.addEventListener('click',remove);
-        el.append(ic,tx,x);
-        wrap.appendChild(el);
-        t=setTimeout(remove,5200);
-        while(wrap.children.length>4)wrap.firstChild.remove();
+        if(typeof Toastify==='undefined')return;
+        Toastify({
+            text:String(msg),
+            duration:3000,
+            gravity:'top',
+            position:'right',
+            stopOnFocus:true,
+            newestOnTop:true,
+            className:kind==='flash-ok'?'pv-tv-ok':'pv-tv-err',
+            onClick:function(){this.toast.remove()}
+        }).showToast();
     }
     // Mounts a TradingView external-embedding widget that follows the app theme.
     function pvThemedWidget(hostId,src,cfg){
