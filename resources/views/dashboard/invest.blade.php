@@ -57,7 +57,7 @@
         <div class="grid-2" style="grid-template-columns:1fr 1fr">
             <div>
                 <label class="lbl">Stake amount (USD)</label>
-                <input class="inp num" id="iAmount" type="number" min="0" step="0.01" required placeholder="e.g. 2,500">
+                <input class="inp num" id="iAmount" name="amount" type="number" min="0" step="0.01" required placeholder="e.g. 2,500">
             </div>
             <div>
                 <label class="lbl">Est. reward at maturity</label>

@@ -273,13 +273,15 @@
     function pvAjax(form,btn){
         const fd=new FormData(form);
         const meta=document.querySelector('meta[name="csrf-token"]');
-        if(btn){const o=btn.textContent;btn.disabled=true;btn.textContent='Processing…'}
+        const o=btn?btn.textContent:'';if(btn){btn.disabled=true;btn.textContent='Processing…'}
+        const done=(ok,msg)=>{if(btn){btn.disabled=false;btn.textContent=o}pvFlash(ok?'flash-ok':'flash-err',msg||(ok?'Done':'Request failed'));if(ok&&form.dataset.reload)setTimeout(()=>location.reload(),900)};
         fetch(form.action,{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json','X-CSRF-TOKEN':meta?meta.content:''}})
-        .then(r=>r.json()).then(d=>{
-            if(btn){btn.disabled=false;btn.textContent=o}
-            pvFlash(d.success?'flash-ok':'flash-err',d.message||'Request processed');
-            if(d.success&&form.dataset.reload){setTimeout(()=>location.reload(),900)}
-        }).catch(e=>{if(btn){btn.disabled=false;btn.textContent=o}pvFlash('flash-err','Something went wrong. Please try again.')});
+        .then(r=>r.text().then(t=>{let d=null;try{d=JSON.parse(t)}catch(e){}return{status:r.status,text:r.statusText,d}}))
+        .then(({status,text,d})=>{
+            if(!d)return done(false,'Server error ('+status+' '+text+'). Please try again.');
+            done(!!d.success,d.message);
+        })
+        .catch(()=>done(false,'Network error. Please try again.'));
     }
     function pvFlash(kind,msg){
         const el=document.createElement('div');el.className='flash show '+kind;el.textContent=msg;
