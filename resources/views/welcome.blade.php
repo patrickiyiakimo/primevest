@@ -13,11 +13,6 @@
     .hero-trust{display:flex;gap:26px;margin-top:26px;color:var(--muted);font-size:.82rem}
     .hero-trust span{display:inline-flex;align-items:center;gap:7px}
     .hero-card{border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#0d1526,#0a0f1c);border:1px solid var(--line);box-shadow:0 60px 120px -60px rgba(0,0,0,.9)}
-    .hero-tab{display:flex;gap:6px;padding:8px;background:rgba(255,255,255,.04);border-radius:12px;border:1px solid var(--line)}
-    .hero-tab span{flex:1;text-align:center;padding:9px 0;border-radius:9px;font-size:.85rem;font-weight:600;color:var(--muted);cursor:pointer;transition:.2s}
-    .hero-tab span.on{background:rgba(47,123,255,.14);color:var(--acc);box-shadow:inset 0 0 0 1px rgba(47,123,255,.3)}
-    .price-row{display:flex;align-items:flex-end;justify-content:space-between;gap:14px}
-    .price-num{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;letter-spacing:-.02em}
     .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
     .pill-up{background:rgba(47,123,255,.14);color:var(--acc)}
     .pill-down{background:rgba(239,68,68,.14);color:#ff7c85}
@@ -30,39 +25,35 @@
     .trust-badge{padding:14px 22px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:10px}
     .step-box{padding:26px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line);text-align:center;height:100%}
     .step-num{width:40px;height:40px;border-radius:12px;margin:0 auto 14px;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d}
-    /* ---- premium hero chart card ---- */
-    .hero-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .hero-live{display:inline-flex;align-items:center;gap:7px;padding:5px 11px;border-radius:999px;background:rgba(47,123,255,.1);border:1px solid rgba(47,123,255,.3);color:var(--acc);font-size:.7rem;font-weight:800;letter-spacing:.1em}
-    .hero-live i{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:lp 1.4s infinite}
-    @keyframes lp{0%{opacity:1;box-shadow:0 0 0 0 rgba(47,123,255,.55)}70%{opacity:.45;box-shadow:0 0 0 7px rgba(47,123,255,0)}100%{opacity:1}}
-    .range-tab{display:flex;gap:4px;padding:5px;background:rgba(255,255,255,.04);border-radius:10px;border:1px solid var(--line)}
-    .range-tab span{padding:5px 11px;border-radius:7px;font-size:.74rem;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s}
-    .range-tab span.on{background:rgba(47,123,255,.15);color:var(--acc);box-shadow:inset 0 0 0 1px rgba(47,123,255,.3)}
-    .lg{display:inline-flex;align-items:center;gap:6px;font-size:.7rem;font-weight:600;color:var(--muted)}
-    .lg i{width:14px;height:2px;border-radius:2px}
-    .chart-wrap{position:relative;margin:14px 20px 0}
-    .chart-wrap svg{display:block;width:100%;height:auto;background:rgba(255,255,255,.012);border:1px solid rgba(255,255,255,.05);border-radius:12px}
-    .ch-xhair{position:absolute;top:0;bottom:26px;width:1px;background:rgba(255,255,255,.3);display:none;pointer-events:none}
-    .chart-tip{position:absolute;padding:8px 11px;border-radius:10px;background:#0a1020;border:1px solid var(--line);box-shadow:0 14px 34px -12px rgba(0,0,0,.85);font-size:.72rem;line-height:1.5;pointer-events:none;display:none;z-index:5;min-width:132px}
-    .chart-tip .t-t{color:var(--muted);font-size:.68rem;font-weight:600;letter-spacing:.05em}
-    .chart-tip .t-ohlc{display:grid;grid-template-columns:auto auto;gap:1px 14px;font-family:'JetBrains Mono',monospace;font-weight:600;margin-top:5px}
-    .hero-stat{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:14px}
-    .hero-stat .cell{padding:13px 14px}
-    .hero-stat .cell+.cell{border-left:1px solid var(--line)}
-    @media(max-width:520px){.hero-stat{grid-template-columns:1fr 1fr}.hero-stat .cell:nth-child(3){border-left:0}}
+    /* ---- hero rotating rubik's cube ---- */
+    .cube-stage{position:relative;height:430px;display:flex;align-items:center;justify-content:center;perspective:1100px;overflow:hidden}
+    .cube-glow{position:absolute;left:50%;top:50%;width:540px;height:540px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(47,123,255,.20),rgba(124,58,237,.12) 45%,transparent 72%);z-index:0}
+    .cube{position:relative;width:230px;height:230px;transform-style:preserve-3d;animation:cubespin 22s linear infinite;z-index:1;filter:drop-shadow(0 30px 50px rgba(0,0,0,.55))}
+    .cube-face{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px;padding:7px;background:#0c1322;border-radius:9px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
+    .cube-face span{display:block;border-radius:3px;box-shadow:inset 0 2px 6px rgba(0,0,0,.3)}
+    .cell-front span{background:#2f7bff}.cell-back span{background:#f0b90b}.cell-left span{background:#7c3aed}
+    .cell-right span{background:#1fd594}.cell-top span{background:#4cc3ff}.cell-bottom span{background:#ff5c6e}
+    .cube-front{transform:translateZ(115px)}
+    .cube-back{transform:rotateY(180deg) translateZ(115px)}
+    .cube-left{transform:rotateY(-90deg) translateZ(115px)}
+    .cube-right{transform:rotateY(90deg) translateZ(115px)}
+    .cube-top{transform:rotateX(90deg) translateZ(115px)}
+    .cube-bottom{transform:rotateX(-90deg) translateZ(115px)}
+    @keyframes cubespin{0%{transform:rotateX(-20deg) rotateY(0deg)}100%{transform:rotateX(-20deg) rotateY(360deg)}}
+    @media(max-width:520px){.cube-stage{height:340px}.cube{width:190px;height:190px}.cube-front{transform:translateZ(95px)}.cube-back{transform:rotateY(180deg) translateZ(95px)}.cube-left{transform:rotateY(-90deg) translateZ(95px)}.cube-right{transform:rotateY(90deg) translateZ(95px)}.cube-top{transform:rotateX(90deg) translateZ(95px)}.cube-bottom{transform:rotateX(-90deg) translateZ(95px)}}
     /* ---- hero background chart ---- */
     .hero-bgchart{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
     .hero-bgchart .bg-area{fill:url(#bgArea)}
     .hero-bgchart .bg-path{fill:none;stroke:url(#bgLine);stroke-width:2.2;opacity:.8}
     .hero-bgchart .bg-dash{stroke:#4cc3ff;stroke-dasharray:6 9;opacity:.5}
     /* ---- awards strip ---- */
-    .pv-awards{position:relative;z-index:1;border-bottom:1px solid var(--line);background:var(--bg2);padding:26px 0}
-    .pv-awards-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px}
-    .pv-awards-label{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800;text-align:center}
-    .pv-awards-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:24px}
-    .pv-awards img{height:54px;max-width:200px;object-fit:contain;opacity:.85;filter:grayscale(.55) brightness(1.05);transition:.3s}
+    .pv-awards{position:relative;z-index:1;border-bottom:1px solid var(--line);background:var(--bg2);padding:12px 0}
+    .pv-awards-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px}
+    .pv-awards-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800;text-align:center}
+    .pv-awards-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px}
+    .pv-awards img{height:24px;max-width:110px;object-fit:contain;opacity:.85;filter:grayscale(.55) brightness(1.05);transition:.3s}
     .pv-awards img:hover{opacity:1;filter:grayscale(0)}
-    @media(max-width:600px){.pv-awards-in{flex-direction:column;gap:16px;text-align:center}.pv-awards img{height:42px}}
+    @media(max-width:600px){.pv-awards-in{flex-direction:column;gap:8px;text-align:center}.pv-awards img{height:20px}}
     /* ---- verified trader badge ---- */
     .pv-verif{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:6px;position:relative}
     .pv-verif svg{display:block;width:17px;height:17px}
@@ -112,72 +103,32 @@
             <div>
                 <div class="hero-badge"><span class="dot"></span> Institutional-grade crypto investing for everyone</div>
                 <h1 class="pv-h1">Trade, stake &amp; grow your <span style="background:linear-gradient(120deg,#2f7bff,#4cc3ff);-webkit-background-clip:text;background-clip:text;color:transparent">digital assets</span> with a platform you can trust.</h1>
-                <!-- <p class="pv-lead">Buy and sell 200+ cryptocurrencies, stake for passive income, and mirror the trades of proven experts. Bank-grade security, transparent fees and lightning-fast execution.</p> -->
                 <div class="hero-actions">
                     <a href="{{ route('register') }}" class="pv-btn pv-btn-lg mr-5">Start Trading Free</a>
                     <a href="{{ route('trading') }}#copy-trading" class="pv-btn pv-btn-ghost pv-btn-lg">Explore Copy Trading</a>
                 </div>
-                <!-- <div class="hero-trust">
-                    <span>◆ 480K+ investors</span>
-                    <span>◆ $2.4B+ assets secured</span>
-                    <span>◆ 99.9% uptime</span>
-                </div> -->
-                <!-- <div class="hero-note">
-                    <span><b>New here?</b> Get a <b style="color:var(--gold)">$100 demo balance</b> to practise trading risk-free.</span>
-                </div> -->
             </div>
 
-            <!-- Live trading chart -->
+            <!-- Rotating Rubik's cube visual -->
             <div class="hero-card">
-                <div style="padding:16px 20px 10px">
-                    <div class="hero-top">
-                        <div class="hero-tab">
-                            <span class="on" data-sym="BTCUSD">BTC</span>
-                            <span data-sym="ETHUSD">ETH</span>
-                            <span data-sym="SOLUSD">SOL</span>
-                            <span data-sym="BNBUSD">BNB</span>
-                            <span data-sym="XRPUSD">XRP</span>
-                        </div>
-                        <span class="hero-live"><i></i>LIVE</span>
+                <div class="cube-stage">
+                    <div class="cube-glow"></div>
+                    <div class="cube">
+                        <div class="cube-face cube-front cell-front">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
+                        <div class="cube-face cube-back cell-back">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
+                        <div class="cube-face cube-left cell-left">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
+                        <div class="cube-face cube-right cell-right">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
+                        <div class="cube-face cube-top cell-top">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
+                        <div class="cube-face cube-bottom cell-bottom">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
                     </div>
                 </div>
-                <div style="padding:8px 20px 0">
-                    <div class="price-row" style="align-items:flex-start">
-                        <div>
-                            <div style="display:flex;align-items:center;gap:9px">
-                                <img id="cIcon" src="{{ asset('/images/btc.png') }}" alt="BTC" width="26" height="26" style="border-radius:50%">
-                                <b id="cName">Bitcoin</b>
-                                <span class="pv-mut" id="cPair" style="font-size:.8rem">BTC/USD</span>
-                            </div>
-                            <div class="price-num num" id="heroPrice">$67,241.80</div>
-                            <div style="display:flex;align-items:center;gap:12px;margin-top:5px">
-                                <span class="pill pill-up num" id="heroChg">▲ +2.41%</span>
-                                <span class="lg"><i style="background:var(--gold)"></i>MA7</span>
-                            </div>
-                        </div>
-                        <div class="range-tab" id="rangeTabs">
-                            <span data-range="h1">1H</span><span data-range="h4">4H</span><span class="on" data-range="d1">1D</span><span data-range="w1">1W</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="chart-wrap" id="chartBox">
-                    <svg id="candles" viewBox="0 0 560 250"></svg>
-                    <div class="ch-xhair" id="chX"></div>
-                    <div class="chart-tip" id="chTip"></div>
-                </div>
-                <!-- <div class="hero-stat">
-                    <div class="cell"><div class="pv-mut" style="font-size:.68rem;letter-spacing:.05em">24H HIGH</div><div class="num" id="sHigh" style="font-weight:700;font-size:.88rem">$67,890</div></div>
-                    <div class="cell"><div class="pv-mut" style="font-size:.68rem;letter-spacing:.05em">24H LOW</div><div class="num" id="sLow" style="font-weight:700;font-size:.88rem">$66,322</div></div>
-                    <div class="cell"><div class="pv-mut" style="font-size:.68rem;letter-spacing:.05em">VOLUME</div><div class="num" id="sVol" style="font-weight:700;font-size:.88rem">$28.4B</div></div>
-                    <div class="cell"><div class="pv-mut" style="font-size:.68rem;letter-spacing:.05em">MARKET CAP</div><div class="num" id="sMc" style="font-weight:700;font-size:.88rem">$1.33T</div></div>
-                </div> -->
             </div>
         </div>
     </div>
 </section>
 
 <!-- ===== AWARDS & RECOGNITION ===== -->
-<section class="pv-awards">
+<!-- <section class="pv-awards">
     <div class="pv-container">
         <div class="pv-awards-in">
             <div class="pv-awards-label">Awards &amp; Recognition</div>
@@ -190,25 +141,55 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
-<!-- ===== LIVE TICKER ===== -->
+<!-- ===== LIVE MARKETS (TradingView Ticker Tape) ===== -->
 <section class="ticker" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);position:relative;z-index:1">
-    <div style="overflow:hidden">
-        <div class="pv-container" style="padding:12px 22px;overflow:hidden">
-            <div style="display:flex;gap:34px;white-space:nowrap;align-items:center;overflow-x:auto;scrollbar-width:none" id="tickerRow">
-                <span class="pv-mut" style="font-weight:700;letter-spacing:.1em;font-size:.75rem;text-transform:uppercase">Live Markets</span>
-                <span style="font-weight:600" class="num">BTC <span class="pv-acc">$67,241.80</span> <span class="pill pill-up" style="font-size:.72rem">+2.41%</span></span>
-                <span style="font-weight:600" class="num">ETH <span style="color:var(--muted)">$3,482.15</span> <span class="pill pill-down" style="font-size:.72rem">-0.86%</span></span>
-                <span style="font-weight:600" class="num">SOL <span class="pv-acc">$152.34</span> <span class="pill pill-up" style="font-size:.72rem">+4.02%</span></span>
-                <span style="font-weight:600" class="num">BNB <span class="pv-acc">$584.90</span> <span class="pill pill-up" style="font-size:.72rem">+1.27%</span></span>
-                <span style="font-weight:600" class="num">XRP <span class="pv-acc">$0.5841</span> <span class="pill pill-up" style="font-size:.72rem">+3.18%</span></span>
-                <span style="font-weight:600" class="num">ADA <span style="color:var(--muted)">$0.4520</span> <span class="pill pill-down" style="font-size:.72rem">-0.42%</span></span>
-                <span style="font-weight:600" class="num">DOT <span class="pv-acc">$6.182</span> <span class="pill pill-up" style="font-size:.72rem">+1.84%</span></span>
-                <span style="font-weight:600" class="num">LINK <span class="pv-acc">$13.27</span> <span class="pill pill-up" style="font-size:.72rem">+2.95%</span></span>
-            </div>
-        </div>
-    </div>
+    <div id="pvTvTape" style="min-height:44px"><div style="color:var(--muted);font-size:.8rem;padding:14px 20px">Loading live market…</div></div>
+    <script>
+        (function(){
+            var hostSel='#pvTvTape';
+            function theme(){try{return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'}catch(e){return 'dark'}}
+            function mount(){
+                var host=document.querySelector(hostSel);
+                if(!host)return;
+                host.innerHTML='';
+                var cfg={
+                    "symbols":[
+                        {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},
+                        {"proName":"BITSTAMP:ETHUSD","title":"Ethereum"},
+                        {"proName":"BINANCE:SOLUSDT","title":"Solana"},
+                        {"proName":"BINANCE:BNBUSDT","title":"BNB"},
+                        {"proName":"BITFINEX:XRPUSD","title":"XRP"},
+                        {"proName":"COINBASE:ADAUSD","title":"Cardano"},
+                        {"proName":"COINBASE:DOTUSD","title":"Polkadot"},
+                        {"proName":"BINANCE:LINKUSDT","title":"Chainlink"}
+                    ],
+                    "showSymbolLogo":true,
+                    "isTransparent":true,
+                    "displayMode":"adaptive",
+                    "colorTheme":theme(),
+                    "locale":"en"
+                };
+                var wrap=document.createElement('div');
+                wrap.className='tradingview-widget-container';
+                var w=document.createElement('div');
+                w.className='tradingview-widget-container__widget';
+                wrap.appendChild(w);
+                var s=document.createElement('script');
+                s.type='text/javascript';
+                s.async=true;
+                s.src='https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
+                s.text=JSON.stringify(cfg);
+                wrap.appendChild(s);
+                host.appendChild(wrap);
+            }
+            mount();
+            try{
+                new MutationObserver(mount).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+            }catch(e){}
+        })();
+    </script>
 </section>
 
 <!-- ===== STATS ===== -->
@@ -462,182 +443,4 @@
         </div>
     </div>
 </section>
-@endsection
-
-@section('scripts')
-<script>
-    // ---- Premium hero chart (pure SVG, no deps) ----
-    const UP='#1fd594', DN='#ff5c6e';
-    const SPEC={
-        BTCUSD:[67241.80,0.0011,0.0045,'$1.33T'],
-        ETHUSD:[3482.15,0.0006,0.0038,'$419B'],
-        SOLUSD:[152.34,0.0022,0.0065,'$68B'],
-        BNBUSD:[584.90,0.0009,0.0032,'$86B'],
-        XRPUSD:[0.5841,0.0028,0.0075,'$33B']
-    };
-    const INFO={
-        BTCUSD:{name:'Bitcoin',pair:'BTC/USD',icon:'btc.png',vol:'$28.4B'},
-        ETHUSD:{name:'Ethereum',pair:'ETH/USD',icon:'eth.png',vol:'$17.1B'},
-        SOLUSD:{name:'Solana',pair:'SOL/USD',icon:'sol.png',vol:'$6.2B'},
-        BNBUSD:{name:'BNB',pair:'BNB/USD',icon:'bnb.png',vol:'$3.1B'},
-        XRPUSD:{name:'XRP',pair:'XRP/USD',icon:'xrp.png',vol:'$2.4B'}
-    };
-    const RCOUNT={h1:26,h4:24,d1:26,w1:22};
-    const mulberry=s=>{let a=s|0;return()=>{a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}};
-    const series=(sym,range)=>{
-        const [base,trend,vol]=SPEC[sym];
-        const n=RCOUNT[range];
-        const rnd=mulberry(sym.length*13+({h1:1,h4:2,d1:3,w1:4}[range])*97);
-        let price=base*(1-n*trend*(range==='w1'?0.8:0.4));
-        const out=[];
-        for(let i=0;i<n;i++){
-            const o=price, dr=trend*base;
-            const c=o+dr+(rnd()-0.5)*vol*base*2.2;
-            let h=Math.max(o,c)+rnd()*vol*base*(0.35+rnd()*0.65);
-            let l=Math.min(o,c)-rnd()*vol*base*(0.35+rnd()*0.65);
-            h=Math.max(h,l+vol*base*0.04); l=Math.min(l,h-vol*base*0.04);
-            const v=3000+rnd()*9000;
-            out.push([o,h,l,c,Math.round(v)]);
-            price=c;
-        }
-        return out;
-    };
-    const now=new Date();
-    const step={h1:10*60000,h4:60*60000,d1:360*60000,w1:24*3600000};
-    const tlabel=(range,i,n)=>{
-        const t=new Date(now.getTime()-(n-1-i)*step[range]);
-        return range==='w1'
-            ? t.toLocaleDateString('en-US',{month:'short',day:'numeric'})
-            : t.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:false});
-    };
-    const fmtP=(p,base)=>p>=1000?p.toLocaleString('en-US',{maximumFractionDigits:0}):p>=10?p.toFixed(2):p.toFixed(4);
-    const fmtV=v=>v>=1e12?('$'+(v/1e12).toFixed(2)+'T'):v>=1e9?('$'+(v/1e9).toFixed(2)+'B'):('$'+(v/1e6).toFixed(1)+'M');
-
-    const W=560,H=250,padL=8,padR=56,padT=8,padB=26,volH=42;
-    const plotW=W-padL-padR, bottom=H-padB, botTop=H-padB-volH;
-
-    const state={sym:'BTCUSD',range:'d1',data:[],labels:[],min:0,max:0,n:0};
-
-    function draw(){
-        const {sym,range}=state;
-        const d=series(sym,range); state.data=d; state.n=d.length;
-        state.labels=Array.from({length:d.length},(_,i)=>tlabel(range,i,d.length));
-        let lo=Infinity,hi=-Infinity;
-        d.forEach(c=>{lo=Math.min(lo,c[1],c[2]);hi=Math.max(hi,c[1],c[2])});
-        const pad=(hi-lo)*0.06; lo-=pad;hi+=pad;
-        state.min=lo;state.max=hi;
-        const n=d.length, xw=plotW/(n-1);
-        const xs=i=>padL+i*xw;
-        const y=p=>botTop-((p-lo)/(hi-lo))*(botTop-padT);
-        const vMax=Math.max(...d.map(c=>c[4]));
-        const yv=v=>H-padB-(v/vMax)*volH;
-        const bw=Math.max(Math.min(xw*0.55,13),2);
-        let s=`<g>`;
-        for(let k=0;k<=4;k++){
-            const yy=botTop+(botTop-padT)*k/4, val=hi-(hi-lo)*k/4, x=padL;
-            s+=`<line x1="${x}" y1="${yy.toFixed(1)}" x2="${W-padR}" y2="${yy.toFixed(1)}" stroke="rgba(255,255,255,.05)"/>`;
-            s+=`<text x="${W-padR+6}" y="${(yy+3).toFixed(1)}" fill="rgba(148,161,182,.75)" font-size="9" font-family="JetBrains Mono,monospace">${fmtP(val)}</text>`;
-        }
-        [0,(n-1)/3,(n-1)*2/3,n-1].forEach(i=>{
-            i=Math.round(i); const xx=xs(i);
-            s+=`<line x1="${xx.toFixed(1)}" y1="${padT}" x2="${xx.toFixed(1)}" y2="${bottom}" stroke="rgba(255,255,255,.05)"/>`;
-            s+=`<text x="${(xx-9).toFixed(1)}" y="${H-10}" fill="rgba(148,161,182,.6)" font-size="9">${state.labels[i]}</text>`;
-        });
-        s+=`</g>`;
-        d.forEach((c,i)=>{
-            const cx=xs(i), up=c[4]>=0; const col=Math.abs(c[3]-c[0])<1e-9?UP:(c[3]>=c[0]?UP:DN);
-            s+=`<line x1="${cx.toFixed(1)}" y1="${y(c[1]).toFixed(1)}" x2="${cx.toFixed(1)}" y2="${y(c[2]).toFixed(1)}" stroke="${col}" stroke-width="1"/>`;
-            const yo=y(c[0]), yc=y(c[3]);
-            const top=Math.min(yo,yc), hgt=Math.max(Math.abs(yo-yc),1.4);
-            s+=`<rect x="${(cx-bw/2).toFixed(1)}" y="${top.toFixed(1)}" width="${bw.toFixed(1)}" height="${hgt.toFixed(1)}" rx="1" fill="${col}"/>`;
-            const vh=yv(c[4]);
-            s+=`<rect x="${(cx-bw*0.9/2).toFixed(1)}" y="${vh.toFixed(1)}" width="${(bw*0.9).toFixed(1)}" height="${(H-padB-vh).toFixed(1)}" fill="${col}" opacity=".4"/>`;
-        });
-        const closes=d.map(c=>c[3]);
-        const ma=[];
-        for(let i=6;i<n;i++){
-            const a=closes.slice(i-6,i+1).reduce((x,v)=>(x+=v),0)/7;
-            ma.push([xs(i),y(a)]);
-        }
-        if(ma.length>1){
-            const p=ma.map((m,k)=>(k?'L':'M')+m[0].toFixed(1)+' '+m[1].toFixed(1)).join(' ');
-            s+=`<path d="${p}" fill="none" stroke="#f0b90b" stroke-width="1.3" opacity=".9"/>`;
-        }
-        document.getElementById('candles').innerHTML=s;
-        updateHeader();
-    }
-
-    function updateHeader(){
-        const {sym,range,data,min,max}=state;
-        const li=INFO[sym], base=SPEC[sym][0];
-        const icon=document.getElementById('cIcon');
-        icon.src="{{ asset('/images/') }}"+li.icon;
-        icon.onerror=()=>{icon.src='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"><circle cx="13" cy="13" r="13" fill="#0c1322"/><circle cx="13" cy="13" r="12" fill="none" stroke="rgba(47,123,255,.6)"/><text x="13" y="17" font-size="11" font-family="Arial" font-weight="bold" text-anchor="middle" fill="#2f7bff">'+li.pair.slice(0,3)+'</text></svg>')};
-        document.getElementById('cName').textContent=li.name;
-        document.getElementById('cPair').textContent=li.pair;
-        document.getElementById('heroPrice').textContent='$'+fmtP(data[data.length-1][3],base);
-        const chg=(data[data.length-1][3]-data[0][0])/data[0][0]*100;
-        const hc=document.getElementById('heroChg');
-        hc.innerHTML=(chg>=0?'▲ +':'▼ ')+Math.abs(chg).toFixed(2)+'%';
-        hc.className='pill '+(chg>=0?'pill-up':'pill-down')+' num';
-        const hhi=-Infinity,llo=Infinity;
-        data.forEach(c=>{if(c[1]>hhi)hhi=c[1];if(c[2]<llo)llo=c[2]});
-        const dp=base<1?4:base<10?2:0;
-        document.getElementById('sHigh').textContent='$'+hhi.toLocaleString('en-US',{maximumFractionDigits:dp});
-        document.getElementById('sLow').textContent='$'+llo.toLocaleString('en-US',{maximumFractionDigits:dp});
-        document.getElementById('sVol').textContent=li.vol;
-        document.getElementById('sMc').textContent=SPEC[sym][3];
-    }
-
-    function drawCross(i, px){
-        const c=state.data[i];
-        const col=Math.abs(c[3]-c[0])<1e-9?UP:(c[3]>=c[0]?UP:DN);
-        const dp=SPEC[state.sym][0]<1?4:SPEC[state.sym][0]<10?2:0;
-        const f=p=>'$'+p.toLocaleString('en-US',{maximumFractionDigits:dp});
-        const tip=document.getElementById('chTip');
-        tip.style.display='block';
-        tip.innerHTML=`<div class="t-t">${state.labels[i]} · ${INFO[state.sym].pair}</div><div class="t-ohlc"><span>Open</span><b style="color:${col}">${f(c[0])}</b><span>High</span><b class="num">${f(c[1])}</b><span>Low</span><b class="num">${f(c[2])}</b><span>Close</span><b class="num">${f(c[3])}</b></div>`;
-        const box=document.getElementById('chartBox').getBoundingClientRect();
-        const scale=W/box.width;
-        const xpx=px/scale;
-        document.getElementById('chX').style.left=xpx+'px';
-        document.getElementById('chX').style.display='block';
-        const tw=tip.offsetWidth, bw=box.width;
-        tip.style.top='14px';
-        tip.style.left=Math.min(Math.max(xpx+12,8),bw-tw-8)+'px';
-    }
-
-    const boxEl=document.getElementById('chartBox');
-    boxEl.addEventListener('mousemove',e=>{
-        const r=boxEl.getBoundingClientRect();
-        const x=e.clientX-r.left, scale=W/r.width, xv=x*scale;
-        const n=state.n, xw=plotW/(n-1);
-        let i=Math.round((xv-padL)/xw);
-        i=Math.max(0,Math.min(n-1,i));
-        drawCross(i,x);
-    });
-    boxEl.addEventListener('mouseleave',()=>{
-        document.getElementById('chTip').style.display='none';
-        document.getElementById('chX').style.display='none';
-    });
-
-    document.querySelectorAll('.hero-tab span').forEach(el=>{
-        el.addEventListener('click',()=>{
-            document.querySelector('.hero-tab span.on').classList.remove('on');
-            el.classList.add('on');
-            state.sym=el.dataset.sym;
-            draw();
-        });
-    });
-    document.querySelectorAll('#rangeTabs span').forEach(el=>{
-        el.addEventListener('click',()=>{
-            document.querySelector('#rangeTabs span.on').classList.remove('on');
-            el.classList.add('on');
-            state.range=el.dataset.range;
-            draw();
-        });
-    });
-
-    draw();
-</script>
 @endsection

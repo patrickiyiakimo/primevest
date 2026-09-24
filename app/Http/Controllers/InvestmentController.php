@@ -168,7 +168,7 @@ class InvestmentController extends Controller
                 'duration' => $validated['duration'],
                 'duration_days' => $validated['duration_days'],
                 'start_date' => Carbon::now(),
-                'end_date' => Carbon::now()->addDays($validated['duration_days']),
+                'end_date' => Carbon::now()->addDays((int) $validated['duration_days']),
                 'status' => 'active'
             ]);
             
