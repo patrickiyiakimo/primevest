@@ -4,7 +4,7 @@
 @section('breadcrumb', 'Earn daily rewards by staking your crypto')
 
 @section('dashboard-content')
-<div class="pa" style="padding:22px;background:linear-gradient(140deg,#0d1d2e,#0c1322);margin-bottom:24px">
+<div class="pa pv-shade" style="padding:22px;margin-bottom:24px">
     <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px">
         <div style="flex:1;min-width:220px">
             <div style="font-weight:800;font-size:1.2rem">Choose a staking plan</div>

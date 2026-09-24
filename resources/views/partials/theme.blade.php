@@ -40,6 +40,10 @@
 
     /* Universal light surfaces (hardcoded white-rgba -> dark-on-light tint) */
     [data-theme="light"] body{background:var(--bg);color:var(--text)}
+
+    /* Accent shade panels: dark navy gradient in dark mode, soft blue in light */
+    .pv-shade{background:linear-gradient(140deg,#0d1d2e,#0c1322)!important}
+    [data-theme="light"] .pv-shade{background:linear-gradient(140deg,#e3eeff,#f6f9ff)!important}
     [data-theme="light"] .pv-panel-soft,[data-theme="light"] .pv-stat,[data-theme="light"] .step-box,
     [data-theme="light"] .side-user,[data-theme="light"] .udrop-menu a:hover,
     [data-theme="light"] .notif,[data-theme="light"] .tsearch,[data-theme="light"] .udrop-btn{background:rgba(10,24,52,.04)}

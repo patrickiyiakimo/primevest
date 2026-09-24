@@ -47,7 +47,7 @@
         <div><h2>My Referrals</h2><p>Invite friends and earn with the PrimeVest referral program</p></div>
         <button class="btn btn-sm btn-ghost" onclick="navigator.clipboard.writeText('{{ url('/register?ref='.$user->referral_code ?? '') }}').then(()=>pvFlash('flash-ok','Referral link copied'))">Copy referral link</button>
     </div>
-    <div class="pa" style="padding:16px 20px;display:flex;align-items:center;gap:14px;margin-bottom:18px;background:linear-gradient(140deg,#0d1d2e,#0c1322)">
+    <div class="pa pv-shade" style="padding:16px 20px;display:flex;align-items:center;gap:14px;margin-bottom:18px">
         <div style="font-weight:800">🔗 Your referral code</div>
         <code class="num" style="background:rgba(255,255,255,.06);padding:8px 14px;border-radius:9px;border:1px solid var(--line)">{{ $user->referral_code }}</code>
         <span class="muted" style="font-size:.82rem">Earn <b class="gold">5% of every deposit</b> a referred friend makes.</span>
