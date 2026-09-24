@@ -70,10 +70,10 @@ class DashboardController extends Controller
         $lastWithdrawalAmount = $lastWithdrawal ? $lastWithdrawal->amount : 0;
         $lastWithdrawalDate = $lastWithdrawal ? $lastWithdrawal->created_at->format('Y-m-d') : null;
         
-        // Get recent transactions
+        // Get recent transactions (top 5 shown on dashboard)
         $transactions = Transaction::where('user_id', $user->id)
             ->latest()
-            ->take(10)
+            ->take(5)
             ->get()
             ->map(function($transaction) {
                 return [
