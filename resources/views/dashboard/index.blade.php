@@ -18,6 +18,13 @@
     .sig-ring{transform:rotate(-90deg)}
     .pv-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,12,.72);backdrop-filter:blur(8px)}
     .pv-modal.open{display:flex}
+    .pv-grid-main{display:grid;grid-template-columns:1.7fr 1fr;gap:20px;height:560px}
+    .pv-chart-box{flex:1;min-height:0;position:relative}
+    @media(max-width:1100px){
+        .pv-grid-main{grid-template-columns:1fr;height:auto}
+        .pv-chart-box{min-height:320px}
+        .pv-quickcol .pv-screener{min-height:420px}
+    }
 </style>
 
 <!-- KPI CARDS -->
@@ -78,7 +85,7 @@
 </div>
 
 <!-- MAIN GRID: chart + quick actions -->
-<div class="grid-3 mt" style="grid-template-columns:1.7fr 1fr;height:560px">
+<div class="pv-grid-main mt">
     <!-- Portfolio performance -->
     <div class="pa" style="padding:22px;display:flex;flex-direction:column;min-height:0">
         <div class="sec-h">
@@ -90,7 +97,7 @@
             <div><span class="muted" style="font-size:.75rem">Net P/L</span><div style="font-weight:800" class="num {{ $netPnl >= 0 ? 'ok' : 'bad' }}">{{ $netPnl >= 0 ? '+' : '' }}${{ number_format($netPnl, 2) }}</div></div>
             <div><span class="muted" style="font-size:.75rem">Last deposit</span><div style="font-weight:800" class="num">{{ $lastDepositDate ? '$'.number_format($lastDepositAmount,2).' · '.$lastDepositDate : '—' }}</div></div>
         </div>
-        <div style="flex:1;min-height:0;position:relative">
+        <div class="pv-chart-box">
             @if(count($chart))
                 <canvas id="growthChart" style="height:100%;width:100%"></canvas>
             @else
@@ -100,14 +107,14 @@
     </div>
 
     <!-- Quick actions + market screener -->
-    <div style="display:flex;flex-direction:column;gap:20px;min-height:0">
+    <div class="pv-quickcol" style="display:flex;flex-direction:column;gap:20px;min-height:0">
         <div class="pa" style="padding:22px">
             <div class="sec-h"><div><h2>Quick Actions</h2><p>Move your funds in seconds</p></div></div>
             <a href="{{ route('deposit') }}" class="btn btn-block" style="width:100%;margin-bottom:10px">⬆ Deposit Funds</a>
             <a href="{{ route('invest') }}" class="btn btn-gold btn-block" style="width:100%;margin-bottom:10px">🔥 Start Staking</a>
             <a href="{{ route('buy-crypto') }}" class="btn btn-ghost btn-block" style="width:100%">⟳ Buy Crypto</a>
         </div>
-        <div class="pa pv-card" style="padding:22px 22px 14px;display:flex;flex-direction:column;flex:1;min-height:0">
+        <div class="pa pv-card pv-screener" style="padding:22px 22px 14px;display:flex;flex-direction:column;flex:1;min-height:0">
             <div class="sec-h" style="margin-bottom:10px"><div><h2>Market Screener</h2><p>Real-time crypto overview</p></div></div>
             <div style="flex:1;min-height:0;border-radius:12px;overflow:hidden">
                 <div id="tvScreener" style="height:100%"></div>
