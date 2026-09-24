@@ -93,15 +93,16 @@ class DashboardController extends Controller
         
         // Signal strength — grows with the investor's funded balance (0% for new signups, 100% at $1M)
         $signalTiers = [
-            ['threshold' => 0,          'level' => 'Bronze',    'signal' => 0],
-            ['threshold' => 1000,       'level' => 'Silver',    'signal' => 10],
-            ['threshold' => 10000,      'level' => 'Gold',      'signal' => 25],
-            ['threshold' => 50000,      'level' => 'Platinum',  'signal' => 40],
-            ['threshold' => 150000,     'level' => 'Titanium',  'signal' => 55],
-            ['threshold' => 300000,     'level' => 'Diamond',   'signal' => 70],
-            ['threshold' => 600000,     'level' => 'Obsidian',  'signal' => 85],
-            ['threshold' => 1000000,    'level' => 'Whale',     'signal' => 100],
+            ['threshold' => 0,      'level' => 'Bronze',   'signal' => 0],
+            ['threshold' => 1000,   'level' => 'Silver',   'signal' => 10],
+            ['threshold' => 10000,  'level' => 'Gold',     'signal' => 25],
+            ['threshold' => 50000,  'level' => 'Platinum', 'signal' => 40],
+            ['threshold' => 150000, 'level' => 'Titanium', 'signal' => 55],
+            ['threshold' => 300000, 'level' => 'Diamond',  'signal' => 70],
+            ['threshold' => 600000, 'level' => 'Obsidian', 'signal' => 85],
+            ['threshold' => 1000000,'level' => 'Whale',    'signal' => 100],
         ];
+
         $signal = 0;
         $signalLevel = $signalTiers[0]['level'];
         $signalNext = null;
