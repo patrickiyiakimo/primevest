@@ -21,7 +21,7 @@
     .tips li{margin:8px 0;color:var(--muted);font-size:.95rem}
     .tips li b{color:var(--text)}
     .copy-chip{display:flex;align-items:center;gap:10px;padding:18px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.3s}
-    @media(max-width:900px){.ct-cards{grid-template-columns:1fr!important}}
+    @media(max-width:900px){.ct-cards,.wh-cards{grid-template-columns:1fr!important}}
     .trader-av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-size:1rem;flex-shrink:0}
     .trust-badge{padding:14px 22px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:10px}
     .step-box{padding:26px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line);text-align:center;height:100%}
@@ -55,6 +55,15 @@
     .pv-awards img{height:24px;max-width:110px;object-fit:contain;opacity:.85;filter:grayscale(.55) brightness(1.05);transition:.3s}
     .pv-awards img:hover{opacity:1;filter:grayscale(0)}
     @media(max-width:600px){.pv-awards-in{flex-direction:column;gap:8px;text-align:center}.pv-awards img{height:20px}}
+    /* ---- as seen on press strip ---- */
+    .pv-media{position:relative;z-index:1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);padding:22px 0}
+    .pv-media-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;text-align:center;margin-bottom:18px}
+    .pv-media-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:34px}
+    .pv-media img{height:26px;max-width:150px;object-fit:contain;filter:brightness(0) invert(1);opacity:.75;transition:.25s}
+    .pv-media img:hover{opacity:1;transform:translateY(-2px)}
+    [data-theme="light"] .pv-media img{filter:grayscale(.45) brightness(1.1);opacity:.75}
+    [data-theme="light"] .pv-media img:hover{filter:none;opacity:1}
+    @media(max-width:600px){.pv-media{padding:18px 0}.pv-media-row{gap:20px}.pv-media img{height:20px;max-width:120px}}
     /* ---- verified trader badge ---- */
     .pv-verif{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:7px;position:relative;vertical-align:middle}
     .pv-verif svg{display:block;width:18px;height:18px;filter:drop-shadow(0 2px 3px rgba(29,107,240,.45))}
@@ -68,12 +77,31 @@
     .feat-stat{padding:20px 24px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--line);text-align:center}
     .feat-stat b{display:block;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#57c8ff,#2f7bff);-webkit-background-clip:text;background-clip:text;color:transparent}
     .feat-stat span{color:var(--muted);font-size:.8rem}
-    .pv-icon-grad{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:1.35rem;background:linear-gradient(135deg,rgba(87,200,255,.22),rgba(47,123,255,.08));border:1px solid rgba(47,123,255,.3)}
+    .pv-emoji{font-size:110px;line-height:1;display:block;filter:drop-shadow(0 10px 20px rgba(0,0,0,.25))}
     /* ---- academy video ---- */
     .aca-shell{display:grid;grid-template-columns:1.05fr 1fr;gap:34px;align-items:center}
     @media(max-width:900px){.aca-shell{grid-template-columns:1fr}}
     .vid-frame{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#0a0f1c;box-shadow:0 40px 90px -50px rgba(0,0,0,.9)}
     .vid-frame iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+    /* ---- testimonials ---- */
+    .t-track{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+    .t-card{padding:26px;flex:0 1 345px;border-radius:0!important}
+    .t-stars{color:var(--gold);letter-spacing:2px}
+    .t-av{width:120px;height:120px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid rgba(47,123,255,.35);display:block}
+    .t-nav{display:none;justify-content:center;gap:10px;margin-top:24px}
+    .t-nav button{width:42px;height:42px;border-radius:0;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;font-size:1.05rem;line-height:1;transition:.2s;font-family:inherit}
+    .t-nav button:hover{background:rgba(47,123,255,.12);border-color:rgba(47,123,255,.4)}
+    .t-dots{display:none;justify-content:center;gap:8px;margin-top:16px}
+    .t-dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer;transition:.2s}
+    .t-dots button.on{background:var(--acc);transform:scale(1.25)}
+    @media(min-width:901px){.t-nav,.t-dots{display:none}}
+    @media(max-width:900px){
+        .t-track{flex-wrap:nowrap;justify-content:flex-start;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -20px;padding:0 20px}
+        .t-track::-webkit-scrollbar{display:none}
+        .t-card{flex:0 0 86%;scroll-snap-align:center;padding:24px}
+        .t-nav{display:flex}
+        .t-dots{display:flex}
+    }
 </style>
 @endpush
 
@@ -104,7 +132,7 @@
     <div class="pv-container" style="position:relative;z-index:1">
         <div class="pv-grid pv-grid-2" style="align-items:center;gap:46px">
             <div>
-                <div class="hero-badge"><span class="dot"></span> Institutional-grade crypto investing for everyone</div>
+                <!-- <div class="hero-badge"><span class="dot"></span> Institutional-grade crypto investing for everyone</div> -->
                 <h1 class="pv-h1">Trade, stake &amp; grow your <span style="background:linear-gradient(120deg,#2f7bff,#4cc3ff);-webkit-background-clip:text;background-clip:text;color:transparent">digital assets</span> with a platform you can trust.</h1>
                 <div class="hero-actions">
                     <a href="{{ route('register') }}" class="pv-btn pv-btn-lg mr-5">Start Trading Free</a>
@@ -145,6 +173,19 @@
         </div>
     </div>
 </section> -->
+
+<!-- ===== AS SEEN ON ===== -->
+<section class="pv-media">
+    <div class="pv-container">
+        <div class="pv-media-label">As seen on</div>
+        <div class="pv-media-row">
+            <img src="{{ asset('images/cnbc.svg') }}" alt="CNBC" title="Featured on CNBC">
+            <img src="{{ asset('images/bloomberg.svg') }}" alt="Bloomberg" title="Featured on Bloomberg">
+            <img src="{{ asset('images/reuters.svg') }}" alt="Reuters" title="Featured on Reuters">
+            <img src="{{ asset('images/theguardian.svg') }}" alt="The Guardian" title="Featured in The Guardian">
+        </div>
+    </div>
+</section>
 
 <!-- ===== LIVE MARKETS (TradingView Ticker Tape) ===== -->
 <section class="ticker" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);position:relative;z-index:1">
@@ -354,41 +395,34 @@
             <p class="pv-lead" style="margin:10px auto 0">One platform for trading, staking, copying experts and learning — engineered to help your portfolio compound over time.</p>
         </div>
 
-        <div class="pv-stats" style="margin-bottom:34px">
-            <div class="feat-stat"><b>18%</b><span>Max staking APY</span></div>
-            <div class="feat-stat"><b>200+</b><span>Crypto assets</span></div>
-            <div class="feat-stat"><b>&lt;10 min</b><span>Withdrawal speed</span></div>
-            <div class="feat-stat"><b>99.9%</b><span>Platform uptime</span></div>
-        </div>
-
-        <div class="pv-grid pv-grid-3 cards">
+        <div class="pv-grid pv-grid-3 cards wh-cards">
             <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-icon-grad">📈</div>
+                <div class="pv-emoji">📈</div>
                 <h3 style="margin:18px 0 8px;font-size:1.12rem">Pro Trading Charts</h3>
                 <p class="pv-foot" style="line-height:1.7">Candlestick charts with 100+ indicators, drawing tools and live order books — powered by TradingView.</p>
             </div>
             <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-icon-grad" style="border-color:rgba(240,185,11,.35);background:linear-gradient(135deg,rgba(240,185,11,.2),rgba(240,185,11,.05))">🏦</div>
+                <div class="pv-emoji">🏦</div>
                 <h3 style="margin:18px 0 8px;font-size:1.12rem">High-Yield Staking</h3>
                 <p class="pv-foot" style="line-height:1.7">Earn up to 18% APY by staking stablecoins like USDT and USDC — rewards paid daily, right into your balance.</p>
             </div>
             <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-icon-grad" style="border-color:rgba(168,85,247,.35);background:linear-gradient(135deg,rgba(168,85,247,.2),rgba(168,85,247,.05))">🔒</div>
+                <div class="pv-emoji">🔒</div>
                 <h3 style="margin:18px 0 8px;font-size:1.12rem">Cold Storage Security</h3>
                 <p class="pv-foot" style="line-height:1.7">98% of funds held in audited cold wallets, with 2FA, withdrawal whitelists and an insured hot wallet.</p>
             </div>
             <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-icon-grad">⚡</div>
+                <div class="pv-emoji">⚡</div>
                 <h3 style="margin:18px 0 8px;font-size:1.12rem">Instant Withdrawals</h3>
                 <p class="pv-foot" style="line-height:1.7">Request funds anytime — most crypto withdrawals land in your wallet in under 10 minutes, 24/7.</p>
             </div>
             <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-icon-grad">👥</div>
+                <div class="pv-emoji">👥</div>
                 <h3 style="margin:18px 0 8px;font-size:1.12rem">Copy Trading Elite</h3>
                 <p class="pv-foot" style="line-height:1.7">Automatically mirror the strategies of verified professionals — audited results, zero guesswork, real growth.</p>
             </div>
             <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-icon-grad" style="border-color:rgba(14,165,233,.35);background:linear-gradient(135deg,rgba(14,165,233,.2),rgba(14,165,233,.05))">🎓</div>
+                <div class="pv-emoji">🎓</div>
                 <h3 style="margin:18px 0 8px;font-size:1.12rem">Crypto Academy</h3>
                 <p class="pv-foot" style="line-height:1.7">Guides, webinars and market analysis to help beginners and pros sharpen their edge.</p>
             </div>
@@ -418,22 +452,36 @@
             <p class="pv-tag" style="text-align:center">Investor Stories</p>
             <h2 class="pv-h2">Trusted by investors worldwide</h2>
         </div>
-        <div class="pv-grid pv-grid-3 cards">
-            <div class="pv-panel pv-card" style="padding:26px">
-                <div style="color:var(--gold);letter-spacing:2px">★★★★★</div>
-                <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"I started with my demo balance, learned staking, then went live. My USDT stake pays me daily and I can see every single return on the dashboard. Superb transparency."</p>
-                <div style="display:flex;align-items:center;gap:12px"><div class="trader-av" style="background:#7c3aed;width:38px;height:38px;font-size:.9rem">KT</div><div><b>Kofi T.</b><div class="pv-mut" style="font-size:.8rem">Accra, Ghana · Investor since 2025</div></div></div>
+        <div class="t-wrap">
+            <div class="t-track" id="tTrack">
+                <div class="pv-panel pv-card t-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"I started with my demo balance, learned staking, then went live. My USDT stake pays me daily and I can see every single return on the dashboard. Superb transparency."</p>
+                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/mike.jpg') }}" alt="Mike"><div><b>Mike O.</b><div class="pv-mut" style="font-size:.8rem">Accra, Ghana · Investor since 2025</div></div></div>
+                </div>
+                <div class="pv-panel pv-card t-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"The copy trading feature is a game-changer. I'm mirroring two traders and up 11% in my first two months without lifting a finger. Withdrawals are genuinely fast."</p>
+                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/claudia.jpg') }}" alt="Claudia"><div><b>Claudia S.</b><div class="pv-mut" style="font-size:.8rem">Berlin, Germany · Copy trader</div></div></div>
+                </div>
+                <div class="pv-panel pv-card t-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"I've been on 4 other platforms and none felt this secure. 2FA, whitelisted addresses, and real customer support that actually answers. This is how crypto platforms should be."</p>
+                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/jenny.jpg') }}" alt="Jenny"><div><b>Jenny T.</b><div class="pv-mut" style="font-size:.8rem">Austin, USA · Staking investor</div></div></div>
+                </div>
+                <div class="pv-panel pv-card t-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"The dashboard is clarity. Live P&L, transparent fees, and my staking rewards land like clockwork every single day. PrimeVest rebuilt my trust in crypto investing."</p>
+                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/malcome.jpg') }}" alt="Malcome"><div><b>Malcome W.</b><div class="pv-mut" style="font-size:.8rem">Wealth investor</div></div></div>
+                </div>
+                <div class="pv-panel pv-card t-card">
+                    <div class="t-stars">★★★★★</div>
+                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"I'm a long-term holder and wanted a platform that finally takes security seriously. Cold-storage custody, verified traders, honest support — this is the one I recommend to friends."</p>
+                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/crian.jpg') }}" alt="Crian"><div><b>Crian D.</b><div class="pv-mut" style="font-size:.8rem">Dublin, Ireland · Long-term holder</div></div></div>
+                </div>
             </div>
-            <div class="pv-panel pv-card" style="padding:26px">
-                <div style="color:var(--gold);letter-spacing:2px">★★★★★</div>
-                <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"The copy trading feature is a game-changer. I'm mirroring two traders and up 11% in my first two months without lifting a finger. Withdrawals are genuinely fast."</p>
-                <div style="display:flex;align-items:center;gap:12px"><div class="trader-av" style="background:#0ea5e9;width:38px;height:38px;font-size:.9rem">JD</div><div><b>Jessica M.</b><div class="pv-mut" style="font-size:.8rem">London, UK · Copy trader</div></div></div>
-            </div>
-            <div class="pv-panel pv-card" style="padding:26px">
-                <div style="color:var(--gold);letter-spacing:2px">★★★★★</div>
-                <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"I've been on 4 other platforms and none felt this secure. 2FA, whitelisted addresses, and real customer support that actually answers. This is how crypto platforms should be."</p>
-                <div style="display:flex;align-items:center;gap:12px"><div class="trader-av" style="background:#f59e0b;width:38px;height:38px;font-size:.9rem">AR</div><div><b>Adaeze R.</b><div class="pv-mut" style="font-size:.8rem">Lagos, Nigeria · Staking investor</div></div></div>
-            </div>
+            <div class="t-nav"><button type="button" aria-label="Previous" onclick="tSlide(-1)">‹</button><button type="button" aria-label="Next" onclick="tSlide(1)">›</button></div>
+            <div class="t-dots" id="tDots"></div>
         </div>
     </div>
 </section>
@@ -456,3 +504,56 @@
     </div>
 </section>
 @endsection
+
+@push('scripts')
+<script>
+    (function(){
+        var track=document.getElementById('tTrack');
+        if(!track)return;
+        var cards=track.querySelectorAll('.t-card');
+        var dots=[];
+        var dotWrap=document.getElementById('tDots');
+        for(var i=0;i<cards.length;i++){
+            (function(idx){
+                var b=document.createElement('button');
+                b.type='button';
+                b.setAttribute('aria-label','Go to testimonial '+(idx+1));
+                if(idx===0)b.className='on';
+                b.addEventListener('click',function(){tGo(idx);});
+                dotWrap.appendChild(b);
+                dots.push(b);
+            })(i);
+        }
+        function cardStep(){return cards[0].offsetWidth+16;}
+        function currentIndex(){
+            var pos=track.scrollLeft;
+            var step=cardStep();
+            if(step<=0)return 0;
+            return Math.round(pos/step);
+        }
+        function syncDots(){
+            var c=currentIndex();
+            for(var i=0;i<dots.length;i++)dots[i].className=(i===c)?'on':'';
+        }
+        var ticking=false;
+        track.addEventListener('scroll',function(){
+            if(!ticking){requestAnimationFrame(function(){syncDots();ticking=false;});ticking=true;}
+        });
+        var tTouchStart=track.scrollLeft;
+        track.addEventListener('touchstart',function(){tTouchStart=track.scrollLeft;});
+        track.addEventListener('touchend',function(){tGo(currentIndex());});
+        function tGo(i){
+            if(i<0)i=0;
+            if(i>=cards.length)i=cards.length-1;
+            track.scrollTo({left:i*cardStep(),behavior:'smooth'});
+            syncDots();
+        }
+        window.tSlide=function(dir){
+            var i=currentIndex();
+            if(dir>0&&i>=cards.length-1)return;
+            if(dir<0&&i<=0)return;
+            tGo(i+dir);
+        };
+    })();
+</script>
+@endpush
