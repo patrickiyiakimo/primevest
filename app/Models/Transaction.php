@@ -11,6 +11,7 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id', 'type', 'amount', 'balance_before', 'balance_after',
+        'profit_before', 'profit_after',
         'status', 'reference', 'description', 'payment_method'
     ];
 

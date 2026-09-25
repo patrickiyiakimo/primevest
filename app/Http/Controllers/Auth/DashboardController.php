@@ -123,8 +123,8 @@ class DashboardController extends Controller
             ->get();
         foreach ($history as $tx) {
             $delta = match ($tx->type) {
-                'deposit', 'profit' => (float) $tx->amount,
-                'withdrawal', 'investment' => -1 * abs((float) $tx->amount),
+        'deposit', 'profit', 'loss_reversal' => (float) $tx->amount,
+        'withdrawal', 'investment', 'loss' => -1 * abs((float) $tx->amount),
                 'profit_withdrawal' => (float) $tx->amount, // stored as a negative amount
                 default => 0.0,
             };

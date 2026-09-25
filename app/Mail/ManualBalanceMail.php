@@ -33,6 +33,10 @@ class ManualBalanceMail extends Mailable
             $subject = 'Funds Added to Your Account - ' . config('app.name');
         } elseif ($this->type == 'debit') {
             $subject = 'Funds Deducted from Your Account - ' . config('app.name');
+        } elseif ($this->type == 'loss') {
+            $subject = 'Loss Applied to Your Account - ' . config('app.name');
+        } elseif ($this->type == 'loss_reversal') {
+            $subject = 'Loss Reversed on Your Account - ' . config('app.name');
         } else {
             $subject = 'Profit Added to Your Account - ' . config('app.name');
         }

@@ -59,9 +59,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     })->name('dashboard');
     
     // User Management
-    Route::get('/users', [UserManagementController::class, 'index'])->name('users');
-    Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
+    Route::middleware('admin')->group(function () {
+        Route::get('/users', [UserManagementController::class, 'index'])->name('users');
+        Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
+        Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
+        Route::post('/users/losses/{loss}/reverse', [UserManagementController::class, 'reverseLoss'])->name('users.losses.reverse');
+    });
     
     // Deposit management
     Route::get('/deposits', [AdminController::class, 'deposits'])->name('deposits');

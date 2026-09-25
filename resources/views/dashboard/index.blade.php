@@ -184,12 +184,14 @@
                     @if(($tx['type'] ?? '') == 'deposit')<span class="pill pill-g">⬇ Deposit</span>
                     @elseif(($tx['type'] ?? '') == 'withdrawal')<span class="pill pill-r">⬆ Withdrawal</span>
                     @elseif(($tx['type'] ?? '') == 'profit')<span class="pill pill-y">★ Profit</span>
+                    @elseif(($tx['type'] ?? '') == 'loss')<span class="pill pill-r">▼ Loss</span>
+                    @elseif(($tx['type'] ?? '') == 'loss_reversal')<span class="pill pill-g">↩ Loss Reversed</span>
                     @elseif(($tx['type'] ?? '') == 'investment')<span class="pill pill-b">🔥 Staking</span>
                     @else<span class="pill pill-b">{{ ucfirst($tx['type'] ?? 'Trade') }}</span>
                     @endif
                 </td>
-                <td class="num {{ in_array(($tx['type'] ?? ''), ['withdrawal']) ? 'bad' : 'ok' }}" style="font-weight:700">
-                    {{ in_array(($tx['type'] ?? ''), ['withdrawal']) ? '-' : '+' }}${{ number_format($tx['amount'] ?? 0, 2) }}
+                <td class="num {{ in_array(($tx['type'] ?? ''), ['withdrawal', 'loss']) ? 'bad' : 'ok' }}" style="font-weight:700">
+                    {{ in_array(($tx['type'] ?? ''), ['withdrawal', 'loss']) ? '-' : '+' }}${{ number_format($tx['amount'] ?? 0, 2) }}
                 </td>
                 <td><span class="pill pill-g">● {{ ucfirst($tx['status'] ?? 'completed') }}</span></td>
                 <td class="num muted" style="font-size:.78rem">{{ $tx['ref'] ?? '—' }}</td>

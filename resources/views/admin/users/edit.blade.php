@@ -29,7 +29,7 @@
     </div>
 
     <div class="pa" style="padding:22px">
-        <div class="sec-h"><div><h2>Balance Adjustment</h2><p>Credit, debit or add profit</p></div></div>
+        <div class="sec-h"><div><h2>Balance Adjustment</h2><p>Credit, debit, add profit or apply a loss</p></div></div>
         <form method="POST" action="{{ route('admin.users.update', $user->id) }}">
             @csrf @method('PUT')
             <label class="lbl">Transaction type</label>
@@ -37,6 +37,7 @@
                 <option value="credit">Credit (+) — add to balance</option>
                 <option value="debit">Debit (-) — deduct from balance</option>
                 <option value="profit">Profit — add to total profits</option>
+                <option value="loss">Loss (-) — deduct from total profits, then balance</option>
             </select>
             <label class="lbl">Amount (USD)</label>
             <input class="inp num" name="amount" type="number" min="0.01" step="0.01" required style="margin-bottom:14px">
@@ -44,7 +45,70 @@
             <input class="inp" name="description" placeholder="e.g. Manual credit for referral bonus" style="margin-bottom:18px">
             <button class="btn btn-block">Apply Adjustment</button>
         </form>
-        <p class="muted mt" style="font-size:.8rem;margin-bottom:0">💡 The user is notified by email. Debits above the current balance are rejected automatically.</p>
+        <p class="muted mt" style="font-size:.8rem;margin-bottom:0">💡 The user is notified by email. Debits above the current balance are rejected automatically, and a loss larger than the user's total profits plus balance is rejected too.</p>
     </div>
+</div>
+
+<div class="pa mt" style="padding:22px">
+    <div class="sec-h">
+        <div>
+            <h2>Loss History</h2>
+            <p>Most recent 20 losses applied to this account. Reversing refunds the exact split that was deducted.</p>
+        </div>
+    </div>
+
+    @if($losses->isEmpty())
+        <p class="muted" style="margin:0">No losses have been applied to this account.</p>
+    @else
+        <div style="overflow-x:auto">
+            <table class="tbl" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Applied</th>
+                        <th>Amount</th>
+                        <th>Deducted from</th>
+                        <th>Reason</th>
+                        <th>By</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($losses as $loss)
+                        <tr>
+                            <td style="white-space:nowrap">{{ $loss->applied_at?->format('M j, Y g:i A') ?? '—' }}</td>
+                            <td style="color:#ef4444;font-weight:700;white-space:nowrap">-${{ number_format($loss->amount, 2) }}</td>
+                            <td class="muted" style="font-size:.8rem;white-space:nowrap">
+                                ${{ number_format($loss->profit_deducted, 2) }} profits<br>
+                                ${{ number_format($loss->balance_deducted, 2) }} balance
+                            </td>
+                            <td style="max-width:220px">{{ \Illuminate\Support\Str::limit($loss->reason ?? '—', 60) }}</td>
+                            <td class="muted" style="white-space:nowrap">{{ $loss->admin?->name ?? '—' }}</td>
+                            <td style="white-space:nowrap">
+                                @if($loss->isReversed())
+                                    <span style="display:inline-block;padding:3px 9px;border-radius:999px;font-size:.7rem;font-weight:700;background:rgba(255,255,255,.06);color:var(--muted)">Reversed</span>
+                                    <div class="muted" style="font-size:.75rem;margin-top:4px">
+                                        {{ $loss->reversed_at?->format('M j, Y') }} by {{ $loss->reversedBy?->name ?? 'admin' }}
+                                    </div>
+                                @else
+                                    <span style="display:inline-block;padding:3px 9px;border-radius:999px;font-size:.7rem;font-weight:700;background:rgba(239,68,68,.16);color:#ff8b93">Applied</span>
+                                @endif
+                            </td>
+                            <td>
+                                @unless($loss->isReversed())
+                                    <form method="POST" action="{{ route('admin.users.losses.reverse', $loss->id) }}" id="rev-loss-{{ $loss->id }}">
+                                        @csrf
+                                        <input type="hidden" name="reversal_reason" value="Reversed by admin">
+                                        <button type="button" class="btn btn-sm btn-red"
+                                                onclick="pvConfirm('rev-loss-{{ $loss->id }}', 'Reverse this ${{ number_format($loss->amount, 2) }} loss? ${{ number_format($loss->profit_deducted, 2) }} returns to total profits and ${{ number_format($loss->balance_deducted, 2) }} to balance.')">Reverse</button>
+                                    </form>
+                                @endunless
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    @endif
 </div>
 @endsection

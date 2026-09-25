@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{{ $type == 'credit' ? 'Funds Added' : ($type == 'debit' ? 'Funds Deducted' : 'Profit Added') }}</title>
+    <title>{{ $type == 'credit' ? 'Funds Added' : ($type == 'debit' ? 'Funds Deducted' : ($type == 'loss' ? 'Loss Applied' : ($type == 'loss_reversal' ? 'Loss Reversed' : 'Profit Added'))) }}</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +19,7 @@
             overflow: hidden;
         }
         .header {
-            background: @if($type == 'credit') #059669 @elseif($type == 'debit') #dc2626 @else #f59e0b @endif;
+            background: @if($type == 'credit' || $type == 'loss_reversal') #059669 @elseif($type == 'debit' || $type == 'loss') #dc2626 @else #f59e0b @endif;
             color: white;
             padding: 30px;
             text-align: center;
@@ -28,8 +28,8 @@
             padding: 30px;
         }
         .details {
-            background: @if($type == 'credit') #f0fdf4 @elseif($type == 'debit') #fef2f2 @else #fffbeb @endif;
-            border-left: 4px solid @if($type == 'credit') #059669 @elseif($type == 'debit') #dc2626 @else #f59e0b @endif;
+            background: @if($type == 'credit') #f0fdf4 @elseif($type == 'debit' || $type == 'loss') #fef2f2 @else #fffbeb @endif;
+            border-left: 4px solid @if($type == 'credit') #059669 @elseif($type == 'debit' || $type == 'loss') #dc2626 @else #f59e0b @endif;
             padding: 15px;
             margin: 20px 0;
             border-radius: 4px;
@@ -37,7 +37,7 @@
         .amount {
             font-size: 24px;
             font-weight: bold;
-            color: @if($type == 'credit') #059669 @elseif($type == 'debit') #dc2626 @else #f59e0b @endif;
+            color: @if($type == 'credit') #059669 @elseif($type == 'debit' || $type == 'loss') #dc2626 @else #f59e0b @endif;
         }
         .description-box {
             background: #f9fafb;
@@ -72,6 +72,10 @@
                     Funds Added to Your Account
                 @elseif($type == 'debit')
                     Funds Deducted from Your Account
+                @elseif($type == 'loss')
+                    Loss Applied to Your Account
+                @elseif($type == 'loss_reversal')
+                    Loss Reversed on Your Account
                 @else
                     Profit Added to Your Account
                 @endif
@@ -85,6 +89,10 @@
                 <p>Funds have been added to your trading account.</p>
             @elseif($type == 'debit')
                 <p>Funds have been deducted from your trading account.</p>
+            @elseif($type == 'loss')
+                <p>A loss has been applied to your trading account. It was deducted from your profits first, and then from your balance. Your updated balance is shown below.</p>
+            @elseif($type == 'loss_reversal')
+                <p>A previously applied loss on your trading account has been reversed by an administrator. The refunded amount has been returned to your account and your updated balance is shown below.</p>
             @else
                 <p>Profit has been added to your trading account.</p>
             @endif
@@ -105,8 +113,8 @@
                 <a href="{{ url('/dashboard/transactions') }}" class="button">View Transaction History</a>
             </div>
             
-            @if($type == 'debit')
-                <p style="color: #dc2626; font-size: 12px;">If you did not expect this deduction, please contact our support team immediately.</p>
+            @if($type == 'debit' || $type == 'loss')
+                <p style="color: #dc2626; font-size: 12px;">If you did not expect this adjustment, please contact our support team immediately.</p>
             @endif
             
             <p>Best regards,<br><strong>{{ config('app.name') }} Team</strong></p>
