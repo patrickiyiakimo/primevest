@@ -79,9 +79,9 @@
         @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:560px){.kpi{grid-template-columns:1fr}}
         .kpi-card{position:relative;overflow:hidden;padding:22px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel))}
-        .kpi-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:7px}
-        .kpi-card .val{font-size:1.55rem;font-weight:800;letter-spacing:-.02em}
-        .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px}
+        .kpi-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+        .kpi-card .val{font-size:1.55rem;font-weight:800;letter-spacing:-.02em;overflow-wrap:anywhere}
+        .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
         .kpi-card.glow::after{content:"";position:absolute;top:-40%;right:-20%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(47,123,255,.18),transparent 70%);pointer-events:none}
         .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#57c8ff 0%,#2f7bff 45%,#1456d1 100%);color:#03140d;font-weight:700;padding:11px 20px;border-radius:11px;border:0;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(47,123,255,.55),inset 0 1px 0 rgba(255,255,255,.28)}
         .btn:hover{transform:translateY(-2px)}
@@ -104,9 +104,15 @@
         .pill-r{background:rgba(239,68,68,.13);color:#ff7c85}
         .pill-y{background:rgba(240,185,11,.12);color:var(--gold)}
         .pill-b{background:rgba(14,165,233,.12);color:#4cc3ff}
-        .sec-h{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px}
+        .sec-h{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;min-width:0}
         .sec-h h2{margin:0;font-size:1.2rem;font-weight:800}
         .sec-h p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
+        @media(max-width:560px){
+            .content{padding:18px 14px}
+            .kpi{gap:12px}
+            .kpi-card{padding:18px}
+            .kpi-card .val{font-size:1.35rem}
+        }
         .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
         .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
         .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}

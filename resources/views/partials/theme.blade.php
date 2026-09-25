@@ -68,4 +68,9 @@
     [data-theme="light"] .pv-ic-sun{display:block}
     [data-theme="light"] .pv-ic-moon{display:none}
     [data-theme="light"] .pv-theme-btn{background:rgba(10,24,52,.05);color:var(--text)}
+
+    /* Balance privacy eye (dashboard) */
+    [data-theme="light"] .pv-eye{background:rgba(10,24,52,.05);color:var(--muted)}
+    [data-theme="light"] .pv-eye:hover{background:rgba(10,24,52,.09);color:var(--text)}
+    [data-theme="light"] .pv-balances-hidden .pv-eye{background:rgba(47,123,255,.12)}
 </style>

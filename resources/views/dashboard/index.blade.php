@@ -7,7 +7,20 @@
 @php
     $totalBalance = $user->balance + $profits + ($stocksCurrentValue ?? 0);
     $cashAvailable = $user->balance + $profits;
+
+    // One icon pair, reused by every balance toggle on the page.
+    $eyeOn = '<svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>';
+    $eyeOff = '<svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.94 17.94A10.1 10.1 0 0112 20c-6.5 0-11-8-11-8a18.5 18.5 0 015.06-5.94M9.9 4.24A9.1 9.1 0 0112 4c6.5 0 11 8 11 8a18.4 18.4 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><path stroke-linecap="round" d="M1 1l22 22"/></svg>';
 @endphp
+
+{{-- Applied before any balance is painted so a refresh never flashes the amounts. --}}
+<script>
+    (function(){
+        var h=false;
+        try{h=localStorage.getItem('pv-hide-balances')==='1'}catch(e){}
+        document.documentElement.classList.toggle('pv-balances-hidden',h);
+    })();
+</script>
 
 <style>
     .pv-alert{position:fixed;left:50%;bottom:24px;transform:translate(-50%,170%);z-index:960;display:flex;align-items:center;gap:12px;width:min(520px,calc(100vw - 32px));padding:14px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.5);transition:transform .55s cubic-bezier(.22,1,.36,1)}
@@ -18,36 +31,82 @@
     .sig-ring{transform:rotate(-90deg)}
     .pv-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,12,.72);backdrop-filter:blur(8px)}
     .pv-modal.open{display:flex}
+
+    /* ===== Balance privacy toggle ===== */
+    .pv-eye{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;margin-left:auto;flex-shrink:0;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--muted);cursor:pointer;transition:.18s}
+    .pv-eye:hover{color:var(--text);background:rgba(255,255,255,.1)}
+    .pv-eye:focus-visible{outline:0;border-color:rgba(47,123,255,.55);box-shadow:0 0 0 3px rgba(47,123,255,.13)}
+    .pv-eye svg{width:15px;height:15px}
+    .pv-eye .i-off{display:none}
+    .pv-balances-hidden .pv-eye{color:var(--acc);border-color:rgba(47,123,255,.4);background:rgba(47,123,255,.12)}
+    .pv-balances-hidden .pv-eye .i-on{display:none}
+    .pv-balances-hidden .pv-eye .i-off{display:block}
+    /* Blur keeps the original width, so nothing reflows when toggling. */
+    .pv-money{transition:filter .18s ease}
+    .pv-balances-hidden .pv-money{filter:blur(7px);pointer-events:none;user-select:none;-webkit-user-select:none}
+
+    /* ===== Portfolio performance ===== */
     .pv-grid-main{display:grid;grid-template-columns:1.7fr 1fr;gap:20px;height:560px}
-    .pv-chart-box{flex:1;min-height:0;position:relative}
+    /* The chart must always sit in a box with a DEFINITE height, otherwise the
+       canvas height:100% falls back to its intrinsic 300x150 and Chart.js's
+       responsive observer fights the auto-height parent. */
+    .pv-chart-box{flex:1;min-height:260px;position:relative}
+    .pv-chart-box canvas{position:absolute!important;inset:0;width:100%!important;height:100%!important;display:block}
+    .pv-perf-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:18px}
+    .pv-perf-stats>div{min-width:0}
+    .pv-perf-stats .num{overflow-wrap:anywhere}
+    .pv-sec-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
+    .pv-tv-ov{height:590px;border-radius:12px;overflow:hidden}
+
     @media(max-width:1100px){
         .pv-grid-main{grid-template-columns:1fr;height:auto}
-        .pv-chart-box{min-height:320px}
+        .pv-chart-box{flex:none;height:300px;min-height:0}
         .pv-quickcol .pv-screener{min-height:420px}
+    }
+    @media(max-width:760px){
+        .pv-perf-stats{grid-template-columns:1fr;gap:12px}
+        .pv-tv-ov{height:420px}
+    }
+    @media(max-width:560px){
+        .sec-h{flex-wrap:wrap;row-gap:10px}
+        .sec-h h2{font-size:1.05rem}
+        .sec-actions{width:100%}
     }
 </style>
 
 <!-- KPI CARDS -->
 <div class="kpi">
     <div class="kpi-card glow pv-shade">
-        <div class="lbl"><span style="width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)"></span>Total Balance</div>
-        <div class="val num" style="color:var(--acc)">${{ number_format($totalBalance, 2) }}</div>
-        <div class="sub">Main {{ number_format($user->balance, 2) }} · Profits {{ number_format($profits, 2) }}</div>
+        <div class="lbl">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)"></span>Total Balance
+            <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
+        </div>
+        <div class="val num pv-money" style="color:var(--acc)">${{ number_format($totalBalance, 2) }}</div>
+        <div class="sub pv-money">Main {{ number_format($user->balance, 2) }} · Profits {{ number_format($profits, 2) }}</div>
     </div>
     <div class="kpi-card">
-        <div class="lbl">Available Cash</div>
-        <div class="val num">${{ number_format($cashAvailable, 2) }}</div>
+        <div class="lbl">
+            Available Cash
+            <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
+        </div>
+        <div class="val num pv-money">${{ number_format($cashAvailable, 2) }}</div>
         <div class="sub">Ready to trade or stake</div>
     </div>
     <div class="kpi-card">
-        <div class="lbl">Est. Annual Return</div>
-        <div class="val num" style="color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">+{{ number_format($profitPercentage >= 0 ? $profitPercentage : 0, 3) }}%</div>
+        <div class="lbl">
+            Est. Annual Return
+            <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
+        </div>
+        <div class="val num pv-money" style="color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">+{{ number_format($profitPercentage >= 0 ? $profitPercentage : 0, 3) }}%</div>
         <div class="sub">Lifetime return on balance</div>
     </div>
     <div class="kpi-card">
-        <div class="lbl">Positions</div>
+        <div class="lbl">
+            Positions
+            <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
+        </div>
         <div class="val num">{{ $stocksCount }}</div>
-        <div class="sub">P/L <span class="{{ ($totalProfitLoss ?? 0) >= 0 ? 'ok' : 'bad' }} num">{{ ($totalProfitLoss ?? 0) >= 0 ? '+' : '' }}${{ number_format($totalProfitLoss ?? 0, 2) }}</span></div>
+        <div class="sub">P/L <span class="pv-money {{ ($totalProfitLoss ?? 0) >= 0 ? 'ok' : 'bad' }} num">{{ ($totalProfitLoss ?? 0) >= 0 ? '+' : '' }}${{ number_format($totalProfitLoss ?? 0, 2) }}</span></div>
     </div>
 </div>
 
@@ -76,7 +135,7 @@
                 </div>
                 <div class="num" style="font-weight:800;font-size:1.1rem;color:var(--acc)">{{ $signal }}/100</div>
             </div>
-            <div class="muted" style="font-size:.8rem;margin-top:6px">Deposit <b class="gold num">${{ number_format(max(0, $signalNext['threshold'] - $spendableBalance)) }}</b> more to reach <b class="ok num">{{ $signalNext['signal'] }}%</b> and enter elite {{ $signalNext['level'] }} trades.</div>
+            <div class="muted" style="font-size:.8rem;margin-top:6px">Deposit <b class="gold num pv-money">${{ number_format(max(0, $signalNext['threshold'] - $spendableBalance)) }}</b> more to reach <b class="ok num">{{ $signalNext['signal'] }}%</b> and enter elite {{ $signalNext['level'] }} trades.</div>
         @else
             <div class="ok" style="font-weight:700">🏆 Maximum signal reached — you have full access to elite trades &amp; staking plans.</div>
         @endif
@@ -90,18 +149,21 @@
     <div class="pa" style="padding:22px;display:flex;flex-direction:column;min-height:0">
         <div class="sec-h">
             <div><h2>Portfolio Performance</h2><p>Value curve based on your realized activity</p></div>
-            <span class="pill pill-g">● Live</span>
+            <div class="pv-sec-actions">
+                <span class="pill pill-g">● Live</span>
+                <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances" style="margin-left:0">{!! $eyeOn !!}{!! $eyeOff !!}</button>
+            </div>
         </div>
-        <div style="display:flex;gap:22px;flex-wrap:wrap;margin-bottom:18px">
-            <div><span class="muted" style="font-size:.75rem">Portfolio value</span><div style="font-weight:800" class="num">${{ number_format($totalBalance, 2) }}</div></div>
-            <div><span class="muted" style="font-size:.75rem">Net P/L</span><div style="font-weight:800" class="num {{ $netPnl >= 0 ? 'ok' : 'bad' }}">{{ $netPnl >= 0 ? '+' : '' }}${{ number_format($netPnl, 2) }}</div></div>
-            <div><span class="muted" style="font-size:.75rem">Last deposit</span><div style="font-weight:800" class="num">{{ $lastDepositDate ? '$'.number_format($lastDepositAmount,2).' · '.$lastDepositDate : '—' }}</div></div>
+        <div class="pv-perf-stats">
+            <div><span class="muted" style="font-size:.75rem">Portfolio value</span><div class="pv-money num" style="font-weight:800">${{ number_format($totalBalance, 2) }}</div></div>
+            <div><span class="muted" style="font-size:.75rem">Net P/L</span><div class="pv-money num {{ $netPnl >= 0 ? 'ok' : 'bad' }}" style="font-weight:800">{{ $netPnl >= 0 ? '+' : '' }}${{ number_format($netPnl, 2) }}</div></div>
+            <div><span class="muted" style="font-size:.75rem">Last deposit</span><div class="pv-money num" style="font-weight:800">{{ $lastDepositDate ? '$'.number_format($lastDepositAmount,2).' · '.$lastDepositDate : '—' }}</div></div>
         </div>
         <div class="pv-chart-box">
             @if(count($chart))
-                <canvas id="growthChart" style="height:100%;width:100%"></canvas>
+                <canvas id="growthChart"></canvas>
             @else
-                <div class="muted" style="height:100%;display:grid;place-items:center;text-align:center;font-size:.9rem">No activity yet — your performance chart will appear here after your first deposit or stake.</div>
+                <div class="muted" style="height:100%;display:grid;place-items:center;text-align:center;font-size:.9rem;padding:0 12px">No activity yet — your performance chart will appear here after your first deposit or stake.</div>
             @endif
         </div>
     </div>
@@ -126,17 +188,17 @@
 <!-- MARKET OVERVIEW -->
 <div class="pa mt" style="padding:22px">
     <div class="sec-h" style="margin-bottom:10px"><div><h2>Market Overview</h2><p>Global markets at a glance</p></div></div>
-    <div style="height:590px;border-radius:12px;overflow:hidden">
+    <div class="pv-tv-ov">
         <div id="tvOverview" style="height:100%"></div>
     </div>
 </div>
 
 <!-- GROWTH STRIP -->
-<div class="pa mt" style="padding:18px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:22px">
+<!-- <div class="pa mt" style="padding:18px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:22px">
     <div style="font-weight:800">⚡ Staking highlights</div>
     <div class="muted" style="font-size:.88rem">USDT Flexible — <b class="gold">9% APY</b> · BTC Staking — <b class="gold">6.75% APY</b> · ETH 2.0 — <b class="gold">5.2% APY</b></div>
     <a href="{{ route('invest') }}" class="btn btn-sm btn-ghost" style="margin-left:auto">View all plans</a>
-</div>
+</div> -->
 
 <!-- COPY TRADING TEASER -->
 <div class="pa mt" style="padding:22px">
@@ -208,6 +270,31 @@
 @endsection
 
 @section('scripts')
+<script>
+    // All eye buttons share one state so any of them toggles every balance.
+    (function(){
+        var KEY='pv-hide-balances';
+        function hidden(){
+            try{return localStorage.getItem(KEY)==='1'}catch(e){return false}
+        }
+        function apply(on){
+            try{localStorage.setItem(KEY,on?'1':'0')}catch(e){}
+            document.documentElement.classList.toggle('pv-balances-hidden',on);
+            document.querySelectorAll('[data-pv-eye]').forEach(function(b){
+                b.setAttribute('aria-pressed',on?'true':'false');
+                b.setAttribute('aria-label',on?'Show balances':'Hide balances');
+            });
+        }
+        // Keep the icons/aria in sync with the class set before paint.
+        apply(hidden());
+        document.addEventListener('click',function(e){
+            var b=e.target.closest&&e.target.closest('[data-pv-eye]');
+            if(!b)return;
+            e.preventDefault();
+            apply(!hidden());
+        });
+    })();
+</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
     if(typeof pvThemedWidget==='function'){
