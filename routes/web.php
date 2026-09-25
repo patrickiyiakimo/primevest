@@ -198,6 +198,10 @@ Route::middleware('auth')->group(function () {
     
     // Buy Crypto
     Route::get('/buy-crypto', function () { return view('dashboard.buy-crypto'); })->name('buy-crypto');
+
+    // Copy Trading
+    Route::get('/copy-traders', [App\Http\Controllers\CopyTradingController::class, 'index'])->name('copy-traders');
+    Route::post('/copy-traders/request', [App\Http\Controllers\CopyTradingController::class, 'store'])->name('copy-traders.request');
     
     // Stocks
     Route::get('/stock-trading', [StockController::class, 'index'])->name('stock-trading');
