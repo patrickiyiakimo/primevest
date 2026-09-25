@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StockPortfolio;
+use App\Models\StockPriceHistory;
 use App\Models\StockTransaction;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
@@ -25,20 +26,15 @@ class StockController extends Controller
     ];
 
     /**
-     * Get current stock prices
+     * Get current stock prices (cache-aware — honours admin updates)
      */
     private function getStockPrices()
     {
-        return [
-            'AAPL' => 175.50,
-            'MSFT' => 420.75,
-            'GOOGL' => 140.25,
-            'AMZN' => 145.80,
-            'TSLA' => 245.50,
-            'NVDA' => 895.20,
-            'META' => 485.30,
-            'NFLX' => 620.40,
-        ];
+        $prices = [];
+        foreach (array_keys($this->stocks) as $symbol) {
+            $prices[$symbol] = $this->getCurrentPrice($symbol);
+        }
+        return $prices;
     }
 
     /**
@@ -73,17 +69,126 @@ class StockController extends Controller
 
     public function index(Request $request)
     {
-        $symbol = $request->get('symbol', 'TSLA');
-        $stock = $this->getStockData($symbol);
-        $portfolio = $this->getUserPortfolio();
-        $cashAvailable = $this->getCashAvailableForBuying(Auth::user());
-        $totalNetWorth = $this->getTotalNetWorth(Auth::user());
+        $symbol = strtoupper($request->get('symbol', 'TSLA'));
+        $market = $this->marketData($symbol);
+        $stock = $market['quotes'][$symbol] ?? $this->getStockData($symbol);
+        $portfolio = $market['positions'];
+        $cashAvailable = $market['cash_available'];
+        $totalNetWorth = $market['total_net_worth'];
         $recentTransactions = StockTransaction::where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->limit(10)
             ->get();
 
-        return view('dashboard.stock-trading', compact('stock', 'portfolio', 'recentTransactions', 'cashAvailable', 'totalNetWorth'));
+        return view('dashboard.stock-trading', compact('market', 'stock', 'portfolio', 'recentTransactions', 'cashAvailable', 'totalNetWorth'));
+    }
+
+    /**
+     * Live end-point polled by the trading desk. Replays the admin-driven quote
+     * store (cache + price history table) so changes from the admin panel appear
+     * on the user dashboard in a few seconds.
+     */
+    public function markets(Request $request)
+    {
+        $symbol = strtoupper($request->get('symbol', 'TSLA'));
+        return response()->json($this->marketData($symbol));
+    }
+
+    private function marketData($symbol)
+    {
+        $symbols = array_keys($this->stocks);
+
+        $quotes = [];
+        $history = [];
+        foreach ($symbols as $sym) {
+            $q = $this->getStockData($sym);
+            $prev = $this->stocks[$sym]['open'] ?? $q['price'];
+            $chg = round($q['price'] - $prev, 2);
+            $quotes[$sym] = [
+                'symbol' => $sym,
+                'name' => $q['name'],
+                'price' => $q['price'],
+                'change' => $chg,
+                'change_percent' => $prev > 0 ? round(($chg / $prev) * 100, 2) : 0,
+                'open' => $q['open'],
+                'high' => $q['high'],
+                'low' => $q['low'],
+                'volume' => $q['volume'],
+                'market_cap' => $q['market_cap'],
+            ];
+            $history[$sym] = $this->timeSeries($sym, $sym === $symbol ? 160 : 42);
+        }
+
+        return [
+            'success' => true,
+            'server_time' => now()->timestamp,
+            'symbol' => $symbol,
+            'quotes' => $quotes,
+            'history' => $history,
+            'positions' => $this->getUserPortfolio(),
+            'cash_available' => $this->getCashAvailableForBuying(Auth::user()),
+            'total_net_worth' => $this->getTotalNetWorth(Auth::user()),
+            'main_balance' => Auth::user()->balance,
+            'total_profits' => Auth::user()->total_profits ?? 0,
+        ];
+    }
+
+    /**
+     * Build an ordered [time, price] series per symbol.
+     * Real admin snapshots are appended first; any missing lead-in is
+     * backfilled with a deterministic curve anchored to the current price so
+     * the chart always has depth — without fabricating data that gets stored.
+     */
+    private function timeSeries($symbol, $points)
+    {
+        $current = $this->getCurrentPrice($symbol);
+        $rows = StockPriceHistory::where('symbol', $symbol)
+            ->orderBy('id', 'asc')
+            ->limit(160)
+            ->get(['price', 'created_at']);
+
+        $series = [];
+        foreach ($rows as $r) {
+            $series[] = [(int) $r->created_at->timestamp, (float) $r->price];
+        }
+
+        $last = count($series) ? $series[count($series) - 1] : null;
+        if ($last === null || abs($last[1] - $current) > 0.0001) {
+            $series[] = [time(), (float) $current];
+        }
+
+        if (count($series) < $points) {
+            $series = $this->backfillSeries($series, $symbol, $points);
+        }
+
+        return array_slice($series, -$points);
+    }
+
+    private function backfillSeries($series, $symbol, $points)
+    {
+        $need = $points - count($series);
+        if ($need <= 0) {
+            return $series;
+        }
+
+        $anchor = count($series) ? $series[0] : [time(), $this->getCurrentPrice($symbol)];
+        $startPrice = max(0.01, (float) $anchor[1]);
+        $startTime = (int) $anchor[0];
+
+        mt_srand(crc32($symbol));
+        $stepMins = max(1, (int) floor(240 / $points));
+        $floor = 0.62 + ((crc32($symbol) % 28) / 100);
+
+        $seed = [];
+        for ($i = 0; $i < $need; $i++) {
+            $ratio = ($i + 1) / $need;
+            $level = $floor + (1 - $floor) * $ratio;
+            $noise = 1 + (mt_rand(-35, 35) / 1000);
+            $price = round($startPrice * $level * $noise * 100) / 100;
+            $seed[] = [$startTime - $stepMins * 60 * ($need - $i), max(0.01, $price)];
+        }
+
+        return array_merge($seed, $series);
     }
 
     public function buy(Request $request)

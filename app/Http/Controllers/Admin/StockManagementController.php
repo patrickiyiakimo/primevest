@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\StockPortfolio;
+use App\Models\StockPriceHistory;
 use App\Models\StockTransaction;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -40,30 +41,57 @@ class StockManagementController extends Controller
             'price' => 'required|numeric|min:0.01',
         ]);
 
-        $cacheKey = "stock_price_{$request->symbol}";
-        Cache::put($cacheKey, $request->price, now()->addDay());
-        
+        $symbol = strtoupper($request->symbol);
+        $price = number_format((float) $request->price, 2, '.', '');
+
+        $cacheKey = "stock_price_{$symbol}";
+        Cache::put($cacheKey, $price, now()->addDay());
+
+        $this->recordPrice($symbol, $price);
+
         return response()->json([
             'success' => true,
-            'message' => "{$request->symbol} price updated to $" . number_format($request->price, 2)
+            'message' => "{$symbol} price updated to $" . number_format($price, 2)
         ]);
     }
 
     public function updateAllStockPrices(Request $request)
     {
         $prices = $request->input('prices', []);
-        
+        $updated = 0;
+
         foreach ($prices as $symbol => $price) {
+            $symbol = strtoupper($symbol);
+            $price = (float) $price;
             if ($price > 0) {
+                $price = number_format($price, 2, '.', '');
                 $cacheKey = "stock_price_{$symbol}";
                 Cache::put($cacheKey, $price, now()->addDay());
+                $this->recordPrice($symbol, $price);
+                $updated++;
             }
         }
         
         return response()->json([
             'success' => true,
-            'message' => 'All stock prices updated successfully'
+            'message' => "$updated stock prices updated successfully"
         ]);
+    }
+
+    /**
+     * Append a snapshot to the price history table so user charts can replay
+     * every admin update instead of showing live, uncontrollable market data.
+     */
+    private function recordPrice(string $symbol, $price)
+    {
+        try {
+            StockPriceHistory::create([
+                'symbol' => $symbol,
+                'price'  => $price,
+            ]);
+        } catch (\Throwable $e) {
+            // History is supplemental — never block a price update because of it.
+        }
     }
 
    public function userPortfolios()

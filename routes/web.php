@@ -208,6 +208,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/stock/buy', [StockController::class, 'buy'])->name('stock.buy');
     Route::post('/stock/sell', [StockController::class, 'sell'])->name('stock.sell');
     Route::get('/stock/quote', [StockController::class, 'getStockQuote'])->name('stock.quote');
+    Route::get('/stock/markets', [StockController::class, 'markets'])->name('stock.markets');
     Route::get('/stock/history', [StockController::class, 'history'])->name('stock.history');
 });
 
