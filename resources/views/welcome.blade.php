@@ -83,6 +83,28 @@
     @media(max-width:900px){.aca-shell{grid-template-columns:1fr}}
     .vid-frame{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#0a0f1c;box-shadow:0 40px 90px -50px rgba(0,0,0,.9)}
     .vid-frame iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+    /* ---- live fx rates (TradingView forex cross rates) ---- */
+    .fx-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px}
+    .fx-head .pv-lead{margin-top:10px;max-width:660px}
+    .fx-panel{padding:0;overflow:hidden;position:relative}
+    .fx-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+    .fx-live{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
+    .fx-live i{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 rgba(47,123,255,.6);animation:pulse 2s infinite}
+    .fx-mids{margin-left:auto;font-size:.72rem;letter-spacing:.06em;color:var(--muted);font-family:'JetBrains Mono',monospace}
+    .fx-widget{min-height:420px;background:#0a101c}
+    [data-theme="light"] .fx-widget{background:#fff}
+    .fx-widget .tradingview-widget-container{width:100%}
+    .fx-fallback{color:var(--muted);font-size:.82rem;padding:24px 20px;text-align:center}
+    .fx-note{padding:12px 20px;border-top:1px solid var(--line);font-size:.74rem;line-height:1.6;color:var(--muted);background:rgba(255,255,255,.015)}
+    .fx-note a{color:var(--acc);font-weight:700}
+    .fx-note a:hover{text-decoration:underline}
+    .fx-points{margin-top:26px;gap:16px}
+    .fx-point{display:flex;gap:14px;align-items:flex-start;padding:20px 22px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
+    .fx-point .pv-icon{flex-shrink:0}
+    .fx-point b{display:block;font-size:.95rem;margin-bottom:4px}
+    .fx-point span{color:var(--muted);font-size:.82rem;line-height:1.6}
+    @media(max-width:900px){.fx-head{flex-direction:column;align-items:flex-start}.fx-mids{margin-left:0;width:100%}.fx-points{grid-template-columns:1fr!important}}
+    @media(max-width:600px){.fx-bar{padding:12px 14px}.fx-note{padding:11px 14px}}
     /* ---- testimonials ---- */
     .t-track{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
     .t-card{padding:26px;flex:0 1 345px;border-radius:0!important}
@@ -137,21 +159,6 @@
                 <div class="hero-actions">
                     <a href="{{ route('register') }}" class="pv-btn pv-btn-lg mr-5">Start Trading Free</a>
                     <a href="{{ route('trading') }}#copy-trading" class="pv-btn pv-btn-ghost pv-btn-lg">Explore Copy Trading</a>
-                </div>
-            </div>
-
-            <!-- Rotating Rubik's cube visual -->
-            <div class="hero-card">
-                <div class="cube-stage">
-                    <div class="cube-glow"></div>
-                    <div class="cube">
-                        <div class="cube-face cube-front cell-front">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
-                        <div class="cube-face cube-back cell-back">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
-                        <div class="cube-face cube-left cell-left">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
-                        <div class="cube-face cube-right cell-right">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
-                        <div class="cube-face cube-top cell-top">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
-                        <div class="cube-face cube-bottom cell-bottom">@for($i=0;$i<9;$i++)<span></span>@endfor</div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -363,6 +370,86 @@
         </div>
     </div>
 </section>
+
+<!-- ===== LIVE FX RATES (TradingView Forex Cross Rates) ===== -->
+<section class="pv-section" id="fx-rates">
+    <div class="pv-container">
+        <div class="fx-head">
+            <div>
+                <p class="pv-tag">Live FX Rates</p>
+                <h2 class="pv-h2">See the currency market move in real time</h2>
+                <p class="pv-lead">Live cross rates for the eight most-traded currencies, streamed around the clock from the same global feeds that power professional trading desks.</p>
+            </div>
+            <a href="{{ route('forex.majors') }}" class="pv-btn pv-btn-ghost pv-btn-sm">Explore major pairs →</a>
+        </div>
+
+        <div class="pv-panel fx-panel">
+            <div class="fx-bar">
+                <span class="fx-live"><i></i>Live</span>
+                <span class="fx-mids">EUR · USD · JPY · GBP · CHF · AUD · CAD · NZD</span>
+            </div>
+
+            <div id="pvFxRates" class="fx-widget">
+                <div class="fx-fallback">Loading live exchange rates…</div>
+            </div>
+
+            <p class="fx-note">Quotes are indicative and provided by <a href="https://www.tradingview.com/" target="_blank" rel="noopener noreferrer">TradingView</a>. The foreign-exchange market trades 24 hours a day, Sunday evening through Friday evening.</p>
+        </div>
+
+        <div class="pv-grid pv-grid-3 cards fx-points">
+            <div class="fx-point">
+                <div class="pv-icon">💱</div>
+                <div><b>28 live cross pairs</b><span>Every combination of the eight majors, priced continuously as the market moves.</span></div>
+            </div>
+            <div class="fx-point">
+                <div class="pv-icon">🌍</div>
+                <div><b>Global liquidity</b><span>Aggregated quotes from the world's largest interbank venues and prime brokers.</span></div>
+            </div>
+            <div class="fx-point">
+                <div class="pv-icon">🕐</div>
+                <div><b>Always-on coverage</b><span>Follow currency strength around the clock, from Tokyo to New York.</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    (function(){
+        var host=document.getElementById('pvFxRates');
+        if(!host)return;
+        function theme(){try{return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'}catch(e){return 'dark'}}
+        function surface(){return theme()==='light'?'#ffffff':'#0a101c'}
+        function mount(){
+            host.innerHTML='';
+            var cfg={
+                "currencies":["EUR","USD","JPY","GBP","CHF","AUD","CAD","NZD"],
+                "colorTheme":theme(),
+                "backgroundColor":surface(),
+                "disableCrossClickHref":true,
+                "largeChartUrl":"https://www.tradingview.com/markets/currencies/rates-major/",
+                "locale":"en",
+                "width":"100%",
+                "height":420
+            };
+            var wrap=document.createElement('div');
+            wrap.className='tradingview-widget-container';
+            var w=document.createElement('div');
+            w.className='tradingview-widget-container__widget';
+            wrap.appendChild(w);
+            var s=document.createElement('script');
+            s.type='text/javascript';
+            s.async=true;
+            s.src='https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js';
+            s.text=JSON.stringify(cfg);
+            wrap.appendChild(s);
+            host.appendChild(wrap);
+        }
+        mount();
+        try{
+            new MutationObserver(mount).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+        }catch(e){}
+    })();
+</script>
 
 <!-- ===== CRYPTO ACADEMY / WHAT IS BITCOIN ===== -->
 <section class="pv-section" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
