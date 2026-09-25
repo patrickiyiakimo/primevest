@@ -2,7 +2,7 @@
 
 @section('title', 'PrimeVest | Trusted Crypto Investment Platform')
 
-@section('styles')
+@push('styles')
 <style>
     .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:rgba(47,123,255,.1);border:1px solid rgba(47,123,255,.28);color:var(--acc);font-size:.82rem;font-weight:600;margin-bottom:22px}
     .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 rgba(47,123,255,.7);animation:pulse 2s infinite}
@@ -21,6 +21,7 @@
     .tips li{margin:8px 0;color:var(--muted);font-size:.95rem}
     .tips li b{color:var(--text)}
     .copy-chip{display:flex;align-items:center;gap:10px;padding:18px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.3s}
+    @media(max-width:900px){.ct-cards{grid-template-columns:1fr!important}}
     .trader-av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-size:1rem;flex-shrink:0}
     .trust-badge{padding:14px 22px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:10px}
     .step-box{padding:26px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line);text-align:center;height:100%}
@@ -55,10 +56,12 @@
     .pv-awards img:hover{opacity:1;filter:grayscale(0)}
     @media(max-width:600px){.pv-awards-in{flex-direction:column;gap:8px;text-align:center}.pv-awards img{height:20px}}
     /* ---- verified trader badge ---- */
-    .pv-verif{display:inline-flex;align-items:center;justify-content:center;vertical-align:middle;margin-left:6px;position:relative}
-    .pv-verif svg{display:block;width:17px;height:17px}
+    .pv-verif{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:7px;position:relative;vertical-align:middle}
+    .pv-verif svg{display:block;width:18px;height:18px;filter:drop-shadow(0 2px 3px rgba(29,107,240,.45))}
+    .pv-verif circle{fill:url(#pvTickGrad)}
+    .pv-verif path{fill:none;stroke:#fff;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
     .pv-verif:hover .pv-vtip{opacity:1;transform:translate(-50%,2px);pointer-events:auto}
-    .pv-vtip{position:absolute;bottom:calc(100% + 9px);left:50%;transform:translate(-50%,4px);width:210px;background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.72rem;line-height:1.5;color:var(--muted);text-align:left;opacity:0;pointer-events:none;transition:.2s;z-index:20;box-shadow:0 16px 36px -14px rgba(0,0,0,.85);font-weight:500;white-space:normal}
+    .pv-vtip{position:absolute;bottom:calc(100% + 9px);left:50%;transform:translate(-50%,4px);width:210px;max-width:calc(100vw - 32px);background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.72rem;line-height:1.5;color:var(--muted);text-align:left;opacity:0;pointer-events:none;transition:.2s;z-index:20;box-shadow:0 16px 36px -14px rgba(0,0,0,.85);font-weight:500;white-space:normal}
     .pv-vtip b{color:var(--text)}
     .pv-verif .pv-vtip-emit{content:"";position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:var(--line)}
     /* ---- wealth section ---- */
@@ -72,7 +75,7 @@
     .vid-frame{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#0a0f1c;box-shadow:0 40px 90px -50px rgba(0,0,0,.9)}
     .vid-frame iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
 </style>
-@endsection
+@endpush
 
 @section('content')
 <!-- ===== HERO ===== -->
@@ -216,44 +219,48 @@
             <a href="{{ route('register') }}" class="pv-btn pv-btn-ghost pv-btn-sm">See all markets →</a>
         </div>
 
-        <div class="pv-panel" style="padding:6px;overflow:hidden">
-            <div style="overflow-x:auto">
-            <table class="pv-table">
-                <thead>
-                    <tr>
-                        <th style="padding-left:22px">Asset</th><th>Price</th><th>24h Change</th><th>Market Cap</th><th>Volume (24h)</th><th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                        $coins = [
-                            ['btc.png','Bitcoin','BTC',67418.20,2.41,'$1.33T','$28.4B'],
-                            ['eth.png','Ethereum','ETH',3484.15,-0.86,'$419B','$17.1B'],
-                            ['bch.png','Bitcoin Cash','BCH',611.40,1.08,'$12.1B','$1.02B'],
-                            ['doge.png','Dogecoin','DOGE',0.1524,5.72,'$22.3B','$2.9B'],
-                        ];
-                    @endphp
-                    @foreach($coins as $c)
-                    <tr>
-                        <td style="padding-left:22px">
-                            <div style="display:flex;align-items:center;gap:12px">
-                                <img src="{{ asset('/images/'.$c[0]) }}" alt="{{ $c[1] }}" width="30" height="30" style="border-radius:50%">
-                                <div><div style="font-weight:700">{{ $c[1] }}</div><div class="pv-mut" style="font-size:.78rem">{{ $c[2] }}</div></div>
-                            </div>
-                        </td>
-                        <td class="num" style="font-weight:700">${{ number_format($c[3], $c[3] < 1 ? 4 : 2) }}</td>
-                        <td><span class="pill {{ $c[4] >= 0 ? 'pill-up' : 'pill-down' }} num">{{ $c[4] >= 0 ? '+' : '' }}{{ $c[4] }}%</span></td>
-                        <td class="num pv-mut">{{ $c[5] }}</td>
-                        <td class="num pv-mut">{{ $c[6] }}</td>
-                        <td style="text-align:right;padding-right:22px"><a href="{{ route('register') }}" class="pv-btn pv-btn-sm">Trade</a></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            </div>
+        <div class="pv-panel" style="padding:22px">
+            <div id="pvCryptoScreener" style="height:480px"></div>
         </div>
     </div>
 </section>
+
+<script>
+    (function(){
+        function theme(){try{return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'}catch(e){return 'dark'}}
+        function mount(){
+            var host=document.getElementById('pvCryptoScreener');
+            if(!host)return;
+            host.innerHTML='';
+            var cfg={
+                "width":"100%","height":"100%",
+                "defaultColumn":"overview",
+                "screener_type":"crypto_mkt",
+                "displayCurrency":"USD",
+                "colorTheme":theme(),
+                "locale":"en",
+                "isTransparent":true,
+                "showLogo":true
+            };
+            var wrap=document.createElement('div');
+            wrap.className='tradingview-widget-container';
+            var w=document.createElement('div');
+            w.className='tradingview-widget-container__widget';
+            wrap.appendChild(w);
+            var s=document.createElement('script');
+            s.type='text/javascript';
+            s.async=true;
+            s.src='https://s3.tradingview.com/external-embedding/embed-widget-screener.js';
+            s.text=JSON.stringify(cfg);
+            wrap.appendChild(s);
+            host.appendChild(wrap);
+        }
+        mount();
+        try{
+            new MutationObserver(mount).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+        }catch(e){}
+    })();
+</script>
 
 <!-- ===== COPY TRADING ===== -->
 <section class="pv-section" id="copy-trading" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
@@ -264,7 +271,7 @@
             <p class="pv-lead" style="margin:10px auto 0">Every trader on PrimeVest is <strong style="color:var(--text)">vetted and verified</strong> — audited track records, years of live experience and transparent risk scores. One click mirrors their positions.</p>
         </div>
 
-        <div class="pv-grid pv-grid-3 cards" style="margin-bottom:30px">
+        <div class="pv-grid pv-grid-3 cards ct-cards" style="margin-bottom:30px">
             @php
                 $traders = [
                     ['SK','CryptoMatrix','+186.4%','3yr ROI','128,402','24.1%','#7c3aed', 1],
@@ -277,13 +284,18 @@
                 @if($t[6] == 1)<span class="pv-chip pv-chip-gold" style="float:right">🔥 Top Trader</span>@endif
                 <div style="display:flex;align-items:center;gap:14px">
                     <div class="trader-av" style="background:{{ $t[5] }}">{{ $t[0] }}</div>
-                    <div style="flex:1">
-                        <div style="font-weight:700;display:flex;align-items:center">{{ $t[1] }}
+                    <div style="flex:1;min-width:0">
+                        <div style="font-weight:700;display:flex;align-items:center;min-width:0">
+                            <span style="min-width:0;overflow-wrap:anywhere">{{ $t[1] }}</span>
                             <span class="pv-verif">
-                                <svg viewBox="0 0 24 24" fill="none">
-                                    <path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z" fill="#2f7bff" opacity=".18"/>
-                                    <path d="M12 2l8 3v6c0 5-3.4 8.6-8 11-4.6-2.4-8-6-8-11V5l8-3z" stroke="#2f7bff" stroke-width="1.6"/>
-                                    <path d="M8.4 12.1l2.4 2.4 4.8-5" stroke="#2f7bff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                                    <defs>
+                                        <linearGradient id="pvTickGrad" x1="0" y1="0" x2="1" y2="1">
+                                            <stop offset="0%" stop-color="#57c8ff"/><stop offset="100%" stop-color="#1d6bf0"/>
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="12" cy="12" r="11"/>
+                                    <path d="M7.5 12.5l2.9 2.9 6-6.3"/>
                                 </svg>
                                 <span class="pv-vtip"><b>Verified Professional</b><br>Passed PrimeVest's identity, risk and track-record review. {{ $t[3] }} of live trading experience with audited results.<span class="pv-vtip-emit"></span></span>
                             </span>
@@ -303,7 +315,7 @@
             @endforeach
         </div>
 
-        <div class="pv-grid pv-grid-3 cards" style="gap:16px">
+        <div class="pv-grid pv-grid-3 cards ct-cards" style="gap:16px">
             <div class="copy-chip"><div class="pv-icon">⚡</div><div><b>One-click mirroring</b><br><span class="pv-foot">Your portfolio mirrors theirs automatically.</span></div></div>
             <div class="copy-chip"><div class="pv-icon">🛡</div><div><b>Verified performance</b><br><span class="pv-foot">Track record audited and live.</span></div></div>
             <div class="copy-chip"><div class="pv-icon">✋</div><div><b>Stop-loss control</b><br><span class="pv-foot">Set limits to protect your capital.</span></div></div>
