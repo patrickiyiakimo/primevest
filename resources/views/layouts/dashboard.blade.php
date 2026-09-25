@@ -48,8 +48,11 @@
         .main{margin-left:var(--side);min-height:100vh;display:flex;flex-direction:column}
         .topbar{position:sticky;top:0;z-index:70;display:flex;align-items:center;gap:14px;justify-content:space-between;padding:13px 24px;background:rgba(7,11,20,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
         .burger{display:none;background:none;border:0;color:var(--text);cursor:pointer}
-        .crumb{font-size:.76rem;color:var(--muted)}
+        .crumb{font-size:.76rem;color:var(--muted);min-width:0}
         .crumb b{color:var(--text);font-size:.82rem}
+        /* Long page titles / long names must not squeeze the navbar controls. */
+        .pv-topbar-title{min-width:0}
+        .pv-topbar-title>div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
         .tsearch{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:9px 14px;width:260px}
         .tsearch input{background:none;border:0;outline:0;color:var(--text);font-family:inherit;font-size:.85rem;width:100%}
         .tsearch input::placeholder{color:#5a6685}
@@ -69,6 +72,10 @@
             .main{margin-left:0}
             .burger{display:block}
             .tsearch{display:none}
+            /* Reclaim navbar room on phones. Profile + Log out stay available
+               in the drawer sidebar, so nothing becomes unreachable. */
+            .topbar .udrop{display:none}
+            .topbar{padding:12px 16px;gap:10px}
             .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:75;display:none}
             .overlay.show{display:block}
         }
@@ -218,11 +225,11 @@
 <!-- MAIN -->
 <div class="main">
     <header class="topbar">
-        <div style="display:flex;align-items:center;gap:14px">
+        <div style="display:flex;align-items:center;gap:14px;min-width:0">
             <button class="burger" onclick="pvOpenSide()" aria-label="Menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
             </button>
-            <div>
+            <div class="pv-topbar-title">
                 <div style="font-weight:800;font-size:1.05rem">@yield('page-title', 'Overview')</div>
                 <div class="crumb">@yield('breadcrumb', 'Dashboard')</div>
             </div>
