@@ -308,8 +308,8 @@
     function seedSeries(){
         const pts=history[selected]||[];
         series=pts.map(p=>({t:p[0],y:p[1]}));
-        const keep=volumes.length===pts.length?id||volumes:null;
-        volumes=pts.map((_,i)=>keep?keep[i]:(randVol()));
+        const keep = volumes.length===pts.length ? volumes : null;
+        volumes=pts.map((_,i)=>keep?keep[i]:randVol());
         const now=Math.floor(Date.now()/1000);
         if(series.length){
             const last=series[series.length-1];
