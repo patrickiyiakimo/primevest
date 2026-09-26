@@ -211,5 +211,6 @@
         });
     </script>
     @stack('scripts')
+@include('partials.jivo')
 </body>
 </html>

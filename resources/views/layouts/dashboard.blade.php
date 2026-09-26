@@ -332,5 +332,6 @@
     if(q)q.addEventListener('input',()=>{const v=q.value.toLowerCase();document.querySelectorAll('[data-sym]').forEach(r=>{r.style.display=r.dataset.sym.includes(v)?'':'none'})});
 </script>
 @yield('scripts')
+@include('partials.jivo')
 </body>
 </html>

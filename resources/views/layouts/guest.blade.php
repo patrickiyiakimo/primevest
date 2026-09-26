@@ -137,5 +137,6 @@
             </div>
         </main>
     </div>
+    @include('partials.jivo')
 </body>
 </html>
