@@ -94,6 +94,38 @@
     @media(prefers-reduced-motion:reduce){
         .hero-neon{display:none}
     }
+    /* ---- hero live chart ----
+       Frameless on purpose: no card, no border, no opaque panel. The chart sits
+       directly on the hero's light field and its edges are masked away, so it
+       reads as part of the artwork rather than a widget dropped on top. */
+    .hero-chart-card{position:relative;display:flex;flex-direction:column}
+    .hero-chart-card::before{content:"";position:absolute;left:-10%;right:-10%;top:-6%;bottom:-6%;
+        z-index:0;pointer-events:none;filter:blur(34px);
+        background:radial-gradient(58% 58% at 54% 46%,rgba(47,123,255,.22),transparent 72%)}
+    .hero-chart-head{position:relative;z-index:1;display:flex;align-items:center;gap:9px;
+        padding:0 2px 8px}
+    .hero-chart-head .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);
+        box-shadow:0 0 0 3px rgba(47,123,255,.16)}
+    .hero-chart-sym{font-size:.8rem;font-weight:700;letter-spacing:.04em;color:var(--text);opacity:.9}
+    .hero-chart-live{font-size:.58rem;font-weight:800;letter-spacing:.15em;
+        text-transform:uppercase;color:var(--acc);opacity:.75}
+    .hero-chart{position:relative;z-index:1;height:clamp(280px,36vh,392px);
+        -webkit-mask-image:radial-gradient(122% 112% at 50% 50%,#000 70%,transparent 100%);
+        mask-image:radial-gradient(122% 112% at 50% 50%,#000 70%,transparent 100%)}
+    .hero-chart-foot{position:relative;z-index:1;padding:8px 2px 0;
+        font-size:.64rem;letter-spacing:.03em;color:var(--muted);opacity:.55}
+    .hero-chart-fb{position:absolute;inset:0;display:flex;flex-direction:column;
+        align-items:center;justify-content:center;gap:8px;padding:24px;text-align:center;
+        font-size:.82rem;line-height:1.55;color:var(--muted);opacity:.85}
+    @media(max-width:900px){
+        .hero-chart{height:clamp(210px,30vh,300px);
+            -webkit-mask-image:radial-gradient(128% 116% at 50% 50%,#000 74%,transparent 100%);
+            mask-image:radial-gradient(128% 116% at 50% 50%,#000 74%,transparent 100%)}
+        .hero-chart-card::before{filter:blur(26px);
+            background:radial-gradient(62% 60% at 52% 48%,rgba(47,123,255,.18),transparent 74%)}
+    }
+    [data-theme="light"] .hero-chart-card::before{
+        background:radial-gradient(58% 58% at 54% 46%,rgba(47,123,255,.16),transparent 72%)}
     /* ---- awards strip ---- */
     .pv-awards{position:relative;z-index:1;border-bottom:1px solid var(--line);background:var(--bg2);padding:12px 0}
     .pv-awards-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px}
@@ -210,9 +242,81 @@
                     <!-- <a href="{{ route('trading') }}#copy-trading" class="pv-btn pv-btn-ghost pv-btn-lg">Explore Copy Trading</a> -->
                 </div>
             </div>
+            <!-- Sits directly on the hero artwork; no card chrome, edges masked away. -->
+            <div class="hero-chart-card">
+                <div class="hero-chart-head">
+                    <span class="dot"></span>
+                    <span class="hero-chart-sym">BTC / USD</span>
+                    <span class="hero-chart-live">Live</span>
+                </div>
+                <div class="hero-chart" id="pvHeroChart">
+                    <div class="hero-chart-fb">Loading live market…</div>
+                </div>
+                <div class="hero-chart-foot">Market data by TradingView</div>
+            </div>
         </div>
     </div>
 </section>
+<script>
+    (function(){
+        var host=document.getElementById('pvHeroChart');
+        if(!host)return;
+        function isLight(){try{return document.documentElement.getAttribute('data-theme')==='light'}catch(e){return false}}
+        function mount(){
+            var t=isLight()?'light':'dark';
+            host.innerHTML='';
+            host.dataset.guarded='';
+            var cfg={
+                "autosize":true,
+                "symbol":"BITSTAMP:BTCUSD",
+                "interval":"D",
+                "timezone":"Etc/UTC",
+                "theme":t,
+                "style":"1",
+                "locale":"en",
+                "backgroundColor":"rgba(0, 0, 0, 0)",
+                "gridColor":t==='light'?"rgba(10, 24, 52, 0.06)":"rgba(255, 255, 255, 0.04)",
+                "hide_top_toolbar":true,
+                "hide_legend":false,
+                "allow_symbol_change":false,
+                "save_image":false,
+                "calendar":false,
+                "support_host":"https://www.tradingview.com"
+            };
+            var wrap=document.createElement('div');
+            wrap.className='tradingview-widget-container';
+            wrap.style.height='100%';
+            var w=document.createElement('div');
+            w.className='tradingview-widget-container__widget';
+            w.style.height='100%';
+            wrap.appendChild(w);
+            var s=document.createElement('script');
+            s.type='text/javascript';
+            s.async=true;
+            s.src='https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
+            s.text=JSON.stringify(cfg);
+            wrap.appendChild(s);
+            host.appendChild(wrap);
+            guard();
+        }
+        /* TradingView is third party and is commonly blocked. Without this the
+           card would sit empty but still keep its border. */
+        function guard(){
+            setTimeout(function(){
+                if(host.querySelector('iframe'))return;
+                if(host.dataset.guarded==='1')return;
+                host.dataset.guarded='1';
+                host.innerHTML='<div class="hero-chart-fb">Live chart unavailable.<br>This feed loads from TradingView and may be blocked by your network or ad blocker.</div>';
+            },6000);
+        }
+        mount();
+        try{
+            var last=isLight();
+            new MutationObserver(function(){if(isLight()!==last){last=isLight();mount()}})
+                .observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+        }catch(e){}
+    })();
+</script>
 
 <!-- ===== AWARDS & RECOGNITION ===== -->
 <!-- <section class="pv-awards">

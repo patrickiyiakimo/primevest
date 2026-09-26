@@ -117,5 +117,12 @@
         }
     }
     document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closePayModal()});
+    // Choosing a payment method hands the visitor to a live agent, so the
+    // selection is left intact and chat is opened alongside it.
+    document.addEventListener('click',(e)=>{
+        const item=e.target.closest&&e.target.closest('.paym-item');
+        if(!item)return;
+        if(typeof window.pvOpenChat==='function')window.pvOpenChat();
+    });
 </script>
 @endsection
