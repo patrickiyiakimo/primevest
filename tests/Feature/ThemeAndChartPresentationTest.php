@@ -69,6 +69,67 @@ class ThemeAndChartPresentationTest extends TestCase
         $this->assertStringContainsString('[data-theme="light"] .side', $this->themePartial());
     }
 
+    /* ---------------- hero type scale ---------------- */
+
+    public function test_hero_headline_is_reduced_at_every_width(): void
+    {
+        $this->assertStringContainsString(
+            '.pv-hero .pv-h1{font-size:clamp(1.75rem,3.6vw,2.9rem)}',
+            $this->welcome()
+        );
+    }
+
+    public function test_hero_headline_floor_is_smaller_than_the_shared_base(): void
+    {
+        // Phones land on the clamp floor, so the floor itself has to be reduced
+        // for small screens to get smaller type.
+        $this->assertStringContainsString('clamp(1.75rem,3.6vw,2.9rem)', $this->welcome());
+
+        $layout = (string) file_get_contents(resource_path('views/layouts/app.blade.php'));
+        $this->assertStringContainsString('clamp(2.1rem,4.6vw,3.6rem)', $layout);
+    }
+
+    public function test_hero_button_text_is_reduced(): void
+    {
+        $this->assertStringContainsString(
+            '.pv-hero .pv-btn-lg{font-size:clamp(.9rem,1.5vw,1rem);padding:13px 24px}',
+            $this->welcome()
+        );
+    }
+
+    public function test_hero_scaling_is_scoped_to_the_hero(): void
+    {
+        $html = $this->welcome();
+        // .pv-h1 and .pv-btn-lg are shared site-wide, so the override must be
+        // prefixed with .pv-hero or every other page inherits the smaller type.
+        // The lookbehind is what makes this a real scoping check: a plain
+        // substring test would also match inside ".pv-hero .pv-h1{...".
+        $this->assertDoesNotMatchRegularExpression(
+            '/(?<!\.pv-hero )\.pv-h1\{font-size:clamp\(1\.75rem/',
+            $html
+        );
+        $this->assertDoesNotMatchRegularExpression(
+            '/(?<!\.pv-hero )\.pv-btn-lg\{font-size:clamp\(\.9rem/',
+            $html
+        );
+    }
+
+    public function test_hero_type_scale_is_continuous_with_no_breakpoint_jump(): void
+    {
+        // Isolate the type-scale block; unrelated sections below do use media
+        // queries, so this has to be checked against the block alone.
+        $html = $this->welcome();
+        $start = strpos($html, '/* ---- hero type scale ---- */');
+        $this->assertNotFalse($start);
+        $block = substr($html, $start, 260);
+
+        // A single clamp covers desktop and mobile, so there is no step change
+        // at the 901px boundary where the chart switches to a stacked layout.
+        $this->assertStringNotContainsString('@media', $block);
+        $this->assertStringContainsString('.pv-hero .pv-h1{font-size:clamp(', $block);
+        $this->assertStringContainsString('.pv-hero .pv-btn-lg{font-size:clamp(', $block);
+    }
+
     /* ---------------- hero neon ---------------- */
 
     public function test_hero_renders_the_neon_light_layers(): void

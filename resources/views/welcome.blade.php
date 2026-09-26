@@ -12,6 +12,9 @@
     .hero-note b{color:var(--text)}
     .hero-trust{display:flex;gap:26px;margin-top:26px;color:var(--muted);font-size:.82rem}
     .hero-trust span{display:inline-flex;align-items:center;gap:7px}
+    /* ---- hero type scale ---- */
+    .pv-hero .pv-h1{font-size:clamp(1.75rem,3.6vw,2.9rem)}
+    .pv-hero .pv-btn-lg{font-size:clamp(.9rem,1.5vw,1rem);padding:13px 24px}
     .hero-card{border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#0d1526,#0a0f1c);border:1px solid var(--line);box-shadow:0 60px 120px -60px rgba(0,0,0,.9)}
     .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
     .pill-up{background:rgba(47,123,255,.14);color:var(--acc)}
