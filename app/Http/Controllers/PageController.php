@@ -10,7 +10,17 @@ class PageController extends Controller
     {
         return view('pages.trading');
     }
-    
+
+    public function copyTrading()
+    {
+        return view('pages.copy-trading');
+    }
+
+    public function pricing()
+    {
+        return view('pages.pricing');
+    }
+
     public function contact()
     {
         return view('pages.contact');

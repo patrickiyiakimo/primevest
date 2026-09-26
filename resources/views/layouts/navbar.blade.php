@@ -5,15 +5,15 @@
         </a>
         <div class="pv-nav-links" id="pvNav">
             <span class="pv-menu-label">Explore</span>
-            <a href="{{ url('/') }}" class="{{ request()->routeIs('welcome') ? 'active' : '' }}">
-                <span class="pv-menu-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 21v-6h6v6"/></svg></span>
-                <span>Home</span><span class="pv-menu-chev">›</span>
+            <a href="{{ route('pricing') }}" class="{{ request()->routeIs('pricing') ? 'active' : '' }}">
+                <span class="pv-menu-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4L12 22l-9-9V3h10l7.6 7.6a2 2 0 010 2.8z"/><circle cx="7.5" cy="7.5" r="1.2"/></svg></span>
+                <span>Pricing</span><span class="pv-menu-chev">›</span>
             </a>
             <a href="{{ route('trading') }}" class="{{ request()->routeIs('trading') ? 'active' : '' }}">
                 <span class="pv-menu-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l4-5 3 3 5-7"/></svg></span>
                 <span>Markets</span><span class="pv-menu-chev">›</span>
             </a>
-            <a href="{{ route('trading') }}#copy-trading">
+            <a href="{{ route('copy-trading') }}" class="{{ request()->routeIs('copy-trading') ? 'active' : '' }}">
                 <span class="pv-menu-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></span>
                 <span>Copy Trading</span><span class="pv-menu-chev">›</span>
             </a>

@@ -217,7 +217,9 @@ Route::middleware('auth')->group(function () {
 
 
 // Page routes (public)
-Route::get('/trading', [PageController::class, 'trading'])->name('trading');
+    Route::get('/trading', [PageController::class, 'trading'])->name('trading');
+    Route::get('/copy-trading', [PageController::class, 'copyTrading'])->name('copy-trading');
+    Route::get('/pricing', [PageController::class, 'pricing'])->name('pricing');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/company', [PageController::class, 'company'])->name('company');
 // Real Estate Routes

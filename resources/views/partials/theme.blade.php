@@ -56,10 +56,20 @@
 
     /* Navy page/nav/sidebar/topbar backgrounds -> light glass */
     [data-theme="light"] .pv-nav,[data-theme="light"] .topbar{background:rgba(255,255,255,.82);border-color:var(--line);backdrop-filter:blur(18px)}
-    [data-theme="light"] .pv-nav-links a,.pv-nav-links a:hover{color:var(--muted)}
     [data-theme="light"] .side,.some-side{background:#f4f8ff}.side-item.on{box-shadow:inset 2px 0 0 var(--acc)}
     [data-theme="light"] .pv-burger{color:var(--text)}
     [data-theme="light"] .pv-ticker{color:var(--muted)}
+
+    /* Navbar / mobile menu surfaces */
+    [data-theme="light"] .pv-nav-links a{color:var(--muted)}
+    [data-theme="light"] .pv-nav-links a:hover{background:rgba(47,123,255,.10);color:var(--text)}
+    [data-theme="light"] .pv-nav-links a.active{background:rgba(47,123,255,.13);color:var(--acc);box-shadow:inset 2.5px 0 0 var(--acc)}
+    /* The dropdown panel is a dark navy in the base stylesheet, which left the
+       light theme's slate text unreadable inside it. */
+    [data-theme="light"] .pv-nav-links{background:rgba(255,255,255,.97);box-shadow:0 40px 80px -30px rgba(10,24,52,.32),inset 0 1px 0 rgba(255,255,255,.9)}
+    [data-theme="light"] .pv-menu-ic{background:rgba(10,24,52,.04)}
+    [data-theme="light"] .pv-nav-links a.active .pv-menu-ic{background:linear-gradient(135deg,rgba(87,200,255,.30),rgba(47,123,255,.16));border-color:rgba(47,123,255,.45)}
+    [data-theme="light"] .pv-burger:hover{background:rgba(10,24,52,.06)}
 
     /* Toggle button */
     .pv-theme-btn{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:12px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--muted);cursor:pointer;transition:.2s;flex-shrink:0}

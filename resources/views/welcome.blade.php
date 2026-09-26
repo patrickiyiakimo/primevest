@@ -47,6 +47,53 @@
     .hero-bgchart .bg-area{fill:url(#bgArea)}
     .hero-bgchart .bg-path{fill:none;stroke:url(#bgLine);stroke-width:2.2;opacity:.8}
     .hero-bgchart .bg-dash{stroke:#4cc3ff;stroke-dasharray:6 9;opacity:.5}
+    /* ---- hero neon light ---- */
+    /* A single heavily-blurred blob just read as another static gradient, so
+       each layer is a bright core inside a wide halo (that ratio is what looks
+       like neon) and one wide beam sweeps across to make the motion obvious.
+       --a1..--a4 drive alpha so the light palette can dial the whole thing back. */
+    .hero-neon{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+        --a1:.9;--a2:.75;--a3:.45;--a4:.5}
+    .hero-neon i{position:absolute;display:block;border-radius:50%;
+        mix-blend-mode:screen;will-change:transform,opacity}
+    .hero-neon i:nth-child(1){width:640px;height:640px;left:-16%;top:-28%;
+        background:radial-gradient(circle,rgba(96,170,255,var(--a1)) 0%,rgba(47,123,255,.55) 16%,rgba(47,123,255,.18) 36%,rgba(47,123,255,0) 62%);
+        filter:blur(20px);animation:pvNeonA 16s ease-in-out infinite}
+    .hero-neon i:nth-child(2){width:560px;height:560px;right:-14%;top:-16%;
+        background:radial-gradient(circle,rgba(140,225,255,var(--a2)) 0%,rgba(76,195,255,.5) 18%,rgba(14,165,233,.15) 38%,rgba(14,165,233,0) 64%);
+        filter:blur(22px);animation:pvNeonB 21s ease-in-out infinite}
+    .hero-neon i:nth-child(3){width:520px;height:520px;left:30%;bottom:-34%;
+        background:radial-gradient(circle,rgba(255,214,120,var(--a3)) 0%,rgba(240,185,11,.4) 20%,rgba(240,185,11,.12) 40%,rgba(240,185,11,0) 66%);
+        filter:blur(26px);animation:pvNeonC 27s ease-in-out infinite}
+    /* the sweep */
+    .hero-neon i:nth-child(4){width:160%;height:300px;left:-30%;top:34%;
+        background:radial-gradient(ellipse at center,rgba(150,215,255,var(--a4)) 0%,rgba(76,195,255,.16) 32%,rgba(76,195,255,0) 66%);
+        filter:blur(38px);animation:pvNeonD 19s ease-in-out infinite}
+    @keyframes pvNeonA{
+        0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.85}
+        33%{transform:translate3d(30vw,14vh,0) scale(1.2);opacity:1}
+        66%{transform:translate3d(9vw,30vh,0) scale(.88);opacity:.6}}
+    @keyframes pvNeonB{
+        0%,100%{transform:translate3d(0,0,0) scale(1.1);opacity:.75}
+        40%{transform:translate3d(-28vw,22vh,0) scale(.85);opacity:1}
+        70%{transform:translate3d(-11vw,-8vh,0) scale(1.24);opacity:.55}}
+    @keyframes pvNeonC{
+        0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.6}
+        45%{transform:translate3d(20vw,-26vh,0) scale(1.26);opacity:.95}
+        75%{transform:translate3d(-16vw,-11vh,0) scale(.9);opacity:.45}}
+    @keyframes pvNeonD{
+        0%,100%{transform:translate3d(-16%,0,0) rotate(-9deg);opacity:.3}
+        50%{transform:translate3d(24%,-7vh,0) rotate(7deg);opacity:.85}}
+    /* `screen` washes out to nothing on a white page, and `normal` at low alpha
+       was too faint to notice. `multiply` keeps the hue on white and actually
+       darkens toward the brand colour, so light mode gets a real tinted glow. */
+    [data-theme="light"] .hero-neon{--a1:.5;--a2:.42;--a3:.24;--a4:.3}
+    [data-theme="light"] .hero-neon i{mix-blend-mode:multiply;filter:blur(46px)}
+    /* keep the gold pool from muddying to brown when multiplied */
+    [data-theme="light"] .hero-neon i:nth-child(3){background:radial-gradient(circle,rgba(245,158,11,.3) 0%,rgba(245,158,11,.16) 22%,rgba(245,158,11,.05) 42%,rgba(245,158,11,0) 66%)}
+    @media(prefers-reduced-motion:reduce){
+        .hero-neon{display:none}
+    }
     /* ---- awards strip ---- */
     .pv-awards{position:relative;z-index:1;border-bottom:1px solid var(--line);background:var(--bg2);padding:12px 0}
     .pv-awards-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px}
@@ -130,6 +177,8 @@
 @section('content')
 <!-- ===== HERO ===== -->
 <section class="pv-hero">
+    <!-- Drifting neon light, behind the chart and copy. Decorative only. -->
+    <div class="hero-neon" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
     <!-- Background chart layer (gradient + grid kept via .pv-hero::before) -->
     <svg class="hero-bgchart" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true">
         <defs>
@@ -158,7 +207,7 @@
                 <h1 class="pv-h1">Trade, stake &amp; grow your <span style="background:linear-gradient(120deg,#2f7bff,#4cc3ff);-webkit-background-clip:text;background-clip:text;color:transparent">digital assets</span> with a platform you can trust.</h1>
                 <div class="hero-actions">
                     <a href="{{ route('register') }}" class="pv-btn pv-btn-lg mr-5">Start Trading Free</a>
-                    <a href="{{ route('trading') }}#copy-trading" class="pv-btn pv-btn-ghost pv-btn-lg">Explore Copy Trading</a>
+                    <!-- <a href="{{ route('trading') }}#copy-trading" class="pv-btn pv-btn-ghost pv-btn-lg">Explore Copy Trading</a> -->
                 </div>
             </div>
         </div>

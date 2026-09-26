@@ -89,7 +89,9 @@
         .pv-logo-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04121f;font-weight:800;font-size:1.05rem;box-shadow:0 6px 18px -6px rgba(47,123,255,.6),inset 0 1px 0 rgba(255,255,255,.3)}
         .pv-nav-links{display:flex;align-items:center;gap:26px;font-size:.92rem;font-weight:600}
         .pv-nav-links a{color:var(--muted);transition:.2s}
-        .pv-nav-links a:hover,.pv-nav-links a.active{color:#fff}
+        /* var(--text) flips with the theme; a hardcoded #fff stays white on the
+           light palette and disappears against the light nav. */
+        .pv-nav-links a:hover,.pv-nav-links a.active{color:var(--text)}
         .pv-menu-ic,.pv-menu-chev,.pv-menu-label,.pv-menu-sep,.pv-menu-auth{display:none}
         .pv-btn-block{display:flex;width:100%;justify-content:center}
         .pv-btn-hide-sm{display:inline-flex}
@@ -112,8 +114,8 @@
             .pv-nav-links.open a:nth-child(4){transition-delay:.13s}.pv-nav-links.open a:nth-child(5){transition-delay:.17s}
             .pv-nav-links.open a:nth-child(6){transition-delay:.21s}.pv-nav-links.open a:nth-child(7){transition-delay:.25s}
             .pv-nav-links.open a:nth-child(10){transition-delay:.29s}
-            .pv-nav-links a:hover{background:rgba(47,123,255,.09);color:#fff;transform:translateX(3px)}
-            .pv-nav-links a.active{background:rgba(47,123,255,.12);color:#fff;box-shadow:inset 2.5px 0 0 var(--acc)}
+            .pv-nav-links a:hover{background:rgba(47,123,255,.09);color:var(--text);transform:translateX(3px)}
+            .pv-nav-links a.active{background:rgba(47,123,255,.12);color:var(--acc);box-shadow:inset 2.5px 0 0 var(--acc)}
             .pv-menu-ic{display:grid;width:36px;height:36px;border-radius:10px;place-items:center;background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--acc);flex-shrink:0;font-size:1rem;transition:.2s}
             .pv-nav-links a.active .pv-menu-ic{background:linear-gradient(135deg,rgba(87,200,255,.22),rgba(47,123,255,.1));border-color:rgba(47,123,255,.4)}
             .pv-menu-chev{display:block;margin-left:auto;color:var(--muted);opacity:.45;font-size:1.1rem}

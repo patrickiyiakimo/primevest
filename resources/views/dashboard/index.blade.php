@@ -22,6 +22,18 @@
     })();
 </script>
 
+@if($needsFundingOnboarding)
+{{-- Dismissal is read before paint so the guide never flashes on repeat visits. --}}
+<script>
+    (function(){
+        var KEY='pv-funding-onb-{{ $user->id }}';
+        var d=false;
+        try{d=localStorage.getItem(KEY)==='1'}catch(e){}
+        document.documentElement.classList.toggle('pv-onb-dismissed',d);
+    })();
+</script>
+@endif
+
 <style>
     .pv-alert{position:fixed;left:50%;bottom:24px;transform:translate(-50%,170%);z-index:960;display:flex;align-items:center;gap:12px;width:min(520px,calc(100vw - 32px));padding:14px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.5);transition:transform .55s cubic-bezier(.22,1,.36,1)}
     .pv-alert.show{transform:translate(-50%,0)}
@@ -72,9 +84,62 @@
         .sec-h h2{font-size:1.05rem}
         .sec-actions{width:100%}
     }
+
+    /* ===== Mobile-only funding prompt =====
+       Flat dark dialog, no gradients. Desktop and tablet are untouched. */
+    .pv-onb{display:none}
+
+    @media(max-width:768px){
+        .pv-onb{display:flex;position:fixed;inset:0;z-index:970;align-items:center;
+            justify-content:center;padding:20px;background:rgba(4,7,14,.78);
+            backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+            animation:pv-onb-in .22s ease-out}
+        .pv-onb-card{position:relative;width:100%;max-width:320px;padding:26px 22px 22px;
+            border-radius:18px;background:#0d1320;border:1px solid rgba(255,255,255,.11);
+            box-shadow:0 20px 48px rgba(0,0,0,.6);text-align:center;
+            animation:pv-onb-pop .26s cubic-bezier(.22,1,.36,1)}
+        .pv-onb-x{position:absolute;top:8px;right:10px;width:28px;height:28px;padding:0;
+            border:0;border-radius:8px;background:transparent;color:#6d7a91;
+            font-size:1.3rem;line-height:1;cursor:pointer;transition:.18s}
+        .pv-onb-x:hover{color:#eef2f9;background:rgba(255,255,255,.08)}
+        .pv-onb-title{margin:0 0 8px;font-size:1.06rem;font-weight:700;line-height:1.4;
+            letter-spacing:-.01em;color:#f2f6fc}
+        .pv-onb-sub{margin:0 0 20px;font-size:.83rem;line-height:1.5;color:#8b97ad}
+        .pv-onb-cta{display:block;width:100%;padding:13px;border-radius:12px;
+            font-size:.92rem;font-weight:700;text-align:center;text-decoration:none;
+            background:var(--acc);color:#03140d;transition:opacity .18s;
+            box-shadow:0 10px 26px -12px rgba(47,123,255,.55)}
+        .pv-onb-cta:hover{opacity:.9}
+
+        /* An unfunded new account has no use for a 12M chart, a market screener
+           or a duplicate deposit button, and on a phone they bury the popup's
+           call to action. */
+        .pv-dash-needs-funding .pv-onb-hide-sm{display:none}
+    }
+    @keyframes pv-onb-in{from{opacity:0}to{opacity:1}}
+    @keyframes pv-onb-pop{from{opacity:0;transform:translateY(10px) scale(.97)}
+        to{opacity:1;transform:none}}
+    @media(prefers-reduced-motion:reduce){
+        .pv-onb,.pv-onb-card{animation:none}
+    }
 </style>
 
+<!-- MOBILE-ONLY FUNDING PROMPT -->
+@if($needsFundingOnboarding)
+{{-- Compact dark dialog. Hidden from 769px up so the desktop dashboard is
+     untouched. Deliberately flat: no gradients, no multi-step content. --}}
+<div class="pv-onb" data-pv-onb>
+    <div class="pv-onb-card" role="dialog" aria-modal="true" aria-labelledby="pv-onb-title">
+        <button type="button" class="pv-onb-x" data-pv-onb-close aria-label="Dismiss">&times;</button>
+        <h2 class="pv-onb-title" id="pv-onb-title">Fund your account to start trading</h2>
+        <p class="pv-onb-sub">Deposit funds to activate your portfolio.</p>
+        <a href="{{ route('deposit') }}" class="pv-onb-cta">Deposit Funds</a>
+    </div>
+</div>
+@endif
+
 <!-- KPI CARDS -->
+<div class="{{ $needsFundingOnboarding ? 'pv-dash-needs-funding' : '' }}">
 <div class="kpi">
     <div class="kpi-card glow pv-shade">
         <div class="lbl">
@@ -172,11 +237,14 @@
     <div class="pv-quickcol" style="display:flex;flex-direction:column;gap:20px;min-height:0">
         <div class="pa" style="padding:22px">
             <div class="sec-h"><div><h2>Quick Actions</h2><p>Move your funds in seconds</p></div></div>
-            <a href="{{ route('deposit') }}" class="btn btn-block" style="width:100%;margin-bottom:10px">⬆ Deposit Funds</a>
+            {{-- For a brand new phone user the funding popup is the single call to
+                 action, so the duplicate deposit button is dropped here. Scoped to
+                 the onboarding state; funded accounts keep it on every device. --}}
+            <a href="{{ route('deposit') }}" class="btn btn-block pv-onb-hide-sm" style="width:100%;margin-bottom:10px">⬆ Deposit Funds</a>
             <a href="{{ route('invest') }}" class="btn btn-gold btn-block" style="width:100%;margin-bottom:10px">🔥 Start Staking</a>
             <a href="{{ route('buy-crypto') }}" class="btn btn-ghost btn-block" style="width:100%">⟳ Buy Crypto</a>
         </div>
-        <div class="pa pv-card pv-screener" style="padding:22px 22px 14px;display:flex;flex-direction:column;flex:1;min-height:0">
+        <div class="pa pv-card pv-screener pv-onb-hide-sm" style="padding:22px 22px 14px;display:flex;flex-direction:column;flex:1;min-height:0">
             <div class="sec-h" style="margin-bottom:10px"><div><h2>Market Screener</h2><p>Real-time crypto overview</p></div></div>
             <div style="flex:1;min-height:0;border-radius:12px;overflow:hidden">
                 <div id="tvScreener" style="height:100%"></div>
@@ -186,49 +254,15 @@
 </div>
 
 <!-- MARKET OVERVIEW -->
-<div class="pa mt" style="padding:22px">
+<div class="pa mt pv-onb-hide-sm" style="padding:22px">
     <div class="sec-h" style="margin-bottom:10px"><div><h2>Market Overview</h2><p>Global markets at a glance</p></div></div>
     <div class="pv-tv-ov">
         <div id="tvOverview" style="height:100%"></div>
     </div>
 </div>
 
-<!-- GROWTH STRIP -->
-<!-- <div class="pa mt" style="padding:18px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:22px">
-    <div style="font-weight:800">⚡ Staking highlights</div>
-    <div class="muted" style="font-size:.88rem">USDT Flexible — <b class="gold">9% APY</b> · BTC Staking — <b class="gold">6.75% APY</b> · ETH 2.0 — <b class="gold">5.2% APY</b></div>
-    <a href="{{ route('invest') }}" class="btn btn-sm btn-ghost" style="margin-left:auto">View all plans</a>
-</div> -->
-
-<!-- COPY TRADING TEASER -->
-<div class="pa mt" style="padding:22px">
-    <div class="sec-h">
-        <div><h2>Top Copy Traders</h2><p>Mirror proven strategies automatically</p></div>
-        <a href="{{ route('trading') }}#copy-trading" class="btn btn-sm btn-ghost">See all traders</a>
-    </div>
-    <div class="grid-3">
-        @php
-            $traders = [
-                ['SK','CryptoMatrix','+186.4%','3yr','128,402','#7c3aed'],
-                ['LN','LunaBulls','+143.9%','2yr','94,118','#0ea5e9'],
-                ['AS','SatoshiEdge','+119.2%','18mo','76,541','#f59e0b'],
-            ];
-        @endphp
-        @foreach($traders as $t)
-        <div style="display:flex;align-items:center;gap:12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid var(--line)">
-            <div style="width:42px;height:42px;border-radius:50%;background:{{ $t[5] }};display:grid;place-items:center;font-weight:800">{{ $t[0] }}</div>
-            <div style="flex:1;min-width:0">
-                <div style="font-weight:700;font-size:.9rem">{{ $t[1] }}</div>
-                <div class="muted" style="font-size:.75rem">{{ $t[4] }} copiers</div>
-            </div>
-            <div style="text-align:right"><div class="num" style="font-weight:800;color:var(--acc)">+{{ $t[2] }}</div><div class="muted" style="font-size:.7rem">{{ $t[3] }} ROI</div></div>
-        </div>
-        @endforeach
-    </div>
-</div>
-
 <!-- RECENT TRANSACTIONS -->
-<div class="pa mt" style="padding:22px">
+<div class="pa mt pv-onb-hide-sm" style="padding:22px">
     <div class="sec-h">
         <div><h2>Recent Transactions</h2><p>Your latest movements on PrimeVest</p></div>
         <a href="{{ route('deposits-history') }}" class="btn btn-sm btn-ghost">View all</a>
@@ -267,13 +301,13 @@
     </table>
     </div>
 </div>
+</div>
 @endsection
 
 @section('scripts')
 <script>
     // All eye buttons share one state so any of them toggles every balance.
-    (function(){
-        var KEY='pv-hide-balances';
+    (function(){        var KEY='pv-hide-balances';
         function hidden(){
             try{return localStorage.getItem(KEY)==='1'}catch(e){return false}
         }
@@ -295,6 +329,30 @@
         });
     })();
 </script>
+@if($needsFundingOnboarding)
+<script>
+    /* The dialog is the only funding prompt. Dismissal is remembered per account
+       so it is shown once rather than on every visit. */
+    (function(){
+        var KEY='pv-funding-onb-{{ $user->id }}';
+        var card=document.querySelector('[data-pv-onb]');
+        if(!card)return;
+
+        if(document.documentElement.classList.contains('pv-onb-dismissed')){
+            card.style.display='none';
+        }
+
+        document.addEventListener('click',function(e){
+            var x=e.target.closest&&e.target.closest('[data-pv-onb-close]');
+            if(!x)return;
+            e.preventDefault();
+            document.documentElement.classList.add('pv-onb-dismissed');
+            try{localStorage.setItem(KEY,'1')}catch(e){}
+            card.style.display='none';
+        });
+    })();
+</script>
+@endif
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
     if(typeof pvThemedWidget==='function'){

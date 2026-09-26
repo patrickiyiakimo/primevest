@@ -140,7 +140,16 @@ class DashboardController extends Controller
             $chart = array_reverse($chart);
         }
         $netPnl = count($chart) ? (float) $chart[count($chart) - 1]['v'] : 0.0;
-        
+
+        // ---- First-run funding prompt -------------------------------------------
+        // A brand new account has nothing to show: every KPI is zero and the only
+        // useful action (deposit) is easy to miss. This flags that state so the
+        // view can prompt on a phone. It is deliberately short-lived (one week) so
+        // it behaves as onboarding rather than a permanent nag.
+        $onboardingWindowDays = 7;
+        $accountAgeDays = (int) $user->created_at->diffInDays(now());
+        $needsFundingOnboarding = $lastDeposit === null && $accountAgeDays <= $onboardingWindowDays;
+
         return view('dashboard.index', compact(
             'user',
             'profits',
@@ -161,7 +170,8 @@ class DashboardController extends Controller
             'signalNext',
             'signalTiers',
             'chart',
-            'netPnl'
+            'netPnl',
+            'needsFundingOnboarding'
         ));
     }
 }

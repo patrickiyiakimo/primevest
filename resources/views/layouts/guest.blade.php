@@ -73,6 +73,13 @@
             .auth-hero h1{max-width:none}
             .auth-hero p,.auth-feats,.auth-stats{display:none}
             .auth-right{padding:34px 18px 40px}
+            /* Phones showed the brand three times: the "Back to PrimeVest" link,
+               the brand panel, and the large logo above the form. Keep only the
+               brand panel so the logo and wordmark read once, cleanly. */
+            .auth-back{display:none}
+            .auth-right .pv-logo{display:none}
+            /* space-between with one child would pull the theme toggle left. */
+            .auth-topbar{justify-content:flex-end}
         }
     </style>
 </head>
