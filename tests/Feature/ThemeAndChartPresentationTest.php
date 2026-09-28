@@ -69,6 +69,85 @@ class ThemeAndChartPresentationTest extends TestCase
         $this->assertStringContainsString('[data-theme="light"] .side', $this->themePartial());
     }
 
+    /* ---------------- market ticker stays horizontal on phones ---------------- */
+
+    public function test_ticker_clips_to_a_single_row(): void
+    {
+        $layout = $this->raw('layouts/app.blade.php');
+        // overflow:hidden is what keeps the tape from growing a second row.
+        $this->assertStringContainsString('.ticker{position:relative;z-index:1;overflow:hidden}', $layout);
+    }
+
+    public function test_ticker_height_is_pinned_on_phones(): void
+    {
+        $layout = $this->raw('layouts/app.blade.php');
+        // One tape row is 46px. Pinning it stops TradingView stacking rows.
+        $this->assertStringContainsString('@media(max-width:768px)', $layout);
+        $this->assertStringContainsString('.ticker iframe{height:46px!important;min-height:46px}', $layout);
+        $this->assertStringContainsString('.ticker .tradingview-widget-container{width:100%}', $layout);
+    }
+
+    public function test_ticker_still_loads_the_real_tape(): void
+    {
+        // The mobile clamp must not replace the live widget with a fake list.
+        $this->assertStringContainsString('embed-widget-ticker-tape.js', $this->welcome());
+    }
+
+    /* ---------------- landing stats responsiveness ---------------- */
+
+    public function test_landing_stats_use_the_responsive_modifier(): void
+    {
+        $this->assertStringContainsString('class="pv-stats pv-stats--home"', $this->welcome());
+    }
+
+    public function test_landing_stat_numbers_no_longer_use_inline_sizes(): void
+    {
+        $html = $this->welcome();
+        // Inline font-size cannot be overridden by a media query, so it has to go.
+        $this->assertStringNotContainsString('class="num" style="font-weight:800;font-size:1.7rem"', $html);
+        $this->assertStringContainsString('<span class="num">$2.4B+</span>', $html);
+        $this->assertSame(4, substr_count($html, '<span class="num">'));
+    }
+
+    public function test_landing_stats_step_down_to_one_column_on_phones(): void
+    {
+        $layout = $this->raw('layouts/app.blade.php');
+        $this->assertStringContainsString('.pv-stats--home{grid-template-columns:1fr;gap:10px}', $layout);
+        $this->assertStringContainsString('.pv-stats--home .num{font-size:1.35rem;min-width:88px}', $layout);
+    }
+
+    public function test_landing_stats_become_a_row_on_phones(): void
+    {
+        $layout = $this->raw('layouts/app.blade.php');
+        // Number left, label right - keeps four long labels readable on a phone.
+        $this->assertStringContainsString(
+            '.pv-stats--home .pv-stat{padding:15px 17px;display:flex;align-items:center;gap:14px}',
+            $layout
+        );
+    }
+
+    public function test_landing_stats_keep_two_up_on_tablets(): void
+    {
+        $layout = $this->raw('layouts/app.blade.php');
+        $this->assertStringContainsString('.pv-stats--home{grid-template-columns:repeat(2,1fr);gap:12px}', $layout);
+    }
+
+    public function test_landing_stat_number_is_styled_once_via_the_modifier(): void
+    {
+        $layout = $this->raw('layouts/app.blade.php');
+        // The label span must be excluded, otherwise it also gets the big number style.
+        $this->assertStringContainsString('.pv-stats--home .pv-stat span:not(.num)', $layout);
+        $this->assertStringContainsString('.pv-stats--home .num{font-size:1.7rem;font-weight:800', $layout);
+    }
+
+    public function test_other_pages_using_stats_are_left_alone(): void
+    {
+        // company / property-details / real-estate use .pv-stats without the
+        // modifier, so their sizing and 2-up layout must be unchanged.
+        $this->assertStringNotContainsString('pv-stats--home', $this->raw('pages/company.blade.php'));
+        $this->assertStringContainsString('class="pv-stats"', $this->raw('pages/company.blade.php'));
+    }
+
     /* ---------------- hero type scale ---------------- */
 
     public function test_hero_headline_is_reduced_at_every_width(): void

@@ -144,6 +144,20 @@
         .pv-stat{padding:22px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--line)}
         .pv-stat b{font-size:1.5rem;font-weight:800;display:block}
         .pv-stat span{color:var(--muted);font-size:.82rem}
+        /* landing stats: single column of rows on phones, 2-up on tablets */
+        .pv-stats--home .num{font-size:1.7rem;font-weight:800;display:block;line-height:1.15;color:var(--text)}
+        .pv-stats--home .pv-stat span:not(.num){color:var(--muted);font-size:.82rem;display:block;margin-top:4px}
+        @media(max-width:900px){
+            .pv-stats--home{grid-template-columns:repeat(2,1fr);gap:12px}
+            .pv-stats--home .pv-stat{padding:18px}
+            .pv-stats--home .num{font-size:1.45rem}
+        }
+        @media(max-width:560px){
+            .pv-stats--home{grid-template-columns:1fr;gap:10px}
+            .pv-stats--home .pv-stat{padding:15px 17px;display:flex;align-items:center;gap:14px}
+            .pv-stats--home .num{font-size:1.35rem;min-width:88px}
+            .pv-stats--home .pv-stat span:not(.num){margin-top:0;font-size:.85rem}
+        }
         /* Grid helpers */
         .pv-grid{display:grid;gap:22px}
         .pv-grid-2{grid-template-columns:1fr 1fr}
@@ -164,7 +178,14 @@
         .pv-divider{height:1px;background:var(--line);border:0}
         .pv-tag{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:700;margin:0 0 12px}
         .pv-foot{color:var(--muted);font-size:.82rem}
-        .ticker{position:relative;z-index:1}
+        .ticker{position:relative;z-index:1;overflow:hidden}
+        .ticker .tradingview-widget-container{width:100%}
+        @media(max-width:768px){
+            .ticker #pvTvTape,
+            .ticker .tradingview-widget-container,
+            .ticker .tradingview-widget-container__widget,
+            .ticker iframe{height:46px!important;min-height:46px}
+        }
         ::selection{background:#2375ff;color:#fff}
         .pv-card{transition:.3s}
         .pv-card:hover{transform:translateY(-4px);border-color:rgba(47,123,255,.35);box-shadow:0 24px 48px -24px rgba(0,0,0,.6)}

@@ -402,11 +402,11 @@
 <!-- ===== STATS ===== -->
 <section class="pv-section" style="padding-top:64px">
     <div class="pv-container">
-        <div class="pv-stats">
-            <div class="pv-stat"><span class="num" style="font-weight:800;font-size:1.7rem">$2.4B+</span><span>Assets under management</span></div>
-            <div class="pv-stat"><span class="num" style="font-weight:800;font-size:1.7rem">480K+</span><span>Investors in 190 countries</span></div>
-            <div class="pv-stat"><span class="num" style="font-weight:800;font-size:1.7rem">24/7</span><span>Live market &amp; support coverage</span></div>
-            <div class="pv-stat"><span class="num" style="font-weight:800;font-size:1.7rem">9.7/10</span><span>Average investor rating</span></div>
+        <div class="pv-stats pv-stats--home">
+            <div class="pv-stat"><span class="num">$2.4B+</span><span>Assets under management</span></div>
+            <div class="pv-stat"><span class="num">480K+</span><span>Investors in 190 countries</span></div>
+            <div class="pv-stat"><span class="num">24/7</span><span>Live market &amp; support coverage</span></div>
+            <div class="pv-stat"><span class="num">9.7/10</span><span>Average investor rating</span></div>
         </div>
     </div>
 </section>
