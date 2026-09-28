@@ -78,12 +78,13 @@ class ThemeAndChartPresentationTest extends TestCase
         $this->assertStringContainsString('.ticker{position:relative;z-index:1;overflow:hidden}', $layout);
     }
 
-    public function test_ticker_height_is_pinned_on_phones(): void
+    public function test_ticker_height_fits_name_and_price_lines(): void
     {
         $layout = $this->raw('layouts/app.blade.php');
-        // One tape row is 46px. Pinning it stops TradingView stacking rows.
+        // Each mobile item stacks the price underneath the crypto name (two
+        // lines). 46px clips that second line, so the clamp must be taller.
         $this->assertStringContainsString('@media(max-width:768px)', $layout);
-        $this->assertStringContainsString('.ticker iframe{height:46px!important;min-height:46px}', $layout);
+        $this->assertStringContainsString('.ticker iframe{height:68px!important;min-height:68px}', $layout);
         $this->assertStringContainsString('.ticker .tradingview-widget-container{width:100%}', $layout);
     }
 

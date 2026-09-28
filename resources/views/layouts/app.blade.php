@@ -184,7 +184,7 @@
             .ticker #pvTvTape,
             .ticker .tradingview-widget-container,
             .ticker .tradingview-widget-container__widget,
-            .ticker iframe{height:46px!important;min-height:46px}
+            .ticker iframe{height:68px!important;min-height:68px}
         }
         ::selection{background:#2375ff;color:#fff}
         .pv-card{transition:.3s}
