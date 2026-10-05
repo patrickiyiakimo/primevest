@@ -23,9 +23,9 @@
     @endif
 
     /* Celebratory sheen on the approved card. */
-    .pv-kyc-celebrate{position:relative;overflow:hidden;border-color:rgba(47,123,255,.32)}
+    .pv-kyc-celebrate{position:relative;overflow:hidden;border-color:rgba(75,24,191,.32)}
     .pv-kyc-celebrate::before{content:"";position:absolute;left:-20%;right:-20%;top:-45%;height:75%;
-        background:radial-gradient(ellipse at 50% 100%,rgba(47,123,255,.26),rgba(0,180,255,.08) 45%,transparent 72%);
+        background:radial-gradient(ellipse at 50% 100%,rgba(75,24,191,.26),rgba(169,139,255,.08) 45%,transparent 72%);
         pointer-events:none}
     .pv-kyc-celebrate>*{position:relative;z-index:1}
     @keyframes pvBadgePop{0%{transform:scale(.55) rotate(-14deg);opacity:0}
@@ -41,7 +41,7 @@
 
 <div class="pa {{ $isVerified ? 'pv-kyc-celebrate' : '' }}" style="padding:26px;text-align:center">
     <div class="pv-kyc-badge" style="width:74px;height:74px;border-radius:20px;margin:0 auto 18px;display:grid;place-items:center;font-size:2rem;
-        background:{{ $isVerified ? 'rgba(47,123,255,.15)' : ($st == 'rejected' ? 'rgba(239,68,68,.15)' : 'rgba(240,185,11,.12)') }}">
+        background:{{ $isVerified ? 'rgba(75,24,191,.15)' : ($st == 'rejected' ? 'rgba(239,68,68,.15)' : 'rgba(240,185,11,.12)') }}">
         {{ $isVerified ? '✓' : ($st == 'rejected' ? '✖' : '⏳') }}
     </div>
     <h2 style="margin:0 0 8px;font-size:1.4rem">KYC: <span class="num" style="color:var(--acc)">{{ $label }}</span></h2>
@@ -102,7 +102,7 @@
         return;
     }
 
-    var COLORS = ['#2f7bff','#00b4ff','#4cc3ff','#f0b90b','#22c55e','#ffffff'];
+    var COLORS = ['#4b18bf','#a98bff','#6a2ee0','#f0b90b','#22c55e','#ffffff'];
     var ctx = canvas.getContext('2d');
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
     var parts = [];

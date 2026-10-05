@@ -35,7 +35,7 @@
     :root[data-theme="light"]{
         --bg:#f2f6fc; --bg2:#e9eef7; --panel:#ffffff; --panel2:#f5f9ff;
         --line:rgba(10,24,52,.12); --text:#0b1526; --muted:#5c6b86;
-        --acc:#2f7bff; --acc2:#00b4ff; --gold:#b07f0b; --red:#dc2626;
+        --acc:#4b18bf; --acc2:#a98bff; --gold:#b07f0b; --red:#dc2626;
     }
 
     /* Universal light surfaces (hardcoded white-rgba -> dark-on-light tint) */
@@ -62,13 +62,13 @@
 
     /* Navbar / mobile menu surfaces */
     [data-theme="light"] .pv-nav-links a{color:var(--muted)}
-    [data-theme="light"] .pv-nav-links a:hover{background:rgba(47,123,255,.10);color:var(--text)}
-    [data-theme="light"] .pv-nav-links a.active{background:rgba(47,123,255,.13);color:var(--acc);box-shadow:inset 2.5px 0 0 var(--acc)}
+    [data-theme="light"] .pv-nav-links a:hover{background:rgba(75,24,191,.10);color:var(--text)}
+    [data-theme="light"] .pv-nav-links a.active{background:rgba(75,24,191,.13);color:var(--acc);box-shadow:inset 2.5px 0 0 var(--acc)}
     /* The dropdown panel is a dark navy in the base stylesheet, which left the
        light theme's slate text unreadable inside it. */
     [data-theme="light"] .pv-nav-links{background:rgba(255,255,255,.97);box-shadow:0 40px 80px -30px rgba(10,24,52,.32),inset 0 1px 0 rgba(255,255,255,.9)}
     [data-theme="light"] .pv-menu-ic{background:rgba(10,24,52,.04)}
-    [data-theme="light"] .pv-nav-links a.active .pv-menu-ic{background:linear-gradient(135deg,rgba(87,200,255,.30),rgba(47,123,255,.16));border-color:rgba(47,123,255,.45)}
+    [data-theme="light"] .pv-nav-links a.active .pv-menu-ic{background:linear-gradient(135deg,rgba(106,46,224,.30),rgba(75,24,191,.16));border-color:rgba(75,24,191,.45)}
     [data-theme="light"] .pv-burger:hover{background:rgba(10,24,52,.06)}
 
     /* Toggle button */
@@ -82,5 +82,5 @@
     /* Balance privacy eye (dashboard) */
     [data-theme="light"] .pv-eye{background:rgba(10,24,52,.05);color:var(--muted)}
     [data-theme="light"] .pv-eye:hover{background:rgba(10,24,52,.09);color:var(--text)}
-    [data-theme="light"] .pv-balances-hidden .pv-eye{background:rgba(47,123,255,.12)}
+    [data-theme="light"] .pv-balances-hidden .pv-eye{background:rgba(75,24,191,.12)}
 </style>

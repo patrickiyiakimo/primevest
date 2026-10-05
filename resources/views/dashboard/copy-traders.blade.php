@@ -54,7 +54,7 @@
             <div><div class="num" style="font-weight:800;font-size:1.05rem;color:var(--gold)">+{{ $t->ytd_return }}%</div><div class="muted" style="font-size:.7rem">YTD</div></div>
         </div>
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-            <span class="ct-risk" style="background:{{ $t->risk_score > 25 ? 'rgba(239,68,68,.15)' : 'rgba(47,123,255,.13)' }};color:{{ $t->risk_score > 25 ? '#ff7c85' : 'var(--acc)' }}">{{ $t->risk_score }}</span>
+            <span class="ct-risk" style="background:{{ $t->risk_score > 25 ? 'rgba(239,68,68,.15)' : 'rgba(75,24,191,.13)' }};color:{{ $t->risk_score > 25 ? '#ff7c85' : 'var(--acc)' }}">{{ $t->risk_score }}</span>
             <div>
                 <div style="font-size:.82rem;font-weight:700">Risk score</div>
                 <div class="muted" style="font-size:.72rem">{{ $t->risk_score > 25 ? 'Higher risk profile' : 'Balanced risk profile' }}</div>
@@ -70,9 +70,9 @@
 
 <!-- How copy works -->
 <div class="grid-3 mt">
-    <div class="pa" style="padding:22px"><div class="step-n" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#57c8ff,#2f7bff);color:#04121f;display:grid;place-items:center;font-weight:800">1</div><h3 style="margin:12px 0 6px;font-size:1rem">Choose a trader</h3><p class="muted" style="font-size:.85rem;margin:0;line-height:1.6">Compare verified track records, win rates and risk scores. Transparent, audited stats only.</p></div>
-    <div class="pa" style="padding:22px"><div class="step-n" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#57c8ff,#2f7bff);color:#04121f;display:grid;place-items:center;font-weight:800">2</div><h3 style="margin:12px 0 6px;font-size:1rem">Set your allocation</h3><p class="muted" style="font-size:.85rem;margin:0;line-height:1.6">Decide how much of your balance to mirror — you keep full ownership of your funds.</p></div>
-    <div class="pa" style="padding:22px"><div class="step-n" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#57c8ff,#2f7bff);color:#04121f;display:grid;place-items:center;font-weight:800">3</div><h3 style="margin:12px 0 6px;font-size:1rem">Earn automatically</h3><p class="muted" style="font-size:.85rem;margin:0;line-height:1.6">Every trade they take is copied to your account in real time. Watch your portfolio grow.</p></div>
+    <div class="pa" style="padding:22px"><div class="step-n" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#6a2ee0,#4b18bf);color:#04121f;display:grid;place-items:center;font-weight:800">1</div><h3 style="margin:12px 0 6px;font-size:1rem">Choose a trader</h3><p class="muted" style="font-size:.85rem;margin:0;line-height:1.6">Compare verified track records, win rates and risk scores. Transparent, audited stats only.</p></div>
+    <div class="pa" style="padding:22px"><div class="step-n" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#6a2ee0,#4b18bf);color:#04121f;display:grid;place-items:center;font-weight:800">2</div><h3 style="margin:12px 0 6px;font-size:1rem">Set your allocation</h3><p class="muted" style="font-size:.85rem;margin:0;line-height:1.6">Decide how much of your balance to mirror — you keep full ownership of your funds.</p></div>
+    <div class="pa" style="padding:22px"><div class="step-n" style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#6a2ee0,#4b18bf);color:#04121f;display:grid;place-items:center;font-weight:800">3</div><h3 style="margin:12px 0 6px;font-size:1rem">Earn automatically</h3><p class="muted" style="font-size:.85rem;margin:0;line-height:1.6">Every trade they take is copied to your account in real time. Watch your portfolio grow.</p></div>
 </div>
 
 <!-- Start copying modal -->

@@ -1,0 +1,267 @@
+/* ---------- footer ----------
+   The brand tokens the footer uses are declared here rather than in
+   landing.css, so the footer keeps its colours when rendered inside the app
+   layout (which never loads landing.css). Host tokens still win where the
+   host defines them, because these are the lower-specificity fallbacks. */
+.wf-footer {
+    --wf-eggplant-deep: #190742;
+    --wf-eggplant: #230b59;
+    --wf-pebble: #f0f0f2;
+    --wf-light-neptune: #e9ecfc;
+    --wf-r-md: 6px;
+    --wf-xxlarge: 64px;
+}
+
+.wf-footer {
+    background: var(--wf-eggplant-deep);
+    color: var(--wf-pebble);
+    padding: var(--wf-xxlarge) 0 0;
+    position: relative;
+    z-index: 1;
+}
+
+.wf-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px 30px;
+    padding-bottom: 48px;
+}
+
+.wf-footer-brand p {
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.65;
+    max-width: 280px;
+    margin-top: 14px;
+}
+
+.wf-footer h4 {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 14px;
+}
+
+.wf-footer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.wf-footer ul a {
+    font-size: 14px;
+    opacity: 0.78;
+    transition: opacity 0.18s ease;
+}
+
+.wf-footer ul a:hover {
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.wf-footer-social {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.wf-footer-social a {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(240, 240, 242, 0.22);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.wf-footer-social a:hover {
+    background: rgba(240, 240, 242, 0.12);
+    border-color: rgba(240, 240, 242, 0.45);
+}
+
+.wf-footer-social svg {
+    width: 15px;
+    height: 15px;
+}
+
+.wf-footer-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.wf-footer-form input {
+    flex: 1;
+    min-width: 0;
+    background: rgba(240, 240, 242, 0.08);
+    border: 1px solid rgba(240, 240, 242, 0.2);
+    border-radius: var(--wf-r-md);
+    padding: 11px 13px;
+    color: var(--wf-pebble);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.wf-footer-form input::placeholder {
+    color: rgba(240, 240, 242, 0.45);
+}
+
+.wf-footer-form input:focus {
+    border-color: rgba(240, 240, 242, 0.5);
+}
+
+.wf-footer-form button {
+    flex-shrink: 0;
+    border-radius: var(--wf-r-md);
+    padding: 11px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #fff;
+    color: var(--wf-eggplant);
+    transition: background-color 0.2s ease;
+}
+
+.wf-footer-form button:hover {
+    background: var(--wf-light-neptune);
+}
+
+.wf-footer-bottom {
+    border-top: 1px solid rgba(240, 240, 242, 0.14);
+    padding: 22px 0 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+.wf-footer-bottom nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.wf-footer-legal {
+    padding-bottom: 40px;
+    font-size: 11px;
+    line-height: 1.7;
+    opacity: 0.45;
+    max-width: 1000px;
+}
+
+.wf-footer-legal b {
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+/* ---------- shared footer chrome ----------
+   The footer partial is included by the landing layout and by the
+   authenticated app layout, so everything it relies on lives here rather
+   than in either host stylesheet. */
+.pv-footer-container {
+    max-width: 1180px;
+    margin-inline: auto;
+    padding-inline: 22px;
+}
+
+.pv-footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.pv-footer-logo img {
+    height: 30px;
+    width: auto;
+    filter: brightness(0) invert(1);
+}
+
+.pv-footer-logo b {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: #fff;
+}
+
+.pv-footer-form input {
+    width: 100%;
+    background: rgba(240, 240, 242, 0.08);
+    border: 1px solid rgba(240, 240, 242, 0.2);
+    border-radius: var(--wf-r-md, 6px);
+    padding: 11px 13px;
+    color: #f0f0f2;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.pv-footer-form input::placeholder {
+    color: rgba(240, 240, 242, 0.45);
+}
+
+.pv-footer-form input:focus {
+    border-color: rgba(240, 240, 242, 0.5);
+}
+
+.pv-footer-form button {
+    flex-shrink: 0;
+    border: 0;
+    border-radius: var(--wf-r-md, 6px);
+    padding: 11px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    background: #fff;
+    color: #230b59;
+    transition: background-color 0.2s ease;
+}
+
+.pv-footer-form button:hover {
+    background: #e9ecfc;
+}
+
+/* ---------- footer responsive ---------- */
+@media (max-width: 1024px) {
+    .wf-footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .wf-footer {
+        padding: 56px 0 0;
+    }
+
+    .wf-footer-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 36px;
+        padding-bottom: 36px;
+    }
+
+    .wf-footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .pv-footer-container {
+        padding-inline: 20px;
+    }
+}
+.wf-footer-note {
+    font-size: 14px;
+    line-height: 1.5;
+    opacity: 0.65;
+    margin-top: 0;
+}

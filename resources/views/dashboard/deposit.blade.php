@@ -19,11 +19,11 @@
     .pv-modal-card{width:100%;max-width:430px;background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 40px 90px -30px rgba(0,0,0,.75);animation:mup .25s ease}
     @keyframes mup{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
     .wm-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
-    .wm-badge{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;background:rgba(47,123,255,.14);color:var(--acc);flex-shrink:0}
+    .wm-badge{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;font-size:1.7rem;background:rgba(75,24,191,.14);color:var(--acc);flex-shrink:0}
     .wm-badge img{width:46px;height:46px;object-fit:contain;border-radius:10px}
     .wm-x{background:none;border:0;color:var(--muted);font-size:1.6rem;line-height:1;cursor:pointer;padding:0 4px}
     .wm-x:hover{color:var(--text)}
-    .wm-addr{font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.6;word-break:break-all;padding:14px;border-radius:12px;background:rgba(47,123,255,.07);border:1px dashed rgba(47,123,255,.35);color:var(--text);user-select:all;cursor:pointer}
+    .wm-addr{font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.6;word-break:break-all;padding:14px;border-radius:12px;background:rgba(75,24,191,.07);border:1px dashed rgba(75,24,191,.35);color:var(--text);user-select:all;cursor:pointer}
 </style>
 
 <div class="grid-2">

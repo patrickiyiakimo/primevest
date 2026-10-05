@@ -35,12 +35,12 @@
     .paym-x{background:none;border:none;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;padding:0 2px}
     .paym-x:hover{color:var(--text)}
     .paym-item{display:flex;align-items:center;gap:13px;padding:14px 15px;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:rgba(255,255,255,.03);transition:.2s}
-    .paym-item:hover{border-color:rgba(47,123,255,.5)}
-    .paym-item:has(input:checked){border-color:var(--acc);background:rgba(47,123,255,.1)}
+    .paym-item:hover{border-color:rgba(75,24,191,.5)}
+    .paym-item:has(input:checked){border-color:var(--acc);background:rgba(75,24,191,.1)}
     .paym-item input{accent-color:var(--acc);width:18px;height:18px;flex-shrink:0}
     .paym-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:1.05rem;flex-shrink:0}
     .step{display:flex;gap:15px;padding:16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}
-    .step-n{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#57c8ff,#2f7bff);color:#04121f;display:grid;place-items:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+    .step-n{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6a2ee0,#4b18bf);color:#04121f;display:grid;place-items:center;font-weight:800;font-size:.85rem;flex-shrink:0}
 </style>
 
 <div class="pa" style="padding:26px">

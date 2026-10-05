@@ -6,7 +6,7 @@
 <style>
     .mk-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
     .mk-tabs a{padding:9px 18px;border-radius:999px;border:1px solid var(--line);color:var(--muted);font-size:.87rem;font-weight:600;transition:.2s}
-    .mk-tabs a:hover,.mk-tabs a.on{background:rgba(47,123,255,.12);color:var(--acc);border-color:rgba(47,123,255,.4)}
+    .mk-tabs a:hover,.mk-tabs a.on{background:rgba(75,24,191,.12);color:var(--acc);border-color:rgba(75,24,191,.4)}
     /* live chart */
     @media(max-width:640px){
         .pv-panel.tv-chart-panel{height:clamp(340px,52vh,460px)!important}
@@ -37,8 +37,8 @@
     .tv-market-tab{padding:9px 20px;border-radius:999px;border:1px solid var(--line);
         background:rgba(10,24,52,.02);color:var(--muted);font-size:.87rem;font-weight:600;
         cursor:pointer;transition:.2s;font-family:inherit}
-    .tv-market-tab:hover{border-color:rgba(47,123,255,.45);color:var(--acc);background:rgba(47,123,255,.07)}
-    .tv-market-tab.is-on{background:rgba(47,123,255,.13);color:var(--acc);border-color:rgba(47,123,255,.45)}
+    .tv-market-tab:hover{border-color:rgba(75,24,191,.45);color:var(--acc);background:rgba(75,24,191,.07)}
+    .tv-market-tab.is-on{background:rgba(75,24,191,.13);color:var(--acc);border-color:rgba(75,24,191,.45)}
     .tv-market-tab:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
     .tv-market-label{position:absolute;top:22px;right:22px;z-index:4;pointer-events:none;
         padding:5px 12px;border-radius:999px;background:rgba(10,24,52,.55);border:1px solid var(--line);

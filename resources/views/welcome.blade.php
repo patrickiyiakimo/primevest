@@ -1,802 +1,910 @@
-@extends('layouts.app')
+@extends('layouts.landing')
 
-@section('title', 'PrimeVest | Trusted Crypto Investment Platform')
+@section('title', 'PrimeVest | Money works better here')
+@section('meta_description', 'PrimeVest makes building wealth easy. Earn 3.55% APY on your uninvested cash and invest in expert-built, automated portfolios of stocks, bonds, and ETFs.')
 
-@push('styles')
-<style>
-    .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:rgba(47,123,255,.1);border:1px solid rgba(47,123,255,.28);color:var(--acc);font-size:.82rem;font-weight:600;margin-bottom:22px}
-    .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 rgba(47,123,255,.7);animation:pulse 2s infinite}
-    @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(47,123,255,.6)}70%{box-shadow:0 0 0 10px rgba(47,123,255,0)}100%{box-shadow:0 0 0 0 rgba(47,123,255,0)}}
-    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
-    .hero-note{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:.84rem;margin-top:30px}
-    .hero-note b{color:var(--text)}
-    .hero-trust{display:flex;gap:26px;margin-top:26px;color:var(--muted);font-size:.82rem}
-    .hero-trust span{display:inline-flex;align-items:center;gap:7px}
-    /* ---- hero type scale ---- */
-    .pv-hero .pv-h1{font-size:clamp(1.75rem,3.6vw,2.9rem)}
-    .pv-hero .pv-btn-lg{font-size:clamp(.9rem,1.5vw,1rem);padding:13px 24px}
-    .hero-card{border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#0d1526,#0a0f1c);border:1px solid var(--line);box-shadow:0 60px 120px -60px rgba(0,0,0,.9)}
-    .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
-    .pill-up{background:rgba(47,123,255,.14);color:var(--acc)}
-    .pill-down{background:rgba(239,68,68,.14);color:#ff7c85}
-    .market-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-    @media(max-width:880px){.market-row{grid-template-columns:repeat(2,1fr)}}
-    .tips li{margin:8px 0;color:var(--muted);font-size:.95rem}
-    .tips li b{color:var(--text)}
-    .copy-chip{display:flex;align-items:center;gap:10px;padding:18px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid var(--line);transition:.3s}
-    @media(max-width:900px){.ct-cards,.wh-cards{grid-template-columns:1fr!important}}
-    .trader-av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-size:1rem;flex-shrink:0}
-    .trust-badge{padding:14px 22px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:.9rem;color:var(--muted);display:flex;align-items:center;gap:10px}
-    .step-box{padding:26px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line);text-align:center;height:100%}
-    .step-num{width:40px;height:40px;border-radius:12px;margin:0 auto 14px;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d}
-    /* ---- hero rotating rubik's cube ---- */
-    .cube-stage{position:relative;height:430px;display:flex;align-items:center;justify-content:center;perspective:1100px;overflow:hidden}
-    .cube-glow{position:absolute;left:50%;top:50%;width:540px;height:540px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(47,123,255,.20),rgba(124,58,237,.12) 45%,transparent 72%);z-index:0}
-    .cube{position:relative;width:230px;height:230px;transform-style:preserve-3d;animation:cubespin 22s linear infinite;z-index:1;filter:drop-shadow(0 30px 50px rgba(0,0,0,.55))}
-    .cube-face{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);gap:4px;padding:7px;background:#0c1322;border-radius:9px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.09)}
-    .cube-face span{display:block;border-radius:3px;box-shadow:inset 0 2px 6px rgba(0,0,0,.3)}
-    .cell-front span{background:#2f7bff}.cell-back span{background:#f0b90b}.cell-left span{background:#7c3aed}
-    .cell-right span{background:#1fd594}.cell-top span{background:#4cc3ff}.cell-bottom span{background:#ff5c6e}
-    .cube-front{transform:translateZ(115px)}
-    .cube-back{transform:rotateY(180deg) translateZ(115px)}
-    .cube-left{transform:rotateY(-90deg) translateZ(115px)}
-    .cube-right{transform:rotateY(90deg) translateZ(115px)}
-    .cube-top{transform:rotateX(90deg) translateZ(115px)}
-    .cube-bottom{transform:rotateX(-90deg) translateZ(115px)}
-    @keyframes cubespin{0%{transform:rotateX(-20deg) rotateY(0deg)}100%{transform:rotateX(-20deg) rotateY(360deg)}}
-    @media(max-width:520px){.cube-stage{height:340px}.cube{width:190px;height:190px}.cube-front{transform:translateZ(95px)}.cube-back{transform:rotateY(180deg) translateZ(95px)}.cube-left{transform:rotateY(-90deg) translateZ(95px)}.cube-right{transform:rotateY(90deg) translateZ(95px)}.cube-top{transform:rotateX(90deg) translateZ(95px)}.cube-bottom{transform:rotateX(-90deg) translateZ(95px)}}
-    /* ---- hero background chart ---- */
-    .hero-bgchart{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-    .hero-bgchart .bg-area{fill:url(#bgArea)}
-    .hero-bgchart .bg-path{fill:none;stroke:url(#bgLine);stroke-width:2.2;opacity:.8}
-    .hero-bgchart .bg-dash{stroke:#4cc3ff;stroke-dasharray:6 9;opacity:.5}
-    /* ---- hero neon light ---- */
-    /* A single heavily-blurred blob just read as another static gradient, so
-       each layer is a bright core inside a wide halo (that ratio is what looks
-       like neon) and one wide beam sweeps across to make the motion obvious.
-       --a1..--a4 drive alpha so the light palette can dial the whole thing back. */
-    .hero-neon{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
-        --a1:.9;--a2:.75;--a3:.45;--a4:.5}
-    .hero-neon i{position:absolute;display:block;border-radius:50%;
-        mix-blend-mode:screen;will-change:transform,opacity}
-    .hero-neon i:nth-child(1){width:640px;height:640px;left:-16%;top:-28%;
-        background:radial-gradient(circle,rgba(96,170,255,var(--a1)) 0%,rgba(47,123,255,.55) 16%,rgba(47,123,255,.18) 36%,rgba(47,123,255,0) 62%);
-        filter:blur(20px);animation:pvNeonA 16s ease-in-out infinite}
-    .hero-neon i:nth-child(2){width:560px;height:560px;right:-14%;top:-16%;
-        background:radial-gradient(circle,rgba(140,225,255,var(--a2)) 0%,rgba(76,195,255,.5) 18%,rgba(14,165,233,.15) 38%,rgba(14,165,233,0) 64%);
-        filter:blur(22px);animation:pvNeonB 21s ease-in-out infinite}
-    .hero-neon i:nth-child(3){width:520px;height:520px;left:30%;bottom:-34%;
-        background:radial-gradient(circle,rgba(255,214,120,var(--a3)) 0%,rgba(240,185,11,.4) 20%,rgba(240,185,11,.12) 40%,rgba(240,185,11,0) 66%);
-        filter:blur(26px);animation:pvNeonC 27s ease-in-out infinite}
-    /* the sweep */
-    .hero-neon i:nth-child(4){width:160%;height:300px;left:-30%;top:34%;
-        background:radial-gradient(ellipse at center,rgba(150,215,255,var(--a4)) 0%,rgba(76,195,255,.16) 32%,rgba(76,195,255,0) 66%);
-        filter:blur(38px);animation:pvNeonD 19s ease-in-out infinite}
-    @keyframes pvNeonA{
-        0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.85}
-        33%{transform:translate3d(30vw,14vh,0) scale(1.2);opacity:1}
-        66%{transform:translate3d(9vw,30vh,0) scale(.88);opacity:.6}}
-    @keyframes pvNeonB{
-        0%,100%{transform:translate3d(0,0,0) scale(1.1);opacity:.75}
-        40%{transform:translate3d(-28vw,22vh,0) scale(.85);opacity:1}
-        70%{transform:translate3d(-11vw,-8vh,0) scale(1.24);opacity:.55}}
-    @keyframes pvNeonC{
-        0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.6}
-        45%{transform:translate3d(20vw,-26vh,0) scale(1.26);opacity:.95}
-        75%{transform:translate3d(-16vw,-11vh,0) scale(.9);opacity:.45}}
-    @keyframes pvNeonD{
-        0%,100%{transform:translate3d(-16%,0,0) rotate(-9deg);opacity:.3}
-        50%{transform:translate3d(24%,-7vh,0) rotate(7deg);opacity:.85}}
-    /* `screen` washes out to nothing on a white page, and `normal` at low alpha
-       was too faint to notice. `multiply` keeps the hue on white and actually
-       darkens toward the brand colour, so light mode gets a real tinted glow. */
-    [data-theme="light"] .hero-neon{--a1:.5;--a2:.42;--a3:.24;--a4:.3}
-    [data-theme="light"] .hero-neon i{mix-blend-mode:multiply;filter:blur(46px)}
-    /* keep the gold pool from muddying to brown when multiplied */
-    [data-theme="light"] .hero-neon i:nth-child(3){background:radial-gradient(circle,rgba(245,158,11,.3) 0%,rgba(245,158,11,.16) 22%,rgba(245,158,11,.05) 42%,rgba(245,158,11,0) 66%)}
-    @media(prefers-reduced-motion:reduce){
-        .hero-neon{display:none}
-    }
-    /* ---- hero live chart ----
-       Frameless on purpose: no card, no border, no opaque panel. The chart sits
-       directly on the hero's light field and its edges are masked away, so it
-       reads as part of the artwork rather than a widget dropped on top. */
-    .hero-chart-card{position:relative;display:flex;flex-direction:column}
-    .hero-chart-card::before{content:"";position:absolute;left:-10%;right:-10%;top:-6%;bottom:-6%;
-        z-index:0;pointer-events:none;filter:blur(34px);
-        background:radial-gradient(58% 58% at 54% 46%,rgba(47,123,255,.22),transparent 72%)}
-    .hero-chart-head{position:relative;z-index:1;display:flex;align-items:center;gap:9px;
-        padding:0 2px 8px}
-    .hero-chart-head .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);
-        box-shadow:0 0 0 3px rgba(47,123,255,.16)}
-    .hero-chart-sym{font-size:.8rem;font-weight:700;letter-spacing:.04em;color:var(--text);opacity:.9}
-    .hero-chart-live{font-size:.58rem;font-weight:800;letter-spacing:.15em;
-        text-transform:uppercase;color:var(--acc);opacity:.75}
-    .hero-chart{position:relative;z-index:1;height:clamp(280px,36vh,392px);
-        -webkit-mask-image:radial-gradient(122% 112% at 50% 50%,#000 70%,transparent 100%);
-        mask-image:radial-gradient(122% 112% at 50% 50%,#000 70%,transparent 100%)}
-    .hero-chart-foot{position:relative;z-index:1;padding:8px 2px 0;
-        font-size:.64rem;letter-spacing:.03em;color:var(--muted);opacity:.55}
-    .hero-chart-fb{position:absolute;inset:0;display:flex;flex-direction:column;
-        align-items:center;justify-content:center;gap:8px;padding:24px;text-align:center;
-        font-size:.82rem;line-height:1.55;color:var(--muted);opacity:.85}
-    @media(max-width:900px){
-        .hero-chart{height:clamp(210px,30vh,300px);
-            -webkit-mask-image:radial-gradient(128% 116% at 50% 50%,#000 74%,transparent 100%);
-            mask-image:radial-gradient(128% 116% at 50% 50%,#000 74%,transparent 100%)}
-        .hero-chart-card::before{filter:blur(26px);
-            background:radial-gradient(62% 60% at 52% 48%,rgba(47,123,255,.18),transparent 74%)}
-    }
-    [data-theme="light"] .hero-chart-card::before{
-        background:radial-gradient(58% 58% at 54% 46%,rgba(47,123,255,.16),transparent 72%)}
-    /* ---- awards strip ---- */
-    .pv-awards{position:relative;z-index:1;border-bottom:1px solid var(--line);background:var(--bg2);padding:12px 0}
-    .pv-awards-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px}
-    .pv-awards-label{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:800;text-align:center}
-    .pv-awards-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px}
-    .pv-awards img{height:24px;max-width:110px;object-fit:contain;opacity:.85;filter:grayscale(.55) brightness(1.05);transition:.3s}
-    .pv-awards img:hover{opacity:1;filter:grayscale(0)}
-    @media(max-width:600px){.pv-awards-in{flex-direction:column;gap:8px;text-align:center}.pv-awards img{height:20px}}
-    /* ---- as seen on press strip ---- */
-    .pv-media{position:relative;z-index:1;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);padding:22px 0}
-    .pv-media-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:700;text-align:center;margin-bottom:18px}
-    .pv-media-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:34px}
-    .pv-media img{height:26px;max-width:150px;object-fit:contain;filter:brightness(0) invert(1);opacity:.75;transition:.25s}
-    .pv-media img:hover{opacity:1;transform:translateY(-2px)}
-    [data-theme="light"] .pv-media img{filter:grayscale(.45) brightness(1.1);opacity:.75}
-    [data-theme="light"] .pv-media img:hover{filter:none;opacity:1}
-    @media(max-width:600px){.pv-media{padding:18px 0}.pv-media-row{gap:20px}.pv-media img{height:20px;max-width:120px}}
-    /* ---- verified trader badge ---- */
-    .pv-verif{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:7px;position:relative;vertical-align:middle}
-    .pv-verif svg{display:block;width:18px;height:18px;filter:drop-shadow(0 2px 3px rgba(29,107,240,.45))}
-    .pv-verif circle{fill:url(#pvTickGrad)}
-    .pv-verif path{fill:none;stroke:#fff;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round}
-    .pv-verif:hover .pv-vtip{opacity:1;transform:translate(-50%,2px);pointer-events:auto}
-    .pv-vtip{position:absolute;bottom:calc(100% + 9px);left:50%;transform:translate(-50%,4px);width:210px;max-width:calc(100vw - 32px);background:#0a1020;border:1px solid var(--line);border-radius:10px;padding:10px 12px;font-size:.72rem;line-height:1.5;color:var(--muted);text-align:left;opacity:0;pointer-events:none;transition:.2s;z-index:20;box-shadow:0 16px 36px -14px rgba(0,0,0,.85);font-weight:500;white-space:normal}
-    .pv-vtip b{color:var(--text)}
-    .pv-verif .pv-vtip-emit{content:"";position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:var(--line)}
-    /* ---- wealth section ---- */
-    .feat-stat{padding:20px 24px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid var(--line);text-align:center}
-    .feat-stat b{display:block;font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#57c8ff,#2f7bff);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .feat-stat span{color:var(--muted);font-size:.8rem}
-    .pv-emoji{font-size:110px;line-height:1;display:block;filter:drop-shadow(0 10px 20px rgba(0,0,0,.25))}
-    /* ---- academy video ---- */
-    .aca-shell{display:grid;grid-template-columns:1.05fr 1fr;gap:34px;align-items:center}
-    @media(max-width:900px){.aca-shell{grid-template-columns:1fr}}
-    .vid-frame{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#0a0f1c;box-shadow:0 40px 90px -50px rgba(0,0,0,.9)}
-    .vid-frame iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
-    /* ---- live fx rates (TradingView forex cross rates) ---- */
-    .fx-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:26px}
-    .fx-head .pv-lead{margin-top:10px;max-width:660px}
-    .fx-panel{padding:0;overflow:hidden;position:relative}
-    .fx-bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
-    .fx-live{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
-    .fx-live i{width:7px;height:7px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 0 rgba(47,123,255,.6);animation:pulse 2s infinite}
-    .fx-mids{margin-left:auto;font-size:.72rem;letter-spacing:.06em;color:var(--muted);font-family:'JetBrains Mono',monospace}
-    .fx-widget{min-height:420px;background:#0a101c}
-    [data-theme="light"] .fx-widget{background:#fff}
-    .fx-widget .tradingview-widget-container{width:100%}
-    .fx-fallback{color:var(--muted);font-size:.82rem;padding:24px 20px;text-align:center}
-    .fx-note{padding:12px 20px;border-top:1px solid var(--line);font-size:.74rem;line-height:1.6;color:var(--muted);background:rgba(255,255,255,.015)}
-    .fx-note a{color:var(--acc);font-weight:700}
-    .fx-note a:hover{text-decoration:underline}
-    .fx-points{margin-top:26px;gap:16px}
-    .fx-point{display:flex;gap:14px;align-items:flex-start;padding:20px 22px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line)}
-    .fx-point .pv-icon{flex-shrink:0}
-    .fx-point b{display:block;font-size:.95rem;margin-bottom:4px}
-    .fx-point span{color:var(--muted);font-size:.82rem;line-height:1.6}
-    @media(max-width:900px){.fx-head{flex-direction:column;align-items:flex-start}.fx-mids{margin-left:0;width:100%}.fx-points{grid-template-columns:1fr!important}}
-    @media(max-width:600px){.fx-bar{padding:12px 14px}.fx-note{padding:11px 14px}}
-    /* ---- testimonials ---- */
-    .t-track{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
-    .t-card{padding:26px;flex:0 1 345px;border-radius:0!important}
-    .t-stars{color:var(--gold);letter-spacing:2px}
-    .t-av{width:120px;height:120px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid rgba(47,123,255,.35);display:block}
-    .t-nav{display:none;justify-content:center;gap:10px;margin-top:24px}
-    .t-nav button{width:42px;height:42px;border-radius:0;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;font-size:1.05rem;line-height:1;transition:.2s;font-family:inherit}
-    .t-nav button:hover{background:rgba(47,123,255,.12);border-color:rgba(47,123,255,.4)}
-    .t-dots{display:none;justify-content:center;gap:8px;margin-top:16px}
-    .t-dots button{width:8px;height:8px;border-radius:50%;border:0;padding:0;background:var(--line);cursor:pointer;transition:.2s}
-    .t-dots button.on{background:var(--acc);transform:scale(1.25)}
-    @media(min-width:901px){.t-nav,.t-dots{display:none}}
-    @media(max-width:900px){
-        .t-track{flex-wrap:nowrap;justify-content:flex-start;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -20px;padding:0 20px}
-        .t-track::-webkit-scrollbar{display:none}
-        .t-card{flex:0 0 86%;scroll-snap-align:center;padding:24px}
-        .t-nav{display:flex}
-        .t-dots{display:flex}
-    }
-</style>
-@endpush
+@php
+    $wfImg   = fn ($file) => asset('images/wf/' . $file);
+    $stages  = [
+        [
+            'id'     => 'grow',
+            'pill'   => 'Evelyn T. | Client since 2020',
+            'title'  => 'Growing your savings',
+            'strong' => 'Earn interest on every penny',
+            'rest'   => ' of your paycheck.',
+            'copy'   => 'Set up automatic deposits, watch every transfer land in one place, and let your balance compound from the day you start.',
+        ],
+        [
+            'id'     => 'build',
+            'pill'   => 'Peter &amp; Alex | Clients since 2015 &amp; 2023',
+            'title'  => 'Building wealth together',
+            'strong' => 'Save, spend and earn as a couple,',
+            'rest'   => ' all in one place.',
+            'copy'   => 'Joint balances, shared goals and a single dashboard that keeps every dollar of household money visible to both of you.',
+        ],
+        [
+            'id'     => 'manage',
+            'pill'   => 'Brad B. | Client since 2015',
+            'title'  => 'Managing complex finances',
+            'strong' => 'Find a simpler way',
+            'rest'   => ' to manage your money.',
+            'copy'   => 'Multiple accounts, tax documents and investment reports — consolidated, reconciled and explained in plain language.',
+        ],
+    ];
+    $faqs = [
+        [
+            'q' => 'Are there any restrictions around the 3.55% APY? Is this a promotional rate?',
+            'a' => 'Believe it or not, there\'s no funny business here. There are no minimum (or maximum) balance requirements to earn 3.55% APY from program banks in your Cash Account. Better yet, you can earn an extra 0.75% boost for three months when you refer a friend who signs up for the Cash Account. See promotional interest terms at {{ route("pricing") }} #promotional-terms.',
+        ],
+        [
+            'q' => 'What kind of fees do you charge? Is there a minimum to know about?',
+            'a' => 'The Cash Account has no account fees and you can start saving with just $1. We also offer taxable and tax-advantaged automated investing accounts. Here\'s an easy way to compare our investing products: Automated Investing: management fee: 0.25% and minimum to invest: $500, Nasdaq-100 Direct - management fee: 0.12% and minimum to invest: $5,000, S&P 500 Direct - management fee: 0.09% and minimum to invest: $5,000, Stock Investing Account - management fee: $0 commissions and minimum to invest: $1, Automated Bond Ladder - management fee: 0.15% and minimum to invest: $500',
+        ],
+        [
+            'q' => 'How is automated investing at PrimeVest different?',
+            'a' => 'Not only were we one of the pioneers of automated investing, we\'re consistently ranked as one of the best options out there. We developed the industry-first automated Tax-Loss Harvesting, and we\'re constantly innovating, using our award-winning software to expand access to a broad range of financial products. Our suite of investing products never veer away from helping our clients focus on what they can control: keeping taxes low, keeping fees low, and staying protected from unnecessary risk. That\'s because we\'ve made it our mission to build products that benefit our clients, not just our bottom line.',
+        ],
+        [
+            'q' => 'What is Tax-Loss Harvesting? And what does that mean for me?',
+            'a' => 'Tax-Loss Harvesting is a strategy that can help lower your tax bill. Here\'s how it works: If the price of an investment, say a stock or ETF, falls below the price you paid for it, our software can take advantage of that volatility and sell those shares to harvest the loss, then swap it with a similar security to help keep your portfolio balanced. Because market volatility is just a part of investing, regular dips in the market continue to work as a kind of tax deduction. At tax time, the losses you\'ve collected can offset your capital gains, and you can use any remaining losses to reduce your ordinary income by up to $3,000. Best of all, your harvested losses never expire. Anything you can\'t use in a given year carries forward indefinitely. That\'s good news for you now and in the future. Learn more about Tax-Loss Harvesting at {{ route("education") }} #tax-loss-harvesting',
+        ],
+        [
+            'q' => 'How is the Stock Investing Account different from the Automated Investing Account?',
+            'a' => 'Our Automated Investing Account not only personalizes a portfolio for you based on your appetite for risk, it handles everything from rebalancing to finding ways to help you save on your taxes - all for the low, annual fee of just 0.25%. For the Stock Investing Account, it\'s up to you to let us know what stocks you want to trade, when, and how much, but we\'ll still help you understand how that lines up with your investing goals and manage all the trades on your behalf.',
+        ],
+    ];
+@endphp
 
 @section('content')
-<!-- ===== HERO ===== -->
-<section class="pv-hero">
-    <!-- Drifting neon light, behind the chart and copy. Decorative only. -->
-    <div class="hero-neon" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <!-- Background chart layer (gradient + grid kept via .pv-hero::before) -->
-    <svg class="hero-bgchart" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none" viewBox="0 0 1440 560" preserveAspectRatio="none" aria-hidden="true">
-        <defs>
-            <linearGradient id="bgLine" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#2f7bff"/><stop offset=".55" stop-color="#4cc3ff"/><stop offset="1" stop-color="#f0b90b"/>
-            </linearGradient>
-            <linearGradient id="bgArea" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#2f7bff" stop-opacity=".2"/><stop offset="1" stop-color="#2f7bff" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="bgMask" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0" stop-color="#05070d"/><stop offset=".2" stop-color="transparent"/><stop offset=".75" stop-color="transparent"/><stop offset="1" stop-color="#05070d"/>
-            </linearGradient>
-            <mask id="bgFade"><rect width="100%" height="100%" fill="url(#bgMask)"/></mask>
-        </defs>
-        <g mask="url(#bgFade)">
-            <path class="bg-area" d="M0,350 C130,360 210,305 310,245 C430,170 490,215 590,150 C700,75 770,140 870,118 C965,98 1020,195 1120,162 C1240,122 1330,58 1440,38 L1440,540 L0,540 Z"/>
-            <path class="bg-path" d="M0,350 C130,360 210,305 310,245 C430,170 490,215 590,150 C700,75 770,140 870,118 C965,98 1020,195 1120,162 C1240,122 1330,58 1440,38"/>
-            <path class="bg-path bg-dash" d="M0,300 C150,310 260,248 370,190 C480,130 570,185 670,112 C770,42 850,112 960,82 C1080,50 1160,150 1290,112 C1360,92 1405,42 1440,30"/>
-            <circle cx="1440" cy="38" r="4" fill="#f0b90b" opacity=".85"/>
-        </g>
-    </svg>
-    <div class="pv-container" style="position:relative;z-index:1">
-        <div class="pv-grid pv-grid-2" style="align-items:center;gap:46px">
+
+{{-- ======================================================================
+     HERO  ·  data-testid="reusable-hero-module"
+     ====================================================================== --}}
+<section class="wf-hero" data-testid="reusable-hero-module">
+    <div class="wf-circles-wrap" data-reveal>
+        <img class="wf-circles" src="{{ $wfImg('gradient-circles.svg') }}" width="2024" height="850" alt="" loading="eager">
+    </div>
+
+    <div class="wf-hero-inner">
+        <div class="wf-hero-grid">
+
+            {{-- ---------- copy column ---------- --}}
+            <div class="wf-hero-copy">
+                <div class="wf-hero-eyebrow">
+                    <h1 class="wf-h1">
+                        <span class="wf-eyebrow-line">
+                            <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M7.689 14.804a.5.5 0 00.282.281l1.487.587a.5.5 0 010 .93l-1.487.587a.5.5 0 00-.282.282l-.587 1.487a.5.5 0 01-.93 0l-.587-1.487a.5.5 0 00-.281-.282l-1.487-.587a.5.5 0 010-.93l1.487-.587a.5.5 0 00.281-.281l.587-1.487a.5.5 0 01.93 0l.587 1.487zm.648-8.798a.279.279 0 00.157.157l.83.328a.279.279 0 010 .518l-.83.328a.279.279 0 00-.157.157l-.328.83a.279.279 0 01-.518 0l-.328-.83a.279.279 0 00-.157-.157l-.83-.328a.279.279 0 010-.518l.83-.328a.279.279 0 00.157-.157l.328-.83a.279.279 0 01.518 0l.328.83zM13.892 5.402a.625.625 0 011.168 0l.666 1.75a5.328 5.328 0 003.074 3.074l1.75.666a.625.625 0 010 1.168l-1.75.666a5.328 5.328 0 00-3.073 3.074l-.667 1.75a.625.625 0 01-1.168 0l-.666-1.75a5.328 5.328 0 00-3.074-3.073l-1.75-.667a.625.625 0 010-1.168l1.75-.666a5.327 5.327 0 003.074-3.074l.666-1.75zm.972 3.385c-.168-.276-.608-.276-.775 0a6.822 6.822 0 01-2.302 2.302c-.277.167-.277.607 0 .774a6.823 6.823 0 012.302 2.302c.167.277.607.277.774 0a6.825 6.825 0 012.302-2.301c.277-.168.277-.608 0-.775a6.824 6.824 0 01-2.301-2.302z"/></svg>
+                            Earn up to
+                        </span>
+                        <span class="wf-h1-apy" data-testid="h1-apy-hero">4.45% APY</span>
+                    </h1>
+                </div>
+
+                <h2 class="wf-h2-serif" data-testid="hero-apy-description">Better than a bank</h2>
+
+                <div class="wf-hero-features" data-testid="cash-hero-features">
+                    <div class="wf-feature">
+                        <span class="wf-feature-ic">
+                            <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M10.233 12.707a1 1 0 000-1.414L8.465 9.525a.75.75 0 011.06-1.06l1.768 1.767a1 1 0 001.414 0l1.768-1.768a.75.75 0 011.06 1.06l-1.767 1.769a1 1 0 000 1.414l1.768 1.768a1 1 0 01-1.06 1.06l-1.769-1.768a1 1 0 00-1.414 0l-1.768 1.768a.749.749 0 11-1.06-1.06l1.768-1.768zM12 21a9 9 0 110-18 9 9 0 010 18zm0-1.5a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"/></svg>
+                        </span>
+                        <span class="wf-feature-txt">Zero account fees</span>
+                    </div>
+
+                    <div class="wf-feature">
+                        <span class="wf-feature-ic">
+                            <img src="{{ $wfImg('union-pebble.svg') }}" height="21" width="21" alt="" loading="eager">
+                        </span>
+                        <span class="wf-feature-txt">
+                            Free 24/7 instant withdrawals
+                            <button class="wf-info-btn" type="button" aria-label="open instant withdrawal information dialog" data-modal="wf-modal-wd">
+                                <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M10.748 10.798h.017c.422 0 .765.343.765.765v2.381a1 1 0 01-1 1h-.285a.745.745 0 000 1.49h4.01a.745.745 0 100-1.49H14a1 1 0 01-1-1v-3.642a1 1 0 00-1-1h-1.252a.748.748 0 000 1.496zm.223-2.927a.965.965 0 00.547.507c.132.05.277.073.435.073.325 0 .583-.09.772-.27a.935.935 0 00.29-.705.913.913 0 00-.29-.699c-.19-.185-.447-.277-.772-.277a1.255 1.255 0 00-.435.073 1.029 1.029 0 00-.33.198.934.934 0 00-.29.705c0 .14.024.272.073.395zM21 12a9 9 0 11-18 0 9 9 0 0118 0zm-1.5 0a7.5 7.5 0 10-15 0 7.5 7.5 0 0015 0z"/></svg>
+                            </button>
+                        </span>
+                    </div>
+
+                    <div class="wf-feature">
+                        <span class="wf-feature-ic">
+                            <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M12 7.25a2.25 2.25 0 110 4.5 2.25 2.25 0 010-4.5zm-.75 2.25a.75.75 0 101.5 0 .75.75 0 00-1.5 0zm-.5 4.5v3a.75.75 0 11-1.5 0v-3a.75.75 0 111.5 0zm3.25-.75a.75.75 0 01.75.75v3a.75.75 0 11-1.5 0v-3a.75.75 0 01.75-.75zM12.49 3.277l8 4.5a1 1 0 01.51.871v2.29a1 1 0 01-1 1h-.313a1 1 0 00-1 1v2.625a1 1 0 001 1H20a1 1 0 011 1v2.438a1 1 0 01-1 1H4a1 1 0 01-1-1v-2.438a1 1 0 011-1h.313a1 1 0 001-1v-2.625a1 1 0 00-1-1H4a1 1 0 01-1-1v-2.29a1 1 0 01.51-.871l8-4.5a1 1 0 01.98 0zm-5.678 8.161v5.625a1 1 0 01-1 1h-.594a.72.72 0 000 1.438h13.564a.719.719 0 000-1.438h-.595a1 1 0 01-1-1v-5.625a1 1 0 011-1h.368a.945.945 0 00.463-1.768L12.49 4.998a.945.945 0 00-.981 0L4.982 8.67a.945.945 0 00.463 1.768h.368a1 1 0 011 1z"/></svg>
+                        </span>
+                        <span class="wf-feature-txt">Up to $8M in FDIC insurance eligibility through program banks</span>
+                    </div>
+                </div>
+
+                <div class="wf-hero-ctas">
+                    <a class="wf-btn wf-btn-primary" href="{{ route('register') }}" data-testid="hero-get-started">Get started</a>
+                    <a class="wf-btn wf-btn-ghost-dark" href="{{ route('trading') }}" data-testid="hero-learn-more">Learn more</a>
+                </div>
+
+                <p class="wf-disclosure" data-testid="hero-rate-disclosure">
+                    3.55% Base Annual Percentage Yield (APY) as of 10/01/2026 is provided by program banks and is subject to change. APY Boost is up to a $150,000 balance. See additional terms in the footer.
+                </p>
+            </div>
+
+            {{-- ---------- phone + card composition ---------- --}}
+            <div class="wf-hero-visual" data-testid="hero-phone-composition" data-reveal>
+                <div class="wf-hero-card">
+                    <img width="267" height="352" alt="A Visa debit card with a PrimeVest logo, partially obscured by a phone." loading="eager" src="{{ $wfImg('debit-card.svg') }}">
+                </div>
+                <div class="wf-hero-phone">
+                    <picture>
+                        <source type="image/webp"
+                            srcset="{{ $wfImg('hero-phone-640w.webp') }} 640w,
+                                    {{ $wfImg('hero-phone-750w.webp') }} 750w,
+                                    {{ $wfImg('hero-phone-828w.webp') }} 828w,
+                                    {{ $wfImg('hero-phone-1080w.webp') }} 1080w,
+                                    {{ $wfImg('hero-phone-1200w.webp') }} 1200w"
+                            sizes="(min-width: 1536px) 700px, (min-width: 1280px) 620px, 45vw">
+                        <img width="1434" height="1666" alt="" loading="eager" src="{{ $wfImg('hero-phone.png') }}">
+                    </picture>
+                </div>
+            </div>
+        </div>
+
+        {{-- ---------- accolades bar ---------- --}}
+        <div class="wf-accolades-bar" data-testid="accolades-bar" data-reveal>
+            <div class="wf-accolades">
+
+                <div class="wf-accolades-item">
+                    <img src="{{ $wfImg('bankrate-dark.svg') }}" alt="Bankrate" loading="lazy">
+                    <span>Best Cash Management Account, 2023-25<sup>1</sup></span>
+                </div>
+
+                <div class="wf-accolades-item is-sm-hide">
+                    <b>1.5M+</b>
+                    <span>Funded clients<sup>2</sup></span>
+                </div>
+
+                <div class="wf-accolades-item is-sm-hide">
+                    <b>$100B+</b>
+                    <span>In total assets<sup>2</sup></span>
+                </div>
+
+                <div class="wf-accolades-item">
+                    <span class="wf-stars" aria-hidden="true">
+                        <svg viewBox="0 0 21 21" fill="currentColor"><path d="M21 5.3l-7.6-1.1L10.4 0 7.4 4.2 0 5.3l5.4 5.2L4.1 18.1 10.4 14l6.3 4.1-1.4-7.6L21 5.3z"/></svg>
+                    </span>
+                    <b>4.8</b>
+                    <span>Apple App Store<sup>3</sup></span>
+                </div>
+
+                <div class="wf-accolades-item">
+                    <span class="wf-stars" aria-hidden="true">
+                        <svg viewBox="0 0 21 21" fill="currentColor"><path d="M21 5.3l-7.6-1.1L10.4 0 7.4 4.2 0 5.3l5.4 5.2L4.1 18.1 10.4 14l6.3 4.1-1.4-7.6L21 5.3z"/></svg>
+                    </span>
+                    <b>4.9</b>
+                    <span>Google Play Store<sup>3</sup></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- ======================================================================
+     DIRECT-DEPOSIT ACCORDION
+     ====================================================================== --}}
+<div class="wf-container-2024">
+    <div class="wf-dd wf-reveal" data-accordion data-testid="direct-deposit-plus-module">
+        <button class="wf-dd-trigger" type="button" aria-expanded="false" aria-controls="dd-panel">
+            <img src="{{ $wfImg('enclosed-chevron.svg') }}" width="40" height="40" alt="" loading="lazy">
+            <span class="wf-dd-texts">
+                <h3>Your cash earns 3.55% base APY</h3>
+                <p>See how to raise it to 4.45% APY in three easy steps</p>
+            </span>
+        </button>
+        <div class="wf-dd-panel" id="dd-panel">
             <div>
-                <!-- <div class="hero-badge"><span class="dot"></span> Institutional-grade crypto investing for everyone</div> -->
-                <h1 class="pv-h1">Trade, stake &amp; grow your <span style="background:linear-gradient(120deg,#2f7bff,#4cc3ff);-webkit-background-clip:text;background-clip:text;color:transparent">digital assets</span> with a platform you can trust.</h1>
-                <div class="hero-actions">
-                    <a href="{{ route('register') }}" class="pv-btn pv-btn-lg mr-5">Start Trading Free</a>
-                    <!-- <a href="{{ route('trading') }}#copy-trading" class="pv-btn pv-btn-ghost pv-btn-lg">Explore Copy Trading</a> -->
+                <div class="wf-dd-steps">
+                    <div class="wf-dd-step"><b>1</b><span>Link your bank with Plaid in under two minutes and set up an automated deposit for the day after your paycheck lands.</span></div>
+                    <div class="wf-dd-step"><b>2</b><span>Keep a qualifying balance of $25,000 or more in your Cash Account to unlock the +0.75% APY Boost on that balance.</span></div>
+                    <div class="wf-dd-step"><b>3</b><span>Refer a friend who also opens a Cash Account and both of you earn the boosted rate for three months.</span></div>
                 </div>
             </div>
-            <!-- Sits directly on the hero artwork; no card chrome, edges masked away. -->
-            <div class="hero-chart-card">
-                <div class="hero-chart-head">
-                    <span class="dot"></span>
-                    <span class="hero-chart-sym">BTC / USD</span>
-                    <span class="hero-chart-live">Live</span>
+        </div>
+    </div>
+</div>
+
+{{-- ======================================================================
+     INVESTING INTRO  ·  data-testid="aia-messaging-investing-intro-module"
+     ====================================================================== --}}
+<section class="wf-band" style="padding-block:var(--wf-xlarge) var(--wf-xxxlarge)" data-testid="aia-messaging-investing-intro-module">
+    <div class="wf-marketing-section" data-marketing>
+        <div class="wf-sec-head wf-reveal" data-reveal>
+            <h2 class="wf-h2">
+                Turn savings into wealth<br>
+                <span class="wf-h2-serif">at one of the best places for long-term investing</span>
+            </h2>
+            <p class="wf-lede">
+                Investing in index funds for the long-term has been shown time and time again to be the most effective way to earn more than even the highest-yield savings accounts. Let us build and manage your portfolio or create your own.
+            </p>
+        </div>
+
+        <div class="wf-badge-row wf-reveal" data-reveal>
+            {{-- Bankrate --}}
+            <div class="wf-badge" data-testid="aia-messaging-intro-bankrate-badge">
+                <span class="wf-badge-laurel"><img src="{{ $wfImg('bankrate-laurel.svg') }}" alt="" loading="lazy"></span>
+                <span class="wf-badge-logo">
+                    <img src="{{ $wfImg('bankrate-dark.svg') }}" alt="Bankrate" loading="lazy">
+                </span>
+                <span class="wf-badge-kicker">recommends</span>
+                <span class="wf-badge-title">Best Investment Apps</span>
+                <span class="wf-badge-year">2026<sup>4</sup></span>
+            </div>
+
+            {{-- NerdWallet --}}
+            <div class="wf-badge" data-testid="aia-messaging-intro-nerdwallet-badge">
+                <span class="wf-badge-laurel"><img src="{{ $wfImg('five-star-laurel.svg') }}" alt="" loading="lazy"></span>
+                <span class="wf-badge-logo">
+                    <img src="{{ $wfImg('nerdwallet-light.svg') }}" alt="NerdWallet" loading="lazy">
+                </span>
+                <span class="wf-badge-kicker">Best Robo-advisor,</span>
+                <span class="wf-badge-title">Portfolio Options</span>
+                <span class="wf-badge-year">2022-26<sup>5</sup></span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="wf-hr" data-marketing style="margin:0">
+
+{{-- ======================================================================
+     ACCOUNT CARDS  ·  data-testid="aia-messaging-investing-accounts-module"
+     ====================================================================== --}}
+<section class="wf-band" style="padding-top:var(--wf-xxxlarge)" data-testid="aia-messaging-investing-accounts-module">
+    <div class="wf-marketing-section">
+        <div class="wf-acct-grid">
+
+            {{-- ---------- card A · Automated Investing Account ---------- --}}
+            <article class="wf-acct-card wf-reveal" data-reveal data-testid="automated-investing-account-card">
+                <div class="wf-acct-head">
+                    <h2 class="wf-h2">Built and managed for you</h2>
+                    <p>Designed for investors who prefer to delegate the selection and management of their investments to us.</p>
                 </div>
-                <div class="hero-chart" id="pvHeroChart">
-                    <div class="hero-chart-fb">Loading live market…</div>
+
+                <div class="wf-acct-visual is-aia">
+                    <img class="wf-acct-graph" src="{{ $wfImg('aia-graph.png') }}" width="600" height="300" alt="" loading="lazy">
+                    <div class="wf-returns" data-testid="investing-accounts-aia-annual-returns">
+                        <b>9.65%</b>
+                        <span>annualized returns</span>
+                    </div>
+                    <picture class="wf-acct-phone">
+                        <source type="image/webp"
+                            srcset="{{ $wfImg('screen-aia-640w.webp') }} 640w,
+                                    {{ $wfImg('screen-aia-750w.webp') }} 750w,
+                                    {{ $wfImg('screen-aia-828w.webp') }} 828w,
+                                    {{ $wfImg('screen-aia-1080w.webp') }} 1080w"
+                            sizes="400px">
+                        <img src="{{ $wfImg('screen-aia.png') }}" width="1134" height="1400" alt="automated investing account mobile dashboard" loading="lazy">
+                    </picture>
                 </div>
-                <div class="hero-chart-foot">Market data by TradingView</div>
-            </div>
-        </div>
-    </div>
-</section>
-<script>
-    (function(){
-        var host=document.getElementById('pvHeroChart');
-        if(!host)return;
-        function isLight(){try{return document.documentElement.getAttribute('data-theme')==='light'}catch(e){return false}}
-        function mount(){
-            var t=isLight()?'light':'dark';
-            host.innerHTML='';
-            host.dataset.guarded='';
-            var cfg={
-                "autosize":true,
-                "symbol":"BITSTAMP:BTCUSD",
-                "interval":"D",
-                "timezone":"Etc/UTC",
-                "theme":t,
-                "style":"1",
-                "locale":"en",
-                "backgroundColor":"rgba(0, 0, 0, 0)",
-                "gridColor":t==='light'?"rgba(10, 24, 52, 0.06)":"rgba(255, 255, 255, 0.04)",
-                "hide_top_toolbar":true,
-                "hide_legend":false,
-                "allow_symbol_change":false,
-                "save_image":false,
-                "calendar":false,
-                "support_host":"https://www.tradingview.com"
-            };
-            var wrap=document.createElement('div');
-            wrap.className='tradingview-widget-container';
-            wrap.style.height='100%';
-            var w=document.createElement('div');
-            w.className='tradingview-widget-container__widget';
-            w.style.height='100%';
-            wrap.appendChild(w);
-            var s=document.createElement('script');
-            s.type='text/javascript';
-            s.async=true;
-            s.src='https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js';
-            s.text=JSON.stringify(cfg);
-            wrap.appendChild(s);
-            host.appendChild(wrap);
-            guard();
-        }
-        /* TradingView is third party and is commonly blocked. Without this the
-           card would sit empty but still keep its border. */
-        function guard(){
-            setTimeout(function(){
-                if(host.querySelector('iframe'))return;
-                if(host.dataset.guarded==='1')return;
-                host.dataset.guarded='1';
-                host.innerHTML='<div class="hero-chart-fb">Live chart unavailable.<br>This feed loads from TradingView and may be blocked by your network or ad blocker.</div>';
-            },6000);
-        }
-        mount();
-        try{
-            var last=isLight();
-            new MutationObserver(function(){if(isLight()!==last){last=isLight();mount()}})
-                .observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-        }catch(e){}
-    })();
-</script>
 
-<!-- ===== AWARDS & RECOGNITION ===== -->
-<!-- <section class="pv-awards">
-    <div class="pv-container">
-        <div class="pv-awards-in">
-            <div class="pv-awards-label">Awards &amp; Recognition</div>
-            <div class="pv-awards-row">
-                <img src="{{ asset('/images/award-2024-investopedia-best-for-advanced-traders.png') }}" alt="Investopedia 2024 — Best for Advanced Traders" title="Investopedia 2024 — Best for Advanced Traders">
-                <img src="{{ asset('/images/awards-2026-stockbrokers-professionaltrading.svg') }}" alt="StockBrokers.com 2026 — Professional Trading" title="StockBrokers.com 2026 — Professional Trading">
-                <img src="{{ asset('/images/best-online-broker-2026-badges.png') }}" alt="Best Online Broker 2026" title="Best Online Broker 2026">
-                <img src="{{ asset('/images/in-wave-award.svg') }}" alt="In-Wave Top Rated Award" title="In-Wave Top Rated Award">
-                <img src="{{ asset('/images/INV_broker-advanced_vt-green.svg') }}" alt="Advanced Trading Broker 2026" title="Advanced Trading Broker 2026">
-            </div>
-        </div>
-    </div>
-</section> -->
+                <div class="wf-acct-body">
+                    <div>
+                        <h3 class="wf-acct-name">Automated Investing Account</h3>
+                        <h4 class="wf-acct-tag">Build wealth with globally diversified index investing</h4>
+                    </div>
 
-<!-- ===== AS SEEN ON ===== -->
-<section class="pv-media">
-    <div class="pv-container">
-        <div class="pv-media-label">As seen on</div>
-        <div class="pv-media-row">
-            <img src="{{ asset('images/cnbc.svg') }}" alt="CNBC" title="Featured on CNBC">
-            <img src="{{ asset('images/bloomberg.svg') }}" alt="Bloomberg" title="Featured on Bloomberg">
-            <img src="{{ asset('images/reuters.svg') }}" alt="Reuters" title="Featured on Reuters">
-            <img src="{{ asset('images/theguardian.svg') }}" alt="The Guardian" title="Featured in The Guardian">
-        </div>
-    </div>
-</section>
+                    <ul class="wf-checklist">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>
+                            <span>Designed to maximize long-term, after-tax returns</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>
+                            <span>Customize to your goals and risk level</span>
+                        </li>
+                    </ul>
 
-<!-- ===== LIVE MARKETS (TradingView Ticker Tape) ===== -->
-<section class="ticker" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);position:relative;z-index:1">
-    <div id="pvTvTape" style="min-height:44px"><div style="color:var(--muted);font-size:.8rem;padding:14px 20px">Loading live market…</div></div>
-    <script>
-        (function(){
-            var hostSel='#pvTvTape';
-            function theme(){try{return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'}catch(e){return 'dark'}}
-            function mount(){
-                var host=document.querySelector(hostSel);
-                if(!host)return;
-                host.innerHTML='';
-                var cfg={
-                    "symbols":[
-                        {"proName":"BITSTAMP:BTCUSD","title":"Bitcoin"},
-                        {"proName":"BITSTAMP:ETHUSD","title":"Ethereum"},
-                        {"proName":"BINANCE:SOLUSDT","title":"Solana"},
-                        {"proName":"BINANCE:BNBUSDT","title":"BNB"},
-                        {"proName":"BITFINEX:XRPUSD","title":"XRP"},
-                        {"proName":"COINBASE:ADAUSD","title":"Cardano"},
-                        {"proName":"COINBASE:DOTUSD","title":"Polkadot"},
-                        {"proName":"BINANCE:LINKUSDT","title":"Chainlink"}
-                    ],
-                    "showSymbolLogo":true,
-                    "isTransparent":true,
-                    "displayMode":"adaptive",
-                    "colorTheme":theme(),
-                    "locale":"en"
-                };
-                var wrap=document.createElement('div');
-                wrap.className='tradingview-widget-container';
-                var w=document.createElement('div');
-                w.className='tradingview-widget-container__widget';
-                wrap.appendChild(w);
-                var s=document.createElement('script');
-                s.type='text/javascript';
-                s.async=true;
-                s.src='https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js';
-                s.text=JSON.stringify(cfg);
-                wrap.appendChild(s);
-                host.appendChild(wrap);
-            }
-            mount();
-            try{
-                new MutationObserver(mount).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-            }catch(e){}
-        })();
-    </script>
-</section>
+                    <div class="wf-acct-ctas">
+                        <a class="wf-btn wf-btn-primary" href="{{ route('register') }}">Get started</a>
+                        <a class="wf-btn wf-btn-ghost-light" href="{{ route('trading') }}">Learn more</a>
+                    </div>
 
-<!-- ===== STATS ===== -->
-<section class="pv-section" style="padding-top:64px">
-    <div class="pv-container">
-        <div class="pv-stats pv-stats--home">
-            <div class="pv-stat"><span class="num">$2.4B+</span><span>Assets under management</span></div>
-            <div class="pv-stat"><span class="num">480K+</span><span>Investors in 190 countries</span></div>
-            <div class="pv-stat"><span class="num">24/7</span><span>Live market &amp; support coverage</span></div>
-            <div class="pv-stat"><span class="num">9.7/10</span><span>Average investor rating</span></div>
-        </div>
-    </div>
-</section>
+                    <p class="wf-acct-note" data-testid="investing-accounts-aia-disclosure">
+                        The chart in the product image represents actual performance for one-, five-, ten-year and since inception periods through 05/22/2026 for investors in PrimeVest's Classic Automated Investing Account, with a composite risk score of 9 (Ranges 0.5-10). The annualized returns are for the same time periods as of 10/01/2026.
+                        <button type="button" data-modal="wf-modal-disc">See full disclosures here</button>
+                    </p>
 
-<!-- ===== MARKETS ===== -->
-<section class="pv-section" id="markets" style="padding-top:52px">
-    <div class="pv-container">
-        <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:30px">
-            <div>
-                <p class="pv-tag">Spot Markets</p>
-                <h2 class="pv-h2">Top cryptocurrencies by market cap</h2>
-                <p class="pv-lead">Real-time prices, accessible 24/7 across spot, futures and staking.</p>
-            </div>
-            <a href="{{ route('register') }}" class="pv-btn pv-btn-ghost pv-btn-sm">See all markets →</a>
-        </div>
-
-        <div class="pv-panel" style="padding:22px">
-            <div id="pvCryptoScreener" style="height:480px"></div>
-        </div>
-    </div>
-</section>
-
-<script>
-    (function(){
-        function theme(){try{return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'}catch(e){return 'dark'}}
-        function mount(){
-            var host=document.getElementById('pvCryptoScreener');
-            if(!host)return;
-            host.innerHTML='';
-            var cfg={
-                "width":"100%","height":"100%",
-                "defaultColumn":"overview",
-                "screener_type":"crypto_mkt",
-                "displayCurrency":"USD",
-                "colorTheme":theme(),
-                "locale":"en",
-                "isTransparent":true,
-                "showLogo":true
-            };
-            var wrap=document.createElement('div');
-            wrap.className='tradingview-widget-container';
-            var w=document.createElement('div');
-            w.className='tradingview-widget-container__widget';
-            wrap.appendChild(w);
-            var s=document.createElement('script');
-            s.type='text/javascript';
-            s.async=true;
-            s.src='https://s3.tradingview.com/external-embedding/embed-widget-screener.js';
-            s.text=JSON.stringify(cfg);
-            wrap.appendChild(s);
-            host.appendChild(wrap);
-        }
-        mount();
-        try{
-            new MutationObserver(mount).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-        }catch(e){}
-    })();
-</script>
-
-<!-- ===== COPY TRADING ===== -->
-<section class="pv-section" id="copy-trading" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-    <div class="pv-container">
-        <div style="text-align:center;max-width:640px;margin:0 auto 44px">
-            <p class="pv-tag" style="text-align:center">Copy Trading</p>
-            <h2 class="pv-h2">Follow the winners. Mirror their trades.</h2>
-            <p class="pv-lead" style="margin:10px auto 0">Every trader on PrimeVest is <strong style="color:var(--text)">vetted and verified</strong> — audited track records, years of live experience and transparent risk scores. One click mirrors their positions.</p>
-        </div>
-
-        <div class="pv-grid pv-grid-3 cards ct-cards" style="margin-bottom:30px">
-            @php
-                $traders = [
-                    ['SK','CryptoMatrix','+186.4%','3yr ROI','128,402','24.1%','#7c3aed', 1],
-                    ['LN','LunaBulls','+143.9%','2yr ROI','94,118','19.7%','#0ea5e9', 2],
-                    ['AS','SatoshiEdge','+119.2%','18mo ROI','76,541','22.4%','#f59e0b', 3],
-                ];
-            @endphp
-            @foreach($traders as $t)
-            <div class="pv-panel pv-card" style="padding:24px">
-                @if($t[6] == 1)<span class="pv-chip pv-chip-gold" style="float:right">🔥 Top Trader</span>@endif
-                <div style="display:flex;align-items:center;gap:14px">
-                    <div class="trader-av" style="background:{{ $t[5] }}">{{ $t[0] }}</div>
-                    <div style="flex:1;min-width:0">
-                        <div style="font-weight:700;display:flex;align-items:center;min-width:0">
-                            <span style="min-width:0;overflow-wrap:anywhere">{{ $t[1] }}</span>
-                            <span class="pv-verif">
-                                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                    <defs>
-                                        <linearGradient id="pvTickGrad" x1="0" y1="0" x2="1" y2="1">
-                                            <stop offset="0%" stop-color="#57c8ff"/><stop offset="100%" stop-color="#1d6bf0"/>
-                                        </linearGradient>
-                                    </defs>
-                                    <circle cx="12" cy="12" r="11"/>
-                                    <path d="M7.5 12.5l2.9 2.9 6-6.3"/>
-                                </svg>
-                                <span class="pv-vtip"><b>Verified Professional</b><br>Passed PrimeVest's identity, risk and track-record review. {{ $t[3] }} of live trading experience with audited results.<span class="pv-vtip-emit"></span></span>
-                            </span>
-                        </div>
-                        <div style="display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap">
-                            <span class="pv-chip" style="font-size:.68rem;padding:2px 9px">✔ Vetted</span>
-                            <span class="pv-mut" style="font-size:.8rem">Copy traders: <b>{{ $t[4] }}</b></span>
+                    <div class="wf-acct-foot">
+                        <hr class="wf-hr">
+                        <div class="wf-explore">Explore supported account types:</div>
+                        <div class="wf-explore-list">
+                            <a href="{{ route('trading') }}">Taxable Accounts <small>(Personal, Joint, Trust)</small>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                            </a>
+                            <a href="{{ route('pricing') }}">Retirement Accounts <small>(Traditional IRA, Roth IRA, SEP)</small>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                            </a>
+                            <a href="{{ route('education') }}">529 Education Savings Accounts
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div style="display:flex;justify-content:space-between;margin:20px 0;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-                    <div><div style="font-weight:800" class="pv-acc num">+{{ $t[2] }}</div><div class="pv-mut" style="font-size:.75rem">{{ $t[3] }}</div></div>
-                    <div style="text-align:right"><div style="font-weight:800" class="num">{{ $t[5] }}</div><div class="pv-mut" style="font-size:.75rem">Win rate</div></div>
+            </article>
+
+            {{-- ---------- card B · Stock Investing Account ---------- --}}
+            <article class="wf-acct-card wf-reveal" data-reveal data-testid="stock-investing-account-card">
+                <div class="wf-acct-head">
+                    <h2 class="wf-h2">Build your own</h2>
+                    <p>Designed for self-directed investors who prefer to select their own investments for each asset class and diversify themselves.</p>
                 </div>
-                <a href="{{ route('register') }}" class="pv-btn pv-btn-block pv-btn-sm">Copy this trader</a>
-            </div>
+
+                <div class="wf-acct-visual is-sia">
+                    <img class="wf-acct-graph" src="{{ $wfImg('aia-graph.png') }}" width="600" height="300" alt="" loading="lazy" style="opacity:.5">
+                    <picture class="wf-acct-phone">
+                        <source type="image/webp"
+                            srcset="{{ $wfImg('screen-sia-640w.webp') }} 640w,
+                                    {{ $wfImg('screen-sia-750w.webp') }} 750w,
+                                    {{ $wfImg('screen-sia-828w.webp') }} 828w,
+                                    {{ $wfImg('screen-sia-1080w.webp') }} 1080w"
+                            sizes="400px">
+                        <img src="{{ $wfImg('screen-sia.png') }}" width="1134" height="1400" alt="stock investing account mobile browse" loading="lazy">
+                    </picture>
+                </div>
+
+                <div class="wf-acct-body">
+                    <div>
+                        <h3 class="wf-acct-name">Stock Investing Account</h3>
+                        <h4 class="wf-acct-tag">Built for long-term stock and ETF investing</h4>
+                    </div>
+
+                    <ul class="wf-checklist">
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>
+                            <span>Simple by design for intentional investors</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>
+                            <span>Zero commissions on trades, start with $1</span>
+                        </li>
+                    </ul>
+
+                    <div class="wf-acct-ctas">
+                        <a class="wf-btn wf-btn-primary" href="{{ route('register') }}">Get started</a>
+                        <a class="wf-btn wf-btn-ghost-light" href="{{ route('stock-trading') }}">Learn more</a>
+                    </div>
+
+                    <div class="wf-acct-foot">
+                        <hr class="wf-hr">
+                        <div class="wf-explore">Explore other single asset class products:</div>
+                        <div class="wf-explore-list">
+                            <a href="{{ route('shares.us') }}">S&amp;P 500 Direct
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                            </a>
+                            <a href="{{ route('shares.uk') }}">Nasdaq-100 Direct
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                            </a>
+                            <a href="{{ route('pricing') }}">Automated Bond Ladder
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+{{-- ======================================================================
+     LIFE STAGES  ·  data-testid="homepage-life-stages-module"
+     ====================================================================== --}}
+<div class="wf-stages" data-testid="homepage-life-stages-module">
+    <div class="wf-marketing-section">
+        <div class="wf-sec-head wf-reveal" data-reveal>
+            <h2 class="wf-h2">Make the most of your money, wherever you're at.</h2>
+        </div>
+
+        {{-- ---------- mobile: collapsed cards ---------- --}}
+        <div class="wf-stages-grid">
+            @foreach ($stages as $s)
+                <button class="wf-stage-m" type="button" data-stage-m aria-expanded="false">
+                    <img class="wf-stage-m-img" width="76" height="74" alt="{{ $s['title'] }}" loading="lazy" src="{{ $wfImg('ls-' . $s['id'] . '.webp') }}">
+                    <span class="wf-stage-m-body">
+                        <span class="wf-stage-m-head">
+                            <h3>{{ $s['title'] }}</h3>
+                            <span class="wf-arrow-chip" data-testid="arrow-right-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                            </span>
+                        </span>
+                        <p><b>{{ $s['strong'] }}</b>{{ $s['rest'] }}</p>
+                    </span>
+                    <span class="wf-stage-m-detail">{{ $s['copy'] }}</span>
+                </button>
             @endforeach
         </div>
 
-        <div class="pv-grid pv-grid-3 cards ct-cards" style="gap:16px">
-            <div class="copy-chip"><div class="pv-icon">⚡</div><div><b>One-click mirroring</b><br><span class="pv-foot">Your portfolio mirrors theirs automatically.</span></div></div>
-            <div class="copy-chip"><div class="pv-icon">🛡</div><div><b>Verified performance</b><br><span class="pv-foot">Track record audited and live.</span></div></div>
-            <div class="copy-chip"><div class="pv-icon">✋</div><div><b>Stop-loss control</b><br><span class="pv-foot">Set limits to protect your capital.</span></div></div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== LIVE FX RATES (TradingView Forex Cross Rates) ===== -->
-<section class="pv-section" id="fx-rates">
-    <div class="pv-container">
-        <div class="fx-head">
-            <div>
-                <p class="pv-tag">Live FX Rates</p>
-                <h2 class="pv-h2">See the currency market move in real time</h2>
-                <p class="pv-lead">Live cross rates for the eight most-traded currencies, streamed around the clock from the same global feeds that power professional trading desks.</p>
-            </div>
-            <a href="{{ route('forex.majors') }}" class="pv-btn pv-btn-ghost pv-btn-sm">Explore major pairs →</a>
-        </div>
-
-        <div class="pv-panel fx-panel">
-            <div class="fx-bar">
-                <span class="fx-live"><i></i>Live</span>
-                <span class="fx-mids">EUR · USD · JPY · GBP · CHF · AUD · CAD · NZD</span>
-            </div>
-
-            <div id="pvFxRates" class="fx-widget">
-                <div class="fx-fallback">Loading live exchange rates…</div>
-            </div>
-
-            <p class="fx-note">Quotes are indicative and provided by <a href="https://www.tradingview.com/" target="_blank" rel="noopener noreferrer">TradingView</a>. The foreign-exchange market trades 24 hours a day, Sunday evening through Friday evening.</p>
-        </div>
-
-        <div class="pv-grid pv-grid-3 cards fx-points">
-            <div class="fx-point">
-                <div class="pv-icon">💱</div>
-                <div><b>28 live cross pairs</b><span>Every combination of the eight majors, priced continuously as the market moves.</span></div>
-            </div>
-            <div class="fx-point">
-                <div class="pv-icon">🌍</div>
-                <div><b>Global liquidity</b><span>Aggregated quotes from the world's largest interbank venues and prime brokers.</span></div>
-            </div>
-            <div class="fx-point">
-                <div class="pv-icon">🕐</div>
-                <div><b>Always-on coverage</b><span>Follow currency strength around the clock, from Tokyo to New York.</span></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<script>
-    (function(){
-        var host=document.getElementById('pvFxRates');
-        if(!host)return;
-        function theme(){try{return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'}catch(e){return 'dark'}}
-        function surface(){return theme()==='light'?'#ffffff':'#0a101c'}
-        function mount(){
-            host.innerHTML='';
-            var cfg={
-                "currencies":["EUR","USD","JPY","GBP","CHF","AUD","CAD","NZD"],
-                "colorTheme":theme(),
-                "backgroundColor":surface(),
-                "disableCrossClickHref":true,
-                "largeChartUrl":"https://www.tradingview.com/markets/currencies/rates-major/",
-                "locale":"en",
-                "width":"100%",
-                "height":420
-            };
-            var wrap=document.createElement('div');
-            wrap.className='tradingview-widget-container';
-            var w=document.createElement('div');
-            w.className='tradingview-widget-container__widget';
-            wrap.appendChild(w);
-            var s=document.createElement('script');
-            s.type='text/javascript';
-            s.async=true;
-            s.src='https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js';
-            s.text=JSON.stringify(cfg);
-            wrap.appendChild(s);
-            host.appendChild(wrap);
-        }
-        mount();
-        try{
-            new MutationObserver(mount).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-        }catch(e){}
-    })();
-</script>
-
-<!-- ===== CRYPTO ACADEMY / WHAT IS BITCOIN ===== -->
-<section class="pv-section" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
-    <div class="pv-container">
-        <div class="aca-shell">
-            <div class="vid-frame">
-                <iframe src="https://www.youtube.com/embed/bBC-nXj3Ng4" title="What is Bitcoin? — explained simply" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
-            </div>
-            <div>
-                <p class="pv-tag" style="text-align:left">Crypto Academy</p>
-                <h2 class="pv-h2" style="margin-bottom:12px">What is Bitcoin? Learn before you invest.</h2>
-                <p class="pv-foot" style="font-size:.95rem;line-height:1.7;color:var(--muted)">New to crypto? This quick, beginner-friendly explainer walks through how Bitcoin works, why it has value and how you can begin investing safely on PrimeVest.</p>
-                <ul style="list-style:none;padding:0;margin:22px 0;display:grid;gap:11px">
-                    <li style="display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:.92rem"><span style="color:var(--acc);font-weight:800">✓</span> How Bitcoin's blockchain keeps a secure, public ledger</li>
-                    <li style="display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:.92rem"><span style="color:var(--acc);font-weight:800">✓</span> Why supply is capped at 21&nbsp;million — the case for long-term value</li>
-                    <li style="display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:.92rem"><span style="color:var(--acc);font-weight:800">✓</span> How to buy your first Bitcoin in minutes with a bank card</li>
-                </ul>
-                <a href="{{ route('register') }}" class="pv-btn">Start learning with a $100 demo</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== FEATURES ===== -->
-<section class="pv-section">
-    <div class="pv-container">
-        <div style="text-align:center;max-width:640px;margin:0 auto 48px">
-            <p class="pv-tag" style="text-align:center">Why PrimeVest</p>
-            <h2 class="pv-h2">Everything you need to build wealth in crypto</h2>
-            <p class="pv-lead" style="margin:10px auto 0">One platform for trading, staking, copying experts and learning — engineered to help your portfolio compound over time.</p>
-        </div>
-
-        <div class="pv-grid pv-grid-3 cards wh-cards">
-            <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-emoji">📈</div>
-                <h3 style="margin:18px 0 8px;font-size:1.12rem">Pro Trading Charts</h3>
-                <p class="pv-foot" style="line-height:1.7">Candlestick charts with 100+ indicators, drawing tools and live order books — powered by TradingView.</p>
-            </div>
-            <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-emoji">🏦</div>
-                <h3 style="margin:18px 0 8px;font-size:1.12rem">High-Yield Staking</h3>
-                <p class="pv-foot" style="line-height:1.7">Earn up to 18% APY by staking stablecoins like USDT and USDC — rewards paid daily, right into your balance.</p>
-            </div>
-            <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-emoji">🔒</div>
-                <h3 style="margin:18px 0 8px;font-size:1.12rem">Cold Storage Security</h3>
-                <p class="pv-foot" style="line-height:1.7">98% of funds held in audited cold wallets, with 2FA, withdrawal whitelists and an insured hot wallet.</p>
-            </div>
-            <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-emoji">⚡</div>
-                <h3 style="margin:18px 0 8px;font-size:1.12rem">Instant Withdrawals</h3>
-                <p class="pv-foot" style="line-height:1.7">Request funds anytime — most crypto withdrawals land in your wallet in under 10 minutes, 24/7.</p>
-            </div>
-            <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-emoji">👥</div>
-                <h3 style="margin:18px 0 8px;font-size:1.12rem">Copy Trading Elite</h3>
-                <p class="pv-foot" style="line-height:1.7">Automatically mirror the strategies of verified professionals — audited results, zero guesswork, real growth.</p>
-            </div>
-            <div class="pv-panel pv-card" style="padding:28px">
-                <div class="pv-emoji">🎓</div>
-                <h3 style="margin:18px 0 8px;font-size:1.12rem">Crypto Academy</h3>
-                <p class="pv-foot" style="line-height:1.7">Guides, webinars and market analysis to help beginners and pros sharpen their edge.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== HOW IT WORKS ===== -->
-<section class="pv-section" style="padding-top:0">
-    <div class="pv-container">
-        <div style="text-align:center;max-width:640px;margin:0 auto 44px">
-            <p class="pv-tag" style="text-align:center">Getting Started</p>
-            <h2 class="pv-h2">From zero to crypto investor in 3 steps</h2>
-        </div>
-        <div class="pv-grid pv-grid-3" style="gap:20px">
-            <div class="step-box"><div class="step-num">1</div><h3 style="margin:8px 0;font-size:1.05rem">Create your account</h3><p class="pv-foot">Sign up in under a minute with just an email. Verify your identity once to unlock full limits.</p></div>
-            <div class="step-box"><div class="step-num">2</div><h3 style="margin:8px 0;font-size:1.05rem">Fund with crypto or cards</h3><p class="pv-foot">Deposit BTC, ETH, USDT or use a card. Your balance is available for trading instantly.</p></div>
-            <div class="step-box"><div class="step-num">3</div><h3 style="margin:8px 0;font-size:1.05rem">Buy, stake or copy traders</h3><p class="pv-foot">Trade the markets, stake for passive yield, or copy a top trader — your money works 24/7.</p></div>
-        </div>
-    </div>
-</section>
-
-<!-- ===== TESTIMONIALS ===== -->
-<section class="pv-section" style="background:var(--bg2);border-top:1px solid var(--line)">
-    <div class="pv-container">
-        <div style="text-align:center;max-width:640px;margin:0 auto 44px">
-            <p class="pv-tag" style="text-align:center">Investor Stories</p>
-            <h2 class="pv-h2">Trusted by investors worldwide</h2>
-        </div>
-        <div class="t-wrap">
-            <div class="t-track" id="tTrack">
-                <div class="pv-panel pv-card t-card">
-                    <div class="t-stars">★★★★★</div>
-                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"I started with my demo balance, learned staking, then went live. My USDT stake pays me daily and I can see every single return on the dashboard. Superb transparency."</p>
-                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/mike.jpg') }}" alt="Mike"><div><b>Mike O.</b><div class="pv-mut" style="font-size:.8rem">Accra, Ghana · Investor since 2025</div></div></div>
+        {{-- ---------- desktop: expanding carousel ---------- --}}
+        <div class="wf-stage-d" data-stage-d role="group" aria-label="Life stages" data-testid="expandable-carousel">
+            @foreach ($stages as $i => $s)
+                <div class="wf-stage-d-card" role="button" tabindex="0"
+                     aria-expanded="false"
+                     aria-label="Expand {{ $s['title'] }}" data-stage-card data-pill="{{ $i }}">
+                    <img width="718" height="650" alt="{{ $s['title'] }}" loading="lazy" src="{{ $wfImg('ls-' . $s['id'] . '-x-640w.webp') }}">
+                    <div class="wf-stage-d-inner">
+                        <span class="wf-stage-d-pill">{!! $s['pill'] !!}</span>
+                        <div>
+                            <h3>{{ $s['title'] }}</h3>
+                            <div class="wf-stage-d-cta">
+                                <p><b>{{ $s['strong'] }}</b>{{ $s['rest'] }}</p>
+                                <span class="wf-arrow-chip" data-testid="arrow-right-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                                </span>
+                            </div>
+                            <p class="wf-stage-d-detail">{{ $s['copy'] }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="pv-panel pv-card t-card">
-                    <div class="t-stars">★★★★★</div>
-                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"The copy trading feature is a game-changer. I'm mirroring two traders and up 11% in my first two months without lifting a finger. Withdrawals are genuinely fast."</p>
-                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/claudia.jpg') }}" alt="Claudia"><div><b>Claudia S.</b><div class="pv-mut" style="font-size:.8rem">Berlin, Germany · Copy trader</div></div></div>
-                </div>
-                <div class="pv-panel pv-card t-card">
-                    <div class="t-stars">★★★★★</div>
-                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"I've been on 4 other platforms and none felt this secure. 2FA, whitelisted addresses, and real customer support that actually answers. This is how crypto platforms should be."</p>
-                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/jenny.jpg') }}" alt="Jenny"><div><b>Jenny T.</b><div class="pv-mut" style="font-size:.8rem">Austin, USA · Staking investor</div></div></div>
-                </div>
-                <div class="pv-panel pv-card t-card">
-                    <div class="t-stars">★★★★★</div>
-                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"The dashboard is clarity. Live P&L, transparent fees, and my staking rewards land like clockwork every single day. PrimeVest rebuilt my trust in crypto investing."</p>
-                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/malcome.jpg') }}" alt="Malcome"><div><b>Malcome W.</b><div class="pv-mut" style="font-size:.8rem">Wealth investor</div></div></div>
-                </div>
-                <div class="pv-panel pv-card t-card">
-                    <div class="t-stars">★★★★★</div>
-                    <p style="margin:14px 0;line-height:1.7;font-size:.95rem">"I'm a long-term holder and wanted a platform that finally takes security seriously. Cold-storage custody, verified traders, honest support — this is the one I recommend to friends."</p>
-                    <div style="display:flex;align-items:center;gap:12px"><img class="t-av" src="{{ asset('images/crian.jpg') }}" alt="Crian"><div><b>Crian D.</b><div class="pv-mut" style="font-size:.8rem">Dublin, Ireland · Long-term holder</div></div></div>
+            @endforeach
+        </div>
+
+        {{-- ---------- carousel pills ---------- --}}
+        <div class="wf-pills" role="tablist" aria-label="Life stages">
+            @foreach ($stages as $i => $s)
+                <button class="wf-pill {{ $i === 0 ? 'is-active' : '' }}" role="tab" type="button"
+                        id="expandable-carousel-tab-{{ $i }}" aria-selected="{{ $i === 0 ? 'true' : 'false' }}"
+                        aria-controls="expandable-carousel-tabpanel" tabindex="{{ $i === 0 ? '0' : '-1' }}"
+                        aria-label="View {{ $s['title'] }}" data-pill="{{ $i }}"></button>
+            @endforeach
+        </div>
+    </div>
+</div>
+
+{{-- ======================================================================
+     REVIEWS  ·  data-testid="homepage-reviews-module"
+     ====================================================================== --}}
+<section class="wf-reviews" data-testid="homepage-reviews-module">
+    <div class="wf-container-2024">
+
+        {{-- ---------- Forbes quote + testimonial carousel ---------- --}}
+        <div class="wf-rev-top">
+            <div class="wf-rev-copy wf-reveal" data-reveal>
+                <span class="wf-quote-mark" aria-hidden="true">"</span>
+                <h2 class="wf-rev-quote">PrimeVest beats out Fidelity, Schwab and Vanguard when it comes to direct indexing and tax-loss harvesting.</h2>
+
+                <img class="wf-rev-forbes" src="{{ $wfImg('forbes-logo-white.png') }}" width="1945" height="475" alt="Forbes" loading="lazy">
+
+                <p class="wf-rev-fine">
+                    <b><a href="#">Read the article<sup>6</sup></a></b><br>
+                    From Forbes, July 26, 2025. 2025 Forbes Media LLC. All rights reserved. Used under license.<br>
+                    Forbes and the author are not clients of PrimeVest and no compensation was provided for the article.
+                </p>
+            </div>
+
+            <div class="wf-carousel wf-reveal" data-testid="review-carousel" data-reveal data-carousel>
+                <div class="wf-carousel-slide is-active" data-slide>
+                    <picture>
+                        <source type="image/webp"
+                            srcset="{{ $wfImg('reviews-1-640w.webp') }} 640w,
+                                    {{ $wfImg('reviews-1-750w.webp') }} 750w,
+                                    {{ $wfImg('reviews-1-828w.webp') }} 828w,
+                                    {{ $wfImg('reviews-1-1080w.webp') }} 1080w,
+                                    {{ $wfImg('reviews-1-1200w.webp') }} 1200w"
+                            sizes="(min-width: 1280px) 684px, 100vw">
+                        <img width="1368" height="726" alt="client testimonials" data-testid="testimonial-image-0" loading="lazy" src="{{ $wfImg('reviews-1.png') }}">
+                    </picture>
                 </div>
             </div>
-            <div class="t-nav"><button type="button" aria-label="Previous" onclick="tSlide(-1)">‹</button><button type="button" aria-label="Next" onclick="tSlide(1)">›</button></div>
-            <div class="t-dots" id="tDots"></div>
         </div>
-    </div>
-</section>
 
-<!-- ===== CTA ===== -->
-<section class="pv-section" style="padding-bottom:0">
-    <div class="pv-container">
-        <div class="pv-panel" style="position:relative;overflow:hidden;padding:64px 28px;text-align:center">
-            <div style="position:absolute;inset:0;background:radial-gradient(600px 300px at 50% 0%,rgba(47,123,255,.16),transparent 60%)"></div>
-            <div style="position:relative;z-index:1">
-                <h2 class="pv-h2" style="max-width:560px;margin:0 auto">Your crypto wealth journey starts today</h2>
-                <p class="pv-lead" style="margin:14px auto 30px">Join 480,000+ investors already growing their digital assets with PrimeVest.</p>
-                <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
-                    <a href="{{ route('register') }}" class="pv-btn pv-btn-lg">Create Free Account</a>
-                    <a href="{{ route('trading') }}" class="pv-btn pv-btn-ghost pv-btn-lg">Explore the Markets</a>
+        {{-- ---------- accolades tiles ---------- --}}
+        <div class="wf-rev-accolades" data-testid="reviews-accolades">
+            <div class="wf-rev-tiles">
+                <div class="wf-rev-tile">
+                    <b>1.5M+</b>
+                    <span>Trusted by 1.5M+ clients</span>
                 </div>
-                <div class="pv-foot" style="margin-top:24px">No hidden fees · Cancel anytime · Backed by 24/7 support</div>
+                <div class="wf-rev-tile">
+                    <b>$100B+</b>
+                    <span>$100B+ in client funds</span>
+                </div>
+                <div class="wf-rev-tile is-xl">
+                    <b>14+ years</b>
+                    <span>Simplifying finances since 2011</span>
+                </div>
+                <div class="wf-rev-tile is-xl">
+                    <b>WLTH</b>
+                    <span>Traded on the NASDAQ<sup>r</sup></span>
+                </div>
+            </div>
+        </div>
+
+        {{-- ---------- fine print ---------- --}}
+        <div class="wf-rev-fineprint">
+            <p>The testimonials above are by clients of PrimeVest Advisers and PrimeVest Brokerage. No compensation was provided. These testimonials may not be representative of other clients' experience. Past performance is no guarantee of success.</p>
+            <p>The mention of WLTH is for informational purposes only and should not be construed as investment advice, a solicitation, offer, or recommendation to buy or sell any security. Please visit our investor relations page for more information.</p>
+        </div>
+
+        {{-- ---------- CTA band ---------- --}}
+        <div class="wf-cta-band">
+            <div class="wf-circles-wrap" style="opacity:.5" aria-hidden="true">
+                <img class="wf-circles" src="{{ $wfImg('gradient-circles.svg') }}" width="2024" height="850" alt="" loading="lazy">
+            </div>
+            <div class="wf-cta-band-inner">
+                <h2>Sophisticated investing<br class="wf-br"> <span class="wf-h2-serif">made simple.</span></h2>
+                <a class="wf-btn wf-btn-white" href="{{ route('register') }}">Open account</a>
             </div>
         </div>
     </div>
 </section>
+
+{{-- ======================================================================
+     FAQ  ·  data-testid="homepage-faqs-module"
+     ====================================================================== --}}
+<div class="wf-faq" data-testid="homepage-faqs-module">
+    <section class="wf-faq-inner" data-testid="faq-module">
+        <div class="wf-faq-intro">
+            <h2 class="wf-h2" data-testid="faq-header">Questions? 5 things to know in 5 minutes or less.</h2>
+            <p>
+                To learn more about PrimeVest, read our <a href="{{ route('education') }}">whitepapers</a>
+                or visit the <a href="{{ route('contact') }}" target="_blank" rel="noopener noreferrer">help center</a>.
+            </p>
+        </div>
+
+        <div class="wf-faq-list">
+            @foreach ($faqs as $i => $f)
+                <div class="wf-faq-item {{ $i === 0 ? 'is-open' : '' }}" data-accordion>
+                    <button class="wf-faq-q" type="button" aria-expanded="{{ $i === 0 ? 'true' : 'false' }}">
+                        <span>{{ $f['q'] }}</span>
+                        <img src="{{ $wfImg('chevron.svg') }}" width="37" height="18" alt="" loading="lazy">
+                    </button>
+                    <div class="wf-faq-a">
+                        <div><p>{{ $f['a'] }}</p></div>
+                    </div>
+                </div>
+            @endforeach
+            <div class="wf-faq-spacer" aria-hidden="true"></div>
+        </div>
+    </section>
+</div>
+
+{{-- ======================================================================
+     MODALS
+     ====================================================================== --}}
+<div class="wf-modal-backdrop" id="wf-modal-wd" data-modal-panel>
+    <div class="wf-modal" role="dialog" aria-modal="true" aria-labelledby="wf-modal-wd-t" style="position:relative">
+        <button class="wf-modal-close" type="button" aria-label="Close dialog" data-modal-close>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+        </button>
+        <h3 id="wf-modal-wd-t">Free 24/7 instant withdrawals</h3>
+        <p>Money in your Cash Account is available to withdraw whenever you want — nights, weekends and holidays included. Withdrawals initiated before 3pm ET on a business day typically settle the same day, and the funds are usable immediately.</p>
+        <p style="margin-top:10px">Because program banks send funds via ACH, your bank's own posting schedule applies. Instant withdrawals are limited to $5,000 per day, raised to $25,000 for clients with a qualifying direct deposit.</p>
+    </div>
+</div>
+
+<div class="wf-modal-backdrop" id="wf-modal-disc" data-modal-panel>
+    <div class="wf-modal" role="dialog" aria-modal="true" aria-labelledby="wf-modal-disc-t" style="position:relative">
+        <button class="wf-modal-close" type="button" aria-label="Close dialog" data-modal-close>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
+        </button>
+        <h3 id="wf-modal-disc-t">Full disclosures</h3>
+        <p>Annualized returns: 1-year 14.74%, 5-year 10.04%, 10-year 10.78%, since inception 9.65% as of 10/01/2026.</p>
+        <p style="margin-top:10px">The chart represents actual performance for one-, five-, ten-year and since-inception periods through 05/22/2026 for investors in the Classic Automated Investing Account with a composite risk score of 9 (range 0.5–10).</p>
+        <p style="margin-top:10px">3.55% Base APY as of 10/01/2026 is provided by program banks and is subject to change. APY Boost is up to a $150,000 balance.</p>
+    </div>
+</div>
+
 @endsection
 
 @push('scripts')
 <script>
-    (function(){
-        var track=document.getElementById('tTrack');
-        if(!track)return;
-        var cards=track.querySelectorAll('.t-card');
-        var dots=[];
-        var dotWrap=document.getElementById('tDots');
-        for(var i=0;i<cards.length;i++){
-            (function(idx){
-                var b=document.createElement('button');
-                b.type='button';
-                b.setAttribute('aria-label','Go to testimonial '+(idx+1));
-                if(idx===0)b.className='on';
-                b.addEventListener('click',function(){tGo(idx);});
-                dotWrap.appendChild(b);
-                dots.push(b);
-            })(i);
-        }
-        function cardStep(){return cards[0].offsetWidth+16;}
-        function currentIndex(){
-            var pos=track.scrollLeft;
-            var step=cardStep();
-            if(step<=0)return 0;
-            return Math.round(pos/step);
-        }
-        function syncDots(){
-            var c=currentIndex();
-            for(var i=0;i<dots.length;i++)dots[i].className=(i===c)?'on':'';
-        }
-        var ticking=false;
-        track.addEventListener('scroll',function(){
-            if(!ticking){requestAnimationFrame(function(){syncDots();ticking=false;});ticking=true;}
+(function () {
+    'use strict';
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ------------------------------------------------------------------
+       1. Header dropdowns — click to open, click-away / Esc to close.
+       ------------------------------------------------------------------ */
+    var ddItems = Array.prototype.slice.call(document.querySelectorAll('[data-dropdown]'));
+
+    function closeAllDropdowns(except) {
+        ddItems.forEach(function (item) {
+            if (item === except) return;
+            item.classList.remove('is-open');
+            var btn = item.querySelector('.wf-nav-btn');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
         });
-        var tTouchStart=track.scrollLeft;
-        track.addEventListener('touchstart',function(){tTouchStart=track.scrollLeft;});
-        track.addEventListener('touchend',function(){tGo(currentIndex());});
-        function tGo(i){
-            if(i<0)i=0;
-            if(i>=cards.length)i=cards.length-1;
-            track.scrollTo({left:i*cardStep(),behavior:'smooth'});
-            syncDots();
+    }
+
+    ddItems.forEach(function (item) {
+        var btn = item.querySelector('.wf-nav-btn');
+        if (!btn) return;
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var open = item.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            closeAllDropdowns(item);
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('[data-dropdown]')) closeAllDropdowns(null);
+    });
+
+    /* ------------------------------------------------------------------
+       2. Mobile drawer
+       ------------------------------------------------------------------ */
+    var drawer = document.querySelector('.wf-drawer');
+    var drawerBackdrop = document.querySelector('.wf-drawer-backdrop');
+    var drawerTrigger = document.querySelector('[data-drawer-open]');
+
+    function setDrawer(open) {
+        if (!drawer) return;
+        drawer.classList.toggle('is-open', open);
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+        if (drawerBackdrop) drawerBackdrop.classList.toggle('is-open', open);
+        if (drawerTrigger) {
+            drawerTrigger.classList.toggle('is-open', open);
+            drawerTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
         }
-        window.tSlide=function(dir){
-            var i=currentIndex();
-            if(dir>0&&i>=cards.length-1)return;
-            if(dir<0&&i<=0)return;
-            tGo(i+dir);
-        };
-    })();
+        document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    if (drawerTrigger) {
+        drawerTrigger.addEventListener('click', function () {
+            setDrawer(!drawer.classList.contains('is-open'));
+        });
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-drawer-close]'), function (el) {
+        el.addEventListener('click', function () { setDrawer(false); });
+    });
+
+    /* ------------------------------------------------------------------
+       3. Accordions (direct-deposit + FAQ)
+       ------------------------------------------------------------------ */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-accordion]'), function (root) {
+        var trigger = root.querySelector('.wf-dd-trigger, .wf-faq-q');
+        if (!trigger) return;
+        trigger.addEventListener('click', function () {
+            var open = root.classList.toggle('is-open');
+            trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+    });
+
+    /* ------------------------------------------------------------------
+       4. Modals
+       ------------------------------------------------------------------ */
+    var lastFocus = null;
+
+    function openModal(id) {
+        var panel = document.getElementById(id);
+        if (!panel) return;
+        lastFocus = document.activeElement;
+        panel.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        var f = panel.querySelector('[data-modal-close]');
+        if (f) f.focus();
+    }
+
+    function closeModal(panel) {
+        if (!panel) return;
+        panel.classList.remove('is-open');
+        if (!document.querySelector('.wf-modal-backdrop.is-open')) document.body.style.overflow = '';
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-modal]'), function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            openModal(btn.getAttribute('data-modal'));
+        });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-modal-panel]'), function (panel) {
+        panel.addEventListener('click', function (e) {
+            if (e.target === panel || e.target.closest('[data-modal-close]')) closeModal(panel);
+        });
+    });
+
+    /* ------------------------------------------------------------------
+       5. Toasts
+       ------------------------------------------------------------------ */
+    var viewport = document.querySelector('[data-toast-viewport]');
+
+    function toast(message) {
+        if (!viewport) return;
+        var el = document.createElement('div');
+        el.className = 'wf-toast';
+        el.setAttribute('role', 'status');
+        el.innerHTML =
+            '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>' +
+            '<span></span><button type="button" aria-label="Dismiss">&times;</button>';
+        el.querySelector('span').textContent = message;
+        viewport.appendChild(el);
+        requestAnimationFrame(function () { el.classList.add('is-open'); });
+
+        var timer = setTimeout(function () { kill(); }, 5200);
+        function kill() {
+            clearTimeout(timer);
+            el.classList.remove('is-open');
+            setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 300);
+        }
+        el.querySelector('button').addEventListener('click', kill);
+    }
+    window.wfToast = toast;
+
+    var news = document.querySelector('[data-newsletter]');
+    if (news) {
+        news.addEventListener('submit', function (e) {
+            e.preventDefault();
+            toast('You are on the list. Market insights land every Friday.');
+            news.reset();
+        });
+    }
+
+    /* ------------------------------------------------------------------
+       6. Life stages — mobile accordion + desktop expanding carousel
+       ------------------------------------------------------------------ */
+    Array.prototype.forEach.call(document.querySelectorAll('[data-stage-m]'), function (card) {
+        card.addEventListener('click', function () {
+            var open = card.classList.toggle('is-open');
+            card.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+    });
+
+    var stageRow = document.querySelector('[data-stage-d]');
+    var stageCards = Array.prototype.slice.call(document.querySelectorAll('[data-stage-card]'));
+    var stageTitles = stageCards.map(function (card) {
+        var h3 = card.querySelector('h3');
+        return h3 ? h3.textContent.trim() : '';
+    });
+    var pillsWrap = document.querySelector('.wf-pills');
+    /* Scope to .wf-pill: the cards also carry a data-pill attribute, and
+       selecting on that alone attached a second click handler to every card
+       that force-re-expanded it. That is why clicking the open card could
+       never collapse the carousel — toggleStage() collapsed it and this
+       listener immediately expanded it again. */
+    var pills = Array.prototype.slice.call(document.querySelectorAll('.wf-pill[data-pill]'));
+    var stageOpen = false;
+
+    /* Collapsed, the three cards are equal portrait tiles and the pills stay
+       hidden (matching wealthfront). `open` promotes one card to a wide panel
+       with the copy beside the image, while its peers stay visible and
+       clickable so another card can be chosen in place. Clicking the promoted
+       card again (its arrow chip turns into a close) collapses back down. */
+    function activateStage(index, open) {
+        stageOpen = open;
+        if (stageRow) stageRow.classList.toggle('is-expanded', open);
+        if (pillsWrap) pillsWrap.classList.toggle('is-visible', open);
+
+        stageCards.forEach(function (card, i) {
+            var on = i === index;
+            card.classList.toggle('is-active', on);
+            card.setAttribute('aria-expanded', on && open ? 'true' : 'false');
+            /* Say Collapse while this card is the open one, so the way back
+               out is announced rather than only implied by the X chip. */
+            card.setAttribute('aria-label', (on && open ? 'Collapse ' : 'Expand ') + stageTitles[i]);
+        });
+        pills.forEach(function (pill) {
+            var on = parseInt(pill.getAttribute('data-pill'), 10) === index;
+            pill.classList.toggle('is-active', on);
+            if (pill.hasAttribute('role')) {
+                pill.setAttribute('aria-selected', on ? 'true' : 'false');
+                pill.setAttribute('tabindex', on ? '0' : '-1');
+            }
+        });
+    }
+
+    function toggleStage(index) {
+        activateStage(index, !(stageOpen && stageCards[index].classList.contains('is-active')));
+    }
+
+    stageCards.forEach(function (card, i) {
+        card.addEventListener('click', function () { toggleStage(i); });
+        card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleStage(i); }
+            if (e.key === 'ArrowRight') { e.preventDefault(); activateStage((i + 1) % stageCards.length, true); }
+            if (e.key === 'ArrowLeft')  { e.preventDefault(); activateStage((i - 1 + stageCards.length) % stageCards.length, true); }
+        });
+    });
+
+    pills.forEach(function (pill) {
+        pill.addEventListener('click', function () {
+            activateStage(parseInt(pill.getAttribute('data-pill'), 10), true);
+        });
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && stageOpen) {
+            activateStage(stageCards.findIndex(function (c) { return c.classList.contains('is-active'); }), false);
+        }
+    });
+
+    /* Start collapsed with the pills hidden; card 0 is only the keyboard seed. */
+    if (stageCards.length) activateStage(0, false);
+
+    /* ------------------------------------------------------------------
+       7. Testimonial carousel
+       ------------------------------------------------------------------ */
+    var carousel = document.querySelector('[data-carousel]');
+    if (carousel) {
+        var slides = Array.prototype.slice.call(carousel.querySelectorAll('[data-slide]'));
+        if (slides.length > 1) {
+            var dotsWrap = document.createElement('div');
+            dotsWrap.className = 'wf-carousel-dots';
+            carousel.appendChild(dotsWrap);
+
+            var dots = slides.map(function (_, i) {
+                var b = document.createElement('button');
+                b.type = 'button';
+                b.setAttribute('aria-label', 'View testimonial ' + (i + 1));
+                b.addEventListener('click', function () { go(i); restart(); });
+                dotsWrap.appendChild(b);
+                return b;
+            });
+
+            var idx = 0;
+            var timer = null;
+
+            function go(i) {
+                idx = (i + slides.length) % slides.length;
+                slides.forEach(function (s, n) { s.classList.toggle('is-active', n === idx); });
+                dots.forEach(function (d, n) { d.classList.toggle('is-active', n === idx); });
+            }
+
+            function restart() {
+                if (reduce) return;
+                clearInterval(timer);
+                timer = setInterval(function () { go(idx + 1); }, 6500);
+            }
+
+            go(0);
+            restart();
+
+            var x0 = null;
+            carousel.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+            carousel.addEventListener('touchend', function (e) {
+                if (x0 === null) return;
+                var dx = e.changedTouches[0].clientX - x0;
+                if (Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1));
+                x0 = null;
+            });
+        }
+    }
+
+    /* ------------------------------------------------------------------
+       8. Scroll reveal — the source ships opacity:0 inline and reveals
+          via IntersectionObserver. Without this the page renders blank.
+       ------------------------------------------------------------------ */
+    var revealables = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+
+    if (reduce || !('IntersectionObserver' in window)) {
+        revealables.forEach(function (el) { el.classList.add('is-in'); });
+    } else {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-in');
+                io.unobserve(entry.target);
+            });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+
+        revealables.forEach(function (el, i) {
+            el.style.transitionDelay = (Math.min(i % 6, 5) * 60) + 'ms';
+            io.observe(el);
+        });
+
+        /* Anything already on screen at load reveals immediately. */
+        requestAnimationFrame(function () {
+            revealables.forEach(function (el) {
+                var r = el.getBoundingClientRect();
+                if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-in');
+            });
+        });
+    }
+
+    /* ------------------------------------------------------------------
+       9. Esc closes everything
+       ------------------------------------------------------------------ */
+    document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        closeAllDropdowns(null);
+        setDrawer(false);
+        var open = document.querySelector('.wf-modal-backdrop.is-open');
+        if (open) closeModal(open);
+    });
+})();
 </script>
 @endpush
