@@ -74,11 +74,11 @@
     .cx-tab{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;
         border:1px solid var(--line);background:rgba(10,24,52,.02);color:var(--text);
         font-size:.82rem;font-weight:700;cursor:pointer;transition:.2s}
-    .cx-tab:hover{border-color:rgba(47,123,255,.45);background:rgba(47,123,255,.07)}
+    .cx-tab:hover{border-color:rgba(75,24,191,.45);background:rgba(75,24,191,.07)}
     .cx-tab .cx-d{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;
         background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04121f;font-size:.68rem;font-weight:800;letter-spacing:-.02em}
-    .cx-tab.on{border-color:rgba(47,123,255,.6);background:rgba(47,123,255,.13);
-        box-shadow:0 0 0 3px rgba(47,123,255,.10)}
+    .cx-tab.on{border-color:rgba(75,24,191,.6);background:rgba(75,24,191,.13);
+        box-shadow:0 0 0 3px rgba(75,24,191,.10)}
     .cx-live{position:absolute;top:44px;right:32px;z-index:3;display:flex;align-items:center;gap:6px;
         padding:5px 11px;border-radius:999px;background:rgba(15,185,129,.12);
         border:1px solid rgba(16,185,129,.35);color:#2eae82;font-size:.68rem;font-weight:800;letter-spacing:.1em}
@@ -291,8 +291,8 @@
         /* The line was a washed-out grey in both themes, so the theme toggle
            barely registered. These are the hero blues, so the switch is obvious
            and the chart matches the brand. */
-        line: isL() ? '#2f7bff' : '#4cc3ff',
-        fill: isL() ? 'rgba(47,123,255,.12)' : 'rgba(76,195,255,.18)',
+        line: isL() ? '#4b18bf' : '#6a2ee0',
+        fill: isL() ? 'rgba(75,24,191,.12)' : 'rgba(76,195,255,.18)',
         grid: isL() ? 'rgba(10,24,52,.05)' : 'rgba(255,255,255,.045)',
         tick: isL() ? '#5c6b86' : '#5a6685',
         bg:  isL() ? '#ffffff' : '#0d1526',

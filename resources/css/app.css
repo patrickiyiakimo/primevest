@@ -1,3 +1,5 @@
+@import './footer.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,14 +7,14 @@
 
 /* Modern Blue Theme for PrimeVest */
 :root {
-    --primary-blue: #2f7bff;
-    --primary-blue-dark: #1456d1;
-    --primary-blue-light: #57c8ff;
-    --primary-blue-bg: #eff6ff;
-    --primary-blue-border: #bfdbfe;
-    --primary-blue-hover: #4cc3ff;
-    --secondary-blue: #1456d1;
-    --accent-blue: #00b4ff;
+    --primary-blue: #4b18bf;
+    --primary-blue-dark: #3a1296;
+    --primary-blue-light: #6a2ee0;
+    --primary-blue-bg: #f0ecfd;
+    --primary-blue-border: #d5cff0;
+    --primary-blue-hover: #6a2ee0;
+    --secondary-blue: #3a1296;
+    --accent-blue: #a98bff;
     /* Red selection color */
     --selection-red: #dc2626;
     --selection-red-light: #ef4444;
@@ -27,7 +29,7 @@
 }
 
 .green-gradient-bg {
-    background: linear-gradient(135deg, #2f7bff 0%, #1456d1 100%);
+    background: linear-gradient(135deg, #4b18bf 0%, #3a1296 100%);
 }
 
 /* Checkbox Styles */
@@ -69,7 +71,7 @@
     width: 100%;
     height: 100%;
     z-index: -1;
-    background: linear-gradient(135deg, #2f7bff 0%, #1456d1 100%);
+    background: linear-gradient(135deg, #4b18bf 0%, #3a1296 100%);
     opacity: 0.9;
 }
 
@@ -225,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Special text styles */
 .text-gradient {
-    background: linear-gradient(135deg, #57c8ff 0%, #2f7bff 100%);
+    background: linear-gradient(135deg, #6a2ee0 0%, #4b18bf 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

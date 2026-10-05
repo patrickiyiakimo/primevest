@@ -1,0 +1,2746 @@
+@import './footer.css';
+
+/* =========================================================================
+   PrimeVest — Landing page
+   A faithful rebuild of the wealthfront.com homepage shell + design tokens,
+   re-skinned onto the PrimeVest brand (logo, nav, routes, copy).
+
+   Design tokens below are resolved from wealthfront's own colour values:
+   eggplant #230B59, blurple #4B18BF, pebble #F0F0F2, hover #DADEF11A.
+   ========================================================================= */
+
+/* ---------- tokens ---------- */
+:root {
+    /* surface */
+    --wf-eggplant: #230b59;
+    --wf-eggplant-deep: #190742;
+    --wf-plum: #301066;
+    --wf-blurple: #4b18bf;
+    --wf-blurple-lift: #6a2ee0;
+
+    /* neutrals */
+    --wf-pebble: #f0f0f2;
+    --wf-ghost: #f7f7f8;
+    --wf-surface: #ffffff;
+    --wf-surface-soft: #fbfbfc;
+    --wf-boulder: #d2d2d6;
+    --wf-quartz: #6b6b76;
+    --wf-lavender: #d5cff0;
+    --wf-light-neptune: #e9ecfc;
+    --wf-content-divider: #e4e4e8;
+    --wf-content-primary: #16161a;
+    --wf-content-secondary: #5c5c66;
+    --wf-space: #101014;
+
+    /* PrimeVest accents used sparingly for interactive/brand moments */
+    --pv-accent: #4b18bf;
+    --pv-accent-2: #a98bff;
+    --pv-gold: #f0b90b;
+
+    /* type */
+    --wf-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --wf-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+
+    /* radii */
+    --wf-r-md: 6px;
+    --wf-r-lg: 10px;
+    --wf-r-xl: 16px;
+    --wf-r-2xl: 18px;
+
+    /* spacing scale (WF xxsmall..x4large) */
+    --wf-xxsmall: 4px;
+    --wf-xsmall: 6px;
+    --wf-small: 12px;
+    --wf-medium: 20px;
+    --wf-large: 32px;
+    --wf-xlarge: 44px;
+    --wf-xxlarge: 64px;
+    --wf-xxxlarge: 96px;
+    --wf-x4large: 128px;
+
+    /* brand gradient — the single continuous run behind banner + header + hero */
+    --wf-top-gradient: linear-gradient(90deg, #230b59 20%, #4b18bf 120%);
+}
+
+/* ---------- reset ----------
+   The landing layout loads only this stylesheet (no Tailwind preflight), so the
+   UA default body margin would otherwise inset the whole page by 8px on every
+   side — that is the "margin all round" gap around the shell. */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--wf-ghost);
+}
+
+.wf-shell {
+    margin: 0;
+    background: var(--wf-ghost);
+    /* Dark bands (.wf-top, .wf-hero, .wf-reviews, .wf-footer) each declare the
+       light --wf-pebble themselves, so the safe default for everything else is
+       the dark content colour. Inheriting pebble here left every light band
+       (ghost / white) rendering near-white text on a near-white background. */
+    color: var(--wf-content-primary);
+    font-family: var(--wf-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+.wf-shell *,
+.wf-shell *::before,
+.wf-shell *::after {
+    box-sizing: border-box;
+}
+
+.wf-shell h1,
+.wf-shell h2,
+.wf-shell h3,
+.wf-shell h4,
+.wf-shell h5,
+.wf-shell h6,
+.wf-shell p,
+.wf-shell ul,
+.wf-shell ol,
+.wf-shell figure {
+    margin: 0;
+    padding: 0;
+}
+
+.wf-shell ul,
+.wf-shell ol {
+    list-style: none;
+}
+
+/* Zero-specificity element resets. `.wf-shell a` / `.wf-shell button` would
+   score (0,1,1) and beat every single-class component rule such as
+   `.wf-btn-white` (0,1,0), so every button and link silently fell back to the
+   inherited colour — white-on-white on light backgrounds. Wrapping the
+   selectors in :where() drops the reset to (0,0,0) so components always win. */
+:where(.wf-shell a) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.wf-shell img,
+.wf-shell svg {
+    display: block;
+    max-width: 100%;
+}
+
+:where(.wf-shell button) {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.wf-shell sup {
+    font-size: 0.62em;
+    vertical-align: super;
+    line-height: 0;
+}
+
+/* ---------- shared type ---------- */
+.wf-copy-body {
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+}
+
+.wf-copy-h3-alt {
+    font-size: 1.125rem;
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+}
+
+.wf-copy-h1 {
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+}
+
+/* ---------- layout shells ---------- */
+.wf-container-2024 {
+    max-width: 2024px;
+    margin-inline: auto;
+    padding-inline: 16px;
+}
+
+.wf-marketing-section {
+    max-width: 1766px;
+    margin-inline: auto;
+    padding-inline: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+
+/* Light marketing band. The ghost background and the dark content colour have
+   to travel together — declaring one without the other is what made these
+   headings invisible. */
+.wf-band {
+    position: relative;
+    background: var(--wf-ghost);
+    color: var(--wf-content-primary);
+}
+
+/* ---------- the continuous top gradient (banner + header + hero) ---------- */
+.wf-top {
+    position: relative;
+    background: var(--wf-top-gradient);
+    color: var(--wf-pebble);
+}
+
+.wf-circles-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.wf-circles {
+    position: absolute;
+    width: 2024px;
+    height: 850px;
+    min-width: 2024px;
+    bottom: -150px;
+    right: -1000px;
+    pointer-events: none;
+}
+
+/* ---------- promo banner ---------- */
+.wf-banner {
+    position: relative;
+    z-index: 10;
+    padding-top: 32px;
+    padding-bottom: 8px;
+}
+
+.wf-banner-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--wf-small);
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--wf-r-md);
+    padding: var(--wf-small);
+    background: linear-gradient(90deg, #f6e9e2 0%, #e8ebfd 100%);
+}
+
+.wf-banner-copy {
+    min-width: 0;
+    font-family: var(--wf-sans);
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--wf-eggplant);
+}
+
+.wf-banner-copy span {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    opacity: 0.72;
+    margin-top: 2px;
+}
+
+.wf-banner-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--wf-blurple);
+    white-space: nowrap;
+    border-radius: 999px;
+    padding: 6px 12px;
+    border: 1px solid rgba(75, 24, 191, 0.28);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.wf-banner-link:hover {
+    background: rgba(75, 24, 191, 0.09);
+    border-color: rgba(75, 24, 191, 0.5);
+}
+
+.wf-banner-photo {
+    height: 38px;
+    flex-grow: 1;
+    object-fit: cover;
+    object-position: left top;
+    border-radius: 4px;
+}
+
+/* ---------- header ---------- */
+.wf-header {
+    position: relative;
+    z-index: 20;
+}
+
+.wf-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: 96px;
+}
+
+.wf-logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.wf-logo img {
+    height: 32px;
+    width: auto;
+}
+
+/* The PrimeVest mark ships dark-on-transparent, so it is knocked to white for
+   the dark gradient header/footer. Matches Wealthfront's "surface-dark" wordmark. */
+.wf-logo-mark {
+    filter: brightness(0) invert(1);
+}
+
+.wf-logo-lockup {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.wf-logo-lockup b {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1;
+    color: #fff;
+}
+
+.wf-logo-lockup.on-light b {
+    color: var(--wf-eggplant);
+}
+
+.wf-logo-lockup.on-light .wf-logo-mark {
+    filter: none;
+}
+
+.wf-nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.wf-nav-item {
+    position: relative;
+}
+
+.wf-nav-btn,
+.wf-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border-radius: var(--wf-r-2xl);
+    color: #fff;
+    transition: background-color 0.18s ease;
+    padding: 14px 14px;
+    margin: -14px 0;
+    font-family: var(--wf-sans);
+    /* The source pins its nav labels to a flat !text-[20px]; this block used
+       to be overridden to 32px at >=1280px, which is what made the desktop
+       nav look oversized. 18px keeps the same visual weight, tightened. */
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.wf-nav-btn:hover,
+.wf-nav-link:hover,
+.wf-nav-item.is-open > .wf-nav-btn {
+    background: rgba(218, 222, 241, 0.1);
+}
+
+.wf-nav-btn svg {
+    height: 6px;
+    width: 9px;
+    transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 2px;
+}
+
+.wf-nav-item.is-open > .wf-nav-btn svg {
+    transform: rotate(180deg);
+}
+
+/* dropdown panel */
+.wf-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: -20px;
+    min-width: 320px;
+    padding: 10px;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 24px 60px -24px rgba(35, 11, 89, 0.4), 0 2px 8px rgba(35, 11, 89, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    z-index: 40;
+}
+
+.wf-nav-item.is-open .wf-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.wf-menu-group + .wf-menu-group {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--wf-content-divider);
+}
+
+.wf-menu-label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--wf-quartz);
+    padding: 6px 10px 8px;
+}
+
+.wf-menu-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 9px;
+    color: var(--wf-eggplant);
+    transition: background-color 0.15s ease;
+}
+
+.wf-menu-link:hover {
+    background: rgba(75, 24, 191, 0.07);
+}
+
+.wf-menu-link b {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.wf-menu-link span {
+    display: block;
+    font-size: 12px;
+    line-height: 1.4;
+    color: var(--wf-quartz);
+    margin-top: 1px;
+}
+
+.wf-menu-ic {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    background: var(--wf-light-neptune);
+    color: var(--wf-blurple);
+}
+
+.wf-menu-ic svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* header actions */
+.wf-header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+/* hamburger — the source uses a bespoke 30x23 glyph; this is the animated twin */
+.wf-burger {
+    display: none;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+    width: 30px;
+    height: 23px;
+    color: #fff;
+    align-items: center;
+    justify-content: center;
+}
+
+.wf-burger-box {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 18px;
+}
+
+.wf-burger-box span {
+    position: absolute;
+    left: 0;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wf-burger-box span:nth-child(1) { top: 0; }
+.wf-burger-box span:nth-child(2) { top: 8px; }
+.wf-burger-box span:nth-child(3) { top: 16px; }
+
+.wf-burger.is-open .wf-burger-box span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+.wf-burger.is-open .wf-burger-box span:nth-child(2) { opacity: 0; transform: translateX(-8px); }
+.wf-burger.is-open .wf-burger-box span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+/* ---------- buttons ---------- */
+.wf-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--wf-r-md);
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding: 12px 20px;
+    white-space: nowrap;
+    transition: all 0.22s ease;
+}
+
+.wf-btn-primary {
+    background: var(--wf-blurple);
+    color: #fff;
+}
+
+.wf-btn-primary:hover {
+    background: var(--wf-blurple-lift);
+}
+
+.wf-btn-white {
+    background: #fff;
+    color: var(--wf-eggplant);
+}
+
+.wf-btn-white:hover {
+    background: var(--wf-light-neptune);
+}
+
+.wf-btn-ghost-dark {
+    border: 1px solid var(--wf-lavender);
+    color: var(--wf-lavender);
+}
+
+.wf-btn-ghost-dark:hover {
+    border-color: transparent;
+    background: rgba(213, 207, 240, 0.12);
+}
+
+.wf-btn-ghost-light {
+    border: 1px solid var(--wf-blurple);
+    color: var(--wf-blurple);
+}
+
+.wf-btn-ghost-light:hover {
+    background: rgba(75, 24, 191, 0.07);
+}
+
+/* ---------- hero ---------- */
+.wf-hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--wf-top-gradient);
+    color: var(--wf-pebble);
+}
+
+.wf-hero-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 500px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 32px 16px;
+}
+
+.wf-hero-grid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr;
+    gap: var(--wf-large);
+    padding-bottom: 32px;
+}
+
+.wf-hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-large);
+}
+
+.wf-hero-eyebrow {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-medium);
+}
+
+.wf-eyebrow-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    font-size: 24px;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.wf-eyebrow-line svg {
+    height: 1.2em;
+    width: 1.2em;
+    flex-shrink: 0;
+}
+
+.wf-h1 {
+    font-family: var(--wf-sans);
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+}
+
+.wf-h1-apy {
+    display: block;
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 0.86;
+    letter-spacing: -0.04em;
+    margin-top: 6px;
+}
+
+.wf-h2-serif {
+    font-family: var(--wf-serif);
+    font-weight: 300;
+    font-style: italic;
+    font-size: 41px;
+    line-height: 1.2;
+    letter-spacing: -0.05em;
+    max-width: 600px;
+    margin-top: 14px;
+}
+
+/* hero feature bullets */
+.wf-hero-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-small);
+}
+
+.wf-feature {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.wf-feature-ic {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 21px;
+}
+
+.wf-feature-ic svg {
+    height: 1.2em;
+    width: 1.2em;
+    font-size: 20px;
+}
+
+.wf-feature-ic img {
+    height: 21px;
+    width: 21px;
+}
+
+.wf-feature-txt {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+}
+
+.wf-info-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: top;
+    height: 1lh;
+    margin-left: 2px;
+    color: var(--wf-pebble);
+    opacity: 0.75;
+    transition: opacity 0.2s ease;
+}
+
+.wf-info-btn:hover {
+    opacity: 1;
+}
+
+.wf-info-btn svg {
+    height: 1.2em;
+    width: 1.2em;
+    position: relative;
+    top: 1px;
+}
+
+.wf-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--wf-medium);
+    align-items: flex-start;
+}
+
+.wf-disclosure {
+    font-size: 14px;
+    line-height: 1.35;
+    opacity: 0.75;
+    max-width: 508px;
+}
+
+/* hero phone composition */
+.wf-hero-visual {
+    display: none;
+    position: relative;
+    max-width: 621px;
+    aspect-ratio: 621 / 818;
+    margin-bottom: -28.2%;
+    margin-left: 90px;
+}
+
+.wf-hero-card {
+    position: absolute;
+    top: 40px;
+    width: 43.5%;
+}
+
+.wf-hero-card img {
+    width: 100%;
+    height: auto;
+}
+
+.wf-hero-phone {
+    position: absolute;
+    inset: 0;
+}
+
+.wf-hero-phone img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ---------- accolades bar ---------- */
+.wf-accolades-bar {
+    position: relative;
+    z-index: 2;
+    padding-bottom: 40px;
+}
+
+.wf-accolades {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 8px 24px;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    opacity: 0.6;
+}
+
+.wf-accolades-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wf-accolades-item img {
+    height: 16px;
+    width: auto;
+    max-width: 128px;
+    object-fit: contain;
+}
+
+.wf-accolades-item b {
+    font-weight: 600;
+}
+
+.wf-accolades-item span {
+    display: block;
+    opacity: 0.8;
+    font-size: 0.78rem;
+}
+
+.wf-stars {
+    display: inline-flex;
+    gap: 1px;
+    color: currentColor;
+}
+
+.wf-stars svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ---------- direct-deposit accordion ---------- */
+.wf-dd {
+    background: var(--wf-light-neptune);
+    color: var(--wf-content-primary);
+    border-radius: 40px;
+    margin-block: var(--wf-large);
+    position: relative;
+    z-index: 2;
+}
+
+.wf-dd-trigger {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--wf-small);
+    width: 100%;
+    text-align: left;
+    padding: var(--wf-small);
+}
+
+.wf-dd-trigger > svg {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    transition: transform 0.2s ease-out;
+}
+
+.wf-dd.is-open .wf-dd-trigger > svg {
+    transform: rotate(180deg);
+}
+
+.wf-dd-texts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    min-width: 0;
+}
+
+.wf-dd-texts h3 {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+}
+
+.wf-dd-texts p {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--wf-content-secondary);
+    margin-top: 2px;
+}
+
+.wf-dd-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wf-dd.is-open .wf-dd-panel {
+    grid-template-rows: 1fr;
+}
+
+.wf-dd-panel > div {
+    overflow: hidden;
+}
+
+.wf-dd-steps {
+    padding: 0 var(--wf-small) var(--wf-medium);
+    display: grid;
+    gap: 12px;
+    max-width: 720px;
+}
+
+.wf-dd-step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--wf-content-secondary);
+}
+
+.wf-dd-step b {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--wf-blurple);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 1px;
+}
+
+.wf-dd-step b {
+    color: #fff;
+}
+
+/* ---------- section headings ---------- */
+.wf-sec-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-large);
+    text-align: center;
+    align-items: center;
+}
+
+.wf-h2 {
+    font-family: var(--wf-sans);
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    max-width: 1074px;
+}
+
+.wf-h2-serif {
+    font-family: var(--wf-serif);
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: -0.03em;
+}
+
+.wf-lede {
+    font-size: 1.125rem;
+    line-height: 1.45;
+    letter-spacing: -0.015em;
+    max-width: 1012px;
+    color: var(--wf-content-secondary);
+}
+
+/* ---------- press / award badges ---------- */
+.wf-badge-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    gap: var(--wf-medium);
+    width: 100%;
+}
+
+.wf-badge {
+    position: relative;
+    width: 250px;
+    min-width: 0;
+    aspect-ratio: 250 / 167;
+    flex-shrink: 0;
+    border-radius: var(--wf-r-lg);
+    overflow: hidden;
+    background: var(--wf-surface);
+    border: 1px solid var(--wf-content-divider);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 12px 32px -22px rgba(35, 11, 89, 0.45);
+}
+
+.wf-badge-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.wf-badge-logo img {
+    height: 20px;
+    width: auto;
+    max-width: 128px;
+    object-fit: contain;
+    /* Every WF partner asset in images/wf is a "for dark background" variant
+       (flat #F0F0F2 / #F8F7FC fills). The badge card is white, so the raw
+       assets rendered white-on-white and only the text was visible.
+       Inverting maps those light fills back to near-black. */
+    filter: invert(1);
+}
+
+.wf-badge > *:not(.wf-badge-laurel) {
+    position: relative;
+    z-index: 1;
+}
+
+.wf-badge-laurel {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    height: 156px;
+    width: 156px;
+    opacity: 0.14;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.wf-badge-laurel img {
+    width: 100%;
+    height: 100%;
+    /* Same near-white asset problem as .wf-badge-logo img — the wreath was
+       invisible until inverted. Kept faint so it stays a watermark. */
+    filter: invert(1);
+}
+
+.wf-badge-kicker {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--wf-quartz);
+}
+
+.wf-badge-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--wf-content-primary);
+    line-height: 1.2;
+}
+
+.wf-badge-year {
+    font-size: 12px;
+    color: var(--wf-quartz);
+}
+
+/* ---------- account cards ---------- */
+.wf-acct-grid {
+    max-width: 1260px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--wf-xlarge);
+    justify-items: center;
+}
+
+.wf-acct-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: var(--wf-r-2xl);
+    border: 1px solid rgba(240, 240, 242, 0.5);
+    background: var(--wf-surface);
+    color: var(--wf-content-primary);
+    max-width: 612px;
+    width: 100%;
+    box-shadow: 0 30px 60px -46px rgba(35, 11, 89, 0.5);
+}
+
+.wf-acct-head {
+    background: var(--wf-ghost);
+    padding: var(--wf-medium) var(--wf-medium) var(--wf-large);
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-xsmall);
+    text-align: center;
+    align-items: center;
+}
+
+.wf-acct-head .wf-h2 {
+    font-size: 26px;
+    max-width: 100%;
+}
+
+.wf-acct-head p {
+    max-width: 450px;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--wf-content-secondary);
+}
+
+/* graph + phone */
+.wf-acct-visual {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    border-radius: var(--wf-r-2xl) var(--wf-r-2xl) 0 0;
+}
+
+.wf-acct-visual.is-aia {
+    background: linear-gradient(180deg, #eeedf9 0%, #fff 100%);
+}
+
+.wf-acct-visual.is-sia {
+    background: linear-gradient(102deg, #fff 10%, #f6e9e2 95%);
+}
+
+.wf-acct-graph {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+.wf-returns {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    z-index: 10;
+    width: 149px;
+    aspect-ratio: 1.5;
+    border-radius: var(--wf-r-lg);
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #fff;
+    background: linear-gradient(135deg, #301066 5%, #4b18bf 111%);
+    box-shadow: 0 18px 34px -20px rgba(35, 11, 89, 0.8);
+}
+
+.wf-returns b {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+}
+
+.wf-returns span {
+    font-size: 10px;
+    line-height: 1.25;
+    opacity: 0.85;
+    margin-top: 3px;
+}
+
+.wf-acct-phone {
+    position: absolute;
+    left: 50%;
+    top: 20px;
+    width: 400px;
+    max-width: 78%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.wf-acct-phone img {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+}
+
+/* card body */
+.wf-acct-body {
+    padding: var(--wf-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-medium);
+    flex: 1;
+}
+
+.wf-acct-name {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    color: var(--wf-content-primary);
+}
+
+.wf-acct-tag {
+    font-size: 1.125rem;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: var(--wf-blurple);
+}
+
+.wf-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-xsmall);
+}
+
+.wf-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 1rem;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    color: var(--wf-content-primary);
+}
+
+.wf-checklist svg {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    color: var(--wf-blurple);
+}
+
+.wf-acct-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--wf-small);
+    align-items: center;
+}
+
+.wf-acct-note {
+    font-size: 13px;
+    line-height: 1.4;
+    color: var(--wf-quartz);
+    opacity: 0.85;
+}
+
+.wf-acct-note button {
+    text-decoration: underline;
+    color: inherit;
+    font: inherit;
+}
+
+.wf-acct-foot {
+    margin-top: auto;
+}
+
+.wf-hr {
+    height: 1px;
+    width: 100%;
+    border: 0;
+    background: var(--wf-content-divider);
+    margin: 0;
+}
+
+.wf-explore {
+    font-size: 12px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--wf-quartz);
+    margin-bottom: 10px;
+}
+
+.wf-explore-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-xxsmall);
+}
+
+.wf-explore-list a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--wf-content-primary);
+    padding: 6px 0;
+    border-radius: 8px;
+    transition: color 0.18s ease;
+}
+
+.wf-explore-list a:hover {
+    color: var(--wf-blurple);
+}
+
+.wf-explore-list a svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    transition: transform 0.18s ease;
+}
+
+.wf-explore-list a small {
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--wf-quartz);
+}
+
+.wf-explore-list a:hover svg {
+    transform: translateX(3px);
+}
+
+/* ---------- life stages ----------
+   Mirrors wealthfront's "expandable carousel": below xl a stack of compact
+   tappable cards (thumbnail on the left, copy on the right — exactly the
+   source's collapsed mobile card), from xl up a row where the selected card
+   expands to fill the row and reveals its detail layer while the others
+   collapse to narrow image slivers. */
+.wf-stages {
+    display: block;
+    overflow: hidden;
+    padding-block: var(--wf-xxxlarge);
+    color: var(--wf-content-primary);
+}
+
+.wf-stages-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-small);
+}
+
+.wf-stages .wf-h2 {
+    color: var(--wf-blurple);
+}
+
+/* ---------- mobile collapsed card ----------
+   Measured against wealthfront.com at 390x844: white card, 16px radius,
+   overflow hidden, 91x88 thumbnail, h3 24px/600, lead 18px, and a 40px round
+   blurple chip (rgba(72,64,186,.1) on #4840BA). */
+.wf-stage-m {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: var(--wf-small);
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--wf-surface);
+    cursor: pointer;
+    text-align: left;
+    color: var(--wf-content-primary);
+    padding: var(--wf-small);
+    box-shadow: 0 20px 44px -34px rgba(35, 11, 89, 0.55);
+    transition: box-shadow 0.25s ease;
+}
+
+.wf-stage-m:hover,
+.wf-stage-m.is-open {
+    box-shadow: 0 22px 44px -26px rgba(35, 11, 89, 0.5);
+}
+
+.wf-stage-m-img {
+    flex: 0 1 auto;
+    width: 91px;
+    max-width: 30%;
+    height: auto;
+    aspect-ratio: 91 / 88;
+    object-fit: cover;
+    border-radius: var(--wf-r-lg);
+    background: var(--wf-ghost);
+}
+
+.wf-stage-m-body {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wf-stage-m-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--wf-small);
+}
+
+.wf-stage-m-body h3 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+}
+
+.wf-stage-m-body p {
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--wf-content-secondary);
+}
+
+.wf-stage-m .wf-arrow-chip {
+    width: 40px;
+    height: 40px;
+    background: rgba(72, 64, 186, 0.1);
+    color: #4840ba;
+}
+
+.wf-stage-m-detail {
+    display: none;
+    flex-basis: 100%;
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--wf-content-secondary);
+}
+
+.wf-stage-m.is-open .wf-stage-m-detail {
+    display: block;
+}
+
+.wf-stage-m.is-open .wf-arrow-chip {
+    transform: rotate(-45deg);
+}
+
+/* ---------- desktop expandable carousel ----------
+   Mirrors the real wealthfront.com "expandable-carousel", measured live at
+   1440x900:
+
+   collapsed  three equal portrait cards, `flex:1 1 0%` + `aspect-ratio:420/500`
+              -> 421x502 each, 24px gaps, row `max-width:1400px`, radius 16px.
+              The overlay copy is visible on ALL cards, not just one.
+   expanded  the chosen card becomes a single centred panel (~560px wide) and
+              the other two are parked off the row edges. The pill tablist is
+              `display:none` while collapsed and only appears once expanded,
+              because the cards themselves are the affordance until then. */
+.wf-stage-d {
+    display: none;
+    position: relative;
+    gap: 24px;
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.wf-stage-d-card {
+    position: relative;
+    flex: 1 1 0%;
+    min-width: 0;
+    aspect-ratio: 420 / 500;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    color: #fff;
+    background: var(--wf-eggplant);
+    transition: flex-grow 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wf-stage-d-card:focus-visible {
+    outline: 2px solid var(--wf-blurple);
+    outline-offset: 3px;
+}
+
+.wf-stage-d-card img {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* The source keeps every collapsed card visually identical, so the zoom and
+   the chip rotation only apply once a card is actually expanded. */
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active img {
+    /* Stop being a full-bleed overlay and become the left-hand panel,
+       keeping the portrait ratio the collapsed cards use. */
+    position: relative;
+    inset: auto;
+    flex: 0 0 44%;
+    width: 44%;
+    height: auto;
+    align-self: stretch;
+    aspect-ratio: 420 / 500;
+    transform: scale(1.04);
+}
+
+/* ---------- expanded state ----------
+   Clicking a card zooms its image up and reveals the copy in a panel to the
+   RIGHT of the image (the previous behaviour), while the image keeps the
+   portrait 420/500 ratio and the `object-fit:cover` crop from the collapsed
+   cards. */
+.wf-stage-d.is-expanded {
+    gap: 24px;
+    max-width: 1200px;
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active {
+    display: flex;
+    align-items: stretch;
+    flex: 1 1 auto;
+    width: 100%;
+    aspect-ratio: auto;
+    min-height: 520px;
+    margin-inline: auto;
+    background: var(--wf-surface);
+    color: var(--wf-content-primary);
+    transition: flex-grow 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.4s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        min-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Peers stay in flow as smaller portrait tiles so another image can be picked
+   without refreshing. Only their overlay copy is dropped — previously they
+   were parked off the row edges at opacity 0 with pointer-events disabled,
+   which left the expanded row with no way back to the other cards. */
+.wf-stage-d.is-expanded .wf-stage-d-card:not(.is-active) {
+    position: relative;
+    top: auto;
+    flex: 0 0 200px;
+    width: 200px;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 420 / 500;
+    opacity: 0.55;
+    pointer-events: auto;
+    cursor: pointer;
+    transform: none;
+    z-index: 0;
+    transition: flex-grow 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.35s ease, transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* No overlay copy and no photo scrims on the collapsed peers. */
+.wf-stage-d.is-expanded .wf-stage-d-card:not(.is-active)::before,
+.wf-stage-d.is-expanded .wf-stage-d-card:not(.is-active)::after {
+    content: none;
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card:not(.is-active) .wf-stage-d-inner {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card:not(.is-active):hover,
+.wf-stage-d.is-expanded .wf-stage-d-card:not(.is-active):focus-visible {
+    opacity: 1;
+    transform: translateY(-4px);
+}
+
+@media (max-width: 1439px) {
+    .wf-stage-d.is-expanded .wf-stage-d-card:not(.is-active) {
+        flex-basis: 150px;
+        width: 150px;
+    }
+}
+
+/* ---------- expanded copy panel ----------
+   Once expanded the copy is no longer an overlay on the photo: it becomes an
+   opaque panel beside the image. The two photo scrims are switched off so they
+   do not dim that panel. */
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active::before,
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active::after {
+    content: none;
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-stage-d-inner {
+    position: relative;
+    inset: auto;
+    flex: 1 1 auto;
+    height: auto;
+    justify-content: center;
+    gap: 22px;
+    padding: 44px;
+    background: var(--wf-surface);
+    color: var(--wf-content-primary);
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-stage-d-pill {
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--wf-light-neptune);
+    color: var(--wf-blurple);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    white-space: normal;
+    overflow: visible;
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-stage-d-inner h3 {
+    font-size: 40px;
+    line-height: 1.02;
+    margin-bottom: 0;
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-stage-d-cta {
+    align-items: center;
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-stage-d-cta p {
+    font-size: 21px;
+    line-height: 1.25;
+    max-width: 34ch;
+    color: var(--wf-content-secondary);
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-stage-d-detail {
+    max-width: 46ch;
+    color: var(--wf-content-secondary);
+}
+
+/* ---------- card overlay ----------
+   Two scrims: a soft bottom-up gradient so the copy stays legible over any
+   photo, plus a masked blur in the bottom quarter (matches the source). */
+.wf-stage-d-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 25%);
+    mask-image: linear-gradient(to top, #000 0%, transparent 25%);
+}
+
+.wf-stage-d-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.28) 45%, transparent 78%);
+}
+
+/* The testimonial line sits at the top of the card (11px/500 on the source);
+   the title/lead/arrow block is pinned to the bottom. */
+.wf-stage-d-inner {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    padding: var(--wf-medium);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.wf-stage-d-pill {
+    align-self: flex-start;
+    max-width: 100%;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.5;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.wf-stage-d-inner h3 {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    margin-bottom: 10px;
+}
+
+.wf-stage-d-cta {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--wf-small);
+}
+
+.wf-stage-d-cta p {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    max-width: 20ch;
+}
+
+.wf-stage-d-cta b {
+    font-weight: 600;
+}
+
+/* The long-form detail only exists while the card is expanded. */
+.wf-stage-d-detail {
+    display: none;
+    margin-top: 14px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.45;
+    max-width: 44ch;
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-detail {
+    display: block;
+}
+
+/* 40px round chip, ghost surface over the dark photo (source uses
+   #F4F3F7 on #161338). */
+.wf-arrow-chip {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #f4f3f7;
+    color: #161338;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-arrow-chip {
+    transform: rotate(-45deg);
+}
+
+.wf-arrow-chip svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* ---------- carousel pills ----------
+   Hidden until a card is expanded, exactly like the source, so the collapsed
+   cards stay the primary affordance. */
+.wf-pills {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: var(--wf-medium);
+}
+
+.wf-pills.is-visible {
+    display: flex;
+}
+
+.wf-pill {
+    height: 8px;
+    width: 64px;
+    border-radius: 999px;
+    background: var(--wf-boulder);
+    transition: background-color 0.25s ease;
+}
+
+.wf-pill:hover {
+    background: var(--wf-quartz);
+}
+
+.wf-pill.is-active {
+    background: var(--wf-blurple);
+}
+
+/* ---------- reviews ---------- */
+.wf-reviews {
+    background: var(--wf-plum);
+    color: var(--wf-pebble);
+    position: relative;
+    padding: var(--wf-xxxlarge) var(--wf-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-xxlarge);
+}
+
+.wf-rev-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--wf-xlarge);
+    align-items: center;
+}
+
+.wf-rev-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-large);
+}
+
+.wf-quote-mark {
+    font-family: var(--wf-serif);
+    font-size: 46px;
+    line-height: 0.6;
+    height: 22px;
+    color: var(--wf-pebble);
+    opacity: 0.65;
+}
+
+.wf-rev-quote {
+    font-family: var(--wf-sans);
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    max-width: 560px;
+}
+
+.wf-rev-forbes {
+    height: 27px;
+    width: 112px;
+    object-fit: contain;
+    opacity: 0.9;
+}
+
+.wf-rev-fine {
+    font-size: 12px;
+    line-height: 1.5;
+    opacity: 0.6;
+    max-width: 520px;
+}
+
+.wf-rev-fine a {
+    text-decoration: underline;
+}
+
+.wf-rev-fine b {
+    font-weight: 600;
+}
+
+/* review carousel */
+.wf-carousel {
+    position: relative;
+    max-width: 684px;
+    width: 100%;
+    aspect-ratio: 684 / 363;
+    border-radius: var(--wf-r-xl);
+    overflow: hidden;
+    background: var(--wf-eggplant-deep);
+}
+
+.wf-carousel-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity 0.6s ease, transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+}
+
+.wf-carousel-slide.is-active {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+.wf-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wf-carousel-dots {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 5;
+}
+
+.wf-carousel-dots button {
+    height: 6px;
+    width: 22px;
+    border-radius: 999px;
+    background: rgba(240, 240, 242, 0.45);
+    transition: background-color 0.25s ease;
+}
+
+.wf-carousel-dots button.is-active {
+    background: #fff;
+}
+
+/* reviews accolades */
+.wf-rev-accolades {
+    width: 100%;
+    max-width: 1000px;
+    margin-inline: auto;
+    padding-inline: 0;
+}
+
+.wf-rev-tiles {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: var(--wf-small);
+}
+
+.wf-rev-tile {
+    flex: 1 1 0;
+    background: rgba(240, 240, 242, 0.05);
+    border-radius: var(--wf-r-lg);
+    padding: var(--wf-xlarge) 0;
+    text-align: center;
+}
+
+.wf-rev-tile b {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+}
+
+.wf-rev-tile span {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    line-height: 1.3;
+    opacity: 0.7;
+    padding-inline: 8px;
+}
+
+.wf-rev-fineprint {
+    max-width: 800px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-xsmall);
+}
+
+.wf-rev-fineprint p {
+    font-size: 12px;
+    line-height: 1.55;
+    opacity: 0.5;
+}
+
+.wf-rev-fineprint a {
+    text-decoration: underline;
+}
+
+/* CTA band */
+.wf-cta-band {
+    position: relative;
+    overflow: hidden;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(35, 11, 89, 0.6);
+    border-radius: var(--wf-r-2xl);
+    margin-top: var(--wf-xsmall);
+}
+
+.wf-cta-band .wf-circles {
+    top: -210px;
+    bottom: auto;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.wf-cta-band-inner {
+    position: relative;
+    padding: var(--wf-medium);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-medium);
+    align-items: center;
+}
+
+.wf-cta-band h2 {
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+}
+
+/* ---------- FAQ ---------- */
+.wf-faq {
+    background: var(--wf-surface);
+    color: var(--wf-eggplant);
+    padding-block: 64px 48px;
+}
+
+.wf-faq-inner {
+    width: 100%;
+    max-width: 1766px;
+    margin-inline: auto;
+    /* Below 768px the wider overrides do not apply, so the questions and
+       answers would otherwise sit flush against the screen edge. */
+    padding-inline: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+.wf-faq-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 460px;
+}
+
+.wf-faq-intro .wf-h2 {
+    font-size: 30px;
+}
+
+.wf-faq-intro p {
+    font-size: 15px;
+    line-height: 1.45;
+    color: var(--wf-quartz);
+    text-decoration-color: var(--wf-eggplant);
+    text-decoration-line: underline;
+    text-underline-offset: 2px;
+}
+
+.wf-faq-intro p a {
+    color: var(--wf-eggplant);
+    font-weight: 500;
+}
+
+.wf-faq-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.wf-faq-item {
+    border-top: 1px solid rgba(35, 11, 89, 0.6);
+}
+
+.wf-faq-item:last-of-type {
+    border-bottom: 1px solid rgba(35, 11, 89, 0.6);
+}
+
+.wf-faq-q {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    text-align: left;
+    padding: 20px 0;
+    font-family: var(--wf-sans);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: var(--wf-eggplant);
+    transition: opacity 0.2s ease;
+}
+
+.wf-faq-q:hover {
+    opacity: 0.68;
+}
+
+.wf-faq-q span {
+    max-width: 247px;
+}
+
+.wf-faq-q img {
+    flex-shrink: 0;
+    width: 37px;
+    height: 18px;
+    margin-top: 2px;
+    transition: transform 0.25s ease-out;
+}
+
+.wf-faq-item.is-open .wf-faq-q img {
+    transform: rotate(180deg);
+}
+
+.wf-faq-a {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wf-faq-item.is-open .wf-faq-a {
+    grid-template-rows: 1fr;
+}
+
+.wf-faq-a > div {
+    overflow: hidden;
+}
+
+.wf-faq-a p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--wf-quartz);
+    padding: 0 96px 22px 0;
+    max-width: 680px;
+}
+
+.wf-faq-a a {
+    color: var(--wf-blurple);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.wf-faq-spacer {
+    border-top: 1px solid rgba(35, 11, 89, 0.6);
+    padding: 20px 96px 40px 0;
+}
+
+/* ---------- toast viewport ---------- */
+.wf-toast-region {
+    position: fixed;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    width: min(420px, 100%);
+    padding-inline: 6px;
+}
+
+.wf-toast {
+    pointer-events: auto;
+    width: 100%;
+    border-radius: var(--wf-r-lg);
+    padding: 13px 16px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #fff;
+    background: var(--wf-eggplant);
+    box-shadow: 0 22px 44px -22px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.wf-toast.is-open {
+    opacity: 1;
+    transform: none;
+}
+
+.wf-toast svg {
+    flex-shrink: 0;
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+}
+
+.wf-toast button {
+    margin-left: auto;
+    opacity: 0.7;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.wf-toast button:hover {
+    opacity: 1;
+}
+
+/* ---------- modal ---------- */
+.wf-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(35, 11, 89, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.22s ease, visibility 0.22s;
+}
+
+.wf-modal-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wf-modal {
+    width: min(520px, 100%);
+    max-height: 86vh;
+    overflow-y: auto;
+    background: #fff;
+    color: var(--wf-content-primary);
+    border-radius: var(--wf-r-2xl);
+    padding: var(--wf-medium);
+    box-shadow: 0 40px 90px -40px rgba(35, 11, 89, 0.7);
+    transform: translateY(10px);
+    transition: transform 0.22s ease;
+}
+
+.wf-modal-backdrop.is-open .wf-modal {
+    transform: none;
+}
+
+.wf-modal h3 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    margin-bottom: 10px;
+}
+
+.wf-modal p {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--wf-content-secondary);
+}
+
+.wf-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: var(--wf-content-secondary);
+}
+
+.wf-modal-close:hover {
+    background: var(--wf-ghost);
+    color: var(--wf-content-primary);
+}
+
+.wf-modal-close svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* ---------- mobile drawer ---------- */
+.wf-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(35, 11, 89, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s;
+}
+
+.wf-drawer-backdrop.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wf-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(400px, 90vw);
+    z-index: 9001;
+    background: #fff;
+    color: var(--wf-content-primary);
+    padding: var(--wf-medium);
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+}
+
+.wf-drawer.is-open {
+    transform: none;
+}
+
+.wf-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: var(--wf-medium);
+    border-bottom: 1px solid var(--wf-content-divider);
+}
+
+.wf-drawer-head img {
+    height: 24px;
+    width: auto;
+}
+
+.wf-drawer-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.wf-drawer-close:hover {
+    background: var(--wf-ghost);
+}
+
+.wf-drawer-close svg {
+    width: 18px;
+    height: 18px;
+}
+
+.wf-drawer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-top: var(--wf-small);
+}
+
+.wf-drawer-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--wf-content-primary);
+}
+
+.wf-drawer-link:hover {
+    background: var(--wf-ghost);
+}
+
+.wf-drawer-sub {
+    padding: 2px 0 8px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.wf-drawer-sub a {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--wf-content-secondary);
+}
+
+.wf-drawer-sub a:hover {
+    background: var(--wf-ghost);
+    color: var(--wf-blurple);
+}
+
+.wf-drawer-foot {
+    margin-top: auto;
+    padding-top: var(--wf-medium);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-top: 1px solid var(--wf-content-divider);
+}
+
+/* ---------- scroll reveal ---------- */
+.wf-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.wf-reveal.is-in {
+    opacity: 1;
+    transform: none;
+}
+
+/* =========================================================================
+   RESPONSIVE
+   ========================================================================= */
+
+/* ---- md: 768px — two-column hero, desktop nav ---- */
+@media (min-width: 768px) {
+    .wf-container-2024 {
+        padding-inline: 48px;
+    }
+
+    .wf-marketing-section {
+        padding-inline: 48px;
+    }
+
+    .wf-drawer {
+        display: none;
+    }
+
+    .wf-banner-photo {
+        height: 40px;
+    }
+
+    .wf-banner-copy {
+        font-size: 18px;
+    }
+
+    .wf-banner-copy span {
+        font-size: 14px;
+    }
+
+    .wf-banner-link {
+        font-size: 14px;
+    }
+
+    .wf-hero-inner {
+        max-width: 2024px;
+        padding: 32px 48px;
+    }
+
+    .wf-hero-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+    }
+
+    .wf-hero-visual {
+        display: block;
+    }
+
+    .wf-dd-trigger {
+        padding: var(--wf-medium);
+    }
+
+    .wf-dd-trigger > svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .wf-dd-texts {
+        flex-direction: row;
+        align-items: center;
+        gap: var(--wf-small);
+    }
+
+    .wf-dd-texts h3 {
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+    .wf-dd-texts p {
+        font-size: 19px;
+        margin-top: 0;
+    }
+
+    .wf-dd-steps {
+        padding: 0 var(--wf-medium) var(--wf-large);
+    }
+
+    .wf-h2 {
+        font-size: 40px;
+    }
+
+    .wf-h2-serif {
+        font-size: 48px;
+    }
+
+    .wf-badge {
+        width: 250px;
+    }
+
+    .wf-acct-head {
+        padding: var(--wf-medium) var(--wf-medium) var(--wf-large);
+    }
+
+    .wf-acct-head .wf-h2 {
+        font-size: 30px;
+    }
+
+    .wf-acct-body {
+        padding: var(--wf-xlarge);
+    }
+
+    .wf-reviews {
+        padding-inline: var(--wf-large);
+    }
+
+    .wf-rev-accolades {
+        padding-inline: 40px;
+    }
+
+    .wf-faq {
+        padding-block: 96px 72px;
+    }
+
+    .wf-faq-inner {
+        padding-inline: 64px;
+    }
+}
+
+/* ---- lg: 1000px ---- */
+@media (min-width: 1000px) {
+    .wf-container-2024 {
+        padding-inline: 44px;
+    }
+
+    .wf-marketing-section {
+        padding-inline: 44px;
+    }
+
+    .wf-banner-photo {
+        height: 38px;
+    }
+
+    .wf-hero-inner {
+        padding-inline: 64px;
+    }
+
+    .wf-hero-grid {
+        gap: 20px;
+    }
+
+    .wf-circles {
+        bottom: 0;
+        right: -800px;
+    }
+
+}
+
+/* ---- xl: 1280px — full desktop nav, 2-up cards, side-by-side reviews ---- */
+@media (min-width: 1280px) {
+    .wf-container-2024,
+    .wf-marketing-section,
+    .wf-hero-inner {
+        padding-inline: 64px;
+    }
+
+    .wf-header-inner {
+        height: 96px;
+    }
+
+    .wf-nav {
+        display: flex;
+    }
+
+    .wf-banner-copy {
+        font-size: 20px;
+    }
+
+    .wf-banner-copy span {
+        font-size: 15px;
+    }
+
+    .wf-banner-link {
+        font-size: 15px;
+    }
+
+    .wf-banner-photo {
+        height: 40px;
+    }
+
+    .wf-hero-inner {
+        padding-block: 32px;
+    }
+
+    .wf-hero-grid {
+        padding-bottom: 80px;
+    }
+
+    /* Nav links inherit the 18px base size; this block used to force 32px. */
+    .wf-nav-btn,
+    .wf-nav-link {
+        font-size: 18px;
+        letter-spacing: -0.01em;
+    }
+
+    .wf-eyebrow-line {
+        font-size: 32px;
+    }
+
+    .wf-h1 {
+        font-size: 62px;
+        white-space: nowrap;
+    }
+
+    .wf-h1-apy {
+        font-size: 120px;
+    }
+
+    .wf-h2-serif {
+        font-size: 59px;
+    }
+
+    .wf-btn {
+        padding: 14px 24px;
+    }
+
+    .wf-accolades {
+        gap: 8px 40px;
+    }
+
+    .wf-h2 {
+        font-size: 46px;
+    }
+
+    .wf-h2-serif {
+        font-size: 56px;
+    }
+
+    .wf-acct-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .wf-acct-head .wf-h2 {
+        font-size: 30px;
+    }
+
+    .wf-stages-grid {
+        display: none;
+    }
+
+    .wf-stage-d {
+        display: flex;
+    }
+
+    /* Pills stay hidden until a card is expanded (`.wf-pills.is-visible`,
+       toggled by the carousel script) — same as the source. */
+
+    .wf-rev-top {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--wf-xxlarge);
+    }
+
+    .wf-rev-quote {
+        font-size: 34px;
+    }
+
+    .wf-quote-mark {
+        font-size: 46px;
+    }
+
+    .wf-rev-tile.is-xl {
+        display: block;
+    }
+
+    .wf-br {
+        display: block;
+    }
+
+    .wf-cta-band h2 {
+        font-size: 46px;
+    }
+
+    .wf-faq-inner {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 48px;
+        padding: 80px 96px 16px;
+    }
+
+    .wf-faq-intro {
+        padding-top: 0;
+    }
+
+    .wf-faq-list {
+        padding-top: 0;
+    }
+}
+
+@media (min-width: 1536px) {
+    .wf-h1-apy {
+        font-size: 156px;
+    }
+
+    .wf-hero-grid {
+        padding-bottom: 80px;
+    }
+
+    .wf-btn {
+        padding: 14px 24px;
+    }
+}
+
+/* tiles 3 & 4 are hidden below xl, matching the source */
+.wf-rev-tile.is-xl {
+    display: none;
+}
+
+.wf-br {
+    display: none;
+}
+
+/* ---- <= 1279px: nav collapses to the drawer trigger ---- */
+@media (max-width: 1279px) {
+    .wf-nav,
+    .wf-header-actions {
+        display: none;
+    }
+
+    .wf-burger {
+        display: flex;
+    }
+
+    .wf-header-inner {
+        height: auto;
+        padding-block: 24px;
+    }
+}
+
+/* ---- <= 767px: mobile nav ---- */
+@media (max-width: 767px) {
+    .wf-header-inner {
+        padding-block: 24px;
+    }
+
+    .wf-banner-card {
+        flex-wrap: wrap;
+    }
+
+    .wf-banner-photo {
+        order: 3;
+        width: 100%;
+        flex-basis: 100%;
+        height: 36px;
+    }
+
+    .wf-hero-inner {
+        padding-bottom: 8px;
+    }
+
+    .wf-h1-apy {
+        font-size: 64px;
+    }
+
+    .wf-accolades {
+        grid-auto-flow: row;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: none;
+        gap: 12px 16px;
+    }
+
+    .wf-accolades-item.is-sm-hide {
+        display: none;
+    }
+
+    .wf-rev-tiles {
+        flex-wrap: wrap;
+    }
+
+    .wf-rev-tile {
+        flex: 1 1 calc(50% - 6px);
+    }
+
+}
+
+/* ---- <= 480px ---- */
+@media (max-width: 480px) {
+    .wf-hero-ctas .wf-btn {
+        width: 100%;
+    }
+
+    .wf-rev-tile {
+        flex: 1 1 100%;
+    }
+
+    .wf-faq-a p {
+        padding-right: 0;
+    }
+}
+
+/* ---- reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+    .wf-reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .wf-carousel-slide,
+    .wf-stage-d-card,
+    .wf-stage-d-card img,
+    .wf-stage-d-inner,
+    .wf-dd-panel,
+    .wf-faq-a {
+        transition: none;
+    }
+}

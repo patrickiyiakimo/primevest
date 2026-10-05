@@ -3,32 +3,46 @@
 @section('title', 'Log in · PrimeVest')
 
 @section('content')
-<h2 style="margin:0 0 6px;font-size:1.5rem;font-weight:800;letter-spacing:-.01em">Welcome back</h2>
-<p class="pv-mut" style="margin:0 0 24px">Log in to your crypto portfolio.</p>
+<h2 class="pv-title">Welcome back</h2>
+<p class="pv-mut pv-sub">Log in to your PrimeVest account.</p>
 
 <form method="POST" action="{{ route('login') }}">
     @csrf
+
     <label class="pv-label" for="email">Email address</label>
     <input class="pv-input" id="email" type="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" style="margin-bottom:16px">
     @error('email')<div class="pv-err">{{ $message }}</div>@enderror
 
     <div style="display:flex;justify-content:space-between;align-items:baseline">
         <label class="pv-label" for="password">Password</label>
-        <a href="{{ route('password.request') }}" class="pv-link" style="font-size:.8rem">Forgot password?</a>
+        <a href="{{ route('password.request') }}" class="pv-link" style="font-size:.82rem">Forgot password?</a>
     </div>
     <input class="pv-input" id="password" type="password" name="password" required autocomplete="current-password">
 
-    <label style="display:flex;align-items:center;gap:9px;margin:16px 0 22px;color:var(--muted);font-size:.88rem;cursor:pointer">
-        <input type="checkbox" name="remember" style="accent-color:var(--acc);width:16px;height:16px"> Remember me on this device
+    <label class="pv-check">
+        <input type="checkbox" name="remember">
+        <span>Remember me on this device</span>
     </label>
 
-    <button class="pv-btn pv-btn-block" type="submit">Log in to My Account</button>
+    <button class="wf-btn wf-btn-primary wf-btn-block" type="submit">Log in to my account</button>
 </form>
 
 <p class="pv-mut" style="text-align:center;margin:24px 0 0">
-    New to PrimeVest? <a href="{{ route('register') }}" class="pv-link">Create a free account</a>
+    New to PrimeVest? <a href="{{ route('register') }}" class="pv-link">Open a free account</a>
 </p>
-<div style="display:flex;justify-content:center;gap:22px;margin-top:18px;color:var(--muted);font-size:.75rem">
-    <span>🔒 256-bit SSL</span><span>🛡 2FA ready</span><span>⚡ Instant access</span>
+
+<div class="pv-flags pv-note">
+    <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        256-bit SSL
+    </span>
+    <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        2FA ready
+    </span>
+    <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4.5 13H11l-1 9 8.5-11H12l1-9z"/></svg>
+        Instant access
+    </span>
 </div>
 @endsection

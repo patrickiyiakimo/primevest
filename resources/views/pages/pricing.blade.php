@@ -11,12 +11,12 @@
     .pr-card{position:relative;display:flex;flex-direction:column;padding:26px 24px 24px;
         border-radius:20px;border:1px solid var(--line);background:var(--panel);
         transition:transform .28s cubic-bezier(.4,0,.2,1),border-color .28s,box-shadow .28s}
-    .pr-card:hover{transform:translateY(-5px);border-color:rgba(47,123,255,.4);
+    .pr-card:hover{transform:translateY(-5px);border-color:rgba(75,24,191,.4);
         box-shadow:0 28px 56px -28px rgba(0,0,0,.6)}
     /* featured tier */
-    .pr-card.is-top{border-color:rgba(47,123,255,.5);
-        background:linear-gradient(180deg,rgba(47,123,255,.10),var(--panel) 42%);
-        box-shadow:0 24px 60px -30px rgba(47,123,255,.55)}
+    .pr-card.is-top{border-color:rgba(75,24,191,.5);
+        background:linear-gradient(180deg,rgba(75,24,191,.10),var(--panel) 42%);
+        box-shadow:0 24px 60px -30px rgba(75,24,191,.55)}
     .pr-flag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
         padding:5px 14px;border-radius:999px;font-size:.68rem;font-weight:800;letter-spacing:.11em;
         text-transform:uppercase;white-space:nowrap;
@@ -40,12 +40,12 @@
     .pr-feats .v.hi{color:var(--acc)}
     .pr-feats .v.gold{color:var(--gold)}
     .pr-tick{flex-shrink:0;width:17px;height:17px;margin-top:1px;border-radius:50%;
-        display:grid;place-items:center;background:rgba(47,123,255,.14);color:var(--acc);font-size:.6rem;font-weight:800}
+        display:grid;place-items:center;background:rgba(75,24,191,.14);color:var(--acc);font-size:.6rem;font-weight:800}
 
     .pr-cta{margin-top:22px}
     .pr-note{margin:34px auto 0;max-width:760px;text-align:center;color:var(--muted);font-size:.78rem;line-height:1.6}
-    [data-theme="light"] .pr-card.is-top{background:linear-gradient(180deg,rgba(47,123,255,.12),var(--panel) 42%)}
-    [data-theme="light"] .pr-tick{background:rgba(47,123,255,.16)}
+    [data-theme="light"] .pr-card.is-top{background:linear-gradient(180deg,rgba(75,24,191,.12),var(--panel) 42%)}
+    [data-theme="light"] .pr-tick{background:rgba(75,24,191,.16)}
 </style>
 @endpush
 

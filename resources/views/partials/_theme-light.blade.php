@@ -9,7 +9,7 @@
 :root[data-theme="light"]{
     --bg:#f2f6fc; --bg2:#eaf0f8; --panel:#ffffff; --panel2:#f6f9ff;
     --line:rgba(10,22,46,.12); --text:#0b1424; --muted:#5c6b85;
-    --acc:#2f7bff; --acc2:#00b4ff; --gold:#a8730a; --red:#dc2626;
+    --acc:#4b18bf; --acc2:#a98bff; --gold:#a8730a; --red:#dc2626;
 }
 [data-theme="light"] body{background:var(--bg);color:var(--text)}
 [data-theme="light"] a[data-band]{color:var(--muted)}
