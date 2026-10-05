@@ -254,5 +254,6 @@
 </div>
 
 @stack('scripts')
+@include('partials.jivo')
 </body>
 </html>
