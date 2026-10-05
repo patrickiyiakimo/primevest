@@ -2327,19 +2327,6 @@ body {
     border-top: 1px solid var(--wf-content-divider);
 }
 
-/* ---------- scroll reveal ---------- */
-.wf-reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    will-change: opacity, transform;
-}
-
-.wf-reveal.is-in {
-    opacity: 1;
-    transform: none;
-}
-
 /* =========================================================================
    RESPONSIVE
    ========================================================================= */
@@ -2729,12 +2716,6 @@ body {
 
 /* ---- reduced motion ---- */
 @media (prefers-reduced-motion: reduce) {
-    .wf-reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-
     .wf-carousel-slide,
     .wf-stage-d-card,
     .wf-stage-d-card img,

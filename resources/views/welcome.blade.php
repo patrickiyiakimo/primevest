@@ -61,7 +61,7 @@
      HERO  ·  data-testid="reusable-hero-module"
      ====================================================================== --}}
 <section class="wf-hero" data-testid="reusable-hero-module">
-    <div class="wf-circles-wrap" data-reveal>
+    <div class="wf-circles-wrap" >
         <img class="wf-circles" src="{{ $wfImg('gradient-circles.svg') }}" width="2024" height="850" alt="" loading="eager">
     </div>
 
@@ -76,7 +76,7 @@
                             <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M7.689 14.804a.5.5 0 00.282.281l1.487.587a.5.5 0 010 .93l-1.487.587a.5.5 0 00-.282.282l-.587 1.487a.5.5 0 01-.93 0l-.587-1.487a.5.5 0 00-.281-.282l-1.487-.587a.5.5 0 010-.93l1.487-.587a.5.5 0 00.281-.281l.587-1.487a.5.5 0 01.93 0l.587 1.487zm.648-8.798a.279.279 0 00.157.157l.83.328a.279.279 0 010 .518l-.83.328a.279.279 0 00-.157.157l-.328.83a.279.279 0 01-.518 0l-.328-.83a.279.279 0 00-.157-.157l-.83-.328a.279.279 0 010-.518l.83-.328a.279.279 0 00.157-.157l.328-.83a.279.279 0 01.518 0l.328.83zM13.892 5.402a.625.625 0 011.168 0l.666 1.75a5.328 5.328 0 003.074 3.074l1.75.666a.625.625 0 010 1.168l-1.75.666a5.328 5.328 0 00-3.073 3.074l-.667 1.75a.625.625 0 01-1.168 0l-.666-1.75a5.328 5.328 0 00-3.074-3.073l-1.75-.667a.625.625 0 010-1.168l1.75-.666a5.327 5.327 0 003.074-3.074l.666-1.75zm.972 3.385c-.168-.276-.608-.276-.775 0a6.822 6.822 0 01-2.302 2.302c-.277.167-.277.607 0 .774a6.823 6.823 0 012.302 2.302c.167.277.607.277.774 0a6.825 6.825 0 012.302-2.301c.277-.168.277-.608 0-.775a6.824 6.824 0 01-2.301-2.302z"/></svg>
                             Earn up to
                         </span>
-                        <span class="wf-h1-apy" data-testid="h1-apy-hero">4.45% APY</span>
+                        <span class="text-lg font-bold" data-testid="h1-apy-hero">4.45% APY</span>
                     </h1>
                 </div>
 
@@ -110,18 +110,18 @@
                     </div>
                 </div>
 
-                <div class="wf-hero-ctas">
+                <!-- <div class="wf-hero-ctas">
                     <a class="wf-btn wf-btn-primary" href="{{ route('register') }}" data-testid="hero-get-started">Get started</a>
                     <a class="wf-btn wf-btn-ghost-dark" href="{{ route('trading') }}" data-testid="hero-learn-more">Learn more</a>
                 </div>
 
                 <p class="wf-disclosure" data-testid="hero-rate-disclosure">
                     3.55% Base Annual Percentage Yield (APY) as of 10/01/2026 is provided by program banks and is subject to change. APY Boost is up to a $150,000 balance. See additional terms in the footer.
-                </p>
+                </p> -->
             </div>
 
             {{-- ---------- phone + card composition ---------- --}}
-            <div class="wf-hero-visual" data-testid="hero-phone-composition" data-reveal>
+            <div class="wf-hero-visual" data-testid="hero-phone-composition" >
                 <div class="wf-hero-card">
                     <img width="267" height="352" alt="A Visa debit card with a PrimeVest logo, partially obscured by a phone." loading="eager" src="{{ $wfImg('debit-card.svg') }}">
                 </div>
@@ -141,10 +141,10 @@
         </div>
 
         {{-- ---------- accolades bar ---------- --}}
-        <div class="wf-accolades-bar" data-testid="accolades-bar" data-reveal>
-            <div class="wf-accolades">
+        <!-- <div class="wf-accolades-bar" data-testid="accolades-bar" > -->
+            <!-- <div class="wf-accolades"> -->
 
-                <div class="wf-accolades-item">
+                <!-- <div class="wf-accolades-item">
                     <img src="{{ $wfImg('bankrate-dark.svg') }}" alt="Bankrate" loading="lazy">
                     <span>Best Cash Management Account, 2023-25<sup>1</sup></span>
                 </div>
@@ -157,9 +157,9 @@
                 <div class="wf-accolades-item is-sm-hide">
                     <b>$100B+</b>
                     <span>In total assets<sup>2</sup></span>
-                </div>
+                </div> -->
 
-                <div class="wf-accolades-item">
+                <!-- <div class="wf-accolades-item">
                     <span class="wf-stars" aria-hidden="true">
                         <svg viewBox="0 0 21 21" fill="currentColor"><path d="M21 5.3l-7.6-1.1L10.4 0 7.4 4.2 0 5.3l5.4 5.2L4.1 18.1 10.4 14l6.3 4.1-1.4-7.6L21 5.3z"/></svg>
                     </span>
@@ -173,9 +173,9 @@
                     </span>
                     <b>4.9</b>
                     <span>Google Play Store<sup>3</sup></span>
-                </div>
-            </div>
-        </div>
+                </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
     </div>
 </section>
 
@@ -183,7 +183,7 @@
      DIRECT-DEPOSIT ACCORDION
      ====================================================================== --}}
 <div class="wf-container-2024">
-    <div class="wf-dd wf-reveal" data-accordion data-testid="direct-deposit-plus-module">
+    <div class="wf-dd " data-accordion data-testid="direct-deposit-plus-module">
         <button class="wf-dd-trigger" type="button" aria-expanded="false" aria-controls="dd-panel">
             <img src="{{ $wfImg('enclosed-chevron.svg') }}" width="40" height="40" alt="" loading="lazy">
             <span class="wf-dd-texts">
@@ -208,7 +208,7 @@
      ====================================================================== --}}
 <section class="wf-band" style="padding-block:var(--wf-xlarge) var(--wf-xxxlarge)" data-testid="aia-messaging-investing-intro-module">
     <div class="wf-marketing-section" data-marketing>
-        <div class="wf-sec-head wf-reveal" data-reveal>
+        <div class="wf-sec-head " >
             <h2 class="wf-h2">
                 Turn savings into wealth<br>
                 <span class="wf-h2-serif">at one of the best places for long-term investing</span>
@@ -218,7 +218,7 @@
             </p>
         </div>
 
-        <div class="wf-badge-row wf-reveal" data-reveal>
+        <div class="wf-badge-row " >
             {{-- Bankrate --}}
             <div class="wf-badge" data-testid="aia-messaging-intro-bankrate-badge">
                 <span class="wf-badge-laurel"><img src="{{ $wfImg('bankrate-laurel.svg') }}" alt="" loading="lazy"></span>
@@ -254,7 +254,7 @@
         <div class="wf-acct-grid">
 
             {{-- ---------- card A · Automated Investing Account ---------- --}}
-            <article class="wf-acct-card wf-reveal" data-reveal data-testid="automated-investing-account-card">
+            <article class="wf-acct-card "  data-testid="automated-investing-account-card">
                 <div class="wf-acct-head">
                     <h2 class="wf-h2">Built and managed for you</h2>
                     <p>Designed for investors who prefer to delegate the selection and management of their investments to us.</p>
@@ -323,7 +323,7 @@
             </article>
 
             {{-- ---------- card B · Stock Investing Account ---------- --}}
-            <article class="wf-acct-card wf-reveal" data-reveal data-testid="stock-investing-account-card">
+            <article class="wf-acct-card "  data-testid="stock-investing-account-card">
                 <div class="wf-acct-head">
                     <h2 class="wf-h2">Build your own</h2>
                     <p>Designed for self-directed investors who prefer to select their own investments for each asset class and diversify themselves.</p>
@@ -391,7 +391,7 @@
      ====================================================================== --}}
 <div class="wf-stages" data-testid="homepage-life-stages-module">
     <div class="wf-marketing-section">
-        <div class="wf-sec-head wf-reveal" data-reveal>
+        <div class="wf-sec-head " >
             <h2 class="wf-h2">Make the most of your money, wherever you're at.</h2>
         </div>
 
@@ -458,7 +458,7 @@
 
         {{-- ---------- Forbes quote + testimonial carousel ---------- --}}
         <div class="wf-rev-top">
-            <div class="wf-rev-copy wf-reveal" data-reveal>
+            <div class="wf-rev-copy " >
                 <span class="wf-quote-mark" aria-hidden="true">"</span>
                 <h2 class="wf-rev-quote">PrimeVest beats out Fidelity, Schwab and Vanguard when it comes to direct indexing and tax-loss harvesting.</h2>
 
@@ -471,7 +471,7 @@
                 </p>
             </div>
 
-            <div class="wf-carousel wf-reveal" data-testid="review-carousel" data-reveal data-carousel>
+            <div class="wf-carousel " data-testid="review-carousel"  data-carousel>
                 <div class="wf-carousel-slide is-active" data-slide>
                     <picture>
                         <source type="image/webp"
@@ -865,38 +865,7 @@
     }
 
     /* ------------------------------------------------------------------
-       8. Scroll reveal — the source ships opacity:0 inline and reveals
-          via IntersectionObserver. Without this the page renders blank.
-       ------------------------------------------------------------------ */
-    var revealables = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
-
-    if (reduce || !('IntersectionObserver' in window)) {
-        revealables.forEach(function (el) { el.classList.add('is-in'); });
-    } else {
-        var io = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('is-in');
-                io.unobserve(entry.target);
-            });
-        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-
-        revealables.forEach(function (el, i) {
-            el.style.transitionDelay = (Math.min(i % 6, 5) * 60) + 'ms';
-            io.observe(el);
-        });
-
-        /* Anything already on screen at load reveals immediately. */
-        requestAnimationFrame(function () {
-            revealables.forEach(function (el) {
-                var r = el.getBoundingClientRect();
-                if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('is-in');
-            });
-        });
-    }
-
-    /* ------------------------------------------------------------------
-       9. Esc closes everything
+       8. Esc closes everything
        ------------------------------------------------------------------ */
     document.addEventListener('keydown', function (e) {
         if (e.key !== 'Escape') return;
