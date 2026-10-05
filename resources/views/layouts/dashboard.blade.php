@@ -11,7 +11,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
     <style>
         :root{
             --bg:#05070d; --bg2:#070b14; --panel:#0c1322; --panel2:#111b31;
@@ -21,9 +21,9 @@
         }
         *{box-sizing:border-box}
         html,body{margin:0;padding:0}
-        body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
+        body{background:var(--bg);color:var(--text);font-family:'Inter Tight',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
         ::selection{background:#2375ff;color:#fff}
-        .num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
+        .num{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums lining-nums;font-feature-settings:'tnum' 1,'lnum' 1,'zero' 1;letter-spacing:-.01em}
         a{color:inherit;text-decoration:none}
 
         /* ===== Sidebar ===== */
@@ -87,7 +87,10 @@
         @media(max-width:560px){.kpi{grid-template-columns:1fr}}
         .kpi-card{position:relative;overflow:hidden;padding:22px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel))}
         .kpi-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-        .kpi-card .val{font-size:1.55rem;font-weight:800;letter-spacing:-.02em;overflow-wrap:anywhere}
+        /* Display balances use a serif with lining tabular figures - the
+           "research report" look used by institutional and wealth dashboards,
+           instead of the monospace default. */
+        .kpi-card .val{font-family:'Source Serif 4',Georgia,'Times New Roman',serif;font-size:1.9rem;font-weight:600;letter-spacing:-.015em;line-height:1.15;overflow-wrap:anywhere;font-variant-numeric:lining-nums tabular-nums;font-feature-settings:'tnum' 1,'lnum' 1}
         .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
         .kpi-card.glow::after{content:"";position:absolute;top:-40%;right:-20%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(75,24,191,.18),transparent 70%);pointer-events:none}
         .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#6a2ee0 0%,#4b18bf 45%,#3a1296 100%);color:#03140d;font-weight:700;padding:11px 20px;border-radius:11px;border:0;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(75,24,191,.55),inset 0 1px 0 rgba(255,255,255,.28)}
@@ -118,7 +121,7 @@
             .content{padding:18px 14px}
             .kpi{gap:12px}
             .kpi-card{padding:18px}
-            .kpi-card .val{font-size:1.35rem}
+            .kpi-card .val{font-size:1.6rem}
         }
         .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
         .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
