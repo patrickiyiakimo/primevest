@@ -602,6 +602,63 @@
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    /* ------------------------------------------------------------------
+       1. Header dropdowns — click to open, click-away / Esc to close.
+       ------------------------------------------------------------------ */
+    var ddItems = Array.prototype.slice.call(document.querySelectorAll('[data-dropdown]'));
+
+    function closeAllDropdowns(except) {
+        ddItems.forEach(function (item) {
+            if (item === except) return;
+            item.classList.remove('is-open');
+            var btn = item.querySelector('.wf-nav-btn');
+            if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+    }
+
+    ddItems.forEach(function (item) {
+        var btn = item.querySelector('.wf-nav-btn');
+        if (!btn) return;
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var open = item.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            closeAllDropdowns(item);
+        });
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!e.target.closest('[data-dropdown]')) closeAllDropdowns(null);
+    });
+
+    /* ------------------------------------------------------------------
+       2. Mobile drawer
+       ------------------------------------------------------------------ */
+    var drawer = document.querySelector('.wf-drawer');
+    var drawerBackdrop = document.querySelector('.wf-drawer-backdrop');
+    var drawerTrigger = document.querySelector('[data-drawer-open]');
+
+    function setDrawer(open) {
+        if (!drawer) return;
+        drawer.classList.toggle('is-open', open);
+        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
+        if (drawerBackdrop) drawerBackdrop.classList.toggle('is-open', open);
+        if (drawerTrigger) {
+            drawerTrigger.classList.toggle('is-open', open);
+            drawerTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        document.body.style.overflow = open ? 'hidden' : '';
+    }
+
+    if (drawerTrigger) {
+        drawerTrigger.addEventListener('click', function () {
+            setDrawer(!drawer.classList.contains('is-open'));
+        });
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-drawer-close]'), function (el) {
+        el.addEventListener('click', function () { setDrawer(false); });
+    });
 
     /* ------------------------------------------------------------------
        3. Accordions (direct-deposit + FAQ)
@@ -740,10 +797,8 @@
        ------------------------------------------------------------------ */
     document.addEventListener('keydown', function (e) {
         if (e.key !== 'Escape') return;
-        if (window.pfLandingNav) {
-            window.pfLandingNav.closeAllDropdowns(null);
-            window.pfLandingNav.setDrawer(false);
-        }
+        closeAllDropdowns(null);
+        setDrawer(false);
         var open = document.querySelector('.wf-modal-backdrop.is-open');
         if (open) closeModal(open);
     });
