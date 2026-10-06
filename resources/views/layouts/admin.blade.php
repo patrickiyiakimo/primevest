@@ -66,7 +66,7 @@
         .kpi-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
         .kpi-card .val{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
         .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#6a2ee0 0%,#4b18bf 45%,#3a1296 100%);color:#03140d;font-weight:700;padding:10px 18px;border-radius:11px;border:0;cursor:pointer;font-size:.88rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(75,24,191,.55),inset 0 1px 0 rgba(255,255,255,.28)}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#6a2ee0 0%,#4b18bf 45%,#3a1296 100%);color:#fff;font-weight:700;padding:10px 18px;border-radius:11px;border:0;cursor:pointer;font-size:.88rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(75,24,191,.55),inset 0 1px 0 rgba(255,255,255,.28)}
         .btn:hover{transform:translateY(-2px)}
         .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);box-shadow:none;border:1px solid var(--line)}
         .btn-ghost:hover{background:rgba(255,255,255,.1)}

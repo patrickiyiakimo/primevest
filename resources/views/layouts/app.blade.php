@@ -58,7 +58,7 @@
         .pv-gold{color:var(--gold)}
         .pv-h{background:linear-gradient(90deg,#fff,#8c9bb5);-webkit-background-clip:text;background-clip:text;color:transparent}
         /* Buttons */
-        .pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#6a2ee0 0%,#4b18bf 45%,#3a1296 100%);color:#03140d;font-weight:700;padding:12px 22px;border-radius:12px;border:0;cursor:pointer;font-size:.95rem;transition:.25s;box-shadow:0 10px 30px -12px rgba(75,24,191,.6),inset 0 1px 0 rgba(255,255,255,.28)}
+        .pv-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#6a2ee0 0%,#4b18bf 45%,#3a1296 100%);color:#fff;font-weight:700;padding:12px 22px;border-radius:12px;border:0;cursor:pointer;font-size:.95rem;transition:.25s;box-shadow:0 10px 30px -12px rgba(75,24,191,.6),inset 0 1px 0 rgba(255,255,255,.28)}
         .pv-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px -12px rgba(75,24,191,.75),inset 0 1px 0 rgba(255,255,255,.3)}
         .pv-btn-gold{background:linear-gradient(135deg,#ffe39d 0%,#ffd257 45%,#f0b90b 100%);color:#241a00;box-shadow:0 10px 30px -12px rgba(240,185,11,.55),inset 0 1px 0 rgba(255,255,255,.4)}
         .pv-btn-ghost{background:rgba(255,255,255,.06);color:var(--text);box-shadow:none;border:1px solid var(--line)}

@@ -42,15 +42,26 @@
             <div>
                 <h4>Stay updated</h4>
                 <p class="wf-footer-note">Market insights delivered to your inbox weekly.</p>
-                <form class="pv-footer-form wf-footer-form" data-newsletter>
-                    <input type="email" name="email" placeholder="Email address" aria-label="Email address" required>
-                    <button type="submit">Join</button>
-                </form>
+     <form class="pv-footer-form wf-footer-form" data-newsletter style="display: flex; flex-wrap: wrap; gap: 14px; align-items: stretch;">
+    <!-- Add signed up user email to input fields -->
+    <div style="flex: 1; min-width: 200px;">
+        @if (Auth::check())
+            <input class="inp" name="email" type="email" value="{{ old('email', Auth::user()->email) }}" style="width: 100%; box-sizing: border-box;" required>
+        @else
+            <input type="email" name="email" placeholder="Enter your email" style="width: 100%; box-sizing: border-box;" required>
+        @endif
+    </div>
+
+    <button type="submit" style="height: auto; align-self: stretch;">Subscribe</button>
+</form>
+
+
+
             </div>
         </div>
 
         <div class="wf-footer-bottom">
-            <span>&copy; {{ date('Y') }} PrimeVest. All rights reserved.</span>
+            <span>&copy; 2023 PrimeVest. All rights reserved.</span>
             <nav aria-label="Footer">
                 <a href="{{ route('pricing') }}">Pricing</a>
                 <a href="{{ route('education') }}">Academy</a>

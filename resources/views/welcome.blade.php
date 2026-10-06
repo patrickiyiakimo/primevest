@@ -1,56 +1,82 @@
-@extends('layouts.landing')
+﻿@extends('layouts.landing')
 
-@section('title', 'PrimeVest | Money works better here')
-@section('meta_description', 'PrimeVest makes building wealth easy. Earn 3.55% APY on your uninvested cash and invest in expert-built, automated portfolios of stocks, bonds, and ETFs.')
+@section('title', 'PrimeVest | Trade crypto, stocks &amp; indices')
+@section('meta_description', 'PrimeVest is a crypto-first investment platform. Buy 250+ coins 24/7, trade commission-free US and UK stocks, and track the S&P 500, Nasdaq-100 and FTSE 100 from a single account.')
 
 @php
     $wfImg   = fn ($file) => asset('images/wf/' . $file);
-    $stages  = [
+
+    /* ---------------------------------------------------------------
+       Markets carousel â€” each card expands to show trading detail.
+       --------------------------------------------------------------- */
+    $stages = [
         [
-            'id'     => 'grow',
-            'pill'   => 'Evelyn T. | Client since 2020',
-            'title'  => 'Growing your savings',
-            'strong' => 'Earn interest on every penny',
-            'rest'   => ' of your paycheck.',
-            'copy'   => 'Set up automatic deposits, watch every transfer land in one place, and let your balance compound from the day you start.',
+            'id'     => 'crypto',
+            'pill'   => 'BTC/USD &middot; 24/7 market',
+            'title'  => 'Crypto',
+            'strong' => 'Trade 250+ coins around the clock,',
+            'rest'   => ' with no market close.',
+            'copy'   => 'Buy, sell and hold Bitcoin, Ethereum and 250+ altcoins from one wallet. Spot, futures and margin desks stay open every minute of every day â€” no weekend gaps, no settlement delay. Funds sit in multi-sig cold storage with published proof-of-reserves, and on-chain deposits credit in seconds.',
+            'chart'  => ['symbol' => 'BTC/USD', 'name' => 'Bitcoin', 'price' => '$68,412.90', 'change' => '+4.82%', 'up' => true, 'accent' => '#22d3a5', 'style' => 'candles', 'seed' => 91],
         ],
         [
-            'id'     => 'build',
-            'pill'   => 'Peter &amp; Alex | Clients since 2015 &amp; 2023',
-            'title'  => 'Building wealth together',
-            'strong' => 'Save, spend and earn as a couple,',
-            'rest'   => ' all in one place.',
-            'copy'   => 'Joint balances, shared goals and a single dashboard that keeps every dollar of household money visible to both of you.',
+            'id'     => 'stocks',
+            'pill'   => 'AAPL &middot; NVDA &middot; TSLA',
+            'title'  => 'Stocks',
+            'strong' => 'Fractional shares from $1,',
+            'rest'   => ' commission-free.',
+            'copy'   => 'Trade listed US and UK equities with $0 commissions, extended-hours access and level-2 depth. Build a position from a single share, queue limit, stop and trailing orders, then reinvest dividends automatically the moment they settle.',
+            'chart'  => ['symbol' => 'NVDA', 'name' => 'NVIDIA Corp', 'price' => '$236.41', 'change' => '+1.24%', 'up' => true, 'accent' => '#4f8cff', 'style' => 'area', 'seed' => 17],
         ],
         [
-            'id'     => 'manage',
-            'pill'   => 'Brad B. | Client since 2015',
-            'title'  => 'Managing complex finances',
-            'strong' => 'Find a simpler way',
-            'rest'   => ' to manage your money.',
-            'copy'   => 'Multiple accounts, tax documents and investment reports — consolidated, reconciled and explained in plain language.',
+            'id'     => 'indices',
+            'pill'   => 'S&amp;P 500 &middot; Nasdaq-100 &middot; FTSE',
+            'title'  => 'Indices',
+            'strong' => 'Own the whole market',
+            'rest'   => ' in a single ticket.',
+            'copy'   => 'Track the S&P 500, Nasdaq-100, Dow Jones and FTSE 100 through one position. Index exposure spreads your risk across hundreds of constituents at once, so a single weak earnings print never gets to decide your week.',
+            'chart'  => ['symbol' => 'SPX', 'name' => 'S&P 500', 'price' => '5,842.17', 'change' => '+0.63%', 'up' => true, 'accent' => '#a98bff', 'style' => 'area', 'seed' => 43],
+        ],
+        [
+            'id'     => 'forex',
+            'pill'   => 'EUR/USD &middot; GBP/JPY &middot; 70+ pairs',
+            'title'  => 'Forex',
+            'strong' => '70+ currency pairs',
+            'rest'   => ' on institutional liquidity.',
+            'copy'   => 'Majors, minors and exotics priced off aggregated bank liquidity with tight variable spreads. Leverage up to 1:500, negative-balance protection as standard, and economic-calendar alerts pushed to your phone before the candle even forms.',
+            'chart'  => ['symbol' => 'EUR/USD', 'name' => 'Euro / US Dollar', 'price' => '1.0874', 'change' => '-0.21%', 'up' => false, 'accent' => '#f6465d', 'style' => 'area', 'seed' => 58],
+        ],
+        [
+            'id'     => 'commodities',
+            'pill'   => 'XAU/USD &middot; Brent &middot; Nat gas',
+            'title'  => 'Commodities',
+            'strong' => 'Trade gold, oil and gas',
+            'rest'   => ' as a real hedge.',
+            'copy'   => 'Go long or short on precious metals, crude oil, natural gas and agricultural futures. Commodities have historically moved against equities, which makes them a practical hedge when risk appetite turns and your equity book is having a bad week.',
+            'chart'  => ['symbol' => 'XAU/USD', 'name' => 'Gold Spot', 'price' => '$2,684.50', 'change' => '+0.94%', 'up' => true, 'accent' => '#f0b90b', 'style' => 'area', 'seed' => 73],
         ],
     ];
+
     $faqs = [
         [
-            'q' => 'Are there any restrictions around the 3.55% APY? Is this a promotional rate?',
-            'a' => 'Believe it or not, there\'s no funny business here. There are no minimum (or maximum) balance requirements to earn 3.55% APY from program banks in your Cash Account. Better yet, you can earn an extra 0.75% boost for three months when you refer a friend who signs up for the Cash Account. See promotional interest terms at {{ route("pricing") }} #promotional-terms.',
+            'q' => 'What can I actually trade on PrimeVest?',
+            'a' => 'Everything runs from one funded account. 250+ crypto assets including Bitcoin, Ethereum and Solana; listed US and UK equities with $0 commission; 30+ indices such as the S&P 500, Nasdaq-100 and FTSE 100; 70+ forex pairs; and commodities covering gold, silver, crude oil and natural gas. You can hold all of them side by side and rebalance between them without leaving the dashboard.',
         ],
         [
-            'q' => 'What kind of fees do you charge? Is there a minimum to know about?',
-            'a' => 'The Cash Account has no account fees and you can start saving with just $1. We also offer taxable and tax-advantaged automated investing accounts. Here\'s an easy way to compare our investing products: Automated Investing: management fee: 0.25% and minimum to invest: $500, Nasdaq-100 Direct - management fee: 0.12% and minimum to invest: $5,000, S&P 500 Direct - management fee: 0.09% and minimum to invest: $5,000, Stock Investing Account - management fee: $0 commissions and minimum to invest: $1, Automated Bond Ladder - management fee: 0.15% and minimum to invest: $500',
+            'q' => 'Does the crypto desk really stay open 24/7?',
+            'a' => 'Yes. Crypto markets do not close, so neither does ours â€” spot, futures and margin trading run every minute of every day, weekends and holidays included. That also means prices can move while you sleep. Set price alerts, use stop and take-profit orders, and enable two-factor authentication before you fund the account.',
         ],
         [
-            'q' => 'How is automated investing at PrimeVest different?',
-            'a' => 'Not only were we one of the pioneers of automated investing, we\'re consistently ranked as one of the best options out there. We developed the industry-first automated Tax-Loss Harvesting, and we\'re constantly innovating, using our award-winning software to expand access to a broad range of financial products. Our suite of investing products never veer away from helping our clients focus on what they can control: keeping taxes low, keeping fees low, and staying protected from unnecessary risk. That\'s because we\'ve made it our mission to build products that benefit our clients, not just our bottom line.',
+            'q' => 'How are my coins and shares kept safe?',
+            'a' => 'Client crypto is held in multi-signature cold storage, segregated from company funds, with balances published as proof-of-reserves you can verify from your dashboard. Equities and cash sit with regulated custodians under SIPC-style protection. Withdrawals require a confirmed second factor, and large withdrawals sit behind a short manual review window.',
         ],
         [
-            'q' => 'What is Tax-Loss Harvesting? And what does that mean for me?',
-            'a' => 'Tax-Loss Harvesting is a strategy that can help lower your tax bill. Here\'s how it works: If the price of an investment, say a stock or ETF, falls below the price you paid for it, our software can take advantage of that volatility and sell those shares to harvest the loss, then swap it with a similar security to help keep your portfolio balanced. Because market volatility is just a part of investing, regular dips in the market continue to work as a kind of tax deduction. At tax time, the losses you\'ve collected can offset your capital gains, and you can use any remaining losses to reduce your ordinary income by up to $3,000. Best of all, your harvested losses never expire. Anything you can\'t use in a given year carries forward indefinitely. That\'s good news for you now and in the future. Learn more about Tax-Loss Harvesting at {{ route("education") }} #tax-loss-harvesting',
+            'q' => 'What does it cost to trade here?',
+            'a' => 'US and UK stock trades are $0 commission. Crypto spot carries a flat 0.20% taker fee that steps down to 0.06% as your 30-day volume grows. Forex and indices are charged as a spread only â€” no overnight platform fee, no inactivity fee, no custody fee on balances under $50,000. The full schedule lives on our pricing page.',
         ],
         [
-            'q' => 'How is the Stock Investing Account different from the Automated Investing Account?',
-            'a' => 'Our Automated Investing Account not only personalizes a portfolio for you based on your appetite for risk, it handles everything from rebalancing to finding ways to help you save on your taxes - all for the low, annual fee of just 0.25%. For the Stock Investing Account, it\'s up to you to let us know what stocks you want to trade, when, and how much, but we\'ll still help you understand how that lines up with your investing goals and manage all the trades on your behalf.',
+            'q' => 'How fast are deposits and withdrawals?',
+            'a' => 'Card and bank deposits land instantly for first-time funding and within one business day after that. Crypto withdrawals are broadcast to the network the moment they clear review, typically inside a minute. There is no withdrawal cap on verified accounts beyond the daily review threshold shown in your settings.',
         ],
     ];
 @endphp
@@ -58,9 +84,16 @@
 @section('content')
 
 {{-- ======================================================================
-     HERO  ·  data-testid="reusable-hero-module"
+     HERO  Â·  data-testid="reusable-hero-module"
      ====================================================================== --}}
 <section class="wf-hero" data-testid="reusable-hero-module">
+    <video class="wf-hero-bg" poster="{{ asset('videos/hero-trading-poster.jpg') }}"
+           autoplay muted loop playsinline preload="auto"
+           aria-hidden="true" tabindex="-1" data-testid="hero-background-video">
+        <source src="{{ asset('videos/hero-trading.mp4') }}" type="video/mp4">
+    </video>
+    <div class="wf-hero-scrim" aria-hidden="true"></div>
+
     <div class="wf-circles-wrap" >
         <img class="wf-circles" src="{{ $wfImg('gradient-circles.svg') }}" width="2024" height="850" alt="" loading="eager">
     </div>
@@ -71,23 +104,23 @@
             {{-- ---------- copy column ---------- --}}
             <div class="wf-hero-copy">
                 <div class="wf-hero-eyebrow">
-                    <h1 class="wf-h1">
+                    <h1 class="text-5xl">
                         <span class="wf-eyebrow-line">
                             <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M7.689 14.804a.5.5 0 00.282.281l1.487.587a.5.5 0 010 .93l-1.487.587a.5.5 0 00-.282.282l-.587 1.487a.5.5 0 01-.93 0l-.587-1.487a.5.5 0 00-.281-.282l-1.487-.587a.5.5 0 010-.93l1.487-.587a.5.5 0 00.281-.281l.587-1.487a.5.5 0 01.93 0l.587 1.487zm.648-8.798a.279.279 0 00.157.157l.83.328a.279.279 0 010 .518l-.83.328a.279.279 0 00-.157.157l-.328.83a.279.279 0 01-.518 0l-.328-.83a.279.279 0 00-.157-.157l-.83-.328a.279.279 0 010-.518l.83-.328a.279.279 0 00.157-.157l.328-.83a.279.279 0 01.518 0l.328.83zM13.892 5.402a.625.625 0 011.168 0l.666 1.75a5.328 5.328 0 003.074 3.074l1.75.666a.625.625 0 010 1.168l-1.75.666a5.328 5.328 0 00-3.073 3.074l-.667 1.75a.625.625 0 01-1.168 0l-.666-1.75a5.328 5.328 0 00-3.074-3.073l-1.75-.667a.625.625 0 010-1.168l1.75-.666a5.327 5.327 0 003.074-3.074l.666-1.75zm.972 3.385c-.168-.276-.608-.276-.775 0a6.822 6.822 0 01-2.302 2.302c-.277.167-.277.607 0 .774a6.823 6.823 0 012.302 2.302c.167.277.607.277.774 0a6.825 6.825 0 012.302-2.301c.277-.168.277-.608 0-.775a6.824 6.824 0 01-2.301-2.302z"/></svg>
-                            Earn up to
+                            24/7 markets &middot; 250+ assets
                         </span>
-                        <span class="text-lg font-bold" data-testid="h1-apy-hero">4.45% APY</span>
+                        <span class="text-5xl" data-testid="h1-apy-hero">Crypto.<br>Stocks.<br>Indices.</span>
                     </h1>
                 </div>
 
-                <h2 class="wf-h2-serif" data-testid="hero-apy-description">Better than a bank</h2>
+                <h2 class="wf-h2-serif" data-testid="hero-apy-description">All from one account.</h2>
 
                 <div class="wf-hero-features" data-testid="cash-hero-features">
                     <div class="wf-feature">
                         <span class="wf-feature-ic">
                             <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M10.233 12.707a1 1 0 000-1.414L8.465 9.525a.75.75 0 011.06-1.06l1.768 1.767a1 1 0 001.414 0l1.768-1.768a.75.75 0 011.06 1.06l-1.767 1.769a1 1 0 000 1.414l1.768 1.768a1 1 0 01-1.06 1.06l-1.769-1.768a1 1 0 00-1.414 0l-1.768 1.768a.749.749 0 11-1.06-1.06l1.768-1.768zM12 21a9 9 0 110-18 9 9 0 010 18zm0-1.5a7.5 7.5 0 100-15 7.5 7.5 0 000 15z"/></svg>
                         </span>
-                        <span class="wf-feature-txt">Zero account fees</span>
+                        <span class="wf-feature-txt">$0 commission on US &amp; UK stocks</span>
                     </div>
 
                     <div class="wf-feature">
@@ -95,7 +128,7 @@
                             <img src="{{ $wfImg('union-pebble.svg') }}" height="21" width="21" alt="" loading="eager">
                         </span>
                         <span class="wf-feature-txt">
-                            Free 24/7 instant withdrawals
+                            24/7 instant crypto withdrawals
                             <button class="wf-info-btn" type="button" aria-label="open instant withdrawal information dialog" data-modal="wf-modal-wd">
                                 <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M10.748 10.798h.017c.422 0 .765.343.765.765v2.381a1 1 0 01-1 1h-.285a.745.745 0 000 1.49h4.01a.745.745 0 100-1.49H14a1 1 0 01-1-1v-3.642a1 1 0 00-1-1h-1.252a.748.748 0 000 1.496zm.223-2.927a.965.965 0 00.547.507c.132.05.277.073.435.073.325 0 .583-.09.772-.27a.935.935 0 00.29-.705.913.913 0 00-.29-.699c-.19-.185-.447-.277-.772-.277a1.255 1.255 0 00-.435.073 1.029 1.029 0 00-.33.198.934.934 0 00-.29.705c0 .14.024.272.073.395zM21 12a9 9 0 11-18 0 9 9 0 0118 0zm-1.5 0a7.5 7.5 0 10-15 0 7.5 7.5 0 0015 0z"/></svg>
                             </button>
@@ -104,26 +137,51 @@
 
                     <div class="wf-feature">
                         <span class="wf-feature-ic">
-                            <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M12 7.25a2.25 2.25 0 110 4.5 2.25 2.25 0 010-4.5zm-.75 2.25a.75.75 0 101.5 0 .75.75 0 00-1.5 0zm-.5 4.5v3a.75.75 0 11-1.5 0v-3a.75.75 0 111.5 0zm3.25-.75a.75.75 0 01.75.75v3a.75.75 0 11-1.5 0v-3a.75.75 0 01.75-.75zM12.49 3.277l8 4.5a1 1 0 01.51.871v2.29a1 1 0 01-1 1h-.313a1 1 0 00-1 1v2.625a1 1 0 001 1H20a1 1 0 011 1v2.438a1 1 0 01-1 1H4a1 1 0 01-1-1v-2.438a1 1 0 011-1h.313a1 1 0 001-1v-2.625a1 1 0 00-1-1H4a1 1 0 01-1-1v-2.29a1 1 0 01.51-.871l8-4.5a1 1 0 01.98 0zm-5.678 8.161v5.625a1 1 0 01-1 1h-.594a.72.72 0 000 1.438h13.564a.719.719 0 000-1.438h-.595a1 1 0 01-1-1v-5.625a1 1 0 011-1h.368a.945.945 0 00.463-1.768L12.49 4.998a.945.945 0 00-.981 0L4.982 8.67a.945.945 0 00.463 1.768h.368a1 1 0 011 1z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" role="presentation" aria-hidden="true"><path d="M12 3l7.5 3v5.2c0 4.5-3.1 8.5-7.5 9.6-4.4-1.1-7.5-5.1-7.5-9.6V6L12 3z"/><path d="M9.3 12.1l1.9 1.9 3.6-3.7"/></svg>
                         </span>
-                        <span class="wf-feature-txt">Up to $8M in FDIC insurance eligibility through program banks</span>
+                        <span class="wf-feature-txt">Multi-sig cold storage &amp; published proof-of-reserves</span>
                     </div>
                 </div>
 
-                <!-- <div class="wf-hero-ctas">
-                    <a class="wf-btn wf-btn-primary" href="{{ route('register') }}" data-testid="hero-get-started">Get started</a>
-                    <a class="wf-btn wf-btn-ghost-dark" href="{{ route('trading') }}" data-testid="hero-learn-more">Learn more</a>
+                <div class="wf-hero-ctas">
+                    <a class="wf-btn wf-btn-primary" href="{{ route('register') }}" data-testid="hero-get-started">Start trading</a>
+                    <a class="wf-btn wf-btn-ghost-dark" href="{{ route('trading') }}" data-testid="hero-learn-more">Explore markets</a>
                 </div>
 
-                <p class="wf-disclosure" data-testid="hero-rate-disclosure">
-                    3.55% Base Annual Percentage Yield (APY) as of 10/01/2026 is provided by program banks and is subject to change. APY Boost is up to a $150,000 balance. See additional terms in the footer.
+                <!-- <p class="wf-disclosure" data-testid="hero-rate-disclosure">
+                    Crypto assets are volatile and unregulated in some jurisdictions. Capital is at risk and returns are not guaranteed.
+                    Trading in stocks, indices, forex and commodities involves leverage and can result in losses exceeding your deposit.
+                    See additional terms in the footer.
                 </p> -->
             </div>
 
-            {{-- ---------- phone + card composition ---------- --}}
+            {{-- ---------- live market panel ---------- --}}
             <div class="wf-hero-visual" data-testid="hero-phone-composition" >
                 <div class="wf-hero-card">
-                    <img width="267" height="352" alt="A Visa debit card with a PrimeVest logo, partially obscured by a phone." loading="eager" src="{{ $wfImg('debit-card.svg') }}">
+                    <div class="wf-mkt-card">
+                        <!-- <div class="wf-mkt-head">
+                            <span class="wf-mkt-pair">
+                                <span class="wf-mkt-dot" aria-hidden="true"></span>
+                                BTC/USD
+                            </span>
+                            <span class="wf-mkt-tag">Bitcoin</span>
+                        </div> -->
+                        <!-- <div class="wf-mkt-price">$68,412.90</div> -->
+                        <!-- <div class="wf-mkt-chg is-up">+4.82% <span>24h</span></div> -->
+                        <!-- <div class="wf-mkt-chart" aria-hidden="true">
+                            @include('partials.chart', ['seed' => 91, 'style' => 'candles', 'symbol' => null, 'price' => null, 'change' => null, 'up' => true, 'accent' => '#22d3a5', 'tone' => '#0d1330', 'wide' => true])
+                        </div> -->
+                        <!-- <div class="wf-mkt-foot">
+                            <span>24h vol <b>$41.2B</b></span>
+                            <span>High <b>$69,088</b></span>
+                        </div> -->
+                    </div>
+
+                    <!-- <div class="wf-mkt-chip">
+                        <span class="wf-mkt-chip-sym">ETH</span>
+                        <span class="wf-mkt-chip-val">$3,417.06</span>
+                        <span class="wf-mkt-chip-chg is-up">+2.14%</span>
+                    </div> -->
                 </div>
                 <div class="wf-hero-phone">
                     <picture>
@@ -180,41 +238,49 @@
 </section>
 
 {{-- ======================================================================
-     DIRECT-DEPOSIT ACCORDION
+     LIVE MARKET TICKER
      ====================================================================== --}}
-<div class="wf-container-2024">
-    <div class="wf-dd " data-accordion data-testid="direct-deposit-plus-module">
-        <button class="wf-dd-trigger" type="button" aria-expanded="false" aria-controls="dd-panel">
-            <img src="{{ $wfImg('enclosed-chevron.svg') }}" width="40" height="40" alt="" loading="lazy">
-            <span class="wf-dd-texts">
-                <h3>Your cash earns 3.55% base APY</h3>
-                <p>See how to raise it to 4.45% APY in three easy steps</p>
+@php
+    $quotes = [
+        ['s' => 'BTC',    'n' => 'Bitcoin',      'p' => '$68,412.90', 'c' => '+4.82%', 'up' => true],
+        ['s' => 'ETH',    'n' => 'Ethereum',     'p' => '$3,417.06',  'c' => '+2.14%', 'up' => true],
+        ['s' => 'SOL',    'n' => 'Solana',       'p' => '$186.24',    'c' => '+6.71%', 'up' => true],
+        ['s' => 'BNB',    'n' => 'BNB',          'p' => '$604.18',    'c' => '-0.84%', 'up' => false],
+        ['s' => 'XRP',    'n' => 'XRP',          'p' => '$0.6142',    'c' => '+1.09%', 'up' => true],
+        ['s' => 'SPX',    'n' => 'S&P 500',      'p' => '5,842.17',   'c' => '+0.63%', 'up' => true],
+        ['s' => 'NDX',    'n' => 'Nasdaq 100',   'p' => '20,411.62',  'c' => '+0.91%', 'up' => true],
+        ['s' => 'AAPL',   'n' => 'Apple',        'p' => '$236.41',    'c' => '+1.24%', 'up' => true],
+        ['s' => 'NVDA',   'n' => 'NVIDIA',       'p' => '$186.52',    'c' => '+3.08%', 'up' => true],
+        ['s' => 'EURUSD', 'n' => 'Euro / Dollar','p' => '1.0874',     'c' => '-0.21%', 'up' => false],
+        ['s' => 'XAU',    'n' => 'Gold Spot',    'p' => '$2,684.50',  'c' => '+0.94%', 'up' => true],
+        ['s' => 'UKOIL',  'n' => 'Brent Crude',  'p' => '$78.32',     'c' => '-1.12%', 'up' => false],
+    ];
+@endphp
+<!-- <div class="wf-ticker" data-testid="market-ticker" aria-label="Live market prices">
+    <div class="wf-ticker-track">
+        @foreach (array_merge($quotes, $quotes) as $q)
+            <span class="wf-tick {{ $q['up'] ? 'is-up' : 'is-down' }}">
+                <b>{{ $q['s'] }}</b>
+                <span class="wf-tick-n">{{ $q['n'] }}</span>
+                <span class="wf-tick-p" style="font-variant-numeric:tabular-nums">{{ $q['p'] }}</span>
+                <span class="wf-tick-c">{{ $q['c'] }}</span>
             </span>
-        </button>
-        <div class="wf-dd-panel" id="dd-panel">
-            <div>
-                <div class="wf-dd-steps">
-                    <div class="wf-dd-step"><b>1</b><span>Link your bank with Plaid in under two minutes and set up an automated deposit for the day after your paycheck lands.</span></div>
-                    <div class="wf-dd-step"><b>2</b><span>Keep a qualifying balance of $25,000 or more in your Cash Account to unlock the +0.75% APY Boost on that balance.</span></div>
-                    <div class="wf-dd-step"><b>3</b><span>Refer a friend who also opens a Cash Account and both of you earn the boosted rate for three months.</span></div>
-                </div>
-            </div>
-        </div>
+        @endforeach
     </div>
-</div>
+</div> -->
 
 {{-- ======================================================================
-     INVESTING INTRO  ·  data-testid="aia-messaging-investing-intro-module"
+     INVESTING INTRO  Â·  data-testid="aia-messaging-investing-intro-module"
      ====================================================================== --}}
 <section class="wf-band" style="padding-block:var(--wf-xlarge) var(--wf-xxxlarge)" data-testid="aia-messaging-investing-intro-module">
     <div class="wf-marketing-section" data-marketing>
         <div class="wf-sec-head " >
             <h2 class="wf-h2">
-                Turn savings into wealth<br>
-                <span class="wf-h2-serif">at one of the best places for long-term investing</span>
+                One account,<br>
+                <span class="wf-h2-serif">every market that matters.</span>
             </h2>
             <p class="wf-lede">
-                Investing in index funds for the long-term has been shown time and time again to be the most effective way to earn more than even the highest-yield savings accounts. Let us build and manage your portfolio or create your own.
+                Crypto, equities, indices, forex and commodities â€” priced live, settled instantly. Buy Bitcoin at 3am, trim your S&amp;P 500 position before the bell, or mirror a professional trader while you sleep. It all sits in a single balance you can move in seconds.
             </p>
         </div>
 
@@ -226,7 +292,7 @@
                     <img src="{{ $wfImg('bankrate-dark.svg') }}" alt="Bankrate" loading="lazy">
                 </span>
                 <span class="wf-badge-kicker">recommends</span>
-                <span class="wf-badge-title">Best Investment Apps</span>
+                <span class="wf-badge-title">Best Crypto Exchanges</span>
                 <span class="wf-badge-year">2026<sup>4</sup></span>
             </div>
 
@@ -236,8 +302,8 @@
                 <span class="wf-badge-logo">
                     <img src="{{ $wfImg('nerdwallet-light.svg') }}" alt="NerdWallet" loading="lazy">
                 </span>
-                <span class="wf-badge-kicker">Best Robo-advisor,</span>
-                <span class="wf-badge-title">Portfolio Options</span>
+                <span class="wf-badge-kicker">Best for,</span>
+                <span class="wf-badge-title">Active Traders</span>
                 <span class="wf-badge-year">2022-26<sup>5</sup></span>
             </div>
         </div>
@@ -247,24 +313,26 @@
 <hr class="wf-hr" data-marketing style="margin:0">
 
 {{-- ======================================================================
-     ACCOUNT CARDS  ·  data-testid="aia-messaging-investing-accounts-module"
+     ACCOUNT CARDS  Â·  data-testid="aia-messaging-investing-accounts-module"
      ====================================================================== --}}
 <section class="wf-band" style="padding-top:var(--wf-xxxlarge)" data-testid="aia-messaging-investing-accounts-module">
     <div class="wf-marketing-section">
         <div class="wf-acct-grid">
 
-            {{-- ---------- card A · Automated Investing Account ---------- --}}
+            {{-- ---------- card A Â· Automated Investing Account ---------- --}}
             <article class="wf-acct-card "  data-testid="automated-investing-account-card">
                 <div class="wf-acct-head">
                     <h2 class="wf-h2">Built and managed for you</h2>
-                    <p>Designed for investors who prefer to delegate the selection and management of their investments to us.</p>
+                    <p>Designed for investors who want a diversified crypto portfolio, rebalanced automatically, without watching charts all day.</p>
                 </div>
 
                 <div class="wf-acct-visual is-aia">
-                    <img class="wf-acct-graph" src="{{ $wfImg('aia-graph.png') }}" width="600" height="300" alt="" loading="lazy">
+                    <div class="wf-acct-chart" aria-hidden="true">
+                        @include('partials.chart', ['seed' => 27, 'style' => 'area', 'symbol' => null, 'price' => null, 'change' => null, 'up' => true, 'accent' => '#22d3a5', 'tone' => '#0d1330', 'wide' => false])
+                    </div>
                     <div class="wf-returns" data-testid="investing-accounts-aia-annual-returns">
-                        <b>9.65%</b>
-                        <span>annualized returns</span>
+                        <b>+96.4%</b>
+                        <span>12-month portfolio return</span>
                     </div>
                     <picture class="wf-acct-phone">
                         <source type="image/webp"
@@ -279,18 +347,18 @@
 
                 <div class="wf-acct-body">
                     <div>
-                        <h3 class="wf-acct-name">Automated Investing Account</h3>
-                        <h4 class="wf-acct-tag">Build wealth with globally diversified index investing</h4>
+                        <h3 class="wf-acct-name">Managed Crypto Portfolio</h3>
+                        <h4 class="wf-acct-tag">Automated allocation across BTC, ETH and 250+ assets</h4>
                     </div>
 
                     <ul class="wf-checklist">
                         <li>
                             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>
-                            <span>Designed to maximize long-term, after-tax returns</span>
+                            <span>Rebalanced automatically as the market moves</span>
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>
-                            <span>Customize to your goals and risk level</span>
+                            <span>Risk-scored from conservative to aggressive</span>
                         </li>
                     </ul>
 
@@ -300,21 +368,21 @@
                     </div>
 
                     <p class="wf-acct-note" data-testid="investing-accounts-aia-disclosure">
-                        The chart in the product image represents actual performance for one-, five-, ten-year and since inception periods through 05/22/2026 for investors in PrimeVest's Classic Automated Investing Account, with a composite risk score of 9 (Ranges 0.5-10). The annualized returns are for the same time periods as of 10/01/2026.
+                        The chart shown is illustrative of portfolio behaviour and does not represent the return of any individual client account. Figures are shown before fees and are not a projection of future performance. Crypto assets are volatile and can lose value in full.
                         <button type="button" data-modal="wf-modal-disc">See full disclosures here</button>
                     </p>
 
                     <div class="wf-acct-foot">
                         <hr class="wf-hr">
-                        <div class="wf-explore">Explore supported account types:</div>
+                        <div class="wf-explore">Explore managed products:</div>
                         <div class="wf-explore-list">
-                            <a href="{{ route('trading') }}">Taxable Accounts <small>(Personal, Joint, Trust)</small>
+                            <a href="{{ route('trading') }}">Crypto Trading Desk <small>(Spot, futures, margin)</small>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
                             </a>
-                            <a href="{{ route('pricing') }}">Retirement Accounts <small>(Traditional IRA, Roth IRA, SEP)</small>
+                            <a href="{{ route('copy-trading') }}">Copy Trading <small>(Mirror pro traders)</small>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
                             </a>
-                            <a href="{{ route('education') }}">529 Education Savings Accounts
+                            <a href="{{ route('register') }}">Staking Plans <small>(Stablecoin yield, paid daily)</small>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
                             </a>
                         </div>
@@ -322,15 +390,17 @@
                 </div>
             </article>
 
-            {{-- ---------- card B · Stock Investing Account ---------- --}}
+            {{-- ---------- card B Â· Stock Investing Account ---------- --}}
             <article class="wf-acct-card "  data-testid="stock-investing-account-card">
                 <div class="wf-acct-head">
-                    <h2 class="wf-h2">Build your own</h2>
-                    <p>Designed for self-directed investors who prefer to select their own investments for each asset class and diversify themselves.</p>
+                    <h2 class="wf-h2">Trade it yourself</h2>
+                    <p>Designed for self-directed traders who want direct control over every crypto, stock and index position they open.</p>
                 </div>
 
                 <div class="wf-acct-visual is-sia">
-                    <img class="wf-acct-graph" src="{{ $wfImg('aia-graph.png') }}" width="600" height="300" alt="" loading="lazy" style="opacity:.5">
+                    <div class="wf-acct-chart" aria-hidden="true">
+                        @include('partials.chart', ['seed' => 64, 'style' => 'candles', 'symbol' => null, 'price' => null, 'change' => null, 'up' => false, 'accent' => '#4f8cff', 'tone' => '#111b31', 'wide' => false])
+                    </div>
                     <picture class="wf-acct-phone">
                         <source type="image/webp"
                             srcset="{{ $wfImg('screen-sia-640w.webp') }} 640w,
@@ -344,18 +414,18 @@
 
                 <div class="wf-acct-body">
                     <div>
-                        <h3 class="wf-acct-name">Stock Investing Account</h3>
-                        <h4 class="wf-acct-tag">Built for long-term stock and ETF investing</h4>
+                        <h3 class="wf-acct-name">Spot &amp; Margin Trading</h3>
+                        <h4 class="wf-acct-tag">Crypto, stocks, indices, forex &amp; commodities</h4>
                     </div>
 
                     <ul class="wf-checklist">
                         <li>
                             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>
-                            <span>Simple by design for intentional investors</span>
+                            <span>$0 commission on stocks, 0.20% taker fee on crypto</span>
                         </li>
                         <li>
                             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.55 18.2l-4.1-4.1a1 1 0 011.4-1.42l2.7 2.68 7.38-7.38a1 1 0 111.42 1.42l-8.08 8.08a1 1 0 01-1.42 0z"/></svg>
-                            <span>Zero commissions on trades, start with $1</span>
+                            <span>Start from $1 with fractional shares and satoshis</span>
                         </li>
                     </ul>
 
@@ -366,15 +436,15 @@
 
                     <div class="wf-acct-foot">
                         <hr class="wf-hr">
-                        <div class="wf-explore">Explore other single asset class products:</div>
+                        <div class="wf-explore">Explore single-asset desks:</div>
                         <div class="wf-explore-list">
-                            <a href="{{ route('shares.us') }}">S&amp;P 500 Direct
+                            <a href="{{ route('shares.us') }}">US Equities <small>(NYSE, Nasdaq, fractional)</small>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
                             </a>
-                            <a href="{{ route('shares.uk') }}">Nasdaq-100 Direct
+                            <a href="{{ route('shares.uk') }}">UK Equities <small>(LSE, FTSE constituents)</small>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
                             </a>
-                            <a href="{{ route('pricing') }}">Automated Bond Ladder
+                            <a href="{{ route('forex.majors') }}">Forex &amp; Commodities <small>(70+ pairs, gold, oil)</small>
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
                             </a>
                         </div>
@@ -387,19 +457,21 @@
 </section>
 
 {{-- ======================================================================
-     LIFE STAGES  ·  data-testid="homepage-life-stages-module"
+     LIFE STAGES  Â·  data-testid="homepage-life-stages-module"
      ====================================================================== --}}
 <div class="wf-stages" data-testid="homepage-life-stages-module">
     <div class="wf-marketing-section">
         <div class="wf-sec-head " >
-            <h2 class="wf-h2">Make the most of your money, wherever you're at.</h2>
+            <h2 class="wf-h2">Pick your market,<br> <span class="wf-h2-serif">trade it in seconds.</span></h2>
         </div>
 
         {{-- ---------- mobile: collapsed cards ---------- --}}
         <div class="wf-stages-grid">
             @foreach ($stages as $s)
                 <button class="wf-stage-m" type="button" data-stage-m aria-expanded="false">
-                    <img class="wf-stage-m-img" width="76" height="74" alt="{{ $s['title'] }}" loading="lazy" src="{{ $wfImg('ls-' . $s['id'] . '.webp') }}">
+                    <span class="wf-stage-m-viz" aria-hidden="true">
+                        @include('partials.chart', $s['chart'] + ['tone' => '#0a0f1e', 'wide' => true])
+                    </span>
                     <span class="wf-stage-m-body">
                         <span class="wf-stage-m-head">
                             <h3>{{ $s['title'] }}</h3>
@@ -415,12 +487,14 @@
         </div>
 
         {{-- ---------- desktop: expanding carousel ---------- --}}
-        <div class="wf-stage-d" data-stage-d role="group" aria-label="Life stages" data-testid="expandable-carousel">
+        <div class="wf-stage-d" data-stage-d role="group" aria-label="Markets" data-testid="expandable-carousel">
             @foreach ($stages as $i => $s)
                 <div class="wf-stage-d-card" role="button" tabindex="0"
                      aria-expanded="false"
                      aria-label="Expand {{ $s['title'] }}" data-stage-card data-pill="{{ $i }}">
-                    <img width="718" height="650" alt="{{ $s['title'] }}" loading="lazy" src="{{ $wfImg('ls-' . $s['id'] . '-x-640w.webp') }}">
+                    <span class="wf-stage-viz" aria-hidden="true">
+                        @include('partials.chart', $s['chart'] + ['tone' => '#0a0f1e', 'wide' => true])
+                    </span>
                     <div class="wf-stage-d-inner">
                         <span class="wf-stage-d-pill">{!! $s['pill'] !!}</span>
                         <div>
@@ -439,7 +513,7 @@
         </div>
 
         {{-- ---------- carousel pills ---------- --}}
-        <div class="wf-pills" role="tablist" aria-label="Life stages">
+        <div class="wf-pills" role="tablist" aria-label="Markets">
             @foreach ($stages as $i => $s)
                 <button class="wf-pill {{ $i === 0 ? 'is-active' : '' }}" role="tab" type="button"
                         id="expandable-carousel-tab-{{ $i }}" aria-selected="{{ $i === 0 ? 'true' : 'false' }}"
@@ -451,7 +525,7 @@
 </div>
 
 {{-- ======================================================================
-     REVIEWS  ·  data-testid="homepage-reviews-module"
+     REVIEWS  Â·  data-testid="homepage-reviews-module"
      ====================================================================== --}}
 <section class="wf-reviews" data-testid="homepage-reviews-module">
     <div class="wf-container-2024">
@@ -460,7 +534,7 @@
         <div class="wf-rev-top">
             <div class="wf-rev-copy " >
                 <span class="wf-quote-mark" aria-hidden="true">"</span>
-                <h2 class="wf-rev-quote">PrimeVest beats out Fidelity, Schwab and Vanguard when it comes to direct indexing and tax-loss harvesting.</h2>
+                <h2 class="wf-rev-quote">PrimeVest has quietly become one of the most complete trading destinations for retail investors — crypto, equities and indices under a single roof.</h2>
 
                 <img class="wf-rev-forbes" src="{{ $wfImg('forbes-logo-white.png') }}" width="1945" height="475" alt="Forbes" loading="lazy">
 
@@ -521,7 +595,7 @@
                 <img class="wf-circles" src="{{ $wfImg('gradient-circles.svg') }}" width="2024" height="850" alt="" loading="lazy">
             </div>
             <div class="wf-cta-band-inner">
-                <h2>Sophisticated investing<br class="wf-br"> <span class="wf-h2-serif">made simple.</span></h2>
+                <h2>Sophisticated trading<br class="wf-br"> <span class="wf-h2-serif">made simple.</span></h2>
                 <a class="wf-btn wf-btn-white" href="{{ route('register') }}">Open account</a>
             </div>
         </div>
@@ -529,7 +603,7 @@
 </section>
 
 {{-- ======================================================================
-     FAQ  ·  data-testid="homepage-faqs-module"
+     FAQ  Â·  data-testid="homepage-faqs-module"
      ====================================================================== --}}
 <div class="wf-faq" data-testid="homepage-faqs-module">
     <section class="wf-faq-inner" data-testid="faq-module">
@@ -566,9 +640,9 @@
         <button class="wf-modal-close" type="button" aria-label="Close dialog" data-modal-close>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
         </button>
-        <h3 id="wf-modal-wd-t">Free 24/7 instant withdrawals</h3>
-        <p>Money in your Cash Account is available to withdraw whenever you want — nights, weekends and holidays included. Withdrawals initiated before 3pm ET on a business day typically settle the same day, and the funds are usable immediately.</p>
-        <p style="margin-top:10px">Because program banks send funds via ACH, your bank's own posting schedule applies. Instant withdrawals are limited to $5,000 per day, raised to $25,000 for clients with a qualifying direct deposit.</p>
+        <h3 id="wf-modal-wd-t">Free 24/7 instant crypto withdrawals</h3>
+        <p>Withdraw Bitcoin, Ethereum and every other supported asset whenever you want — nights, weekends and holidays included. Requests clear review and broadcast to the network in under a minute, and you can track the transaction hash from your dashboard the whole way.</p>
+        <p style="margin-top:10px">Fiat withdrawals settle by ACH or SEPA, so your bank's own posting schedule applies. Crypto withdrawals are unlimited on verified accounts beyond the daily review threshold shown in settings.</p>
     </div>
 </div>
 
@@ -578,9 +652,9 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
         </button>
         <h3 id="wf-modal-disc-t">Full disclosures</h3>
-        <p>Annualized returns: 1-year 14.74%, 5-year 10.04%, 10-year 10.78%, since inception 9.65% as of 10/01/2026.</p>
-        <p style="margin-top:10px">The chart represents actual performance for one-, five-, ten-year and since-inception periods through 05/22/2026 for investors in the Classic Automated Investing Account with a composite risk score of 9 (range 0.5–10).</p>
-        <p style="margin-top:10px">3.55% Base APY as of 10/01/2026 is provided by program banks and is subject to change. APY Boost is up to a $150,000 balance.</p>
+        <p>Returns shown on this page are illustrative only. They do not represent the performance of any individual client account, are shown before fees, and are not a projection of future results.</p>
+        <p style="margin-top:10px">Crypto assets are volatile and can lose value in full. Leverage amplifies both gains and losses and can result in losses exceeding your initial deposit. Trading in stocks, indices, forex and commodities may not be suitable for all investors.</p>
+        <p style="margin-top:10px">Fees are as published on our pricing page as of 10/01/2026 and are subject to change. PrimeVest is not a bank; balances are held with regulated custodians.</p>
     </div>
 </div>
 
@@ -594,7 +668,7 @@
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     /* ------------------------------------------------------------------
-       1. Header dropdowns — click to open, click-away / Esc to close.
+       1. Header dropdowns â€” click to open, click-away / Esc to close.
        ------------------------------------------------------------------ */
     var ddItems = Array.prototype.slice.call(document.querySelectorAll('[data-dropdown]'));
 
@@ -735,7 +809,7 @@
     }
 
     /* ------------------------------------------------------------------
-       6. Life stages — mobile accordion + desktop expanding carousel
+       6. Life stages â€” mobile accordion + desktop expanding carousel
        ------------------------------------------------------------------ */
     Array.prototype.forEach.call(document.querySelectorAll('[data-stage-m]'), function (card) {
         card.addEventListener('click', function () {
@@ -754,7 +828,7 @@
     /* Scope to .wf-pill: the cards also carry a data-pill attribute, and
        selecting on that alone attached a second click handler to every card
        that force-re-expanded it. That is why clicking the open card could
-       never collapse the carousel — toggleStage() collapsed it and this
+       never collapse the carousel â€” toggleStage() collapsed it and this
        listener immediately expanded it again. */
     var pills = Array.prototype.slice.call(document.querySelectorAll('.wf-pill[data-pill]'));
     var stageOpen = false;
