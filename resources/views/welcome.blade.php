@@ -6,57 +6,6 @@
 @php
     $wfImg   = fn ($file) => asset('images/wf/' . $file);
 
-    /* ---------------------------------------------------------------
-       Markets carousel â€” each card expands to show trading detail.
-       --------------------------------------------------------------- */
-    $stages = [
-        [
-            'id'     => 'crypto',
-            'pill'   => 'BTC/USD &middot; 24/7 market',
-            'title'  => 'Crypto',
-            'strong' => 'Trade 250+ coins around the clock,',
-            'rest'   => ' with no market close.',
-            'copy'   => 'Buy, sell and hold Bitcoin, Ethereum and 250+ altcoins from one wallet. Spot, futures and margin desks stay open every minute of every day â€” no weekend gaps, no settlement delay. Funds sit in multi-sig cold storage with published proof-of-reserves, and on-chain deposits credit in seconds.',
-            'chart'  => ['symbol' => 'BTC/USD', 'name' => 'Bitcoin', 'price' => '$68,412.90', 'change' => '+4.82%', 'up' => true, 'accent' => '#22d3a5', 'style' => 'candles', 'seed' => 91],
-        ],
-        [
-            'id'     => 'stocks',
-            'pill'   => 'AAPL &middot; NVDA &middot; TSLA',
-            'title'  => 'Stocks',
-            'strong' => 'Fractional shares from $1,',
-            'rest'   => ' commission-free.',
-            'copy'   => 'Trade listed US and UK equities with $0 commissions, extended-hours access and level-2 depth. Build a position from a single share, queue limit, stop and trailing orders, then reinvest dividends automatically the moment they settle.',
-            'chart'  => ['symbol' => 'NVDA', 'name' => 'NVIDIA Corp', 'price' => '$236.41', 'change' => '+1.24%', 'up' => true, 'accent' => '#4f8cff', 'style' => 'area', 'seed' => 17],
-        ],
-        [
-            'id'     => 'indices',
-            'pill'   => 'S&amp;P 500 &middot; Nasdaq-100 &middot; FTSE',
-            'title'  => 'Indices',
-            'strong' => 'Own the whole market',
-            'rest'   => ' in a single ticket.',
-            'copy'   => 'Track the S&P 500, Nasdaq-100, Dow Jones and FTSE 100 through one position. Index exposure spreads your risk across hundreds of constituents at once, so a single weak earnings print never gets to decide your week.',
-            'chart'  => ['symbol' => 'SPX', 'name' => 'S&P 500', 'price' => '5,842.17', 'change' => '+0.63%', 'up' => true, 'accent' => '#a98bff', 'style' => 'area', 'seed' => 43],
-        ],
-        [
-            'id'     => 'forex',
-            'pill'   => 'EUR/USD &middot; GBP/JPY &middot; 70+ pairs',
-            'title'  => 'Forex',
-            'strong' => '70+ currency pairs',
-            'rest'   => ' on institutional liquidity.',
-            'copy'   => 'Majors, minors and exotics priced off aggregated bank liquidity with tight variable spreads. Leverage up to 1:500, negative-balance protection as standard, and economic-calendar alerts pushed to your phone before the candle even forms.',
-            'chart'  => ['symbol' => 'EUR/USD', 'name' => 'Euro / US Dollar', 'price' => '1.0874', 'change' => '-0.21%', 'up' => false, 'accent' => '#f6465d', 'style' => 'area', 'seed' => 58],
-        ],
-        [
-            'id'     => 'commodities',
-            'pill'   => 'XAU/USD &middot; Brent &middot; Nat gas',
-            'title'  => 'Commodities',
-            'strong' => 'Trade gold, oil and gas',
-            'rest'   => ' as a real hedge.',
-            'copy'   => 'Go long or short on precious metals, crude oil, natural gas and agricultural futures. Commodities have historically moved against equities, which makes them a practical hedge when risk appetite turns and your equity book is having a bad week.',
-            'chart'  => ['symbol' => 'XAU/USD', 'name' => 'Gold Spot', 'price' => '$2,684.50', 'change' => '+0.94%', 'up' => true, 'accent' => '#f0b90b', 'style' => 'area', 'seed' => 73],
-        ],
-    ];
-
     $faqs = [
         [
             'q' => 'What can I actually trade on PrimeVest?',
@@ -109,7 +58,8 @@
                             <svg viewBox="0 0 24 24" fill="currentColor" role="presentation" aria-hidden="true"><path d="M7.689 14.804a.5.5 0 00.282.281l1.487.587a.5.5 0 010 .93l-1.487.587a.5.5 0 00-.282.282l-.587 1.487a.5.5 0 01-.93 0l-.587-1.487a.5.5 0 00-.281-.282l-1.487-.587a.5.5 0 010-.93l1.487-.587a.5.5 0 00.281-.281l.587-1.487a.5.5 0 01.93 0l.587 1.487zm.648-8.798a.279.279 0 00.157.157l.83.328a.279.279 0 010 .518l-.83.328a.279.279 0 00-.157.157l-.328.83a.279.279 0 01-.518 0l-.328-.83a.279.279 0 00-.157-.157l-.83-.328a.279.279 0 010-.518l.83-.328a.279.279 0 00.157-.157l.328-.83a.279.279 0 01.518 0l.328.83zM13.892 5.402a.625.625 0 011.168 0l.666 1.75a5.328 5.328 0 003.074 3.074l1.75.666a.625.625 0 010 1.168l-1.75.666a5.328 5.328 0 00-3.073 3.074l-.667 1.75a.625.625 0 01-1.168 0l-.666-1.75a5.328 5.328 0 00-3.074-3.073l-1.75-.667a.625.625 0 010-1.168l1.75-.666a5.327 5.327 0 003.074-3.074l.666-1.75zm.972 3.385c-.168-.276-.608-.276-.775 0a6.822 6.822 0 01-2.302 2.302c-.277.167-.277.607 0 .774a6.823 6.823 0 012.302 2.302c.167.277.607.277.774 0a6.825 6.825 0 012.302-2.301c.277-.168.277-.608 0-.775a6.824 6.824 0 01-2.301-2.302z"/></svg>
                             24/7 markets &middot; 250+ assets
                         </span>
-                        <span class="text-5xl" data-testid="h1-apy-hero">Crypto.<br>Stocks.<br>Indices.</span>
+                        <br>
+                        <span class="text-5xl" data-testid="h1-apy-hero">Crypto.Stocks.Indices.</span>
                     </h1>
                 </div>
 
@@ -457,72 +407,42 @@
 </section>
 
 {{-- ======================================================================
-     LIFE STAGES  Â·  data-testid="homepage-life-stages-module"
+     LIVE CROSS RATES  ·  TradingView widget replaces the old carousels
      ====================================================================== --}}
-<div class="wf-stages" data-testid="homepage-life-stages-module">
+<section class="wf-tv" data-testid="homepage-cross-rates-module">
     <div class="wf-marketing-section">
-        <div class="wf-sec-head " >
-            <h2 class="wf-h2">Pick your market,<br> <span class="wf-h2-serif">trade it in seconds.</span></h2>
+        <div class="wf-sec-head">
+            <h2 class="wf-h2">Live cross rates,<br> <span class="wf-h2-serif">piped in real time.</span></h2>
+            <p class="wf-lede">
+                Every major pair, quoted straight from aggregated interbank liquidity. Scan the grid, spot the
+                breakout, then open the desk and trade it in a couple of taps.
+            </p>
         </div>
 
-        {{-- ---------- mobile: collapsed cards ---------- --}}
-        <div class="wf-stages-grid">
-            @foreach ($stages as $s)
-                <button class="wf-stage-m" type="button" data-stage-m aria-expanded="false">
-                    <span class="wf-stage-m-viz" aria-hidden="true">
-                        @include('partials.chart', $s['chart'] + ['tone' => '#0a0f1e', 'wide' => true])
-                    </span>
-                    <span class="wf-stage-m-body">
-                        <span class="wf-stage-m-head">
-                            <h3>{{ $s['title'] }}</h3>
-                            <span class="wf-arrow-chip" data-testid="arrow-right-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-                            </span>
-                        </span>
-                        <p><b>{{ $s['strong'] }}</b>{{ $s['rest'] }}</p>
-                    </span>
-                    <span class="wf-stage-m-detail">{{ $s['copy'] }}</span>
-                </button>
-            @endforeach
+        <div class="wf-tv-box">
+            <div class="tradingview-widget-container" style="height:100%;width:100%">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript"
+                        src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js"
+                        async>
+                {
+                    "colorTheme": "dark",
+                    "locale": "en",
+                    "isTransparent": true,
+                    "width": "100%",
+                    "height": 660,
+                    "currencies": ["EUR", "USD", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD"]
+                }
+                </script>
+            </div>
         </div>
 
-        {{-- ---------- desktop: expanding carousel ---------- --}}
-        <div class="wf-stage-d" data-stage-d role="group" aria-label="Markets" data-testid="expandable-carousel">
-            @foreach ($stages as $i => $s)
-                <div class="wf-stage-d-card" role="button" tabindex="0"
-                     aria-expanded="false"
-                     aria-label="Expand {{ $s['title'] }}" data-stage-card data-pill="{{ $i }}">
-                    <span class="wf-stage-viz" aria-hidden="true">
-                        @include('partials.chart', $s['chart'] + ['tone' => '#0a0f1e', 'wide' => true])
-                    </span>
-                    <div class="wf-stage-d-inner">
-                        <span class="wf-stage-d-pill">{!! $s['pill'] !!}</span>
-                        <div>
-                            <h3>{{ $s['title'] }}</h3>
-                            <div class="wf-stage-d-cta">
-                                <p><b>{{ $s['strong'] }}</b>{{ $s['rest'] }}</p>
-                                <span class="wf-arrow-chip" data-testid="arrow-right-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-                                </span>
-                            </div>
-                            <p class="wf-stage-d-detail">{{ $s['copy'] }}</p>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-
-        {{-- ---------- carousel pills ---------- --}}
-        <div class="wf-pills" role="tablist" aria-label="Markets">
-            @foreach ($stages as $i => $s)
-                <button class="wf-pill {{ $i === 0 ? 'is-active' : '' }}" role="tab" type="button"
-                        id="expandable-carousel-tab-{{ $i }}" aria-selected="{{ $i === 0 ? 'true' : 'false' }}"
-                        aria-controls="expandable-carousel-tabpanel" tabindex="{{ $i === 0 ? '0' : '-1' }}"
-                        aria-label="View {{ $s['title'] }}" data-pill="{{ $i }}"></button>
-            @endforeach
+        <div class="wf-tv-foot">
+            <a class="wf-btn wf-btn-primary" href="{{ route('forex.majors') }}">Trade these pairs</a>
+            <span class="wf-tv-note">Rates provided by TradingView &middot; updated continuously</span>
         </div>
     </div>
-</div>
+</section>
 
 {{-- ======================================================================
      REVIEWS  Â·  data-testid="homepage-reviews-module"
@@ -809,88 +729,7 @@
     }
 
     /* ------------------------------------------------------------------
-       6. Life stages â€” mobile accordion + desktop expanding carousel
-       ------------------------------------------------------------------ */
-    Array.prototype.forEach.call(document.querySelectorAll('[data-stage-m]'), function (card) {
-        card.addEventListener('click', function () {
-            var open = card.classList.toggle('is-open');
-            card.setAttribute('aria-expanded', open ? 'true' : 'false');
-        });
-    });
-
-    var stageRow = document.querySelector('[data-stage-d]');
-    var stageCards = Array.prototype.slice.call(document.querySelectorAll('[data-stage-card]'));
-    var stageTitles = stageCards.map(function (card) {
-        var h3 = card.querySelector('h3');
-        return h3 ? h3.textContent.trim() : '';
-    });
-    var pillsWrap = document.querySelector('.wf-pills');
-    /* Scope to .wf-pill: the cards also carry a data-pill attribute, and
-       selecting on that alone attached a second click handler to every card
-       that force-re-expanded it. That is why clicking the open card could
-       never collapse the carousel â€” toggleStage() collapsed it and this
-       listener immediately expanded it again. */
-    var pills = Array.prototype.slice.call(document.querySelectorAll('.wf-pill[data-pill]'));
-    var stageOpen = false;
-
-    /* Collapsed, the three cards are equal portrait tiles and the pills stay
-       hidden (matching wealthfront). `open` promotes one card to a wide panel
-       with the copy beside the image, while its peers stay visible and
-       clickable so another card can be chosen in place. Clicking the promoted
-       card again (its arrow chip turns into a close) collapses back down. */
-    function activateStage(index, open) {
-        stageOpen = open;
-        if (stageRow) stageRow.classList.toggle('is-expanded', open);
-        if (pillsWrap) pillsWrap.classList.toggle('is-visible', open);
-
-        stageCards.forEach(function (card, i) {
-            var on = i === index;
-            card.classList.toggle('is-active', on);
-            card.setAttribute('aria-expanded', on && open ? 'true' : 'false');
-            /* Say Collapse while this card is the open one, so the way back
-               out is announced rather than only implied by the X chip. */
-            card.setAttribute('aria-label', (on && open ? 'Collapse ' : 'Expand ') + stageTitles[i]);
-        });
-        pills.forEach(function (pill) {
-            var on = parseInt(pill.getAttribute('data-pill'), 10) === index;
-            pill.classList.toggle('is-active', on);
-            if (pill.hasAttribute('role')) {
-                pill.setAttribute('aria-selected', on ? 'true' : 'false');
-                pill.setAttribute('tabindex', on ? '0' : '-1');
-            }
-        });
-    }
-
-    function toggleStage(index) {
-        activateStage(index, !(stageOpen && stageCards[index].classList.contains('is-active')));
-    }
-
-    stageCards.forEach(function (card, i) {
-        card.addEventListener('click', function () { toggleStage(i); });
-        card.addEventListener('keydown', function (e) {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleStage(i); }
-            if (e.key === 'ArrowRight') { e.preventDefault(); activateStage((i + 1) % stageCards.length, true); }
-            if (e.key === 'ArrowLeft')  { e.preventDefault(); activateStage((i - 1 + stageCards.length) % stageCards.length, true); }
-        });
-    });
-
-    pills.forEach(function (pill) {
-        pill.addEventListener('click', function () {
-            activateStage(parseInt(pill.getAttribute('data-pill'), 10), true);
-        });
-    });
-
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' && stageOpen) {
-            activateStage(stageCards.findIndex(function (c) { return c.classList.contains('is-active'); }), false);
-        }
-    });
-
-    /* Start collapsed with the pills hidden; card 0 is only the keyboard seed. */
-    if (stageCards.length) activateStage(0, false);
-
-    /* ------------------------------------------------------------------
-       7. Testimonial carousel
+       6. Testimonial carousel
        ------------------------------------------------------------------ */
     var carousel = document.querySelector('[data-carousel]');
     if (carousel) {
@@ -939,7 +778,7 @@
     }
 
     /* ------------------------------------------------------------------
-       8. Esc closes everything
+       7. Esc closes everything
        ------------------------------------------------------------------ */
     document.addEventListener('keydown', function (e) {
         if (e.key !== 'Escape') return;

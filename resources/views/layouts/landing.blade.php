@@ -37,21 +37,6 @@
          ============================================================ --}}
     <div class="wf-top">
 
-        {{-- ---------- promo banner ---------- --}}
-        <div class="wf-banner wf-container-2024" data-testid="home-lending-banner">
-            <div class="wf-banner-card">
-                <div class="wf-banner-copy">
-                    The easier way to get a low mortgage rate.
-                    <span>Self-serve home loans with zero sales pressure.</span>
-                </div>
-                <a href="{{ route('real-estate') }}" class="wf-banner-link">
-                    Learn more
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
-                </a>
-                <img class="wf-banner-photo" width="595" height="94" alt="" loading="eager" src="{{ asset('images/wf/banner-photo-small.png') }}">
-            </div>
-        </div>
-
         {{-- ---------- header ---------- --}}
         <div class="wf-header wf-container-2024" data-testid="header">
             <div class="wf-header-inner">
@@ -186,6 +171,19 @@
                 </button>
             </div>
         </div>
+
+        {{-- ---------- promo banner (below the navbar so it never pushes it down) ---------- --}}
+        <!-- <div class="wf-banner wf-container-2024" data-testid="home-lending-banner">
+            <div class="wf-banner-card">
+                <div class="wf-banner-copy">
+                    Earn up to <span>15% APY</span> on stablecoin staking.
+                </div>
+                <a href="{{ route('dashboard') }}" class="wf-banner-link">
+                    Start earning
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></svg>
+                </a>
+            </div>
+        </div> -->
     </div>
 
     {{-- ---------- page ---------- --}}

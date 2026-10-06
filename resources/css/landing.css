@@ -218,8 +218,8 @@ body {
 .wf-banner {
     position: relative;
     z-index: 10;
-    padding-top: 32px;
-    padding-bottom: 8px;
+    padding-top: 8px;
+    padding-bottom: 4px;
 }
 
 .wf-banner-card {
@@ -644,9 +644,9 @@ body {
     gap: 8px;
     font-weight: 600;
     letter-spacing: -0.02em;
-    font-size: 24px;
+    font-size: 17px;
     line-height: 1;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .wf-eyebrow-line svg {
@@ -658,29 +658,29 @@ body {
 .wf-h1 {
     font-family: var(--wf-sans);
     font-weight: 700;
-    font-size: 42px;
-    line-height: 0.9;
+    font-size: 32px;
+    line-height: 0.94;
     letter-spacing: -0.03em;
 }
 
 .wf-h1-apy {
     display: block;
     font-weight: 700;
-    font-size: 72px;
-    line-height: 0.86;
+    font-size: 52px;
+    line-height: 0.9;
     letter-spacing: -0.04em;
-    margin-top: 6px;
+    margin-top: 4px;
 }
 
 .wf-h2-serif {
     font-family: var(--wf-serif);
     font-weight: 300;
     font-style: italic;
-    font-size: 41px;
+    font-size: 30px;
     line-height: 1.2;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.04em;
     max-width: 600px;
-    margin-top: 14px;
+    margin-top: 10px;
 }
 
 /* hero feature bullets */
@@ -956,7 +956,7 @@ body {
 .wf-h2 {
     font-family: var(--wf-sans);
     font-weight: 700;
-    font-size: 30px;
+    font-size: 26px;
     line-height: 1.02;
     letter-spacing: -0.035em;
     max-width: 1074px;
@@ -970,7 +970,7 @@ body {
 }
 
 .wf-lede {
-    font-size: 1.125rem;
+    font-size: 1rem;
     line-height: 1.45;
     letter-spacing: -0.015em;
     max-width: 1012px;
@@ -1106,7 +1106,7 @@ body {
 }
 
 .wf-acct-head .wf-h2 {
-    font-size: 26px;
+    font-size: 23px;
     max-width: 100%;
 }
 
@@ -1370,7 +1370,8 @@ body {
     box-shadow: 0 22px 44px -26px rgba(35, 11, 89, 0.5);
 }
 
-.wf-stage-m-img {
+.wf-stage-m-img,
+.wf-stage-m-viz {
     flex: 0 1 auto;
     width: 91px;
     max-width: 30%;
@@ -1379,6 +1380,14 @@ body {
     object-fit: cover;
     border-radius: var(--wf-r-lg);
     background: var(--wf-ghost);
+    overflow: hidden;
+    display: block;
+}
+
+.wf-stage-m-viz .wf-chart-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .wf-stage-m-body {
@@ -1397,7 +1406,7 @@ body {
 }
 
 .wf-stage-m-body h3 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 0.9;
@@ -1474,19 +1483,30 @@ body {
     outline-offset: 3px;
 }
 
-.wf-stage-d-card img {
+.wf-stage-d-card img,
+.wf-stage-d-card .wf-stage-viz {
     position: absolute;
     inset: 0;
     z-index: 0;
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    overflow: hidden;
     transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* the chart SVG has to fill whichever box its wrapper ends up in */
+.wf-stage-d-card .wf-stage-viz .wf-chart-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* The source keeps every collapsed card visually identical, so the zoom and
    the chip rotation only apply once a card is actually expanded. */
-.wf-stage-d.is-expanded .wf-stage-d-card.is-active img {
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active img,
+.wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-stage-viz {
     /* Stop being a full-bleed overlay and become the left-hand panel,
        keeping the portrait ratio the collapsed cards use. */
     position: relative;
@@ -1605,7 +1625,7 @@ body {
 }
 
 .wf-stage-d.is-expanded .wf-stage-d-card.is-active .wf-stage-d-inner h3 {
-    font-size: 40px;
+    font-size: 32px;
     line-height: 1.02;
     margin-bottom: 0;
 }
@@ -1675,7 +1695,7 @@ body {
 }
 
 .wf-stage-d-inner h3 {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 0.9;
@@ -1805,7 +1825,7 @@ body {
 .wf-rev-quote {
     font-family: var(--wf-sans);
     font-weight: 600;
-    font-size: 26px;
+    font-size: 22px;
     line-height: 1.12;
     letter-spacing: -0.035em;
     max-width: 560px;
@@ -1977,7 +1997,7 @@ body {
 }
 
 .wf-cta-band h2 {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 700;
     letter-spacing: -0.035em;
     line-height: 1.05;
@@ -2010,7 +2030,7 @@ body {
 }
 
 .wf-faq-intro .wf-h2 {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .wf-faq-intro p {
@@ -2437,11 +2457,11 @@ body {
     }
 
     .wf-h2 {
-        font-size: 40px;
+        font-size: 33px;
     }
 
     .wf-h2-serif {
-        font-size: 48px;
+        font-size: 36px;
     }
 
     .wf-badge {
@@ -2453,7 +2473,7 @@ body {
     }
 
     .wf-acct-head .wf-h2 {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .wf-acct-body {
@@ -2554,20 +2574,20 @@ body {
     }
 
     .wf-eyebrow-line {
-        font-size: 32px;
+        font-size: 22px;
     }
 
     .wf-h1 {
-        font-size: 62px;
+        font-size: 46px;
         white-space: nowrap;
     }
 
     .wf-h1-apy {
-        font-size: 120px;
+        font-size: 82px;
     }
 
     .wf-h2-serif {
-        font-size: 59px;
+        font-size: 44px;
     }
 
     .wf-btn {
@@ -2579,11 +2599,11 @@ body {
     }
 
     .wf-h2 {
-        font-size: 46px;
+        font-size: 38px;
     }
 
     .wf-h2-serif {
-        font-size: 56px;
+        font-size: 44px;
     }
 
     .wf-acct-grid {
@@ -2591,7 +2611,7 @@ body {
     }
 
     .wf-acct-head .wf-h2 {
-        font-size: 30px;
+        font-size: 25px;
     }
 
     .wf-stages-grid {
@@ -2611,7 +2631,7 @@ body {
     }
 
     .wf-rev-quote {
-        font-size: 34px;
+        font-size: 27px;
     }
 
     .wf-quote-mark {
@@ -2627,7 +2647,7 @@ body {
     }
 
     .wf-cta-band h2 {
-        font-size: 46px;
+        font-size: 36px;
     }
 
     .wf-faq-inner {
@@ -2647,7 +2667,7 @@ body {
 
 @media (min-width: 1536px) {
     .wf-h1-apy {
-        font-size: 156px;
+        font-size: 104px;
     }
 
     .wf-hero-grid {
@@ -2691,15 +2711,11 @@ body {
         padding-block: 24px;
     }
 
-    .wf-banner-card {
-        flex-wrap: wrap;
-    }
-
-    .wf-banner-photo {
-        order: 3;
-        width: 100%;
-        flex-basis: 100%;
-        height: 36px;
+    /* The real-estate promo strip is desktop-only. On phones the card wrapped
+       to three rows (copy + link + full-width photo) plus 32px of top padding,
+       which shoved the header and hero well down the viewport. */
+    .wf-banner {
+        display: none;
     }
 
     .wf-hero-inner {
@@ -2707,7 +2723,7 @@ body {
     }
 
     .wf-h1-apy {
-        font-size: 64px;
+        font-size: 50px;
     }
 
     .wf-accolades {
@@ -2755,5 +2771,109 @@ body {
     .wf-dd-panel,
     .wf-faq-a {
         transition: none;
+    }
+}
+/* ---------- promo banner: compact on small screens ---------- */
+@media (max-width: 767px) {
+    .wf-banner {
+        padding-top: 6px;
+        padding-bottom: 2px;
+    }
+
+    .wf-banner-card {
+        padding: 8px 10px;
+        gap: 8px;
+        flex-wrap: nowrap;
+    }
+
+    .wf-banner-copy {
+        font-size: 13px;
+        letter-spacing: -0.01em;
+    }
+
+    .wf-banner-copy span {
+        display: inline;
+        font-size: 13px;
+        margin-top: 0;
+        opacity: 1;
+        font-weight: 700;
+        color: var(--wf-blurple);
+    }
+
+    .wf-banner-link {
+        padding: 5px 10px;
+        font-size: 12px;
+    }
+}
+
+/* ---------- TradingView cross-rates block ---------- */
+.wf-tv {
+    display: block;
+    overflow: hidden;
+    padding-block: var(--wf-xxxlarge);
+    background: linear-gradient(180deg, var(--wf-ghost) 0%, #eef0fb 100%);
+    color: var(--wf-content-primary);
+}
+
+.wf-tv .wf-sec-head {
+    gap: var(--wf-medium);
+}
+
+.wf-tv .wf-h2 {
+    color: var(--wf-blurple);
+}
+
+.wf-tv-box {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    height: 660px;
+    border-radius: var(--wf-r-xl);
+    overflow: hidden;
+    background: #0b1020;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 50px 90px -55px rgba(35, 11, 89, 0.75);
+}
+
+.wf-tv-box .tradingview-widget-container,
+.wf-tv-box .tradingview-widget-container__widget {
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.wf-tv-box iframe {
+    height: 100% !important;
+    width: 100% !important;
+    border: 0 !important;
+}
+
+.wf-tv-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.wf-tv-note {
+    color: var(--wf-quartz);
+    font-size: 13px;
+    letter-spacing: -0.01em;
+}
+
+@media (max-width: 1279px) {
+    .wf-tv-box {
+        height: 600px;
+    }
+}
+
+@media (max-width: 767px) {
+    .wf-tv-box {
+        height: 480px;
+        border-radius: var(--wf-r-lg);
+    }
+
+    .wf-tv .wf-h2 {
+        font-size: 30px;
     }
 }
