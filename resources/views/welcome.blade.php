@@ -36,10 +36,10 @@
      HERO  Â·  data-testid="reusable-hero-module"
      ====================================================================== --}}
 <section class="wf-hero" data-testid="reusable-hero-module">
-    <video class="wf-hero-bg" poster="{{ asset('videos/hero-trading-poster.jpg') }}"
+    <video class="wf-hero-bg"
            autoplay muted loop playsinline preload="auto"
            aria-hidden="true" tabindex="-1" data-testid="hero-background-video">
-        <source src="{{ asset('videos/hero-trading.mp4') }}" type="video/mp4">
+        <source src="{{ asset('videos/hero-crypto.mp4') }}" type="video/mp4">
     </video>
     <div class="wf-hero-scrim" aria-hidden="true"></div>
 
@@ -426,9 +426,10 @@
                         src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js"
                         async>
                 {
-                    "colorTheme": "dark",
+                    "colorTheme": "light",
                     "locale": "en",
-                    "isTransparent": true,
+                    "isTransparent": false,
+                    "backgroundColor": "#ffffff",
                     "width": "100%",
                     "height": 660,
                     "currencies": ["EUR", "USD", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD"]

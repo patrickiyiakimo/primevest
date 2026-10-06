@@ -358,10 +358,9 @@ body {
     padding: 14px 14px;
     margin: -14px 0;
     font-family: var(--wf-sans);
-    /* The source pins its nav labels to a flat !text-[20px]; this block used
-       to be overridden to 32px at >=1280px, which is what made the desktop
-       nav look oversized. 18px keeps the same visual weight, tightened. */
-    font-size: 18px;
+    /* The source pins its nav labels to a flat !text-[20px]; 15px keeps the
+       nav quiet without shrinking the tap targets. */
+    font-size: 15px;
     font-weight: 600;
     line-height: 1;
     letter-spacing: -0.01em;
@@ -2566,10 +2565,10 @@ body {
         padding-bottom: 80px;
     }
 
-    /* Nav links inherit the 18px base size; this block used to force 32px. */
+    /* Nav links inherit the base size; never let the wide query bloat them. */
     .wf-nav-btn,
     .wf-nav-link {
-        font-size: 18px;
+        font-size: 15px;
         letter-spacing: -0.01em;
     }
 
@@ -2830,9 +2829,9 @@ body {
     height: 660px;
     border-radius: var(--wf-r-xl);
     overflow: hidden;
-    background: #0b1020;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 50px 90px -55px rgba(35, 11, 89, 0.75);
+    background: #ffffff;
+    border: 1px solid rgba(35, 11, 89, 0.12);
+    box-shadow: 0 50px 90px -55px rgba(35, 11, 89, 0.55);
 }
 
 .wf-tv-box .tradingview-widget-container,
