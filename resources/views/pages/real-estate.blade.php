@@ -15,7 +15,7 @@
     
     <!-- Hero Content -->
     <div class="relative z-10 flex items-center min-h-[500px] sm:min-h-[550px] md:min-h-[600px]">
-        <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16 w-full">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 
                 <!-- Left Side - Text Content -->
