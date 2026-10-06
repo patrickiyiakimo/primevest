@@ -453,15 +453,18 @@
 
         {{-- ---------- Forbes quote + testimonial carousel ---------- --}}
         <div class="wf-rev-top">
-            <div class="wf-rev-copy " >
-                <span class="wf-quote-mark" aria-hidden="true">"</span>
-                <h2 class="wf-rev-quote">PrimeVest has quietly become one of the most complete trading destinations for retail investors — crypto, equities and indices under a single roof.</h2>
+            <div class="wf-rev-copy">
+                <span class="wf-rev-eyebrow">Featured in</span>
+                <span class="wf-quote-mark" aria-hidden="true">&ldquo;</span>
+                <h2 class="wf-rev-quote">PrimeVest has quietly become one of the most complete trading destinations for retail investors &mdash; crypto, equities and indices under a single roof.</h2>
 
-                <img class="wf-rev-forbes" src="{{ $wfImg('forbes-logo-white.png') }}" width="1945" height="475" alt="Forbes" loading="lazy">
+                <div class="wf-rev-source">
+                    <img class="wf-rev-forbes" src="{{ $wfImg('forbes-logo-white.png') }}" width="1945" height="475" alt="Forbes" loading="lazy">
+                    <a class="wf-rev-link" href="#">Read the article<sup>6</sup></a>
+                </div>
 
                 <p class="wf-rev-fine">
-                    <b><a href="#">Read the article<sup>6</sup></a></b><br>
-                    From Forbes, July 26, 2025. 2025 Forbes Media LLC. All rights reserved. Used under license.<br>
+                    From Forbes, July 26, 2025. 2025 Forbes Media LLC. All rights reserved. Used under license.
                     Forbes and the author are not clients of PrimeVest and no compensation was provided for the article.
                 </p>
             </div>
@@ -509,16 +512,27 @@
             <p>The testimonials above are by clients of PrimeVest Advisers and PrimeVest Brokerage. No compensation was provided. These testimonials may not be representative of other clients' experience. Past performance is no guarantee of success.</p>
             <p>The mention of WLTH is for informational purposes only and should not be construed as investment advice, a solicitation, offer, or recommendation to buy or sell any security. Please visit our investor relations page for more information.</p>
         </div>
+    </div>
+</section>
 
-        {{-- ---------- CTA band ---------- --}}
-        <div class="wf-cta-band">
-            <div class="wf-circles-wrap" style="opacity:.5" aria-hidden="true">
-                <img class="wf-circles" src="{{ $wfImg('gradient-circles.svg') }}" width="2024" height="850" alt="" loading="lazy">
-            </div>
-            <div class="wf-cta-band-inner">
-                <h2>Sophisticated trading<br class="wf-br"> <span class="wf-h2-serif">made simple.</span></h2>
-                <a class="wf-btn wf-btn-white" href="{{ route('register') }}">Open account</a>
-            </div>
+{{-- ======================================================================
+     REAL ESTATE CTA  Â·  full-bleed image banner
+     ====================================================================== --}}
+<section class="wf-re-cta" data-testid="homepage-real-estate-cta">
+    <img class="wf-re-cta-bg" src="{{ asset('images/estate-cta.jpg') }}" width="1600" height="1067"
+         alt="" aria-hidden="true" loading="lazy">
+    <div class="wf-re-cta-scrim" aria-hidden="true"></div>
+
+    <div class="wf-re-cta-inner">
+        <span class="wf-re-cta-eyebrow">PrimeVest Real Estate</span>
+        <h2>Invest in real estate, right from your trading account.</h2>
+        <p>
+            Back hand-picked residential and commercial property, earn a share of the rental yield, and manage
+            it alongside your crypto, forex and equity positions &mdash; one account, one dashboard.
+        </p>
+        <div class="wf-cta-actions">
+            <a class="wf-btn wf-btn-white" href="{{ route('real-estate') }}" data-testid="cta-real-estate-link">Explore properties</a>
+            <a class="wf-btn wf-btn-outline" href="{{ route('register') }}">Open account</a>
         </div>
     </div>
 </section>
@@ -588,63 +602,6 @@
 
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ------------------------------------------------------------------
-       1. Header dropdowns â€” click to open, click-away / Esc to close.
-       ------------------------------------------------------------------ */
-    var ddItems = Array.prototype.slice.call(document.querySelectorAll('[data-dropdown]'));
-
-    function closeAllDropdowns(except) {
-        ddItems.forEach(function (item) {
-            if (item === except) return;
-            item.classList.remove('is-open');
-            var btn = item.querySelector('.wf-nav-btn');
-            if (btn) btn.setAttribute('aria-expanded', 'false');
-        });
-    }
-
-    ddItems.forEach(function (item) {
-        var btn = item.querySelector('.wf-nav-btn');
-        if (!btn) return;
-        btn.addEventListener('click', function (e) {
-            e.stopPropagation();
-            var open = item.classList.toggle('is-open');
-            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-            closeAllDropdowns(item);
-        });
-    });
-
-    document.addEventListener('click', function (e) {
-        if (!e.target.closest('[data-dropdown]')) closeAllDropdowns(null);
-    });
-
-    /* ------------------------------------------------------------------
-       2. Mobile drawer
-       ------------------------------------------------------------------ */
-    var drawer = document.querySelector('.wf-drawer');
-    var drawerBackdrop = document.querySelector('.wf-drawer-backdrop');
-    var drawerTrigger = document.querySelector('[data-drawer-open]');
-
-    function setDrawer(open) {
-        if (!drawer) return;
-        drawer.classList.toggle('is-open', open);
-        drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
-        if (drawerBackdrop) drawerBackdrop.classList.toggle('is-open', open);
-        if (drawerTrigger) {
-            drawerTrigger.classList.toggle('is-open', open);
-            drawerTrigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-        }
-        document.body.style.overflow = open ? 'hidden' : '';
-    }
-
-    if (drawerTrigger) {
-        drawerTrigger.addEventListener('click', function () {
-            setDrawer(!drawer.classList.contains('is-open'));
-        });
-    }
-
-    Array.prototype.forEach.call(document.querySelectorAll('[data-drawer-close]'), function (el) {
-        el.addEventListener('click', function () { setDrawer(false); });
-    });
 
     /* ------------------------------------------------------------------
        3. Accordions (direct-deposit + FAQ)
@@ -783,8 +740,10 @@
        ------------------------------------------------------------------ */
     document.addEventListener('keydown', function (e) {
         if (e.key !== 'Escape') return;
-        closeAllDropdowns(null);
-        setDrawer(false);
+        if (window.pfLandingNav) {
+            window.pfLandingNav.closeAllDropdowns(null);
+            window.pfLandingNav.setDrawer(false);
+        }
         var open = document.querySelector('.wf-modal-backdrop.is-open');
         if (open) closeModal(open);
     });
