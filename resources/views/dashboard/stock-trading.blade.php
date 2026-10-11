@@ -74,11 +74,11 @@
     .cx-tab{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;
         border:1px solid var(--line);background:rgba(10,24,52,.02);color:var(--text);
         font-size:.82rem;font-weight:700;cursor:pointer;transition:.2s}
-    .cx-tab:hover{border-color:rgba(75,24,191,.45);background:rgba(75,24,191,.07)}
+    .cx-tab:hover{border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.07)}
     .cx-tab .cx-d{display:grid;place-items:center;width:26px;height:26px;border-radius:8px;
-        background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04121f;font-size:.68rem;font-weight:800;letter-spacing:-.02em}
-    .cx-tab.on{border-color:rgba(75,24,191,.6);background:rgba(75,24,191,.13);
-        box-shadow:0 0 0 3px rgba(75,24,191,.10)}
+        background:linear-gradient(135deg,var(--acc2),var(--acc));color:#0b1120;font-size:.68rem;font-weight:800;letter-spacing:-.02em}
+    .cx-tab.on{border-color:rgba(59,130,246,.6);background:rgba(59,130,246,.13);
+        box-shadow:0 0 0 3px rgba(59,130,246,.10)}
     .cx-live{position:absolute;top:44px;right:32px;z-index:3;display:flex;align-items:center;gap:6px;
         padding:5px 11px;border-radius:999px;background:rgba(15,185,129,.12);
         border:1px solid rgba(16,185,129,.35);color:#2eae82;font-size:.68rem;font-weight:800;letter-spacing:.1em}
@@ -97,13 +97,13 @@
     .chart-order{display:grid;grid-template-columns:1.8fr 1fr;gap:20px;align-items:start}
     @media(max-width:1100px){.chart-order{grid-template-columns:1fr}}
 </style>
-
+<!-- 
 <div class="kpi">
     <div class="kpi-card"><div class="lbl">Available Cash</div><div class="val num" id="kCash">${{ number_format($cashAvailable ?? 0, 2) }}</div><div class="sub">Balance + profits</div></div>
     <div class="kpi-card"><div class="lbl">Total Net Worth</div><div class="val num" id="kNet">${{ number_format($totalNetWorth ?? 0, 2) }}</div></div>
     <div class="kpi-card"><div class="lbl">Open Positions</div><div class="val num" id="kPos">{{ count($portfolio ?? []) }}</div></div>
     <div class="kpi-card"><div class="lbl">Market Feed</div><div class="live-tag" style="margin-top:9px"><span class="live-dot"></span>Live</div><div class="sub" id="kFeed">Streaming admin prices</div></div>
-</div>
+</div> -->
 
 <!-- ===== ALL MARKETS WATCHLIST ===== -->
 <div class="pa mt" style="padding:18px">
@@ -291,8 +291,8 @@
         /* The line was a washed-out grey in both themes, so the theme toggle
            barely registered. These are the hero blues, so the switch is obvious
            and the chart matches the brand. */
-        line: isL() ? '#4b18bf' : '#6a2ee0',
-        fill: isL() ? 'rgba(75,24,191,.12)' : 'rgba(76,195,255,.18)',
+        line: isL() ? '#2563eb' : '#3b82f6',
+        fill: isL() ? 'rgba(59,130,246,.12)' : 'rgba(76,195,255,.18)',
         grid: isL() ? 'rgba(10,24,52,.05)' : 'rgba(255,255,255,.045)',
         tick: isL() ? '#5c6b86' : '#5a6685',
         bg:  isL() ? '#ffffff' : '#0d1526',

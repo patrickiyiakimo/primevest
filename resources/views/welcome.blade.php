@@ -660,6 +660,17 @@
         el.addEventListener('click', function () { setDrawer(false); });
     });
 
+    Array.prototype.forEach.call(document.querySelectorAll('[data-drawer-sub]'), function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var sub = document.getElementById(btn.getAttribute('aria-controls'));
+            var open = !btn.classList.contains('is-open');
+            btn.classList.toggle('is-open', open);
+            btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+            if (sub) sub.classList.toggle('is-open', open);
+        });
+    });
+
     /* ------------------------------------------------------------------
        3. Accordions (direct-deposit + FAQ)
        ------------------------------------------------------------------ */

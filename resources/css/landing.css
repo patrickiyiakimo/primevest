@@ -293,7 +293,7 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    height: 96px;
+    height: 76px;
 }
 
 .wf-logo {
@@ -305,7 +305,7 @@ body {
 }
 
 .wf-logo img {
-    height: 32px;
+    height: 28px;
     width: auto;
 }
 
@@ -318,11 +318,11 @@ body {
 .wf-logo-lockup {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 8px;
 }
 
 .wf-logo-lockup b {
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 700;
     letter-spacing: -0.035em;
     line-height: 1;
@@ -2440,11 +2440,51 @@ body {
     background: var(--wf-ghost);
 }
 
-.wf-drawer-sub {
-    padding: 2px 0 8px 44px;
+.wf-drawer-link-row {
     display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.wf-drawer-link-row .wf-drawer-link {
+    flex: 1;
+}
+
+.wf-drawer-sub-btn {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    color: var(--wf-content-secondary);
+    transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.wf-drawer-sub-btn:hover {
+    background: var(--wf-ghost);
+    color: var(--wf-blurple);
+}
+
+.wf-drawer-sub-btn svg {
+    width: 10px;
+    height: 6px;
+    transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wf-drawer-sub-btn[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+.wf-drawer-sub {
+    display: none;
     flex-direction: column;
     gap: 2px;
+    padding: 2px 0 8px 44px;
+}
+
+.wf-drawer-sub.is-open {
+    display: flex;
 }
 
 .wf-drawer-sub a {
@@ -2623,8 +2663,8 @@ body {
         padding-inline: 64px;
     }
 
-    .wf-header-inner {
-        height: 96px;
+.wf-header-inner {
+        height: 76px;
     }
 
     .wf-nav {
