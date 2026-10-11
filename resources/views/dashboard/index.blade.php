@@ -47,10 +47,10 @@
     /* ===== Balance privacy toggle ===== */
     .pv-eye{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;margin-left:auto;flex-shrink:0;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--muted);cursor:pointer;transition:.18s}
     .pv-eye:hover{color:var(--text);background:rgba(255,255,255,.1)}
-    .pv-eye:focus-visible{outline:0;border-color:rgba(75,24,191,.55);box-shadow:0 0 0 3px rgba(75,24,191,.13)}
+    .pv-eye:focus-visible{outline:0;border-color:rgba(59,130,246,.6);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
     .pv-eye svg{width:15px;height:15px}
     .pv-eye .i-off{display:none}
-    .pv-balances-hidden .pv-eye{color:var(--acc);border-color:rgba(75,24,191,.4);background:rgba(75,24,191,.12)}
+    .pv-balances-hidden .pv-eye{color:var(--acc);border-color:rgba(59,130,246,.45);background:rgba(59,130,246,.14)}
     .pv-balances-hidden .pv-eye .i-on{display:none}
     .pv-balances-hidden .pv-eye .i-off{display:block}
     /* Blur keeps the original width, so nothing reflows when toggling. */
@@ -107,8 +107,8 @@
         .pv-onb-sub{margin:0 0 20px;font-size:.83rem;line-height:1.5;color:#8b97ad}
         .pv-onb-cta{display:block;width:100%;padding:13px;border-radius:12px;
             font-size:.92rem;font-weight:700;text-align:center;text-decoration:none;
-            background:var(--acc);color:#03140d;transition:opacity .18s;
-            box-shadow:0 10px 26px -12px rgba(75,24,191,.55)}
+            background:var(--acc);color:#fff;transition:opacity .18s;
+            box-shadow:0 10px 26px -12px rgba(37,99,235,.55)}
         .pv-onb-cta:hover{opacity:.9}
 
         /* An unfunded new account has no use for a 12M chart, a market screener
@@ -122,6 +122,8 @@
     @media(prefers-reduced-motion:reduce){
         .pv-onb,.pv-onb-card{animation:none}
     }
+    .kpi{grid-template-columns:repeat(2,1fr)}
+    @media(max-width:560px){.kpi{grid-template-columns:1fr}}
 </style>
 
 <!-- MOBILE-ONLY FUNDING PROMPT -->
@@ -141,7 +143,7 @@
 <!-- KPI CARDS -->
 <div class="{{ $needsFundingOnboarding ? 'pv-dash-needs-funding' : '' }}">
 <div class="kpi">
-    <div class="kpi-card glow pv-shade">
+    <div class="kpi-card">
         <div class="lbl">
             <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)"></span>Total Balance
             <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
@@ -157,31 +159,30 @@
         <div class="val num pv-money">${{ number_format($cashAvailable, 2) }}</div>
         <div class="sub">Ready to trade or stake</div>
     </div>
-    <div class="kpi-card">
+    <!-- <div class="kpi-card">
         <div class="lbl">
             Est. Annual Return
             <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
         </div>
         <div class="val num pv-money" style="color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">+{{ number_format($profitPercentage >= 0 ? $profitPercentage : 0, 3) }}%</div>
         <div class="sub">Lifetime return on balance</div>
-    </div>
-    <div class="kpi-card">
+    </div> -->
+    <!-- <div class="kpi-card">
         <div class="lbl">
             Positions
             <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
         </div>
         <div class="val num">{{ $stocksCount }}</div>
         <div class="sub">P/L <span class="pv-money {{ ($totalProfitLoss ?? 0) >= 0 ? 'ok' : 'bad' }} num">{{ ($totalProfitLoss ?? 0) >= 0 ? '+' : '' }}${{ number_format($totalProfitLoss ?? 0, 2) }}</span></div>
-    </div>
+    </div> -->
 </div>
 
 <!-- SIGNAL STRENGTH -->
-<div class="pa pv-shade mt" style="padding:16px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
+<div class="pa mt" style="padding:16px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:14px">
         <svg class="sig-ring" width="64" height="64" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" stroke-width="9"/>
-            <circle id="sigRing" cx="50" cy="50" r="42" fill="none" stroke="url(#sigGrad)" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="{{ round(263.9 * (1 - $signal / 100), 1) }}"/>
-            <defs><linearGradient id="sigGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6a2ee0"/><stop offset="100%" stop-color="#4b18bf"/></linearGradient></defs>
+            <circle id="sigRing" cx="50" cy="50" r="42" fill="none" stroke="#3b82f6" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="{{ round(263.9 * (1 - $signal / 100), 1) }}"/>
         </svg>
         <div style="min-width:125px">
             <div class="muted" style="font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700">Signal Strength</div>
@@ -195,7 +196,7 @@
                 <div style="flex:1">
                     <div class="muted" style="margin-bottom:6px">Top up to unlock <b class="ok">{{ $signalNext['level'] }}</b> tier</div>
                     <div style="height:8px;border-radius:99px;background:var(--line);overflow:hidden">
-                        <div style="height:100%;width:{{ $signal }}%;background:linear-gradient(90deg,#6a2ee0,#4b18bf);border-radius:99px;transition:width .6s"></div>
+                        <div style="height:100%;width:{{ $signal }}%;background:#3b82f6;border-radius:99px;transition:width .6s"></div>
                     </div>
                 </div>
                 <div class="num" style="font-weight:800;font-size:1.1rem;color:var(--acc)">{{ $signal }}/100</div>
@@ -396,8 +397,7 @@
         const labels=rows.map(r=>r.d);
         const values=rows.map(r=>r.v);
         const ctx=el.getContext('2d');
-        const grad=ctx.createLinearGradient(0,0,0,el.clientHeight||260);
-        grad.addColorStop(0,'rgba(75,24,191,.35)');grad.addColorStop(1,'rgba(75,24,191,0)');
+        const grad='rgba(59,130,246,.18)';
         const up=(values[values.length-1]||0)>=(values[0]||0);
         const isLight=document.documentElement.getAttribute('data-theme')==='light';
         const tipBg=isLight?'#ffffff':'#0d1526';
@@ -406,7 +406,7 @@
         const tickCol=isLight?'#5c6b86':'#5a6685';
         new Chart(ctx,{
             type:'line',
-            data:{labels,datasets:[{data:values,fill:true,backgroundColor:grad,borderColor:up?'#6a2ee0':'#ff7c85',borderWidth:2.4,tension:.35,pointRadius:0,pointHoverRadius:5}]},
+            data:{labels,datasets:[{data:values,fill:true,backgroundColor:grad,borderColor:up?'#3b82f6':'#f87171',borderWidth:2.4,tension:.35,pointRadius:0,pointHoverRadius:5}]},
             options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:tipBg,borderColor:tipBorder,borderWidth:1,callbacks:{label:(c)=>' $'+c.parsed.y.toLocaleString('en-US',{maximumFractionDigits:2})},titleColor:isLight?'#0b1526':'#eef2f9',bodyColor:isLight?'#0b1526':'#eef2f9'}},scales:{x:{grid:{color:gridCol},ticks:{color:tickCol,font:{size:10}}},y:{grid:{color:gridCol},ticks:{color:tickCol,font:{size:10},callback:(v)=>'$'+v}}}}
         });
     });
@@ -445,12 +445,10 @@
 
 <!-- SIGNAL MODAL -->
 <div id="sigModal" class="pv-modal">
-    <div style="width:480px;max-width:100%;background:linear-gradient(160deg,#1a1442 0%,#0d0a1a 40%,#0a0614 100%);border:1px solid rgba(124,58,237,.3);border-radius:24px;padding:32px;position:relative;overflow:hidden;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.6)">
-        <div style="position:absolute;top:-40%;right:-20%;width:200px;height:200px;background:radial-gradient(circle,rgba(124,58,237,.4),transparent 70%);pointer-events:none"></div>
-        <div style="position:absolute;bottom:-30%;left:-15%;width:160px;height:160px;background:radial-gradient(circle,rgba(75,24,191,.3),transparent 70%);pointer-events:none"></div>
+    <div style="width:480px;max-width:100%;background:#111827;border:1px solid rgba(59,130,246,.35);border-radius:24px;padding:32px;position:relative;overflow:hidden;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.6)">
 
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;position:relative;z-index:1">
-            <span style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:#a78bfa">Signal Strength</span>
+            <span style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:#60a5fa">Signal Strength</span>
             <button onclick="closeSignalModal()" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:1.4rem;cursor:pointer;line-height:1">&times;</button>
         </div>
 
@@ -458,8 +456,7 @@
         <div style="position:relative;width:160px;height:160px;margin:0 auto 20px;z-index:1">
             <svg width="160" height="160" viewBox="0 0 160 160" style="transform:rotate(-90deg)">
                 <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"/>
-                <circle id="sigModalRing" cx="80" cy="80" r="70" fill="none" stroke="url(#sigGrad2)" stroke-width="10" stroke-linecap="round" stroke-dasharray="439.8" stroke-dashoffset="439.8" style="transition:stroke-dashoffset .3s"/>
-                <defs><linearGradient id="sigGrad2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#7c3aed"/><stop offset="50%" stop-color="#4b18bf"/><stop offset="100%" stop-color="#a78bfa"/></linearGradient></defs>
+                <circle id="sigModalRing" cx="80" cy="80" r="70" fill="none" stroke="#3b82f6" stroke-width="10" stroke-linecap="round" stroke-dasharray="439.8" stroke-dashoffset="439.8" style="transition:stroke-dashoffset .3s"/>
             </svg>
             <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
                 <span id="sigModalVal" style="font-size:3rem;font-weight:800;color:#fff">0</span>
@@ -469,30 +466,30 @@
 
         <!-- Level -->
         <div style="margin-bottom:16px;position:relative;z-index:1">
-            <span style="display:inline-block;padding:6px 20px;background:linear-gradient(90deg,#7c3aed,#4b18bf);border-radius:20px;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.05em">{{ $signalLevel }}</span>
+            <span style="display:inline-block;padding:6px 20px;background:#2563eb;border-radius:20px;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.05em">{{ $signalLevel }}</span>
         </div>
 
         @if($signalNext)
             <p style="font-size:.95rem;color:rgba(255,255,255,.85);margin-bottom:8px;position:relative;z-index:1;line-height:1.6">
-                🎯 To unlock <strong style="color:#a78bfa">{{ $signalNext['level'] }}</strong> trading signals, deposit at least <strong style="color:#fff">${{ number_format($signalNext['threshold']) }}</strong>
+                🎯 To unlock <strong style="color:#60a5fa">{{ $signalNext['level'] }}</strong> trading signals, deposit at least <strong style="color:#fff">${{ number_format($signalNext['threshold']) }}</strong>
             </p>
             <p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:20px;position:relative;z-index:1">
-                You're at ${{ number_format($spendableBalance) }} — deposit <strong style="color:#7c3aed">${{ number_format(max(0,$signalNext['threshold']-$spendableBalance)) }}</strong> more to reach {{ $signalNext['signal'] }}% signal
+                You're at ${{ number_format($spendableBalance) }} — deposit <strong style="color:#60a5fa">${{ number_format(max(0,$signalNext['threshold']-$spendableBalance)) }}</strong> more to reach {{ $signalNext['signal'] }}% signal
             </p>
         @else
-            <p style="font-size:.95rem;color:#a78bfa;margin-bottom:20px;position:relative;z-index:1;font-weight:600">
+            <p style="font-size:.95rem;color:#60a5fa;margin-bottom:20px;position:relative;z-index:1;font-weight:600">
                 🏆 You've reached maximum signal strength! Full access to all trading signals.
             </p>
         @endif
 
         <!-- Progress -->
         <div style="background:rgba(255,255,255,.08);border-radius:10px;height:8px;overflow:hidden;margin-bottom:24px;position:relative;z-index:1">
-            <div style="height:100%;width:{{ $signal }}%;background:linear-gradient(90deg,#7c3aed,#4b18bf);border-radius:10px;transition:width .4s"></div>
+            <div style="height:100%;width:{{ $signal }}%;background:#3b82f6;border-radius:10px;transition:width .4s"></div>
         </div>
 
         <!-- CTAs -->
         <div style="display:flex;gap:12px;position:relative;z-index:1">
-            <a href="{{ route('deposit') }}" style="flex:1;padding:14px;background:linear-gradient(90deg,#7c3aed,#4b18bf);border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:opacity .2s" onmouseover="this.style.opacity=.85" onmouseout="this.style.opacity=1">💰 Deposit Now</a>
+            <a href="{{ route('deposit') }}" style="flex:1;padding:14px;background:#2563eb;border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:opacity .2s" onmouseover="this.style.opacity=.85" onmouseout="this.style.opacity=1">💰 Deposit Now</a>
             <a href="{{ route('invest') }}" style="flex:1;padding:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.15)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">📈 View Plans</a>
         </div>
     </div>

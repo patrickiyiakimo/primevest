@@ -209,8 +209,13 @@
         <nav class="wf-drawer-nav">
             <a class="wf-drawer-link" href="{{ route('trading') }}">Markets</a>
 
-            <a class="wf-drawer-link" href="{{ route('copy-trading') }}">Invest</a>
-            <div class="wf-drawer-sub">
+            <div class="wf-drawer-link-row">
+                <a class="wf-drawer-link" href="{{ route('copy-trading') }}">Invest</a>
+                <button class="wf-drawer-sub-btn" type="button" aria-expanded="false" aria-controls="wfd-invest" data-drawer-sub>
+                    <svg viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M.47 1.624A.754.754 0 111.58.602l2.552 2.772a.5.5 0 00.736 0L7.42.602a.754.754 0 111.11 1.022L5.236 5.201a1 1 0 01-1.472 0L.47 1.624z" fill="currentColor" fill-rule="evenodd"/></svg>
+                </button>
+            </div>
+            <div class="wf-drawer-sub" id="wfd-invest">
                 <a href="{{ route('copy-trading') }}">Copy Trading</a>
                 <a href="{{ route('dashboard') }}">Staking Plans</a>
                 <a href="{{ route('real-estate') }}">Real Estate</a>
@@ -218,8 +223,13 @@
                 <a href="{{ route('buy-crypto') }}">PrimeVest Card</a>
             </div>
 
-            <a class="wf-drawer-link" href="{{ route('trading') }}">Trade</a>
-            <div class="wf-drawer-sub">
+            <div class="wf-drawer-link-row">
+                <a class="wf-drawer-link" href="{{ route('trading') }}">Trade</a>
+                <button class="wf-drawer-sub-btn" type="button" aria-expanded="false" aria-controls="wfd-trade" data-drawer-sub>
+                    <svg viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M.47 1.624A.754.754 0 111.58.602l2.552 2.772a.5.5 0 00.736 0L7.42.602a.754.754 0 111.11 1.022L5.236 5.201a1 1 0 01-1.472 0L.47 1.624z" fill="currentColor" fill-rule="evenodd"/></svg>
+                </button>
+            </div>
+            <div class="wf-drawer-sub" id="wfd-trade">
                 <a href="{{ route('trading') }}">Crypto Trading Desk</a>
                 <a href="{{ route('shares.us') }}">US Equities</a>
                 <a href="{{ route('shares.uk') }}">UK Equities</a>
@@ -227,8 +237,13 @@
                 <a href="{{ route('forex.minors') }}">Minor pairs &amp; exotics</a>
             </div>
 
-            <a class="wf-drawer-link" href="{{ route('education') }}">Learn</a>
-            <div class="wf-drawer-sub">
+            <div class="wf-drawer-link-row">
+                <a class="wf-drawer-link" href="{{ route('education') }}">Learn</a>
+                <button class="wf-drawer-sub-btn" type="button" aria-expanded="false" aria-controls="wfd-learn" data-drawer-sub>
+                    <svg viewBox="0 0 9 6" fill="none" aria-hidden="true"><path d="M.47 1.624A.754.754 0 111.58.602l2.552 2.772a.5.5 0 00.736 0L7.42.602a.754.754 0 111.11 1.022L5.236 5.201a1 1 0 01-1.472 0L.47 1.624z" fill="currentColor" fill-rule="evenodd"/></svg>
+                </button>
+            </div>
+            <div class="wf-drawer-sub" id="wfd-learn">
                 <a href="{{ route('education') }}">Crypto Academy</a>
                 <a href="{{ route('pricing') }}">Pricing</a>
                 <a href="{{ route('company') }}">About PrimeVest</a>

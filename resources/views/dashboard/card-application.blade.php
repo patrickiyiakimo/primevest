@@ -52,7 +52,7 @@
                 <option value="drivers_license">Driver's License</option>
                 <option value="national_id">National ID</option>
             </select>
-            <div style="display:flex;align-items:center;justify-content:center;gap:12px;background:rgba(75,24,191,.08);border:1px solid rgba(75,24,191,.25);border-radius:12px;padding:14px;margin-bottom:20px">
+            <div style="display:flex;align-items:center;justify-content:center;gap:12px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.28);border-radius:12px;padding:14px;margin-bottom:20px">
                 <div class="lbl" style="margin:0">Balance: </div>
                 <b class="num" style="color:var(--acc)">${{ number_format(Auth::user()->balance, 2) }}</b>
                 <span class="muted" style="font-size:.8rem">/ $2,000 required</span>
