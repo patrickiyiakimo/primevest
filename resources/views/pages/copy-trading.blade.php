@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Copy Trading · PrimeVest')
+@section('title', 'Copy Trading · PrimevestMarket')
 
 @section('content')
 <!-- Hero -->

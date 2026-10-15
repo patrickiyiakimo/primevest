@@ -55,9 +55,9 @@ class AISupportController extends Controller
     
     private function getAIResponse($question, $user)
     {
-        // FAQs about PrimeVest
-        if (str_contains($question, 'what is primevest') || str_contains($question, 'about primevest')) {
-            return "PrimeVest is a premier investment platform that offers copy trading on cryptocurrency, stocks, forex, indices, and share CFDs. We provide users with access to global markets and professional trading tools.";
+        // FAQs about PrimevestMarket
+        if (str_contains($question, 'what is primevestmarket') || str_contains($question, 'about primevestmarket')) {
+            return "PrimevestMarket is a premier investment platform that offers copy trading on cryptocurrency, stocks, forex, indices, and share CFDs. We provide users with access to global markets and professional trading tools.";
         }
         
         if (str_contains($question, 'how to deposit') || str_contains($question, 'deposit funds')) {
@@ -73,11 +73,11 @@ class AISupportController extends Controller
         }
         
         if (str_contains($question, 'fees') || str_contains($question, 'commission')) {
-            return "PrimeVest offers competitive fees with zero commissions on all trades. There are no hidden fees for deposits or withdrawals. Some payment methods may have minimal network fees (gas fees) that are charged by the blockchain network, not by PrimeVest.";
+            return "PrimevestMarket offers competitive fees with zero commissions on all trades. There are no hidden fees for deposits or withdrawals. Some payment methods may have minimal network fees (gas fees) that are charged by the blockchain network, not by PrimevestMarket.";
         }
         
         if (str_contains($question, 'security') || str_contains($question, 'safe') || str_contains($question, 'protected')) {
-            return "PrimeVest employs bank-level security measures including SSL encryption, two-factor authentication (2FA), cold storage for funds, and regular security audits. Your account is protected with advanced security protocols.";
+            return "PrimevestMarket employs bank-level security measures including SSL encryption, two-factor authentication (2FA), cold storage for funds, and regular security audits. Your account is protected with advanced security protocols.";
         }
         
         if (str_contains($question, 'referral') || str_contains($question, 'refer')) {
@@ -85,11 +85,11 @@ class AISupportController extends Controller
         }
         
         if (str_contains($question, 'card application') || str_contains($question, 'debit card')) {
-            return "You can apply for a PrimeVest debit card in the 'Card Application' section. Requirements include a minimum balance of $2,000. Once approved, your card will be delivered within 7-10 business days. The card offers 0% foreign fees and up to 5% cashback rewards.";
+            return "You can apply for a PrimevestMarket debit card in the 'Card Application' section. Requirements include a minimum balance of $2,000. Once approved, your card will be delivered within 7-10 business days. The card offers 0% foreign fees and up to 5% cashback rewards.";
         }
         
         if (str_contains($question, 'investment plan') || str_contains($question, 'plan')) {
-            return "PrimeVest offers 6 investment plans: Starter (3% ROI, $1,000), Silver (8% ROI, $5,000), Gold (7% ROI, $10,000), Platinum (9% ROI, $25,000), Diamond (11% ROI, $50,000), and VIP Elite (15% ROI, $100,000). Each plan has different durations and returns.";
+            return "PrimevestMarket offers 6 investment plans: Starter (3% ROI, $1,000), Silver (8% ROI, $5,000), Gold (7% ROI, $10,000), Platinum (9% ROI, $25,000), Diamond (11% ROI, $50,000), and VIP Elite (15% ROI, $100,000). Each plan has different durations and returns.";
         }
         
         if (str_contains($question, 'how to invest') || str_contains($question, 'start investing')) {
@@ -101,7 +101,7 @@ class AISupportController extends Controller
         }
         
         if (str_contains($question, 'contact support') || str_contains($question, 'customer support')) {
-            return "You can reach our customer support team via email at support@primevest.com or through the Contact page. Our support team is available 24/7 to assist you with any questions or concerns.";
+            return "You can reach our customer support team via email at support@primevestmarket.com or through the Contact page. Our support team is available 24/7 to assist you with any questions or concerns.";
         }
         
         if (str_contains($question, 'verification') || str_contains($question, 'verify account')) {
@@ -132,11 +132,11 @@ class AISupportController extends Controller
         }
 
         if (str_contains($question, 'stock trading') || str_contains($question, 'forex trading') || str_contains($question, 'crypto trading')) {
-            return "PrimeVest offers copy trading on a wide range of assets including stocks, forex, and cryptocurrencies. You can choose from our list of top-performing traders and automatically copy their trades to your account.";
+            return "PrimevestMarket offers copy trading on a wide range of assets including stocks, forex, and cryptocurrencies. You can choose from our list of top-performing traders and automatically copy their trades to your account.";
         }
 
         if(str_contains($question, 'card benefits') || str_contains($question, 'card benefit') || str_contains($question, 'debit card benefits') || str_contains($question, 'debit card benefit')) {
-            return "The PrimeVest debit card offers 0% foreign transaction fees, up to 5% cashback on purchases, secure contactless payments and accepted globally. It's a great way to access your funds and enjoy rewards on everyday spending.";
+            return "The PrimevestMarket debit card offers 0% foreign transaction fees, up to 5% cashback on purchases, secure contactless payments and accepted globally. It's a great way to access your funds and enjoy rewards on everyday spending.";
         }
         
         // Default response

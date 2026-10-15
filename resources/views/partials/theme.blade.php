@@ -1,5 +1,5 @@
 {{--
-    PrimeVest theme bootstrap + LIGHT palette + light-mode component overrides.
+    PrimevestMarket theme bootstrap + LIGHT palette + light-mode component overrides.
 
     This partial MUST be included in <head> of EVERY layout (app/guest/dashboard/admin),
     placed AFTER the layout's <meta name="csrf-token"> line but BEFORE (or at the very

@@ -1,14 +1,14 @@
 ﻿@extends('layouts.landing')
 
-@section('title', 'PrimeVest | Trade crypto, stocks &amp; indices')
-@section('meta_description', 'PrimeVest is a crypto-first investment platform. Buy 250+ coins 24/7, trade commission-free US and UK stocks, and track the S&P 500, Nasdaq-100 and FTSE 100 from a single account.')
+@section('title', 'PrimevestMarket | Trade crypto, stocks &amp; indices')
+@section('meta_description', 'PrimevestMarket is a crypto-first investment platform. Buy 250+ coins 24/7, trade commission-free US and UK stocks, and track the S&P 500, Nasdaq-100 and FTSE 100 from a single account.')
 
 @php
     $wfImg   = fn ($file) => asset('images/wf/' . $file);
 
     $faqs = [
         [
-            'q' => 'What can I actually trade on PrimeVest?',
+            'q' => 'What can I actually trade on PrimevestMarket?',
             'a' => 'Everything runs from one funded account. 250+ crypto assets including Bitcoin, Ethereum and Solana; listed US and UK equities with $0 commission; 30+ indices such as the S&P 500, Nasdaq-100 and FTSE 100; 70+ forex pairs; and commodities covering gold, silver, crude oil and natural gas. You can hold all of them side by side and rebalance between them without leaving the dashboard.',
         ],
         [
@@ -456,7 +456,7 @@
             <div class="wf-rev-copy">
                 <span class="wf-rev-eyebrow">Featured in</span>
                 <span class="wf-quote-mark" aria-hidden="true">&ldquo;</span>
-                <h2 class="wf-rev-quote">PrimeVest has quietly become one of the most complete trading destinations for retail investors &mdash; crypto, equities and indices under a single roof.</h2>
+                <h2 class="wf-rev-quote">PrimevestMarket has quietly become one of the most complete trading destinations for retail investors &mdash; crypto, equities and indices under a single roof.</h2>
 
                 <div class="wf-rev-source">
                     <img class="wf-rev-forbes" src="{{ $wfImg('forbes-logo-white.png') }}" width="1945" height="475" alt="Forbes" loading="lazy">
@@ -465,7 +465,7 @@
 
                 <p class="wf-rev-fine">
                     From Forbes, July 26, 2025. 2025 Forbes Media LLC. All rights reserved. Used under license.
-                    Forbes and the author are not clients of PrimeVest and no compensation was provided for the article.
+                    Forbes and the author are not clients of PrimevestMarket and no compensation was provided for the article.
                 </p>
             </div>
 
@@ -509,7 +509,7 @@
 
         {{-- ---------- fine print ---------- --}}
         <div class="wf-rev-fineprint">
-            <p>The testimonials above are by clients of PrimeVest Advisers and PrimeVest Brokerage. No compensation was provided. These testimonials may not be representative of other clients' experience. Past performance is no guarantee of success.</p>
+            <p>The testimonials above are by clients of PrimevestMarket Advisers and PrimevestMarket Brokerage. No compensation was provided. These testimonials may not be representative of other clients' experience. Past performance is no guarantee of success.</p>
             <p>The mention of WLTH is for informational purposes only and should not be construed as investment advice, a solicitation, offer, or recommendation to buy or sell any security. Please visit our investor relations page for more information.</p>
         </div>
     </div>
@@ -524,7 +524,7 @@
     <div class="wf-re-cta-scrim" aria-hidden="true"></div>
 
     <div class="wf-re-cta-inner">
-        <span class="wf-re-cta-eyebrow">PrimeVest Real Estate</span>
+        <span class="wf-re-cta-eyebrow">PrimevestMarket Real Estate</span>
         <h2>Invest in real estate, right from your trading account.</h2>
         <p>
             Back hand-picked residential and commercial property, earn a share of the rental yield, and manage
@@ -545,7 +545,7 @@
         <div class="wf-faq-intro">
             <h2 class="wf-h2" data-testid="faq-header">Questions? 5 things to know in 5 minutes or less.</h2>
             <p>
-                To learn more about PrimeVest, read our <a href="{{ route('education') }}">whitepapers</a>
+                To learn more about PrimevestMarket, read our <a href="{{ route('education') }}">whitepapers</a>
                 or visit the <a href="{{ route('contact') }}" target="_blank" rel="noopener noreferrer">help center</a>.
             </p>
         </div>
@@ -589,7 +589,7 @@
         <h3 id="wf-modal-disc-t">Full disclosures</h3>
         <p>Returns shown on this page are illustrative only. They do not represent the performance of any individual client account, are shown before fees, and are not a projection of future results.</p>
         <p style="margin-top:10px">Crypto assets are volatile and can lose value in full. Leverage amplifies both gains and losses and can result in losses exceeding your initial deposit. Trading in stocks, indices, forex and commodities may not be suitable for all investors.</p>
-        <p style="margin-top:10px">Fees are as published on our pricing page as of 10/01/2026 and are subject to change. PrimeVest is not a bank; balances are held with regulated custodians.</p>
+        <p style="margin-top:10px">Fees are as published on our pricing page as of 10/01/2026 and are subject to change. PrimevestMarket is not a bank; balances are held with regulated custodians.</p>
     </div>
 </div>
 

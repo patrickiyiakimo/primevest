@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>PrimeVest | Dashboard</title>
+    <title>PrimevestMarket | Dashboard</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         * {
@@ -281,7 +281,7 @@
                     <span class="text-white font-bold text-sm">P</span>
                 </div>
                 <a href="/dashboard" class="text-xl font-bold bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent">
-                    PrimeVest
+                    PrimevestMarket
                 </a>
             </div>
             <button id="closeSidebarBtn" class="lg:hidden text-gray-400 hover:text-white transition-colors duration-200">

@@ -187,7 +187,7 @@
         Real Results from <span class="text-red-600">Real Traders</span>
     </h2>
     <p class="text-gray-500 text-lg max-w-2xl mx-auto">
-        Success stories from our community of traders who achieved their financial goals with PrimeVest
+        Success stories from our community of traders who achieved their financial goals with PrimevestMarket
     </p>
 </div>
 <!-- </div> -->
@@ -503,7 +503,7 @@
             Ready to Write Your Own Success Story?
         </h2>
         <p class="text-gray-500 text-lg mb-8">
-            Join thousands of successful traders who achieved their financial goals with PrimeVest
+            Join thousands of successful traders who achieved their financial goals with PrimevestMarket
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="/register" class="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold transition-all duration-500 shadow-lg hover:shadow-xl">

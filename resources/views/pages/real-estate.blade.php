@@ -392,7 +392,7 @@
                 <div class="order-first lg:order-last">
                     <h3 class="text-2xl lg:text-3xl font-bold text-gray-800 mb-4">Health‑Centric Design</h3>
                     <p class="text-gray-600 text-base leading-relaxed">
-                        Who's paying the medical bill for the health conditions attributed to the average American "sick" home? A home is where we spend most of our time, it must be one of the healthiest places we live. Sustainable materials, air and water filtration, continuous air circulation, and soundproofing are the path to well-being. Something all PrimeVest homes come standard with.
+                        Who's paying the medical bill for the health conditions attributed to the average American "sick" home? A home is where we spend most of our time, it must be one of the healthiest places we live. Sustainable materials, air and water filtration, continuous air circulation, and soundproofing are the path to well-being. Something all PrimevestMarket homes come standard with.
                     </p>
                 </div>
             </div>
@@ -418,7 +418,7 @@
                 <div class="order-first lg:order-last">
                     <h3 class="text-2xl lg:text-3xl font-bold text-gray-800 mb-4">Environmentally Responsible</h3>
                     <p class="text-gray-600 text-base leading-relaxed">
-                        Each PrimeVest home is built to last 100 years, significantly reducing the environmental impact. Using high-quality materials and product design-based science, your home will require less maintenance, won't begin to rot in a matter of years, and will consume a fraction of the energy a typical home uses each year – for the lifetime of the home.
+                        Each PrimevestMarket home is built to last 100 years, significantly reducing the environmental impact. Using high-quality materials and product design-based science, your home will require less maintenance, won't begin to rot in a matter of years, and will consume a fraction of the energy a typical home uses each year – for the lifetime of the home.
                     </p>
                 </div>
             </div>
@@ -426,13 +426,13 @@
             <!-- Benefit 5 - Image Right -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h3 class="text-2xl lg:text-3xl font-bold text-gray-800 mb-4">PrimeVest IQ™</h3>
+                    <h3 class="text-2xl lg:text-3xl font-bold text-gray-800 mb-4">PrimevestMarket IQ™</h3>
                     <p class="text-gray-600 text-base leading-relaxed">
-                        The only home operating system you need. The PrimeVest IQ app will improve your living experience by caring for you. It monitors the home's systems to protect your health, safety, and security. Over time, the software will learn how to improve your daily routines – almost serendipitously.
+                        The only home operating system you need. The PrimevestMarket IQ app will improve your living experience by caring for you. It monitors the home's systems to protect your health, safety, and security. Over time, the software will learn how to improve your daily routines – almost serendipitously.
                     </p>
                 </div>
                 <div class="rounded-lg overflow-hidden shadow-lg">
-                    <img src="{{ asset('/images/estate/primevest.jpg') }}" alt="PrimeVest IQ" class="w-full h-80 object-cover">
+                    <img src="{{ asset('/images/estate/primevestmarket.jpg') }}" alt="PrimevestMarket IQ" class="w-full h-80 object-cover">
                 </div>
             </div>
             

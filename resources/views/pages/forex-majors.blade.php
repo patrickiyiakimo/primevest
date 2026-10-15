@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Forex Majors · PrimeVest Markets')
+@section('title', 'Forex Majors · PrimevestMarket Markets')
 
 @section('content')
 <section class="pv-hero">

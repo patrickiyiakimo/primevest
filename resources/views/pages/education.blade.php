@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Crypto Education · PrimeVest Academy')
+@section('title', 'Crypto Education · PrimevestMarket Academy')
 
 @section('content')
 <section class="pv-hero">
     <div class="pv-container" style="position:relative;z-index:1;max-width:1020px;text-align:center">
-        <p class="pv-tag" style="text-align:center">PrimeVest Academy</p>
+        <p class="pv-tag" style="text-align:center">PrimevestMarket Academy</p>
         <h1 class="pv-h1">Learn crypto the smart way</h1>
         <p class="pv-lead" style="margin:16px auto 0">Free, practical guides that take you from absolute beginner to confident investor. No jargon, no fluff.</p>
         <div style="display:flex;gap:12px;justify-content:center;margin-top:28px">

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Contact Us · PrimeVest')
+@section('title', 'Contact Us · PrimevestMarket')
 
 @section('content')
 <section class="pv-hero">
@@ -15,7 +15,7 @@
             <div class="pv-panel pv-card" style="padding:22px;text-align:center">
                 <div style="font-size:1.8rem">📧</div>
                 <h3 style="margin:10px 0 6px">Email support</h3>
-                <p class="pv-mut" style="font-size:.9rem">support@primevest.io</p>
+                <p class="pv-mut" style="font-size:.9rem">support@primevestmarket.io</p>
             </div>
             <div class="pv-panel pv-card" style="padding:22px;text-align:center">
                 <div style="font-size:1.8rem">🚨</div>

@@ -7,14 +7,14 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <meta name="theme-color" content="#230b59">
     @include('partials.theme')
-    <title>@yield('title', 'PrimeVest')</title>
+    <title>@yield('title', 'PrimevestMarket')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           PrimeVest auth pages — Wealthfront palette.
+           PrimevestMarket auth pages — Wealthfront palette.
            Mirrors resources/css/landing.css tokens so the login /
            signup screens read as the same product as the landing page:
            eggplant → blurple gradient brand panel, ghost page surface,
@@ -298,7 +298,7 @@
             .auth-hero h1{max-width:none}
             .auth-hero p,.auth-feats,.auth-stats{display:none}
             .auth-right{padding:36px 18px 40px}
-            /* Phones showed the brand three times: the "Back to PrimeVest" link,
+            /* Phones showed the brand three times: the "Back to PrimevestMarket" link,
                the brand panel, and the large logo above the form. Keep only the
                brand panel so the logo and wordmark read once, cleanly. */
             .auth-back{display:none}
@@ -311,8 +311,8 @@
 <body>
     <div class="auth-topbar">
         <a href="{{ url('/') }}" class="auth-back">
-            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest">
-            <span>Back to PrimeVest</span>
+            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket">
+            <span>Back to PrimevestMarket</span>
         </a>
         @include('partials.theme-btn')
     </div>
@@ -322,8 +322,8 @@
             <img class="auth-circles" src="{{ asset('images/wf/gradient-circles.svg') }}" width="2024" height="850" alt="" aria-hidden="true">
 
             <div class="auth-brand">
-                <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest">
-                <span>PrimeVest</span>
+                <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket">
+                <span>PrimevestMarket</span>
             </div>
 
             <div class="auth-mid">
@@ -362,7 +362,7 @@
         <main class="auth-right">
             <div class="pv-container">
                 <a href="{{ url('/') }}" class="pv-logo" style="text-decoration:none;color:inherit;margin-bottom:24px">
-                    <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest">
+                    <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket">
                 </a>
 
                 <div class="pv-card">
@@ -381,7 +381,7 @@
 
                 <p class="pv-foot" style="margin-top:24px">
                     Protected by 256-bit encryption &middot; 2-Factor Authentication available<br>
-                    &copy; {{ date('Y') }} PrimeVest. All rights reserved.
+                    &copy; {{ date('Y') }} PrimevestMarket. All rights reserved.
                 </p>
             </div>
         </main>

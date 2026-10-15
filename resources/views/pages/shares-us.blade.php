@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'US Shares · PrimeVest Stock Trading')
+@section('title', 'US Shares · PrimevestMarket Stock Trading')
 
 @section('content')
 <section class="pv-hero">
@@ -9,7 +9,7 @@
             <div>
                 <p class="pv-tag">Shares · United States</p>
                 <h1 class="pv-h1" style="font-size:clamp(1.8rem,3.2vw,2.5rem)">Own the giants of Wall Street</h1>
-                <p class="pv-lead" style="margin:12px 0 0">Trade fractional shares of America's biggest companies, commission-free on PrimeVest.</p>
+                <p class="pv-lead" style="margin:12px 0 0">Trade fractional shares of America's biggest companies, commission-free on PrimevestMarket.</p>
             </div>
             <div style="display:flex;gap:10px">
                 <a href="{{ route('register') }}" class="pv-btn pv-btn-sm">Open Account</a>

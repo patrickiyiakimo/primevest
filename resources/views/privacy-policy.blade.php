@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Privacy Policy · PrimeVest')
+@section('title', 'Privacy Policy · PrimevestMarket')
 
 @section('content')
 <section class="pv-hero">
@@ -20,11 +20,11 @@
                 ['3. Sharing','We never sell your data. We share it only with regulated processors who help run the platform (payments, KYC providers, hosting) under strict confidentiality agreements.'],
                 ['4. Data protection','All data is encrypted in transit (TLS) and at rest. Access is limited to trained staff, and we apply the principle of least privilege across our systems.'],
                 ['5. Data retention','We keep personal data only as long as your account is active, plus the retention periods required by financial regulation (typically 5 years after closure).'],
-                ['6. Your rights','Under GDPR and similar laws you may request a copy of your data, correct inaccuracies, restrict processing or delete your account. Contact support@primevest.io to exercise these rights.'],
+                ['6. Your rights','Under GDPR and similar laws you may request a copy of your data, correct inaccuracies, restrict processing or delete your account. Contact support@primevestmarket.io to exercise these rights.'],
                 ['7. Cookies','We use essential cookies for login sessions and security. Optional analytics cookies are used only with your consent, and you can change preferences at any time.'],
-                ['8. Children','PrimeVest is a professional financial service. We do not knowingly collect data from anyone under 18 years of age.'],
+                ['8. Children','PrimevestMarket is a professional financial service. We do not knowingly collect data from anyone under 18 years of age.'],
                 ['9. Changes','We may update this policy as our services evolve. Significant changes will be announced by email at least 14 days before taking effect.'],
-                ['10. Contact','Privacy questions? Email our Data Protection team at privacy@primevest.io or write to 1 Canada Square, Canary Wharf, London E14 5AB, United Kingdom.'],
+                ['10. Contact','Privacy questions? Email our Data Protection team at privacy@primevestmarket.io or write to 1 Canada Square, Canary Wharf, London E14 5AB, United Kingdom.'],
             ] as $s)
             <div style="margin-bottom:26px">
                 <h3 style="margin:0 0 8px;font-size:1.05rem">{{ $s[0] }}</h3>
@@ -32,7 +32,7 @@
             </div>
             @endforeach
         </div>
-        <p class="pv-foot" style="text-align:center;margin-top:24px">PrimeVest Technologies Ltd · Registered in England &amp; Wales No. 11845210</p>
+        <p class="pv-foot" style="text-align:center;margin-top:24px">PrimevestMarket Technologies Ltd · Registered in England &amp; Wales No. 11845210</p>
     </div>
 </section>
 @endsection

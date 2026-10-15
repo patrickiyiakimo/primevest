@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Markets & Copy Trading · PrimeVest')
+@section('title', 'Markets & Copy Trading · PrimevestMarket')
 
 @push('styles')
 <style>

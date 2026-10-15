@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'About PrimeVest · Our Company')
+@section('title', 'About PrimevestMarket · Our Company')
 
 @section('content')
 <section class="pv-hero">
@@ -8,7 +8,7 @@
         <div style="text-align:center">
             <p class="pv-tag" style="text-align:center">Who we are</p>
             <h1 class="pv-h1">Built for the new era of digital wealth</h1>
-            <p class="pv-lead" style="margin:16px auto 0">PrimeVest is a regulated digital asset platform connecting everyday investors to crypto markets, staking and elite copy-trading strategies.</p>
+            <p class="pv-lead" style="margin:16px auto 0">PrimevestMarket is a regulated digital asset platform connecting everyday investors to crypto markets, staking and elite copy-trading strategies.</p>
         </div>
 
         <div class="pv-stats" style="margin-top:46px">
@@ -24,7 +24,7 @@
     <div class="pv-container pv-grid pv-grid-2" style="gap:22px">
         <div class="pv-panel" style="padding:30px">
             <h2 class="pv-h2" style="font-size:1.5rem">Our mission</h2>
-            <p class="pv-mut" style="margin:0;line-height:1.8">We believe financial freedom should not be reserved for the few. PrimeVest exists to give every investor — regardless of background — access to institutional-grade crypto tools, transparent performance data and strategies that historically belonged only to fund managers.</p>
+            <p class="pv-mut" style="margin:0;line-height:1.8">We believe financial freedom should not be reserved for the few. PrimevestMarket exists to give every investor — regardless of background — access to institutional-grade crypto tools, transparent performance data and strategies that historically belonged only to fund managers.</p>
         </div>
         <div class="pv-panel" style="padding:30px">
             <h2 class="pv-h2" style="font-size:1.5rem">Our vision</h2>
@@ -37,10 +37,10 @@
     <div class="pv-container">
         <div style="text-align:center;max-width:620px;margin:0 auto 42px">
             <p class="pv-tag" style="text-align:center">Milestones</p>
-            <h2 class="pv-h2">The PrimeVest journey</h2>
+            <h2 class="pv-h2">The PrimevestMarket journey</h2>
         </div>
         <div class="pv-grid pv-grid-3" style="gap:18px">
-            <div class="pv-panel pv-card" style="padding:24px"><div class="pv-chip pv-chip-gold">2018</div><h3 style="margin:14px 0 8px">Platform launched</h3><p class="pv-foot" style="margin:0;line-height:1.7">PrimeVest opens its doors with just 3 cryptocurrencies and a founding team of 12.</p></div>
+            <div class="pv-panel pv-card" style="padding:24px"><div class="pv-chip pv-chip-gold">2018</div><h3 style="margin:14px 0 8px">Platform launched</h3><p class="pv-foot" style="margin:0;line-height:1.7">PrimevestMarket opens its doors with just 3 cryptocurrencies and a founding team of 12.</p></div>
             <div class="pv-panel pv-card" style="padding:24px"><div class="pv-chip pv-chip-blue">2020</div><h3 style="margin:14px 0 8px">Copy trading goes live</h3><p class="pv-foot" style="margin:0;line-height:1.7">We pioneer verified-performance copy trading, giving retail investors pro-level access.</p></div>
             <div class="pv-panel pv-card" style="padding:24px"><div class="pv-chip">2022</div><h3 style="margin:14px 0 8px">1M investors</h3><p class="pv-foot" style="margin:0;line-height:1.7">Community grows past one million across 140 countries — our most ambitious year.</p></div>
             <div class="pv-panel pv-card" style="padding:24px"><div class="pv-chip pv-chip-gold">2023</div><h3 style="margin:14px 0 8px">Staking &amp; real estate</h3><p class="pv-foot" style="margin:0;line-height:1.7">Tokenised staking vaults and real-estate funds join the product family.</p></div>

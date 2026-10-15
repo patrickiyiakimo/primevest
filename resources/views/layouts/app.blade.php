@@ -22,10 +22,10 @@
             };
         })();
     </script>
-    <title>@yield('title', 'PrimeVest | Trade & Invest in Crypto')</title>
-    <meta name="description" content="PrimeVest — a trusted crypto investment platform. Trade, stake and grow your digital assets with confidence, copy elite traders and track the markets in real time.">
+    <title>@yield('title', 'PrimevestMarket | Trade & Invest in Crypto')</title>
+    <meta name="description" content="PrimevestMarket — a trusted crypto investment platform. Trade, stake and grow your digital assets with confidence, copy elite traders and track the markets in real time.">
     <meta name="theme-color" content="#05070d">
-    <meta property="og:title" content="PrimeVest | Trade & Invest in Crypto">
+    <meta property="og:title" content="PrimevestMarket | Trade & Invest in Crypto">
     <meta property="og:description" content="A trusted crypto investment platform. Trade, stake and grow your digital assets with confidence.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">

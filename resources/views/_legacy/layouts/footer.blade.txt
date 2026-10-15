@@ -69,7 +69,7 @@
         <!-- Risk Warning -->
         <div class="border-t border-gray-800 pt-6 mb-6">
             <p class="text-gray-500 text-xs leading-relaxed">
-                This website can be accessed worldwide however the information on the website is related to PrimeVest A/S and is not specific to any entity of PrimeVest. All clients will directly engage with PrimeVest A/S and all client agreements will be entered into with PrimeVest A/S.
+                This website can be accessed worldwide however the information on the website is related to PrimevestMarket A/S and is not specific to any entity of PrimevestMarket. All clients will directly engage with PrimevestMarket A/S and all client agreements will be entered into with PrimevestMarket A/S.
             </p>
             <p class="text-gray-500 text-xs leading-relaxed mt-3">
                 Forex and CFDs are leveraged products and can result in losses that exceed your deposits. Please ensure you fully understand all of the risks. Contracts for Difference ("CFDs") are leveraged products and carry a significant risk of loss to your capital, as prices may move rapidly against you and you may be required to make further payments to keep any trades open. These products are not suitable for all clients, therefore please ensure you fully understand the risks and seek independent advice.
@@ -82,7 +82,7 @@
         <!-- Copyright -->
         <div class="border-t border-gray-800 pt-6 text-center">
             <p class="text-gray-500 text-xs">
-                Copyright © {{ date('Y') }} PrimeVest. All rights reserved.
+                Copyright © {{ date('Y') }} PrimevestMarket. All rights reserved.
             </p>
         </div>
     </div>

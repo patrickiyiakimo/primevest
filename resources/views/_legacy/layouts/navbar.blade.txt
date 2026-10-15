@@ -5,7 +5,7 @@
         <!-- Section Header -->
         <div class="text-center mb-12 lg:mb-16">
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
-                Why Trade With PrimeVest
+                Why Trade With PrimevestMarket
             </h2>
             <p class="text-gray-500 text-lg max-w-2xl mx-auto">
                 Experience trading with a trusted partner
@@ -105,7 +105,7 @@
             <div class="relative mb-6">
                 <h1 class="text-xl md:text-3xl font-bold tracking-wider">
                     <span class="bg-gradient-to-r from-red-400 via-red-500 to-red-600 bg-clip-text text-transparent animate-pulse">
-                        PrimeVest
+                        PrimevestMarket
                     </span>
                 </h1>
                 <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-0.5 bg-red-500 rounded-full animate-pulse"></div>
@@ -126,7 +126,7 @@
     <!-- Video Background (hidden initially) -->
     <div id="video-container" class="absolute inset-0 z-0 opacity-0 transition-opacity duration-700">
         <video id="hero-video" class="w-full h-full object-cover" autoplay loop muted playsinline preload="auto">
-            <source src="{{ asset('videos/primevest-video4.mp4') }}" type="video/mp4">
+            <source src="{{ asset('videos/primevestmarket-video4.mp4') }}" type="video/mp4">
             <!-- Fallback image in case video doesn't load -->
             <img src="https://images.pexels.com/photos/8370752/pexels-photo-8370752.jpeg?w=1920&h=1080&fit=crop" 
                  alt="Trading Background">

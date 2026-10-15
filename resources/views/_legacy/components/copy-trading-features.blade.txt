@@ -1,4 +1,4 @@
-<!-- Why Choose PrimeVest Section -->
+<!-- Why Choose PrimevestMarket Section -->
 <div class="bg-white py-16 lg:py-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
-                        Why Choose PrimeVest
+                        Why Choose PrimevestMarket
                     </h2>
                     <p class="text-gray-500 text-lg max-w-2xl">
                         Experience trading with a globally trusted partner
@@ -157,7 +157,7 @@
             <!-- Right Side - Image -->
             <div class="flex justify-center lg:justify-end">
                 <img src="{{ asset('images/Group 23.png') }}" 
-                     alt="Why Choose PrimeVest" 
+                     alt="Why Choose PrimevestMarket" 
                      class="w-full max-w-lg lg:max-w-full h-auto">
             </div>
             

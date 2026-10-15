@@ -6,17 +6,17 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
-    <title>@yield('title', 'PrimeVest | Money works better here')</title>
-    <meta name="description" content="@yield('meta_description', 'PrimeVest makes building wealth easy. Earn 3.55% APY on your uninvested cash and invest in expert-built, automated portfolios of stocks, bonds, and ETFs.')">
+    <title>@yield('title', 'PrimevestMarket | Money works better here')</title>
+    <meta name="description" content="@yield('meta_description', 'PrimevestMarket makes building wealth easy. Earn 3.55% APY on your uninvested cash and invest in expert-built, automated portfolios of stocks, bonds, and ETFs.')">
     <meta name="theme-color" content="#230b59">
     <meta name="format-detection" content="telephone=no, date=no, email=no, address=no">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:title" content="@yield('title', 'PrimeVest | Money works better here')">
-    <meta property="og:description" content="@yield('meta_description', 'PrimeVest makes building wealth easy.')">
+    <meta property="og:title" content="@yield('title', 'PrimevestMarket | Money works better here')">
+    <meta property="og:description" content="@yield('meta_description', 'PrimevestMarket makes building wealth easy.')">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@PrimeVest">
+    <meta name="twitter:site" content="@PrimevestMarket">
 
     <link rel="canonical" href="{{ url()->current() }}">
 
@@ -41,10 +41,10 @@
         <div class="wf-header wf-container-2024" data-testid="header">
             <div class="wf-header-inner">
 
-                <a class="wf-logo" href="{{ url('/') }}" aria-label="PrimeVest home">
+                <a class="wf-logo" href="{{ url('/') }}" aria-label="PrimevestMarket home">
                     <span class="wf-logo-lockup">
-                        <img class="wf-logo-mark" src="{{ asset('images/logoipsum-409.png') }}" width="32" height="26" alt="PrimeVest" loading="eager">
-                        <b>PrimeVest</b>
+                        <img class="wf-logo-mark" src="{{ asset('images/logoipsum-409.png') }}" width="32" height="26" alt="PrimevestMarket" loading="eager">
+                        <b>PrimevestMarket</b>
                     </span>
                 </a>
 
@@ -84,7 +84,7 @@
                                 </a>
                                 <a class="wf-menu-link" href="{{ route('buy-crypto') }}" role="menuitem">
                                     <span class="wf-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="13" rx="3"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></span>
-                                    <span><b>PrimeVest Card</b><span>Spend your balance anywhere.</span></span>
+                                    <span><b>PrimevestMarket Card</b><span>Spend your balance anywhere.</span></span>
                                 </a>
                             </div>
                         </div>
@@ -145,7 +145,7 @@
                                 </a>
                                 <a class="wf-menu-link" href="{{ route('company') }}" role="menuitem">
                                     <span class="wf-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
-                                    <span><b>About PrimeVest</b><span>Who we are and how we operate.</span></span>
+                                    <span><b>About PrimevestMarket</b><span>Who we are and how we operate.</span></span>
                                 </a>
                                 <a class="wf-menu-link" href="{{ route('contact') }}" role="menuitem">
                                     <span class="wf-menu-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 7l-10 6L2 7"/></svg></span>
@@ -198,8 +198,8 @@
     <aside class="wf-drawer" aria-label="Navigation menu" aria-hidden="true">
         <div class="wf-drawer-head">
             <span class="wf-logo-lockup on-light">
-                <img class="wf-logo-mark" src="{{ asset('images/logoipsum-409.png') }}" width="28" height="22" alt="PrimeVest">
-                <b>PrimeVest</b>
+                <img class="wf-logo-mark" src="{{ asset('images/logoipsum-409.png') }}" width="28" height="22" alt="PrimevestMarket">
+                <b>PrimevestMarket</b>
             </span>
             <button class="wf-drawer-close" type="button" aria-label="Close navigation menu" data-drawer-close>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18"/><path d="M6 6l12 12"/></svg>
@@ -220,7 +220,7 @@
                 <a href="{{ route('dashboard') }}">Staking Plans</a>
                 <a href="{{ route('real-estate') }}">Real Estate</a>
                 <a href="{{ route('register') }}">Automated Investing Account</a>
-                <a href="{{ route('buy-crypto') }}">PrimeVest Card</a>
+                <a href="{{ route('buy-crypto') }}">PrimevestMarket Card</a>
             </div>
 
             <div class="wf-drawer-link-row">
@@ -246,7 +246,7 @@
             <div class="wf-drawer-sub" id="wfd-learn">
                 <a href="{{ route('education') }}">Crypto Academy</a>
                 <a href="{{ route('pricing') }}">Pricing</a>
-                <a href="{{ route('company') }}">About PrimeVest</a>
+                <a href="{{ route('company') }}">About PrimevestMarket</a>
                 <a href="{{ route('contact') }}">Contact</a>
             </div>
         </nav>

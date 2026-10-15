@@ -1,4 +1,4 @@
-<!-- Trusted Section - PrimeVest -->
+<!-- Trusted Section - PrimevestMarket -->
 <div class="relative py-20 lg:py-28 overflow-hidden">
     <!-- Background Image with Subtle Green Overlay -->
     <div class="absolute inset-0 z-0">
@@ -28,12 +28,12 @@
                 <!-- Main Description Text -->
                 <div class="space-y-6 mb-12">
                     <p class="text-gray-700 leading-relaxed text-lg">
-                        PrimeVest is an online Forex and cryptocurrency STP broker providing CFD trading on hundreds of assets 
+                        PrimevestMarket is an online Forex and cryptocurrency STP broker providing CFD trading on hundreds of assets 
                         and optimal trading conditions within the award-winning MT4 platform.
                     </p>
                     
                     <p class="text-gray-700 leading-relaxed text-lg">
-                        PrimeVest offers deep liquidity, generous leverage up to <span class="font-semibold text-gray-600">1:500</span>, 
+                        PrimevestMarket offers deep liquidity, generous leverage up to <span class="font-semibold text-gray-600">1:500</span>, 
                         and some of the best spreads in the industry. As part of our commitment to our client's satisfaction, 
                         we offer <span class="font-semibold text-gray-600">24/7 live customer service</span>, charge 
                         <span class="font-semibold text-gray-600">no deposit or withdrawal fees</span>, and process withdrawals 

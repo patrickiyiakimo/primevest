@@ -1,4 +1,4 @@
-<!-- Testimonials Section - PrimeVest -->
+<!-- Testimonials Section - PrimevestMarket -->
 <div class="py-20 lg:py-28 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -17,7 +17,7 @@
                 What Our Clients Say
             </h2>
             <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-                Join thousands of satisfied traders who trust PrimeVest for their investment journey
+                Join thousands of satisfied traders who trust PrimevestMarket for their investment journey
             </p>
         </div>
 
@@ -26,7 +26,7 @@
             currentSlide: 0, 
             testimonials: [
                 {
-                    text: 'PrimeVest runs a quick and reliable system. It feels great to know that I can always trust their support system to come through for me. Their response speed is prompt and the delivery precise to the last detail.',
+                    text: 'PrimevestMarket runs a quick and reliable system. It feels great to know that I can always trust their support system to come through for me. Their response speed is prompt and the delivery precise to the last detail.',
                     name: 'Rukky Sanders',
                     role: 'Verified Trader',
                     image: '/images/FB_IMG_1757815688420.jpg',
@@ -47,7 +47,7 @@
                     rating: 5
                 },
                 {
-                    text: 'The customer service at PrimeVest is exceptional. They guided me through every step of my investment journey. I\'ve seen consistent returns and feel confident in my financial future.',
+                    text: 'The customer service at PrimevestMarket is exceptional. They guided me through every step of my investment journey. I\'ve seen consistent returns and feel confident in my financial future.',
                     name: 'Sarah Michaels',
                     role: 'Long-term Investor',
                     image: '/images/FB_IMG_1757815900467 (1).jpg',

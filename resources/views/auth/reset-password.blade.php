@@ -1,6 +1,6 @@
 @extends('layouts.guest')
 
-@section('title', 'Set New Password · PrimeVest')
+@section('title', 'Set New Password · PrimevestMarket')
 
 @section('content')
 <h2 class="pv-title">Set a new password</h2>

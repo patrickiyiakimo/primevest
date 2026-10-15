@@ -12,7 +12,7 @@
 </div>
 
 <div class="pa mt" style="padding:22px">
-    <div class="sec-h"><div><h2>Staking Positions</h2><p>Every plan you've staked on PrimeVest</p></div></div>
+    <div class="sec-h"><div><h2>Staking Positions</h2><p>Every plan you've staked on PrimevestMarket</p></div></div>
     <div style="overflow-x:auto">
     <table class="tbl">
         <thead><tr><th>Plan</th><th>Stake</th><th>ROI %</th><th>Est. Return</th><th>Start</th><th>End</th><th>Status</th></tr></thead>

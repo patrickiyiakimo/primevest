@@ -25,12 +25,12 @@
                 <div class="text-center lg:text-left">
                     <!-- Main Heading -->
                     <h1 class="text-4xl sm:text-5xl md:text-4xl lg:text-4xl xl:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                        GET MORE FROM METATRADER WITH <span class="text-red-600">PrimeVest</span>
+                        GET MORE FROM METATRADER WITH <span class="text-red-600">PrimevestMarket</span>
                     </h1>
                     
                     <!-- Description -->
                     <p class="text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed mb-8 max-w-2xl mx-auto lg:mx-0">
-                        Our MT4 and MT5 platforms combine the charting and analysis power of MetaTrader with PrimeVest raw spreads and rapid execution. Available on PC, Mac, web and mobile.
+                        Our MT4 and MT5 platforms combine the charting and analysis power of MetaTrader with PrimevestMarket raw spreads and rapid execution. Available on PC, Mac, web and mobile.
                     </p>
 
                     <!-- Buttons -->
@@ -333,7 +333,7 @@
             </div>
             <div>
                 <div class="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 text-white">
-                    <h3 class="text-xl font-bold mb-4">PrimeVest SWAP RATES</h3>
+                    <h3 class="text-xl font-bold mb-4">PrimevestMarket SWAP RATES</h3>
                     <p class="text-gray-300 mb-6">
                         To view the latest swap rates for any of our instruments, please refer to the MT4 or MT5 Trading platforms.
                     </p>

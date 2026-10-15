@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Account Settings · PrimeVest')
+@section('title', 'Account Settings · PrimevestMarket')
 
 @section('content')
 <section class="pv-hero">

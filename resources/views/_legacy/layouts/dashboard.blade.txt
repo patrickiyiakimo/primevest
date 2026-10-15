@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>PrimeVest | Dashboard</title>
+    <title>PrimevestMarket | Dashboard</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
@@ -418,8 +418,8 @@
     <!-- Logo -->
     <div class="sidebar-logo">
         <a href="/">
-            <img src="{{ asset('/images/primevest-logo.png') }}" alt="PrimeVest">
-            <span>PrimeVest</span>
+            <img src="{{ asset('/images/primevestmarket-logo.png') }}" alt="PrimevestMarket">
+            <span>PrimevestMarket</span>
         </a>
     </div>
     

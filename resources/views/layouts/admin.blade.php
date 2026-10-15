@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css">
     @include('partials.theme')
-    <title>@yield('title', 'Admin') · PrimeVest</title>
+    <title>@yield('title', 'Admin') · PrimevestMarket</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,7 +106,7 @@
 <aside class="side" id="pvSide">
     <div class="side-logo">
         <a href="{{ route('admin.dashboard') }}" style="display:flex;align-items:center;gap:10px">
-            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="width:auto;height:28px;display:block">
+            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="width:auto;height:28px;display:block">
             <span class="pill pill-y" style="margin-left:2px">ADMIN</span>
         </a>
     </div>
