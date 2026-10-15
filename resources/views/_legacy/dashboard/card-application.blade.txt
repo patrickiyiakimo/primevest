@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('page-title', 'Card Application')
-@section('breadcrumb', 'Apply for your PrimeVest debit card')
+@section('breadcrumb', 'Apply for your PrimevestMarket debit card')
 
 @section('dashboard-content')
 <div class="space-y-6 bg-white">
@@ -10,7 +10,7 @@
         <div class="flex items-center justify-between flex-wrap gap-4">
             <div>
                 <h1 class="text-2xl font-bold">Apply for Card</h1>
-                <p class="text-gray-300 mt-1">Get your PrimeVest debit card for easy access to your funds</p>
+                <p class="text-gray-300 mt-1">Get your PrimevestMarket debit card for easy access to your funds</p>
             </div>
             <div class="bg-white/10 backdrop-blur-sm rounded-full px-5 py-2.5 border border-white/20">
                 <span class="text-green-400 text-sm font-semibold">💰 Available Balance: ${{ number_format(Auth::user()->balance, 2) }}</span>
@@ -126,12 +126,12 @@
         <div class="space-y-6">
             <!-- Debit Card Image - Static Image -->
             <div class="flex justify-center">
-                <!-- <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-300"> -->
+                <!-- <img src="{{ asset('/images/Gemini_Generated_Image_ydhjqgydhjqgydhj.png') }}" alt="PrimevestMarket Debit Card" class="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-300"> -->
             </div>
 
             <!-- Card Benefits -->
             <div class="bg-white overflow-hidden">
-                 <img src="{{ asset('/images/primevest-card.png') }}" alt="PrimeVest Debit Card" class="w-full max-w-mdtransition-all duration-300">
+                 <img src="{{ asset('/images/primevestmarket-card.png') }}" alt="PrimevestMarket Debit Card" class="w-full max-w-mdtransition-all duration-300">
                 <div class="border-b border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-white">
                     <h2 class="text-lg font-semibold text-gray-900 flex items-center">
                         <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

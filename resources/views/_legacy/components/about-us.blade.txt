@@ -16,7 +16,7 @@
         <!-- Section Header -->
         <div class="text-center mb-12">
             <h2 class="text-3xl lg:text-4xl font-bold text-white mb-4">
-                About <span class="text-red-400">PrimeVest</span>
+                About <span class="text-red-400">PrimevestMarket</span>
             </h2>
             <p class="text-gray-300 text-lg max-w-2xl mx-auto">
                 Your trusted partner in the world of online trading since 2015
@@ -28,7 +28,7 @@
             <div class="bg-white/10 backdrop-blur-md rounded-2xl p-6 lg:p-8 border border-white/20 shadow-2xl">
                 <div class="space-y-6 text-gray-200 leading-relaxed">
                     <p class="text-base lg:text-lg">
-                        <span class="text-red-400 font-semibold">PrimeVest</span> has become one of the most reputable brokers in the industry, 
+                        <span class="text-red-400 font-semibold">PrimevestMarket</span> has become one of the most reputable brokers in the industry, 
                         offering to traders CFDs across Forex, Equities, Commodities and Futures. 
                         Trading on the Forex market is a legitimate and straightforward way of generating income.
                     </p>
@@ -39,10 +39,10 @@
                     </p>
                     
                     <p class="text-base lg:text-lg">
-                        <span class="text-red-400 font-semibold">PrimeVest</span> lets you trade in the way that best suits you. 
+                        <span class="text-red-400 font-semibold">PrimevestMarket</span> lets you trade in the way that best suits you. 
                         Do you want to risk a little or a lot? Do you want gains in the short term or are you playing a longer game? 
                         Are you a day trader, a swing trader or a scalper? Are you an old hand or a rookie just testing the water? 
-                        It does not matter because <span class="text-red-400 font-semibold">PrimeVest</span> puts you in control.
+                        It does not matter because <span class="text-red-400 font-semibold">PrimevestMarket</span> puts you in control.
                     </p>
                     
                     <p class="text-base lg:text-lg">
@@ -53,7 +53,7 @@
                     
                     <p class="text-base lg:text-lg">
                         With the right tools, information and access to all the world's currencies, 
-                        <span class="text-red-400 font-semibold">PrimeVest</span> puts you in control of the trades you make.
+                        <span class="text-red-400 font-semibold">PrimevestMarket</span> puts you in control of the trades you make.
                     </p>
                 </div>
                 
@@ -80,7 +80,7 @@
                 <!-- CTA Button -->
                 <div class="text-center mt-8">
                     <a href="/register" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-semibold  duration-500">
-                        Start Trading With PrimeVest
+                        Start Trading With PrimevestMarket
                         <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                         </svg>

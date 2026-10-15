@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 
-@section('page-title', 'PrimeVest Card')
+@section('page-title', 'PrimevestMarket Card')
 @section('breadcrumb', 'Spend your crypto balance worldwide')
 
 @section('dashboard-content')
@@ -8,10 +8,10 @@
     <!-- Card preview -->
     <div style="display:flex;flex-direction:column;gap:18px">
         <div class="pa pv-shade" style="padding:20px">
-            <div style="font-weight:800;margin-bottom:14px">Your PrimeVest Debit Card</div>
+            <div style="font-weight:800;margin-bottom:14px">Your PrimevestMarket Debit Card</div>
             <div style="border-radius:18px;padding:24px;background:linear-gradient(135deg,#0f2027,#203a43 50%,#2c5364);border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 60px -30px rgba(0,0,0,.8)">
                 <div style="display:flex;justify-content:space-between;align-items:center">
-                    <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="width:auto;height:22px;display:block">
+                    <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="width:auto;height:22px;display:block">
                     <span style="width:46px;height:30px;border-radius:6px;background:repeating-linear-gradient(45deg,#f0b90b,#f0b90b 6px,#e0a90a 6px,#e0a90a 12px)"></span>
                 </div>
                 <div class="num" style="font-size:1.15rem;letter-spacing:.14em;margin:26px 0 18px">•••• &nbsp;•&nbsp; •••• &nbsp;•&nbsp; •••• &nbsp;•&nbsp; 9021</div>

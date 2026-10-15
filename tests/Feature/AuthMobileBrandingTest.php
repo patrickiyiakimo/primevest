@@ -49,14 +49,14 @@ class AuthMobileBrandingTest extends TestCase
         $this->assertStringNotContainsString('.auth-right .pv-logo{display:none}', $before);
         // the markup itself is untouched and still rendered for desktop
         $this->assertStringContainsString('class="auth-back"', $css);
-        $this->assertStringContainsString('Back to PrimeVest', $css);
+        $this->assertStringContainsString('Back to PrimevestMarket', $css);
         $this->assertStringContainsString('class="pv-logo"', $css);
     }
 
     public function test_main_brand_logo_and_wordmark_are_kept(): void
     {
         $css = $this->guestLayout();
-        // .auth-brand (logo + "PrimeVest") must survive on phones
+        // .auth-brand (logo + "PrimevestMarket") must survive on phones
         $start = strpos($css, '@media(max-width:899px)');
         $block = substr($css, $start, 700);
         $this->assertStringNotContainsString('.auth-brand{display:none}', $block);
@@ -73,8 +73,8 @@ class AuthMobileBrandingTest extends TestCase
     {
         $css = $this->guestLayout();
         $this->assertStringContainsString('<div class="auth-brand">', $css);
-        $this->assertStringContainsString('<span>PrimeVest</span>', $css);
-        $this->assertStringContainsString("alt=\"PrimeVest\"", $css);
+        $this->assertStringContainsString('<span>PrimevestMarket</span>', $css);
+        $this->assertStringContainsString("alt=\"PrimevestMarket\"", $css);
     }
 
     public function test_theme_toggle_stays_right_aligned_on_phones(): void

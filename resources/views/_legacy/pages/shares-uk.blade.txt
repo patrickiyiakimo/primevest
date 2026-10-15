@@ -602,7 +602,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">
-                Why Trade UK Stocks with PrimeVest?
+                Why Trade UK Stocks with PrimevestMarket?
             </h2>
             <p class="text-gray-500 text-lg max-w-2xl mx-auto">
                 Experience unparalleled access to the UK's premier stock market

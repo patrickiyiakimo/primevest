@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Forex Exotics · PrimeVest Markets')
+@section('title', 'Forex Exotics · PrimevestMarket Markets')
 
 @section('content')
 <section class="pv-hero">
     <div class="pv-container" style="position:relative;z-index:1;max-width:980px">
         <p class="pv-tag">Forex · Exotics</p>
         <h1 class="pv-h1" style="font-size:clamp(1.8rem,3.2vw,2.5rem)">Emerging-market pairs</h1>
-        <p class="pv-lead" style="margin:12px 0 0">Higher volatility meets higher reward. Trade with PrimeVest's institutional spreads.</p>
+        <p class="pv-lead" style="margin:12px 0 0">Higher volatility meets higher reward. Trade with PrimevestMarket's institutional spreads.</p>
     </div>
 </section>
 

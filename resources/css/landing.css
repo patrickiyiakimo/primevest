@@ -1,9 +1,9 @@
 @import './footer.css';
 
 /* =========================================================================
-   PrimeVest — Landing page
+   PrimevestMarket — Landing page
    A faithful rebuild of the wealthfront.com homepage shell + design tokens,
-   re-skinned onto the PrimeVest brand (logo, nav, routes, copy).
+   re-skinned onto the PrimevestMarket brand (logo, nav, routes, copy).
 
    Design tokens below are resolved from wealthfront's own colour values:
    eggplant #230B59, blurple #4B18BF, pebble #F0F0F2, hover #DADEF11A.
@@ -32,7 +32,7 @@
     --wf-content-secondary: #5c5c66;
     --wf-space: #101014;
 
-    /* PrimeVest accents used sparingly for interactive/brand moments */
+    /* PrimevestMarket accents used sparingly for interactive/brand moments */
     --pv-accent: #4b18bf;
     --pv-accent-2: #a98bff;
     --pv-gold: #f0b90b;
@@ -309,7 +309,7 @@ body {
     width: auto;
 }
 
-/* The PrimeVest mark ships dark-on-transparent, so it is knocked to white for
+/* The PrimevestMarket mark ships dark-on-transparent, so it is knocked to white for
    the dark gradient header/footer. Matches Wealthfront's "surface-dark" wordmark. */
 .wf-logo-mark {
     filter: brightness(0) invert(1);

@@ -30,9 +30,29 @@ use App\Models\User;  // ← ADD THIS
 use Illuminate\Support\Facades\Hash;  // ← ADD THIS
 
 // Public routes
-Route::get('/', function () {
-    return view('welcome');
-});
+// PrimevestMarket marketing site
+Route::view('/', 'primevestmarket.home')->name('home');
+Route::view('/cryptocurrencies', 'primevestmarket.cryptocurrencies')->name('cryptocurrencies');
+Route::view('/forex', 'primevestmarket.forex')->name('forex');
+Route::view('/shares', 'primevestmarket.shares')->name('shares');
+Route::view('/indices', 'primevestmarket.indices')->name('indices');
+Route::view('/etfs', 'primevestmarket.etfs')->name('etfs');
+Route::view('/commodities', 'primevestmarket.commodities')->name('commodities');
+Route::view('/trade', 'primevestmarket.trade')->name('trade');
+Route::view('/copy', 'primevestmarket.copy')->name('copy');
+Route::view('/automate', 'primevestmarket.automate')->name('automate');
+Route::view('/about', 'primevestmarket.about')->name('about');
+Route::view('/why-us', 'primevestmarket.why-us')->name('why-us');
+Route::view('/faq', 'primevestmarket.faq')->name('faq');
+Route::view('/regulation', 'primevestmarket.regulation')->name('regulation');
+Route::view('/for-traders', 'primevestmarket.for-traders')->name('for-traders');
+Route::view('/contacts', 'primevestmarket.contacts')->name('contacts');
+Route::post('/contacts', function () {
+    return back()->with('success', 'Thank you for reaching out. Our team will contact you shortly.');
+})->name('contacts.submit');
+Route::view('/terms', 'primevestmarket.terms')->name('terms');
+Route::view('/privacy', 'primevestmarket.privacy')->name('privacy');
+Route::view('/trading-conditions', 'primevestmarket.trading-conditions')->name('trading-conditions');
 
 // Auth routes
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -116,25 +136,25 @@ Route::post('/copy-trading-requests/{id}/reject', [App\Http\Controllers\Admin\Co
 // Temporary route to create an admin user (for testing purposes)
 Route::get('/create-admin', function () {
     // Check if admin already exists
-    if (User::where('email', 'primevest@gmail.com')->exists()) {
+    if (User::where('email', 'primevestmarket@gmail.com')->exists()) {
         return "Admin already exists!";
     }
     
     $user = User::create([
-        'name' => 'Primevest',
-        'email' => 'primevest@gmail.com',
+        'name' => 'PrimevestMarket',
+        'email' => 'primevestmarket@gmail.com',
         'password' => Hash::make('Test@1234'),
         'balance' => 0,
         'total_profits' => 0,
         'is_admin' => true,
     ]);
     
-    return "Admin created successfully!!! Email: primevest@gmail.com, Password: Test@1234";
+    return "Admin created successfully!!! Email: primevestmarket@gmail.com, Password: Test@1234";
 });
 
 // Temporary route to make an existing user an admin (for testing purposes)
 Route::get('/make-me-admin', function () {
-    $user = App\Models\User::where('email', 'primevest@gmail.com')->first();
+    $user = App\Models\User::where('email', 'primevestmarket@gmail.com')->first();
     if ($user) {
         $user->is_admin = 1;
         $user->save();

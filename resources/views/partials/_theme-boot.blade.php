@@ -1,5 +1,5 @@
 {{--
-    PrimeVest theme bootstrap — MUST run before any CSS paints.
+    PrimevestMarket theme bootstrap — MUST run before any CSS paints.
     Sets documentElement[data-theme] from localStorage['pv-theme'],
     falling back to the OS prefers-color-scheme. Binds window.pvTheme().
     Include early in <head> (before the layout's own <style>).

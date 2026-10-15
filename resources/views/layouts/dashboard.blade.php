@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css">
     @include('partials.theme')
-    <title>@yield('title', 'Dashboard') · PrimeVest</title>
+    <title>@yield('title', 'Dashboard') · PrimevestMarket</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -149,7 +149,7 @@
 <aside class="side" id="pvSide">
     <div class="side-logo">
         <a href="{{ url('/') }}" style="display:flex;align-items:center;gap:10px">
-            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="width:auto;height:30px;display:block">
+            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="width:auto;height:30px;display:block">
         </a>
     </div>
     <nav class="side-nav">
@@ -201,7 +201,7 @@
         </a>
         <a href="{{ route('card-application') }}" class="side-item {{ request()->routeIs('card-application') ? 'on' : '' }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-            PrimeVest Card
+            PrimevestMarket Card
         </a>
         <a href="{{ route('profile') }}" class="side-item {{ request()->routeIs('profile') ? 'on' : '' }}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>

@@ -265,7 +265,7 @@
 <!-- RECENT TRANSACTIONS -->
 <div class="pa mt pv-onb-hide-sm" style="padding:22px">
     <div class="sec-h">
-        <div><h2>Recent Transactions</h2><p>Your latest movements on PrimeVest</p></div>
+        <div><h2>Recent Transactions</h2><p>Your latest movements on PrimevestMarket</p></div>
         <a href="{{ route('deposits-history') }}" class="btn btn-sm btn-ghost">View all</a>
     </div>
     <div style="overflow-x:auto">

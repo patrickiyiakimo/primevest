@@ -1,7 +1,7 @@
 <nav class="pv-nav" id="pvNavbar">
     <div class="pv-container pv-nav-inner">
         <a href="{{ url('/') }}" class="pv-logo">
-            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="height:38px;width:auto;display:block">
+            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="height:38px;width:auto;display:block">
         </a>
 
         {{-- Nav items mirror the landing page header: Markets / Invest /

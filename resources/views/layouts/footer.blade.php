@@ -3,7 +3,7 @@
         <div class="pv-grid pv-grid-4" style="gap:30px;padding-bottom:44px">
             <div>
                 <a href="{{ url('/') }}" class="pv-logo" style="margin-bottom:14px">
-                    <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimeVest" style="height:34px;width:auto;display:block">
+                    <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="height:34px;width:auto;display:block">
                 </a>
                 <p class="pv-foot" style="max-width:260px;line-height:1.7">A trusted digital asset investment platform. Buy, trade, stake and copy elite crypto traders.</p>
                 <div style="display:flex;gap:10px;margin-top:16px">
@@ -15,7 +15,7 @@
             <div>
                 <div style="font-weight:700;margin-bottom:14px" class="pv-acc">Company</div>
                 <div style="display:flex;flex-direction:column;gap:10px" class="pv-foot">
-                    <a href="{{ route('company') }}">About PrimeVest</a>
+                    <a href="{{ route('company') }}">About PrimevestMarket</a>
                     <a href="{{ route('contact') }}">Contact Us</a>
                     <a href="{{ route('education') }}">Learn Crypto</a>
                     <a href="{{ route('privacy.policy') }}">Privacy Policy</a>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div style="border-top:1px solid var(--line);padding:20px 0;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between" class="pv-foot">
-            <span>&copy; 2023 PrimeVest. All rights reserved.</span>
+            <span>&copy; 2023 PrimevestMarket. All rights reserved.</span>
             <span>BTC · ETH · SOL · USDT · ADA · DOT</span>
         </div>
         <div style="padding:0 0 26px">

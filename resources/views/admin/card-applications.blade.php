@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-title', 'Card Applications')
-@section('breadcrumb', 'Review PrimeVest card requests')
+@section('breadcrumb', 'Review PrimevestMarket card requests')
 
 @section('admin-content')
 <div class="kpi">

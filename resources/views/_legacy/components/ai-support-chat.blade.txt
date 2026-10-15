@@ -18,7 +18,7 @@
                     </svg>
                 </div>
                 <div>
-                    <h3 class="text-white font-semibold">PrimeVest AI Assistant</h3>
+                    <h3 class="text-white font-semibold">PrimevestMarket AI Assistant</h3>
                     <p class="text-xs text-gray-400"><span class=" text-green-500 text-xs"> Online </span> Always here to help!</p>
                 </div>
             </div>
@@ -44,7 +44,7 @@
         <!-- Quick Questions -->
         <div class="px-4 py-2 border-t border-gray-100 bg-gray-50">
             <div class="flex flex-wrap gap-2">
-                <button onclick="askQuestion('What is PrimeVest?')" class="text-xs bg-white hover:bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full border border-gray-200 transition-all">What is PrimeVest?</button>
+                <button onclick="askQuestion('What is PrimevestMarket?')" class="text-xs bg-white hover:bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full border border-gray-200 transition-all">What is PrimevestMarket?</button>
                 <button onclick="askQuestion('How to deposit?')" class="text-xs bg-white hover:bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full border border-gray-200 transition-all">How to deposit?</button>
                 <button onclick="askQuestion('Investment plans')" class="text-xs bg-white hover:bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full border border-gray-200 transition-all">Investment plans</button>
                 <button onclick="askQuestion('Monthly profit report')" class="text-xs bg-white hover:bg-gray-100 text-gray-700 px-3 py-1.5 rounded-full border border-gray-200 transition-all">Monthly report</button>
@@ -91,7 +91,7 @@
                 // Show welcome message if no history
                 const chatMessages = document.getElementById('chatMessages');
                 if (chatMessages.children.length === 0) {
-                    addMessageToChat("👋 Hi! I'm your PrimeVest AI Assistant. I can help you with investment plans, deposits, withdrawals, and provide monthly profit reports. What would you like to know?", false);
+                    addMessageToChat("👋 Hi! I'm your PrimevestMarket AI Assistant. I can help you with investment plans, deposits, withdrawals, and provide monthly profit reports. What would you like to know?", false);
                 }
             }
         } catch (error) {

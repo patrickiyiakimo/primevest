@@ -44,7 +44,7 @@
 
 <div class="pa mt" style="padding:24px">
     <div class="sec-h">
-        <div><h2>My Referrals</h2><p>Invite friends and earn with the PrimeVest referral program</p></div>
+        <div><h2>My Referrals</h2><p>Invite friends and earn with the PrimevestMarket referral program</p></div>
         <button class="btn btn-sm btn-ghost" onclick="navigator.clipboard.writeText('{{ url('/register?ref='.$user->referral_code ?? '') }}').then(()=>pvFlash('flash-ok','Referral link copied'))">Copy referral link</button>
     </div>
     <div class="pa pv-shade" style="padding:16px 20px;display:flex;align-items:center;gap:14px;margin-bottom:18px">

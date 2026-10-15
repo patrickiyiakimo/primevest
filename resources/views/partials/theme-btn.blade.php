@@ -1,5 +1,5 @@
 {{--
-    PrimeVest theme toggle button (light/dark). Calls the global window.pvTheme()
+    PrimevestMarket theme toggle button (light/dark). Calls the global window.pvTheme()
     defined in partials/theme-head. Icons are data-theme aware (pure CSS swap).
     Include in any navbar / topbar / side strip.
 --}}

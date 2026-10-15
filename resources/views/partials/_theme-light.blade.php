@@ -1,5 +1,5 @@
 {{--
-    PrimeVest LIGHT palette + component overrides.
+    PrimevestMarket LIGHT palette + component overrides.
     These rules sit at `:root[data-theme="light"]` so they only win while the
     head bootstrap has set data-theme="light" on <html>. Component declarations
     flip hardcoded dark rgba(255,255,255,.0X) surfaces (which never use vars)

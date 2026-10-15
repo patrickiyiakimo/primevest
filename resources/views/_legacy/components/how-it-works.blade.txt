@@ -1,4 +1,4 @@
-<!-- How It Works Section - PrimeVest -->
+<!-- How It Works Section - PrimevestMarket -->
 <div class="relative py-20 lg:py-28 overflow-hidden">
     <!-- Background Image -->
     <div class="absolute inset-0 z-0">

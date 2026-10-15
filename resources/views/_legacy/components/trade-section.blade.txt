@@ -8,7 +8,7 @@
                     Trade with low commissions and tight spreads
                 </h2>
                 <p class="text-lg leading-relaxed text-gray-400 mb-8">
-                    With PrimeVest you get a transparent pricing structure and a secure 
+                    With PrimevestMarket you get a transparent pricing structure and a secure 
                     and regulated trading environment. As an active trader you can also 
                     qualify for lower fees and extra benefits.
                 </p>
@@ -29,7 +29,7 @@
                 
                 <!-- Overlay text to cover any logo -->
                 <!-- <div class="absolute bottom-2 right-1 bg-gray-100/90 backdrop-blur-sm px-3 py-1.5 rounded-md text-xs text-gray-500 font-medium">
-                    PrimeVest
+                    PrimevestMarket
                 </div> -->
             </div>
         </div>
