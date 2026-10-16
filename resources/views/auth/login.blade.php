@@ -8,7 +8,7 @@
     <title>Sign In · PrimevestMarket</title>
 
     <!-- Favicon -->
-    <link href="{{ asset('primevestmarket/storage/app/public/photos/BdNLfPXnjtZpQd84tP1qPi7Doca8jaPb7f1J1uCG.png') }}" rel="icon" type="image/x-icon">
+    <link href="{{ asset('favicon.png') }}" rel="icon" type="image/png">
 
     <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,7 +84,7 @@
                                 <!-- Header -->
                                 <div class="text-center mb-8">
                                     <div class="flex items-center justify-center mb-6">
-                                        <img src="{{ asset('primevestmarket/storage/app/public/photos/rJULSCPNqsykfmmjM9l0J5OMEJUGKcuAUlhRX9WX.png') }}" class="relative h-16 w-auto" alt="PrimevestMarket" />
+                                        <img src="{{ asset('images/logoipsum-409.png') }}" class="relative h-16 w-auto" alt="PrimevestMarket" />
                                     </div>
                                     <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">Welcome Back</h1>
                                     <h2 class="text-lg sm:text-xl font-semibold mb-3">
@@ -244,5 +244,6 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
     </script>
+    @include('partials.smartsupp')
 </body>
 </html>

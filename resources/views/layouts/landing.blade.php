@@ -267,6 +267,6 @@
 </div>
 
 @stack('scripts')
-@include('partials.jivo')
+@include('partials.smartsupp')
 </body>
 </html>

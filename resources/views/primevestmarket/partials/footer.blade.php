@@ -8,7 +8,7 @@
                         <div>
                             <div class="flex items-center mb-6">
                                 <a href="{{ route('home') }}" class="flex items-center">
-                                    <img class="h-8 w-auto" src="{{ asset('primevestmarket/storage/app/public/photos/rJULSCPNqsykfmmjM9l0J5OMEJUGKcuAUlhRX9WX.png') }}" alt="PrimevestMarket">
+                                    <img class="h-8 w-auto" src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket">
                                 </a>
                             </div>
                             <p class="text-sm text-gray-400 mb-6">
@@ -692,6 +692,8 @@
 
 
 
+
+@include('partials.smartsupp')
 
 </body>
 

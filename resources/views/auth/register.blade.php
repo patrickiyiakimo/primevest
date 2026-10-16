@@ -8,7 +8,7 @@
     <title>Create Account · PrimevestMarket</title>
 
     <!-- Favicon -->
-    <link href="{{ asset('primevestmarket/storage/app/public/photos/BdNLfPXnjtZpQd84tP1qPi7Doca8jaPb7f1J1uCG.png') }}" rel="icon" type="image/x-icon">
+    <link href="{{ asset('favicon.png') }}" rel="icon" type="image/png">
 
     <!-- Inter Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,7 +83,7 @@
 
                             <!-- Header -->
                             <div class="text-center mb-6">
-                                <img src="{{ asset('primevestmarket/storage/app/public/photos/rJULSCPNqsykfmmjM9l0J5OMEJUGKcuAUlhRX9WX.png') }}" class="h-12 w-auto mx-auto mb-4" alt="PrimevestMarket" />
+                                <img src="{{ asset('images/logoipsum-409.png') }}" class="h-12 w-auto mx-auto mb-4" alt="PrimevestMarket" />
                                 <h1 class="text-2xl font-bold text-white mb-2">Join <span class="text-blue-400">PrimevestMarket</span></h1>
                                 <p class="text-gray-400 text-sm">Create your trading account</p>
                             </div>
@@ -191,5 +191,6 @@
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
     </script>
+    @include('partials.smartsupp')
 </body>
 </html>
