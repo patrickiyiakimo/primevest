@@ -4,12 +4,7 @@
 @section('breadcrumb', 'All rewards and profits credited to your account')
 
 @section('dashboard-content')
-<div class="kpi">
-    <div class="kpi-card"><div class="lbl">Total Earnings</div><div class="val num ok">+${{ number_format($totalEarnings ?? 0, 2) }}</div></div>
-    <div class="kpi-card"><div class="lbl">This Month</div><div class="val num ok">+${{ number_format($monthlyEarnings ?? 0, 2) }}</div></div>
-    <div class="kpi-card"><div class="lbl">Today</div><div class="val num ok">+${{ number_format($todayEarnings ?? 0, 2) }}</div></div>
-    <div class="kpi-card"><div class="lbl">Average Credit</div><div class="val num">${{ number_format($averageEarnings ?? 0, 2) }}</div></div>
-</div>
+@include('dashboard.partials.transaction-tabs')
 
 <div class="pa mt" style="padding:22px">
     <div class="sec-h"><div><h2>Profit &amp; Reward History</h2><p>Auto-credited staking rewards and trading profits</p></div></div>

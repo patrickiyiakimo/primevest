@@ -16,7 +16,7 @@ class DepositController extends Controller
         $user = Auth::user();
         
         $validated = $request->validate([
-            'amount' => 'required|numeric|min:20|max:100000',
+            'amount' => 'required|numeric|min:300|max:100000',
             'method' => 'required|string',
             'proof' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:5120'
         ]);

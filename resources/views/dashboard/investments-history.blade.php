@@ -4,12 +4,7 @@
 @section('breadcrumb', 'Your active and completed staking positions')
 
 @section('dashboard-content')
-<div class="kpi">
-    <div class="kpi-card"><div class="lbl">Total Staked</div><div class="val num">${{ number_format($totalInvested ?? 0, 2) }}</div></div>
-    <div class="kpi-card"><div class="lbl">Active</div><div class="val num" style="color:var(--acc)">{{ $activeInvestments ?? 0 }}</div></div>
-    <div class="kpi-card"><div class="lbl">Completed</div><div class="val num">{{ $completedInvestments ?? 0 }}</div></div>
-    <div class="kpi-card"><div class="lbl">Total Returns</div><div class="val num ok">+${{ number_format($totalReturns ?? 0, 2) }}</div></div>
-</div>
+@include('dashboard.partials.transaction-tabs')
 
 <div class="pa mt" style="padding:22px">
     <div class="sec-h"><div><h2>Staking Positions</h2><p>Every plan you've staked on PrimevestMarket</p></div></div>

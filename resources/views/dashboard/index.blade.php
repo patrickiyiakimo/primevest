@@ -1,497 +1,294 @@
 @extends('layouts.dashboard')
 
-@section('page-title', 'Portfolio Overview')
-@section('breadcrumb', 'Welcome back, ' . Auth::user()->name)
+@section('page-title', 'Dashboard')
 
 @section('dashboard-content')
 @php
-    $totalBalance = $user->balance + $profits + ($stocksCurrentValue ?? 0);
-    $cashAvailable = $user->balance + $profits;
-
-    // One icon pair, reused by every balance toggle on the page.
-    $eyeOn = '<svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>';
-    $eyeOff = '<svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.94 17.94A10.1 10.1 0 0112 20c-6.5 0-11-8-11-8a18.5 18.5 0 015.06-5.94M9.9 4.24A9.1 9.1 0 0112 4c6.5 0 11 8 11 8a18.4 18.4 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><path stroke-linecap="round" d="M1 1l22 22"/></svg>';
+    $user = Auth::user();
+    $referralLink = url('/register') . '?referral=' . ($user->referral_code ?: $user->email);
 @endphp
 
-{{-- Applied before any balance is painted so a refresh never flashes the amounts. --}}
-<script>
-    (function(){
-        var h=false;
-        try{h=localStorage.getItem('pv-hide-balances')==='1'}catch(e){}
-        document.documentElement.classList.toggle('pv-balances-hidden',h);
-    })();
-</script>
+<div class="row">
 
-@if($needsFundingOnboarding)
-{{-- Dismissal is read before paint so the guide never flashes on repeat visits. --}}
-<script>
-    (function(){
-        var KEY='pv-funding-onb-{{ $user->id }}';
-        var d=false;
-        try{d=localStorage.getItem(KEY)==='1'}catch(e){}
-        document.documentElement.classList.toggle('pv-onb-dismissed',d);
-    })();
-</script>
-@endif
-
-<style>
-    .pv-alert{position:fixed;left:50%;bottom:24px;transform:translate(-50%,170%);z-index:960;display:flex;align-items:center;gap:12px;width:min(520px,calc(100vw - 32px));padding:14px 16px;background:var(--panel2);border:1px solid var(--line);border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.5);transition:transform .55s cubic-bezier(.22,1,.36,1)}
-    .pv-alert.show{transform:translate(-50%,0)}
-    .pv-alert-bar{width:4px;align-self:stretch;border-radius:99px;flex-shrink:0}
-    .pv-alert-x{background:none;border:none;color:var(--muted);font-size:1.3rem;line-height:1;cursor:pointer;padding:0 2px;flex-shrink:0}
-    .pv-alert-x:hover{color:var(--text)}
-    .sig-ring{transform:rotate(-90deg)}
-    .pv-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,12,.72);backdrop-filter:blur(8px)}
-    .pv-modal.open{display:flex}
-
-    /* ===== Balance privacy toggle ===== */
-    .pv-eye{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;margin-left:auto;flex-shrink:0;border-radius:8px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--muted);cursor:pointer;transition:.18s}
-    .pv-eye:hover{color:var(--text);background:rgba(255,255,255,.1)}
-    .pv-eye:focus-visible{outline:0;border-color:rgba(59,130,246,.6);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
-    .pv-eye svg{width:15px;height:15px}
-    .pv-eye .i-off{display:none}
-    .pv-balances-hidden .pv-eye{color:var(--acc);border-color:rgba(59,130,246,.45);background:rgba(59,130,246,.14)}
-    .pv-balances-hidden .pv-eye .i-on{display:none}
-    .pv-balances-hidden .pv-eye .i-off{display:block}
-    /* Blur keeps the original width, so nothing reflows when toggling. */
-    .pv-money{transition:filter .18s ease}
-    .pv-balances-hidden .pv-money{filter:blur(7px);pointer-events:none;user-select:none;-webkit-user-select:none}
-
-    /* ===== Portfolio performance ===== */
-    .pv-grid-main{display:grid;grid-template-columns:1.7fr 1fr;gap:20px;height:560px}
-    /* The chart must always sit in a box with a DEFINITE height, otherwise the
-       canvas height:100% falls back to its intrinsic 300x150 and Chart.js's
-       responsive observer fights the auto-height parent. */
-    .pv-chart-box{flex:1;min-height:260px;position:relative}
-    .pv-chart-box canvas{position:absolute!important;inset:0;width:100%!important;height:100%!important;display:block}
-    .pv-perf-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:18px}
-    .pv-perf-stats>div{min-width:0}
-    .pv-perf-stats .num{overflow-wrap:anywhere}
-    .pv-sec-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
-    .pv-tv-ov{height:590px;border-radius:12px;overflow:hidden}
-
-    @media(max-width:1100px){
-        .pv-grid-main{grid-template-columns:1fr;height:auto}
-        .pv-chart-box{flex:none;height:300px;min-height:0}
-        .pv-quickcol .pv-screener{min-height:420px}
-    }
-    @media(max-width:760px){
-        .pv-perf-stats{grid-template-columns:1fr;gap:12px}
-        .pv-tv-ov{height:420px}
-    }
-    @media(max-width:560px){
-        .sec-h{flex-wrap:wrap;row-gap:10px}
-        .sec-h h2{font-size:1.05rem}
-        .sec-actions{width:100%}
-    }
-
-    /* ===== Mobile-only funding prompt =====
-       Flat dark dialog, no gradients. Desktop and tablet are untouched. */
-    .pv-onb{display:none}
-
-    @media(max-width:768px){
-        .pv-onb{display:flex;position:fixed;inset:0;z-index:970;align-items:center;
-            justify-content:center;padding:20px;background:rgba(4,7,14,.78);
-            backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
-            animation:pv-onb-in .22s ease-out}
-        .pv-onb-card{position:relative;width:100%;max-width:320px;padding:26px 22px 22px;
-            border-radius:18px;background:#0d1320;border:1px solid rgba(255,255,255,.11);
-            box-shadow:0 20px 48px rgba(0,0,0,.6);text-align:center;
-            animation:pv-onb-pop .26s cubic-bezier(.22,1,.36,1)}
-        .pv-onb-x{position:absolute;top:8px;right:10px;width:28px;height:28px;padding:0;
-            border:0;border-radius:8px;background:transparent;color:#6d7a91;
-            font-size:1.3rem;line-height:1;cursor:pointer;transition:.18s}
-        .pv-onb-x:hover{color:#eef2f9;background:rgba(255,255,255,.08)}
-        .pv-onb-title{margin:0 0 8px;font-size:1.06rem;font-weight:700;line-height:1.4;
-            letter-spacing:-.01em;color:#f2f6fc}
-        .pv-onb-sub{margin:0 0 20px;font-size:.83rem;line-height:1.5;color:#8b97ad}
-        .pv-onb-cta{display:block;width:100%;padding:13px;border-radius:12px;
-            font-size:.92rem;font-weight:700;text-align:center;text-decoration:none;
-            background:var(--acc);color:#fff;transition:opacity .18s;
-            box-shadow:0 10px 26px -12px rgba(37,99,235,.55)}
-        .pv-onb-cta:hover{opacity:.9}
-
-        /* An unfunded new account has no use for a 12M chart, a market screener
-           or a duplicate deposit button, and on a phone they bury the popup's
-           call to action. */
-        .pv-dash-needs-funding .pv-onb-hide-sm{display:none}
-    }
-    @keyframes pv-onb-in{from{opacity:0}to{opacity:1}}
-    @keyframes pv-onb-pop{from{opacity:0;transform:translateY(10px) scale(.97)}
-        to{opacity:1;transform:none}}
-    @media(prefers-reduced-motion:reduce){
-        .pv-onb,.pv-onb-card{animation:none}
-    }
-    .kpi{grid-template-columns:repeat(2,1fr)}
-    @media(max-width:560px){.kpi{grid-template-columns:1fr}}
-</style>
-
-<!-- MOBILE-ONLY FUNDING PROMPT -->
-@if($needsFundingOnboarding)
-{{-- Compact dark dialog. Hidden from 769px up so the desktop dashboard is
-     untouched. Deliberately flat: no gradients, no multi-step content. --}}
-<div class="pv-onb" data-pv-onb>
-    <div class="pv-onb-card" role="dialog" aria-modal="true" aria-labelledby="pv-onb-title">
-        <button type="button" class="pv-onb-x" data-pv-onb-close aria-label="Dismiss">&times;</button>
-        <h2 class="pv-onb-title" id="pv-onb-title">Fund your account to start trading</h2>
-        <p class="pv-onb-sub">Deposit funds to activate your portfolio.</p>
-        <a href="{{ route('deposit') }}" class="pv-onb-cta">Deposit Funds</a>
-    </div>
-</div>
-@endif
-
-<!-- KPI CARDS -->
-<div class="{{ $needsFundingOnboarding ? 'pv-dash-needs-funding' : '' }}">
-<div class="kpi">
-    <div class="kpi-card">
-        <div class="lbl">
-            <span style="width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 10px var(--acc)"></span>Total Balance
-            <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
-        </div>
-        <div class="val num pv-money" style="color:var(--acc)">${{ number_format($totalBalance, 2) }}</div>
-        <div class="sub pv-money">Main {{ number_format($user->balance, 2) }} · Profits {{ number_format($profits, 2) }}</div>
-    </div>
-    <div class="kpi-card">
-        <div class="lbl">
-            Available Cash
-            <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
-        </div>
-        <div class="val num pv-money">${{ number_format($cashAvailable, 2) }}</div>
-        <div class="sub">Ready to trade or stake</div>
-    </div>
-    <!-- <div class="kpi-card">
-        <div class="lbl">
-            Est. Annual Return
-            <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
-        </div>
-        <div class="val num pv-money" style="color:var(--gold);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">+{{ number_format($profitPercentage >= 0 ? $profitPercentage : 0, 3) }}%</div>
-        <div class="sub">Lifetime return on balance</div>
-    </div> -->
-    <!-- <div class="kpi-card">
-        <div class="lbl">
-            Positions
-            <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances">{!! $eyeOn !!}{!! $eyeOff !!}</button>
-        </div>
-        <div class="val num">{{ $stocksCount }}</div>
-        <div class="sub">P/L <span class="pv-money {{ ($totalProfitLoss ?? 0) >= 0 ? 'ok' : 'bad' }} num">{{ ($totalProfitLoss ?? 0) >= 0 ? '+' : '' }}${{ number_format($totalProfitLoss ?? 0, 2) }}</span></div>
-    </div> -->
-</div>
-
-<!-- SIGNAL STRENGTH -->
-<div class="pa mt" style="padding:16px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap">
-    <div style="display:flex;align-items:center;gap:14px">
-        <svg class="sig-ring" width="64" height="64" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="42" fill="none" stroke="var(--line)" stroke-width="9"/>
-            <circle id="sigRing" cx="50" cy="50" r="42" fill="none" stroke="#3b82f6" stroke-width="9" stroke-linecap="round" stroke-dasharray="263.9" stroke-dashoffset="{{ round(263.9 * (1 - $signal / 100), 1) }}"/>
-        </svg>
-        <div style="min-width:125px">
-            <div class="muted" style="font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;font-weight:700">Signal Strength</div>
-            <div style="font-weight:800;font-size:1.25rem" class="num"><span id="sigPct">{{ $signal }}</span>%</div>
-            <div class="muted" style="font-size:.78rem">Level <b class="ok">{{ $signalLevel }}</b></div>
+    <!-- Quick action tabs -->
+    <div class="col-xl-12">
+        <div class="card sub-menu">
+            <div class="card-body">
+                <ul class="d-flex">
+                    <li class="nav-item">
+                        <a href="{{ route('deposit') }}" class="nav-link">
+                            <i class="mdi mdi-heart"></i>
+                            <span>Deposit</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('withdraw') }}" class="nav-link">
+                            <i class="mdi mdi-pentagon"></i>
+                            <span>Withdraw</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('invest') }}" class="nav-link">
+                            <i class="mdi mdi-diamond"></i>
+                            <span>Invest</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <div style="flex:1;min-width:220px;font-size:.88rem">
-        @if($signalNext)
-            <div style="display:flex;align-items:center;gap:12px">
-                <div style="flex:1">
-                    <div class="muted" style="margin-bottom:6px">Top up to unlock <b class="ok">{{ $signalNext['level'] }}</b> tier</div>
-                    <div style="height:8px;border-radius:99px;background:var(--line);overflow:hidden">
-                        <div style="height:100%;width:{{ $signal }}%;background:#3b82f6;border-radius:99px;transition:width .6s"></div>
+
+    <!-- Profile card -->
+    <div class="col-xl-6 col-lg-6 col-md-6">
+        <div class="card profile_card">
+            <div class="card-body">
+                <div class="media">
+                    <span class="profile-avatar">{{ strtoupper(substr($user->name, 0, 1)) }}</span>
+                    <div class="media-body">
+                        <span>Hello</span>
+                        <h4 class="mb-2">{{ $user->name }}</h4>
+                        @if($user->phone)
+                        <p class="mb-1"> <span><i class="fa fa-phone mr-2 text-primary"></i></span>{{ $user->phone }}</p>
+                        @endif
+                        <p class="mb-1"> <span><i class="fa fa-envelope mr-2 text-primary"></i></span>
+                            {{ $user->email }}
+                        </p>
                     </div>
                 </div>
-                <div class="num" style="font-weight:800;font-size:1.1rem;color:var(--acc)">{{ $signal }}/100</div>
-            </div>
-            <div class="muted" style="font-size:.8rem;margin-top:6px">Deposit <b class="gold num pv-money">${{ number_format(max(0, $signalNext['threshold'] - $spendableBalance)) }}</b> more to reach <b class="ok num">{{ $signalNext['signal'] }}%</b> and enter elite {{ $signalNext['level'] }} trades.</div>
-        @else
-            <div class="ok" style="font-weight:700">🏆 Maximum signal reached — you have full access to elite trades &amp; staking plans.</div>
-        @endif
-    </div>
-    <button class="btn" onclick="openSignalModal()">⚡ Boost Signal</button>
-</div>
 
-<!-- MAIN GRID: chart + quick actions -->
-<div class="pv-grid-main mt">
-    <!-- Portfolio performance -->
-    <div class="pa" style="padding:22px;display:flex;flex-direction:column;min-height:0">
-        <div class="sec-h">
-            <div><h2>Portfolio Performance</h2><p>Value curve based on your realized activity</p></div>
-            <div class="pv-sec-actions">
-                <span class="pill pill-g">● Live</span>
-                <button type="button" class="pv-eye" data-pv-eye aria-pressed="false" aria-label="Show or hide balances" style="margin-left:0">{!! $eyeOn !!}{!! $eyeOff !!}</button>
-            </div>
-        </div>
-        <div class="pv-perf-stats">
-            <div><span class="muted" style="font-size:.75rem">Portfolio value</span><div class="pv-money num" style="font-weight:800">${{ number_format($totalBalance, 2) }}</div></div>
-            <div><span class="muted" style="font-size:.75rem">Net P/L</span><div class="pv-money num {{ $netPnl >= 0 ? 'ok' : 'bad' }}" style="font-weight:800">{{ $netPnl >= 0 ? '+' : '' }}${{ number_format($netPnl, 2) }}</div></div>
-            <div><span class="muted" style="font-size:.75rem">Last deposit</span><div class="pv-money num" style="font-weight:800">{{ $lastDepositDate ? '$'.number_format($lastDepositAmount,2).' · '.$lastDepositDate : '—' }}</div></div>
-        </div>
-        <div class="pv-chart-box">
-            @if(count($chart))
-                <canvas id="growthChart"></canvas>
-            @else
-                <div class="muted" style="height:100%;display:grid;place-items:center;text-align:center;font-size:.9rem;padding:0 12px">No activity yet — your performance chart will appear here after your first deposit or stake.</div>
-            @endif
-        </div>
-    </div>
-
-    <!-- Quick actions + market screener -->
-    <div class="pv-quickcol" style="display:flex;flex-direction:column;gap:20px;min-height:0">
-        <div class="pa" style="padding:22px">
-            <div class="sec-h"><div><h2>Quick Actions</h2><p>Move your funds in seconds</p></div></div>
-            {{-- For a brand new phone user the funding popup is the single call to
-                 action, so the duplicate deposit button is dropped here. Scoped to
-                 the onboarding state; funded accounts keep it on every device. --}}
-            <a href="{{ route('deposit') }}" class="btn btn-block pv-onb-hide-sm" style="width:100%;margin-bottom:10px">⬆ Deposit Funds</a>
-            <a href="{{ route('invest') }}" class="btn btn-gold btn-block" style="width:100%;margin-bottom:10px">🔥 Start Staking</a>
-            <a href="{{ route('buy-crypto') }}" class="btn btn-ghost btn-block" style="width:100%">⟳ Buy Crypto</a>
-        </div>
-        <div class="pa pv-card pv-screener pv-onb-hide-sm" style="padding:22px 22px 14px;display:flex;flex-direction:column;flex:1;min-height:0">
-            <div class="sec-h" style="margin-bottom:10px"><div><h2>Market Screener</h2><p>Real-time crypto overview</p></div></div>
-            <div style="flex:1;min-height:0;border-radius:12px;overflow:hidden">
-                <div id="tvScreener" style="height:100%"></div>
+                <ul class="card-profile__info">
+                    <li>
+                        <h5 class="mr-4">Country</h5>
+                        <span class="text-muted">{{ $user->country ?: '—' }}</span>
+                    </li>
+                    <li>
+                        <h5 class="mr-4">Status</h5>
+                        <span class="text-success">{{ $user->kyc_verified_at ?? false ? 'Verified' : 'Active' }}</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
-</div>
 
-<!-- MARKET OVERVIEW -->
-<div class="pa mt pv-onb-hide-sm" style="padding:22px">
-    <div class="sec-h" style="margin-bottom:10px"><div><h2>Market Overview</h2><p>Global markets at a glance</p></div></div>
-    <div class="pv-tv-ov">
-        <div id="tvOverview" style="height:100%"></div>
-    </div>
-</div>
+    <!-- Wallet card -->
+    <div class="col-xl-6 col-lg-6 col-md-6">
+        <div class="card acc_balance">
+            <div class="card-header">
+                <h4 class="card-title">Wallet</h4>
+            </div>
+            <div class="card-body">
+                <span>Available BTC</span>
+                <h3> 0 BTC</h3>
 
-<!-- RECENT TRANSACTIONS -->
-<div class="pa mt pv-onb-hide-sm" style="padding:22px">
-    <div class="sec-h">
-        <div><h2>Recent Transactions</h2><p>Your latest movements on PrimevestMarket</p></div>
-        <a href="{{ route('deposits-history') }}" class="btn btn-sm btn-ghost">View all</a>
+                <div class="d-flex justify-content-between my-3">
+                    <div>
+                        <p class="mb-1">Minimum Deposit</p>
+                        <h4>300 USD</h4>
+                    </div>
+                    <div>
+                        <p class="mb-1">Minimum Withdrawal</p>
+                        <h4>1,000 USD</h4>
+                    </div>
+                </div>
+
+                <div class="btn-group mb-3">
+                    <button class="btn btn-success" onclick="location.href='{{ route('deposit') }}';">Deposit</button>
+                    <button class="btn btn-danger" onclick="location.href='{{ route('withdraw') }}';">Withdraw</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div style="overflow-x:auto">
-    <table class="tbl">
-        <thead>
-            <tr><th>Date</th><th>Type</th><th>Amount</th><th>Status</th><th>Reference</th></tr>
-        </thead>
-        <tbody>
-            @forelse($transactions ?? [] as $tx)
-            <tr>
-                <td class="num muted" style="white-space:nowrap">{{ $tx['date'] ?? '' }}</td>
-                <td>
-                    @if(($tx['type'] ?? '') == 'deposit')<span class="pill pill-g">⬇ Deposit</span>
-                    @elseif(($tx['type'] ?? '') == 'withdrawal')<span class="pill pill-r">⬆ Withdrawal</span>
-                    @elseif(($tx['type'] ?? '') == 'profit')<span class="pill pill-y">★ Profit</span>
-                    @elseif(($tx['type'] ?? '') == 'loss')<span class="pill pill-r">▼ Loss</span>
-                    @elseif(($tx['type'] ?? '') == 'loss_reversal')<span class="pill pill-g">↩ Loss Reversed</span>
-                    @elseif(($tx['type'] ?? '') == 'investment')<span class="pill pill-b">🔥 Staking</span>
-                    @else<span class="pill pill-b">{{ ucfirst($tx['type'] ?? 'Trade') }}</span>
-                    @endif
-                </td>
-                <td class="num {{ in_array(($tx['type'] ?? ''), ['withdrawal', 'loss']) ? 'bad' : 'ok' }}" style="font-weight:700">
-                    {{ in_array(($tx['type'] ?? ''), ['withdrawal', 'loss']) ? '-' : '+' }}${{ number_format($tx['amount'] ?? 0, 2) }}
-                </td>
-                <td><span class="pill pill-g">● {{ ucfirst($tx['status'] ?? 'completed') }}</span></td>
-                <td class="num muted" style="font-size:.78rem">{{ $tx['ref'] ?? '—' }}</td>
-            </tr>
-            @empty
-            <tr><td colspan="5" style="text-align:center;padding:40px" class="muted">
-                No transactions yet — <a href="{{ route('deposit') }}" style="color:var(--acc);font-weight:700">make your first deposit</a> to get started.
-            </td></tr>
-            @endforelse
-        </tbody>
-    </table>
+
+    <!-- Market ticker -->
+    <div class="col-xl-12">
+        <div class="tradingview-widget-container mb-4">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+            {
+            "symbols": [
+                { "proName": "FOREXCOM:SPXUSD", "title": "S&P 500" },
+                { "proName": "FOREXCOM:NSXUSD", "title": "Nasdaq 100" },
+                { "proName": "FX_IDC:EURUSD", "title": "EUR/USD" },
+                { "proName": "BITSTAMP:BTCUSD", "title": "BTC/USD" },
+                { "proName": "BITSTAMP:ETHUSD", "title": "ETH/USD" }
+            ],
+            "showSymbolLogo": true,
+            "colorTheme": "light",
+            "isTransparent": false,
+            "displayMode": "regular",
+            "locale": "en"
+            }
+            </script>
+        </div>
     </div>
-</div>
+
+    <!-- Stat cards -->
+    <div class="col-xl-12">
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                <div class="card text-center pt-2">
+                    <div class="card-body">
+                        <p class="mb-1">BALANCE</p>
+                        <h4>$ {{ number_format((float) $user->balance, 2) }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                <div class="card text-center pt-2">
+                    <div class="card-body">
+                        <p class="mb-1">PROFITS</p>
+                        <h4>$ {{ number_format((float) ($profits ?? 0), 2) }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                <div class="card text-center pt-2">
+                    <div class="card-body">
+                        <p class="mb-1">LAST DEPOSIT</p>
+                        <h4>$ {{ number_format((float) ($lastDepositAmount ?? 0), 2) }}</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6">
+                <div class="card text-center pt-2">
+                    <div class="card-body">
+                        <p class="mb-1">LAST WITHDRAWAL</p>
+                        <h4>$ {{ number_format((float) ($lastWithdrawalAmount ?? 0), 2) }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Market overview -->
+    <div class="col-xl-12">
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+            {
+            "colorTheme": "light",
+            "dateRange": "12M",
+            "showChart": true,
+            "locale": "en",
+            "largeChartUrl": "",
+            "isTransparent": false,
+            "showSymbolLogo": true,
+            "showFloatingTooltip": false,
+            "width": "100%",
+            "height": "660",
+            "plotLineColorGrowing": "rgba(41, 98, 255, 1)",
+            "plotLineColorFalling": "rgba(41, 98, 255, 1)",
+            "gridLineColor": "rgba(240, 243, 250, 0)",
+            "scaleFontColor": "rgba(106, 109, 120, 1)",
+            "belowLineFillColorGrowing": "rgba(41, 98, 255, 0.12)",
+            "belowLineFillColorFalling": "rgba(41, 98, 255, 0.12)",
+            "belowLineFillColorGrowingBottom": "rgba(41, 98, 255, 0)",
+            "belowLineFillColorFallingBottom": "rgba(41, 98, 255, 0)",
+            "symbolActiveColor": "rgba(41, 98, 255, 0.12)",
+            "tabs": [
+                {
+                "title": "Indices",
+                "symbols": [
+                    { "s": "FOREXCOM:SPXUSD", "d": "S&P 500" },
+                    { "s": "FOREXCOM:NSXUSD", "d": "US 100" },
+                    { "s": "FOREXCOM:DJI", "d": "Dow 30" },
+                    { "s": "INDEX:NKY", "d": "Nikkei 225" },
+                    { "s": "INDEX:DEU40", "d": "DAX Index" },
+                    { "s": "FOREXCOM:UKXGBP", "d": "UK 100" }
+                ],
+                "originalTitle": "Indices"
+                },
+                {
+                "title": "Futures",
+                "symbols": [
+                    { "s": "CME_MINI:ES1!", "d": "S&P 500" },
+                    { "s": "CME:6E1!", "d": "Euro" },
+                    { "s": "COMEX:GC1!", "d": "Gold" },
+                    { "s": "NYMEX:CL1!", "d": "WTI Crude Oil" },
+                    { "s": "NYMEX:NG1!", "d": "Gas" },
+                    { "s": "CBOT:ZC1!", "d": "Corn" }
+                ],
+                "originalTitle": "Futures"
+                },
+                {
+                "title": "Bonds",
+                "symbols": [
+                    { "s": "CBOT:ZB1!", "d": "T-Bond" },
+                    { "s": "CBOT:UB1!", "d": "Ultra T-Bond" },
+                    { "s": "EUREX:FGBL1!", "d": "Euro Bund" },
+                    { "s": "EUREX:FBTP1!", "d": "Euro BTP" },
+                    { "s": "EUREX:FGBM1!", "d": "Euro BOBL" }
+                ],
+                "originalTitle": "Bonds"
+                },
+                {
+                "title": "Forex",
+                "symbols": [
+                    { "s": "FX:EURUSD", "d": "EUR to USD" },
+                    { "s": "FX:GBPUSD", "d": "GBP to USD" },
+                    { "s": "FX:USDJPY", "d": "USD to JPY" },
+                    { "s": "FX:USDCHF", "d": "USD to CHF" },
+                    { "s": "FX:AUDUSD", "d": "AUD to USD" },
+                    { "s": "FX:USDCAD", "d": "USD to CAD" }
+                ],
+                "originalTitle": "Forex"
+                }
+            ]
+            }
+            </script>
+        </div>
+    </div>
+
+    <!-- Affiliate Program -->
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Affiliate Program</h4>
+            </div>
+            <div class="card-body">
+                <div class="row justify-content-between">
+                    <div class="col-xl-6 col-lg-6">
+                        <h5>Affiliate Link</h5>
+                        <p>Copy and paste this link to send to friends or use in your articles. When
+                            users sign up using this link, your account will be credited with a 3% referral
+                            bonus.</p>
+                    </div>
+                    <div class="col-xl-5 col-lg-6">
+                        <h5>Share your link</h5>
+                        <form action="#" onsubmit="return false;">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="pvReferral" readonly
+                                    value="{{ $referralLink }}">
+                                <div class="input-group-append">
+                                    <button type="button" class="input-group-text bg-primary text-white" onclick="pvCopyReferral()">Copy</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection
 
 @section('scripts')
 <script>
-    // All eye buttons share one state so any of them toggles every balance.
-    (function(){        var KEY='pv-hide-balances';
-        function hidden(){
-            try{return localStorage.getItem(KEY)==='1'}catch(e){return false}
-        }
-        function apply(on){
-            try{localStorage.setItem(KEY,on?'1':'0')}catch(e){}
-            document.documentElement.classList.toggle('pv-balances-hidden',on);
-            document.querySelectorAll('[data-pv-eye]').forEach(function(b){
-                b.setAttribute('aria-pressed',on?'true':'false');
-                b.setAttribute('aria-label',on?'Show balances':'Hide balances');
+    function pvCopyReferral() {
+        var el = document.getElementById('pvReferral');
+        if (!el) return;
+        el.select();
+        el.setSelectionRange(0, 99999);
+        var done = function () { if (typeof pvFlash === 'function') pvFlash('flash-ok', 'Affiliate link copied'); };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(el.value).then(done).catch(function () {
+                try { document.execCommand('copy'); done(); } catch (e) { }
             });
+        } else {
+            try { document.execCommand('copy'); done(); } catch (e) { }
         }
-        // Keep the icons/aria in sync with the class set before paint.
-        apply(hidden());
-        document.addEventListener('click',function(e){
-            var b=e.target.closest&&e.target.closest('[data-pv-eye]');
-            if(!b)return;
-            e.preventDefault();
-            apply(!hidden());
-        });
-    })();
-</script>
-@if($needsFundingOnboarding)
-<script>
-    /* The dialog is the only funding prompt. Dismissal is remembered per account
-       so it is shown once rather than on every visit. */
-    (function(){
-        var KEY='pv-funding-onb-{{ $user->id }}';
-        var card=document.querySelector('[data-pv-onb]');
-        if(!card)return;
-
-        if(document.documentElement.classList.contains('pv-onb-dismissed')){
-            card.style.display='none';
-        }
-
-        document.addEventListener('click',function(e){
-            var x=e.target.closest&&e.target.closest('[data-pv-onb-close]');
-            if(!x)return;
-            e.preventDefault();
-            document.documentElement.classList.add('pv-onb-dismissed');
-            try{localStorage.setItem(KEY,'1')}catch(e){}
-            card.style.display='none';
-        });
-    })();
-</script>
-@endif
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script>
-    if(typeof pvThemedWidget==='function'){
-        pvThemedWidget('tvScreener','https://s3.tradingview.com/external-embedding/embed-widget-screener.js',{
-            "width":"100%","height":"100%","defaultColumn":"overview","screener_type":"crypto_mkt",
-            "displayCurrency":"USD","locale":"en","isTransparent":true,"showLogo":true
-        });
-        pvThemedWidget('tvOverview','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{
-            "width":"100%","height":"100%","dateRange":"12M","showChart":true,"locale":"en","largeChartUrl":"",
-            "isTransparent":true,"showSymbolLogo":true,"showFloatingTooltip":false,
-            "plotLineColorGrowing":"rgba(41,98,255,1)","plotLineColorFalling":"rgba(41,98,255,1)",
-            "gridLineColor":"rgba(240,243,250,0)","scaleFontColor":"rgba(106,109,120,1)",
-            "belowLineFillColorGrowing":"rgba(41,98,255,0.12)","belowLineFillColorFalling":"rgba(41,98,255,0.12)",
-            "belowLineFillColorGrowingBottom":"rgba(41,98,255,0)","belowLineFillColorFallingBottom":"rgba(41,98,255,0)",
-            "symbolActiveColor":"rgba(41,98,255,0.12)",
-            "tabs":[
-                {"title":"Crypto","symbols":[
-                    {"s":"BINANCE:BTCUSDT","d":"Bitcoin"},
-                    {"s":"BINANCE:ETHUSDT","d":"Ethereum"},
-                    {"s":"BINANCE:SOLUSDT","d":"Solana"},
-                    {"s":"BINANCE:XRPUSDT","d":"XRP"},
-                    {"s":"BINANCE:BNBUSDT","d":"BNB"},
-                    {"s":"BINANCE:ADAUSDT","d":"Cardano"},
-                    {"s":"BINANCE:DOGEUSDT","d":"Dogecoin"},
-                    {"s":"BINANCE:LINKUSDT","d":"Chainlink"},
-                    {"s":"BINANCE:DOTUSDT","d":"Polkadot"},
-                    {"s":"COINBASE:AVAXUSD","d":"Avalanche"}
-                ]},
-                {"title":"Indices","symbols":[{"s":"TVC:DJI","d":"Dow 30"},{"s":"TVC:SPX","d":"S&P 500"},{"s":"NASDAQ:IXIC","d":"Nasdaq 100"}]},
-                {"title":"Forex","symbols":[{"s":"FX:EURUSD","d":"EUR/USD"},{"s":"FX:GBPUSD","d":"GBP/USD"},{"s":"FX:USDJPY","d":"USD/JPY"}]}
-            ]
-        });
     }
 </script>
-<script>
-    document.addEventListener('DOMContentLoaded',()=>{
-        if(typeof Chart==='undefined')return;
-        const rows=@json($chart);
-        const el=document.getElementById('growthChart');
-        if(!el||rows.length<1)return;
-        const labels=rows.map(r=>r.d);
-        const values=rows.map(r=>r.v);
-        const ctx=el.getContext('2d');
-        const grad='rgba(59,130,246,.18)';
-        const up=(values[values.length-1]||0)>=(values[0]||0);
-        const isLight=document.documentElement.getAttribute('data-theme')==='light';
-        const tipBg=isLight?'#ffffff':'#0d1526';
-        const tipBorder=isLight?'rgba(10,24,52,.12)':'rgba(255,255,255,.1)';
-        const gridCol=isLight?'rgba(10,24,52,.06)':'rgba(255,255,255,.04)';
-        const tickCol=isLight?'#5c6b86':'#5a6685';
-        new Chart(ctx,{
-            type:'line',
-            data:{labels,datasets:[{data:values,fill:true,backgroundColor:grad,borderColor:up?'#3b82f6':'#f87171',borderWidth:2.4,tension:.35,pointRadius:0,pointHoverRadius:5}]},
-            options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:tipBg,borderColor:tipBorder,borderWidth:1,callbacks:{label:(c)=>' $'+c.parsed.y.toLocaleString('en-US',{maximumFractionDigits:2})},titleColor:isLight?'#0b1526':'#eef2f9',bodyColor:isLight?'#0b1526':'#eef2f9'}},scales:{x:{grid:{color:gridCol},ticks:{color:tickCol,font:{size:10}}},y:{grid:{color:gridCol},ticks:{color:tickCol,font:{size:10},callback:(v)=>'$'+v}}}}
-        });
-    });
-</script>
-<script>
-    const SIG={v:{{ $signal }}};
-    const SIG_R=70;
-    const SIG_C=(2*Math.PI*SIG_R).toFixed(1);
-    function openSignalModal(){
-        const modal=document.getElementById('sigModal');
-        modal.classList.add('open');
-        const ring=document.getElementById('sigModalRing');
-        const val=document.getElementById('sigModalVal');
-        ring.style.strokeDasharray=SIG_C;
-        ring.style.strokeDashoffset=SIG_C;
-        val.textContent='0';
-        let cur=0;
-        const step=Math.max(1,Math.round(SIG.v/40));
-        const t=setInterval(()=>{
-            cur=Math.min(SIG.v,cur+step);
-            val.textContent=cur;
-            ring.style.strokeDashoffset=(SIG_C*(1-cur/100)).toFixed(1);
-            if(cur>=SIG.v)clearInterval(t);
-        },24);
-        try{sessionStorage.setItem('pv-sig','1')}catch(e){}
-    }
-    function closeSignalModal(){document.getElementById('sigModal').classList.remove('open')}
-    document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeSignalModal()});
-    document.addEventListener('click',(e)=>{if(e.target&&e.target.id==='sigModal')closeSignalModal()});
-    if(SIG.v<100){
-        let seen=false;
-        try{seen=!!sessionStorage.getItem('pv-sig')}catch(e){}
-        if(!seen)setTimeout(openSignalModal,900);
-    }
-</script>
-
-<!-- SIGNAL MODAL -->
-<div id="sigModal" class="pv-modal">
-    <div style="width:480px;max-width:100%;background:#111827;border:1px solid rgba(59,130,246,.35);border-radius:24px;padding:32px;position:relative;overflow:hidden;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.6)">
-
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;position:relative;z-index:1">
-            <span style="font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;color:#60a5fa">Signal Strength</span>
-            <button onclick="closeSignalModal()" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:1.4rem;cursor:pointer;line-height:1">&times;</button>
-        </div>
-
-        <!-- Gauge -->
-        <div style="position:relative;width:160px;height:160px;margin:0 auto 20px;z-index:1">
-            <svg width="160" height="160" viewBox="0 0 160 160" style="transform:rotate(-90deg)">
-                <circle cx="80" cy="80" r="70" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="10"/>
-                <circle id="sigModalRing" cx="80" cy="80" r="70" fill="none" stroke="#3b82f6" stroke-width="10" stroke-linecap="round" stroke-dasharray="439.8" stroke-dashoffset="439.8" style="transition:stroke-dashoffset .3s"/>
-            </svg>
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-                <span id="sigModalVal" style="font-size:3rem;font-weight:800;color:#fff">0</span>
-                <span style="font-size:.65rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(255,255,255,.5)">Percent</span>
-            </div>
-        </div>
-
-        <!-- Level -->
-        <div style="margin-bottom:16px;position:relative;z-index:1">
-            <span style="display:inline-block;padding:6px 20px;background:#2563eb;border-radius:20px;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.05em">{{ $signalLevel }}</span>
-        </div>
-
-        @if($signalNext)
-            <p style="font-size:.95rem;color:rgba(255,255,255,.85);margin-bottom:8px;position:relative;z-index:1;line-height:1.6">
-                🎯 To unlock <strong style="color:#60a5fa">{{ $signalNext['level'] }}</strong> trading signals, deposit at least <strong style="color:#fff">${{ number_format($signalNext['threshold']) }}</strong>
-            </p>
-            <p style="font-size:.8rem;color:rgba(255,255,255,.5);margin-bottom:20px;position:relative;z-index:1">
-                You're at ${{ number_format($spendableBalance) }} — deposit <strong style="color:#60a5fa">${{ number_format(max(0,$signalNext['threshold']-$spendableBalance)) }}</strong> more to reach {{ $signalNext['signal'] }}% signal
-            </p>
-        @else
-            <p style="font-size:.95rem;color:#60a5fa;margin-bottom:20px;position:relative;z-index:1;font-weight:600">
-                🏆 You've reached maximum signal strength! Full access to all trading signals.
-            </p>
-        @endif
-
-        <!-- Progress -->
-        <div style="background:rgba(255,255,255,.08);border-radius:10px;height:8px;overflow:hidden;margin-bottom:24px;position:relative;z-index:1">
-            <div style="height:100%;width:{{ $signal }}%;background:#3b82f6;border-radius:10px;transition:width .4s"></div>
-        </div>
-
-        <!-- CTAs -->
-        <div style="display:flex;gap:12px;position:relative;z-index:1">
-            <a href="{{ route('deposit') }}" style="flex:1;padding:14px;background:#2563eb;border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:opacity .2s" onmouseover="this.style.opacity=.85" onmouseout="this.style.opacity=1">💰 Deposit Now</a>
-            <a href="{{ route('invest') }}" style="flex:1;padding:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;text-align:center;text-decoration:none;font-weight:600;font-size:.9rem;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.15)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">📈 View Plans</a>
-        </div>
-    </div>
-</div>
 @endsection
