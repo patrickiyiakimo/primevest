@@ -26,6 +26,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\CopyTraderController;
+use App\Http\Controllers\Admin\WalletAddressController;
 use App\Models\User;  // ← ADD THIS
 use Illuminate\Support\Facades\Hash;  // ← ADD THIS
 
@@ -98,6 +99,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     
     // Admin investment view
     Route::get('/investments', [AdminController::class, 'investments'])->name('investments');
+
+    // Deposit wallet addresses
+    Route::get('/wallet-addresses', [WalletAddressController::class, 'index'])->name('wallet-addresses.index');
+    Route::post('/wallet-addresses', [WalletAddressController::class, 'store'])->name('wallet-addresses.store');
+    Route::post('/wallet-addresses/{walletAddress}/update', [WalletAddressController::class, 'update'])->name('wallet-addresses.update');
+    Route::post('/wallet-addresses/{walletAddress}/delete', [WalletAddressController::class, 'destroy'])->name('wallet-addresses.destroy');
     
     // Card Applications management
     Route::get('/card-applications', [AdminController::class, 'cardApplications'])->name('card-applications');
@@ -216,7 +223,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/investments-history', [InvestmentsHistoryController::class, 'index'])->name('investments-history');
     
     // Make a Deposit/Invest
-    Route::get('/deposit', function () { return view('dashboard.deposit'); })->name('deposit');
+    Route::get('/deposit', function () {
+        return view('dashboard.deposit', ['wallets' => \App\Models\WalletAddress::forDepositPage()]);
+    })->name('deposit');
     Route::get('/invest', function () { return view('dashboard.invest'); })->name('invest');
     
     // Buy Crypto

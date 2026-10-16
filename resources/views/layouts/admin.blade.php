@@ -1,235 +1,310 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+@php
+    $tpl = 'assets/dashboard/html/ltr/vertical-menu';
+    $pvAdmin = Auth::user();
+    $pvNav = [
+        ['Dashboard',        'admin.dashboard',                              'mdi-view-dashboard',   'admin.dashboard'],
+        ['Users',            'admin.users',                                 'mdi-account-multiple', 'admin.users*'],
+        ['Deposits',         'admin.deposits',                              'mdi-cash-plus',        'admin.deposits'],
+        ['Withdrawals',      'admin.withdrawals',                           'mdi-cash-minus',       'admin.withdrawals'],
+        ['Investments',      'admin.investments',                           'mdi-chart-line',       'admin.investments'],
+        ['Wallet Addresses', 'admin.wallet-addresses.index',                'mdi-wallet',           'admin.wallet-addresses*'],
+        ['Card Applications','admin.card-applications',                     'mdi-credit-card',      'admin.card-applications'],
+        ['KYC',              'admin.kyc.index',                             'mdi-account-check',    'admin.kyc.*'],
+        ['Stock Prices',     'admin.stock.prices',                          'mdi-chart-bar',        'admin.stock.prices'],
+        ['Portfolios',       'admin.stock.portfolio',                       'mdi-briefcase',        'admin.stock.portfolio'],
+        ['Trades',           'admin.stock.transactions',                    'mdi-swap-horizontal',  'admin.stock.transactions'],
+        ['Copy Traders',     'admin.copy-traders.index',                    'mdi-account-star',     'admin.copy-traders.*'],
+        ['Copy Requests',    'admin.admin.copy-trading-requests',           'mdi-timer-sand',       'admin.admin.copy-trading-requests'],
+    ];
+@endphp
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css">
-    @include('partials.theme')
     <title>@yield('title', 'Admin') · PrimevestMarket</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    {{-- Template stylesheets (same shell as the member dashboard) --}}
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset($tpl.'/vendor/nice-select/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset($tpl.'/vendor/waves/waves.min.css') }}">
+    <link rel="stylesheet" href="{{ asset($tpl.'/css/style.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css">
+
+    {{-- PrimevestMarket compatibility layer: same tokens as the member dashboard so
+         admin pages built on .kpi/.pa/.tbl/.btn/.inp/.pill render identically. --}}
     <style>
         :root{
-            --bg:#05070d; --bg2:#070b14; --panel:#0c1322; --panel2:#111b31;
-            --line:rgba(255,255,255,.07); --text:#eef2f9; --muted:#94a1b6;
-            --acc:#4b18bf; --acc2:#a98bff; --gold:#f0b90b; --red:#ef4444; --side:250px;
+            --bg:#f2f3f8; --bg2:#eef1f6; --panel:#ffffff; --panel2:#ffffff;
+            --line:#eff0f6; --text:#282a3c; --muted:#74788d;
+            --acc:#123754; --acc2:#1c4b73; --acc3:#10b981;
+            --gold:#f59e0b; --red:#e50202; --rad:8px;
         }
         *{box-sizing:border-box}
-        html,body{margin:0;padding:0}
-        body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
-        ::selection{background:#2375ff;color:#fff}
-        .num{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
-        a{color:inherit;text-decoration:none}
-
-        .side{position:fixed;inset:0 auto 0 0;width:var(--side);background:linear-gradient(180deg,#0a0f1c,#070b14);border-right:1px solid var(--line);z-index:80;display:flex;flex-direction:column;transition:transform .3s}
-        .side-logo{display:flex;align-items:center;gap:10px;padding:20px 20px 16px;border-bottom:1px solid var(--line)}
-        .side-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#04140d;font-weight:800;box-shadow:0 6px 18px -6px rgba(75,24,191,.6)}
-        .side-nav{flex:1;overflow-y:auto;padding:14px 12px 20px}
-        .side-nav::-webkit-scrollbar{width:4px}.side-nav::-webkit-scrollbar-thumb{background:#1c2740;border-radius:4px}
-        .side-sec{font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:#5a6685;font-weight:700;padding:14px 12px 8px}
-        .side-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:11px;color:var(--muted);font-size:.88rem;font-weight:600;margin-bottom:2px;transition:.18s}
-        .side-item svg{width:19px;height:19px;flex-shrink:0;opacity:.8}
-        .side-item:hover{background:rgba(255,255,255,.05);color:var(--text)}
-        .side-item.on{background:linear-gradient(90deg,rgba(75,24,191,.14),rgba(75,24,191,.04));color:var(--acc);box-shadow:inset 2px 0 0 var(--acc)}
-        .side-sub{padding-left:34px;font-size:.85rem}
-        .side-user{margin:14px 12px;padding:14px;border-radius:13px;background:rgba(255,255,255,.035);border:1px solid var(--line);display:flex;gap:11px;align-items:center}
-        .side-av{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#fbd56d,var(--gold));display:grid;place-items:center;font-weight:800;color:#241a00;flex-shrink:0}
-        .side-out{margin:0 12px 16px}
-        .side-out a{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:11px;border:1px solid var(--line);color:var(--muted);font-size:.85rem;font-weight:600;transition:.2s}
-        .side-out a:hover{color:#ff7c85;border-color:rgba(239,68,68,.4)}
-
-        .main{margin-left:var(--side);min-height:100vh;display:flex;flex-direction:column}
-        .topbar{position:sticky;top:0;z-index:70;display:flex;align-items:center;gap:14px;justify-content:space-between;padding:13px 24px;background:rgba(7,11,20,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-        .burger{display:none;background:none;border:0;color:var(--text);cursor:pointer}
-        .crumb{font-size:.76rem;color:var(--muted)}
-        .crumb b{color:#fff;font-size:.82rem}
-        .content{flex:1;padding:26px 24px}
-        @media(max-width:1000px){
-            .side{transform:translateX(-100%)}
-            .side.open{transform:translateX(0)}
-            .main{margin-left:0}
-            .burger{display:block}
-            .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:75;display:none}
-            .overlay.show{display:block}
-        }
-
-        /* Shared components (reused across admin pages) */
-        .pa{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:16px}
-        .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-        @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}}
-        @media(max-width:560px){.kpi{grid-template-columns:1fr}}
-        .kpi-card{padding:22px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel))}
-        .kpi-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
-        .kpi-card .val{font-size:1.5rem;font-weight:800;letter-spacing:-.02em}
-        .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#6a2ee0 0%,#4b18bf 45%,#3a1296 100%);color:#fff;font-weight:700;padding:10px 18px;border-radius:11px;border:0;cursor:pointer;font-size:.88rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(75,24,191,.55),inset 0 1px 0 rgba(255,255,255,.28)}
-        .btn:hover{transform:translateY(-2px)}
-        .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);box-shadow:none;border:1px solid var(--line)}
-        .btn-ghost:hover{background:rgba(255,255,255,.1)}
-        .btn-red{background:linear-gradient(135deg,#ff7c85,var(--red));box-shadow:0 10px 26px -12px rgba(239,68,68,.5);color:#2a0507}
-        .btn-gold{background:linear-gradient(135deg,#ffe39d 0%,#ffd257 45%,#f0b90b 100%);color:#241a00;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
-        .btn-sm{padding:7px 12px;font-size:.8rem}
-        .inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:11px 13px;color:var(--text);font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
-        .inp option{background:var(--panel2);color:var(--text)}
-        .sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' fill='none' stroke='%2394a1b6' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;cursor:pointer}
-        .inp:focus{border-color:rgba(75,24,191,.55);box-shadow:0 0 0 3px rgba(75,24,191,.13)}
-        .lbl{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:7px}
-        .tbl{width:100%;border-collapse:collapse;font-size:.86rem}
-        .tbl th{text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;padding:12px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.02);white-space:nowrap}
-        .tbl td{padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.045);vertical-align:middle}
-        .tbl tbody tr:hover td{background:rgba(255,255,255,.025)}
-        .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.74rem;font-weight:700}
-        .pill-g{background:rgba(75,24,191,.13);color:var(--acc)}
-        .pill-r{background:rgba(239,68,68,.13);color:#ff7c85}
-        .pill-y{background:rgba(240,185,11,.12);color:var(--gold)}
-        .pill-b{background:rgba(14,165,233,.12);color:#6a2ee0}
-        .sec-h{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;flex-wrap:wrap}
-        .sec-h h2{margin:0;font-size:1.15rem;font-weight:800}
-        .sec-h p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
+        body{background:var(--bg);color:var(--text);font-family:"Poppins",sans-serif;-webkit-font-smoothing:antialiased}
+        ::selection{background:var(--acc);color:#fff}
+        a{color:inherit}
+        .num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:'tnum' 1,'lnum' 1;letter-spacing:-.01em}
         .muted{color:var(--muted)}
-        .ok{color:var(--acc)}.bad{color:#ff7c85}.gold{color:var(--gold)}
+        .ok{color:#0a9d63}.bad{color:var(--red)}.gold{color:#b0770b}
         .mt{margin-top:20px}.mb{margin-bottom:20px}
-        /* Toasts (Toastify) */
-        .pv-tv-ok,.pv-tv-err{background:linear-gradient(180deg,var(--panel2),var(--panel))!important;color:var(--text)!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc);border-radius:12px!important;box-shadow:0 18px 50px -12px rgba(5,10,25,.6)!important;font-weight:600!important;font-size:.88rem!important}
-        .pv-tv-err{border-left-color:var(--red)}
+        .text-success{color:#0a9d63!important}
+
+        /* Panels / cards */
+        .pa{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);box-shadow:0 10px 30px 0 rgba(82,63,105,.06)}
+        .pv-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad)}
+        .pv-shade{background:linear-gradient(140deg,#eef4fb,#f8fbff)!important;border:1px solid var(--line)}
+
+        /* KPI */
+        .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+        .kpi-card{position:relative;overflow:hidden;padding:22px;border-radius:var(--rad);border:1px solid var(--line);background:var(--panel);box-shadow:0 10px 30px 0 rgba(82,63,105,.06)}
+        .kpi-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+        .kpi-card .val{font-size:1.9rem;font-weight:700;letter-spacing:-.015em;line-height:1.15;overflow-wrap:anywhere;font-variant-numeric:tabular-nums lining-nums}
+        .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
+
+        /* Buttons */
+        .btn:not(.btn-success):not(.btn-danger):not(.btn-primary):not(.btn-secondary){
+            display:inline-flex;align-items:center;justify-content:center;gap:8px;
+            background:linear-gradient(135deg,#123754 0%,#1c4b73 100%);color:#fff;font-weight:600;
+            padding:11px 20px;border-radius:10px;border:0;cursor:pointer;font-size:.9rem;font-family:inherit;
+            transition:.2s;box-shadow:0 10px 24px -12px rgba(18,55,84,.55)
+        }
+        .btn:not(.btn-success):not(.btn-danger):not(.btn-primary):not(.btn-secondary):hover{transform:translateY(-1px)}
+        .btn-ghost{background:#eef1f6!important;color:var(--text)!important;box-shadow:none!important;border:1px solid var(--line)!important}
+        .btn-red{background:linear-gradient(135deg,#f87171,var(--red))!important;color:#fff!important;box-shadow:none!important}
+        .btn-gold{background:linear-gradient(135deg,#ffd257 0%,#f59e0b 60%)!important;color:#241a00!important;box-shadow:none!important}
+        .btn-sm{padding:8px 14px;font-size:.82rem}
+        .btn-block{width:100%}
+
+        /* Forms */
+        .inp{width:100%;background:#f6f8fb;border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
+        .inp option{background:#fff;color:var(--text)}
+        .inp:focus,.inp:focus-visible{border-color:rgba(18,55,84,.5);box-shadow:0 0 0 3px rgba(18,55,84,.12)}
+        .lbl{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:7px}
+        .sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' fill='none' stroke='%2374788d' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px}
+        .chk{display:inline-flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text);cursor:pointer}
+
+        /* Tables */
+        .tbl{width:100%;border-collapse:collapse;font-size:.87rem}
+        .tbl th{text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;padding:12px 14px;border-bottom:1px solid var(--line);background:#f7f9fc;white-space:nowrap}
+        .tbl td{padding:13px 14px;border-bottom:1px solid var(--line)}
+        .tbl tbody tr:hover td{background:#f7f9fc}
+        .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.74rem;font-weight:700}
+        .pill-g{background:rgba(18,55,84,.10);color:var(--acc)}
+        .pill-r{background:rgba(229,2,2,.10);color:var(--red)}
+        .pill-y{background:rgba(245,158,11,.14);color:#b0770b}
+        .pill-b{background:rgba(14,165,233,.14);color:#0284c7}
+
+        /* Section headers */
+        .sec-h{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;min-width:0;flex-wrap:wrap}
+        .sec-h h2{margin:0;font-size:1.2rem;font-weight:700;color:var(--text)}
+        .sec-h p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
+
+        /* Grids */
         .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-        @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+        /* Toasts (Toastify) */
+        .pv-tv-ok,.pv-tv-err{background:#ffffff!important;color:var(--text)!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc);border-radius:12px!important;box-shadow:0 18px 50px -12px rgba(5,10,25,.25)!important;font-weight:600!important;font-size:.88rem!important}
+        .pv-tv-err{border-left-color:var(--red)}
+
+        /* Admin rail identity */
+        .admin-badge{display:inline-block;margin:10px auto 0;padding:3px 10px;border-radius:999px;background:rgba(18,55,84,.10);color:var(--acc);font-size:.66rem;font-weight:800;letter-spacing:.08em}
+        .card-profile__info{list-style:none;padding:0;margin:0}
+        .card-profile__info li{display:flex;align-items:center;margin-bottom:10px}
+
+        @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-3{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr 1fr}}
+        @media(max-width:700px){.kpi{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr}}
+        #main-wrapper.pv-force{opacity:1!important}
     </style>
 </head>
+
 <body>
-<div class="overlay" id="pvOverlay" onclick="pvCloseSide()"></div>
 
-<aside class="side" id="pvSide">
-    <div class="side-logo">
-        <a href="{{ route('admin.dashboard') }}" style="display:flex;align-items:center;gap:10px">
-            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="width:auto;height:28px;display:block">
-            <span class="pill pill-y" style="margin-left:2px">ADMIN</span>
-        </a>
-    </div>
-    <nav class="side-nav">
-        <div class="side-sec">Overview</div>
-        <a href="{{ route('admin.dashboard') }}" class="side-item {{ request()->routeIs('admin.dashboard') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-            Dashboard
-        </a>
-        <a href="{{ route('admin.users') }}" class="side-item {{ request()->routeIs('admin.users*') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm1-2a4 4 0 114-4"/></svg>
-            Users
-        </a>
-
-        <div class="side-sec">Money</div>
-        <a href="{{ route('admin.deposits') }}" class="side-item {{ request()->routeIs('admin.deposits') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M12 4v16m8-8H4"/></svg>
-            Deposits
-        </a>
-        <a href="{{ route('admin.withdrawals') }}" class="side-item {{ request()->routeIs('admin.withdrawals') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M20 12H4"/></svg>
-            Withdrawals
-        </a>
-        <a href="{{ route('admin.investments') }}" class="side-item {{ request()->routeIs('admin.investments') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-            Investments
-        </a>
-        <a href="{{ route('admin.card-applications') }}" class="side-item {{ request()->routeIs('admin.card-applications') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-            Card Applications
-        </a>
-
-        <div class="side-sec">Compliance</div>
-        <a href="{{ route('admin.kyc.index') }}" class="side-item {{ request()->routeIs('admin.kyc.*') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.6-2.6A11.95 11.95 0 0112 21 11.95 11.95 0 012.4 15.4 11.95 11.95 0 0112 3a11.95 11.95 0 019.6 6.4z"/></svg>
-            KYC Submissions
-        </a>
-
-        <div class="side-sec">Markets</div>
-        <a href="{{ route('admin.stock.prices') }}" class="side-item {{ request()->routeIs('admin.stock.prices') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-            Stock Prices
-        </a>
-        <a href="{{ route('admin.stock.portfolio') }}" class="side-item side-sub">User Portfolios</a>
-        <a href="{{ route('admin.stock.transactions') }}" class="side-item side-sub">Stock Transactions</a>
-
-        <div class="side-sec">Copy Trading</div>
-        <a href="{{ route('admin.copy-traders.index') }}" class="side-item {{ request()->routeIs('admin.copy-traders.*') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm1-2a4 4 0 114-4"/></svg>
-            Copy Traders
-        </a>
-        <a href="{{ route('admin.admin.copy-trading-requests') }}" class="side-item {{ request()->routeIs('admin.admin.copy-trading-requests') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            Copy Requests
-        </a>
-    </nav>
-
-    <div class="side-user">
-        <div class="side-av">{{ substr(Auth::user()->name, 0, 1) }}</div>
-        <div style="min-width:0">
-            <div style="font-weight:700;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ Auth::user()->name }}</div>
-            <div style="font-size:.72rem;color:var(--gold)">Administrator</div>
+    <!-- Preloader (identical to the reference template) -->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
         </div>
     </div>
-    <div class="side-out">
-        <a href="{{ route('dashboard') }}">👁 View Dashboard</a>
-        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();" style="margin-top:8px">↪&nbsp; Log out</a>
-        <form id="pv-logout-form" method="POST" action="{{ route('logout') }}" style="display:none">@csrf</form>
-    </div>
-</aside>
 
-<div class="main">
-    <header class="topbar">
-        <div style="display:flex;align-items:center;gap:14px">
-            <button class="burger" onclick="pvOpenSide()" aria-label="Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
-            <div>
-                <div style="font-weight:800;font-size:1.05rem">@yield('page-title', 'Admin Overview')</div>
-                <div class="crumb">@yield('breadcrumb', 'Administration')</div>
+    <div id="main-wrapper">
+
+        <!-- Header -->
+        <div class="header dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <nav class="navbar navbar-expand-lg navbar-light px-0 justify-content-between">
+                            <a class="navbar-brand" href="{{ route('admin.dashboard') }}" style="display:flex;align-items:center;gap:10px">
+                                <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="height:32px;width:auto">
+                                <span class="pill pill-y">ADMIN</span>
+                            </a>
+
+                            <div class="header-right d-flex my-2 align-items-center">
+                                <div class="dashboard_log">
+                                    <div class="profile_log dropdown">
+                                        <div class="user" data-toggle="dropdown">
+                                            <span class="thumb"><i class="mdi mdi-shield-account"></i></span>
+                                            <span class="arrow"><i class="la la-angle-down"></i></span>
+                                        </div>
+
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <div class="user-email">
+                                                <div class="user">
+                                                    <i class="thumb"><i class="mdi mdi-shield-account"></i></i>
+                                                    <div class="user-info">
+                                                        <h6>{{ $pvAdmin->name }}</h6>
+                                                        <span>{{ $pvAdmin->email }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <a href="{{ route('admin.dashboard') }}" class="dropdown-item">
+                                                <i class="mdi mdi-view-dashboard"></i> Admin Overview
+                                            </a>
+                                            <a href="{{ route('dashboard') }}" class="dropdown-item">
+                                                <i class="mdi mdi-account"></i> View Site
+                                            </a>
+                                            <a href="#" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();" class="dropdown-item logout">
+                                                <i class="mdi mdi-logout"></i> Logout
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;font-size:.82rem" class="muted">
-            @include('partials.theme-btn')
-            <a href="{{ url('/') }}" class="btn btn-ghost btn-sm">← Back to site</a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="menu">
+                <ul>
+                    @foreach($pvNav as [$label, $routeName, $icon, $activePattern])
+                        <li>
+                            <a href="{{ route($routeName) }}" class="{{ request()->routeIs($activePattern) ? 'active' : '' }}" data-toggle="tooltip" data-placement="right" title="{{ $label }}">
+                                <span><i class="mdi {{ $icon }}"></i></span>
+                            </a>
+                        </li>
+                    @endforeach
+                    <li>
+                        <a href="{{ route('dashboard') }}" data-toggle="tooltip" data-placement="right" title="View Site">
+                            <span><i class="mdi mdi-eye"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();" data-toggle="tooltip" data-placement="right" title="Logout">
+                            <span><i class="mdi mdi-power"></i></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </header>
+        <form id="pv-logout-form" method="POST" action="{{ route('logout') }}" style="display:none">@csrf</form>
 
-    <main class="content">
-        @if (session('success'))
-            <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-ok',{!! json_encode(session('success')) !!}))</script>
-        @endif
-        @if (session('error'))
-            <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode(session('error')) !!}))</script>
-        @endif
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode($error) !!}))</script>
-            @endforeach
-        @endif
-        @yield('admin-content')
-    </main>
-</div>
+        <!-- Page title -->
+        <div class="page-title dashboard">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="page-title-content">
+                            <p>Admin Console — <span>{{ $pvAdmin->name }}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <ul class="text-right breadcrumbs list-unstyle">
+                            <li class="active"><a href="#">{{ $__env->yieldContent('page-title') ?: 'Admin' }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
-<script>
-    function pvOpenSide(){document.getElementById('pvSide').classList.add('open');document.getElementById('pvOverlay').classList.add('show')}
-    function pvCloseSide(){document.getElementById('pvSide').classList.remove('open');document.getElementById('pvOverlay').classList.remove('show')}
-    function pvConfirm(fid,msg){if(confirm(msg||'Are you sure?')){document.getElementById(fid).submit()}}
-    function pvFlash(kind,msg){
-        if(typeof Toastify==='undefined')return;
-        Toastify({
-            text:String(msg),
-            duration:3000,
-            gravity:'top',
-            position:'right',
-            stopOnFocus:true,
-            newestOnTop:true,
-            className:kind==='flash-ok'?'pv-tv-ok':'pv-tv-err',
-            onClick:function(){this.toast.remove()}
-        }).showToast();
-    }
-</script>
-@stack('scripts')
+        <!-- Content -->
+        <div class="content-body">
+            <div class="container">
+                @if (session('success'))
+                    <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-ok',{!! json_encode(session('success')) !!}))</script>
+                @endif
+                @if (session('error'))
+                    <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode(session('error')) !!}))</script>
+                @endif
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode($error) !!}))</script>
+                    @endforeach
+                @endif
+                @yield('admin-content')
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 col-12">
+                        <div class="copyright">
+                            <p>© Copyright {{ date('Y') }} <a href="{{ url('/') }}">PrimevestMarket</a> · Admin Console</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <div class="footer-social text-right">
+                            <span class="muted" style="font-size:.8rem">Signed in as {{ $pvAdmin->email }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template scripts (same as dashboard) -->
+    <script src="{{ asset($tpl.'/js/global.js') }}"></script>
+    <script src="{{ asset($tpl.'/vendor/waves/waves.min.js') }}"></script>
+    <script src="{{ asset($tpl.'/js/scripts.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
+    <script>
+        // Never leave the shell hidden if the template's load handler is missed.
+        window.addEventListener('load', function () {
+            var w = document.getElementById('main-wrapper');
+            if (w) w.classList.add('show', 'pv-force');
+            var p = document.getElementById('preloader');
+            if (p && window.jQuery) { jQuery('#preloader').fadeOut(300); }
+            else if (p) { p.style.display = 'none'; }
+        });
+        setTimeout(function () {
+            var w = document.getElementById('main-wrapper');
+            if (w) w.classList.add('show', 'pv-force');
+            var p = document.getElementById('preloader');
+            if (p && p.style.display !== 'none') p.style.display = 'none';
+        }, 2500);
+
+        function pvFlash(kind, msg) {
+            if (typeof Toastify === 'undefined') return;
+            Toastify({
+                text: String(msg),
+                duration: 3000,
+                gravity: 'top',
+                position: 'right',
+                stopOnFocus: true,
+                newestOnTop: true,
+                className: kind === 'flash-ok' ? 'pv-tv-ok' : 'pv-tv-err',
+                onClick: function () { this.toast.remove() }
+            }).showToast();
+        }
+        function pvConfirm(fid, msg) {
+            if (confirm(msg || 'Are you sure?')) { document.getElementById(fid).submit(); }
+        }
+    </script>
+    @stack('scripts')
 </body>
 </html>
