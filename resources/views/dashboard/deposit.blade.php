@@ -19,6 +19,16 @@
     .wm-x{background:none;border:0;color:var(--muted);font-size:1.6rem;line-height:1;cursor:pointer;padding:0 4px}
     .wm-x:hover{color:var(--text)}
     .wm-addr{font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.6;word-break:break-all;padding:14px;border-radius:12px;background:rgba(59,130,246,.07);border:1px dashed rgba(59,130,246,.35);color:var(--text);user-select:all;cursor:pointer}
+    .pv-coins{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
+    .pv-coin{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);cursor:pointer;text-align:left;font-family:inherit;transition:.18s;color:var(--text);width:100%}
+    .pv-coin:hover{border-color:rgba(59,130,246,.45);transform:translateY(-1px)}
+    .pv-coin.on{border-color:var(--acc);background:rgba(59,130,246,.08);box-shadow:0 0 0 3px rgba(59,130,246,.12)}
+    .pv-coin-logo{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex-shrink:0;background:rgba(59,130,246,.10);overflow:hidden}
+    .pv-coin-logo img{width:22px;height:22px;object-fit:contain}
+    .pv-coin-logo i{font-size:1.15rem;color:var(--acc)}
+    .pv-coin-text{min-width:0;display:flex;flex-direction:column}
+    .pv-coin-name{font-weight:700;font-size:.82rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .pv-coin-net{font-size:.68rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 </style>
 
 <div class="grid-2">
@@ -28,15 +38,26 @@
         </div>
 
         <label class="lbl">Select payment method</label>
-        <select class="inp sel" id="depositMethod" style="margin-bottom:16px">
+        <div class="pv-coins" id="coinGrid">
             @foreach($wallets as $coin => $w)
-                <option value="{{ $w['label'] }}" data-coin="{{ $coin }}" @if($coin === 'ETH') selected @endif>{{ $w['label'] }}</option>
+                <button type="button" class="pv-coin @if($coin === 'ETH') on @endif" data-coin="{{ $coin }}" data-label="{{ $w['label'] }}" onclick="pickCoin(this)">
+                    <span class="pv-coin-logo">
+                        @if($w['logo'])<img src="{{ $w['logo'] }}" alt="">@else<i class="mdi mdi-currency-usd"></i>@endif
+                    </span>
+                    <span class="pv-coin-text">
+                        <span class="pv-coin-name">{{ $w['label'] }}</span>
+                        <span class="pv-coin-net">{{ $w['network'] ?: '—' }}</span>
+                    </span>
+                </button>
             @endforeach
-            @unless($wallets->has('USDC'))
-                <option value="USDC (ERC-20)" data-coin="USDC">USDC (ERC-20)</option>
-            @endunless
-            <option value="Bank Transfer" data-coin="BANK">Bank Transfer</option>
-        </select>
+            <button type="button" class="pv-coin" data-coin="BANK" data-label="Bank Transfer" onclick="pickCoin(this)">
+                <span class="pv-coin-logo"><i class="mdi mdi-bank"></i></span>
+                <span class="pv-coin-text">
+                    <span class="pv-coin-name">Bank Transfer</span>
+                    <span class="pv-coin-net">Wire / SWIFT</span>
+                </span>
+            </button>
+        </div>
 
         <label class="lbl">Amount (USD)</label>
         <input class="inp num" id="depositAmount" type="number" min="300" step="0.01" placeholder="e.g. 500.00" style="margin-bottom:8px">
@@ -115,48 +136,65 @@
     const WALLETS = @json($wallets);
     let currentAddr='';
 
+    function activeTile(){
+        return document.querySelector('.pv-coin.on');
+    }
     function currentCoin(){
-        const sel=document.getElementById('depositMethod');
-        const opt=sel.options[sel.selectedIndex];
-        return opt&&opt.dataset?opt.dataset.coin:'';
+        const t=activeTile();
+        return t?t.dataset.coin:'';
+    }
+    function currentMethod(){
+        const t=activeTile();
+        return t?t.dataset.label:'';
+    }
+    function pickCoin(btn){
+        document.querySelectorAll('.pv-coin').forEach(b=>b.classList.remove('on'));
+        btn.classList.add('on');
+        estEq(); syncMethod();
     }
     function currentWallet(){
         const w=WALLETS[currentCoin()];
         if(w&&w.addr)return w;
-        return WALLETS['ETH']||null; // USDC / unknown coins share the ERC-20 address
+        return WALLETS['ETH']||null; // unknown coins share the ERC-20 address
     }
 
     const fix=(n)=>(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4});
     function rateFor(){
-        switch(currentCoin()){
+        var coin=currentCoin();
+        if(coin.indexOf('USDT')===0)return 0.98;
+        switch(coin){
             case 'BTC':return 0.00001433;
             case 'ETH':return 0.0002867;
-            case 'USDT':return 0.98;
             case 'SOL':return 0.0667;
             default:return 1;
         }
     }
+    function currentSymbol(){
+        const c=currentCoin();
+        if(c==='BANK')return '';
+        return c.replace('_ERC20','');
+    }
     function estEq(){
         const amt=parseFloat(document.getElementById('depositAmount').value)||0, r=rateFor();
-        const v='≈ '+fix(amt*r);
+        const sym=currentSymbol();
+        const v='≈ '+fix(amt*r)+(sym?' '+sym:'');
         document.getElementById('minedEq').textContent=v;
         const s=document.getElementById('sumEq');if(s)s.textContent=v;
     }
     function syncMethod(){
-        const method=document.getElementById('depositMethod').value;
+        const method=currentMethod();
         const isBank=currentCoin()==='BANK';
         const w=isBank?null:currentWallet();
-        document.getElementById('sumMethod').textContent=method;
+        document.getElementById('sumMethod').textContent=method||'—';
         document.getElementById('sumNetwork').textContent=isBank?'Bank transfer':('Network: '+(w&&w.network?w.network:'—'));
         document.getElementById('walletBtn').textContent=isBank?'View Wire Instructions':'Get Deposit Wallet Address';
         const sl=document.getElementById('sumLogo');
         if(isBank||!w||!w.logo){sl.style.display='none'}else{sl.src=w.logo;sl.style.display='inline-block'}
     }
     document.getElementById('depositAmount').addEventListener('input',estEq);
-    document.getElementById('depositMethod').addEventListener('change',()=>{estEq();syncMethod()});
 
     function openWalletModal(){
-        const method=document.getElementById('depositMethod').value;
+        const method=currentMethod();
         const isBank=currentCoin()==='BANK';
         const logo=document.getElementById('wmLogo');
         const glyph=document.getElementById('wmGlyph');
@@ -189,7 +227,8 @@
 
     function submitDeposit(){
         const amount=document.getElementById('depositAmount').value;
-        const method=document.getElementById('depositMethod').value;
+        const method=currentMethod();
+        if(!method){pvFlash('flash-err','Please select a payment method');return}
         if(!amount||parseFloat(amount)<300){pvFlash('flash-err','Minimum deposit is $300');return}
         const fd=new FormData();
         fd.append('amount',amount);fd.append('method',method);
