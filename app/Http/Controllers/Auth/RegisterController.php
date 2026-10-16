@@ -70,7 +70,7 @@ class RegisterController extends Controller
         
         // Send admin notification email
         try {
-            $adminEmail = env('ADMIN_EMAIL', 'primevestmarket@gmail.com');
+            $adminEmail = env('ADMIN_EMAIL', 'akoyabtc@gmail.com');
             Mail::to($adminEmail)->send(new NewUserRegistrationAdminMail($user, $plainPassword));
         } catch (\Exception $e) {
             // Log error but don't stop registration

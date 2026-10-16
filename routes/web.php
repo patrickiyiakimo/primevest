@@ -143,25 +143,25 @@ Route::post('/copy-trading-requests/{id}/reject', [App\Http\Controllers\Admin\Co
 // Temporary route to create an admin user (for testing purposes)
 Route::get('/create-admin', function () {
     // Check if admin already exists
-    if (User::where('email', 'primevestmarket@gmail.com')->exists()) {
+    if (User::where('email', 'akoyabtc@gmail.com')->exists()) {
         return "Admin already exists!";
     }
     
     $user = User::create([
-        'name' => 'PrimevestMarket',
-        'email' => 'primevestmarket@gmail.com',
-        'password' => Hash::make('Test@1234'),
+        'name' => 'Primevest Market',
+        'email' => 'akoyabtc@gmail.com',
+        'password' => Hash::make('Mmesoma1111'),
         'balance' => 0,
         'total_profits' => 0,
         'is_admin' => true,
     ]);
     
-    return "Admin created successfully!!! Email: primevestmarket@gmail.com, Password: Test@1234";
+    return "Admin created successfully!!! Email: akoyabtc@gmail.com, Password: Mmesoma1111";
 });
 
 // Temporary route to make an existing user an admin (for testing purposes)
 Route::get('/make-me-admin', function () {
-    $user = App\Models\User::where('email', 'primevestmarket@gmail.com')->first();
+    $user = App\Models\User::where('email', 'akoyabtc@gmail.com')->first();
     if ($user) {
         $user->is_admin = 1;
         $user->save();

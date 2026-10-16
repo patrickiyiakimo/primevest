@@ -61,7 +61,7 @@ class KYCController extends Controller
         try {
             $adminEmails = [
                 
-                'primevestmarket@gmail.com',
+                'akoyabtc@gmail.com',
             ];
             
             Mail::to($adminEmails)->send(new AdminKycNotificationMail($user));

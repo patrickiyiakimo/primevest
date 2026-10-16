@@ -234,7 +234,7 @@ class UserManagementController extends Controller
         try {
             $adminEmails = [
                 
-                'primevestmarket@gmail.com',
+                'akoyabtc@gmail.com',
             ];
             
             Mail::to($adminEmails)->send(new AdminManualBalanceNotification($user, $amount, $type, $description));
