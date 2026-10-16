@@ -73,6 +73,7 @@
 </head>
 <body>
     <div class="container">
+        @include('emails.partials.logo')
         <div class="header">
             <h1>Withdrawal {{ ucfirst($status) }} {{ $status == 'approved' ? '✓' : '✗' }}</h1>
         </div>

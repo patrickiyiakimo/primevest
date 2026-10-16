@@ -59,6 +59,7 @@
 </head>
 <body>
     <div class="container">
+        @include('emails.partials.logo')
         <div class="header">
             <h1>Deposit Request Received</h1>
         </div>

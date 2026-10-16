@@ -94,6 +94,7 @@
 </head>
 <body>
     <div class="container">
+        @include('emails.partials.logo')
         <div class="header">
             <h1>Welcome to {{ config('app.name') }}</h1>
             <p style="font-size: 16px; opacity: 0.9;">Your trading account is ready</p>

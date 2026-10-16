@@ -42,6 +42,7 @@
 </head>
 <body>
     <div class="container">
+        @include('emails.partials.logo')
         <div class="header">
             <h1>New User Registration</h1>
         </div>

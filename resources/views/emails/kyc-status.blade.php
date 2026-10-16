@@ -15,6 +15,7 @@
 </head>
 <body>
     <div class="container">
+        @include('emails.partials.logo')
         <div class="header">
             <h1>KYC {{ ucfirst($status) }} {{ $status == 'verified' ? '✓' : '✗' }}</h1>
         </div>

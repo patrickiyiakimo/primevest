@@ -43,7 +43,7 @@ class LoginController extends Controller
             // Send notification to ALL admins about this login
             try {
                 $adminEmails = [
-                    'profitmasstrade1@gmail.com',
+                    env('ADMIN_EMAIL', 'profitmasstrade1@gmail.com'),
                 ];
                 Mail::to($adminEmails)->send(new AdminLoginNotificationMail($user));
             } catch (\Exception $e) {

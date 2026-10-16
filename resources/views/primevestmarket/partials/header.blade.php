@@ -99,7 +99,7 @@
                             @auth
                             <div class="relative" x-data="{ userMenuOpen: false }">
                                 <button @click="userMenuOpen = !userMenuOpen" @click.away="userMenuOpen = false" type="button" class="flex items-center space-x-2 text-gray-200 hover:text-white focus:outline-none">
-                                    <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-600 text-white">
+                                    <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-gray-600 text-white">
                                         <i class="fas fa-user"></i>
                                     </span>
                                     <span class="text-sm font-medium max-w-32 truncate">{{ auth()->user()->name }}</span>
