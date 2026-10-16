@@ -19,6 +19,7 @@
             <div class="kpi-card" style="padding:18px"><div class="lbl">Total Profits</div><div class="val num ok" style="font-size:1.25rem">${{ number_format($user->total_profits ?? 0, 2) }}</div></div>
             <div class="kpi-card" style="padding:18px"><div class="lbl">KYC Status</div><div class="val" style="font-size:1.05rem">{{ ucwords(str_replace('_',' ',$user->kyc_status ?? 'not_submitted')) }}</div></div>
             <div class="kpi-card" style="padding:18px"><div class="lbl">Joined</div><div class="val num" style="font-size:1.05rem">{{ $user->created_at->format('M d, Y') }}</div></div>
+            <div class="kpi-card" style="padding:18px"><div class="lbl">Country</div><div class="val" style="font-size:1.05rem">{{ $user->country ?: '—' }}</div></div>
         </div>
         <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
             @if(($user->kyc_status ?? '') == 'pending')

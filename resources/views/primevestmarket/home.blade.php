@@ -1867,9 +1867,9 @@
                                 <p class="text-gray-300 leading-relaxed text-sm">I already got more than $200,000 within a month investing with PrimevestMarket. Will again invest soon.</p>
                             </div>
                             <div class="flex items-center">
-                                <img src="{{ asset('primevestmarket/temp/custom/avatar.jpeg') }}" alt="Christy" class="w-10 h-10 rounded-full object-cover border-2 border-emerald-500">
+                                <img src="{{ asset('assets/dashboard/html/ltr/vertical-menu/images/background/joovier.jpg') }}" alt="Joovier" class="w-10 h-10 rounded-full object-cover border-2 border-emerald-500">
                                 <div class="ml-3">
-                                    <h4 class="text-white font-semibold text-sm">Kenan Grace</h4>
+                                    <h4 class="text-white font-semibold text-sm">Joovier</h4>
                                     <p class="text-emerald-400 text-xs">Elite Investor</p>
                                 </div>
                             </div>

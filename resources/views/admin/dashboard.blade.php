@@ -63,12 +63,13 @@
     <div class="sec-h"><div><h2>Recently Registered Users</h2></div></div>
     <div style="overflow-x:auto">
     <table class="tbl">
-        <thead><tr><th>Name</th><th>Email</th><th>Balance</th><th>Joined</th><th></th></tr></thead>
+        <thead><tr><th>Name</th><th>Email</th><th>Country</th><th>Balance</th><th>Joined</th><th></th></tr></thead>
         <tbody>
             @foreach($recentUsers->take(20) as $u)
             <tr>
                 <td style="font-weight:600">{{ $u->name }}</td>
                 <td class="muted">{{ $u->email }}</td>
+                <td>{{ $u->country ?: '—' }}</td>
                 <td class="num">${{ number_format($u->balance, 2) }}</td>
                 <td class="num muted" style="font-size:.8rem">{{ $u->created_at->format('Y-m-d') }}</td>
                 <td style="text-align:right"><a href="{{ route('admin.users.edit', $u->id) }}" class="btn btn-ghost btn-sm">Manage</a></td>
