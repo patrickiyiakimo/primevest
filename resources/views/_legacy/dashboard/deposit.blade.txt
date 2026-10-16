@@ -231,7 +231,7 @@
 
     // Function to show support message for disabled payment methods
     function showSupportMessage(methodName) {
-        toast.warning(`${methodName} is currently unavailable. Please contact our support team at profitmasstrade1@gmail.com for alternative payment options Or Chat with us on Support Chat!`);
+        toast.warning(`${methodName} is currently unavailable. Please contact our support team at primevestmarket@gmail.com for alternative payment options Or Chat with us on Support Chat!`);
         
         // Also try to open JivoChat if available
         if (typeof jivo_api !== 'undefined') {
