@@ -43,10 +43,10 @@ return new class extends Migration
                     'updated_at' => $now,
                 ],
                 [
-                    'coin' => 'ETH',
-                    'label' => 'Ethereum (ETH)',
+                    'coin' => 'USDT',
+                    'label' => 'Tether (USDT – ERC20)',
                     'network' => 'ERC-20',
-                    'address' => '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',
+                    'address' => '0xAEDda9D240fB28f0C12a968EE0e5c9a0b4AaA3B4',
                     'logo' => 'images/eth.png',
                     'color' => '#8a92b2',
                     'is_active' => true,
