@@ -152,8 +152,18 @@
     <meta name="description" content="CFD Trading with PrimevestMarket. Trading on Stocks, Gold, Oil, Indices with ultra-fast execution &amp; spreads from 0.0 pips. News, articles and training materials for experienced and novice traders.">
     <meta name="keywords" content="forex, CFDs, CFD, Bitcoin trading, crypto trading, online trading, Forex trading, Oil trading, Gold trading, trading indexes, shares trading, commodities trading, trading platform, Cryptocurrencies day trading">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="CFD Trading — Trading on Stocks, Gold, Oil, Indices | PrimevestMarket">
-    <meta property="og:image" content="{{ asset('primevestmarket/img/share.jpg') }}">
+    <meta property="og:title" content="PrimevestMarket | Trade, Invest &amp; Grow Your Crypto">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:image" content="{{ asset('images/logoipsum-409.png') }}">
+    <meta property="og:image:secure_url" content="{{ asset('images/logoipsum-409.png') }}">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="285">
+    <meta property="og:image:alt" content="PrimevestMarket">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PrimevestMarket | Trade, Invest &amp; Grow Your Crypto">
+    <meta name="twitter:description" content="CFD Trading with PrimevestMarket. Trade, invest and grow your digital assets with confidence.">
+    <meta name="twitter:image" content="{{ asset('images/logoipsum-409.png') }}">
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
