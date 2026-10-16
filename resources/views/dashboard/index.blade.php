@@ -45,7 +45,7 @@
                 <div class="media">
                     <span class="profile-avatar">{{ strtoupper(substr($user->name, 0, 1)) }}</span>
                     <div class="media-body">
-                        <span>Hello</span>
+                        <span>Welcome, <span style="font-size:1.8rem;vertical-align:-4px">👋</span></span>
                         <h4 class="mb-2">{{ $user->name }}</h4>
                         @if($user->phone)
                         <p class="mb-1"> <span><i class="fa fa-phone mr-2 text-primary"></i></span>{{ $user->phone }}</p>
@@ -77,8 +77,8 @@
                 <h4 class="card-title">Wallet</h4>
             </div>
             <div class="card-body">
-                <span>Available BTC</span>
-                <h3> 0 BTC</h3>
+                <span>Available USD</span>
+                <h3>${{ number_format((float) $user->balance + (float) ($user->total_profits ?? 0), 2) }}</h3>
 
                 <div class="d-flex justify-content-between my-3">
                     <div>
