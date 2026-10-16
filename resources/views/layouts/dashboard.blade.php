@@ -191,6 +191,14 @@
                                             <a href="{{ route('deposits-history') }}" class="dropdown-item">
                                                 <i class="mdi mdi-history"></i> History
                                             </a>
+                                            <a href="{{ route('kyc.status') }}" class="dropdown-item">
+                                                <i class="mdi mdi-account-check"></i> KYC Verification
+                                            </a>
+                                            @if($pvUser->is_admin)
+                                            <a href="{{ route('admin.dashboard') }}" class="dropdown-item">
+                                                <i class="mdi mdi-shield-account"></i> Admin Console
+                                            </a>
+                                            @endif
                                             <a href="#" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();" class="dropdown-item logout">
                                                 <i class="mdi mdi-logout"></i> Logout
                                             </a>
@@ -234,10 +242,22 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('kyc.status') }}" data-toggle="tooltip" data-placement="right" title="KYC Verification">
+                            <span><i class="mdi mdi-account-check"></i></span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('profile') }}" data-toggle="tooltip" data-placement="right" title="Profile">
                             <span><i class="mdi mdi-account"></i></span>
                         </a>
                     </li>
+                    @if($pvUser->is_admin)
+                    <li>
+                        <a href="{{ route('admin.dashboard') }}" data-toggle="tooltip" data-placement="right" title="Admin Console">
+                            <span><i class="mdi mdi-shield-account" style="color:var(--gold)"></i></span>
+                        </a>
+                    </li>
+                    @endif
                     <li>
                         <a href="#" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();" data-toggle="tooltip" data-placement="right" title="Logout">
                             <span><i class="mdi mdi-power"></i></span>

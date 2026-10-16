@@ -33,6 +33,12 @@
                             <span>Invest</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('kyc.status') }}" class="nav-link">
+                            <i class="mdi mdi-account-check"></i>
+                            <span>KYC</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -95,6 +101,32 @@
                     <button class="btn btn-success" onclick="location.href='{{ route('deposit') }}';">Deposit</button>
                     <button class="btn btn-danger" onclick="location.href='{{ route('withdraw') }}';">Withdraw</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KYC status -->
+    @php
+        $kycStatus = $user->kyc_status ?? 'not_submitted';
+        $kycMap = [
+            'not_submitted' => ['Identity Not Verified', 'Complete your KYC to unlock full deposit and withdrawal limits.', 'pill-y', 'Verify Now'],
+            'pending' => ['Verification Under Review', 'Your documents are being reviewed (usually 24–48 hours).', 'pill-b', 'View Status'],
+            'verified' => ['Identity Verified', 'Your identity is verified. All limits are unlocked.', 'pill-g', 'View Status'],
+            'rejected' => ['Verification Rejected', 'Your submission was declined. Please re-submit valid documents.', 'pill-r', 'Re-submit'],
+        ];
+        [$kycTitle, $kycDesc, $kycPill, $kycCta] = $kycMap[$kycStatus] ?? $kycMap['not_submitted'];
+    @endphp
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body d-flex justify-content-between align-items-center flex-wrap" style="gap:14px">
+                <div style="display:flex;align-items:center;gap:14px;min-width:0">
+                    <span class="profile-avatar" style="width:48px;height:48px;font-size:22px;margin-right:0;background:{{ $kycStatus === 'verified' ? 'linear-gradient(135deg,#10b981,#059669)' : 'linear-gradient(135deg,var(--acc),var(--acc2))' }}"><i class="mdi {{ $kycStatus === 'verified' ? 'mdi-check-bold' : 'mdi-account-check' }}"></i></span>
+                    <div style="min-width:0">
+                        <h4 class="mb-1" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">{{ $kycTitle }} <span class="pill {{ $kycPill }}">{{ strtoupper(str_replace('_', ' ', $kycStatus)) }}</span></h4>
+                        <p class="mb-0 text-muted" style="font-size:.85rem">{{ $kycDesc }}</p>
+                    </div>
+                </div>
+                <a href="{{ route('kyc.status') }}" class="btn">{{ $kycCta }}</a>
             </div>
         </div>
     </div>
@@ -275,6 +307,10 @@
 @endsection
 
 @section('scripts')
+@if(($user->kyc_status ?? '') === 'verified')
+    {{-- Identity verified — celebrate (once per account). --}}
+    @include('partials.confetti', ['onceKey' => 'pv-kyc-verified-'.$user->id])
+@endif
 <script>
     function pvCopyReferral() {
         var el = document.getElementById('pvReferral');

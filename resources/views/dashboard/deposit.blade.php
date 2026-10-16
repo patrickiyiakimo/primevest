@@ -5,12 +5,7 @@
 
 @section('dashboard-content')
 @php
-    $wallets = [
-        'BTC'  => ['label' => 'Bitcoin (BTC)',                 'network' => 'Bitcoin (BTC)',           'addr' => 'bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh',      'color' => '#f7931a', 'logo' => asset('images/btc.png')],
-        'ETH'  => ['label' => 'Ethereum (ETH)',                'network' => 'ERC-20',                  'addr' => '0x71C7656EC7ab88b098defB751B7401B5f6d8976F',      'color' => '#8a92b2', 'logo' => asset('images/eth.png')],
-        'USDT' => ['label' => 'Tether (USDT – TRC20)',         'network' => 'TRON (TRC-20)',           'addr' => 'TX7XpN394okDd3rFZag4v1xH3v9WZJQaCo',             'color' => '#26a17b', 'logo' => asset('images/Tron-logo.jfif')],
-        'SOL'  => ['label' => 'Solana (SOL)',                  'network' => 'Solana',                  'addr' => '7YmM2ZvUGrfKXJq3ihQfC8gGKbQ2kBn3kXJb2mZv92oK',   'color' => '#9945ff', 'logo' => asset('images/solana-image.jfif')],
-    ];
+    $wallets = $wallets ?? collect();
 @endphp
 
 <style>
@@ -34,12 +29,13 @@
 
         <label class="lbl">Select payment method</label>
         <select class="inp sel" id="depositMethod" style="margin-bottom:16px">
-            <option>Bitcoin (BTC)</option>
-            <option selected>Ethereum (ETH)</option>
-            <option>Tether (USDT – TRC20)</option>
-            <option>Solana (SOL)</option>
-            <option>USDC (ERC-20)</option>
-            <option>Bank Transfer</option>
+            @foreach($wallets as $coin => $w)
+                <option value="{{ $w['label'] }}" data-coin="{{ $coin }}" @if($coin === 'ETH') selected @endif>{{ $w['label'] }}</option>
+            @endforeach
+            @unless($wallets->has('USDC'))
+                <option value="USDC (ERC-20)" data-coin="USDC">USDC (ERC-20)</option>
+            @endunless
+            <option value="Bank Transfer" data-coin="BANK">Bank Transfer</option>
         </select>
 
         <label class="lbl">Amount (USD)</label>
@@ -119,23 +115,26 @@
     const WALLETS = @json($wallets);
     let currentAddr='';
 
-    function keyFor(method){
-        const m=method.toLowerCase();
-        if(m.includes('bitcoin'))return 'BTC';
-        if(m.includes('usdt')&&!m.includes('usdc'))return 'USDT';
-        if(m.includes('solana'))return 'SOL';
-        return 'ETH'; // Ethereum + USDC (ERC-20, same network)
+    function currentCoin(){
+        const sel=document.getElementById('depositMethod');
+        const opt=sel.options[sel.selectedIndex];
+        return opt&&opt.dataset?opt.dataset.coin:'';
+    }
+    function currentWallet(){
+        const w=WALLETS[currentCoin()];
+        if(w&&w.addr)return w;
+        return WALLETS['ETH']||null; // USDC / unknown coins share the ERC-20 address
     }
 
     const fix=(n)=>(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:4});
     function rateFor(){
-        const m=document.getElementById('depositMethod').value.toLowerCase();
-        if(m.includes('bitcoin'))return 0.00001433;
-        if(m.includes('ethereum'))return 0.0002867;
-        if(m.includes('usdt'))return 0.98;
-        if(m.includes('solana'))return 0.0667;
-        if(m.includes('bank')||m.includes('usdc'))return 1;
-        return 1;
+        switch(currentCoin()){
+            case 'BTC':return 0.00001433;
+            case 'ETH':return 0.0002867;
+            case 'USDT':return 0.98;
+            case 'SOL':return 0.0667;
+            default:return 1;
+        }
     }
     function estEq(){
         const amt=parseFloat(document.getElementById('depositAmount').value)||0, r=rateFor();
@@ -145,32 +144,33 @@
     }
     function syncMethod(){
         const method=document.getElementById('depositMethod').value;
-        const isBank=method.toLowerCase().includes('bank');
-        const w=isBank?null:WALLETS[keyFor(method)];
+        const isBank=currentCoin()==='BANK';
+        const w=isBank?null:currentWallet();
         document.getElementById('sumMethod').textContent=method;
-        document.getElementById('sumNetwork').textContent=isBank?'Bank transfer':('Network: '+w.network);
+        document.getElementById('sumNetwork').textContent=isBank?'Bank transfer':('Network: '+(w&&w.network?w.network:'—'));
         document.getElementById('walletBtn').textContent=isBank?'View Wire Instructions':'Get Deposit Wallet Address';
         const sl=document.getElementById('sumLogo');
-        if(isBank){sl.style.display='none'}else{sl.src=w.logo;sl.style.display='inline-block'}
+        if(isBank||!w||!w.logo){sl.style.display='none'}else{sl.src=w.logo;sl.style.display='inline-block'}
     }
     document.getElementById('depositAmount').addEventListener('input',estEq);
     document.getElementById('depositMethod').addEventListener('change',()=>{estEq();syncMethod()});
 
     function openWalletModal(){
         const method=document.getElementById('depositMethod').value;
-        const isBank=method.toLowerCase().includes('bank');
+        const isBank=currentCoin()==='BANK';
         const logo=document.getElementById('wmLogo');
         const glyph=document.getElementById('wmGlyph');
         document.getElementById('wmBank').style.display=isBank?'block':'none';
         document.getElementById('wmWallet').style.display=isBank?'none':'block';
         if(!isBank){
             const base=method.split(' (')[0];
-            const w=WALLETS[keyFor(method)];
+            const w=currentWallet();
             document.getElementById('wmTitle').textContent='Deposit '+base;
-            document.getElementById('wmNetwork').textContent='Network: '+w.network;
-            document.getElementById('wmAddr').textContent=w.addr;
-            currentAddr=w.addr;
-            logo.src=w.logo;logo.style.display='block';glyph.style.display='none';
+            document.getElementById('wmNetwork').textContent='Network: '+(w&&w.network?w.network:'—');
+            document.getElementById('wmAddr').textContent=w?w.addr:'';
+            currentAddr=w?w.addr:'';
+            if(w&&w.logo){logo.src=w.logo;logo.style.display='block';glyph.style.display='none';}
+            else{logo.style.display='none';glyph.style.display='block';}
         } else {
             document.getElementById('wmTitle').textContent='Bank Transfer';
             document.getElementById('wmNetwork').textContent='Wire instructions';
