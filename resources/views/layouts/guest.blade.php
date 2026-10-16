@@ -386,6 +386,6 @@
             </div>
         </main>
     </div>
-    @include('partials.jivo')
+    @include('partials.smartsupp')
 </body>
 </html>

@@ -156,7 +156,7 @@
     <meta property="og:image" content="{{ asset('primevestmarket/img/share.jpg') }}">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('primevestmarket/storage/app/public/photos/BdNLfPXnjtZpQd84tP1qPi7Doca8jaPb7f1J1uCG.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}" type="image/x-icon">
 
     <!-- Preload key assets -->
     <link rel="preconnect" href="https://fonts.googleapis.com/">
