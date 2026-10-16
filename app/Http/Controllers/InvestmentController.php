@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Investment;
 use App\Models\Transaction;
 use App\Models\StockPortfolio;
+use App\Mail\InvestmentMadeMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 
 class InvestmentController extends Controller
@@ -187,6 +189,13 @@ class InvestmentController extends Controller
                     'deducted_from_profits' => $deductFromProfits
                 ])
             ]);
+            
+            // Send investment confirmation email to the user
+            try {
+                Mail::to($user->email)->send(new InvestmentMadeMail($user, $investment));
+            } catch (\Exception $e) {
+                \Log::error('Failed to send investment confirmation email to ' . $user->email . ': ' . $e->getMessage());
+            }
             
             return response()->json([
                 'success' => true,

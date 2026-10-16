@@ -60,6 +60,7 @@
 </head>
 <body>
     <div class="container">
+        @include('emails.partials.logo')
         <div class="header">
             <h1>📋 New KYC Submission</h1>
             <p>Action Required: Review KYC Documents</p>

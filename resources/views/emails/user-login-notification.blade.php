@@ -60,6 +60,7 @@
 </head>
 <body>
     <div class="container">
+        @include('emails.partials.logo')
         <div class="header">
             <h1>New Login Detected</h1>
         </div>
