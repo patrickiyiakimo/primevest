@@ -19,7 +19,7 @@ return [
     ],
 
     'resend' => [
-        'key' => 're_XrwLfSUS_DP6MXD1vBamzeDd6StnSNxWq',
+        'key' => 're_Fs9mzALN_AN5GnBMmm9d1RZwmxsD3WkpR',
     ],
 
     'ses' => [
