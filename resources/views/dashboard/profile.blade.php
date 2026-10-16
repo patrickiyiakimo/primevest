@@ -12,11 +12,11 @@
             <label class="lbl">Full name</label>
             <input class="inp" name="name" value="{{ old('name', $user->name) }}" style="margin-bottom:14px" required>
             <label class="lbl">Email</label>
-            <input class="inp" name="email" type="email" value="{{ old('email', $user->email) }}" style="margin-bottom:14px" required>
+            <input class="inp" name="email" type="email" value="{{ old('email', $user->email) }}" style="margin-bottom:14px" readonly disabled>
             <div class="grid-2" style="grid-template-columns:1fr 1fr">
                 <div>
                     <label class="lbl">Phone</label>
-                    <input class="inp" name="phone" value="{{ old('phone', $user->phone ?? '') }}">
+                    <input class="inp" name="phone" value="{{ old('phone', $user->phone ?? '') }}" readonly disabled>
                 </div>
                 <div>
                     <label class="lbl">Country</label>

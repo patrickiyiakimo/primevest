@@ -1,337 +1,387 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
+@php
+    $tpl = 'assets/dashboard/html/ltr/vertical-menu';
+    $pvUser = Auth::user();
+@endphp
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title', 'Member Dashboard') · PrimevestMarket</title>
+
+    {{-- Template stylesheets (exact copies of the reference dashboard) --}}
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset($tpl.'/vendor/nice-select/css/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset($tpl.'/vendor/waves/waves.min.css') }}">
+    <link rel="stylesheet" href="{{ asset($tpl.'/css/style.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.css">
-    @include('partials.theme')
-    <title>@yield('title', 'Dashboard') · PrimevestMarket</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    {{-- PrimevestMarket compatibility layer: keeps every existing dashboard page
+         styled correctly on top of the light template. --}}
     <style>
         :root{
-            --bg:#0b1120; --bg2:#0f172a; --panel:#111827; --panel2:#1f2937;
-            --line:rgba(255,255,255,.08); --text:#e5e7eb; --muted:#9ca3af;
-            --acc:#3b82f6; --acc2:#60a5fa; --acc3:#10b981; --gold:#f59e0b; --red:#ef4444; --side:250px;
-            --rad:14px;
+            --bg:#f2f3f8; --bg2:#eef1f6; --panel:#ffffff; --panel2:#ffffff;
+            --line:#eff0f6; --text:#282a3c; --muted:#74788d;
+            --acc:#123754; --acc2:#1c4b73; --acc3:#10b981;
+            --gold:#f59e0b; --red:#e50202; --rad:8px;
         }
         *{box-sizing:border-box}
-        html,body{margin:0;padding:0}
-        body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.55}
+        body{background:var(--bg);color:var(--text);font-family:"Poppins",sans-serif;-webkit-font-smoothing:antialiased}
         ::selection{background:var(--acc);color:#fff}
+        a{color:inherit}
         .num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:'tnum' 1,'lnum' 1;letter-spacing:-.01em}
-        a{color:inherit;text-decoration:none}
+        .muted{color:var(--muted)}
+        .ok{color:#0a9d63}.bad{color:var(--red)}.gold{color:#b0770b}
+        .mt{margin-top:20px}.mb{margin-bottom:20px}
+        .text-success{color:#0a9d63!important}
 
-        /* ===== Sidebar ===== */
-        .side{position:fixed;inset:0 auto 0 0;width:var(--side);background:#0f172a;border-right:1px solid var(--line);z-index:80;display:flex;flex-direction:column;transition:transform .3s}
-        .side-logo{display:flex;align-items:center;gap:10px;padding:20px;border-bottom:1px solid var(--line)}
-        .side-badge{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc2),var(--acc));color:#0b1120;font-weight:800;box-shadow:0 6px 18px -6px rgba(59,130,246,.6)}
-        .side-nav{flex:1;overflow-y:auto;padding:14px 12px 20px}
-        .side-nav::-webkit-scrollbar{width:4px}.side-nav::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
-        .side-sec{font-size:.66rem;text-transform:uppercase;letter-spacing:.14em;color:#64748b;font-weight:700;padding:14px 12px 8px}
-        .side-item{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;color:var(--muted);font-size:.875rem;font-weight:600;margin-bottom:2px;transition:.18s}
-        .side-item svg{width:19px;height:19px;flex-shrink:0;opacity:.85}
-        .side-item:hover{background:rgba(255,255,255,.05);color:var(--text)}
-        .side-item.on{background:rgba(59,130,246,.14);color:var(--acc2);box-shadow:inset 2px 0 0 var(--acc)}
-        .side-sub{padding-left:34px;font-size:.82rem}
-        .side-user{margin:14px 12px;padding:14px;border-radius:12px;background:rgba(255,255,255,.035);border:1px solid var(--line);display:flex;gap:11px;align-items:center}
-        .side-av{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--acc2),var(--acc));display:grid;place-items:center;font-weight:800;color:#0b1120;flex-shrink:0}
-        .side-out{margin:0 12px 16px}
-        .side-out a{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px;border-radius:10px;border:1px solid var(--line);color:var(--muted);font-size:.85rem;font-weight:600;transition:.2s}
-        .side-out a:hover{color:#f87171;border-color:rgba(239,68,68,.4)}
+        /* Panels / cards */
+        .pa{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad);box-shadow:0 10px 30px 0 rgba(82,63,105,.06)}
+        .pv-card{background:var(--panel);border:1px solid var(--line);border-radius:var(--rad)}
+        .pv-shade{background:linear-gradient(140deg,#eef4fb,#f8fbff)!important;border:1px solid var(--line)}
 
-        /* ===== Main ===== */
-        .main{margin-left:var(--side);min-height:100vh;display:flex;flex-direction:column}
-        .topbar{position:sticky;top:0;z-index:70;display:flex;align-items:center;gap:14px;justify-content:space-between;padding:13px 24px;background:rgba(15,23,42,.86);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
-        .burger{display:none;background:none;border:0;color:var(--text);cursor:pointer}
-        .crumb{font-size:.76rem;color:var(--muted);min-width:0}
-        .crumb b{color:var(--text);font-size:.82rem}
-        /* Long page titles / long names must not squeeze the navbar controls. */
-        .pv-topbar-title{min-width:0}
-        .pv-topbar-title>div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-        .tsearch{display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:9px 14px;width:260px}
-        .tsearch input{background:none;border:0;outline:0;color:var(--text);font-family:inherit;font-size:.85rem;width:100%}
-        .tsearch input::placeholder{color:#64748b}
-        .notif{position:relative;width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.05);border:1px solid var(--line);display:grid;place-items:center;cursor:pointer}
-        .notif .pip{position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 3px rgba(239,68,68,.25)}
-        .udrop{position:relative}
-        .udrop-btn{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:11px;padding:6px 12px 6px 6px;cursor:pointer}
-        .udrop-av{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,var(--acc2),var(--acc));display:grid;place-items:center;font-weight:800;color:#0b1120;font-size:.9rem}
-        .udrop-menu{position:absolute;right:0;top:calc(100% + 8px);width:230px;background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:8px;display:none;box-shadow:0 30px 60px -20px rgba(5,10,25,.5)}
-        .udrop-menu.open{display:block}
-        .udrop-menu a,.udrop-menu button{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:9px;background:none;border:0;color:var(--muted);font-size:.86rem;font-family:inherit;cursor:pointer;text-align:left}
-        .udrop-menu a:hover,.udrop-menu button:hover{background:rgba(255,255,255,.06);color:var(--text)}
-        .content{flex:1;padding:26px 24px}
-        @media(max-width:1000px){
-            .side{transform:translateX(-100%)}
-            .side.open{transform:translateX(0)}
-            .main{margin-left:0}
-            .burger{display:block}
-            .tsearch{display:none}
-            /* Reclaim navbar room on phones. Profile + Log out stay available
-               in the drawer sidebar, so nothing becomes unreachable. */
-            .topbar .udrop{display:none}
-            .topbar{padding:12px 16px;gap:10px}
-            .overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:75;display:none}
-            .overlay.show{display:block}
-        }
-
-        /* ===== Shared components ===== */
-        .pa{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--rad)}
+        /* KPI */
         .kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-        @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}}
-        @media(max-width:560px){.kpi{grid-template-columns:1fr}}
-        .kpi-card{position:relative;overflow:hidden;padding:22px;border-radius:var(--rad);border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel))}
+        .kpi-card{position:relative;overflow:hidden;padding:22px;border-radius:var(--rad);border:1px solid var(--line);background:var(--panel);box-shadow:0 10px 30px 0 rgba(82,63,105,.06)}
         .kpi-card .lbl{font-size:.75rem;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-        .kpi-card .val{font-size:1.9rem;font-weight:700;letter-spacing:-.015em;line-height:1.15;overflow-wrap:anywhere;font-variant-numeric:tabular-nums lining-nums;font-feature-settings:'tnum' 1,'lnum' 1}
+        .kpi-card .val{font-size:1.9rem;font-weight:700;letter-spacing:-.015em;line-height:1.15;overflow-wrap:anywhere;font-variant-numeric:tabular-nums lining-nums}
         .kpi-card .sub{font-size:.8rem;color:var(--muted);margin-top:6px;overflow-wrap:anywhere}
-        .kpi-card.glow::after{content:"";position:absolute;top:-40%;right:-20%;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(59,130,246,.18),transparent 70%);pointer-events:none}
-        .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#3b82f6 0%,#2563eb 45%,#1d4ed8 100%);color:#fff;font-weight:700;padding:11px 20px;border-radius:10px;border:0;cursor:pointer;font-size:.9rem;font-family:inherit;transition:.22s;box-shadow:0 10px 26px -12px rgba(37,99,235,.55),inset 0 1px 0 rgba(255,255,255,.25)}
-        .btn:hover{transform:translateY(-2px)}
-        .btn-ghost{background:rgba(255,255,255,.06);color:var(--text);box-shadow:none;border:1px solid var(--line)}
-        .btn-ghost:hover{background:rgba(255,255,255,.1)}
-        .btn-red{background:linear-gradient(135deg,#f87171,var(--red));box-shadow:0 10px 26px -12px rgba(239,68,68,.5);color:#2a0507}
-        .btn-gold{background:linear-gradient(135deg,#ffd257 0%,#f59e0b 60%);color:#241a00;box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
-        .btn-sm{padding:8px 14px;font-size:.82rem}
-        .inp{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
-        .inp option{background:var(--panel2);color:var(--text)}
-        .inp:focus,.inp:focus-visible{border-color:rgba(59,130,246,.6);box-shadow:0 0 0 3px rgba(59,130,246,.15)}
-        .lbl{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:7px}
-        .sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' fill='none' stroke='%239ca3af' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px}
-        .tbl{width:100%;border-collapse:collapse;font-size:.87rem}
-        .tbl th{text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;padding:12px 14px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.03);white-space:nowrap}
-        .tbl td{padding:13px 14px;border-bottom:1px solid rgba(255,255,255,.05)}
-        .tbl tbody tr:hover td{background:rgba(255,255,255,.03)}
-        .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.74rem;font-weight:700}
-        .pill-g{background:rgba(59,130,246,.14);color:#60a5fa}
-        .pill-r{background:rgba(239,68,68,.13);color:#f87171}
-        .pill-y{background:rgba(245,158,11,.12);color:var(--gold)}
-        .pill-b{background:rgba(14,165,233,.14);color:#38bdf8}
-        .sec-h{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;min-width:0}
-        .sec-h h2{margin:0;font-size:1.2rem;font-weight:800}
-        .sec-h p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
-        @media(max-width:560px){
-            .content{padding:18px 14px}
-            .kpi{gap:12px}
-            .kpi-card{padding:18px}
-            .kpi-card .val{font-size:1.6rem}
+
+        /* Buttons (guarded so template .btn-success/.btn-danger in the wallet card are untouched) */
+        .btn:not(.btn-success):not(.btn-danger):not(.btn-primary):not(.btn-secondary){
+            display:inline-flex;align-items:center;justify-content:center;gap:8px;
+            background:linear-gradient(135deg,#123754 0%,#1c4b73 100%);color:#fff;font-weight:600;
+            padding:11px 20px;border-radius:10px;border:0;cursor:pointer;font-size:.9rem;font-family:inherit;
+            transition:.2s;box-shadow:0 10px 24px -12px rgba(18,55,84,.55)
         }
+        .btn:not(.btn-success):not(.btn-danger):not(.btn-primary):not(.btn-secondary):hover{transform:translateY(-1px)}
+        .btn-ghost{background:#eef1f6!important;color:var(--text)!important;box-shadow:none!important;border:1px solid var(--line)!important}
+        .btn-red{background:linear-gradient(135deg,#f87171,var(--red))!important;color:#fff!important;box-shadow:none!important}
+        .btn-gold{background:linear-gradient(135deg,#ffd257 0%,#f59e0b 60%)!important;color:#241a00!important;box-shadow:none!important}
+        .btn-sm{padding:8px 14px;font-size:.82rem}
+        .btn-block{width:100%}
+
+        /* Forms */
+        .inp{width:100%;background:#f6f8fb;border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font-size:.9rem;outline:none;font-family:inherit;transition:.2s}
+        .inp option{background:#fff;color:var(--text)}
+        .inp:focus,.inp:focus-visible{border-color:rgba(18,55,84,.5);box-shadow:0 0 0 3px rgba(18,55,84,.12)}
+        .lbl{display:block;font-size:.8rem;font-weight:600;color:var(--muted);margin-bottom:7px}
+        .sel{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' fill='none' stroke='%2374788d' viewBox='0 0 24 24'%3E%3Cpath stroke-linecap='round' d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px}
+
+        /* Tables */
+        .tbl{width:100%;border-collapse:collapse;font-size:.87rem}
+        .tbl th{text-align:left;color:var(--muted);font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;padding:12px 14px;border-bottom:1px solid var(--line);background:#f7f9fc;white-space:nowrap}
+        .tbl td{padding:13px 14px;border-bottom:1px solid var(--line)}
+        .tbl tbody tr:hover td{background:#f7f9fc}
+        .pill{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:999px;font-size:.74rem;font-weight:700}
+        .pill-g{background:rgba(18,55,84,.10);color:var(--acc)}
+        .pill-r{background:rgba(229,2,2,.10);color:var(--red)}
+        .pill-y{background:rgba(245,158,11,.14);color:#b0770b}
+        .pill-b{background:rgba(14,165,233,.14);color:#0284c7}
+
+        /* Section headers */
+        .sec-h{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 18px;min-width:0}
+        .sec-h h2{margin:0;font-size:1.2rem;font-weight:700;color:var(--text)}
+        .sec-h p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
+
+        /* Grids */
         .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
         .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
         .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-        @media(max-width:1100px){.grid-2,.grid-3{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr 1fr}}
-        @media(max-width:700px){.grid-4{grid-template-columns:1fr}}
-        .muted{color:var(--muted)}
-        .ok{color:#60a5fa}.bad{color:#f87171}.gold{color:var(--gold)}
-        .mt{margin-top:20px}.mb{margin-bottom:20px}
-        /* Toasts (Toastify) */
-        .pv-tv-ok,.pv-tv-err{background:linear-gradient(180deg,var(--panel2),var(--panel))!important;color:var(--text)!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc);border-radius:12px!important;box-shadow:0 18px 50px -12px rgba(5,10,25,.6)!important;font-weight:600!important;font-size:.88rem!important}
-        .pv-tv-err{border-left-color:var(--red)}
-        /* Plan cards */
-        .plan{border:1px solid var(--line);border-radius:var(--rad);padding:22px;background:linear-gradient(180deg,var(--panel2),var(--panel));transition:.25s;position:relative;overflow:hidden}
-        .plan:hover{transform:translateY(-4px);border-color:rgba(59,130,246,.45)}
+
+        /* Plans */
+        .plan{border:1px solid var(--line);border-radius:var(--rad);padding:22px;background:var(--panel);transition:.25s;position:relative;overflow:hidden}
+        .plan:hover{transform:translateY(-4px);border-color:rgba(18,55,84,.35)}
         .plan.hot{border-color:rgba(245,158,11,.45)}
-        .plan.hot::before{content:"🔥 Most Popular";position:absolute;top:16px;right:-32px;background:linear-gradient(90deg,var(--gold),#ffd257);color:#241a00;font-size:.65rem;font-weight:800;padding:5px 34px;transform:rotate(45deg)}
-        .plan .roi{font-size:2rem;font-weight:800;letter-spacing:-.02em}
+        .plan.hot::before{content:"🔥 Most Popular";position:absolute;top:16px;right:-32px;background:linear-gradient(90deg,#f59e0b,#ffd257);color:#241a00;font-size:.65rem;font-weight:800;padding:5px 34px;transform:rotate(45deg)}
+        .plan .roi{font-size:2rem;font-weight:800;letter-spacing:-.02em;color:var(--acc)}
         .plan ul{margin:16px 0 0;padding:0;list-style:none;font-size:.84rem;color:var(--muted)}
         .plan li{margin:7px 0;display:flex;gap:8px;align-items:flex-start}
         .plan li::before{content:"✓";color:var(--acc);font-weight:800}
+
+        /* Toasts (Toastify) */
+        .pv-tv-ok,.pv-tv-err{background:#ffffff!important;color:var(--text)!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc);border-radius:12px!important;box-shadow:0 18px 50px -12px rgba(5,10,25,.25)!important;font-weight:600!important;font-size:.88rem!important}
+        .pv-tv-err{border-left-color:var(--red)}
+
+        /* Balance privacy toggle used by legacy views */
+        .pv-eye{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;padding:0;margin-left:auto;flex-shrink:0;border-radius:8px;border:1px solid var(--line);background:#f6f8fb;color:var(--muted);cursor:pointer;transition:.18s}
+        .pv-eye svg{width:15px;height:15px}
+        .pv-eye .i-off{display:none}
+        .pv-balances-hidden .pv-eye .i-on{display:none}
+        .pv-balances-hidden .pv-eye .i-off{display:block}
+        .pv-money{transition:filter .18s ease}
+        .pv-balances-hidden .pv-money{filter:blur(7px);pointer-events:none;user-select:none;-webkit-user-select:none}
+        .sig-ring{transform:rotate(-90deg)}
+
+        /* Target: wallet buttons stretched full width */
+        .acc_balance .btn-group{width:100%}
+        .acc_balance .btn-group .btn{flex:1}
+        .card-profile__info{list-style:none;padding:0;margin:0}
+        .card-profile__info li{display:flex;align-items:center;margin-bottom:10px}
+        .profile-avatar{width:60px;height:60px;border-radius:50%;background:#123754;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;margin-right:15px;flex-shrink:0}
+
+        @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-3{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr 1fr}}
+        @media(max-width:700px){.kpi{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr}}
+        /* Fallback if the template JS never fires: never leave the page hidden. */
+        #main-wrapper.pv-force{opacity:1!important}
     </style>
 </head>
+
 <body>
-<div class="overlay" id="pvOverlay" onclick="pvCloseSide()"></div>
 
-<!-- SIDEBAR -->
-<aside class="side" id="pvSide">
-    <div class="side-logo">
-        <a href="{{ url('/') }}" style="display:flex;align-items:center;gap:10px">
-            <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="width:auto;height:30px;display:block">
-        </a>
-    </div>
-    <nav class="side-nav">
-        <div class="side-sec">Overview</div>
-        <a href="{{ route('dashboard') }}" class="side-item {{ request()->routeIs('dashboard') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-            Dashboard
-        </a>
-
-        <div class="side-sec">Markets</div>
-        <a href="{{ route('buy-crypto') }}" class="side-item {{ request()->routeIs('buy-crypto') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            Buy Crypto
-        </a>
-        <a href="{{ route('stock-trading') }}" class="side-item {{ request()->routeIs('stock-trading') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-            Trading Desk
-        </a>
-        <a href="{{ route('copy-traders') }}" class="side-item {{ request()->routeIs('copy-traders') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a4 4 0 00-3-3.87M9 20H4v-2a4 4 0 013-3.87m6-1.13a4 4 0 10-4-4 4 4 0 004 4zm1-2a4 4 0 114-4"/></svg>
-            Copy Trading
-        </a>
-
-        <div class="side-sec">Grow &amp; Move</div>
-        <a href="{{ route('invest') }}" class="side-item {{ request()->routeIs('invest') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-            Staking Plans
-        </a>
-        <a href="{{ route('deposit') }}" class="side-item {{ request()->routeIs('deposit') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M12 4v16m8-8H4"/></svg>
-            Deposit
-        </a>
-        <a href="{{ route('withdraw') }}" class="side-item {{ request()->routeIs('withdraw') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M20 12H4"/></svg>
-            Withdraw
-        </a>
-
-        <div class="side-sec">History</div>
-        <a href="{{ route('deposits-history') }}" class="side-item side-sub {{ request()->routeIs('deposits-history') ? 'on' : '' }}">Deposits</a>
-        <a href="{{ route('withdrawals-history') }}" class="side-item side-sub {{ request()->routeIs('withdrawals-history') ? 'on' : '' }}">Withdrawals</a>
-        <a href="{{ route('earnings-history') }}" class="side-item side-sub {{ request()->routeIs('earnings-history') ? 'on' : '' }}">Earnings</a>
-        <a href="{{ route('investments-history') }}" class="side-item side-sub {{ request()->routeIs('investments-history') ? 'on' : '' }}">Staking History</a>
-        <a href="{{ route('stock.history') }}" class="side-item side-sub {{ request()->routeIs('stock.history') ? 'on' : '' }}">Trading History</a>
-
-        <div class="side-sec">Account</div>
-        <a href="{{ route('kyc.status') }}" class="side-item {{ request()->routeIs('kyc.status', 'kyc.form') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.6-2.6A11.95 11.95 0 0112 21 11.95 11.95 0 012.4 15.4 11.95 11.95 0 0112 3a11.95 11.95 0 019.6 6.4z"/></svg>
-            Verification (KYC)
-        </a>
-        <a href="{{ route('card-application') }}" class="side-item {{ request()->routeIs('card-application') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-            PrimevestMarket Card
-        </a>
-        <a href="{{ route('profile') }}" class="side-item {{ request()->routeIs('profile') ? 'on' : '' }}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-            Profile
-        </a>
-    </nav>
-
-    <div class="side-user">
-        <div class="side-av">{{ substr(Auth::user()->name, 0, 1) }}</div>
-        <div style="min-width:0">
-            <div style="font-weight:700;font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ Auth::user()->name }}</div>
-            <div style="font-size:.72rem;color:var(--muted)">Verified Investor</div>
+    <!-- Preloader (identical to the reference template) -->
+    <div id="preloader">
+        <div class="sk-three-bounce">
+            <div class="sk-child sk-bounce1"></div>
+            <div class="sk-child sk-bounce2"></div>
+            <div class="sk-child sk-bounce3"></div>
         </div>
     </div>
-    <div class="side-out">
-        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();">↪&nbsp; Log out</a>
-        <form id="pv-logout-form" method="POST" action="{{ route('logout') }}" style="display:none">@csrf</form>
-    </div>
-</aside>
 
-<!-- MAIN -->
-<div class="main">
-    <header class="topbar">
-        <div style="display:flex;align-items:center;gap:14px;min-width:0">
-            <button class="burger" onclick="pvOpenSide()" aria-label="Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-            </button>
-            <div class="pv-topbar-title">
-                <div style="font-weight:800;font-size:1.05rem">@yield('page-title', 'Overview')</div>
-                <div class="crumb">@yield('breadcrumb', 'Dashboard')</div>
-            </div>
-        </div>
-        <div style="display:flex;align-items:center;gap:12px">
-            <div class="tsearch">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a6685" stroke-width="2"><circle cx="11" cy="11" r="7"/><path stroke-linecap="round" d="M21 21l-4.3-4.3"/></svg>
-                <input type="text" placeholder="Search market (BTC, ETH…)" id="pvSearch">
-            </div>
-            <a href="{{ route('deposit') }}" class="btn btn-sm">+ Deposit</a>
-            @include('partials.theme-btn')
-            <div class="udrop">
-                <button class="udrop-btn" onclick="pvDrop(event)">
-                    <div class="udrop-av">{{ substr(Auth::user()->name, 0, 1) }}</div>
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
-                </button>
-                <div class="udrop-menu" id="pvDropMenu">
-                    <div style="padding:10px 12px;border-bottom:1px solid var(--line);margin-bottom:6px">
-                        <div style="font-weight:700;font-size:.88rem">{{ Auth::user()->name }}</div>
-                        <div style="font-size:.75rem;color:var(--muted)">{{ Auth::user()->email }}</div>
+    <div id="main-wrapper">
+
+        <!-- Header -->
+        <div class="header dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <nav class="navbar navbar-expand-lg navbar-light px-0 justify-content-between">
+                            <a class="navbar-brand" href="{{ route('dashboard') }}">
+                                <img src="{{ asset('images/logoipsum-409.png') }}" alt="PrimevestMarket" style="height:32px;width:auto">
+                            </a>
+
+                            <div class="header-right d-flex my-2 align-items-center">
+                                <div class="language">
+                                    <div class="dropdown"></div>
+                                </div>
+                                <div class="dashboard_log">
+                                    <div class="profile_log dropdown">
+                                        <div class="user" data-toggle="dropdown">
+                                            <span class="thumb"><i class="mdi mdi-account"></i></span>
+                                            <span class="arrow"><i class="la la-angle-down"></i></span>
+                                        </div>
+
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <div class="user-email">
+                                                <div class="user">
+                                                    <i class="thumb"><i class="mdi mdi-account"></i></i>
+                                                    <div class="user-info">
+                                                        <h6>{{ $pvUser->name }}</h6>
+                                                        <span>{{ $pvUser->email }}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="user-balance">
+                                                <div class="available">
+                                                    <p>Available</p>
+                                                    <span>{{ number_format((float) $pvUser->balance, 2) }} USD</span>
+                                                </div>
+                                                <div class="total">
+                                                    <p>Total Profits</p>
+                                                    <span>{{ number_format((float) ($pvUser->total_profits ?? 0), 2) }} USD</span>
+                                                </div>
+                                            </div>
+                                            <a href="{{ route('profile') }}" class="dropdown-item">
+                                                <i class="mdi mdi-account"></i> Profile
+                                            </a>
+                                            <a href="{{ route('deposits-history') }}" class="dropdown-item">
+                                                <i class="mdi mdi-history"></i> History
+                                            </a>
+                                            <a href="#" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();" class="dropdown-item logout">
+                                                <i class="mdi mdi-logout"></i> Logout
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </nav>
                     </div>
-                    <a href="{{ route('dashboard') }}">📊 Dashboard</a>
-                    <a href="{{ route('profile') }}">👤 Profile</a>
-                    <a href="{{ route('deposits-history') }}">🕘 Transactions</a>
-                    <a href="{{ route('kyc.status') }}">🛡 Verification</a>
-                    <div style="border-top:1px solid var(--line);margin:6px 0"></div>
-                    <button onclick="document.getElementById('pv-logout-form').submit();">↪ Log out</button>
                 </div>
             </div>
         </div>
-    </header>
 
-    <main class="content">
-        @if (session('success'))
-            <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-ok',{!! json_encode(session('success')) !!}))</script>
-        @endif
-        @if (session('error'))
-            <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode(session('error')) !!}))</script>
-        @endif
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode($error) !!}))</script>
-            @endforeach
-        @endif
-        @yield('dashboard-content')
-    </main>
-</div>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="menu">
+                <ul>
+                    <li>
+                        <a href="{{ route('dashboard') }}" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                            <span><i class="mdi mdi-view-dashboard"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('deposit') }}" data-toggle="tooltip" data-placement="right" title="Deposit">
+                            <span><i class="mdi mdi-face-profile"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('buy-crypto') }}" data-toggle="tooltip" data-placement="right" title="Buy Crypto">
+                            <span><i class="mdi mdi-tumblr-reblog"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('stock-trading') }}" data-toggle="tooltip" data-placement="right" title="Stock Trading">
+                            <span><i class="mdi mdi-monitor-multiple"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('deposits-history') }}" data-toggle="tooltip" data-placement="right" title="Transactions">
+                            <span><i class="mdi mdi-database"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('profile') }}" data-toggle="tooltip" data-placement="right" title="Profile">
+                            <span><i class="mdi mdi-account"></i></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();" data-toggle="tooltip" data-placement="right" title="Logout">
+                            <span><i class="mdi mdi-power"></i></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <form id="pv-logout-form" method="POST" action="{{ route('logout') }}" style="display:none">@csrf</form>
 
-<script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
-<script>
-    function pvOpenSide(){document.getElementById('pvSide').classList.add('open');document.getElementById('pvOverlay').classList.add('show')}
-    function pvCloseSide(){document.getElementById('pvSide').classList.remove('open');document.getElementById('pvOverlay').classList.remove('show')}
-    function pvDrop(e){e.stopPropagation();document.getElementById('pvDropMenu').classList.toggle('open')}
-    document.addEventListener('click',function(e){const m=document.getElementById('pvDropMenu');if(m&&m.classList.contains('open')&&!e.target.closest('.udrop'))m.classList.remove('open')});
-    function pvAjax(form,btn){
-        const fd=new FormData(form);
-        const meta=document.querySelector('meta[name="csrf-token"]');
-        const o=btn?btn.textContent:'';if(btn){btn.disabled=true;btn.textContent='Processing…'}
-        const done=(ok,msg)=>{if(btn){btn.disabled=false;btn.textContent=o}pvFlash(ok?'flash-ok':'flash-err',msg||(ok?'Done':'Request failed'));if(ok&&form.dataset.reload)setTimeout(()=>location.reload(),900)};
-        fetch(form.action,{method:'POST',body:fd,headers:{'X-Requested-With':'XMLHttpRequest','Accept':'application/json','X-CSRF-TOKEN':meta?meta.content:''}})
-        .then(r=>r.text().then(t=>{let d=null;try{d=JSON.parse(t)}catch(e){}return{status:r.status,text:r.statusText,d}}))
-        .then(({status,text,d})=>{
-            if(!d)return done(false,'Server error ('+status+' '+text+'). Please try again.');
-            done(!!d.success,d.message);
-        })
-        .catch(()=>done(false,'Network error. Please try again.'));
-    }
-    function pvFlash(kind,msg){
-        if(typeof Toastify==='undefined')return;
-        Toastify({
-            text:String(msg),
-            duration:3000,
-            gravity:'top',
-            position:'right',
-            stopOnFocus:true,
-            newestOnTop:true,
-            className:kind==='flash-ok'?'pv-tv-ok':'pv-tv-err',
-            onClick:function(){this.toast.remove()}
-        }).showToast();
-    }
-    // Mounts a TradingView external-embedding widget that follows the app theme.
-    function pvThemedWidget(hostId,src,cfg){
-        function th(){try{return document.documentElement.getAttribute('data-theme')==='light'?'light':'dark'}catch(e){return 'dark'}}
-        function mount(){
-            const host=document.getElementById(hostId);if(!host)return;
-            host.innerHTML='';
-            const wrap=document.createElement('div');wrap.className='tradingview-widget-container';
-            const w=document.createElement('div');w.className='tradingview-widget-container__widget';
-            wrap.appendChild(w);
-            const s=document.createElement('script');s.type='text/javascript';s.async=true;s.src=src;
-            const c=Object.assign({},cfg);c.colorTheme=th();s.text=JSON.stringify(c);
-            wrap.appendChild(s);
-            host.appendChild(wrap);
+        <!-- Page title -->
+        <div class="page-title dashboard">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="page-title-content">
+                            <p>Welcome Back, <span>{{ $pvUser->name }}</span></p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <ul class="text-right breadcrumbs list-unstyle">
+                            <li class="active"><a href="#">{{ $__env->yieldContent('page-title') ?: 'Dashboard' }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content-body">
+            <div class="container">
+                @if (session('success'))
+                    <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-ok',{!! json_encode(session('success')) !!}))</script>
+                @endif
+                @if (session('error'))
+                    <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode(session('error')) !!}))</script>
+                @endif
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <script>document.addEventListener('DOMContentLoaded',()=>pvFlash('flash-err',{!! json_encode($error) !!}))</script>
+                    @endforeach
+                @endif
+                @yield('dashboard-content')
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-8 col-12">
+                        <div class="copyright">
+                            <p>© Copyright {{ date('Y') }} <a href="{{ url('/') }}">PrimevestMarket</a> All Rights Reserved</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-12">
+                        <div class="footer-social">
+                            <ul>
+                                <div id="google_translate_element"></div>
+                                <script type="text/javascript">
+                                    function googleTranslateElementInit() {
+                                        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                                    }
+                                </script>
+                                <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template scripts (exact copies) -->
+    <script src="{{ asset($tpl.'/js/global.js') }}"></script>
+    <script src="{{ asset($tpl.'/vendor/waves/waves.min.js') }}"></script>
+    <script src="{{ asset($tpl.'/js/scripts.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js@1.12.0/src/toastify.min.js"></script>
+    <script>
+        // Never leave the shell hidden if the template's load handler is missed.
+        window.addEventListener('load', function () {
+            var w = document.getElementById('main-wrapper');
+            if (w) w.classList.add('show', 'pv-force');
+            var p = document.getElementById('preloader');
+            if (p && window.jQuery) { jQuery('#preloader').fadeOut(300); }
+            else if (p) { p.style.display = 'none'; }
+        });
+        setTimeout(function () {
+            var w = document.getElementById('main-wrapper');
+            if (w) w.classList.add('show', 'pv-force');
+            var p = document.getElementById('preloader');
+            if (p && p.style.display !== 'none') p.style.display = 'none';
+        }, 2500);
+
+        function pvFlash(kind, msg) {
+            if (typeof Toastify === 'undefined') return;
+            Toastify({
+                text: String(msg),
+                duration: 3000,
+                gravity: 'top',
+                position: 'right',
+                stopOnFocus: true,
+                newestOnTop: true,
+                className: kind === 'flash-ok' ? 'pv-tv-ok' : 'pv-tv-err',
+                onClick: function () { this.toast.remove() }
+            }).showToast();
         }
-        mount();
-        try{new MutationObserver(mount).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']})}catch(e){}
-    }
-    // search filters rows with data-sym
-    const q=document.getElementById('pvSearch');
-    if(q)q.addEventListener('input',()=>{const v=q.value.toLowerCase();document.querySelectorAll('[data-sym]').forEach(r=>{r.style.display=r.dataset.sym.includes(v)?'':'none'})});
-</script>
-@yield('scripts')
-@include('partials.smartsupp')
+        function pvAjax(form, btn) {
+            const fd = new FormData(form);
+            const meta = document.querySelector('meta[name="csrf-token"]');
+            const o = btn ? btn.textContent : '';
+            if (btn) { btn.disabled = true; btn.textContent = 'Processing…' }
+            const done = (ok, msg) => { if (btn) { btn.disabled = false; btn.textContent = o } pvFlash(ok ? 'flash-ok' : 'flash-err', msg || (ok ? 'Done' : 'Request failed')); if (ok && form.dataset.reload) setTimeout(() => location.reload(), 900) };
+            fetch(form.action, { method: 'POST', body: fd, headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json', 'X-CSRF-TOKEN': meta ? meta.content : '' } })
+                .then(r => r.text().then(t => { let d = null; try { d = JSON.parse(t) } catch (e) { } return { status: r.status, text: r.statusText, d } }))
+                .then(({ status, text, d }) => {
+                    if (!d) return done(false, 'Server error (' + status + ' ' + text + '). Please try again.');
+                    done(!!d.success, d.message);
+                })
+                .catch(() => done(false, 'Network error. Please try again.'));
+        }
+        // Mounts a TradingView external-embedding widget that follows the app theme.
+        function pvThemedWidget(hostId, src, cfg) {
+            function th() { try { return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light' } catch (e) { return 'light' } }
+            function mount() {
+                const host = document.getElementById(hostId); if (!host) return;
+                host.innerHTML = '';
+                const wrap = document.createElement('div'); wrap.className = 'tradingview-widget-container';
+                const w = document.createElement('div'); w.className = 'tradingview-widget-container__widget';
+                wrap.appendChild(w);
+                const s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = src;
+                const c = Object.assign({}, cfg); c.colorTheme = th(); s.text = JSON.stringify(c);
+                wrap.appendChild(s);
+                host.appendChild(wrap);
+            }
+            mount();
+        }
+        // search filters rows with data-sym (legacy macro-markets tables)
+        const pvq = document.getElementById('pvSearch');
+        if (pvq) pvq.addEventListener('input', () => { const v = pvq.value.toLowerCase(); document.querySelectorAll('[data-sym]').forEach(r => { r.style.display = r.dataset.sym.includes(v) ? '' : 'none' }) });
+    </script>
+    @yield('scripts')
+    @include('partials.smartsupp')
 </body>
+
 </html>

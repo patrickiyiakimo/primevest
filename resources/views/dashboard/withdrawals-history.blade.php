@@ -4,12 +4,7 @@
 @section('breadcrumb', 'Track your withdrawals')
 
 @section('dashboard-content')
-<div class="kpi">
-    <div class="kpi-card"><div class="lbl">Total Withdrawn</div><div class="val num bad">${{ number_format($totalWithdrawals ?? 0, 2) }}</div></div>
-    <div class="kpi-card"><div class="lbl">Last Withdrawal</div><div class="val num">${{ number_format($lastWithdrawalAmount ?? 0, 2) }}</div></div>
-    <div class="kpi-card"><div class="lbl">Average</div><div class="val num">${{ number_format($averageWithdrawal ?? 0, 2) }}</div></div>
-    <div class="kpi-card"><div class="lbl">Pending Requests</div><div class="val num" style="color:var(--gold)">{{ $pendingCount ?? 0 }}</div></div>
-</div>
+@include('dashboard.partials.transaction-tabs')
 
 <div class="pa mt" style="padding:22px">
     <div class="sec-h"><div><h2>Approved Withdrawals</h2><p>Funds successfully moved to your wallet</p></div></div>

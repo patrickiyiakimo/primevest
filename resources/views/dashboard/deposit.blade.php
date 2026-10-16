@@ -43,9 +43,9 @@
         </select>
 
         <label class="lbl">Amount (USD)</label>
-        <input class="inp num" id="depositAmount" type="number" min="20" step="0.01" placeholder="e.g. 500.00" style="margin-bottom:8px">
+        <input class="inp num" id="depositAmount" type="number" min="300" step="0.01" placeholder="e.g. 500.00" style="margin-bottom:8px">
         <div class="muted" style="font-size:.78rem;margin-bottom:16px">
-            Min $20 · Max $100,000 · <span id="minedEq" class="gold num">≈ 0.1433 ETH</span>
+            Min $300 · Max $100,000 · <span id="minedEq" class="gold num">≈ 0.1433 ETH</span>
         </div>
 
         <label class="lbl">Upload deposit proof <span class="muted" style="font-weight:400">(screenshot of transfer, optional)</span></label>
@@ -190,7 +190,7 @@
     function submitDeposit(){
         const amount=document.getElementById('depositAmount').value;
         const method=document.getElementById('depositMethod').value;
-        if(!amount||parseFloat(amount)<20){pvFlash('flash-err','Minimum deposit is $20');return}
+        if(!amount||parseFloat(amount)<300){pvFlash('flash-err','Minimum deposit is $300');return}
         const fd=new FormData();
         fd.append('amount',amount);fd.append('method',method);
         const pf=document.getElementById('depositProof');
