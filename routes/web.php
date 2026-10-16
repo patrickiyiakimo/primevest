@@ -236,10 +236,11 @@ Route::middleware('auth')->group(function () {
 });
 
 
-// Page routes (public)
-    Route::get('/trading', [PageController::class, 'trading'])->name('trading');
-    Route::get('/copy-trading', [PageController::class, 'copyTrading'])->name('copy-trading');
-    Route::get('/pricing', [PageController::class, 'pricing'])->name('pricing');
+/*
+// LEGACY (pre-clone) public pages — DISABLED. These were linked from the old landing page and are not part of the cloned PrimevestMarket site.
+Route::get('/trading', [PageController::class, 'trading'])->name('trading');
+Route::get('/copy-trading', [PageController::class, 'copyTrading'])->name('copy-trading');
+Route::get('/pricing', [PageController::class, 'pricing'])->name('pricing');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/company', [PageController::class, 'company'])->name('company');
 // Real Estate Routes
@@ -251,23 +252,26 @@ Route::get('/education', [PageController::class, 'education'])->name('education'
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 })->name('privacy.policy');
-Route::get('/settings', [PageController::class, 'settings'])->name('settings');
-Route::put('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
-Route::put('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
 Route::get('/forex/majors', function () {
     return view('pages.forex-majors');
 })->name('forex.majors');
 Route::get('/forex/minors', function () {
     return view('pages.forex-minors');
 })->name('forex.minors');
-Route::get('/forex/exotics', function () {
-    return view('pages.forex-exotics');
-})->name('forex.exotics');
 Route::get('/shares/us', function () {
     return view('pages.shares-us');
 })->name('shares.us');
 Route::get('/shares/uk', function () {
     return view('pages.shares-uk');
 })->name('shares.uk');
+*/
+
+// Account settings (kept — used from the dashboard)
+Route::get('/settings', [PageController::class, 'settings'])->name('settings');
+Route::put('/settings/profile', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
+Route::put('/settings/password', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
+Route::get('/forex/exotics', function () {
+    return view('pages.forex-exotics');
+})->name('forex.exotics');
 
 //  $env:APP_URL="http://localhost:8000"; npm run dev

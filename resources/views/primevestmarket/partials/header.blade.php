@@ -96,6 +96,35 @@
                         <!--</button>-->
 
                         <div class="flex items-center space-x-4">
+                            @auth
+                            <div class="relative" x-data="{ userMenuOpen: false }">
+                                <button @click="userMenuOpen = !userMenuOpen" @click.away="userMenuOpen = false" type="button" class="flex items-center space-x-2 text-gray-200 hover:text-white focus:outline-none">
+                                    <span class="inline-flex items-center justify-center h-8 w-8 rounded-full bg-blue-600 text-white">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <span class="text-sm font-medium max-w-32 truncate">{{ auth()->user()->name }}</span>
+                                    <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                                <div x-show="userMenuOpen" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-1" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0"
+                                    x-transition:leave-end="opacity-0 translate-y-1" class="absolute right-0 mt-2 w-52 rounded-md shadow-lg py-1 bg-dark-300 ring-1 ring-black ring-opacity-5 z-50" style="display: none;">
+                                    <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">
+                                        <i class="fas fa-tachometer-alt mr-2 w-4 text-gray-400"></i> Dashboard
+                                    </a>
+                                    <a href="{{ route('profile') }}" class="flex items-center px-4 py-2 text-sm text-gray-200 hover:bg-dark-200">
+                                        <i class="fas fa-user mr-2 w-4 text-gray-400"></i> Profile
+                                    </a>
+                                    <div class="border-t border-gray-700 my-1"></div>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="w-full flex items-center px-4 py-2 text-sm text-red-400 hover:bg-dark-200 text-left">
+                                            <i class="fas fa-sign-out-alt mr-2 w-4"></i> Logout
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            @else
                             <a href="{{ route('login') }}" class="text-gray-200 hover:text-white flex items-center">
                                 <i class="fas fa-lock mr-1"></i>
                                 <span>Log in</span>
@@ -103,6 +132,7 @@
                             <a href="{{ route('register') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors">
                             Sign up
                         </a>
+                            @endauth
                         </div>
                     </div>
 
@@ -189,6 +219,31 @@
                     <!-- Language Selector (Mobile) -->
 
                     <div class="pt-4 pb-3 border-t border-gray-700">
+                        @auth
+                        <div class="px-4 space-y-1">
+                            <div class="flex items-center space-x-3 mb-3">
+                                <span class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-blue-600 text-white">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                                <div class="min-w-0">
+                                    <p class="text-sm font-medium text-white truncate">{{ auth()->user()->name }}</p>
+                                    <p class="text-xs text-gray-400 truncate">{{ auth()->user()->email }}</p>
+                                </div>
+                            </div>
+                            <a href="{{ route('dashboard') }}" class="flex items-center px-3 py-2 rounded-md text-sm text-gray-300 hover:bg-gray-700 hover:text-white">
+                                <i class="fas fa-tachometer-alt mr-2 w-4 text-gray-400"></i> Dashboard
+                            </a>
+                            <a href="{{ route('profile') }}" class="flex items-center px-3 py-2 rounded-md text-sm text-gray-300 hover:bg-gray-700 hover:text-white">
+                                <i class="fas fa-user mr-2 w-4 text-gray-400"></i> Profile
+                            </a>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button type="submit" class="w-full flex items-center px-3 py-2 rounded-md text-sm text-red-400 hover:bg-gray-700 text-left">
+                                    <i class="fas fa-sign-out-alt mr-2 w-4"></i> Logout
+                                </button>
+                            </form>
+                        </div>
+                        @else
                         <div class="flex items-center justify-between px-4">
                             <div class="flex items-center space-x-3">
                                 <a href="{{ route('login') }}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
@@ -199,6 +254,7 @@
                             </a>
                             </div>
                         </div>
+                        @endauth
                     </div>
                 </div>
             </div>
