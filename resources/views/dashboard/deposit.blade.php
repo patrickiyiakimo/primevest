@@ -50,13 +50,6 @@
                     </span>
                 </button>
             @endforeach
-            <button type="button" class="pv-coin" data-coin="BANK" data-label="Bank Transfer" onclick="pickCoin(this)">
-                <span class="pv-coin-logo"><i class="mdi mdi-bank"></i></span>
-                <span class="pv-coin-text">
-                    <span class="pv-coin-name">Bank Transfer</span>
-                    <span class="pv-coin-net">Wire / SWIFT</span>
-                </span>
-            </button>
         </div>
 
         <label class="lbl">Amount (USD)</label>
