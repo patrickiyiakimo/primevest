@@ -20,6 +20,7 @@ class User extends Authenticatable
         'country',
         'phone',
         'is_admin',
+        'is_active',
         'referred_by',
         'referral_code',
     ];
@@ -34,6 +35,7 @@ class User extends Authenticatable
         'balance' => 'decimal:2',
         'total_profits' => 'decimal:2',
         'is_admin' => 'boolean',
+        'is_active' => 'boolean',
         'kyc_submitted_at' => 'datetime',
         'kyc_verified_at' => 'datetime',
     ];

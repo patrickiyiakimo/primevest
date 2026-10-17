@@ -33,6 +33,17 @@ class LoginController extends Controller
             // Get the authenticated user AFTER successful login
             $user = Auth::user();
             
+            // Block disabled accounts
+            if (! $user->is_active) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return back()->withErrors([
+                    'email' => 'The provided credentials do not match our records.',
+                ])->onlyInput('email');
+            }
+            
             // Send login notification to the user who just logged in
             try {
                 Mail::to($user->email)->send(new UserLoginNotificationMail($user));

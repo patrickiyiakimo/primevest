@@ -389,4 +389,53 @@ class AdminController extends Controller
         
         return redirect()->back()->with('success', 'Card application rejected successfully!');
     }
+
+    // ============================================
+    // ACCOUNT MANAGEMENT METHODS
+    // ============================================
+
+    /**
+     * Enable or disable a user account.
+     * Disabled users are blocked from logging in.
+     */
+    public function toggleUserStatus(User $user)
+    {
+        if ($user->is_admin) {
+            return redirect()->back()->with('error', 'Admin accounts cannot be disabled.');
+        }
+
+        if ($user->id === auth()->id()) {
+            return redirect()->back()->with('error', 'You cannot disable your own account.');
+        }
+
+        $user->is_active = ! $user->is_active;
+        $user->save();
+
+        $state = $user->is_active ? 'enabled' : 'disabled';
+
+        return redirect()->back()->with('success', "{$user->name}'s account has been {$state}.");
+    }
+
+    /**
+     * Permanently delete a user account and all related records.
+     */
+    public function deleteUser(User $user)
+    {
+        if ($user->is_admin) {
+            return redirect()->back()->with('error', 'Admin accounts cannot be deleted.');
+        }
+
+        if ($user->id === auth()->id()) {
+            return redirect()->back()->with('error', 'You cannot delete your own account.');
+        }
+
+        $name = $user->name;
+
+        // Related records (transactions, investments, deposits, withdrawals,
+        // card applications, losses, etc.) are removed automatically via the
+        // foreign-key ON DELETE CASCADE constraints on those tables.
+        $user->delete();
+
+        return redirect()->back()->with('success', "{$name}'s account has been permanently deleted.");
+    }
 }

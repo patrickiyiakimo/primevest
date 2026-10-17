@@ -85,6 +85,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
         Route::get('/users/{user}/edit', [UserManagementController::class, 'edit'])->name('users.edit');
         Route::put('/users/{user}', [UserManagementController::class, 'update'])->name('users.update');
         Route::post('/users/losses/{loss}/reverse', [UserManagementController::class, 'reverseLoss'])->name('users.losses.reverse');
+        Route::post('/users/{user}/toggle-status', [AdminController::class, 'toggleUserStatus'])->name('users.toggle-status');
+        Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('users.destroy');
     });
     
     // Deposit management
@@ -143,25 +145,25 @@ Route::post('/copy-trading-requests/{id}/reject', [App\Http\Controllers\Admin\Co
 // Temporary route to create an admin user (for testing purposes)
 Route::get('/create-admin', function () {
     // Check if admin already exists
-    if (User::where('email', 'akoyabtc@gmail.com')->exists()) {
+    if (User::where('email', 'primevest@gmail.com')->exists()) {
         return "Admin already exists!";
     }
     
     $user = User::create([
         'name' => 'Primevest Market',
-        'email' => 'akoyabtc@gmail.com',
-        'password' => Hash::make('Mmesoma1111'),
+        'email' => 'primevest@gmail.com',
+        'password' => Hash::make('Test@1234'),
         'balance' => 0,
         'total_profits' => 0,
         'is_admin' => true,
     ]);
     
-    return "Admin created successfully!!! Email: akoyabtc@gmail.com, Password: Mmesoma1111";
+    return "Admin created successfully!!! Email: primevest@gmail.com, Password: Test@1234";
 });
 
 // Temporary route to make an existing user an admin (for testing purposes)
 Route::get('/make-me-admin', function () {
-    $user = App\Models\User::where('email', 'akoyabtc@gmail.com')->first();
+    $user = App\Models\User::where('email', 'primevest@gmail.com')->first();
     if ($user) {
         $user->is_admin = 1;
         $user->save();

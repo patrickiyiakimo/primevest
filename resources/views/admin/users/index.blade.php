@@ -14,7 +14,7 @@
     </div>
     <div style="overflow-x:auto">
     <table class="tbl">
-        <thead><tr><th>User</th><th>Balance</th><th>Total Profits</th><th>KYC</th><th>Admin</th><th>Joined</th><th></th></tr></thead>
+        <thead><tr><th>User</th><th>Balance</th><th>Total Profits</th><th>KYC</th><th>Status</th><th>Admin</th><th>Joined</th><th></th></tr></thead>
         <tbody>
             @forelse($users as $u)
             <tr>
@@ -32,12 +32,27 @@
                     @elseif($u->kyc_status == 'rejected')<span class="pill pill-r">✖ Rejected</span>
                     @else<span class="pill pill-b">○ Not submitted</span>@endif
                 </td>
+                <td>@if($u->is_active)<span class="pill pill-g">Active</span>@else<span class="pill pill-r">Disabled</span>@endif</td>
                 <td>@if($u->is_admin)<span class="pill pill-y">Admin</span>@else<span class="pill">User</span>@endif</td>
                 <td class="num muted" style="font-size:.8rem">{{ $u->created_at->format('Y-m-d') }}</td>
-                <td style="text-align:right"><a href="{{ route('admin.users.edit', $u->id) }}" class="btn btn-ghost btn-sm">Manage</a></td>
+                <td style="text-align:right">
+                    <div style="display:flex;gap:6px;justify-content:flex-end">
+                        <a href="{{ route('admin.users.edit', $u->id) }}" class="btn btn-ghost btn-sm">Manage</a>
+                        @unless($u->is_admin)
+                        <form method="POST" action="{{ route('admin.users.toggle-status', $u->id) }}" style="display:inline">
+                            @csrf
+                            <button class="btn btn-ghost btn-sm">{{ $u->is_active ? 'Disable' : 'Enable' }}</button>
+                        </form>
+                        <form method="POST" action="{{ route('admin.users.destroy', $u->id) }}" style="display:inline" onsubmit="return confirm('Permanently delete {{ $u->name }}\'s account and all related data? This cannot be undone.');">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                        @endunless
+                    </div>
+                </td>
             </tr>
             @empty
-            <tr><td colspan="7" style="text-align:center;padding:40px" class="muted">No users found.</td></tr>
+            <tr><td colspan="8" style="text-align:center;padding:40px" class="muted">No users found.</td></tr>
             @endforelse
         </tbody>
     </table>
