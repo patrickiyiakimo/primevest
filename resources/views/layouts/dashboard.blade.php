@@ -131,7 +131,6 @@
         /* Fallback if the template JS never fires: never leave the page hidden. */
         #main-wrapper.pv-force{opacity:1!important}
     </style>
-    @include('partials.mobile-input-fix')
 </head>
 
 <body>

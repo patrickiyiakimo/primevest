@@ -56,7 +56,6 @@
         .skiptranslate { display: none !important; }
         body { top: 0 !important; }
     </style>
-    @include('partials.mobile-input-fix')
 </head>
 
 <body class="h-full bg-gray-900 font-sans antialiased text-gray-900" x-data="{ darkMode: localStorage.theme === 'dark' || !localStorage.theme }" :class="{ 'dark': darkMode }" x-cloak>

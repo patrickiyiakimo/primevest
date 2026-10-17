@@ -222,7 +222,6 @@
             }
         });
     </script>
-    @include('partials.mobile-input-fix')
 </head>
 
 <body class="antialiased text-gray-200 bg-gray-900 font-sans min-h-screen flex flex-col">
