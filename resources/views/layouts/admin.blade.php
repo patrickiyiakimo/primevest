@@ -6,8 +6,8 @@
     $pvNav = [
         ['Dashboard',        'admin.dashboard',                              'mdi-view-dashboard',   'admin.dashboard'],
         ['Users',            'admin.users',                                 'mdi-account-multiple', 'admin.users*'],
-        ['Deposits',         'admin.deposits',                              'mdi-cash-plus',        'admin.deposits'],
-        ['Withdrawals',      'admin.withdrawals',                           'mdi-cash-minus',       'admin.withdrawals'],
+        ['Deposits',         'admin.deposits',                              'mdi-square-inc-cash',  'admin.deposits'],
+        ['Withdrawals',      'admin.withdrawals',                           'mdi-cash',             'admin.withdrawals'],
         ['Investments',      'admin.investments',                           'mdi-chart-line',       'admin.investments'],
         ['Wallet Addresses', 'admin.wallet-addresses.index',                'mdi-wallet',           'admin.wallet-addresses*'],
         ['Card Applications','admin.card-applications',                     'mdi-credit-card',      'admin.card-applications'],
@@ -154,14 +154,14 @@
                                 <div class="dashboard_log">
                                     <div class="profile_log dropdown">
                                         <div class="user" data-toggle="dropdown">
-                                            <span class="thumb"><i class="mdi mdi-shield-account"></i></span>
+                                            <span class="thumb"><i class="mdi mdi-shield"></i></span>
                                             <span class="arrow"><i class="la la-angle-down"></i></span>
                                         </div>
 
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <div class="user-email">
                                                 <div class="user">
-                                                    <i class="thumb"><i class="mdi mdi-shield-account"></i></i>
+                                                    <i class="thumb"><i class="mdi mdi-shield"></i></i>
                                                     <div class="user-info">
                                                         <h6>{{ $pvAdmin->name }}</h6>
                                                         <span>{{ $pvAdmin->email }}</span>

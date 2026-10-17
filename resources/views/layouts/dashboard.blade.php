@@ -199,7 +199,7 @@
                                             </a>
                                             @if($pvUser->is_admin)
                                             <a href="{{ route('admin.dashboard') }}" class="dropdown-item">
-                                                <i class="mdi mdi-shield-account"></i> Admin Console
+                                                <i class="mdi mdi-shield"></i> Admin Console
                                             </a>
                                             @endif
                                             <a href="#" onclick="event.preventDefault();document.getElementById('pv-logout-form').submit();" class="dropdown-item logout">
@@ -257,7 +257,7 @@
                     @if($pvUser->is_admin)
                     <li>
                         <a href="{{ route('admin.dashboard') }}" data-toggle="tooltip" data-placement="right" title="Admin Console">
-                            <span><i class="mdi mdi-shield-account" style="color:var(--gold)"></i></span>
+                            <span><i class="mdi mdi-shield" style="color:var(--gold)"></i></span>
                         </a>
                     </li>
                     @endif
