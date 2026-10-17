@@ -192,7 +192,6 @@
         .pv-icon{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:rgba(75,24,191,.12);color:var(--acc);font-size:1.25rem}
     </style>
     @stack('styles')
-    @include('partials.mobile-input-fix')
 </head>
 <body>
     @include('layouts.navbar')
