@@ -124,6 +124,7 @@
         @media(max-width:768px){.tbl{min-width:600px}.tbl td{white-space:nowrap}}
         #main-wrapper.pv-force{opacity:1!important}
     </style>
+    @include('partials.mobile-input-fix')
 </head>
 
 <body>

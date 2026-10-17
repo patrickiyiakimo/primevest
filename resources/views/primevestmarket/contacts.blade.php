@@ -162,7 +162,7 @@
 
                             <!-- Phone -->
                             <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl border border-gray-700 shadow-lg overflow-hidden">
-                                <div class="p-6">
+                                <!-- <div class="p-6">
                                     <div class="flex items-center mb-4">
                                         <div class="w-10 h-10 rounded-full bg-blue-900 bg-opacity-50 flex items-center justify-center mr-4">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
@@ -177,7 +177,7 @@
                                 </svg>+44 734-835-2766
                                     </a>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- Email -->
                             <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-2xl border border-gray-700 shadow-lg overflow-hidden">

@@ -307,6 +307,7 @@
             .auth-topbar{justify-content:flex-end}
         }
     </style>
+    @include('partials.mobile-input-fix')
 </head>
 <body>
     <div class="auth-topbar">
