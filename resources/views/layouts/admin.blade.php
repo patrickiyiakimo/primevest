@@ -104,9 +104,10 @@
         .sec-h p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
 
         /* Grids */
-        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-        .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+        .grid-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+        .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+        .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+        .grid-2>*,.grid-3>*,.grid-4>*{min-width:0}
 
         /* Toasts (Toastify) */
         .pv-tv-ok,.pv-tv-err{background:#ffffff!important;color:var(--text)!important;border:1px solid var(--line)!important;border-left:3px solid var(--acc);border-radius:12px!important;box-shadow:0 18px 50px -12px rgba(5,10,25,.25)!important;font-weight:600!important;font-size:.88rem!important}
@@ -117,7 +118,7 @@
         .card-profile__info{list-style:none;padding:0;margin:0}
         .card-profile__info li{display:flex;align-items:center;margin-bottom:10px}
 
-        @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-3{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr 1fr}}
+        @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-3{grid-template-columns:minmax(0,1fr)}.grid-4{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
         @media(max-width:700px){.kpi{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr}}
         /* Allow wide tables to scroll horizontally on small screens */
         @media(max-width:768px){.tbl{min-width:600px}.tbl td{white-space:nowrap}}

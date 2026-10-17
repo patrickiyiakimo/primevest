@@ -88,9 +88,10 @@
         .sec-h p{margin:2px 0 0;color:var(--muted);font-size:.82rem}
 
         /* Grids */
-        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-        .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+        .grid-2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+        .grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+        .grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+        .grid-2>*,.grid-3>*,.grid-4>*{min-width:0}
 
         /* Plans */
         .plan{border:1px solid var(--line);border-radius:var(--rad);padding:22px;background:var(--panel);transition:.25s;position:relative;overflow:hidden}
@@ -123,7 +124,7 @@
         .card-profile__info li{display:flex;align-items:center;margin-bottom:10px}
         .profile-avatar{width:60px;height:60px;border-radius:50%;background:#123754;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:24px;font-weight:600;margin-right:15px;flex-shrink:0}
 
-        @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-3{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr 1fr}}
+        @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-3{grid-template-columns:minmax(0,1fr)}.grid-4{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
         @media(max-width:700px){.kpi{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr}}
         /* Allow wide tables to scroll horizontally on small screens */
         @media(max-width:768px){.tbl{min-width:600px}.tbl td{white-space:nowrap}}
