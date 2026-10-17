@@ -119,6 +119,8 @@
 
         @media(max-width:1100px){.kpi{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-3{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr 1fr}}
         @media(max-width:700px){.kpi{grid-template-columns:1fr}.grid-4{grid-template-columns:1fr}}
+        /* Allow wide tables to scroll horizontally on small screens */
+        @media(max-width:768px){.tbl{min-width:600px}.tbl td{white-space:nowrap}}
         #main-wrapper.pv-force{opacity:1!important}
     </style>
 </head>
