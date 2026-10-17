@@ -7,122 +7,144 @@
 
 @section('dashboard-content')
 @php
-    $steps = [
-        ['Choose Your Preferred Payment Option', 'Choose your preferred payment option from the list provided, such as PayPal, Venmo, Zelle, Cashapp, or Bank transfer.'],
-        ['Connect with a Verified Crypto Seller', 'Connect with a verified crypto seller on our platform. Rest assured that all merchants offering these payment services are registered and verified under our platform, ensuring the safety of your funds.'],
-        ['Confirm Crypto Availability', 'We would confirm that the selected payment option is available for the seller and confirm their availability to sell the required amount of crypto for your funding.'],
-        ['Merchant Details Submission', 'The seller submits their payment details to our system, and we promptly forward these details to you for your convenience.'],
-        ['Secure Payment Window', 'A 30-minute timeframe is established to ensure a smooth experience for all investors. During this window, you are encouraged to complete your payment.'],
-        ['Crypto Held in Escrow', 'Upon your confirmation of the payment, the specified amount of cryptocurrency is securely held in escrow for the designated 30-minute period. This ensures a seamless transaction process for both parties involved.'],
-        ['Confirm Payment', 'After making your payment, notify our system to confirm the successful transaction with a receipt or screenshot within the 30-minute window.'],
-        ['Payment Verification', 'Our system verifies the payment made within the stipulated time frame to ensure accuracy and security.'],
-        ['Crypto Delivery', 'Once payment is confirmed, the purchased cryptocurrency is promptly deposited into your wallet, providing you with immediate access to your asset.'],
-        ['Transaction Fee', 'Please note that a flat transaction fee of $25 applies to every payment processed, regardless of the transaction amount. This fee helps maintain the efficiency and security of our payment process.'],
-    ];
-    $methods = [
-        ['🏦', 'Zelle', 'Bank-to-bank instant transfer'],
-        ['💳', 'Venmo', 'Send and receive with the Venmo app'],
-        ['💵', 'Cashapp', 'Quick payments with Cash App'],
-        ['🅿️', 'PayPal', 'Secure PayPal transactions'],
-        ['🏛️', 'Wire Bank Transfer', 'Direct wire transfer from your bank'],
+    $platforms = [
+        [
+            'id' => 'robinhood', 'name' => 'Robinhood', 'domain' => 'robinhood.com',
+            'url' => 'https://robinhood.com/crypto', 'color' => '#00c805', 'badge' => 'Popular',
+            'tagline' => 'Commission-free crypto trading',
+            'desc' => 'Robinhood lets you buy and sell popular cryptocurrencies with zero commission and no account minimums. Perfect for beginners who want a clean, simple app experience.',
+            'fee' => '0% commission', 'coins' => 'BTC, ETH, DOGE & more', 'best' => 'First-time buyers',
+        ],
+        [
+            'id' => 'coinbase', 'name' => 'Coinbase', 'domain' => 'coinbase.com',
+            'url' => 'https://www.coinbase.com/buy', 'color' => '#0052ff', 'badge' => 'Trusted',
+            'tagline' => 'The most trusted crypto exchange',
+            'desc' => 'Coinbase is one of the largest and most regulated exchanges, offering a huge selection of assets, strong security, and an easy buy flow for newcomers and pros alike.',
+            'fee' => 'Low spread', 'coins' => '200+ assets', 'best' => 'Security & choice',
+        ],
+        [
+            'id' => 'binance', 'name' => 'Binance', 'domain' => 'binance.com',
+            'url' => 'https://www.binance.com/en/buy-crypto', 'color' => '#f0b90b', 'badge' => null,
+            'tagline' => 'World\'s largest crypto exchange',
+            'desc' => 'Binance gives you access to hundreds of coins with some of the lowest fees in the market, plus advanced tools, staking and peer-to-peer trading options.',
+            'fee' => 'From 0.1%', 'coins' => '350+ assets', 'best' => 'Low fees',
+        ],
+        [
+            'id' => 'kraken', 'name' => 'Kraken', 'domain' => 'kraken.com',
+            'url' => 'https://www.kraken.com/', 'color' => '#5741d9', 'badge' => null,
+            'tagline' => 'Secure exchange built for traders',
+            'desc' => 'Kraken is known for its robust security, transparent pricing and reliable uptime. A great choice if you want a serious exchange with strong customer support.',
+            'fee' => 'From 0.16%', 'coins' => '200+ assets', 'best' => 'Active traders',
+        ],
+        [
+            'id' => 'etoro', 'name' => 'eToro', 'domain' => 'etoro.com',
+            'url' => 'https://www.etoro.com/crypto/', 'color' => '#4bbf56', 'badge' => null,
+            'tagline' => 'Social investing platform',
+            'desc' => 'eToro combines crypto with stocks and ETFs, and lets you copy the portfolios of top traders. Ideal if you want a single platform for multiple asset classes.',
+            'fee' => '1% spread', 'coins' => '70+ assets', 'best' => 'Social & copy investing',
+        ],
+        [
+            'id' => 'cryptocom', 'name' => 'Crypto.com', 'domain' => 'crypto.com',
+            'url' => 'https://crypto.com/', 'color' => '#1199fa', 'badge' => null,
+            'tagline' => 'A full crypto ecosystem',
+            'desc' => 'Crypto.com offers buying, staking, a card and an app in one place. Competitive fees and cashback rewards make it appealing for everyday crypto users.',
+            'fee' => 'Low fees', 'coins' => '350+ assets', 'best' => 'All-in-one app',
+        ],
+        [
+            'id' => 'webull', 'name' => 'Webull', 'domain' => 'webull.com',
+            'url' => 'https://www.webull.com/', 'color' => '#2f6bff', 'badge' => null,
+            'tagline' => 'Advanced trading, no commission',
+            'desc' => 'Webull provides powerful charting tools, real-time data and commission-free crypto and stock trading — a solid pick if you like detailed market analysis.',
+            'fee' => '0% commission', 'coins' => 'Popular assets', 'best' => 'Charting & analysis',
+        ],
+        [
+            'id' => 'paypal', 'name' => 'PayPal', 'domain' => 'paypal.com',
+            'url' => 'https://www.paypal.com/', 'color' => '#003087', 'badge' => 'Easy',
+            'tagline' => 'Buy crypto with your PayPal balance',
+            'desc' => 'PayPal lets you buy, hold and sell a selection of cryptocurrencies directly inside your existing account — the simplest option if you already use PayPal.',
+            'fee' => 'Spread applies', 'coins' => 'BTC, ETH, LTC, SOL', 'best' => 'Existing users',
+        ],
     ];
 @endphp
 
 <style>
-    .pv-modal{position:fixed;inset:0;z-index:999;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,12,.72);backdrop-filter:blur(8px)}
-    .pv-modal.open{display:flex}
-    .paym-card{width:min(460px,100%);background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:20px;padding:26px;box-shadow:0 40px 80px -40px rgba(0,0,0,.8)}
-    .paym-x{background:none;border:none;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;padding:0 2px}
-    .paym-x:hover{color:var(--text)}
-    .paym-item{display:flex;align-items:center;gap:13px;padding:14px 15px;border:1px solid var(--line);border-radius:13px;cursor:pointer;background:rgba(255,255,255,.03);transition:.2s}
-    .paym-item:hover{border-color:rgba(59,130,246,.55)}
-    .paym-item:has(input:checked){border-color:var(--acc);background:rgba(59,130,246,.1)}
-    .paym-item input{accent-color:var(--acc);width:18px;height:18px;flex-shrink:0}
-    .paym-ico{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:1.05rem;flex-shrink:0}
-    .step{display:flex;gap:15px;padding:16px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}
-    .step-n{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#60a5fa,#3b82f6);color:#0b1120;display:grid;place-items:center;font-weight:800;font-size:.85rem;flex-shrink:0}
+    .pv-tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;margin-bottom:20px;border-bottom:1px solid var(--line);scrollbar-width:thin}
+    .pv-tab{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid transparent;border-bottom:none;border-radius:11px 11px 0 0;background:transparent;color:var(--muted);font-weight:700;font-size:.88rem;cursor:pointer;white-space:nowrap;font-family:inherit;transition:.18s;margin-bottom:-1px}
+    .pv-tab:hover{color:var(--text);background:rgba(255,255,255,.04)}
+    .pv-tab.on{color:var(--text);background:rgba(59,130,246,.12);border-color:var(--line);border-bottom:1px solid var(--panel2)}
+    .pv-tab.on::after{content:'';position:absolute;left:14px;right:14px;bottom:-1px;height:2px;background:var(--acc);border-radius:2px}
+    .pv-tab{position:relative}
+    .pv-tab-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+    .pv-panel{display:none}
+    .pv-panel.on{display:block;animation:pvfade .25s ease}
+    @keyframes pvfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+    .pv-plat{border:1px solid var(--line);border-radius:16px;padding:22px;background:linear-gradient(180deg,var(--panel2),var(--panel))}
+    .pv-plat-head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+    .pv-plat-logo{position:relative;width:54px;height:54px;border-radius:14px;display:grid;place-items:center;font-weight:800;font-size:1.35rem;overflow:hidden;flex-shrink:0}
+    .pv-plat-logo img{position:absolute;width:30px;height:30px;object-fit:contain}
+    .pv-fact{padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.025)}
+    @media(max-width:640px){.pv-facts{grid-template-columns:1fr 1fr !important}}
 </style>
 
 <div class="pa" style="padding:26px">
     <div class="sec-h">
-        <div><h2>Welcome to the Peer-to-Peer Crypto Investment Payment Guide</h2></div>
-    </div>
-
-    <div style="font-size:.93rem;line-height:1.75;color:var(--muted)">
-        <p style="margin:0 0 14px"><b style="color:var(--text)">Introduction:</b><br>
-        At Cap crypto Investment, we are committed to providing you with a seamless and user-friendly experience as you embark on your cryptocurrency investment journey. We understand that navigating the world of cryptocurrencies and payments can sometimes be challenging. To make things simpler, we are excited to introduce our new peer-to-peer payment method, designed to offer you a convenient and secure way to invest in crypto.</p>
-        <p style="margin:0 0 22px">Our peer-to-peer payment method allows you to use well-known payment platforms such as PayPal, Venmo, Zelle, and Bank transfer, ensuring that you can easily fund your investment without any hassles. Rest assured, the individuals offering these payment services are registered and verified under our platform, guaranteeing the safety of your funds.</p>
-    </div>
-
-    <div style="font-weight:800;font-size:1.05rem;margin-bottom:16px">Step-by-Step Guide:</div>
-
-    <div style="display:grid;gap:12px">
-        @foreach($steps as $i => $s)
-        <div class="step">
-            <div class="step-n">{{ $i + 1 }}</div>
-            <div>
-                <div style="font-weight:700;font-size:.95rem;margin-bottom:3px">{{ $s[0] }}</div>
-                <div class="muted" style="font-size:.86rem;line-height:1.6">{{ $s[1] }}</div>
-            </div>
+        <div>
+            <h2>Buy Crypto</h2>
+            <p>Choose a trusted platform to purchase cryptocurrency, then fund your PrimevestMarket account</p>
         </div>
+    </div>
+
+    <div class="pv-tabs" role="tablist">
+        @foreach($platforms as $i => $p)
+        <button type="button" class="pv-tab {{ $i === 0 ? 'on' : '' }}" data-tab="{{ $p['id'] }}" onclick="pvTab('{{ $p['id'] }}')">
+            <span class="pv-tab-dot" style="background:{{ $p['color'] }}"></span>{{ $p['name'] }}
+        </button>
         @endforeach
     </div>
 
-    <div style="font-size:.93rem;line-height:1.75;color:var(--muted);margin-top:22px">
-        <p style="margin:0 0 14px">We understand the importance of simplifying the investment process for our valued customers. This peer-to-peer payment method allows you to use familiar payment platforms while ensuring the safety of your funds and the efficient delivery of your chosen cryptocurrency. If you have any questions or need assistance, our dedicated live support team is here to help.</p>
-        <p style="margin:0 0 20px">Thank you for choosing our platform for your crypto investment needs. We look forward to helping you achieve your financial goals.</p>
-        <div style="margin-top:18px;font-weight:800;color:#fff">Warm regards,</div>
-    </div>
-
-    <button class="btn btn-block" style="margin-top:26px" onclick="openPayModal()">Next →</button>
-</div>
-
-<!-- Accepted Payment Methods Modal -->
-<div id="payModal" class="pv-modal" onclick="if(event.target===this)closePayModal()">
-    <div class="paym-card">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px">
-            <div>
-                <div style="font-weight:800;font-size:1.15rem">Accepted Payment Methods</div>
-                <div class="muted" style="font-size:.82rem;margin-top:3px">Choose the method you'll use to fund your purchase</div>
-            </div>
-            <button class="paym-x" onclick="closePayModal()" aria-label="Close">×</button>
-        </div>
-        <div style="display:grid;gap:11px">
-            @foreach($methods as $m)
-            <label class="paym-item">
-                <input type="radio" name="payMethod" value="{{ $m[1] }}"
-                    @if($loop->first) checked @endif>
-                <span class="paym-ico">{{ $m[0] }}</span>
-                <span style="flex:1;min-width:0">
-                    <span style="display:block;font-weight:700;font-size:.93rem">{{ $m[1] }}</span>
-                    <span class="muted" style="display:block;font-size:.76rem;margin-top:1px">{{ $m[2] }}</span>
+    @foreach($platforms as $i => $p)
+    <div class="pv-panel {{ $i === 0 ? 'on' : '' }}" id="tab-{{ $p['id'] }}">
+        <div class="pv-plat">
+            <div class="pv-plat-head">
+                <span class="pv-plat-logo" style="background:{{ $p['color'] }}1f;color:{{ $p['color'] }}">
+                    <b>{{ strtoupper(substr($p['name'], 0, 1)) }}</b>
+                    <img src="https://www.google.com/s2/favicons?domain={{ $p['domain'] }}&sz=64" alt="{{ $p['name'] }}" loading="lazy" onerror="this.style.display='none'">
                 </span>
-            </label>
-            @endforeach
+                <div style="min-width:0">
+                    <div style="font-weight:800;font-size:1.15rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                        {{ $p['name'] }}
+                        @if(!empty($p['badge']))<span class="pill pill-g">{{ $p['badge'] }}</span>@endif
+                    </div>
+                    <div class="muted" style="font-size:.85rem">{{ $p['tagline'] }}</div>
+                </div>
+            </div>
+
+            <p class="muted" style="font-size:.9rem;line-height:1.7;margin:0 0 16px">{{ $p['desc'] }}</p>
+
+            <div class="pv-facts" style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px">
+                <div class="pv-fact"><div class="lbl">Fees</div><div style="font-weight:700;font-size:.9rem">{{ $p['fee'] }}</div></div>
+                <div class="pv-fact"><div class="lbl">Coins</div><div style="font-weight:700;font-size:.9rem">{{ $p['coins'] }}</div></div>
+                <div class="pv-fact"><div class="lbl">Best for</div><div style="font-weight:700;font-size:.9rem">{{ $p['best'] }}</div></div>
+            </div>
+
+            <a href="{{ $p['url'] }}" target="_blank" rel="noopener noreferrer" class="btn btn-block">Buy crypto on {{ $p['name'] }} →</a>
         </div>
-        <button class="btn btn-block" style="margin-top:18px" onclick="confirmPay()">Continue</button>
     </div>
+    @endforeach
+
+    <p class="muted" style="font-size:.78rem;line-height:1.7;margin:18px 4px 0">
+        PrimevestMarket does not process these purchases directly. You buy crypto on your chosen platform,
+        then deposit it into your PrimevestMarket wallet to start investing. Always confirm you are on the
+        official website before entering any details.
+    </p>
 </div>
 @endsection
 
 @section('scripts')
 <script>
-    function openPayModal(){document.getElementById('payModal').classList.add('open')}
-    function closePayModal(){document.getElementById('payModal').classList.remove('open')}
-    function confirmPay(){
-        const sel=document.querySelector('input[name="payMethod"]:checked');
-        closePayModal();
-        if(typeof pvFlash==='function'){
-            pvFlash('flash-ok',(sel?sel.value:'Selected method')+' selected — our team will contact you shortly.');
-        }
+    function pvTab(id){
+        document.querySelectorAll('.pv-tab').forEach(function(b){ b.classList.toggle('on', b.dataset.tab === id); });
+        document.querySelectorAll('.pv-panel').forEach(function(p){ p.classList.toggle('on', p.id === 'tab-' + id); });
     }
-    document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closePayModal()});
-    // Choosing a payment method hands the visitor to a live agent, so the
-    // selection is left intact and chat is opened alongside it.
-    document.addEventListener('click',(e)=>{
-        const item=e.target.closest&&e.target.closest('.paym-item');
-        if(!item)return;
-        if(typeof window.pvOpenChat==='function')window.pvOpenChat();
-    });
 </script>
 @endsection
